@@ -1,0 +1,11 @@
+@charset "utf-8";
+body,div,ul,ol,li,form{
+	padding:0px;
+	margin:0px;
+	font:12px/20px arial, helvetica, verdana, tahoma, sans-serif;
+}
+img{border:0;}
+ol,ul{list-style:none;}
+.left{float:left;}
+.right{float:right;}
+.clear{clear:both;}
