@@ -16,10 +16,18 @@ create table s_singer(
 --								SpecialPubDate
 --)
 --mv表
+create table s_lyrics(
+		LyricsID
+		MvID
+		LyricsContent
+		LyricsStatus 1正常 -1没审核
+)
 create table s_mv(
 								MvID
 								UserID	--增加的用户ID
-								SingerIDS	--歌手信息
+								SingerID	--歌手信息
+								SingerID2	--歌手信息
+								SingerID3	--歌手信息
 								MvTagIDS	--MTV标签
 								MvName
 								MvPic
@@ -103,6 +111,7 @@ create table s_list(
 								UserID
 								ListName
 								ListType
+								ListOrder
 								ListStatus
 								ListCreateTime
 								ListUpdateTime timestamp
