@@ -7,82 +7,9 @@
 				<script type="text/javascript" src="/slightphp/js/jquery-1.4.4.min.js"></script>
 				<script type="text/javascript" src="/assets/js/swfobject/swfobject.js"></script>
 				<script type="text/javascript" src="/assets/js/jquery-ui.min.js"></script>
+				<script type="text/javascript" src="/assets/js/player.js"></script>
 				<link href="/assets/css/jquery-ui-1.8.6.custom.css" media="all" rel="stylesheet" type="text/css" />
 				{literal}
-				<script type="text/javascript">
-						var playerId="player";
-						function onPlayerStart(vid,vidEncoded){
-								//PlayerColor("000000","4F4F4F",25);
-						}
-function onPlayerError(vid){
-		//PlayerColor("000000","4F4F4F",25);
-}
-$(document).ready(function(){
-				$(".list li a").live('click',function(){
-						var vid = $(this).attr('vid');
-						t(vid);
-						$(".list li").removeClass("current");
-						$(this).parent().addClass('current');
-
-						return false;
-						});
-				});
-function onPlayerComplete(vid,vidEncoded,isFullScreen){
-		t('XMjI2MDIxNTYw');
-		//PlayerSeek(3);
-}
-function _player(moviename) {
-		if (navigator.appName.indexOf("Microsoft") != -1)return window[moviename?moviename:playerId];
-		return document[moviename?moviename:playerId];
-};
-function PlayerColor(bgcolor,gracolor,trans){
-		return _player().setSkinColor(bgcolor,gracolor,trans);
-};
-function PlayerSeek(s){
-		s = isNaN(parseInt(s))?0:parseInt(s);
-		_player().nsseek(parseInt(s));
-};
-function PlayerPlayPre(vid,vidEncoded,isFullScreen){
-		alert("Pre"+vid);
-}
-
-function PlayerPlayNext(vid,vidEncoded,isFullScreen){
-		alert("next"+vid);
-}
-function t(vid){
-		pre=1;
-		next=1;
-		swfobject.embedSWF("http://static.youku.com/v1.0.0133/v/swf/qplayer.swf", playerId, "100%", "100%", "9.0.0", "expressInstall.swf",{isAutoPlay:true,VideoIDS:vid,winType:"interior","show_pre":pre,"show_next":next},{allowFullScreen:true,allowscriptaccess:"always","wmode":"transparent"});//,{id:"xx"});
-		//swfobject.embedSWF("http://static.youku.com/v1.0.0133/v/swf/qplayer.swf", playerId, "100%", "100%", "9.0.0", "expressInstall.swf",{isAutoPlay:false,VideoIDS:vid,winType:"interior","show_pre":pre,"show_next":next},{allowFullScreen:true,allowscriptaccess:"always","wmode":"transparent"});//,{id:"xx"});
-}
-t('XMjI2MDIxNTYw');
-$(function() {
-				//可以被放入和被排序
-				$( ".list >ul" ).sortable({
-stop:function(event,ui){
-//应该保存数据
-//alert($(this).sortable("serialize",{attribute:"vid"}));
-//alert($(ui.placeholder).html());;
-//alert($(ui.sender).html());;
-//for(var i in ui.position)alert(ui.position[i]);
-//($(ui.item).);;
-//alert($(this).html());;
-},remove:function(event,ui){
-alert("REMOVE");
-//应该保存数据
-}
-						});
-				$( ".list >ul" ).disableSelection();
-				$( ".trash" ).droppable({
-					drop: function( event, ui ) {
-					setTimeout(function() { ui.draggable.remove(); }, 1);//fro ie patch
-					$( this )
-					.html( "回收站:Dropped!" )
-					.addClass( "ui-state-highlight" );
-					}
-					});
-});
-</script>
 <style>
 .hide{display:none;}
 		body {
@@ -94,6 +21,9 @@ alert("REMOVE");
 }/*font: 25px Arial;}*/
 div{
 		display: block;
+}
+.red{
+color:red
 }
 img, a img {border:0;}
 a {
@@ -122,11 +52,17 @@ margin:5px;
 		/*border-color: #E5E5E5;*/
 		border: 1px solid #A7D6E0;
 		height: 20px;
-		width:190px;
+		width:210px;
 		margin-left:10px;
 }
-.list ul{
-	height:265px;
+#_Content{
+	height:250px;
+	overflow:hidden;
+   overflow-y:scroll;
+}
+.list {
+	height:320px;
+	width:235px;
 }
 .list li  {
 		cursor:pointer;
@@ -134,7 +70,7 @@ margin:5px;
 		padding:1px;
 		border-bottom:1px solid #E5E5E5;
 		text-align:left;
-		width:190px;
+		width:210px;
 		line-height:20px;
 }
 .list .current{
@@ -154,7 +90,7 @@ margin:5px;
 }
 .list .trash{
 		border: 1px solid #A7D6E0;
-		width:190px;
+		width:210px;
 		margin-left:10px;
 }
 .header li  {
@@ -211,6 +147,16 @@ div#result,div#api,div#services,div#submitform,div#who,div#embed,div#footer {
 		margin:5px;
 }
 h3 {font-weight:bold; margin:2px; text-aling:left;}
+.lyrics_top{
+/*background: #999; /* for non-css3 browsers */
+-moz-opacity:0.5;              /* Moz + FF */ 
+opacity: 0.5; 
+position:absolute;
+top:0px;
+filter:alpha(opacity=50) progid:DXImageTransform.Microsoft.gradient(startColorstr='#cccccc', endColorstr='#000000'); /* for IE */
+background: -webkit-gradient(linear, left top, left bottom, from(#ccc), to(#000)); /* for webkit browsers */
+background: -moz-linear-gradient(top, #ccc, #000); /* for firefox 3.6+ */
+}
 
 				</style>
 				{/literal}
@@ -241,48 +187,71 @@ h3 {font-weight:bold; margin:2px; text-aling:left;}
 												</form>
 										</div>
 												<div class="head">
-														<<返回播放列表
+														<span id="_IDList">打开播放列表</span>
 												</div>
-												<ul>
+												<div id="_Content">
+												<ul id="_ContentList" style="display:none;border:1px solid">
+														<li><a vid="XMTM0MDE5NzAw">黄晓明 2</a></li>
+														<li><a vid="XMTM0MDE5NzAw">黄晓明 3</a></li>
+														<li><a vid="XMTM0MDE5NzAw">黄晓明 4</a></li>
+														<li><a vid="XMTM0MDE5NzAw">黄晓明 4</a></li>
+														<li><a vid="XMTM0MDE5NzAw">黄晓明 4</a></li>
+														<li><a vid="XMTM0MDE5NzAw">黄晓明 4</a></li>
+														<li><a vid="XMTM0MDE5NzAw">黄晓明 4</a></li>
+														<li><a vid="XMTM0MDE5NzAw">黄晓明 4</a></li>
+														<li><a vid="XMTM0MDE5NzAw">黄晓明 5</a></li>
+														<li><a vid="XMTM0MDE5NzAw">黄晓明 6</a></li>
+														<li><a vid="XMTM0MDE5NzAw">黄晓明 5</a></li>
+														<li><a vid="XMTM0MDE5NzAw">黄晓明 6</a></li>
+														<li><a vid="XMTM0MDE5NzAw">黄晓明 5</a></li>
+														<li><a vid="XMTM0MDE5NzAw">黄晓明 6</a></li>
+														<li><a vid="XMTM0MDE5NzAw">黄晓明 5</a></li>
+														<li><a vid="XMTM0MDE5NzAw">黄晓明 6</a></li>
+														<li><a vid="XMTM0MDE5NzAw">黄晓明 5</a></li>
+														<li><a vid="XMTM0MDE5NzAw">黄晓明 6</a></li>
+														<li><a vid="XMTM0MDE5NzAw">黄晓明 5</a></li>
+														<li><a vid="XMTM0MDE5NzAw">黄晓明 6</a></li>
+												</ul>
+												<div class="clear"></div>
+												<ul id="_ContentMusic">
 														<li class="current"><a vid="XMTM0MDE5NzAw">黄晓明 - 什么都可以1</a></li>
 														<li ><a vid="XMTM0MDE5NzAw">黄晓明 - 什么都可以2</a></li>
 														<li ><a vid="XMTM0MDE5NzAw">黄晓明 - 什么都可以3</a></li>
 														<li ><a vid="XMTM0MDE5NzAw">黄晓明 - 什么都可以4</a></li>
 														<li ><a vid="XMTM0MDE5NzAw">黄晓明 - 什么都可以5</a></li>
+														<li ><a vid="XMTM0MDE5NzAw">黄晓明 - 什么都可以5</a></li>
+														<li ><a vid="XMTM0MDE5NzAw">黄晓明 - 什么都可以5</a></li>
+														<li ><a vid="XMTM0MDE5NzAw">黄晓明 - 什么都可以5</a></li>
+														<li ><a vid="XMTM0MDE5NzAw">黄晓明 - 什么都可以5</a></li>
+														<li ><a vid="XMTM0MDE5NzAw">黄晓明 - 什么都可以5</a></li>
+														<li ><a vid="XMTM0MDE5NzAw">黄晓明 - 什么都可以5</a></li>
+														<li ><a vid="XMTM0MDE5NzAw">黄晓明 - 什么都可以5</a></li>
+														<li ><a vid="XMTM0MDE5NzAw">黄晓明 - 什么都可以5</a></li>
+														<li ><a vid="XMTM0MDE5NzAw">黄晓明 - 什么都可以6</a></li>
+														<li ><a vid="XMTM0MDE5NzAw">黄晓明 - 什么都可以6</a></li>
+														<li ><a vid="XMTM0MDE5NzAw">黄晓明 - 什么都可以6</a></li>
+														<li ><a vid="XMTM0MDE5NzAw">黄晓明 - 什么都可以6</a></li>
+														<li ><a vid="XMTM0MDE5NzAw">黄晓明 - 什么都可以6</a></li>
+														<li ><a vid="XMTM0MDE5NzAw">黄晓明 - 什么都可以6</a></li>
+														<li ><a vid="XMTM0MDE5NzAw">黄晓明 - 什么都可以6</a></li>
+														<li ><a vid="XMTM0MDE5NzAw">黄晓明 - 什么都可以6</a></li>
 														<li ><a vid="XMTM0MDE5NzAw">黄晓明 - 什么都可以6</a></li>
 												</ul>
+												</div>
 												<div class="clear"></div>
+												<div id="_IDAdd" class="trash"><a href="#">增加歌曲</a></div>
+												<div id="_DialogAdd" style="display:none">
+												请输入优酷播放页地址:<br /><input /><br />如：http://v.youku.com/v_show/id_XMjI2MDIxNTYw.html
+												<a href='javascript: $( "#_DialogAdd" ).dialog("close")'>close</a>
+												</div>
 												<div class="trash">回收站</div>
 										</div>
 
 								</div>
-								<div class="right" style="width:260px;height:340px;overflow:hidden;overflow-y:scroll">
+								<div class="right" style="width:240px;height:340px;position:relative;">
 										<!--<img src="https://www.google.com/adsense/static/zh_CN/images/250x250.gif"/>-->
-										<div class="lyrics">
-										<pre>
-歌词:
-雨  还是下不停  打醒了 你的距离 
-想要放弃   放弃这段感情 
-注定我们就在此分离 
-
-你转过身离去  留下我 没有回应 
-我想追去  可怜模糊眼睛 
-再给一点点勇气  让我的眼泪流下去
-
-看著自己  站在茫茫人海里 
-是在淋雨还是逃避 我试著让自己放弃 
-
-多麼熟悉 多麼小心遇见你 
-回到过去  我牵著你的手 oh~
-
-什麼都可以  愿意为你守护到天明 
-让每个角落都有我的心  就是我想坚强的意义 
-有那麼多的生命和爱情  我的世界我只有拥有你 
-我只想给你独特的惊喜  却不理
-
-我只想给你独特的惊喜 你却不理
-										</pre>
-										</div>
+										<div id="_LyricsTop" class="lyrics_top" style="display:none;padding-left:5px;padding-right:5px;width:225px;height:22px"></div>
+										<div id="_ContentLyrics" class="lyrics" style="overflow:hidden;height:340px;"></div>
 								</div>
 								<div class="right">
 									<div>
@@ -304,5 +273,46 @@ h3 {font-weight:bold; margin:2px; text-aling:left;}
 
 				</div>
 
-		</body>
+		<div id="debug">debug</div>
+		<div id="debug2">debug</div>
+		<textarea id="lyrics_c" style="display:none;">
+[ti:如果这就是爱情]
+[ar:张靓颖]
+[al:我相信]
+[by:活在當下]
+[00:01.12]张靓颖 - 如果这就是爱情
+[00:05.89]
+[04:31.85][00:06.73]www.51lrc.com @ 活在當下 制作
+[00:14.45]
+[00:16.50]你做了选择 对的错的
+[00:23.02]我只能承认 心是痛的
+[00:29.02]怀疑你舍得 我被伤的那么深
+[00:36.49]就放声哭了 何必再强忍
+[00:41.04]
+[00:41.74]我没有选择 我不再完整
+[00:48.11]原来最后的吻 如此冰冷
+[00:54.60]你只能默认 我要被割舍
+[01:00.66]眼看着 你走了
+[02:53.98][01:06.61]
+[02:54.49][01:07.05]如果这不是结局 如果我还爱你
+[03:00.98][01:13.69]如果我愿相信 你就是唯一
+[03:06.93][01:19.62]如果你听到这里 如果你依然放弃
+[03:13.30][01:25.95]那这就是爱情 我难以抗拒 
+[03:19.15][01:32.25]
+[03:59.06][03:19.73][01:32.64]如果这就是爱情 本来就不公平
+[04:05.70][03:26.27][01:38.85]你不需要讲理 我可以离去
+[04:11.66][03:32.23][01:44.82]如果我成全了你 如果我能祝福你
+[04:17.93][03:38.54][01:51.15]那不是我看清 是我证明 我爱你
+[04:29.80][03:51.89][02:00.99]
+[02:03.86]灰色的天空 无法猜透
+[02:10.10]多余的眼泪 无法挽留
+[02:16.32]什么都牵动 感觉真的好脆弱
+[02:23.79]被呵护的人 原来不是我 
+[02:28.92]
+[02:29.47]我不要你走 我不想放手
+[02:35.42]却又不能够奢求 同情的温柔
+[02:41.69]你可以自由 我愿意承受
+[02:47.98]把昨天 留给我
+		</textarea>
+</body>
 </html>
