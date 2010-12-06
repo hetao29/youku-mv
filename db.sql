@@ -1,91 +1,166 @@
 --歌手名
-create table s_singer(
-								SingerID
-								SingerName
-								SingerGender --男，女，组合
-								SingerNationality	--国籍
-								SingerComment
-								SingerOrder
-								SingerStatus	--１正常，-1未审核
-);
---专辑名(保留)
---create table s_special(
---								SpecialID
---								SpecialName
---								SingerID
---								SpecialPubDate
---)
---mv表
-create table s_lyrics(
-		LyricsID
-		MvID
-		LyricsContent
-		LyricsStatus 1正常 -1没审核
-)
+CREATE TABLE `s_singer` (
+`SingerID` int(10) unsigned NOT NULL AUTO_INCREMENT,
+`SingerName` varchar(200) DEFAULT NULL,
+`SingerGender` tinyint(3) unsigned NOT NULL DEFAULT '0' COMMENT '男，女，组合',
+`SingerNationality` varchar(100) DEFAULT NULL COMMENT '国籍',
+`SingerComment` text,
+`SingerOrder` int(10) unsigned NOT NULL DEFAULT '0',
+`SingerStatus` tinyint(4) NOT NULL default -1 COMMENT '１正常，-1未审核',
+PRIMARY KEY (`SingerID`),
+UNIQUE KEY `SingerName` (`SingerName`),
+KEY `SingerStatus` (`SingerStatus`),
+KEY `SingerID` (`SingerID`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+create table s_user(
+UserID int(10) unsigned NOT NULL AUTO_INCREMENT,
+UserName varchar(200),
+UserEmail varchar(200),
+UserPassword varchar(200),
+UserStatus tinyint not null default 1 COMMENT '1正常',
+
+PRIMARY KEY (`UserID`),
+UNIQUE KEY `UserName` (`UserName`),
+UNIQUE KEY `UserEmail` (`UserEmail`),
+KEY `UserStatus` (`UserStatus`)
+)ENGINE=MyISAM DEFAULT CHARSET=utf8;
+INSERT into s_user(UserID,UserName,UserEmail,UserPassword) values(1,'hetal','hetao@hetao.name','huoqiabc');
+
+
+--drop table s_mv;
+--s_mv表
 create table s_mv(
-								MvID
-								UserID	--增加的用户ID
-								SingerID	--歌手信息
-								SingerID2	--歌手信息
-								SingerID3	--歌手信息
-								MvTagIDS	--MTV标签
-								MvName
-								MvPic
-								CategoryID	--分类ID
-								SpecialID	--0
-								MvVideoID	--视频ID
-								MvSourceID	--来源,优酷，土豆
-								MvPubDate
-								MvTime	--MTV播放时间
-								MvUpdateTime	timestamp
-								MvStatus	--１正常，-1未审核
-);
+MvID int(10) unsigned NOT NULL AUTO_INCREMENT,
+UserID int(10) unsigned NOT NULL default 0 COMMENT '增加的用户ID',
+SingerID int(10) unsigned NOT NULL default 0 COMMENT '歌手信息',
+SingerID2 int(10) unsigned NOT NULL default 0 COMMENT '歌手信息',
+SingerID3 int(10) unsigned NOT NULL default 0 COMMENT '歌手信息',
+MvTagIDS varchar(100) COMMENT 'MTV标签',
+MvName varchar(200),
+MvPic varchar(200),
+CategoryID int(10) unsigned NOT NULL default 0,
+SpecialID int(10) unsigned NOT NULL default 0,
+MvVideoID varchar(50),
+MvSourceID tinyint unsigned not null default 1 COMMENT'来源,1.优酷，2.土豆 3...',
+MvPubDate date,
+MvTime int unsigned not null default 0 COMMENT 'MTV播放时间，秒',
+MvUpdateTime timestamp,
+SpecialName varchar(200),
+SpecialPubDate date,
+MvStatus tinyint not null default -1 COMMENT '--１正常，-1未审核',
+
+PRIMARY KEY (`MvID`),
+UNIQUE KEY `MvName` (`MvName`,`SingerID`),
+Key (`UserID`),
+Key (`CategoryID`),
+Key (`MvSourceID`)
+)ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+--播放列表
+create table s_list(
+ListID int(10) unsigned NOT NULL AUTO_INCREMENT,
+UserID int(10) unsigned NOT NULL,
+ListName varchar(200),
+ListOrder int unsigned not null default 0,
+ListStatus tinyint not null default 1,
+ListCreateTime datetime,
+ListUpdateTime timestamp,
+
+PRIMARY KEY (`ListID`),
+Key (`ListName`),
+Key (`UserID`),
+Key (`ListUpdateTime`),
+Key (`ListCreateTime`)
+
+)ENGINE=MyISAM DEFAULT CHARSET=utf8;
+--列表内容
+create table s_list_content(
+ListID int(10) unsigned NOT NULL,
+MvID int(10) unsigned NOT NULL,
+MvOrder int unsigned not null default 0,
+
+PRIMARY KEY (`ListID`,`MvID`)
+
+)ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+
+
+create table s_lyrics(
+LyricsID int(10) unsigned NOT NULL AUTO_INCREMENT,
+MvID int(10) unsigned NOT NULL,
+LyricsContent  text,
+LyricsStatus tinyint not null default 1 COMMENT'1正常 -1没审核',
+
+PRIMARY KEY (`LyricsID`),
+KEY (`MvID`),
+KEY (`LyricsStatus`)
+
+)ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 --打分记录，一个用户只能打分一次
 create table s_mv_rate(
-								MvID
-								UserID
-								RateTime	timestamp
+		MvID
+		UserID
+		RateTime	timestamp
 )
 create table s_mv_comment(
-								MvID
-								UserID
-								CommentTitle
-								CommentContent
-								CommentTime timestamp
-								CommentStatus 1 正常-1隐藏
+		MvID
+		UserID
+		CommentTitle
+		CommentContent
+		CommentTime timestamp
+		CommentStatus 1 正常-1隐藏
 );
 create table s_mv_status(
-								MvID
-								MvRate--平均打分数
-								MvTotalRate	--打人总数
-								MvTotalRatePeople	--打人总人数
-								MvListenTimes	--视听次数
+		MvID
+		MvRate--平均打分数
+		MvTotalRate	--打人总数
+		MvTotalRatePeople	--打人总人数
+		MvListenTimes	--视听次数
 )
 create table s_mv_tag(
-								TagID
-								TagName
+		TagID
+		TagName
 );
 create table s_mv_category(
-								CategoryID
-								CategoryParentID	0
-								CategoryName
+		CategoryID
+		CategoryParentID	0
+		CategoryName
 );
 create table s_source(
-								source_id
-								source_name
-								source_url_pattern	--/http://v.youku.com/v_show/id_%id%.html
-);
-create table s_user(
-								UserID
-								UserName
-								UserEmail
-								UserPassword
+		source_id	1.优酷
+		source_name
+		source_url_pattern	--/http://v.youku.com/v_show/id_%id%.html
 );
 create table s_invite(
-								UserID - 邀请方ID
-								InviteCode -　邀请code
-								InviteUserID - 邀请接收并注册成功的用户ID
-								InviteCodeExpiredTime	datetime 过期时间
+		UserID - 邀请方ID
+		InviteCode -　邀请code
+		InviteUserID - 邀请接收并注册成功的用户ID
+		InviteCodeExpiredTime	datetime 过期时间
 );
 --用户积分,增加
 --.邀请用户并成功得５分
@@ -97,38 +172,24 @@ create table s_invite(
 
 
 create table s_user_score(
-								UserID
-								UserScore
+		UserID
+		UserScore
 );
 create table s_user_score_log(
-								UserID
-								UserScoreLog	--加分为正，消费分为负
-								UserScoreTimestamp
+		UserID
+		UserScoreLog	--加分为正，消费分为负
+		UserScoreTimestamp
 );
---播放列表
-create table s_list(
-								ListID
-								UserID
-								ListName
-								ListType
-								ListOrder
-								ListStatus
-								ListCreateTime
-								ListUpdateTime timestamp
-)
---列表内容
-create table s_list_content(
-								ListID
-								MvID
-)
+
 --临时列表表
 create table s_list_temp(
-								UserID
-								MvID
-								ListUpdateTime timestamp
+		UserID
+		MvID
+		MvOrder
+		ListUpdateTime timestamp
 )
 create table s_listen_log(
-								UserID
-								MvID
-								ListenTime	timestamp
+		UserID
+		MvID
+		ListenTime	timestamp
 )

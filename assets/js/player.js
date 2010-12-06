@@ -170,6 +170,7 @@ var YoukuWs = function(){
 			swfobject.embedSWF("http://static.youku.com/v1.0.0133/v/swf/qplayer.swf", playerId, "100%", "100%", "9.0.0", "expressInstall.swf",{isAutoPlay:true,VideoIDS:vid,winType:"interior","show_pre":pre,"show_next":next},{allowFullScreen:true,allowscriptaccess:"always","wmode":"transparent"},{},function(){
 				$("#_ContentMusic >li").removeClass("current");
 				$("#_ContentMusic [vid="+vid+"]").addClass('current');
+				YoukuWs.setTitle("YOUKU.WS 正在播放 - " +$("#_ContentMusic [vid="+vid+"] A").html() +"  ");
 			});
 		},
 		/*播放下一个*/
