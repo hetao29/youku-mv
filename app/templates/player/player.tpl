@@ -5,6 +5,7 @@
 				<title>YOUKU MV PLAYER</title>
 				<link href="/assets/css/style.css" media="all" rel="stylesheet" type="text/css" />
 				<script type="text/javascript" src="/slightphp/js/jquery-1.4.4.min.js"></script>
+				<script type="text/javascript" src="/assets/js/jquery.cookie.js"></script>
 				<script type="text/javascript" src="/assets/js/swfobject/swfobject.js"></script>
 				<script type="text/javascript" src="/assets/js/jquery-ui.min.js"></script>
 				<script type="text/javascript" src="/assets/js/player.js"></script>
@@ -214,28 +215,9 @@ background: -moz-linear-gradient(top, #ccc, #000); /* for firefox 3.6+ */
 												</ul>
 												<div class="clear"></div>
 												<ul id="_ContentMusic">
-														<li class="current"><a vid="XMTM0MDE5NzAw">黄晓明 - 什么都可以1</a></li>
-														<li ><a vid="XMTM0MDE5NzAw">黄晓明 - 什么都可以2</a></li>
-														<li ><a vid="XMTM0MDE5NzAw">黄晓明 - 什么都可以3</a></li>
-														<li ><a vid="XMTM0MDE5NzAw">黄晓明 - 什么都可以4</a></li>
-														<li ><a vid="XMTM0MDE5NzAw">黄晓明 - 什么都可以5</a></li>
-														<li ><a vid="XMTM0MDE5NzAw">黄晓明 - 什么都可以5</a></li>
-														<li ><a vid="XMTM0MDE5NzAw">黄晓明 - 什么都可以5</a></li>
-														<li ><a vid="XMTM0MDE5NzAw">黄晓明 - 什么都可以5</a></li>
-														<li ><a vid="XMTM0MDE5NzAw">黄晓明 - 什么都可以5</a></li>
-														<li ><a vid="XMTM0MDE5NzAw">黄晓明 - 什么都可以5</a></li>
-														<li ><a vid="XMTM0MDE5NzAw">黄晓明 - 什么都可以5</a></li>
-														<li ><a vid="XMTM0MDE5NzAw">黄晓明 - 什么都可以5</a></li>
-														<li ><a vid="XMTM0MDE5NzAw">黄晓明 - 什么都可以5</a></li>
-														<li ><a vid="XMTM0MDE5NzAw">黄晓明 - 什么都可以6</a></li>
-														<li ><a vid="XMTM0MDE5NzAw">黄晓明 - 什么都可以6</a></li>
-														<li ><a vid="XMTM0MDE5NzAw">黄晓明 - 什么都可以6</a></li>
-														<li ><a vid="XMTM0MDE5NzAw">黄晓明 - 什么都可以6</a></li>
-														<li ><a vid="XMTM0MDE5NzAw">黄晓明 - 什么都可以6</a></li>
-														<li ><a vid="XMTM0MDE5NzAw">黄晓明 - 什么都可以6</a></li>
-														<li ><a vid="XMTM0MDE5NzAw">黄晓明 - 什么都可以6</a></li>
-														<li ><a vid="XMTM0MDE5NzAw">黄晓明 - 什么都可以6</a></li>
-														<li ><a vid="XMTM0MDE5NzAw">黄晓明 - 什么都可以6</a></li>
+														<li vid="XMTM0MDE5NzAw"><a >黄晓明 - 什么都可以4</a></li>
+														<li vid="XMTkwMTUwODU2"><a >任贤齐《心肝宝贝》MV</a></li>
+														<li vid="XMTYxNjc5MzY4"><a >ILIKE </a></li>
 												</ul>
 												</div>
 												<div class="clear"></div>
@@ -255,9 +237,11 @@ background: -moz-linear-gradient(top, #ccc, #000); /* for firefox 3.6+ */
 								</div>
 								<div class="right">
 									<div>
-									<input type="checkbox" style="vertical-align: top;" value="LOOP"/>循环播放
-									<input type="checkbox" style="vertical-align: top;" value="LOOP"/>随机播放
-									<input type="checkbox" style="vertical-align: top;" value="LOOP"/>单曲循环
+									<form id="PlayModeSet">
+									<input type="radio" name="set" value="1" style="vertical-align: top;" value="LOOP"/>单曲循环
+									<input type="radio" name="set" value="2" checked style="vertical-align: top;" value="LOOP"/>循环播放
+									<input type="radio" name="set" value="3" style="vertical-align: top;" value="LOOP"/>随机播放
+									</form>
 									</div>
 									<div class="playerBox"><div id="player"></div></div>
 								</div>
