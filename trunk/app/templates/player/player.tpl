@@ -113,7 +113,10 @@ margin:5px;
 .content .main{
 }
 .content .nav{
-		margin:18px auto;
+margin:18px auto;
+}
+.content{
+padding-top:5px;
 }
 .footer li{
 		float: left;
@@ -147,6 +150,9 @@ div#result,div#api,div#services,div#submitform,div#who,div#embed,div#footer {
 		margin:auto;
 		margin:5px;
 }
+#PlayModeSet input{
+		vertical-align: top;
+}
 h3 {font-weight:bold; margin:2px; text-aling:left;}
 .lyrics_top{
 /*background: #999; /* for non-css3 browsers */
@@ -170,7 +176,7 @@ background: -moz-linear-gradient(top, #ccc, #000); /* for firefox 3.6+ */
 								<li><a href="">注册</a></li>
 								<li><a href="">关于</a></li>
 								<li><a href="">帮助</a></li>
-								<li><a href="">English</a></li>
+								<!--<li><a href="">English</a></li>-->
 						</ul>
 						<div class="clear"></div>
 				</div>
@@ -198,30 +204,20 @@ background: -moz-linear-gradient(top, #ccc, #000); /* for firefox 3.6+ */
 														<li><a vid="XMTM0MDE5NzAw">黄晓明 4</a></li>
 														<li><a vid="XMTM0MDE5NzAw">黄晓明 4</a></li>
 														<li><a vid="XMTM0MDE5NzAw">黄晓明 4</a></li>
-														<li><a vid="XMTM0MDE5NzAw">黄晓明 4</a></li>
-														<li><a vid="XMTM0MDE5NzAw">黄晓明 4</a></li>
-														<li><a vid="XMTM0MDE5NzAw">黄晓明 5</a></li>
 														<li><a vid="XMTM0MDE5NzAw">黄晓明 6</a></li>
-														<li><a vid="XMTM0MDE5NzAw">黄晓明 5</a></li>
-														<li><a vid="XMTM0MDE5NzAw">黄晓明 6</a></li>
-														<li><a vid="XMTM0MDE5NzAw">黄晓明 5</a></li>
-														<li><a vid="XMTM0MDE5NzAw">黄晓明 6</a></li>
-														<li><a vid="XMTM0MDE5NzAw">黄晓明 5</a></li>
-														<li><a vid="XMTM0MDE5NzAw">黄晓明 6</a></li>
-														<li><a vid="XMTM0MDE5NzAw">黄晓明 5</a></li>
-														<li><a vid="XMTM0MDE5NzAw">黄晓明 6</a></li>
-														<li><a vid="XMTM0MDE5NzAw">黄晓明 5</a></li>
-														<li><a vid="XMTM0MDE5NzAw">黄晓明 6</a></li>
-												</ul>
 												<div class="clear"></div>
+												</ul>
 												<ul id="_ContentMusic">
 														<li vid="XMTM0MDE5NzAw"><a >黄晓明 - 什么都可以4</a></li>
 														<li vid="XMTkwMTUwODU2"><a >任贤齐《心肝宝贝》MV</a></li>
-														<li vid="XMTYxNjc5MzY4"><a >ILIKE </a></li>
+														<li vid="XMTYxNjc5MzY4"><a >张靓颖 - 如果这就是爱情</a></li>
 												</ul>
 												</div>
 												<div class="clear"></div>
-												<div id="_IDAdd" class="trash"><a href="#">增加歌曲</a></div>
+												<div id="_IDAdd" class="trash">
+													<a href="#">增加歌单</a>
+													<a href="#">增加歌曲</a>
+												</div>
 												<div id="_DialogAdd" style="display:none">
 												请输入优酷播放页地址:<br /><input /><br />如：http://v.youku.com/v_show/id_XMjI2MDIxNTYw.html
 												<a href='javascript: $( "#_DialogAdd" ).dialog("close")'>close</a>
@@ -230,20 +226,19 @@ background: -moz-linear-gradient(top, #ccc, #000); /* for firefox 3.6+ */
 										</div>
 
 								</div>
-								<div class="right" style="width:240px;height:340px;position:relative;">
-										<!--<img src="https://www.google.com/adsense/static/zh_CN/images/250x250.gif"/>-->
-										<div id="_LyricsTop" class="lyrics_top" style="display:none;padding-left:5px;padding-right:5px;width:225px;height:22px"></div>
-										<div id="_ContentLyrics" class="lyrics" style="overflow:hidden;height:340px;"></div>
+								<div class="right" style="width:240px;height:322px;position:relative;">
+										<div id="_LyricsTop" class="lyrics_top" style="display:none;padding-left:5px;padding-right:5px;width:225px;"></div>
+										<div id="_ContentLyrics" class="lyrics" style="overflow:hidden;height:322px;"></div>
 								</div>
 								<div class="right">
-									<div>
-									<form id="PlayModeSet">
-									<input type="radio" name="set" value="1" style="vertical-align: top;" value="LOOP"/>单曲循环
-									<input type="radio" name="set" value="2" checked style="vertical-align: top;" value="LOOP"/>循环播放
-									<input type="radio" name="set" value="3" style="vertical-align: top;" value="LOOP"/>随机播放
-									</form>
-									</div>
 									<div class="playerBox"><div id="player"></div></div>
+									<span>
+									<form id="PlayModeSet">播放设置:
+									<input type="radio" id="set1" name="set" value="1"/><label><label for="set1">单曲循环</label>
+									<input type="radio" id="set2" name="set" value="2" checked/><label for="set2">循环播放</label>
+									<input type="radio" id="set3" name="set" value="3"/><label for="set3">随机播放</label>
+									</form>
+									</span>
 								</div>
 								<div class="clear"></div>
 						</div>
