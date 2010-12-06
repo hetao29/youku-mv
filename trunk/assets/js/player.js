@@ -1,7 +1,7 @@
 //{{{主方法
 var YoukuWs = function(){
 	var o_lyrics;
-	var gc_tmp = "";
+	var gc= "";
 
 	$(document).ready(function(){
 			$("#_IDList").click(function(){
@@ -20,11 +20,9 @@ var YoukuWs = function(){
 							}
 					});
 			});
-			$("#_ContentMusic li a").live('click',function(){
+			$("#_ContentMusic >li").live('click',function(){
 					var vid = $(this).attr('vid');
 					YoukuWs.play(vid);
-					$(".list li").removeClass("current");
-					$(this).parent().addClass('current');
 	
 					return false;
 			});
@@ -57,9 +55,60 @@ var YoukuWs = function(){
 									.addClass( "ui-state-highlight" );
 					}
 			});
+			$("#PlayModeSet [name=set]").click(function(){
+						$.cookie('PlayMode',$("#PlayModeSet [name=set]:checked").val(),{expires:60});
+			});
+			if($.cookie("PlayMode")){
+					PlayMode = ($.cookie("PlayMode"));
+					$("#PlayModeSet [value="+PlayMode+"]").attr("checked",true);//(PlayMode);
+			}
 			showLyric();
 			setInterval(checkTime,500);
 	});
+	function checkTime(){
+			try{
+					if(!o_lyrics){
+							o_lyrics = $('.lyrics');
+					}
+					var r= PlayerInfo();
+					//var h= o_lyrics.height();
+					var time = isNaN(r.time)?0:r.time;
+					//var alltime= isNaN(r.alltime)?0:r.alltime;
+					//var p= r.time / r.alltime;
+					//var t= p*h;
+	
+					//t= t<(h/2)?0:t;
+					var l = getLyric(time*1000);
+					if(!l){return;}
+					var id = "_ID"+l.i;
+					var index = l.i;
+					//向上移动
+					//var t = $("#_ID0").height()*(index-8);
+					var t = l.top - 160;
+					//$("#debug").html("top:"+t);
+					$("#_LyricsTop").show();
+					o_lyrics.animate({scrollTop:t+"px"},"fast","linear",function(){
+							if($("#"+id).html().replace("&nbsp",'')!=""){
+									var t2 = $("#"+id).position().top;
+									$("#_LyricsTop").animate({"top":t2+"px"},"fast");
+									$("#_LyricsTop").animate({
+											"height":$("#"+id).height()+"px"
+											},"fast");
+							}
+					});
+	
+	
+	
+	
+					$("#_ContentLyrics .red").removeClass("red");
+					$("#"+id).addClass("red");
+					$("#debug2").html(l.w +":"+l.t);
+					return;
+			}catch(e){
+					$("#debug").html(e.description);
+			}
+	
+	}
 	function showLyric(){
 			parseLyric($("#lyrics_c").val());
 			$(".lyrics").html('');
@@ -104,65 +153,42 @@ var YoukuWs = function(){
 	function getLyric(t){
 			for (var k=0;k<gc.length;k++){
 					if(t>=gc[k].t && t<=gc[k+1].t){
-							gc_tmp = gc[k];
+							var gc_tmp = gc[k];
 							gc_tmp.i=k;
 							return(gc_tmp);
 					}
 			}
 	}
 	
-	function checkTime(){
-			try{
-					if(!o_lyrics){
-							o_lyrics = $('.lyrics');
-					}
-					var r= PlayerInfo();
-					//var h= o_lyrics.outerHeight();
-					var h= o_lyrics.height();
-					//alert(h+":"+h2);
-					var time = isNaN(r.time)?0:r.time;
-					var alltime= isNaN(r.alltime)?0:r.alltime;
-					var p= r.time / r.alltime;
-					//$("#debug").html(r.alltime);
-					var t= p*h;
-	
-					t= t<(h/2)?0:t;
-					var l = getLyric(r.time*1000);
-					if(!l){return;}
-					var id = "_ID"+l.i;
-					var index = l.i;
-					//向上移动
-					var t = $("#_ID0").height()*(index-8);
-					var t = l.top - 160;
-					$("#debug").html("top:"+t);
-					$("#_LyricsTop").show();
-					o_lyrics.animate({scrollTop:t+"px"},"fast","linear",function(){
-							if($("#"+id).html().replace("&nbsp",'')!=""){
-									var t2 = $("#"+id).position().top;
-									$("#_LyricsTop").animate({"top":t2+"px"},"fast");
-									$("#_LyricsTop").animate({"height":$("#"+id).height()+"px"},"fast");
-							}
-					});
-	
-	
-	
-	
-					$("#_ContentLyrics .red").removeClass("red");
-					$("#"+id).addClass("red");
-					$("#debug2").html(l.w +":"+l.t);
-					return;
-			}catch(e){
-					$("#debug").html(e.description);
-			}
-	
-	}
 	return {
 		version:"1.1",
+		/*播放视频*/
 		play:function(vid){
 			pre=1;
 			next=1;
-			//swfobject.embedSWF("http://static.youku.com/v1.0.0133/v/swf/qplayer.swf", playerId, "100%", "100%", "9.0.0", "expressInstall.swf",{isAutoPlay:true,VideoIDS:vid,winType:"interior","show_pre":pre,"show_next":next},{allowFullScreen:true,allowscriptaccess:"always","wmode":"transparent"});//,{id:"xx"});
-			swfobject.embedSWF("http://static.youku.com/v1.0.0133/v/swf/qplayer.swf", playerId, "100%", "100%", "9.0.0", "expressInstall.swf",{isAutoPlay:false,VideoIDS:vid,winType:"interior","show_pre":pre,"show_next":next},{allowFullScreen:true,allowscriptaccess:"always","wmode":"transparent"});//,{id:"xx"});
+			CurrentVideoID=vid;
+			swfobject.embedSWF("http://static.youku.com/v1.0.0133/v/swf/qplayer.swf", playerId, "100%", "100%", "9.0.0", "expressInstall.swf",{isAutoPlay:true,VideoIDS:vid,winType:"interior","show_pre":pre,"show_next":next},{allowFullScreen:true,allowscriptaccess:"always","wmode":"transparent"},{},function(){
+				$("#_ContentMusic >li").removeClass("current");
+				$("#_ContentMusic [vid="+vid+"]").addClass('current');
+			});
+		},
+		/*播放下一个*/
+		playNext:function(){
+			 vid = CurrentVideoID;
+			 vid = $("#_ContentMusic [vid="+vid+"]").next().attr("vid");
+			 if(!vid){
+			 vid = $("#_ContentMusic li").first().attr("vid");
+			 }
+			if(vid)YoukuWs.play(vid);
+		},
+		/*播放上一个*/
+		playPre:function(){
+			 vid = CurrentVideoID;
+			 vid = $("#_ContentMusic [vid="+vid+"]").prev().attr("vid");
+			 if(!vid){
+			 vid = $("#_ContentMusic li").last().attr("vid");
+			 }
+			if(vid)YoukuWs.play(vid);
 		},
 		setTitle:function(t){
 			document.title=t;
@@ -173,15 +199,35 @@ var YoukuWs = function(){
 //{{{播放器回调
 
 var playerId="player";
+/**
+  * 播放模式
+  * 0 播放完当前停止
+  * 1 单曲
+  * 2 顺序播放
+  * 3 随机播放
+  */
+var PlayMode=2;
+var CurrentVideoID="";
 function onPlayerStart(vid,vidEncoded){
 		//PlayerColor("000000","4F4F4F",25);
 }
 function onPlayerError(vid){
 		//PlayerColor("000000","4F4F4F",25);
 }
+//alert($.cookie('a'));
+//alert($.cookie('a',"b"));
 function onPlayerComplete(vid,vidEncoded,isFullScreen){
-		t('XMjI2MDIxNTYw');
-		//PlayerSeek(3);
+		PlayMode = $("#PlayModeSet [name=set]:checked").val();
+		switch(parseInt(PlayMode)){
+				case 1:
+						YoukuWs.play(CurrentVideoID);
+				break;
+				case 2:
+				case 3:
+						YoukuWs.playNext();
+				break;
+				default:
+		}
 }
 function _player(moviename) {
 		if (navigator.appName.indexOf("Microsoft") != -1)return window[moviename?moviename:playerId];
@@ -199,11 +245,11 @@ function PlayerSeek(s){
 		_player().nsseek(parseInt(s));
 };
 function PlayerPlayPre(vid,vidEncoded,isFullScreen){
-		alert("Pre"+vid);
+		YoukuWs.playPre();
 }
 
 function PlayerPlayNext(vid,vidEncoded,isFullScreen){
-		alert("next"+vid);
+		YoukuWs.playNext();
 }
 //}}}
 YoukuWs.play('XMTYxNjc5MzY4');
