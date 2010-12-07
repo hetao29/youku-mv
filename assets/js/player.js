@@ -159,7 +159,7 @@ var YoukuWs = function(){
 							return(gc_tmp);
 					}
 			}
-	}
+	};
 	
 	return {
 		version:"1.1",
@@ -178,7 +178,7 @@ var YoukuWs = function(){
 			});
 		},
 		playRandom:function(){
-			var rand_num = Math.floor(Math.random()*$('#_ContentMusic li').size())
+			var rand_num = Math.floor(Math.random()*$('#_ContentMusic li').size());
 			vid = $("#_ContentMusic li").eq(rand_num).attr("vid");
 			if(vid)YoukuWs.play(vid);
 		},
@@ -353,4 +353,4 @@ if(YoukuWs.get("vid")){
 }else{
 	vid = $("#_ContentMusic >li").first().attr("vid");
 	YoukuWs.play("vid");
-}
+};

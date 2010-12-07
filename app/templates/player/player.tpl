@@ -4,13 +4,15 @@
 				<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 				<title>YOUKU MV PLAYER</title>
 				<link href="/assets/css/style.css" media="all" rel="stylesheet" type="text/css" />
+				<!--
 				<script type="text/javascript" src="/slightphp/js/jquery-1.4.4.min.js"></script>
 				<script type="text/javascript" src="/assets/js/jquery.cookie.js"></script>
 				<script type="text/javascript" src="/assets/js/swfobject/swfobject.js"></script>
 				<script type="text/javascript" src="/assets/js/jquery-ui.min.js"></script>
 				<script type="text/javascript" src="/assets/js/jquery.autocomplete.js"></script>
-				<!--<script type="text/javascript" src="/assets/js/jquery.autocomplete.fixed.js"></script>-->
 				<script type="text/javascript" src="/assets/js/player.js"></script>
+				-->
+				<script type="text/javascript" src="/assets/js/youku.ws.js"></script>
 				<link href="/assets/css/jquery-ui-1.8.6.custom.css" media="all" rel="stylesheet" type="text/css" />
 		</head>
 		<body>
