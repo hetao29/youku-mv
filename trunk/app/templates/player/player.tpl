@@ -8,6 +8,8 @@
 				<script type="text/javascript" src="/assets/js/jquery.cookie.js"></script>
 				<script type="text/javascript" src="/assets/js/swfobject/swfobject.js"></script>
 				<script type="text/javascript" src="/assets/js/jquery-ui.min.js"></script>
+				<script type="text/javascript" src="/assets/js/jquery.autocomplete.js"></script>
+				<!--<script type="text/javascript" src="/assets/js/jquery.autocomplete.fixed.js"></script>-->
 				<script type="text/javascript" src="/assets/js/player.js"></script>
 				<link href="/assets/css/jquery-ui-1.8.6.custom.css" media="all" rel="stylesheet" type="text/css" />
 				{literal}
@@ -165,8 +167,58 @@ background: -webkit-gradient(linear, left top, left bottom, from(#ccc), to(#000)
 background: -moz-linear-gradient(top, #ccc, #000); /* for firefox 3.6+ */
 }
 
-				</style>
-				{/literal}
+/* {{{ */
+.ac_results {
+	padding: 0px;
+	border: 1px solid #A7D6E0;
+	background-color: white;
+	overflow: hidden;
+	z-index: 99999;
+}
+
+.ac_results ul {
+	width: 100%;
+	list-style-position: outside;
+	list-style: none;
+	padding: 0;
+	margin: 0;
+}
+
+.ac_results li {
+	margin: 0px;
+	padding: 2px 5px;
+	cursor: default;
+	display: block;
+	/* 
+	if width will be 100% horizontal scrollbar will apear 
+	when scroll mode will be used
+	*/
+	/*width: 100%;*/
+	font: menu;
+	font-size: 12px;
+	/* 
+	it is very important, if line-height not setted or setted 
+	in relative units scroll will be broken in firefox
+	*/
+	line-height: 16px;
+	overflow: hidden;
+}
+
+.ac_loading {
+	background: white url('indicator.gif') right center no-repeat;
+}
+
+.ac_odd {
+	background-color: #eee;
+}
+
+.ac_over {
+	background-color: #0A246A;
+	color: white;
+}
+/* }}} */
+</style>
+{/literal}
 		</head>
 		<body>
 
@@ -188,9 +240,14 @@ background: -moz-linear-gradient(top, #ccc, #000); /* for firefox 3.6+ */
 
 										<div class="list">
 										<div id="submitform">
-												<form action="/" method="get" onsubmit="send()">
-														<input type="text" id="q" name="q" /> 
+													<form onsubmit="search();return false;">
+											          <input type="text" size="18" id="keywords" placeholder="请输入关键词" autofocus="" value="" autocomplete="off" class="ac_input">
+											            <input type="submit" id="search_bt" value="搜  索">
+											        </form>
+
+														<!--<input type="text" id="q" name="q" /> 
 														<input type="submit" id="btnSubmit" value="搜索" />
+														-->
 												</form>
 										</div>
 												<div class="head">
@@ -205,13 +262,22 @@ background: -moz-linear-gradient(top, #ccc, #000); /* for firefox 3.6+ */
 														<li><a vid="XMTM0MDE5NzAw">黄晓明 4</a></li>
 														<li><a vid="XMTM0MDE5NzAw">黄晓明 4</a></li>
 														<li><a vid="XMTM0MDE5NzAw">黄晓明 6</a></li>
-												<div class="clear"></div>
 												</ul>
+												<div class="clear"></div>
 												<ul id="_ContentMusic">
 														<li vid="XMTM0MDE5NzAw"><a >黄晓明 - 什么都可以4</a></li>
 														<li vid="XMTkwMTUwODU2"><a >任贤齐《心肝宝贝》MV</a></li>
 														<li vid="XMTYxNjc5MzY4"><a >张靓颖 - 如果这就是爱情</a></li>
 												</ul>
+												<div class="clear"></div>
+												<ul id="_ContentSearch">
+												<!--
+														<li vid="XMTM0MDE5NzAw"><a >s黄晓明 - 什么都可以4</a></li>
+														<li vid="XMTkwMTUwODU2"><a >s任贤齐《心肝宝贝》MV</a></li>
+														<li vid="XMTYxNjc5MzY4"><a >s靓颖 - 如果这就是爱情</a></li>
+												-->
+												</ul>
+													<div class="clear"></div>
 												</div>
 												<div class="clear"></div>
 												<div id="_IDAdd" class="trash">
@@ -293,5 +359,17 @@ background: -moz-linear-gradient(top, #ccc, #000); /* for firefox 3.6+ */
 [02:41.69]你可以自由 我愿意承受
 [02:47.98]把昨天 留给我
 		</textarea>
+		<div id="_IDSearchResult">
+		<ul>
+			<li>
+				<img src="http://g4.ykimg.com/01270F1F464CFD6F29FE8D00000000370139A8-837E-B64B-A766-BC13C0E31515" /><br />
+				铁道部回应新规质疑：普通旅客列车车票改签需在开车前办理
+			</li>
+			<li>
+				<img src="http://g4.ykimg.com/01270F1F464CFD6F29FE8D00000000370139A8-837E-B64B-A766-BC13C0E31515" /><br />
+				铁道部回应新规质疑：普通旅客列车车票改签需在开车前办理
+			</li>
+		</ul>
+		<div>
 </body>
 </html>
