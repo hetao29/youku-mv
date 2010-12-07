@@ -121,8 +121,8 @@
 						</div>
 				</div>
 
-				<div id="debug">debug</div>
-				<div id="debug2">debug</div>
+				<div id="debug"></div>
+				<div id="debug2"></div>
 				<textarea id="lyrics_c" style="display:none;">
 [ti:如果这就是爱情]
 [ar:张靓颖]
