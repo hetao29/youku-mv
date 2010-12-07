@@ -88,7 +88,6 @@ var YoukuWs = function(){
 	var pre_index=0;
 	function checkTime(){
 			if(!o_lyrics){
-					$("#debug").html((new Date).toString())
 					o_lyrics = $('.lyrics');
 			}
 			var r= PlayerInfo();
@@ -118,7 +117,6 @@ var YoukuWs = function(){
 	
 			$("#_ContentLyrics .red").removeClass("red");
 			LyricCurrent.addClass("red");
-			$("#debug2").html(l.w +":"+l.t);
 	}
 	function showLyric(){
 			parseLyric($("#lyrics_c").val());
