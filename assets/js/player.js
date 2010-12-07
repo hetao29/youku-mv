@@ -37,7 +37,7 @@ var YoukuWs = function(){
 			});
 			$( "#_Content >ul" ).disableSelection();
 			//$( ".list >ul" ).selectable();
-			$( "#_ContentMusic >li" ).droppable({
+			$( "#_ContentMusic" ).droppable({
 					accept:"#_ContentSearch >li",
 							drop: function( event, ui ) {
 									//这里是从搜索结果拖到当前播放列表
@@ -47,7 +47,7 @@ var YoukuWs = function(){
 							}
 			});
 			$( "#_ContentList >li" ).droppable({
-					accept:"#_ContentMusic li",
+					accept:"#_ContentMusic >li,#_ContentSearch >li",
 							drop: function( event, ui ) {
 									//setTimeout(function() { ui.draggable.remove(); }, 1);//fro ie patch
 									alert("MV");
@@ -279,25 +279,18 @@ function search(page){
 	});
 }
 function parse(data) {
- data = data.replace("showresult('","").replace("',false)","");                                                                         
-                      var r = eval(data);                                                                                                                    
-                      var parsed=[];                                                                                                                         
-                      for(var i=0;i<r.result.length;i++){                                                                                                    
-                          parsed[i]={                                                                                                                        
-                              data:r.result[i] ,                                                                                                             
-                              value:r.result[i].keyword ,                                                                                                    
-                              result:r.result[i].keyword       }
-}
-		//var r = eval(data);
-		//var parsed=[];
-		//for(var i=0;i<r.length;i++){
-		//	parsed[i]={
-		//		data:r[i] ,
-	 	//		value:r[i].keyword , 
-	 	//		result:r[i].keyword
-		//	}
-		//}
-		return parsed;
+	data = data.replace("showresult('","").replace("',false)","");                                                                         
+	var r = eval(data);                                                                                                                    
+	var parsed=[];                                                                                                                         
+	if(!r)return;
+	for(var i=0;i<r.result.length;i++){                                                                                                    
+		parsed[i]={                                                                                                                        
+			data:r.result[i] ,                                                                                                             
+			value:r.result[i].keyword ,                                                                                                    
+			result:r.result[i].keyword
+		}
+	}
+	return parsed;
 }
 $("#keywords").ready(function(){
 	//$("#keywords").focus();
@@ -309,13 +302,11 @@ $("#keywords").ready(function(){
 	if(localStorage.keywords)$("#keywords").val(localStorage.keywords)
 		
 	$("#keywords").autocomplete("/player.main.complete?",{
-		autoFill:false,delay:200,max:7,width:200,"parse":parse,
+		autoFill:false,delay:200,max:20,width:200,"parse":parse,
 		formatItem: function(row, i, max) {
 			return  "<div>"+row.keyword + " <span class='right hits'>[" + row.count + "]个视频</span></div>";
 		},
 		 extraParams: {
-		   k: function() { return $("#keywords").val(); 
-		   }
 	   },
 		formatMatch: function(row, i, max) {
 			return row.keyword;

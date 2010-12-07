@@ -264,7 +264,7 @@ background: -moz-linear-gradient(top, #ccc, #000); /* for firefox 3.6+ */
 														<li><a vid="XMTM0MDE5NzAw">黄晓明 6</a></li>
 												</ul>
 												<div class="clear"></div>
-												<ul id="_ContentMusic">
+												<ul id="_ContentMusic" style="height:250px">
 														<li vid="XMTM0MDE5NzAw"><a >黄晓明 - 什么都可以4</a></li>
 														<li vid="XMTkwMTUwODU2"><a >任贤齐《心肝宝贝》MV</a></li>
 														<li vid="XMTYxNjc5MzY4"><a >张靓颖 - 如果这就是爱情</a></li>
