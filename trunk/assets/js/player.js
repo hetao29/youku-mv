@@ -6,10 +6,13 @@ var YoukuWs = function(){
 	$(document).ready(function(){
 			$("#_IDList").click(function(){
 					//显示列表
-					$("#_ContentList").slideToggle("fast",function(){
-							//$("#_ContentList").fadeIn("fast");
-							$("#_IDList").html("关闭播放列表");
+					$("#_ContentList").dialog({
+						width:410,height:250
 					});
+					//$("#_ContentList").slideToggle("fast",function(){
+					//		//$("#_ContentList").fadeIn("fast");
+					//		$("#_IDList").html("关闭播放列表");
+					//});
 			});
 			$("#_ContentList li").live('click',function(){
 			});
@@ -23,9 +26,14 @@ var YoukuWs = function(){
 			$("#_ContentMusic >li,#_ContentSearch >li").live('click',function(){
 					var vid = $(this).attr('vid');
 					YoukuWs.play(vid);
-	
 					return false;
 			});
+			//$("#_ContentSearch >li .ui-icon-play").live('click',function(){
+			//		//var vid = $(this).attr('vid');
+			//		var vid = $(this).parentsUntil("li").attr('vid');
+			//		YoukuWs.play(vid);
+			//		return false;
+			//});
 			//可以被放入和被排序
 			$( "#_Content >ul" ).sortable({
 					stop:function(event,ui){
@@ -41,9 +49,12 @@ var YoukuWs = function(){
 					accept:"#_ContentSearch >li",
 							drop: function( event, ui ) {
 									//这里是从搜索结果拖到当前播放列表
-									setTimeout(function() { ui.draggable.remove(); }, 1);//fro ie patch
-									var o = '<li vid="'+ui.draggable.attr('vid')+'"><a>'+ui.draggable.html()+'</a></li>';
+									//var o = '<li vid="'+ui.draggable.attr('vid')+'"><a>'+ui.draggable.html()+'</a></li>';
+//alert(ui.draggable.parentsUntil("li").html());
+									//var o = '<li vid="'+ui.draggable.parentsUntil("li").find("a").attr('vid')+'"><a>'+ui.draggable.parentsUntil("li").find("a").html()+'</a></li>';
+									var o = '<li vid="'+ui.draggable.attr('vid')+'"><a>'+ui.draggable.find("a").html()+'</a></li>';
 									$("#_ContentMusic").append(o);
+									setTimeout(function() { ui.draggable.remove(); }, 1);//fro ie patch
 							}
 			});
 			$( "#_ContentList >li" ).droppable({
@@ -65,10 +76,10 @@ var YoukuWs = function(){
 					}
 			});
 			$("#PlayModeSet [name=set]").click(function(){
-						$.cookie('PlayMode',$("#PlayModeSet [name=set]:checked").val(),{expires:60});
+				YoukuWs.set("PlayModeSet",$("#PlayModeSet [name=set]:checked").val());
 			});
-			if($.cookie("PlayMode")){
-					PlayMode = ($.cookie("PlayMode"));
+			if(YoukuWs.get("PlayMode")){
+					PlayMode = YoukuWs.get("PlayMode");
 					$("#PlayModeSet [value="+PlayMode+"]").attr("checked",true);//(PlayMode);
 			}
 			showLyric();
@@ -176,19 +187,25 @@ var YoukuWs = function(){
 			pre=1;
 			next=1;
 			CurrentVideoID=vid;
+			YoukuWs.set("vid",CurrentVideoID);
 			swfobject.embedSWF("http://static.youku.com/v1.0.0133/v/swf/qplayer.swf", playerId, "100%", "100%", "9.0.0", "expressInstall.swf",{isAutoPlay:true,VideoIDS:vid,winType:"interior","show_pre":pre,"show_next":next},{allowFullScreen:true,allowscriptaccess:"always","wmode":"transparent"},{},function(){
 				$("#_ContentMusic >li").removeClass("current");
 				$("#_ContentMusic [vid="+vid+"]").addClass('current');
 				YoukuWs.setTitle("YOUKU.WS 正在播放 - " +$("#_ContentMusic [vid="+vid+"] A").html() +"  ");
 			});
 		},
+		playRandom:function(){
+			var rand_num = Math.floor(Math.random()*$('#_ContentMusic li').size())
+			vid = $("#_ContentMusic li").eq(rand_num).attr("vid");
+			if(vid)YoukuWs.play(vid);
+		},
 		/*播放下一个*/
 		playNext:function(){
-			 vid = CurrentVideoID;
-			 vid = $("#_ContentMusic [vid="+vid+"]").next().attr("vid");
-			 if(!vid){
-			 vid = $("#_ContentMusic li").first().attr("vid");
-			 }
+			vid = CurrentVideoID;
+			vid = $("#_ContentMusic [vid="+vid+"]").next().attr("vid");
+			if(!vid){
+				vid = $("#_ContentMusic li").first().attr("vid");
+			}
 			if(vid)YoukuWs.play(vid);
 		},
 		/*播放上一个*/
@@ -202,6 +219,16 @@ var YoukuWs = function(){
 		},
 		setTitle:function(t){
 			document.title=t;
+		},
+		get:function(k){
+			if(localStorage && localStorage[k])return localStorage[k];
+			if($.cookie(k))return $.cookie(k);
+		},
+		set:function(k,v){
+			if(localStorage){
+				localStorage[k] = v;return;
+			}
+			$.cookie(k,v,{expires:40});
 		}
 	}
 }();
@@ -224,17 +251,19 @@ function onPlayerStart(vid,vidEncoded){
 function onPlayerError(vid){
 		//PlayerColor("000000","4F4F4F",25);
 }
-//alert($.cookie('a'));
-//alert($.cookie('a',"b"));
 function onPlayerComplete(vid,vidEncoded,isFullScreen){
 		PlayMode = $("#PlayModeSet [name=set]:checked").val();
 		switch(parseInt(PlayMode)){
 				case 1:
 						YoukuWs.play(CurrentVideoID);
 				break;
+
 				case 2:
-				case 3:
 						YoukuWs.playNext();
+				break;
+
+				case 3:
+						YoukuWs.playRandom();
 				break;
 				default:
 		}
@@ -257,9 +286,8 @@ function PlayerSeek(s){
 function PlayerPlayPre(vid,vidEncoded,isFullScreen){
 		YoukuWs.playPre();
 }
-
 function PlayerPlayNext(vid,vidEncoded,isFullScreen){
-		YoukuWs.playNext();
+		onPlayerComplete();
 }
 //}}}
 //{{{
@@ -269,10 +297,12 @@ function search(page){
 	$.getJSON("/player.main.search?k="+key, function(data){
 		$("#_ContentSearch").html('');
 		 for(var i=0;i<data.item.length;i++){
-			var o = '<li vid="'+data.item[i].videoid+'"><a title="'+data.item[i].title+'">'+data.item[i].title+'</a></li>';
+			var o = '<li title="点击播放:'+data.item[i].title+'" vid="'+data.item[i].videoid+'"><div><span class="handle ui-icon ui-icon-arrow-4"></span><a>'+data.item[i].title+'</a><span class="right">时长:'+data.item[i].duration+'</span></div><div class="clear"></div></li>';
+			//var o = '<li vid="'+data.item[i].videoid+'"><div><span class="handle ui-icon ui-icon-arrow-4"></span><span alt="播放" class="handle ui-icon ui-icon-play"></span><a title="'+data.item[i].title+'">'+data.item[i].title+'</a></div></li>';
 			$("#_ContentSearch").append(o);
 		}
 					$( "#_ContentSearch" ).dialog({
+							width:410,height:250,
 							close:function(event,ui){
 							}
 					});
@@ -293,13 +323,14 @@ function parse(data) {
 	return parsed;
 }
 $("#keywords").ready(function(){
-	//$("#keywords").focus();
-	//$("#keywords").change(function(){
-	//alert("D");
-	//	$("#debug").html($("#keywords").val());
-	//});
+	$("#keywords").change(function(){
+		YoukuWs.set("keywords",$("#keywords").val());
+	});
 	//return;
-	if(localStorage.keywords)$("#keywords").val(localStorage.keywords)
+	var keywords = YoukuWs.get("keywords");
+	if(keywords){
+		$("#keywords").val(keywords);
+	}
 		
 	$("#keywords").autocomplete("/player.main.complete?",{
 		autoFill:false,delay:200,max:20,width:200,"parse":parse,
@@ -313,7 +344,7 @@ $("#keywords").ready(function(){
 		}
 	});
 	$("#keywords").result(function(event, data, formatted) {
-		localStorage.keywords = data.keyword;
+		YoukuWs.set("keywords",$("#keywords").val());
 		search();
 	});
 	
@@ -325,11 +356,6 @@ $("#search").ready(function(){
 	})
 });
 //}}}
-YoukuWs.play('XMTYxNjc5MzY4');
-
-
-
-
-
-
-
+if(YoukuWs.get("vid")){
+	YoukuWs.play(YoukuWs.get("vid"));
+}
