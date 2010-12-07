@@ -61,12 +61,9 @@
 														<li vid="XMTkwMTUwODU2"><a >任贤齐《心肝宝贝》MV</a></li>
 														<li vid="XMTYxNjc5MzY4"><a >张靓颖 - 如果这就是爱情</a></li>
 												</ul>
-												<div class="clear"></div>
 												<ul id="_ContentSearch" style="display:none">
 												</ul>
-												<div class="clear"></div>
 										</div>
-										<div class="clear"></div>
 										<div id="_IDAdd" class="trash">
 												<a href="#">增加歌单</a>
 												<a href="#">增加歌曲</a>
@@ -94,7 +91,7 @@
 										<div id="_LyricsTop" class="lyrics_top" style="display:none;padding-left:5px;padding-right:5px;width:225px;"></div>
 										<div id="_ContentLyrics" class="lyrics" style="overflow:hidden;height:260px;"></div>
 								</div>
-								<div class="right">
+								<div class="left">
 										<div class="playerBox"><div id="player"></div></div>
 										<div>
 												<form id="PlayModeSet">播放设置:
@@ -104,8 +101,8 @@
 												</form>
 										</div>
 								</div>
-								<div class="clear"></div>
 						</div>
+						<div class="clear"></div>
 						<div class="imglist" style="padding:5px;margin:auto">
 								<script type="text/javascript">
 								<!--

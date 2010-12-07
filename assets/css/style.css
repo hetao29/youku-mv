@@ -42,8 +42,9 @@ a:hover {text-decoration:underline;}
 }
 .header{width:900px;margin:10px auto;}
 li{
-		font-size: 1.1em;
+		/*font-size: 1.1em;
 		line-height: 10px;
+		*/
 		cursor:pointer;
 }
 .list{
