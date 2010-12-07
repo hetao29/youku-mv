@@ -36,14 +36,19 @@ class player_main extends SGui{
 	function pageListList($inPath){
 	}
 	function pageComplete($inPath){
-			$k = $_REQUEST['k'];
-			if(empty($k))return;
-			return $r = file_get_contents("http://tip.so.youku.com/search_keys?type=video&k=$k&limit=10");
+			$k = $_REQUEST['q'];
+			if(empty($k))return "{}";
+			$k = urlencode($k);
+			$r = file_get_contents("http://tip.so.youku.com/search_keys?type=video&k=$k&limit=10");
+			if($r===false){
+					return "{}";
+			}
+			return $r;
 	}
 	function pageSearch($inPath){
 			$k = $_REQUEST['k'];
 			if(empty($k))return;
-			$r = file_get_contents("http://www.youku.com/api_ptvideo/st_3_pid_XOA?sv=$k&rt=3&ob=6&pz=4&pg=1");
+			$r = file_get_contents("http://www.youku.com/api_ptvideo/st_3_pid_XOA?sv=$k&rt=3&ob=6&pz=10&pg=1");
 			return $r;
 	}
 }
