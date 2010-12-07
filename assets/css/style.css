@@ -160,13 +160,17 @@ background: #e5e5e5; display:block; clear:both; margin:15px 40px; padding:5px;  
 }
 .lyrics_top{
 		/*background: #999; /* for non-css3 browsers */
-		-moz-opacity:0.5;              /* Moz + FF */ 
-		opacity: 0.5; 
+		-moz-opacity:0.3;              /* Moz + FF */ 
+		opacity: 0.3; 
 		position:absolute;
 		top:0px;
-		filter:alpha(opacity=50) progid:DXImageTransform.Microsoft.gradient(startColorstr='#cccccc', endColorstr='#000000'); /* for IE */
+		filter:alpha(opacity=30) progid:DXImageTransform.Microsoft.gradient(startColorstr='#cccccc', endColorstr='#000000'); /* for IE */
 		background: -webkit-gradient(linear, left top, left bottom, from(#ccc), to(#000)); /* for webkit browsers */
 		background: -moz-linear-gradient(top, #ccc, #000); /* for firefox 3.6+ */
+		/* not ie */
+		-webkit-border-radius: 5px;
+		-moz-border-radius: 5px;
+		border-radius: 5px;
 }
 
 .ac_results {

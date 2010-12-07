@@ -96,6 +96,7 @@ var YoukuWs = function(){
 			var LyricTop = $("#_LyricsTop");
 			var LyricCurrent = $("#"+id);
 			LyricTop.show();
+			$("#_ContentLyrics .red").removeClass("red");
 			o_lyrics.animate({scrollTop:t+"px"},"fast","linear",function(){
 					if(LyricCurrent.html().replace("&nbsp",'')!=""){
 							var t2 = LyricCurrent.position().top;
@@ -103,11 +104,10 @@ var YoukuWs = function(){
 							LyricTop.animate({
 									"height":LyricCurrent.height()+"px"
 							},"fast");
+							LyricCurrent.addClass("red");
 					}
 			});
 	
-			$("#_ContentLyrics .red").removeClass("red");
-			LyricCurrent.addClass("red");
 	}
 	function showLyric(){
 			parseLyric($("#lyrics_c").val());
