@@ -28,6 +28,13 @@ div{
 .red{
 color:red
 }
+.handle{
+cursor:pointer;
+float:left;
+}
+li{
+cursor:pointer;
+}
 img, a img {border:0;}
 a {
 		color:#222;
@@ -254,29 +261,28 @@ background: -moz-linear-gradient(top, #ccc, #000); /* for firefox 3.6+ */
 														<span id="_IDList">打开播放列表</span>
 												</div>
 												<div id="_Content">
-												<ul id="_ContentList" style="display:none;border:1px solid">
-														<li><a vid="XMTM0MDE5NzAw">黄晓明 2</a></li>
-														<li><a vid="XMTM0MDE5NzAw">黄晓明 3</a></li>
-														<li><a vid="XMTM0MDE5NzAw">黄晓明 4</a></li>
-														<li><a vid="XMTM0MDE5NzAw">黄晓明 4</a></li>
-														<li><a vid="XMTM0MDE5NzAw">黄晓明 4</a></li>
-														<li><a vid="XMTM0MDE5NzAw">黄晓明 4</a></li>
-														<li><a vid="XMTM0MDE5NzAw">黄晓明 6</a></li>
-												</ul>
-												<div class="clear"></div>
-												<ul id="_ContentMusic" style="height:250px">
-														<li vid="XMTM0MDE5NzAw"><a >黄晓明 - 什么都可以4</a></li>
-														<li vid="XMTkwMTUwODU2"><a >任贤齐《心肝宝贝》MV</a></li>
-														<li vid="XMTYxNjc5MzY4"><a >张靓颖 - 如果这就是爱情</a></li>
-												</ul>
-												<div class="clear"></div>
-												<ul id="_ContentSearch">
-												<!--
-														<li vid="XMTM0MDE5NzAw"><a >s黄晓明 - 什么都可以4</a></li>
-														<li vid="XMTkwMTUwODU2"><a >s任贤齐《心肝宝贝》MV</a></li>
-														<li vid="XMTYxNjc5MzY4"><a >s靓颖 - 如果这就是爱情</a></li>
-												-->
-												</ul>
+													<ul id="_ContentList" style="display:none;">
+															<li lid="">
+																<div>黄晓明 2</div>
+															</li>
+															<li lid="">
+																<div>黄晓明 2</div>
+															</li>
+													</ul>
+													<div class="clear"></div>
+													<ul id="_ContentMusic" style="height:250px">
+															<li vid="XMTM0MDE5NzAw"><a >黄晓明 - 什么都可以4</a></li>
+															<li vid="XMTkwMTUwODU2"><a >任贤齐《心肝宝贝》MV</a></li>
+															<li vid="XMTYxNjc5MzY4"><a >张靓颖 - 如果这就是爱情</a></li>
+													</ul>
+													<div class="clear"></div>
+													<ul id="_ContentSearch">
+															<li vid="XMTM0MDE5NzAw"><a class="ui-icon ui-icon-arrow-4">s黄晓明 - 什么都可以4</a></li>
+													<!--
+															<li vid="XMTkwMTUwODU2"><a >s任贤齐《心肝宝贝》MV</a></li>
+															<li vid="XMTYxNjc5MzY4"><a >s靓颖 - 如果这就是爱情</a></li>
+													-->
+													</ul>
 													<div class="clear"></div>
 												</div>
 												<div class="clear"></div>
@@ -359,7 +365,7 @@ background: -moz-linear-gradient(top, #ccc, #000); /* for firefox 3.6+ */
 [02:41.69]你可以自由 我愿意承受
 [02:47.98]把昨天 留给我
 		</textarea>
-		<div id="_IDSearchResult">
+<!--		<div id="_IDSearchResult">
 		<ul>
 			<li>
 				<img src="http://g4.ykimg.com/01270F1F464CFD6F29FE8D00000000370139A8-837E-B64B-A766-BC13C0E31515" /><br />
@@ -371,5 +377,6 @@ background: -moz-linear-gradient(top, #ccc, #000); /* for firefox 3.6+ */
 			</li>
 		</ul>
 		<div>
+-->
 </body>
 </html>
