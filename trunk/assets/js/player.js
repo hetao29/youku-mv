@@ -3,6 +3,7 @@ var YoukuWs = function(){
 	var o_lyrics;
 	var gc= "";
 
+	var order=[];
 	$(document).ready(function(){
 			$("#_ContentMusic >li,#_ContentSearch >li").live('click',function(){
 					var vid = $(this).attr('vid');
@@ -10,19 +11,8 @@ var YoukuWs = function(){
 					return false;
 			});
 			//可以被放入和被排序
-			$( "#_Content >ul" ).sortable({
-					stop:function(event,ui){
-							//应该保存数据
-					},remove:function(event,ui){
-							alert("REMOVE");
-							//应该保存数据
-					}
-			});
-			$( "#_Content >ul" ).disableSelection();
-			//$( ".list >ul" ).selectable();
+			$( "#_ContentSearch" ).sortable();
 			$( "#_ContentMusic" ).droppable({
-					//activeClass: "ui-state-default",
-					//hoverClass: "ui-state-highlight",
 					activeClass: "ui-state-highlight",
 					hoverClass: "ui-state-error",
 					tolerance:"pointer",
@@ -34,6 +24,24 @@ var YoukuWs = function(){
 									//TODO 服务保存
 									setTimeout(function() { ui.draggable.remove(); }, 1);//fro ie patch
 							}
+			}).sortable({
+					stop:function(event,ui){
+						$(this).find("li:not(.ui-sortable-placeholder)").each(function (index, domEle) { 
+
+							if(order[index]!=$(domEle).attr("vid")){
+							//TODO顺序已经改变，需要保存在服务
+							//	alert($(domEle).find("a").html()+index);//attr("vid"));
+							};
+						});
+					},start:function(event,ui){
+						$(this).find("li:not(.ui-sortable-placeholder)").each(function (index, domEle) { 
+							order[index]=$(domEle).attr("vid");
+						});
+					},remove:function(event,ui){
+							//alert("REMOVE");
+							//应该保存数据
+					}
+
 			});
 			$( "#_ContentList >li" ).droppable({
 					accept:"#_ContentMusic >li,#_ContentSearch >li",
@@ -41,24 +49,20 @@ var YoukuWs = function(){
 					hoverClass: "ui-state-error",
 					tolerance:"pointer",
 					drop: function( event, ui ) {
-							//setTimeout(function() { ui.draggable.remove(); }, 1);//fro ie patch
+							setTimeout(function() { ui.draggable.remove(); }, 1);//fro ie patch
+							//TODO移动到另一个列表
 							alert("MV");
-							//$( this )
-							//.html( "回收站:Dropped!" )
-							//.addClass( "ui-state-highlight" );
 					}
 			});
 			$("#_BtTrash").button({ icons: { primary: "ui-icon-trash" }
 				}).droppable({
-					//activeClass: "ui-state-default",
 					activeClass: "ui-state-highlight",
 					hoverClass: "ui-state-error",
 					accept:"#_ContentMusic >li",
 					tolerance:"pointer",
 					drop: function( event, ui ) {
 							setTimeout(function() { ui.draggable.remove(); }, 1);//fro ie patch
-							//$( this ) .html( "回收站:!" );
-									//.addClass( "ui-state-highlight" );
+							alert("delete");
 					}
 				}).click(function(){
 					$("#info").html("把歌曲拖到回收站就能删除").dialog({
@@ -109,7 +113,6 @@ var YoukuWs = function(){
 				});
 			}).show();
 			$("#_BtSearch").button({ icons: { primary: "ui-icon-search" } });
-			//$("button").show();
 
 			showLyric();
 			setInterval(checkTime,500);
