@@ -7,13 +7,13 @@
 				<link href="/assets/css/jquery-ui-1.8.6.custom-smoothness.css" media="all" rel="stylesheet" type="text/css" />
 				<!--<link href="/assets/js/development-bundle/themes/base/jquery.ui.theme.css" media="all" rel="stylesheet" type="text/css" />-->
 				<link href="/assets/css/style.css" media="all" rel="stylesheet" type="text/css" />
-				<script type="text/javascript" src="/slightphp/js/jquery-1.4.4.min.js"></script>
+				{*<script type="text/javascript" src="/slightphp/js/jquery-1.4.4.min.js"></script>
 				<script type="text/javascript" src="/assets/js/jquery.cookie.js"></script>
 				<script type="text/javascript" src="/assets/js/swfobject/swfobject.js"></script>
 				<script type="text/javascript" src="/assets/js/jquery-ui.min.js"></script>
-				{*<script type="text/javascript" src="/assets/js/jquery.autocomplete.js"></script>*}
 				<script type="text/javascript" src="/assets/js/player.js"></script>
-				{*<script type="text/javascript" src="/assets/js/youku.ws.js"></script>*}
+				*}
+				<script type="text/javascript" src="/assets/js/youku.ws.js"></script>
 		</head>
 		<body>
 
