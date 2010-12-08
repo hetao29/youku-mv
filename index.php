@@ -20,7 +20,10 @@ SlightPHP::setDefaultPage("main");
 SlightPHP::setDefaultEntry("entry");
 
 SDb::setConfigFile(SlightPHP::$appDir . "/index/db.ini.php");
-
+//{{{
+SLanguage::setLanguageDir(SlightPHP::$appDir."/../locale");
+SLanguage::setLocale("zh-CN");
+//}}}
 SlightPHP::setSplitFlag("-_.");
 #SError::$CONSOLE= true;
 if(($r=SlightPHP::run())===false){
