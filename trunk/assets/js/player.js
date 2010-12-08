@@ -16,13 +16,13 @@ var YoukuWs = function(){
 			});
 			$("#_ContentList li").live('click',function(){
 			});
-			$("#_IDAdd").click(function(){
-					$( "#_DialogAdd" ).dialog({
-							close:function(event,ui){
-									alert("CLOSE");
-							}
-					});
-			});
+			//$("#_IDAdd").click(function(){
+			//		$( "#_DialogAdd" ).dialog({
+			//				close:function(event,ui){
+			//						alert("CLOSE");
+			//				}
+			//		});
+			//});
 			$("#_ContentMusic >li,#_ContentSearch >li").live('click',function(){
 					var vid = $(this).attr('vid');
 					YoukuWs.play(vid);
@@ -41,7 +41,7 @@ var YoukuWs = function(){
 			//$( ".list >ul" ).selectable();
 			$( "#_ContentMusic" ).droppable({
 					activeClass: "ui-state-default",
-					hoverClass: "ui-state-hover",
+					hoverClass: "ui-state-highlight",
 					accept:"#_ContentSearch >li",
 							drop: function( event, ui ) {
 									//这里是从搜索结果拖到当前播放列表
@@ -52,20 +52,23 @@ var YoukuWs = function(){
 			});
 			$( "#_ContentList >li" ).droppable({
 					accept:"#_ContentMusic >li,#_ContentSearch >li",
-							drop: function( event, ui ) {
-									//setTimeout(function() { ui.draggable.remove(); }, 1);//fro ie patch
-									alert("MV");
-									//$( this )
-									//.html( "回收站:Dropped!" )
-									//.addClass( "ui-state-highlight" );
-							}
+					drop: function( event, ui ) {
+							//setTimeout(function() { ui.draggable.remove(); }, 1);//fro ie patch
+							alert("MV");
+							//$( this )
+							//.html( "回收站:Dropped!" )
+							//.addClass( "ui-state-highlight" );
+					}
 			});
-			$( ".trash" ).droppable({
+			$("#_BtTrash").button({ icons: { primary: "ui-icon-trash" } }).droppable({
+					//activeClass: "ui-state-default",
+					activeClass: "ui-state-highlight",
+					hoverClass: "ui-state-error",
+					accept:"#_ContentMusic >li",
 					drop: function( event, ui ) {
 							setTimeout(function() { ui.draggable.remove(); }, 1);//fro ie patch
-							$( this )
-									.html( "回收站:Dropped!" )
-									.addClass( "ui-state-highlight" );
+							//$( this ) .html( "回收站:!" );
+									//.addClass( "ui-state-highlight" );
 					}
 			});
 			$("#PlayModeSet [name=set]").click(function(){
@@ -76,14 +79,20 @@ var YoukuWs = function(){
 					PlayMode = YoukuWs.get("PlayModeSet");
 					$("#PlayModeSet [value="+PlayMode+"]").attr("checked",true);//(PlayMode);
 			}
-			$("#PlayModeSet" ).buttonset();
+			$("#PlayModeSet" ).buttonset().show();
 			$("#_BtPlayModeSet").button("option","disabled",true);
 
 			$("#_BtOpenList").button({ icons: { primary: "ui-icon-folder-open" } });
 			$("#_BtAddList").button({ icons: { primary: "ui-icon-plusthick" } });
-			$("#_BtAddMv").button({ icons: { primary: "ui-icon-plusthick" } });
-			$("#_BtTrash").button({ icons: { primary: "ui-icon-trash" } });
+			$("#_BtAddMv").button({ icons: { primary: "ui-icon-plusthick" } }).live("click",function(){
+				$( "#_DialogAdd" ).dialog({
+						close:function(event,ui){
+								alert("CLOSE");
+						}
+				});
+			});
 			$("#_BtSearch").button({ icons: { primary: "ui-icon-search" } });
+			$("button").show();
 
 			showLyric();
 			setInterval(checkTime,500);

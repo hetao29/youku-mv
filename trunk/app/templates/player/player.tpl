@@ -30,7 +30,7 @@
 				<div class="content">
 
 						<!--<div class="ad"><img src="https://www.google.com/adsense/static/zh_CN/images/728x15.gif" /></div>-->
-						<div class="main" style="display:none">
+						<div class="main">
 								<div class="left" style="border-right:1px solid #F0F0F0;">
 
 										<div class="list">
@@ -62,10 +62,6 @@
 										<!--<div id="_IDAdd" class="trash">
 												<button>增加歌单</button>
 										</div>
-										<div id="_DialogAdd" style="display:none">
-												请输入优酷播放页地址:<br /><input /><br />如：http://v.youku.com/v_show/id_XMjI2MDIxNTYw.html
-												<a href='javascript: $( "#_DialogAdd" ).dialog("close")'>close</a>
-										</div>
 										<div class="trash"><span class="ui-icon ui-icon-trash left"></span><button>回收站</button></div>
 										-->
 										<div id="action">
@@ -83,8 +79,8 @@
 								<div class="left">
 										<div class="playerBox"><div id="player"></div></div>
 										<div>
-												<div id="PlayModeSet">
-<button id="_BtPlayModeSet">播放模式设置:</button>
+												<div id="PlayModeSet" style="display:none">
+														<button id="_BtPlayModeSet">播放模式设置:</button>
 														<input type="radio" id="set1" name="set" value="1"/><label style="width:95px;" for="set1">单曲循环</label>
 														<input type="radio" id="set2" name="set" value="2" checked/><label style="width:95px;" for="set2">循环播放</label>
 														<input type="radio" id="set3" name="set" value="3"/><label style="width:95px;" for="set3">随机播放</label>
@@ -175,6 +171,10 @@
 {/literal}
 
 
+<div id="_DialogAdd" style="display:none">
+		请输入优酷播放页地址:<br /><input /><br />如：http://v.youku.com/v_show/id_XMjI2MDIxNTYw.html
+		<a href='javascript: $( "#_DialogAdd" ).dialog("close")'>close</a>
+</div>
 <div class="" style="height:30px">
 
 <div id="accordion">
