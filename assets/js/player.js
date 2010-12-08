@@ -54,20 +54,38 @@ var YoukuWs = function(){
 							alert("MV");
 					}
 			});
+			$( "#_ContentList" ).sortable({
+						stop:function(event,ui){
+							$(this).find("li:not(.ui-sortable-placeholder)").each(function (index, domEle) { 
+
+								if(order[index]!=$(domEle).attr("vid")){
+								//TODO顺序已经改变，需要保存在服务
+								//	alert($(domEle).find("a").html()+index);//attr("vid"));
+								};
+							});
+						},start:function(event,ui){
+							$(this).find("li:not(.ui-sortable-placeholder)").each(function (index, domEle) { 
+								order[index]=$(domEle).attr("vid");
+							});
+						},remove:function(event,ui){
+								//alert("REMOVE");
+								//应该保存数据
+						}
+					});
 			$("#_BtTrash").button({ icons: { primary: "ui-icon-trash" }
 				}).droppable({
 					activeClass: "ui-state-highlight",
 					hoverClass: "ui-state-error",
-					accept:"#_ContentMusic >li",
+					accept:"#_ContentMusic >li,#_ContentList >li",
 					tolerance:"pointer",
 					drop: function( event, ui ) {
 							setTimeout(function() { ui.draggable.remove(); }, 1);//fro ie patch
-							alert("delete");
+							//alert("delete");
 					}
-				}).click(function(){
+				});/*.click(function(){
 					$("#info").html("把歌曲拖到回收站就能删除").dialog({
 					});;
-				});;
+				});;*/
 			$("#PlayModeSet [name=set]").click(function(){
 				YoukuWs.set("PlayModeSet",$("#PlayModeSet [name=set]:checked").val());
 			});
@@ -81,7 +99,7 @@ var YoukuWs = function(){
 			$("#_BtOpenList").button({ icons: { primary: "ui-icon-folder-open" } }).click(function(){
 					//显示列表
 					$("#_ContentList").dialog({
-						width:410,height:250
+						width:300,height:250
 					});
 			}).show();
 			$("#_BtAddList").button({ icons: { primary: "ui-icon-plusthick" } });

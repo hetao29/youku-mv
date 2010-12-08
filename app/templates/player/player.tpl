@@ -46,16 +46,6 @@
 															<li vid="XMTkwMTUwODU2"><a >任贤齐《心肝宝贝》MV</a></li>
 															<li vid="XMTYxNjc5MzY4"><a >张靓颖 - 如果这就是爱情</a></li>
 													</ul>
-													<ul id="_ContentSearch" style="display:none">
-													</ul>
-													<ul id="_ContentList" style="display:none;">
-															<li lid="">
-																	<div>黄晓明 2</div>
-															</li>
-															<li lid="">
-																	<div>黄晓明 2</div>
-															</li>
-													</ul>
 											</div>
 											<div id="action">
 												<div>
@@ -164,5 +154,16 @@
 					<div>一次只能添加一种地址</div>
 					<div id="_DialogAdding" style="text-align:center;display:none"><img style="vertical-align: middle;" src="/assets/images/loading/loading9.gif" /> 正在添加中...</div>
 			</div>
+
+			<ul id="_ContentSearch" style="display:none">
+			</ul>
+			<ul id="_ContentList" style="display:none;">
+					<li lid="">
+					<div class="left">黄晓明 2</div><div>9首</div>
+					</li>
+					<li lid="">
+							<div>黄晓明 2</div>
+					</li>
+			</ul>
 		</body>
 </html>
