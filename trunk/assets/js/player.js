@@ -25,6 +25,7 @@ var YoukuWs = function(){
 					//hoverClass: "ui-state-highlight",
 					activeClass: "ui-state-highlight",
 					hoverClass: "ui-state-error",
+					tolerance:"pointer",
 					accept:"#_ContentSearch >li",
 							drop: function( event, ui ) {
 									//这里是从搜索结果拖到当前播放列表
@@ -38,6 +39,7 @@ var YoukuWs = function(){
 					accept:"#_ContentMusic >li,#_ContentSearch >li",
 					activeClass: "ui-state-highlight",
 					hoverClass: "ui-state-error",
+					tolerance:"pointer",
 					drop: function( event, ui ) {
 							//setTimeout(function() { ui.draggable.remove(); }, 1);//fro ie patch
 							alert("MV");
@@ -52,6 +54,7 @@ var YoukuWs = function(){
 					activeClass: "ui-state-highlight",
 					hoverClass: "ui-state-error",
 					accept:"#_ContentMusic >li",
+					tolerance:"pointer",
 					drop: function( event, ui ) {
 							setTimeout(function() { ui.draggable.remove(); }, 1);//fro ie patch
 							//$( this ) .html( "回收站:!" );
