@@ -20,11 +20,10 @@
 
 				<div class="header">
 						<ul class="nav">
-								<li><a id="login">登录</a></li>
-								<li><a href="">注册</a></li>
-								<li><a href="">关于</a></li>
-								<li><a href="">帮助</a></li>
-								<!--<li><a href="">English</a></li>-->
+								<li><a id="_IDLogin">{'登录'|tr}</a></li>
+								<li><a id="_IDSignup">{'注册'|tr}</a></li>
+								<li><a id="_IDAbout">{'关于'|tr}</a></li>
+								<li><a id="_IDUsage">{'使用说明'|tr:'main'}</a></li>
 						</ul>
 						<div class="clear"></div>
 				</div>
@@ -36,7 +35,7 @@
 												<div id="submitform">
 														<form onsubmit="search();return false;">
 																<input type="text" size="18" id="keywords" placeholder="请输入关键词" autofocus="" value="" autocomplete="off" class="ac_input" />
-																<button type="submit" id="_BtSearch">搜索</button>
+																<button type="submit" id="_BtSearch">{'搜索'|tr}</button>
 														</form>
 												</div>
 												<div id="_Content">

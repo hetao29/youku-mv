@@ -22,6 +22,7 @@ div{
 }
 img, a img {border:0;}
 a {
+		cursor:pointer;
 		color:#222;
 		text-decoration:none;
 }
