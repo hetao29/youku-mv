@@ -4,7 +4,6 @@ system("cat ../../slightphp/js/jquery-1.4.4.min.js > /tmp/tmp.x.js");
 system("cat ../../assets/js/jquery.cookie.js >> /tmp/tmp.x.js");
 system("cat ../../assets/js/swfobject/swfobject.js >> /tmp/tmp.x.js");
 system("cat ../../assets/js/jquery-ui.min.js >> /tmp/tmp.x.js");
-system("cat ../../assets/js/jquery.autocomplete.js>> /tmp/tmp.x.js");
 system("cat ../../assets/js/player.js >> /tmp/tmp.x.js");
 $src = '/tmp/tmp.x.js';
 $out = '../../assets/js/youku.ws.js';

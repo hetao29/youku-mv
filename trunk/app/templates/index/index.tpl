@@ -24,7 +24,7 @@ function onPlayerError(vid){
 //});
 $(document).ready(function(){
 				$("#_IDPlayer").click(function(){
-						window.open($(this).attr('href'),'player','width=950,height=550');return false;
+						window.open($(this).attr('href'),'player','width=950,height=570');return false;
 						});
 				$(".list li a").click(function(){
 						var vid = $(this).attr('vid');

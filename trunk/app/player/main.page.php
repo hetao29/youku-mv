@@ -36,13 +36,15 @@ class player_main extends SGui{
 	function pageListList($inPath){
 	}
 	function pageComplete($inPath){
-			$k = $_REQUEST['q'];
+			$k = $_REQUEST['k'];
 			if(empty($k))return "{}";
 			$k = urlencode($k);
 			$r = file_get_contents("http://tip.so.youku.com/search_keys?type=video&k=$k&limit=10");
 			if($r===false){
 					return "{}";
 			}
+			$r = str_replace("showresult('","",$r);
+			$r = str_replace("',false)","",$r);
 			return $r;
 	}
 	function pageSearch($inPath){
