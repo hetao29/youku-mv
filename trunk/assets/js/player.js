@@ -96,6 +96,7 @@ var YoukuWs = function(){
 
 			showLyric();
 			setInterval(checkTime,500);
+			setInterval(YoukuWs.adReload,1000*60*10);// 10分钟一次
 			if(YoukuWs.get("vid")){
 				YoukuWs.play(YoukuWs.get("vid"));
 			}else{
@@ -242,6 +243,14 @@ var YoukuWs = function(){
 				localStorage[k] = v;return;
 			}
 			$.cookie(k,v,{expires:40});
+		},
+		adReload:function(){
+			$(".googlead").each(function(index,dom){
+				var a = $(dom).clone();
+				$(dom).html('');
+				$(dom).html(a.html());
+			});
+
 		}
 	}
 }();
