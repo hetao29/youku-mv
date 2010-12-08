@@ -53,5 +53,54 @@ class player_main extends SGui{
 			$r = file_get_contents("http://www.youku.com/api_ptvideo/st_3_pid_XOA?sv=$k&rt=3&ob=6&pz=10&pg=1");
 			return $r;
 	}
+	/*得到视频信息*/
+	function pageGetVideo($inPath){
+			$k = $_REQUEST['k'];
+			if(empty($k))return;
+			if(preg_match("/v_show\/id_(.*?)\./",$k,$_m)){
+					//普通视频播放页
+					//v_show/id_XMjI3MTU1ODM2.html
+					$vid = urlencode($_m[1]);
+					$r = SHttp::get("http://api.youku.com/api_ptvideoinfo",array("pid"=>"XOA==","rt"=>3,"id"=>$k));
+					$r = SJson::decode($r);
+					$o = new stdclass;
+					$v = new stdclass;
+					$o->items=array();
+					$o->items[]=&$v;
+					$v->vid = $vid;
+					$v->title = $r->item->title;
+					return SJson::encode($o);
+			}elseif(preg_match("/show_page\/id_(.*?)\./",$k,$_m)){
+					//节目显示页
+					$pid = $_m[1];
+					$st = 11;
+			}elseif(preg_match("/playlist_show\/id_(.*?)\./",$k,$_m)){
+					//专辑显示页
+					$pid = $_m[1];
+					$st = 8;
+					//playlist_show/id_5358637.html
+
+			}elseif(preg_match("/v_playlist\/f(\\d*)/",$k,$_m)){
+					//专辑播放页
+					//v_playlist/f5358637o1p1.html
+					$pid = $_m[1];
+					$st = 8;
+			}
+			if(!empty($pid)){
+					//$oid = $_m[1];
+					$r = SHttp::get("http://api.youku.com/api_ptvideo/st_$st",array("pid"=>"XOA==","rt"=>3,"pz"=>100,"sv"=>$pid));
+					$r = SJson::decode($r);
+					$o = new stdclass;
+					$o->items=array();
+					foreach($r->item as $item){
+						$v = new stdclass;
+						$v->vid = $item->videoid;
+						$v->title = $item->title;
+						$o->items[]=$v;
+					}
+					return SJson::encode($o);
+			}
+			return "{}";
+	}
 }
 ?>

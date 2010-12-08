@@ -7,13 +7,12 @@
 				<link href="/assets/css/jquery-ui-1.8.6.custom-smoothness.css" media="all" rel="stylesheet" type="text/css" />
 				<!--<link href="/assets/js/development-bundle/themes/base/jquery.ui.theme.css" media="all" rel="stylesheet" type="text/css" />-->
 				<link href="/assets/css/style.css" media="all" rel="stylesheet" type="text/css" />
-				{*<script type="text/javascript" src="/slightphp/js/jquery-1.4.4.min.js"></script>
+				<script type="text/javascript" src="/slightphp/js/jquery-1.4.4.min.js"></script>
 				<script type="text/javascript" src="/assets/js/jquery.cookie.js"></script>
 				<script type="text/javascript" src="/assets/js/swfobject/swfobject.js"></script>
 				<script type="text/javascript" src="/assets/js/jquery-ui.min.js"></script>
 				<script type="text/javascript" src="/assets/js/player.js"></script>
-				*}
-				<script type="text/javascript" src="/assets/js/youku.ws.js"></script>
+				{*<script type="text/javascript" src="/assets/js/youku.ws.js"></script>*}
 		</head>
 		<body>
 
@@ -29,53 +28,46 @@
 				</div>
 				<div class="content">
 
-						<!--<div class="ad"><img src="https://www.google.com/adsense/static/zh_CN/images/728x15.gif" /></div>-->
 						<div class="main">
 								<div class="left" style="border-right:1px solid #F0F0F0;">
-
 										<div class="list">
-												<div id="submitform">
-														<form onsubmit="search();return false;">
+											<div id="submitform">
+												<form onsubmit="search();return false;">
 																<input type="text" size="18" id="keywords" placeholder="请输入关键词" autofocus="" value="" autocomplete="off" class="ac_input">
 																<button type="submit" id="_BtSearch">搜索</button>
 														</form>
 												</form>
-										</div>
-										<div id="_Content">
-												<ul id="_ContentList" style="display:none;">
-														<li lid="">
-																<div>黄晓明 2</div>
-														</li>
-														<li lid="">
-																<div>黄晓明 2</div>
-														</li>
-												</ul>
-												<div class="clear"></div>
-												<ul id="_ContentMusic" style="height:250px">
-														<li vid="XMTM0MDE5NzAw"><a >黄晓明 - 什么都可以4</a></li>
-														<li vid="XMTkwMTUwODU2"><a >任贤齐《心肝宝贝》MV</a></li>
-														<li vid="XMTYxNjc5MzY4"><a >张靓颖 - 如果这就是爱情</a></li>
-												</ul>
-												<ul id="_ContentSearch" style="display:none">
-												</ul>
-										</div>
-										<!--<div id="_IDAdd" class="trash">
-												<button>增加歌单</button>
-										</div>
-										<div class="trash"><span class="ui-icon ui-icon-trash left"></span><button>回收站</button></div>
-										-->
-										<div id="action">
-											<div>
-													<button style="width:100px;" id="_BtAddMv">增加歌曲</button>
-													<button style="width:100px;" id="_BtTrash">回收站</button>
-													<button style="width:100px;" id="_BtOpenList">打开歌单</button>
-													<button style="width:100px;" id="_BtAddList">增加歌单</button>
 											</div>
-										</div>
+											<div id="_Content">
+													<ul id="_ContentList" style="display:none;">
+															<li lid="">
+																	<div>黄晓明 2</div>
+															</li>
+															<li lid="">
+																	<div>黄晓明 2</div>
+															</li>
+													</ul>
+													<div class="clear"></div>
+													<ul id="_ContentMusic" style="height:250px">
+															<li vid="XMTM0MDE5NzAw"><a >黄晓明 - 什么都可以4</a></li>
+															<li vid="XMTkwMTUwODU2"><a >任贤齐《心肝宝贝》MV</a></li>
+															<li vid="XMTYxNjc5MzY4"><a >张靓颖 - 如果这就是爱情</a></li>
+													</ul>
+													<ul id="_ContentSearch" style="display:none">
+													</ul>
+											</div>
+											<div id="action">
+												<div>
+														<button style="width:100px;" id="_BtAddMv">增加歌曲</button>
+														<button style="width:100px;" id="_BtTrash">回收站</button>
+														<button style="width:100px;" id="_BtOpenList">打开歌单</button>
+														<button style="width:100px;" id="_BtAddList">增加歌单</button>
+												</div>
+											</div>
+
+									</div>
 
 								</div>
-
-						</div>
 								<div class="left">
 										<div class="playerBox"><div id="player"></div></div>
 										<div>
@@ -96,15 +88,15 @@
 												google_ad_width = 234;
 												google_ad_height = 60;
 												//-->
-												</script>
-												<script type="text/javascript" src="http://pagead2.googlesyndication.com/pagead/show_ads.js"></script>
-										</div>
-										<div id="_LyricsTop" class="lyrics_top" style="display:none;padding-left:5px;padding-right:5px;width:225px;"></div>
-										<div id="_ContentLyrics" class="lyrics" style="overflow:hidden;width:225px;height:260px;"></div>
+										</script>
+										<script type="text/javascript" src="http://pagead2.googlesyndication.com/pagead/show_ads.js"></script>
 								</div>
+								<div id="_LyricsTop" class="lyrics_top" style="display:none;padding-left:5px;padding-right:5px;width:225px;"></div>
+								<div id="_ContentLyrics" class="lyrics" style="overflow:hidden;width:225px;height:260px;"></div>
 						</div>
-						<div class="clear"></div>
-						<div class="googlead" style="padding:5px;margin:auto">
+					</div>
+				<div class="clear"></div>
+				<div class="googlead" style="padding:5px;margin:auto">
 								<script type="text/javascript">
 								<!--
 								google_ad_client = "ca-pub-8444474852440924";
@@ -116,8 +108,9 @@
 								</script>
 								<script type="text/javascript" src="http://pagead2.googlesyndication.com/pagead/show_ads.js"> </script>
 								<!--<img src="https://www.google.com/adsense/static/zh_CN/images/200x90.gif" />-->
-						</div>
 				</div>
+			</div>
+			<div id="info"></div>
 
 				<div id="debug"></div>
 				<div id="debug2"></div>
@@ -160,73 +153,15 @@
 [02:41.69]你可以自由 我愿意承受
 [02:47.98]把昨天 留给我
 				</textarea>
-				<!-- help start-->
-{literal}
-<script>
-	$(function() {
-		$( "#accordion" ).accordion();
-	});
-	</script>
-
-{/literal}
-
-
-<div id="_DialogAdd" style="display:none">
-		请输入优酷播放页地址:<br /><input /><br />如：http://v.youku.com/v_show/id_XMjI2MDIxNTYw.html
-		<a href='javascript: $( "#_DialogAdd" ).dialog("close")'>close</a>
-</div>
-<div class="" style="height:30px">
-
-<div id="accordion">
-	<h3><a href="#">Section 1</a></h3>
-	<div>
-		<p>
-		Mauris mauris ante, blandit et, ultrices a, suscipit eget, quam. Integer
-		ut neque. Vivamus nisi metus, molestie vel, gravida in, condimentum sit
-		amet, nunc. Nam a nibh. Donec suscipit eros. Nam mi. Proin viverra leo ut
-		odio. Curabitur malesuada. Vestibulum a velit eu ante scelerisque vulputate.
-		</p>
-	</div>
-	<h3><a href="#">Section 2</a></h3>
-	<div>
-		<p>
-		Sed non urna. Donec et ante. Phasellus eu ligula. Vestibulum sit amet
-		purus. Vivamus hendrerit, dolor at aliquet laoreet, mauris turpis porttitor
-		velit, faucibus interdum tellus libero ac justo. Vivamus non quam. In
-		suscipit faucibus urna.
-		</p>
-	</div>
-	<h3><a href="#">Section 3</a></h3>
-	<div>
-		<p>
-		Nam enim risus, molestie et, porta ac, aliquam ac, risus. Quisque lobortis.
-		Phasellus pellentesque purus in massa. Aenean in pede. Phasellus ac libero
-		ac tellus pellentesque semper. Sed ac felis. Sed commodo, magna quis
-		lacinia ornare, quam ante aliquam nisi, eu iaculis leo purus venenatis dui.
-		</p>
-		<ul>
-			<li>List item one</li>
-			<li>List item two</li>
-			<li>List item three</li>
-		</ul>
-	</div>
-	<h3><a href="#">Section 4</a></h3>
-	<div>
-		<p>
-		Cras dictum. Pellentesque habitant morbi tristique senectus et netus
-		et malesuada fames ac turpis egestas. Vestibulum ante ipsum primis in
-		faucibus orci luctus et ultrices posuere cubilia Curae; Aenean lacinia
-		mauris vel est.
-		</p>
-		<p>
-		Suspendisse eu nisl. Nullam ut libero. Integer dignissim consequat lectus.
-		Class aptent taciti sociosqu ad litora torquent per conubia nostra, per
-		inceptos himenaeos.
-		</p>
-	</div>
-</div>
-
-</div>
-				<!-- help end-->
+			<div id="_DialogAdd" style="display:none;">
+					<div>请输入优酷播放页地址:</div>
+					<div><textarea style="width:460px;height:24px">http://v.youku.com/v_show/id_XMjI2MDIxNTYw.html</textarea></div>
+					<div>如普通播放页：http://v.youku.com<span class="red">/v_show/id_XMjI2MDIxNTYw</span>.html</div>
+					<div>如专辑播放页：http://v.youku.com<span class="red">/v_playlist/f5358705o1p2</span>.html</div>
+					<div>如节目显示页：http://www.youku.com<span class="red">/show_page/id_zd121155eef0a11df97c0</span>.html</div>
+					<div>如专辑显示页：http://www.youku.com<span class="red">/playlist_show/id_5358705</span>.html</div>
+					<div>一次只能添加一种地址</div>
+					<div id="_DialogAdding" style="text-align:center;display:none"><img style="vertical-align: middle;" src="/assets/images/loading/loading9.gif" /> 正在添加中...</div>
+			</div>
 		</body>
 </html>

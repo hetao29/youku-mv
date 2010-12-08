@@ -4,25 +4,6 @@ var YoukuWs = function(){
 	var gc= "";
 
 	$(document).ready(function(){
-			$("#_IDList").click(function(){
-					//显示列表
-					$("#_ContentList").dialog({
-						width:410,height:250
-					});
-					//$("#_ContentList").slideToggle("fast",function(){
-					//		//$("#_ContentList").fadeIn("fast");
-					//		$("#_IDList").html("关闭播放列表");
-					//});
-			});
-			$("#_ContentList li").live('click',function(){
-			});
-			//$("#_IDAdd").click(function(){
-			//		$( "#_DialogAdd" ).dialog({
-			//				close:function(event,ui){
-			//						alert("CLOSE");
-			//				}
-			//		});
-			//});
 			$("#_ContentMusic >li,#_ContentSearch >li").live('click',function(){
 					var vid = $(this).attr('vid');
 					YoukuWs.play(vid);
@@ -40,18 +21,23 @@ var YoukuWs = function(){
 			$( "#_Content >ul" ).disableSelection();
 			//$( ".list >ul" ).selectable();
 			$( "#_ContentMusic" ).droppable({
-					activeClass: "ui-state-default",
-					hoverClass: "ui-state-highlight",
+					//activeClass: "ui-state-default",
+					//hoverClass: "ui-state-highlight",
+					activeClass: "ui-state-highlight",
+					hoverClass: "ui-state-error",
 					accept:"#_ContentSearch >li",
 							drop: function( event, ui ) {
 									//这里是从搜索结果拖到当前播放列表
 									var o = '<li vid="'+ui.draggable.attr('vid')+'"><a>'+ui.draggable.find("a").html()+'</a></li>';
 									$("#_ContentMusic").append(o);
+									//TODO 服务保存
 									setTimeout(function() { ui.draggable.remove(); }, 1);//fro ie patch
 							}
 			});
 			$( "#_ContentList >li" ).droppable({
 					accept:"#_ContentMusic >li,#_ContentSearch >li",
+					activeClass: "ui-state-highlight",
+					hoverClass: "ui-state-error",
 					drop: function( event, ui ) {
 							//setTimeout(function() { ui.draggable.remove(); }, 1);//fro ie patch
 							alert("MV");
@@ -60,7 +46,8 @@ var YoukuWs = function(){
 							//.addClass( "ui-state-highlight" );
 					}
 			});
-			$("#_BtTrash").button({ icons: { primary: "ui-icon-trash" } }).droppable({
+			$("#_BtTrash").button({ icons: { primary: "ui-icon-trash" }
+				}).droppable({
 					//activeClass: "ui-state-default",
 					activeClass: "ui-state-highlight",
 					hoverClass: "ui-state-error",
@@ -70,29 +57,56 @@ var YoukuWs = function(){
 							//$( this ) .html( "回收站:!" );
 									//.addClass( "ui-state-highlight" );
 					}
-			});
+				}).click(function(){
+					$("#info").html("把歌曲拖到回收站就能删除").dialog({
+					});;
+				});;
 			$("#PlayModeSet [name=set]").click(function(){
 				YoukuWs.set("PlayModeSet",$("#PlayModeSet [name=set]:checked").val());
-				//alert($("#PlayModeSet [name=set]:checked").val());
 			});
 			if(YoukuWs.get("PlayModeSet")){
 					PlayMode = YoukuWs.get("PlayModeSet");
 					$("#PlayModeSet [value="+PlayMode+"]").attr("checked",true);//(PlayMode);
 			}
 			$("#PlayModeSet" ).buttonset().show();
-			$("#_BtPlayModeSet").button("option","disabled",true);
+			$("#_BtPlayModeSet").button("option","disabled",true).show();
 
-			$("#_BtOpenList").button({ icons: { primary: "ui-icon-folder-open" } });
+			$("#_BtOpenList").button({ icons: { primary: "ui-icon-folder-open" } }).click(function(){
+					//显示列表
+					$("#_ContentList").dialog({
+						width:410,height:250
+					});
+			}).show();
 			$("#_BtAddList").button({ icons: { primary: "ui-icon-plusthick" } });
-			$("#_BtAddMv").button({ icons: { primary: "ui-icon-plusthick" } }).live("click",function(){
+			$("#_BtAddMv").button({ icons: { primary: "ui-icon-plusthick" } }).click(function(){
 				$( "#_DialogAdd" ).dialog({
-						close:function(event,ui){
-								alert("CLOSE");
-						}
+					width:500,height:280, buttons: {
+							"增加": function() {
+								var k =($("#_DialogAdd textarea").val());
+								$.ajax({type:"POST",dataType:"json",url:"/player.main.getVideo",data:{"k":k},success:function(msg){
+											for(var i=0;i<msg.items.length;i++){
+												var o = '<li vid="'+msg.items[i].vid+'"><a>'+msg.items[i].title+'</a></li>';
+												$("#_ContentMusic").append(o);
+												//TODO 服务保存
+											}
+											$("#_DialogAdding").hide();
+											$("#_DialogAdd").dialog( "close" );
+										},beforeSend:function(xhr){
+											$("#_DialogAdding").show();
+										}
+								});
+							},
+							"取消": function() {
+								$( this ).dialog( "close" );
+							}
+					},
+					close:function(event,ui){
+						//alert("CLOSE");
+					}
 				});
-			});
+			}).show();
 			$("#_BtSearch").button({ icons: { primary: "ui-icon-search" } });
-			$("button").show();
+			//$("button").show();
 
 			showLyric();
 			setInterval(checkTime,500);
