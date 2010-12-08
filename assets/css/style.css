@@ -150,8 +150,8 @@ background: #e5e5e5; display:block; clear:both; margin:15px 40px; padding:5px;  
 }
  */
 .playerBox{
-		margin:auto;
-		margin:5px;
+		/*margin:auto;*/
+		padding:5px;
 		width:400px;
 		height:320px;
 }
