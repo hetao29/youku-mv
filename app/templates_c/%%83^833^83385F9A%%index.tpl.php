@@ -1,4 +1,4 @@
-<?php /* Smarty version 2.6.26, created on 2010-12-03 16:12:08
+<?php /* Smarty version 2.6.26, created on 2010-12-08 09:55:22
          compiled from index/index.tpl */ ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -26,7 +26,7 @@ function onPlayerError(vid){
 //});
 $(document).ready(function(){
 				$("#_IDPlayer").click(function(){
-						window.open($(this).attr(\'href\'),\'player\',\'width=950,height=550\');return false;
+						window.open($(this).attr(\'href\'),\'player\',\'width=950,height=570\');return false;
 						});
 				$(".list li a").click(function(){
 						var vid = $(this).attr(\'vid\');
