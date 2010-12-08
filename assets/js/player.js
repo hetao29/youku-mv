@@ -131,6 +131,7 @@ var YoukuWs = function(){
 				});
 			}).show();
 			$("#_BtSearch").button({ icons: { primary: "ui-icon-search" } });
+			$("#_BtSaveList").button({icons:{primary:"ui-icon-disk"}}).show();
 
 			showLyric();
 			setInterval(checkTime,500);

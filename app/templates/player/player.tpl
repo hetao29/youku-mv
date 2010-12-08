@@ -33,30 +33,30 @@
 						<div class="main">
 								<div class="left" style="border-right:1px solid #F0F0F0;">
 										<div class="list">
-											<div id="submitform">
-												<form onsubmit="search();return false;">
-																<input type="text" size="18" id="keywords" placeholder="请输入关键词" autofocus="" value="" autocomplete="off" class="ac_input">
+												<div id="submitform">
+														<form onsubmit="search();return false;">
+																<input type="text" size="18" id="keywords" placeholder="请输入关键词" autofocus="" value="" autocomplete="off" class="ac_input" />
 																<button type="submit" id="_BtSearch">搜索</button>
 														</form>
-												</form>
-											</div>
-											<div id="_Content">
-													<ul id="_ContentMusic" style="height:250px">
-															<li vid="XMTM0MDE5NzAw"><a >黄晓明 - 什么都可以4</a></li>
-															<li vid="XMTkwMTUwODU2"><a >任贤齐《心肝宝贝》MV</a></li>
-															<li vid="XMTYxNjc5MzY4"><a >张靓颖 - 如果这就是爱情</a></li>
-													</ul>
-											</div>
-											<div id="action">
-												<div>
-														<button style="width:100px;" id="_BtAddMv">增加歌曲</button>
-														<button style="width:100px;" id="_BtTrash">回收站</button>
-														<button style="width:100px;" id="_BtOpenList">打开歌单</button>
-														<button style="width:100px;" id="_BtAddList">增加歌单</button>
 												</div>
-											</div>
+												<div id="_Content">
+														<ul id="_ContentMusic" style="height:250px">
+																<li vid="XMTM0MDE5NzAw"><a >黄晓明 - 什么都可以4</a></li>
+																<li vid="XMTkwMTUwODU2"><a >任贤齐《心肝宝贝》MV</a></li>
+																<li vid="XMTYxNjc5MzY4"><a >张靓颖 - 如果这就是爱情</a></li>
+														</ul>
+												</div>
+												<div id="action">
+														<div>
+																<button style="width:100px;" id="_BtAddMv">增加歌曲</button>
+																<button style="width:100px;" id="_BtTrash">回收站</button>
+																<button style="width:100px;" id="_BtSaveList">保存歌曲</button>
+																<button style="width:100px;" id="_BtOpenList">打开歌单</button>
+																<!--<button style="width:110px;" id="_BtAddList">增加歌单</button>-->
+														</div>
+												</div>
 
-									</div>
+										</div>
 
 								</div>
 								<div class="left">
@@ -70,38 +70,34 @@
 												</div>
 										</div>
 								</div>
-						<div class="right" style="width:240px;height:322px;position:relative;">
-								<div class="googlead">
-										<script type="text/javascript"><!--
-												google_ad_client = "ca-pub-8444474852440924";
-												/* YOUKU-234-60 */
-												google_ad_slot = "1537780825";
-												google_ad_width = 234;
-												google_ad_height = 60;
-												//-->
-										</script>
-										<script type="text/javascript" src="http://pagead2.googlesyndication.com/pagead/show_ads.js"></script>
+								<div class="right" style="width:240px;height:322px;position:relative;">
+										<div class="googlead">
+												<script type="text/javascript">
+														google_ad_client = "ca-pub-8444474852440924";
+														/* YOUKU-234-60 */
+														google_ad_slot = "1537780825";
+														google_ad_width = 234;
+														google_ad_height = 60;
+												</script>
+												<script type="text/javascript" src="http://pagead2.googlesyndication.com/pagead/show_ads.js"></script>
+										</div>
+										<div id="_LyricsTop" class="lyrics_top" style="display:none;padding-left:5px;padding-right:5px;width:225px;"></div>
+										<div id="_ContentLyrics" class="lyrics" style="overflow:hidden;width:225px;height:280px;"></div>
 								</div>
-								<div id="_LyricsTop" class="lyrics_top" style="display:none;padding-left:5px;padding-right:5px;width:225px;"></div>
-								<div id="_ContentLyrics" class="lyrics" style="overflow:hidden;width:225px;height:260px;"></div>
 						</div>
-					</div>
-				<div class="clear"></div>
-				<div class="googlead" style="padding:5px;margin:auto">
+						<div class="clear"></div>
+						<div class="googlead" style="padding:5px;margin:auto">
 								<script type="text/javascript">
-								<!--
-								google_ad_client = "ca-pub-8444474852440924";
-								/* YOUKU */
-								google_ad_slot = "2284360826";
-								google_ad_width = 728;
-								google_ad_height = 90;
-								//-->
+										google_ad_client = "ca-pub-8444474852440924";
+										/* YOUKU */
+										google_ad_slot = "2284360826";
+										google_ad_width = 728;
+										google_ad_height = 90;
 								</script>
 								<script type="text/javascript" src="http://pagead2.googlesyndication.com/pagead/show_ads.js"> </script>
-								<!--<img src="https://www.google.com/adsense/static/zh_CN/images/200x90.gif" />-->
+						</div>
 				</div>
-			</div>
-			<div id="info"></div>
+				<div id="info"></div>
 
 				<div id="debug"></div>
 				<div id="debug2"></div>
@@ -144,26 +140,26 @@
 [02:41.69]你可以自由 我愿意承受
 [02:47.98]把昨天 留给我
 				</textarea>
-			<div id="_DialogAdd" style="display:none;">
-					<div>请输入优酷播放页地址:</div>
-					<div><textarea style="width:460px;height:24px">http://v.youku.com/v_show/id_XMjI2MDIxNTYw.html</textarea></div>
-					<div>如普通播放页：http://v.youku.com<span class="red">/v_show/id_XMjI2MDIxNTYw</span>.html</div>
-					<div>如专辑播放页：http://v.youku.com<span class="red">/v_playlist/f5358705o1p2</span>.html</div>
-					<div>如节目显示页：http://www.youku.com<span class="red">/show_page/id_zd121155eef0a11df97c0</span>.html</div>
-					<div>如专辑显示页：http://www.youku.com<span class="red">/playlist_show/id_5358705</span>.html</div>
-					<div>一次只能添加一种地址</div>
-					<div id="_DialogAdding" style="text-align:center;display:none"><img style="vertical-align: middle;" src="/assets/images/loading/loading9.gif" /> 正在添加中...</div>
-			</div>
+				<div id="_DialogAdd" style="display:none;">
+						<div>请输入优酷播放页地址:</div>
+						<div><textarea style="width:460px;height:24px">http://v.youku.com/v_show/id_XMjI2MDIxNTYw.html</textarea></div>
+						<div>如普通播放页：http://v.youku.com<span class="red">/v_show/id_XMjI2MDIxNTYw</span>.html</div>
+						<div>如专辑播放页：http://v.youku.com<span class="red">/v_playlist/f5358705o1p2</span>.html</div>
+						<div>如节目显示页：http://www.youku.com<span class="red">/show_page/id_zd121155eef0a11df97c0</span>.html</div>
+						<div>如专辑显示页：http://www.youku.com<span class="red">/playlist_show/id_5358705</span>.html</div>
+						<div>一次只能添加一种地址</div>
+						<div id="_DialogAdding" style="text-align:center;display:none"><img style="vertical-align: middle;" src="/assets/images/loading/loading9.gif" /> 正在添加中...</div>
+				</div>
 
-			<ul id="_ContentSearch" style="display:none">
-			</ul>
-			<ul id="_ContentList" style="display:none;">
-					<li lid="">
-					<div class="left">黄晓明 2</div><div>9首</div>
-					</li>
-					<li lid="">
-							<div>黄晓明 2</div>
-					</li>
-			</ul>
+				<ul id="_ContentSearch" style="display:none">
+				</ul>
+				<ul id="_ContentList" style="display:none;">
+						<li lid="">
+								<div class="left">黄晓明 2</div><div>9首</div>
+						</li>
+						<li lid="">
+								<div>黄晓明 2</div>
+						</li>
+				</ul>
 		</body>
 </html>

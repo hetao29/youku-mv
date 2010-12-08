@@ -53,7 +53,7 @@ li{
 }
 .list{
 		margin:auto;
-		margin:5px;
+		/*margin:5px;*/
 }
 .list .head{
 		color: #014CCC;
@@ -65,13 +65,13 @@ li{
 		margin-left:10px;
 }
 #_Content{
-		height:250px;
+		height:275px;
 		overflow:hidden;
 		/*overflow-y:scroll;*/
 		overflow-y:auto;
 }
 .list {
-		height:320px;
+		height:350px;
 		width:235px;
 }
 .list li  {
