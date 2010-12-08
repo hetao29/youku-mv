@@ -34,7 +34,7 @@
 										<div class="list">
 												<div id="submitform">
 														<form onsubmit="search();return false;">
-																<input type="text" size="18" id="keywords" placeholder="请输入关键词" autofocus="" value="" autocomplete="off" class="ac_input" />
+																<input type="text" size="18" id="keywords" placeholder="请输入关键词" autofocus="" value="" autocomplete="off" class="ui-widget-content" />
 																<button type="submit" id="_BtSearch">{'搜索'|tr}</button>
 														</form>
 												</div>
@@ -160,5 +160,23 @@
 								<div>黄晓明 2</div>
 						</li>
 				</ul>
+				<div id="_ContentLogin" title="登录" style="display:none">
+					<form style="padding:15px;margin:auto;text-align:center">
+						<ul>
+						<li><div>用户名:<input class="ui-widget-content"/></div></li>
+						<li><div>密　码:<input class="ui-widget-content" /></div></li>
+						<!--<li><div><input type="checkbox" /><label>记住</label><a>忘记密码</a></div></li>-->
+						<ul>
+					</form>
+				</div>
+				<div id="_ContentSignup" title="注册" style="display:none">
+					<form style="padding:15px;margin:auto;text-align:center">
+						<ul>
+						<li><div>用户名:<input /></div></li>
+						<li><div>密　码:<input /></div></li>
+						<!--<li><div><input type="checkbox" /><label>记住</label><a>忘记密码</a></div></li>-->
+						<ul>
+					</form>
+				</div>
 		</body>
 </html>
