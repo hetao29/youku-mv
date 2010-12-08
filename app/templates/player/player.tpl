@@ -88,7 +88,7 @@
 										</div>
 								</div>
 						<div class="right" style="width:240px;height:322px;position:relative;">
-								<div>
+								<div class="googlead">
 										<script type="text/javascript"><!--
 												google_ad_client = "ca-pub-8444474852440924";
 												/* YOUKU-234-60 */
@@ -104,7 +104,7 @@
 								</div>
 						</div>
 						<div class="clear"></div>
-						<div class="imglist" style="padding:5px;margin:auto">
+						<div class="googlead" style="padding:5px;margin:auto">
 								<script type="text/javascript">
 								<!--
 								google_ad_client = "ca-pub-8444474852440924";
