@@ -10,6 +10,48 @@ var YoukuWs = function(){
 					YoukuWs.play(vid);
 					return false;
 			});
+			$("#_IDLogin").click(function(){
+					$("#_ContentLogin").dialog({
+						width:300,height:180, buttons: {
+								"登录": function() {
+									//TODO LOGIN
+									return;
+									var k =($("#_DialogAdd textarea").val());
+									$.ajax({type:"POST",dataType:"json",url:"/user.main.login",data:{"k":k},success:function(msg){
+												//$("#_DialogAdding").hide();
+												$("#_ContentLogin").dialog( "close" );
+											},beforeSend:function(xhr){
+												//$("#_DialogAdding").show();
+											}
+									});
+								},
+								"取消": function() {
+									$( this ).dialog( "close" );
+								}
+						}
+					});
+			});
+			$("#_IDSignup").click(function(){
+					$("#_ContentSignup").dialog({
+						width:300,height:180, buttons: {
+								"注册": function() {
+									//TODO LOGIN
+									return;
+									var k =($("#_DialogAdd textarea").val());
+									$.ajax({type:"POST",dataType:"json",url:"/user.main.login",data:{"k":k},success:function(msg){
+												//$("#_DialogAdding").hide();
+												$("#_ContentLogin").dialog( "close" );
+											},beforeSend:function(xhr){
+												//$("#_DialogAdding").show();
+											}
+									});
+								},
+								"取消": function() {
+									$( this ).dialog( "close" );
+								}
+						}
+					});
+			});
 			//可以被放入和被排序
 			$( "#_ContentSearch" ).sortable();
 			$( "#_ContentMusic" ).droppable({
