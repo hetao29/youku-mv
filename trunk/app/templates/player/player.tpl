@@ -19,13 +19,7 @@
 		<body>
 
 				<div class="header">
-						<ul class="nav">
-								<li><a id="_IDLogin">{'登录'|tr}</a></li>
-								<li><a id="_IDSignup">{'注册'|tr}</a></li>
-								<li><a id="_IDAbout">{'关于'|tr}</a></li>
-								<li><a id="_IDUsage">{'使用说明'|tr:'main'}</a></li>
-						</ul>
-						<div class="clear"></div>
+{part path="/player.main.header"}
 				</div>
 				<div class="content">
 
@@ -161,19 +155,20 @@
 						</li>
 				</ul>
 				<div id="_ContentLogin" title="登录" style="display:none">
-					<form style="padding:15px;margin:auto;text-align:center">
+					<form id="_FormLogin" style="padding:15px;margin:auto;text-align:center">
 						<ul>
-						<li><div>用户名:<input class="ui-widget-content"/></div></li>
-						<li><div>密　码:<input class="ui-widget-content" /></div></li>
+						<li><div>用户名:<input name="username"/></div></li>
+						<li><div>密　码:<input type="password" name="password"/></div></li>
+						<li><div class="info"></div></li>
 						<!--<li><div><input type="checkbox" /><label>记住</label><a>忘记密码</a></div></li>-->
 						<ul>
 					</form>
 				</div>
 				<div id="_ContentSignup" title="注册" style="display:none">
-					<form style="padding:15px;margin:auto;text-align:center">
+					<form id="_FormSignup" style="padding:15px;margin:auto;text-align:center">
 						<ul>
-						<li><div>用户名:<input /></div></li>
-						<li><div>密　码:<input /></div></li>
+						<li><div>用户名:<input id="username" name="username"/></div></li>
+						<li><div>密　码:<input name="password"/></div></li>
 						<!--<li><div><input type="checkbox" /><label>记住</label><a>忘记密码</a></div></li>-->
 						<ul>
 					</form>

@@ -9,6 +9,13 @@ class player_main extends SGui{
 	function pageEntry($inPath){
 		echo $this->render("player/player.tpl");
 	}
+	function pageHeader($inPath){
+			$param = array();
+			if(!empty($_SESSION['user'])){
+					$param['user'] = $_SESSION['user'];
+			}
+		echo $this->render("player/header.tpl",$param);
+	}
 	/**
 	 * 增加MV
 	 * @param $MvName

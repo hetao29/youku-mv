@@ -29,6 +29,8 @@ SlightPHP::setSplitFlag("-_.");
 if(($r=SlightPHP::run())===false){
 	die("404 error");
 }else{
-	echo $r;
+	if(is_object($r)){
+			echo SJson::encode($r);
+	}else echo $r;
 }
 ?>
