@@ -10,13 +10,27 @@ var YoukuWs = function(){
 					YoukuWs.play(vid);
 					return false;
 			});
-			$("#_IDLogin").click(function(){
+			$("#_IDLogout").live("click",function(){
+					$('.header').load("/user.main.logout");
+			});
+			$("#_IDLogin").live("click",function(){
+					$("#_FormLogin .info").html("").hide();;
 					$("#_ContentLogin").dialog({
-						width:300,height:180, buttons: {
+						width:300,height:200, buttons: {
 								"登录": function() {
 									//TODO LOGIN
+									$.post("/user.main.login",$("#_FormLogin").serialize(),function(data){
+											if(data && data.result==1){
+											$('.header').load("/player.main.header");
+											$("#_ContentLogin").dialog( "close" );
+											//登录成功
+											}else{
+											//登录失败
+											$("#_FormLogin .info").html("<b>登录失败，用户名或者密码错</b>").slideDown("fast");
+											}
+										},"json");
 									return;
-									var k =($("#_DialogAdd textarea").val());
+									//var k =($("#_DialogAdd textarea").val());
 									$.ajax({type:"POST",dataType:"json",url:"/user.main.login",data:{"k":k},success:function(msg){
 												//$("#_DialogAdding").hide();
 												$("#_ContentLogin").dialog( "close" );
@@ -31,7 +45,7 @@ var YoukuWs = function(){
 						}
 					});
 			});
-			$("#_IDSignup").click(function(){
+			$("#_IDSignup").live("click",function(){
 					$("#_ContentSignup").dialog({
 						width:300,height:180, buttons: {
 								"注册": function() {
