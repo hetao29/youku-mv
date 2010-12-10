@@ -1,4 +1,62 @@
 //{{{主方法
+var YoukuWsPlaylist = function(){
+		var o={};
+		o.move=function(vid,index){
+				var all = $.parseJSON(YoukuWs.get("list"))||[];
+				for(var i=0;i<all.length;i++){
+						if(all[i].v==vid){
+								alert("from:"+i+",to:"+index);
+								tmp = all[i];
+								all[i] = all[index];//all[index];
+								all[index]=all[i];
+								break;
+						}
+				}
+				YoukuWs.set("list",JSON.stringify(all));
+		}
+		o.add=function(vid,title){
+				var all = $.parseJSON(YoukuWs.get("list"))||[];
+				finded = false;
+				//v = vid;
+				//t = title
+				$.each(all,function(i,item){
+						if(item.v == vid){
+								finded = true;
+								all[i].t=title;
+						}
+				});
+				if(!finded){
+					var m = {};
+					m.v = vid;
+					m.t= title;
+					all[all.length]=m;
+				}
+				YoukuWs.set("list",JSON.stringify(all));
+		};
+		o.list=function(){
+				return $.parseJSON(YoukuWs.get("list"))||[];
+		}
+		o.save=function(){
+			o.empty();
+			$("#_ContentMusic >li").each(function(i,n){
+						YoukuWsPlaylist.add($(n).attr("vid"),$(n).find("a").html());
+			});
+		}
+		o.empty=function(){
+				YoukuWs.set("list",JSON.stringify([]));
+		}
+		o.del=function(vid){
+				var all = $.parseJSON(YoukuWs.get("list"))||[];
+				for(var i=0;i<all.length;i++){
+						if(all[i].v == vid){
+							all.splice(i,1);
+						}
+				};
+				YoukuWs.set("list2",JSON.stringify(all));
+				YoukuWs.set("list",JSON.stringify(all));
+		}
+		return o;
+}();
 var YoukuWs = function(){
 	var o_lyrics;
 	var gc= "";
@@ -10,6 +68,11 @@ var YoukuWs = function(){
 					YoukuWs.play(vid);
 					return false;
 			});
+			$.each(YoukuWsPlaylist.list(),function(i,n){
+					var o = '<li vid="'+n.v+'"><a>'+n.t+'</a></li>';
+					$("#_ContentMusic").append(o);
+			});
+			//加载播放列表
 			$("#_IDLogout").live("click",function(){
 					$('.header').load("/user.main.logout");
 			});
@@ -29,15 +92,6 @@ var YoukuWs = function(){
 											$("#_FormLogin .info").html("<b>登录失败，用户名或者密码错</b>").slideDown("fast");
 											}
 										},"json");
-									return;
-									//var k =($("#_DialogAdd textarea").val());
-									$.ajax({type:"POST",dataType:"json",url:"/user.main.login",data:{"k":k},success:function(msg){
-												//$("#_DialogAdding").hide();
-												$("#_ContentLogin").dialog( "close" );
-											},beforeSend:function(xhr){
-												//$("#_DialogAdding").show();
-											}
-									});
 								},
 								"取消": function() {
 									$( this ).dialog( "close" );
@@ -77,25 +131,14 @@ var YoukuWs = function(){
 									//这里是从搜索结果拖到当前播放列表
 									var o = '<li vid="'+ui.draggable.attr('vid')+'"><a>'+ui.draggable.find("a").html()+'</a></li>';
 									$("#_ContentMusic").append(o);
+									YoukuWsPlaylist.add(ui.draggable.attr('vid'),ui.draggable.find("a").html());
 									//TODO 服务保存
 									setTimeout(function() { ui.draggable.remove(); }, 1);//fro ie patch
 							}
 			}).sortable({
 					stop:function(event,ui){
-						$(this).find("li:not(.ui-sortable-placeholder)").each(function (index, domEle) { 
-
-							if(order[index]!=$(domEle).attr("vid")){
-							//TODO顺序已经改变，需要保存在服务
-							//	alert($(domEle).find("a").html()+index);//attr("vid"));
-							};
-						});
+						setTimeout("YoukuWsPlaylist.save()",200);
 					},start:function(event,ui){
-						$(this).find("li:not(.ui-sortable-placeholder)").each(function (index, domEle) { 
-							order[index]=$(domEle).attr("vid");
-						});
-					},remove:function(event,ui){
-							//alert("REMOVE");
-							//应该保存数据
 					}
 
 			});
@@ -135,8 +178,8 @@ var YoukuWs = function(){
 					accept:"#_ContentMusic >li,#_ContentList >li",
 					tolerance:"pointer",
 					drop: function( event, ui ) {
+							YoukuWsPlaylist.del(ui.draggable.attr("vid"));
 							setTimeout(function() { ui.draggable.remove(); }, 1);//fro ie patch
-							//alert("delete");
 					}
 				});/*.click(function(){
 					$("#info").html("把歌曲拖到回收站就能删除").dialog({
@@ -169,6 +212,7 @@ var YoukuWs = function(){
 												var o = '<li vid="'+msg.items[i].vid+'"><a>'+msg.items[i].title+'</a></li>';
 												$("#_ContentMusic").append(o);
 												//TODO 服务保存
+												YoukuWsPlaylist.add(msg.items[i].vid,msg.items[i].title);
 											}
 											$("#_DialogAdding").hide();
 											$("#_DialogAdd").dialog( "close" );
@@ -335,7 +379,8 @@ var YoukuWs = function(){
 		},
 		set:function(k,v){
 			if('localStorage' in window && window['localStorage'] !== null){
-				localStorage[k] = v;return;
+				localStorage[k] = v;
+				return;
 			}
 			$.cookie(k,v,{expires:40});
 		},
