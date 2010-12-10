@@ -372,12 +372,14 @@ var YoukuWs = function(){
 			document.title=t;
 		},
 		get:function(k){
+			//TODO userData for IE
 			if('localStorage' in window && window['localStorage'] !== null){
 				if(localStorage[k])return localStorage[k];
 			}
 			if($.cookie(k))return $.cookie(k);
 		},
 		set:function(k,v){
+			//TODO userData for IE
 			if('localStorage' in window && window['localStorage'] !== null){
 				localStorage[k] = v;
 				return;
