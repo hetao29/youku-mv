@@ -11,6 +11,7 @@
 				<script type="text/javascript" src="/assets/js/jquery.cookie.js"></script>
 				<script type="text/javascript" src="/assets/js/swfobject/swfobject.js"></script>
 				<script type="text/javascript" src="/assets/js/jquery-ui.min.js"></script>
+				<script type="text/javascript" src="/assets/js/json2.js"></script>
 				<script type="text/javascript" src="/assets/js/player.js"></script>
 				{*
 				<script type="text/javascript" src="/assets/js/youku.ws.js"></script>
@@ -34,9 +35,11 @@
 												</div>
 												<div id="_Content">
 														<ul id="_ContentMusic" style="height:250px">
+														<!--
 																<li vid="XMTM0MDE5NzAw"><a >黄晓明 - 什么都可以4</a></li>
 																<li vid="XMTkwMTUwODU2"><a >任贤齐《心肝宝贝》MV</a></li>
 																<li vid="XMTYxNjc5MzY4"><a >张靓颖 - 如果这就是爱情</a></li>
+																-->
 														</ul>
 												</div>
 												<div id="action">
