@@ -32,7 +32,7 @@ var YoukuWsPlaylist = function(){
 					m.s= seconds;
 					all[all.length]=m;
 					if(!noappend){
-					var o = '<li vid="'+vid+'"><a>'+title+'<span class="right">'+seconds+'</span></a></li>';
+					var o = '<li vid="'+vid+'"><a><span>'+title+'</span><span class="right">'+seconds+'</span></a></li>';
 					$("#_ContentMusic").append(o);
 					}
 				}
@@ -44,7 +44,7 @@ var YoukuWsPlaylist = function(){
 		o.save=function(){
 			o.empty();
 			$("#_ContentMusic >li").each(function(i,n){
-						YoukuWsPlaylist.add($(n).attr("vid"),$(n).find("a").html(),$(n).find("span").html(),true);
+				YoukuWsPlaylist.add($(n).attr("vid"),$(n).find("span").first().html(),$(n).find("span").eq(1).html(),true);
 			});
 		}
 		o.empty=function(){
@@ -73,7 +73,7 @@ var YoukuWs = function(){
 					return false;
 			});
 			$.each(YoukuWsPlaylist.list(),function(i,n){
-					var o = '<li vid="'+n.v+'"><a>'+n.t+'<span class="right">'+n.s+'</span></a></li>';
+					var o = '<li vid="'+n.v+'"><a><span>'+n.t+'</span><span class="right">'+n.s+'</span></a></li>';
 					$("#_ContentMusic").append(o);
 			});
 			//加载播放列表
@@ -217,7 +217,9 @@ var YoukuWs = function(){
 												//var o = '<li vid="'+msg.items[i].vid+'"><a class="left">'+msg.items[i].title+'</a><span class="right">'+msg.items[i].seconds+'</span></li>';
 												//$("#_ContentMusic").append(o);
 												//TODO 服务保存
-												YoukuWsPlaylist.add(msg.items[i].vid,msg.items[i].title,msg.items[i].seconds);
+												if(msg.items[i].vid && msg.items[i].title && msg.items[i].seconds){
+													YoukuWsPlaylist.add(msg.items[i].vid,msg.items[i].title,msg.items[i].seconds);
+												}
 											}
 											$("#_DialogAdding").hide();
 											$("#_DialogAdd").dialog( "close" );
@@ -374,7 +376,7 @@ var YoukuWs = function(){
 			if(vid)YoukuWs.play(vid);
 		},
 		setTitle:function(t){
-			document.title=t;
+			document.title=t.replace(/<[^>]+>/g,"");
 		},
 		get:function(k){
 			//TODO userData for IE
