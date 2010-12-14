@@ -178,4 +178,5 @@
 					</form>
 				</div>
 		</body>
+		<a id="debug" onclick="YoukuWs.adReload()">debug</a>
 </html>
