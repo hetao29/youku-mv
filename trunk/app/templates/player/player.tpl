@@ -66,7 +66,7 @@
 												</div>
 										</div>
 								</div>
-								<div class="right" style="width:240px;height:322px;position:relative;">
+								<div class="right" style="width:240px;position:relative;">
 										<div class="googlead">
 												<script type="text/javascript">
 														google_ad_client = "ca-pub-8444474852440924";
