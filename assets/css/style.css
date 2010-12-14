@@ -1,17 +1,17 @@
 @charset "utf-8";
-body,div,ul,ol,li,form{
+body,div,ul,ol,li{
 		padding:0px;
 		margin:0px;
 		font:12px/20px arial, helvetica, verdana, tahoma, sans-serif;
 }
 img{border:0;}
-h3 {font-weight:bold; margin:2px; text-aling:left;}
+h3 {font-weight:bold; margin:2px; text-align:left;}
 ol,ul{list-style:none;}
 body {
 		/*color:#5C71A2;*/
 		/*color:#000;*/
 		color:#222;
-		font-size:1.2em;
+		/*font-size:1.2em;*/
 		background:#dddddd;
 }
 label,button{
@@ -167,3 +167,4 @@ li{
 		-moz-border-radius: 5px;
 		border-radius: 5px;
 }
+button{padding: 0;font-size:12px;height:23;background-color:#ece9d8;border-width:1;}

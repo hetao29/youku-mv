@@ -236,7 +236,8 @@ var YoukuWs = function(){
 					}
 				});
 			}).show();
-			$("#_BtSearch").button({ icons: { primary: "ui-icon-search" } });
+			//$("#_BtSearch").button();//{ icons: { primary: "ui-icon-search" } });
+			//$("#_BtSearch").show();//({ icons: { primary: "ui-icon-search" } });
 			$("#_BtSaveList").button({icons:{primary:"ui-icon-disk"}}).show();
 
 			showLyric();
@@ -248,7 +249,7 @@ var YoukuWs = function(){
 				vid = $("#_ContentMusic >li").first().attr("vid");
 				YoukuWs.play("vid");
 			};
-			$(".main").show();
+			//$(".main").show();
 	});
 	var pre_index=0;
 	function checkTime(){
@@ -569,8 +570,8 @@ $("#keywords").ready(function(){
 	
 });
 
-$("#search").ready(function(){
-	$("#search_bt").click(function(){
+$("#_BtSearch").ready(function(){
+	$("#_BtSearch").click(function(){
 		search();
 	})
 });
