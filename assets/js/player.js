@@ -363,6 +363,9 @@ var YoukuWs = function(){
 			$.cookie(k,v,{expires:40});
 		},
 		adReload:function(){
+			if($.browser.mozilla){
+					return;
+			}
 			$(".googlead").each(function(index,dom){
 				var a = $(dom).clone();
 				$(dom).html('');
