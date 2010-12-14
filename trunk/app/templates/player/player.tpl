@@ -26,6 +26,19 @@
 				</div>
 				<div class="content">
 
+				<!--
+						<div class="main">
+							<div class="left" style="border-right:1px solid #F0F0F0;">
+										<div class="list">
+										few
+										</div>
+								
+							</div>
+							<div class="left">center</div>
+							<div class="right">right</div>
+							<div class="clear"></div>
+						</div>
+						-->
 						<div class="main">
 								<div class="left" style="border-right:1px solid #F0F0F0;">
 										<div class="list">
@@ -36,12 +49,7 @@
 														</form>
 												</div>
 												<div id="_Content">
-														<ul id="_ContentMusic" style="height:272px">
-																<!--<li vid="XMTM0MDE5NzAw"><a class="left">黄晓明 efffffffff fewf wf efw few f- 什么都可以4</a><span class="right">32:32</span></li>
-																<li vid="XMTM0MDE5NzAw"><a class="left">黄晓明 - 什么都可以4</a><span class="right">32:32</span></li>
-																<li vid="XMTkwMTUwODU2"><a >任贤齐《心肝宝贝》MV</a></li>
-																<li vid="XMTYxNjc5MzY4"><a >张靓颖 - 如果这就是爱情</a></li>
-																-->
+														<ul id="_ContentMusic" style="display:block;height:272px;overflow:hidden;overflow-y:auto;">
 														</ul>
 												</div>
 												<div id="action">
@@ -82,8 +90,8 @@
 										<div id="_LyricsTop" class="lyrics_top" style="display:none;padding-left:5px;padding-right:5px;width:225px;"></div>
 										<div id="_ContentLyrics" class="lyrics" style="overflow:hidden;width:225px;height:280px;"></div>
 								</div>
+							<div class="clear"></div>
 						</div>
-						<div class="clear"></div>
 						<div class="googlead" style="padding:5px;margin:auto">
 								<script type="text/javascript">
 										google_ad_client = "ca-pub-8444474852440924";

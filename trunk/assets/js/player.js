@@ -135,7 +135,7 @@ var YoukuWs = function(){
 									//这里是从搜索结果拖到当前播放列表
 									//var o = '<li vid="'+ui.draggable.attr('vid')+'"><a class="left">'+ui.draggable.find("a").html()+'</a><span class="right">'+ui.draggable.find("span").eq(1).html()+'</span></li>';
 									//$("#_ContentMusic").append(o);
-									YoukuWsPlaylist.add(ui.draggable.attr('vid'),ui.draggable.find("a").html(),ui.draggable.find("span").eq(1).html());
+									YoukuWsPlaylist.add(ui.draggable.attr('vid'),ui.draggable.find("span").eq(2).html(),ui.draggable.find("span").eq(3).html());
 									//TODO 服务保存
 									setTimeout(function() { ui.draggable.remove(); }, 1);//fro ie patch
 							}
@@ -475,13 +475,15 @@ function search(page){
 				});
 	$.getJSON("/player.main.search?k="+key, function(data){
 		$("#_ContentSearch").html('');
-		if(data.item.length==0){
+		if(!data || !data.item || data.item.length==0){
 			$("#_ContentSearch").html('<li>没有找到,请换下搜索条件试试</li>');
 		}else{
 			for(var i=0;i<data.item.length;i++){
 				var o = '<li title="点击播放:'+data.item[i].title+'" vid="'+data.item[i].videoid+
-						'"><div><span class="handle ui-icon ui-icon-arrow-4"></span><a>'+
-						data.item[i].title+'</a><span class="right">'+data.item[i].duration+'</span></div><div class="clear"></div></li>';
+						'"><a><span class="left"><span class="handle ui-icon ui-icon-arrow-4"></span></span>'+
+						'<span class="left">'+ data.item[i].title+'</span>'+
+						'<span class="right">'+data.item[i].duration+'</span>'+
+						'<div class="clear"></div></a></li>';
 				$("#_ContentSearch").append(o);
 			}
 		}
@@ -530,7 +532,6 @@ $("#keywords").ready(function(){
 					response( $.map( r.result, function( item ) {
 							return {
 								label: item.keyword,
-								//label: "<div>"+item.keyword+ "<span class='right'>["+item.count+"]个视频</span></div>",
 								value: item.keyword,
 								count: item.count
 							}
