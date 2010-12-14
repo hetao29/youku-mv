@@ -57,7 +57,7 @@ class player_main extends SGui{
 	function pageSearch($inPath){
 			$k = $_REQUEST['k'];
 			if(empty($k))return;
-			$r = file_get_contents("http://www.youku.com/api_ptvideo/st_3_pid_XOA?sv=$k&rt=3&ob=6&pz=10&pg=1");
+			$r = file_get_contents("http://www.youku.com/api_ptvideo/st_3_pid_XOA?sv=$k&rt=3&ob=6&pz=30&pg=1");
 			return $r;
 	}
 	/*得到视频信息*/
@@ -76,6 +76,7 @@ class player_main extends SGui{
 					$o->items[]=&$v;
 					$v->vid = $vid;
 					$v->title = $r->item->title;
+					$v->seconds= $r->item->duration;
 					return SJson::encode($o);
 			}elseif(preg_match("/show_page\/id_(.*?)\./",$k,$_m)){
 					//节目显示页
@@ -94,7 +95,6 @@ class player_main extends SGui{
 					$st = 8;
 			}
 			if(!empty($pid)){
-					//$oid = $_m[1];
 					$r = SHttp::get("http://api.youku.com/api_ptvideo/st_$st",array("pid"=>"XOA==","rt"=>3,"pz"=>100,"sv"=>$pid));
 					$r = SJson::decode($r);
 					$o = new stdclass;
@@ -103,6 +103,7 @@ class player_main extends SGui{
 						$v = new stdclass;
 						$v->vid = $item->videoid;
 						$v->title = $item->title;
+						$v->seconds= $item->duration;
 						$o->items[]=$v;
 					}
 					return SJson::encode($o);
