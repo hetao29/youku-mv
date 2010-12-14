@@ -247,7 +247,7 @@ var YoukuWs = function(){
 				YoukuWs.play(YoukuWs.get("vid"));
 			}else{
 				vid = $("#_ContentMusic >li").first().attr("vid");
-				YoukuWs.play("vid");
+				YoukuWs.play(vid);
 			};
 			//$(".main").show();
 	});
@@ -340,6 +340,7 @@ var YoukuWs = function(){
 		version:"1.1",
 		/*播放视频*/
 		play:function(vid){
+			vid = vid?vid:"XMjI4MTczMDIw";
 			pre=1;
 			next=1;
 			CurrentVideoID=vid;
@@ -468,12 +469,14 @@ function PlayerPlayNext(vid,vidEncoded,isFullScreen){
 //{{{
 function search(page){
 	page = page?page:1;
+	$("#keywords").autocomplete("close");
 	var key = $("#keywords").val();
 	$( "#_ContentSearch" ).html('<li><img style="vertical-align: middle;" src="/assets/images/loading/loading9.gif" /> 正在查找中...</li>');
 	$( "#_ContentSearch" ).dialog({
 				width:410,height:250
 				});
 	$.getJSON("/player.main.search?k="+key, function(data){
+		$("#keywords").autocomplete("close");
 		$("#_ContentSearch").html('');
 		if(!data || !data.item || data.item.length==0){
 			$("#_ContentSearch").html('<li>没有找到,请换下搜索条件试试</li>');
@@ -518,7 +521,40 @@ $("#keywords").ready(function(){
 		$("#keywords").val(keywords);
 	}
 		
+/*
+var availableTags = [
+			"ActionScript",
+			"AppleScript",
+			"Asp",
+			"BASIC",
+			"C",
+			"C++",
+			"Clojure",
+			"COBOL",
+			"ColdFusion",
+			"Erlang",
+			"Fortran",
+			"Groovy",
+			"Haskell",
+			"Java",
+			"JavaScript",
+			"Lisp",
+			"Perl",
+			"PHP",
+			"Python",
+			"Ruby",
+			"Scala",
+			"Scheme"
+		];
+
+		$( "#keywords" ).autocomplete({
+			source: availableTags
+		});
+
+*/
 	$("#keywords").autocomplete({
+		delay:0,
+		minLength:1,
 		source: function( request, response ) {
 			$.ajax({
 				url: "/player.main.complete",
@@ -532,16 +568,12 @@ $("#keywords").ready(function(){
 					response( $.map( r.result, function( item ) {
 							return {
 								label: item.keyword,
-								value: item.keyword,
-								count: item.count
-							}
-						})
-					);
+								value: item.keyword
+							};
+					}));
 				}
 
 			});
-		},
-		open: function(event,ui){
 		}
 	});
 	/*.data( "autocomplete" )._renderItem = function( ul, item ) {
