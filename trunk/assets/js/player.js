@@ -521,7 +521,6 @@ var availableTags = [
 
 */
 	$("#keywords").autocomplete({
-		delay:0,
 		minLength:1,
 		source: function( request, response ) {
 			$.ajax({

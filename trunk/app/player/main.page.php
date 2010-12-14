@@ -57,7 +57,8 @@ class player_main extends SGui{
 	function pageSearch($inPath){
 			$k = $_REQUEST['k'];
 			if(empty($k))return;
-			$r = file_get_contents("http://www.youku.com/api_ptvideo/st_3_pid_XOA?sv=$k&rt=3&ob=6&pz=30&pg=1");
+			//$k = urlencode($k);
+			$r = SHttp::get("http://www.youku.com/api_ptvideo/st_3_pid_XOA",array("sv"=>$k,"rt"=>3,"ob"=>6,"pz"=>30,"pg"=>1));
 			return $r;
 	}
 	/*得到视频信息*/
