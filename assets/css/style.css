@@ -71,6 +71,7 @@ li{
 		/*overflow-y:scroll;*/
 		overflow-y:auto;
 }
+#_Content a{padding-right:4px;}
 .list {
 		height:350px;
 		width:235px;
