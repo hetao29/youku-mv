@@ -13,6 +13,8 @@
 				<script type="text/javascript" src="/assets/js/jquery-ui.min.js"></script>
 				<script type="text/javascript" src="/assets/js/json2.js"></script>
 				<script type="text/javascript" src="/assets/js/player.js"></script>
+				<!--
+				-->
 				{*
 				<script type="text/javascript" src="/assets/js/youku.ws.js"></script>
 				*}

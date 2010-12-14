@@ -520,7 +520,6 @@ $("#keywords").ready(function(){
 		source: function( request, response ) {
 			$.ajax({
 				url: "/player.main.complete",
-				//dataType: "json",
 				data: {
 					k:$("#keywords").val()
 				},
@@ -529,27 +528,22 @@ $("#keywords").ready(function(){
 				success: function( result) {
 					var r = eval(result);
 					response( $.map( r.result, function( item ) {
-						return {
-							label: item.keyword,
-							//label: "<div>"+item.keyword+ "<span class='right'>["+item.count+"]个视频</span></div>",
-							value: item.keyword,
-							count: item.count,
-						}
-					}));
-				},
+							return {
+								label: item.keyword,
+								//label: "<div>"+item.keyword+ "<span class='right'>["+item.count+"]个视频</span></div>",
+								value: item.keyword,
+								count: item.count
+							}
+						})
+					);
+				}
 
 			});
 		},
 		open: function(event,ui){
-		}/*,
-		select: function( event, ui ) {
-			$( "#keywords" ).val( ui.item.label );
-			//$( "#project-id" ).val( ui.item.value );
-			//$( "#project-description" ).html( ui.item.desc );
-			//$( "#project-icon" ).attr( "src", "images/" + ui.item.icon );
-			return false;
-		}*/
-	});/*.data( "autocomplete" )._renderItem = function( ul, item ) {
+		}
+	});
+	/*.data( "autocomplete" )._renderItem = function( ul, item ) {
 			return $( "<li></li>" )
 				.data( "item.autocomplete", item )
 				.append( "<div>" + item.label + "<span class='right'>[" + item.count+ "]个视频</span></div>" )
