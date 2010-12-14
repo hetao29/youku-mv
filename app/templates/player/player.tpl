@@ -44,7 +44,7 @@
 																<button id="_BtSearch" style="vertical-align:middle" class="ui-button ui-widget ui-state-default ui-corner-all">{'搜索'|tr}</button>
 														</form>
 												</div>
-												<div id="_Content" style="padding-top:6px;padding-bottom:6px;">
+												<div id="_Content" style="position:relative;padding-top:6px;padding-bottom:6px;">
 														<ul id="_ContentMusic" style="display:block;height:272px;overflow:hidden;overflow-y:auto;">
 														</ul>
 												</div>

@@ -316,9 +316,22 @@ var YoukuWs = function(){
 			swfobject.embedSWF("http://static.youku.com/v1.0.0133/v/swf/qplayer.swf", playerId, "100%", "100%", "9.0.0", "expressInstall.swf",
 				{isAutoPlay:true,VideoIDS:vid,winType:"interior","show_pre":pre,"show_next":next},
 				{allowFullScreen:true,allowscriptaccess:"always","wmode":"transparent"},{},function(){
-					$("#_ContentMusic >li").removeClass("current");
-					$("#_ContentMusic [vid="+vid+"]").addClass('current');
+					var t = 0;
+					var o = $("#_ContentMusic [vid="+vid+"]");
+
 					YoukuWs.setTitle("YOUKU.WS 正在播放 - " +$("#_ContentMusic [vid="+vid+"] A").html() +"  ");
+					t = o.position().top+o.outerHeight()-o.parent().height();
+					if(t>0){
+						t = o.parent().scrollTop() + o.position().top+o.height()-o.parent().height(); //432
+						o.parent().animate({scrollTop:t+"px"},"slow","linear",function(){
+						});
+					}else if( t<0-(o.parent().height()-o.outerHeight())){
+						t = o.parent().scrollTop() - o.outerHeight();//o.position().top;//-o.parent().height(); //432
+						o.parent().animate({scrollTop:t+"px"},"slow","linear",function(){
+						});
+					}
+					$("#_ContentMusic >li").removeClass("current");
+					o.addClass('current');
 			});
 		},
 		playRandom:function(){
