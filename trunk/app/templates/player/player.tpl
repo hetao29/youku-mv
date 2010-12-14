@@ -4,15 +4,15 @@
 				<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 				<title>YOUKU MV PLAYER</title>
 				<!--<link href="/assets/css/jquery-ui-1.8.6.custom.css" media="all" rel="stylesheet" type="text/css" />-->
-				<link href="/assets/css/jquery-ui-1.8.6.custom-smoothness.css" media="all" rel="stylesheet" type="text/css" />
 				<!--<link href="/assets/js/development-bundle/themes/base/jquery.ui.theme.css" media="all" rel="stylesheet" type="text/css" />-->
-				<link href="/assets/css/style.css" media="all" rel="stylesheet" type="text/css" />
 				<script type="text/javascript" src="/slightphp/js/jquery-1.4.4.min.js"></script>
 				<script type="text/javascript" src="/assets/js/jquery.cookie.js"></script>
 				<script type="text/javascript" src="/assets/js/swfobject/swfobject.js"></script>
 				<script type="text/javascript" src="/assets/js/jquery-ui.min.js"></script>
 				<script type="text/javascript" src="/assets/js/json2.js"></script>
 				<script type="text/javascript" src="/assets/js/player.js"></script>
+				<link href="/assets/css/style.css" media="all" rel="stylesheet" type="text/css" />
+				<link href="/assets/css/jquery-ui-1.8.6.custom-smoothness.css" media="all" rel="stylesheet" type="text/css" />
 				<!--
 				-->
 				{*
@@ -42,10 +42,10 @@
 						<div class="main">
 								<div class="left" style="border-right:1px solid #F0F0F0;">
 										<div class="list">
-												<div id="submitform">
-														<form onsubmit="search();return false;">
-																<input type="text" size="18" id="keywords" placeholder="请输入关键词" autofocus="" value="" autocomplete="off" class="ui-widget-content" />
-																<button type="submit" id="_BtSearch">{'搜索'|tr}</button>
+												<div>
+														<form onsubmit="search();return false;" style="vertical-align:middle">
+																<input style="vertical-align:middle" type="text" size="18" id="keywords" placeholder="请输入关键词" autofocus="" value="" autocomplete="off" class="ui-widget-content" />
+																<button id="_BtSearch" style="vertical-align:middle" class="ui-button ui-widget ui-state-default ui-corner-all">{'搜索'|tr}</button>
 														</form>
 												</div>
 												<div id="_Content">
@@ -68,12 +68,7 @@
 								<div class="left">
 										<div class="playerBox"><div id="player"></div></div>
 										<div>
-												<div id="PlayModeSet" style="display:none">
-														<button id="_BtPlayModeSet">播放模式设置:</button>
-														<input type="radio" id="set1" name="set" value="1"/><label style="width:95px;" for="set1">单曲循环</label>
-														<input type="radio" id="set2" name="set" value="2" checked/><label style="width:95px;" for="set2">循环播放</label>
-														<input type="radio" id="set3" name="set" value="3"/><label style="width:95px;" for="set3">随机播放</label>
-												</div>
+												<div id="PlayModeSet" style="display:none"><input type="radio" disabled id="set0" name="set" value="0"/><label style="width:95px;" for="set0">播放设置</label><input type="radio" id="set1" name="set" value="1"/><label style="width:95px;" for="set1">单曲循环</label><input type="radio" id="set2" name="set" value="2" checked/><label style="width:95px;" for="set2">循环播放</label><input type="radio" id="set3" name="set" value="3"/><label style="width:95px;" for="set3">随机播放</label></div>
 										</div>
 								</div>
 								<div class="right" style="width:240px;position:relative;">
