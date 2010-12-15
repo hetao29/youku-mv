@@ -313,6 +313,7 @@ var YoukuWs = function(){
 	
 	function parseLyric(str)
 	{
+			if(!str)return;
 			ti=/\[ti:(.+)\]/i.test(str)?"标题："+RegExp.$1:"";
 			ar=/\[ar:(.+)\]/i.test(str)?"歌手："+RegExp.$1:"";
 			al=/\[al:(.+)\]/i.test(str)?"专辑："+RegExp.$1:"";
