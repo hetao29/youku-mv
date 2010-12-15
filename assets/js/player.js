@@ -358,12 +358,27 @@ var YoukuWs = function(){
 			next=1;
 			CurrentVideoID=vid;
 			YoukuWs.set("vid",CurrentVideoID);
+			//下载歌词
+			showLyric("");
+			$.ajax({
+				url: "/player.main.getlyric",
+				data: {
+					vid:vid
+				},
+				dataType:"json",
+				success: function( result) {
+					if(result){
+						showLyric(result.LyricsContent);
+					}
+				}
+
+			});
 			swfobject.embedSWF("http://static.youku.com/v1.0.0133/v/swf/qplayer.swf", playerId, "100%", "100%", "9.0.0", "expressInstall.swf",
 				{isAutoPlay:true,VideoIDS:vid,winType:"interior","show_pre":pre,"show_next":next},
 				{allowFullScreen:true,allowscriptaccess:"always","wmode":"transparent"},{},function(){
 					var t = 0;
 					var o = $("#_ContentMusic [vid="+vid+"]");
-
+					if(!o)return;
 					YoukuWs.setTitle($("#_ContentMusic [vid="+vid+"] A").html());
 					t = o.position().top+o.outerHeight()-o.parent().height();
 					if(t>0){
@@ -377,21 +392,6 @@ var YoukuWs = function(){
 					}
 					$("#_ContentMusic >li").removeClass("current");
 					o.addClass('current');
-					//下载歌词
-					showLyric("");
-					$.ajax({
-						url: "/player.main.getlyric",
-						data: {
-							vid:vid
-						},
-						dataType:"json",
-						success: function( result) {
-							if(result){
-								showLyric(result.LyricsContent);
-							}
-						}
-
-					});
 			});
 		},
 		playRandom:function(){
@@ -514,6 +514,7 @@ function PlayerPlayNext(vid,vidEncoded,isFullScreen){
 function search(page){
 	page = page?page:1;
 	$("#keywords").autocomplete("close");
+	YoukuWs.set("keywords",$("#keywords").val());
 	var key = $("#keywords").val();
 	$( "#_ContentSearch" ).html('<li><img style="vertical-align: middle;" src="/assets/images/loading/loading9.gif" /> 正在查找中...</li>');
 	$( "#_ContentSearch" ).dialog({
@@ -605,8 +606,8 @@ var availableTags = [
 					k:$("#keywords").val()
 				},
 				beforeSend:function(xhr){
-				},
-				success: function( result) {
+				},select:function(event,ui){
+				},success: function( result) {
 					var r = eval(result);
 					response( $.map( r.result, function( item ) {
 							return {
