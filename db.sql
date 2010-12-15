@@ -85,15 +85,13 @@ PRIMARY KEY (`ListID`,`MvID`)
 
 drop table s_lyrics;
 create table s_lyrics(
-LyricsID int(10) unsigned NOT NULL AUTO_INCREMENT,
 UserID int(10) unsigned NOT NULL DEFAULT 0,
 MvID int(10) unsigned NOT NULL,
 LyricsOffset int NOT NULL  DEFAULT 0 COMMENT '偏移,毫秒,正数表是延迟,负数表是推前,只有当前所属用户才能修改',
 LyricsContent  text,
 LyricsStatus tinyint not null default 1 COMMENT'1正常 -1没审核',
 
-PRIMARY KEY (`LyricsID`),
-KEY (`MvID`),
+UNIQUE (`MvID`),
 KEY (`UserID`),
 KEY (`LyricsStatus`)
 

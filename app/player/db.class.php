@@ -18,7 +18,7 @@ class player_db{
 		return $this->_db->selectOne("s_lyrics",array("MvID"=>$MvID));
 	}
 	function addLyrics($Lyrics){
-		return $this->_db->insert("s_lyrics",$Lyrics);
+		return $this->_db->insert("s_lyrics",$Lyrics,$replace = true);
 	}
 }
 ?>
