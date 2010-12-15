@@ -30,31 +30,28 @@ INSERT into s_user(UserID,UserName,UserEmail,UserPassword) values(1,'hetal','het
 
 --drop table s_mv;
 --s_mv表
+drop table s_mv;
 create table s_mv(
 MvID int(10) unsigned NOT NULL AUTO_INCREMENT,
 UserID int(10) unsigned NOT NULL default 0 COMMENT '增加的用户ID',
-SingerID int(10) unsigned NOT NULL default 0 COMMENT '歌手信息',
-SingerID2 int(10) unsigned NOT NULL default 0 COMMENT '歌手信息',
-SingerID3 int(10) unsigned NOT NULL default 0 COMMENT '歌手信息',
-MvTagIDS varchar(100) COMMENT 'MTV标签',
-MvName varchar(200),
+SingerName varchar(250) NOT NULL default "" COMMENT '歌手名，乐队名等，多个用,号分开',
+MvTag varchar(200) COMMENT 'MTV标签,多个用,分开',
+MvName varchar(200) COMMENT '视频的真实名字,用户不可修改',
+MvAlias varchar(200) COMMENT 'MV的名字，编辑后的，默认和MvName一样',
 MvPic varchar(200),
 CategoryID int(10) unsigned NOT NULL default 0,
 SpecialID int(10) unsigned NOT NULL default 0,
 MvVideoID varchar(50),
 MvSourceID tinyint unsigned not null default 1 COMMENT'来源,1.优酷，2.土豆 3...',
 MvPubDate date,
-MvTime int unsigned not null default 0 COMMENT 'MTV播放时间，秒',
+MvSeconds varchar(10) not null default '' COMMENT 'MTV播放时间，秒',
 MvUpdateTime timestamp,
-SpecialName varchar(200),
-SpecialPubDate date,
-MvStatus tinyint not null default -1 COMMENT '--１正常，-1未审核',
+MvStatus tinyint not null default -1 COMMENT '１正常，-1未审核',
 
 PRIMARY KEY (`MvID`),
-UNIQUE KEY `MvName` (`MvName`,`SingerID`),
+UNIQUE KEY `Mv` (`MvVideoID`,`MvSourceID`),
 Key (`UserID`),
-Key (`CategoryID`),
-Key (`MvSourceID`)
+Key (`CategoryID`)
 )ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 --播放列表
@@ -86,14 +83,18 @@ PRIMARY KEY (`ListID`,`MvID`)
 
 
 
+drop table s_lyrics;
 create table s_lyrics(
 LyricsID int(10) unsigned NOT NULL AUTO_INCREMENT,
+UserID int(10) unsigned NOT NULL DEFAULT 0,
 MvID int(10) unsigned NOT NULL,
+LyricsOffset int NOT NULL  DEFAULT 0 COMMENT '偏移,毫秒,正数表是延迟,负数表是推前,只有当前所属用户才能修改',
 LyricsContent  text,
 LyricsStatus tinyint not null default 1 COMMENT'1正常 -1没审核',
 
 PRIMARY KEY (`LyricsID`),
 KEY (`MvID`),
+KEY (`UserID`),
 KEY (`LyricsStatus`)
 
 )ENGINE=MyISAM DEFAULT CHARSET=utf8;
