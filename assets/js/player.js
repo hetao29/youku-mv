@@ -18,8 +18,17 @@ var YoukuWsPlaylist = function(){
 					m.t= title;
 					all[all.length]=m;
 					if(!noappend){
-					var o = '<li vid="'+vid+'"><a>'+title+'</a></li>';
-					$("#_ContentMusic").append(o);
+						var o = '<li vid="'+vid+'"><a>'+title+'</a></li>';
+						$("#_ContentMusic").append(o);
+						//$.ajax({
+						//	url: "/player.main.addmv",
+						//	data: {
+						//		vid:vid
+						//	},
+						//	success: function( result) {
+						//	}
+
+						//});
 					}
 				}
 				YoukuWs.set("list",JSON.stringify(all));
@@ -208,7 +217,6 @@ var YoukuWs = function(){
 			}).show();
 			$("#_BtSaveList").button({icons:{primary:"ui-icon-disk"}}).show();
 
-			showLyric();
 			setInterval(checkTime,500);
 			setInterval(YoukuWs.adReload,1000*60*10);// 10分钟一次
 			if(YoukuWs.get("vid")){
@@ -252,10 +260,11 @@ var YoukuWs = function(){
 			});
 	
 	}
-	function showLyric(){
-			parseLyric($("#lyrics_c").val());
+	function showLyric(str){
+			parseLyric(str);
 			$(".lyrics").html('');
 			var tmp_top=0;
+			if(!gc)return;
 			for (var k=0;k<gc.length;k++)
 			{
 					if(gc[k].w==""){
@@ -277,6 +286,7 @@ var YoukuWs = function(){
 			otime=parseInt(/\[offset:(.+)\]/i.test(str)?RegExp.$1:0);
 	
 			gc=str.match(/\n\[\d+:.+\][^\[\r\n]*/ig);
+			if(!gc)return;
 			rr=gc.length;
 			for (var i=0;i<rr;i++)
 			{
@@ -295,6 +305,7 @@ var YoukuWs = function(){
 	}
 	/*可以优化为2分算法*/
 	function getLyric(t){
+			if(!gc)return;
 			for (var k=0;k<gc.length && gc[k] &&gc[k+1];k++){
 					if(t>=gc[k].t && t<=gc[k+1].t){
 							var gc_tmp = gc[k];
@@ -332,6 +343,23 @@ var YoukuWs = function(){
 					}
 					$("#_ContentMusic >li").removeClass("current");
 					o.addClass('current');
+					//下载歌词
+					$.ajax({
+						url: "/player.main.getlyric",
+						data: {
+							vid:vid
+						},
+						dataType:"json",
+						success: function( result) {
+							if(result){
+								showLyric(result.LyricContent);
+								//alert(result);
+							}else{
+								showLyric("");
+							}
+						}
+
+					});
 			});
 		},
 		playRandom:function(){
