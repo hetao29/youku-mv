@@ -64,8 +64,29 @@ class player_main extends SGui{
 	 * 读取歌词
 	 **/
 	function pageGetLyric($inPath){
-			$lyric = new stdclass;
-			$lyric->LyricContent="[ti:如果这就是爱情]
+			$vid = $_REQUEST['vid'];
+			$db = new player_db;
+			$mv  = $db->getMvByVid($vid);
+			if(empty($mv)){
+					$this->pageAddMv($inPath);
+					$mv  = $db->getMvByVid($vid);
+			}
+			if(!empty($mv)){
+					$lyric = $db->getLyric($mv['MvID']);
+					if(empty($lyric) || empty($lyric['LyricsContent']))
+					{
+						$api = new player_api;
+						$content = $api->downlyric($mv['MvAlias']);
+						$lyric = array();
+						$lyric['LyricsContent']=$content;
+						$lyric['UserID']=1;
+						$lyric['MvID']=$mv['MvID'];
+						$db->addLyrics($lyric);
+					}
+					return $lyric;
+			}
+			/*
+			"[ti:如果这就是爱情]
 [ar:张靓颖]
 [al:我相信]
 [by:活在當下]
@@ -103,6 +124,7 @@ class player_main extends SGui{
 [02:41.69]你可以自由 我愿意承受
 [02:47.98]把昨天 留给我
 ";
+			 */
 			return $lyric;
 			$vid = $_GET['vid'];
 			//
