@@ -364,7 +364,7 @@ var YoukuWs = function(){
 					var t = 0;
 					var o = $("#_ContentMusic [vid="+vid+"]");
 
-					YoukuWs.setTitle("YOUKU.WS 正在播放 - " +$("#_ContentMusic [vid="+vid+"] A").html() +"  ");
+					YoukuWs.setTitle($("#_ContentMusic [vid="+vid+"] A").html());
 					t = o.position().top+o.outerHeight()-o.parent().height();
 					if(t>0){
 						t = o.parent().scrollTop() + o.position().top+o.height()-o.parent().height(); //432
