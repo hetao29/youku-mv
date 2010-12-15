@@ -12,9 +12,14 @@
 				<script type="text/javascript" src="/assets/js/player.js"></script>
 *}
 				<link href="/assets/css/style.css" media="all" rel="stylesheet" type="text/css" />
+				<link rel="Shortcut Icon" href="/assets/images/ico/favicon_32x32.ico" />
 				<link href="/assets/css/jquery-ui-1.8.6.custom-smoothness.css" media="all" rel="stylesheet" type="text/css" />
 				<script type="text/javascript" src="/assets/js/youku.ws.js"></script>
 		</head>
+		<script>
+		var _LabelOk="{'确认'|tr}";
+		var _LabelCancel="{'取消'|tr}";
+		</script>
 		<body>
 
 				<div class="header">
@@ -64,7 +69,16 @@
 								<div class="left">
 										<div class="playerBox"><div id="player"></div></div>
 										<div>
-												<div id="PlayModeSet" style="display:none"><input type="radio" disabled id="set0" name="set" value="0"/><label style="width:95px;" for="set0">播放设置</label><input type="radio" id="set1" name="set" value="1"/><label style="width:95px;" for="set1">单曲循环</label><input type="radio" id="set2" name="set" value="2" checked/><label style="width:95px;" for="set2">循环播放</label><input type="radio" id="set3" name="set" value="3"/><label style="width:95px;" for="set3">随机播放</label></div>
+												<div id="PlayModeSet" style="display:none">
+													<input type="radio" disabled id="set0" name="set" value="0"/>
+													<label style="width:95px;" for="set0">{'播放设置'|tr}</label>
+													<input type="radio" id="set1" name="set" value="1"/>
+													<label style="width:95px;" for="set1">{'单曲循环'|tr}</label>
+													<input type="radio" id="set2" name="set" value="2" checked/>
+													<label style="width:95px;" for="set2">{'循环播放'|tr}</label>
+													<input type="radio" id="set3" name="set" value="3"/>
+													<label style="width:95px;" for="set3">{'随机播放'|tr}</label>
+												</div>
 										</div>
 								</div>
 								<div class="right" style="width:240px;position:relative;">
@@ -98,7 +112,7 @@
 
 				<div id="debug"></div>
 				<div id="debug2"></div>
-				<textarea id="lyrics_c" style="display:none;">
+{*				<textarea id="lyrics_c" style="display:none;">
 [ti:如果这就是爱情]
 [ar:张靓颖]
 [al:我相信]
@@ -137,6 +151,7 @@
 [02:41.69]你可以自由 我愿意承受
 [02:47.98]把昨天 留给我
 				</textarea>
+*}
 				<div id="_DialogAdd" style="display:none;">
 						<div>请输入优酷播放页地址:</div>
 						<div><textarea style="width:460px;height:24px">http://v.youku.com/v_show/id_XMjI2MDIxNTYw.html</textarea></div>
@@ -158,24 +173,36 @@
 								<div>黄晓明 2</div>
 						</li>
 				</ul>
-				<div id="_ContentLogin" title="登录" style="display:none">
+				<div id="_ContentLogin" title="{'登录'|tr}" style="display:none">
 					<form id="_FormLogin" style="padding:15px;margin:auto;text-align:center">
 						<ul>
-						<li><div>用户名:<input name="username"/></div></li>
-						<li><div>密　码:<input type="password" name="password"/></div></li>
+						<li><div>{'账号'|tr}:<input name="username"/></div></li>
+						<li><div>{'密码'|tr}:<input type="password" name="password"/></div></li>
 						<li><div class="info"></div></li>
 						<!--<li><div><input type="checkbox" /><label>记住</label><a>忘记密码</a></div></li>-->
 						<ul>
 					</form>
 				</div>
-				<div id="_ContentSignup" title="注册" style="display:none">
+				<div id="_ContentSignup" title="{'注册'|tr}" style="display:none">
 					<form id="_FormSignup" style="padding:15px;margin:auto;text-align:center">
 						<ul>
-						<li><div>用户名:<input id="username" name="username"/></div></li>
-						<li><div>密　码:<input name="password"/></div></li>
+						<li><div>账号:<input id="username" name="username"/></div></li>
+						<li><div>密码:<input name="password"/></div></li>
 						<!--<li><div><input type="checkbox" /><label>记住</label><a>忘记密码</a></div></li>-->
 						<ul>
 					</form>
+				</div>
+				<div id="_ContentAbout" title="{'关于'|tr}" style="display:none">
+					<div style="padding:15px;margin:auto;padding-left:45px;">
+					作者:Hetal 2010-12-15<br/>
+					版本所有,山寨必究
+					</div>
+				</div>
+				<div id="_ContentUsage" title="{'使用说明'|tr}" style="display:none">
+					<div style="padding:15px;margin:auto;padding-left:45px;">
+					作者:Hetal 2010-12-15<br/>
+					版本所有,山寨必究
+					</div>
 				</div>
 		</body>
 </html>
