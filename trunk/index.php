@@ -15,7 +15,7 @@ require_once("global.php");
 SlightPHP::setDebug(true);
 
 SlightPHP::setAppDir("app");
-SlightPHP::setDefaultZone("index");
+SlightPHP::setDefaultZone("player");
 SlightPHP::setDefaultPage("main");
 SlightPHP::setDefaultEntry("entry");
 
