@@ -378,7 +378,7 @@ var YoukuWs = function(){
 				{allowFullScreen:true,allowscriptaccess:"always","wmode":"transparent"},{},function(){
 					var t = 0;
 					var o = $("#_ContentMusic [vid="+vid+"]");
-					if(!o)return;
+					if(!o || !o.position())return;
 					YoukuWs.setTitle($("#_ContentMusic [vid="+vid+"] A").html());
 					t = o.position().top+o.outerHeight()-o.parent().height();
 					if(t>0){
@@ -418,7 +418,7 @@ var YoukuWs = function(){
 			if(vid)YoukuWs.play(vid);
 		},
 		setTitle:function(t){
-			document.title=t.replace(/<[^>]+>/g,"");
+			if(t)document.title=t.replace(/<[^>]+>/g,"");
 		},
 		get:function(k){
 			//TODO userData for IE
