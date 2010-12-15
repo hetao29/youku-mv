@@ -260,11 +260,18 @@ var YoukuWs = function(){
 			if(!o_lyrics){
 					o_lyrics = $('.lyrics');
 			}
+			var LyricTop = $("#_LyricsTop");
 			var r= PlayerInfo();
-			if(!r)return;
+			if(!r){
+				LyricTop.hide();
+				return;
+			}
 			var time = isNaN(r.time)?0:r.time;
 			var l = getLyric(time*1000);
-			if(!l){return;}
+			if(!l){
+				LyricTop.hide();
+				return;
+			}
 			var id = "_ID"+l.i;
 			var index = l.i;
 			if(pre_index  == index)return;else{
@@ -272,7 +279,6 @@ var YoukuWs = function(){
 			}
 			//向上移动
 			var t = l.top - 100;
-			var LyricTop = $("#_LyricsTop");
 			var LyricCurrent = $("#"+id);
 			LyricTop.show();
 			$("#_ContentLyrics .red").removeClass("red");
@@ -372,6 +378,7 @@ var YoukuWs = function(){
 					$("#_ContentMusic >li").removeClass("current");
 					o.addClass('current');
 					//下载歌词
+					showLyric("");
 					$.ajax({
 						url: "/player.main.getlyric",
 						data: {
@@ -380,10 +387,7 @@ var YoukuWs = function(){
 						dataType:"json",
 						success: function( result) {
 							if(result){
-								showLyric(result.LyricContent);
-								//alert(result);
-							}else{
-								showLyric("");
+								showLyric(result.LyricsContent);
 							}
 						}
 

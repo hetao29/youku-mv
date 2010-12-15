@@ -14,5 +14,11 @@ class player_db{
 	function addMv($Mv){
 		return $this->_db->insert("s_mv",$Mv);
 	}
+	function getLyric($MvID){
+		return $this->_db->selectOne("s_lyrics",array("MvID"=>$MvID));
+	}
+	function addLyrics($Lyrics){
+		return $this->_db->insert("s_lyrics",$Lyrics);
+	}
 }
 ?>
