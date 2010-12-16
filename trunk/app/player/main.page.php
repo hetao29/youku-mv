@@ -60,6 +60,20 @@ class player_main extends SGui{
 	 */
 	function pageListList($inPath){
 	}
+	function pageSaveOffset($inPath){
+			$MvID= $_REQUEST['MvID'];
+			$offset = $_REQUEST['offset'];
+			if(empty($MvID) || empty($offset)){
+					return;
+			}
+			$db = new player_db;
+			$lyric = $db->getLyrics($MvID);
+			if(empty($lyric)  || $lyric['UserID']!=1){//TODO，当前登录用户
+					return;
+			}
+			$db->updateLyrics($MvID,array("LyricsOffset"=>$offset));
+			return true;
+	}
 	/**
 	 * 读取歌词
 	 **/
@@ -72,7 +86,7 @@ class player_main extends SGui{
 					$mv  = $db->getMvByVid($vid);
 			}
 			if(!empty($mv)){
-					$lyric = $db->getLyric($mv['MvID']);
+					$lyric = $db->getLyrics($mv['MvID']);
 					if(empty($lyric) || empty($lyric['LyricsContent']))
 					{
 						$api = new player_api;
