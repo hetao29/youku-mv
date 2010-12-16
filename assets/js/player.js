@@ -462,7 +462,7 @@ var YoukuWs = function(){
 					url: "/player.main.saveoffset",
 					data: {
 						MvID:mvid,
-						offset:lyrics_offset,
+						offset:lyrics_offset
 					},
 					success: function( result) {
 					}
