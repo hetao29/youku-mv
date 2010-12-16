@@ -74,6 +74,19 @@ class player_main extends SGui{
 			$db->updateLyrics($MvID,array("LyricsOffset"=>$offset));
 			return true;
 	}
+	function pageLyricsError($inPath){
+			$MvID= $_REQUEST['MvID'];
+			if(empty($MvID)){
+					return;
+			}
+			$db = new player_db;
+			$lyric = $db->getLyrics($MvID);
+			if(empty($lyric)  || $lyric['UserID']!=1){//TODO，当前登录用户
+					return;
+			}
+			$db->updateLyrics($MvID,array("LyricsStatus"=>-2));
+			return true;
+	}
 	/**
 	 * 读取歌词
 	 **/
@@ -87,15 +100,19 @@ class player_main extends SGui{
 			}
 			if(!empty($mv)){
 					$lyric = $db->getLyrics($mv['MvID']);
-					if(empty($lyric) || empty($lyric['LyricsContent']))
+					if(empty($lyric) || empty($lyric['LyricsContent']) || $lyric['LyricsStatus']==-2)
 					{
 						$api = new player_api;
 						$content = $api->downlyric($mv['MvAlias']);
-						$lyric = array();
-						$lyric['LyricsContent']=$content;
-						$lyric['UserID']=1;
-						$lyric['MvID']=$mv['MvID'];
-						$db->addLyrics($lyric);
+						if(!empty($content)){
+							$lyric = array();
+							$lyric['LyricsContent']=$content;
+							$lyric['LyricsOffset']=0;
+							$lyric['UserID']=1;
+							$lyric['LyricsStatus']=-1;
+							$lyric['MvID']=$mv['MvID'];
+							$db->addLyrics($lyric);
+						}
 					}
 					return $lyric;
 			}

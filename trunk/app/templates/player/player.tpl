@@ -86,7 +86,7 @@
 											<span id="_IDLyricsPr" style="cursor:pointer;border:1px solid;">前进</span> 
 										   	<span id="_IDLyricsEd" style="cursor:pointer;border:1px solid;">编辑</span>
 										   	<span id="_IDLyricsErr" style="cursor:pointer;border:1px solid;">报错</span>
-										   	<span id="_IDLyricsDn" style="cursor:pointer;border:1px solid;">下载</span>
+										   	<span id="_IDLyricsView" style="cursor:pointer;border:1px solid;">查看</span>
 											<span id="_IDLyricsInfo" style="position:absolute;top:348px;left:180px;"></span>
 										</div>
 								</div>
@@ -156,6 +156,10 @@
 					<div style="padding:15px;margin:auto;padding-left:45px;">
 					作者:Hetal 2010-12-15<br/>
 					版本所有,山寨必究
+					</div>
+				</div>
+				<div id="_ContentLyricsView" title="{'查看歌词'|tr}" style="display:none">
+					<div style="padding:15px;margin:auto;text-align:center">
 					</div>
 				</div>
 		</body>

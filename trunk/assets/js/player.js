@@ -1,7 +1,7 @@
 //{{{主方法
 var YoukuWs = function(){
 	var o_lyrics;
-	var gc= "";
+	var gc= new Array();
 	var lyrics_offset=0;
 	//用户ID
 	var uid=1;
@@ -19,14 +19,47 @@ var YoukuWs = function(){
 					$("#_ContentMusic").append(o);
 			});
 			$("#_IDLyricsPr").click(function(){
-					lyrics_offset+=1000;
+					lyrics_offset=parseInt(lyrics_offset)+1000;
 					$("#_IDLyricsInfo").html("已前进").fadeIn("slow",function(){
 								$("#_IDLyricsInfo").fadeOut("slow");	
 					});
 					YoukuWs.saveOffset();
 			});
+			$("#_IDLyricsErr").click(function(){
+				if(mvid>0 && uid>0){
+					$.ajax({
+						url: "/player.main.LyricsError",
+						data: {
+							MvID:mvid
+						},
+						success: function( result) {
+							$("#_IDLyricsInfo").html("已报错").fadeIn("slow",function(){
+										$("#_IDLyricsInfo").fadeOut("slow");	
+							});
+						}
+
+					});
+				}
+			});
+			$("#_IDLyricsView").click(function(){
+				var html = "";
+				$("#_ContentLyrics >div").each(function(n,item){
+					html+=$(item).html()+"<br/>";
+				});
+				$("#_ContentLyricsView >div").html(html);
+				$("#_ContentLyricsView").dialog({
+					width:400,height:300, buttons: [
+					{
+						text:_LabelOk,
+						click: function() {
+							$("#_ContentLyricsView").dialog("close");
+						}
+					}
+					]
+				});
+			});
 			$("#_IDLyricsBk").click(function(){
-					lyrics_offset-=1000;
+					lyrics_offset=parseInt(lyrics_offset)-1000;
 					$("#_IDLyricsInfo").html("已后退").fadeIn("slow",function(){
 								$("#_IDLyricsInfo").fadeOut("slow");	
 					});
@@ -214,7 +247,6 @@ var YoukuWs = function(){
 				vid = $("#_ContentMusic >li").first().attr("vid");
 				YoukuWs.play(vid);
 			};
-			//$(".main").show();
 	});
 	var pre_index=0;
 	function checkTime(){
@@ -334,7 +366,7 @@ var YoukuWs = function(){
 					if(result){
 				   		if(result.LyricsContent){
 							showLyric(result.LyricsContent);
-							lyrics_offset = result.LyricsOffset;
+							lyrics_offset = parseInt(result.LyricsOffset);
 							mvid = result.MvID;
 							$("#_IDLyricsAdmin").fadeIn("slow");
 						}else{
