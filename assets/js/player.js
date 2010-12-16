@@ -1,67 +1,11 @@
 //{{{主方法
-var YoukuWsPlaylist = function(){
-		var o={};
-		o.add=function(vid,title,noappend){
-				var all = $.parseJSON(YoukuWs.get("list"))||[];
-				finded = false;
-				//v = vid;
-				//t = title
-				$.each(all,function(i,item){
-						if(item.v == vid){
-								finded = true;
-								all[i].t=title;
-						}
-				});
-				if(!finded){
-					var m = {};
-					m.v = vid;
-					m.t= title;
-					all[all.length]=m;
-					if(!noappend){
-						var o = '<li vid="'+vid+'"><a>'+title+'</a></li>';
-						$("#_ContentMusic").append(o);
-						//$.ajax({
-						//	url: "/player.main.addmv",
-						//	data: {
-						//		vid:vid
-						//	},
-						//	success: function( result) {
-						//	}
-
-						//});
-					}
-				}
-				YoukuWs.set("list",JSON.stringify(all));
-		};
-		o.list=function(){
-				return $.parseJSON(YoukuWs.get("list"))||[];
-		};
-		o.save=function(){
-			o.empty();
-			$("#_ContentMusic >li").each(function(i,n){
-				YoukuWsPlaylist.add($(n).attr("vid"),$(n).find("a").html(),true);
-			});
-		};
-		o.empty=function(){
-				YoukuWs.set("list",JSON.stringify([]));
-		};
-		o.del=function(vid){
-				var all = $.parseJSON(YoukuWs.get("list"))||[];
-				for(var i=0;i<all.length;i++){
-						if(all[i].v == vid){
-							all.splice(i,1);
-						}
-				};
-				YoukuWs.set("list",JSON.stringify(all));
-		};
-		return o;
-}();
 var YoukuWs = function(){
 	var o_lyrics;
 	var gc= "";
 	var lyrics_offset=0;
 	//用户ID
-	var uid=0;
+	var uid=1;
+	var mvid=1;
 
 	var order=[];
 	$(document).ready(function(){
@@ -75,16 +19,18 @@ var YoukuWs = function(){
 					$("#_ContentMusic").append(o);
 			});
 			$("#_IDLyricsPr").click(function(){
-					lyrics_offset+=500;
-					$("#_IDLyricsInfo").html("已前进半秒").fadeIn("slow",function(){
+					lyrics_offset+=1000;
+					$("#_IDLyricsInfo").html("已前进").fadeIn("slow",function(){
 								$("#_IDLyricsInfo").fadeOut("slow");	
 					});
+					YoukuWs.saveOffset();
 			});
 			$("#_IDLyricsBk").click(function(){
-					lyrics_offset-=500;
-					$("#_IDLyricsInfo").html("已后退半秒").fadeIn("slow",function(){
+					lyrics_offset-=1000;
+					$("#_IDLyricsInfo").html("已后退").fadeIn("slow",function(){
 								$("#_IDLyricsInfo").fadeOut("slow");	
 					});
+					YoukuWs.saveOffset();
 			});
 			//加载播放列表
 			$("#_IDLogout").live("click",function(){
@@ -282,7 +228,7 @@ var YoukuWs = function(){
 				return;
 			}
 			var time = isNaN(r.time)?0:r.time;
-			var l = getLyric(time*1000+lyrics_offset);
+			var l = getLyric(time*1000+parseInt(lyrics_offset));
 			if(!l){
 				LyricTop.hide();
 				return;
@@ -370,13 +316,14 @@ var YoukuWs = function(){
 		version:"1.1",
 		/*播放视频*/
 		play:function(vid){
+			mvid = 0;
+			showLyric("");
 			vid = vid?vid:"XMjI4MTczMDIw";
 			pre=1;
 			next=1;
 			CurrentVideoID=vid;
 			YoukuWs.set("vid",CurrentVideoID);
 			//下载歌词
-			showLyric("");
 			$.ajax({
 				url: "/player.main.getlyric",
 				data: {
@@ -387,6 +334,8 @@ var YoukuWs = function(){
 					if(result){
 				   		if(result.LyricsContent){
 							showLyric(result.LyricsContent);
+							lyrics_offset = result.LyricsOffset;
+							mvid = result.MvID;
 							$("#_IDLyricsAdmin").fadeIn("slow");
 						}else{
 							//显示没有歌词
@@ -475,8 +424,78 @@ var YoukuWs = function(){
 				$(dom).html(a.html());
 			});
 
+		},saveOffset:function(){
+			if(mvid>0 && uid>0){
+				$.ajax({
+					url: "/player.main.saveoffset",
+					data: {
+						MvID:mvid,
+						offset:lyrics_offset,
+					},
+					success: function( result) {
+					}
+
+				});
+			}
 		}
 	}
+}();
+var YoukuWsPlaylist = function(){
+		var o={};
+		o.add=function(vid,title,noappend){
+				var all = $.parseJSON(YoukuWs.get("list"))||[];
+				finded = false;
+				//v = vid;
+				//t = title
+				$.each(all,function(i,item){
+						if(item.v == vid){
+								finded = true;
+								all[i].t=title;
+						}
+				});
+				if(!finded){
+					var m = {};
+					m.v = vid;
+					m.t= title;
+					all[all.length]=m;
+					if(!noappend){
+						var o = '<li vid="'+vid+'"><a>'+title+'</a></li>';
+						$("#_ContentMusic").append(o);
+						//$.ajax({
+						//	url: "/player.main.addmv",
+						//	data: {
+						//		vid:vid
+						//	},
+						//	success: function( result) {
+						//	}
+
+						//});
+					}
+				}
+				YoukuWs.set("list",JSON.stringify(all));
+		};
+		o.list=function(){
+				return $.parseJSON(YoukuWs.get("list"))||[];
+		};
+		o.save=function(){
+			o.empty();
+			$("#_ContentMusic >li").each(function(i,n){
+				YoukuWsPlaylist.add($(n).attr("vid"),$(n).find("a").html(),true);
+			});
+		};
+		o.empty=function(){
+				YoukuWs.set("list",JSON.stringify([]));
+		};
+		o.del=function(vid){
+				var all = $.parseJSON(YoukuWs.get("list"))||[];
+				for(var i=0;i<all.length;i++){
+						if(all[i].v == vid){
+							all.splice(i,1);
+						}
+				};
+				YoukuWs.set("list",JSON.stringify(all));
+		};
+		return o;
 }();
 //}}}
 //{{{播放器回调
