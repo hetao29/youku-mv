@@ -59,6 +59,9 @@ var YoukuWsPlaylist = function(){
 var YoukuWs = function(){
 	var o_lyrics;
 	var gc= "";
+	var lyrics_offset=0;
+	//用户ID
+	var uid=0;
 
 	var order=[];
 	$(document).ready(function(){
@@ -70,6 +73,18 @@ var YoukuWs = function(){
 			$.each(YoukuWsPlaylist.list(),function(i,n){
 					var o = '<li vid="'+n.v+'"><a>'+n.t+'</a></li>';
 					$("#_ContentMusic").append(o);
+			});
+			$("#_IDLyricsPr").click(function(){
+					lyrics_offset+=500;
+					$("#_IDLyricsInfo").html("已前进半秒").fadeIn("slow",function(){
+								$("#_IDLyricsInfo").fadeOut("slow");	
+					});
+			});
+			$("#_IDLyricsBk").click(function(){
+					lyrics_offset-=500;
+					$("#_IDLyricsInfo").html("已后退半秒").fadeIn("slow",function(){
+								$("#_IDLyricsInfo").fadeOut("slow");	
+					});
 			});
 			//加载播放列表
 			$("#_IDLogout").live("click",function(){
@@ -267,7 +282,7 @@ var YoukuWs = function(){
 				return;
 			}
 			var time = isNaN(r.time)?0:r.time;
-			var l = getLyric(time*1000);
+			var l = getLyric(time*1000+lyrics_offset);
 			if(!l){
 				LyricTop.hide();
 				return;
@@ -295,16 +310,17 @@ var YoukuWs = function(){
 	
 	}
 	function showLyric(str){
+			gc= new Array();
 			parseLyric(str);
 			$(".lyrics").html('');
 			var tmp_top=0;
-			if(!gc)return;
+			if(!gc ||gc.length==0)return;
 			for (var k=0;k<gc.length;k++)
 			{
 					if(gc[k].w==""){
 							gc[k].w="&nbsp;";
 					}
-					var c = '<div id="_ID'+k+'">'+gc[k].w+'</div>';
+					var c = '<div time="'+gc[k].t+'" id="_ID'+k+'">'+gc[k].w+'</div>';
 					$(".lyrics").append(c);
 					gc[k].top = tmp_top;
 					tmp_top+= $("#_ID"+k).height();
@@ -313,34 +329,34 @@ var YoukuWs = function(){
 	
 	function parseLyric(str)
 	{
-			if(!str)return;
+			if(!str || str=="")return;
 			ti=/\[ti:(.+)\]/i.test(str)?"标题："+RegExp.$1:"";
 			ar=/\[ar:(.+)\]/i.test(str)?"歌手："+RegExp.$1:"";
 			al=/\[al:(.+)\]/i.test(str)?"专辑："+RegExp.$1:"";
 			by=/\[by:(.+)\]/i.test(str)?"制作："+RegExp.$1:"";
 			otime=parseInt(/\[offset:(.+)\]/i.test(str)?RegExp.$1:0);
 	
-			gc=str.match(/\n\[\d+:.+\][^\[\r\n]*/ig);
-			if(!gc)return;
-			rr=gc.length;
+			str=str.replace(/[^\]]\[/g,"\n[");
+			matches = str.match(/\n\[\d+:.+\][^\[\r\n]*/ig);
+			if(!matches)return;
+			rr=matches.length;
 			for (var i=0;i<rr;i++)
 			{
-					var gctimes=/\[(.+)\].*/.exec(gc[i])[1].split("][");
-					var gcword=/.+\](.*)/.exec(gc[i])[1];
+					var gctimes=/\[(.+)\].*/.exec(matches[i])[1].split("][");
+					var gcword=/.+\](.*)/.exec(matches[i])[1];
 					for (var j in gctimes)
 					{ 
 							gc.push({t:(parseInt(gctimes[j].split(":")[0])*60+parseFloat(gctimes[j].split(":")[1]))*1000 ,w:gcword});
 					}
 			}
-			gc.splice(0,rr);
 			$.grep( gc, function(n,i){
-					return n.w!="";
+					return n.w!="" && n.w!=undefined;
 			});
-			gc.sort(function (a,b){return a.t-b.t});
+			gc.sort(function (a,b){return a.t-b.t;});
 	}
 	/*可以优化为2分算法*/
 	function getLyric(t){
-			if(!gc)return;
+			if(!gc || gc.length==0)return;
 			for (var k=0;k<gc.length && gc[k] &&gc[k+1];k++){
 					if(t>=gc[k].t && t<=gc[k+1].t){
 							var gc_tmp = gc[k];
@@ -369,7 +385,20 @@ var YoukuWs = function(){
 				dataType:"json",
 				success: function( result) {
 					if(result){
-						showLyric(result.LyricsContent);
+				   		if(result.LyricsContent){
+							showLyric(result.LyricsContent);
+							$("#_IDLyricsAdmin").fadeIn("slow");
+						}else{
+							//显示没有歌词
+							$("#_IDLyricsAdmin").fadeOut("slow");
+						}
+						//如果这歌词是这个用户的，可以编辑
+						if(result.UserID==YoukuWs.uid)
+						{
+							$("#_IDLyricsEd").fadeIn("slow");
+						}else{
+							$("#_IDLyricsEd").fadeOut("slow");
+						}
 					}
 				}
 
