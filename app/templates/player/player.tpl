@@ -93,7 +93,14 @@
 												<script type="text/javascript" src="http://pagead2.googlesyndication.com/pagead/show_ads.js"></script>
 										</div>
 										<div id="_LyricsTop" class="lyrics_top" style="display:none;padding-left:5px;padding-right:5px;width:225px;"></div>
-										<div id="_ContentLyrics" class="lyrics" style="overflow:hidden;width:225px;height:280px;"></div>
+										<div id="_ContentLyrics" class="lyrics" style="overflow:hidden;width:225px;height:278px;"></div>
+										<div id="_IDLyricsAdmin">
+											<span id="_IDLyricsBk" style="cursor:pointer;border:1px solid;">后退</span>
+											<span id="_IDLyricsPr" style="cursor:pointer;border:1px solid;">前进</span> 
+										   	<span id="_IDLyricsEd" style="cursor:pointer;border:1px solid;">编辑</span>
+										   	<span id="_IDLyricsErr" style="cursor:pointer;border:1px solid;">报错</span>
+											<span id="_IDLyricsInfo" style="position:absolute;top:348px;left:180px;"></span>
+										</div>
 								</div>
 							<div class="clear"></div>
 						</div>
