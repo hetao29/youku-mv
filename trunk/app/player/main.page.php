@@ -116,7 +116,7 @@ class player_main extends SGui{
 					}
 					return $lyric;
 			}
-			return $lyric;
+			return array();
 	}
 	/**
 	 * 添加歌词
