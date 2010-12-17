@@ -617,6 +617,7 @@ function search(page){
 	$("#keywords").autocomplete("close");
 	YoukuWs.set("keywords",$("#keywords").val());
 	var key = $("#keywords").val();
+	if(key=="")return;
 	$( "#_ContentSearch" ).html('<li><img style="vertical-align: middle;" src="/assets/images/loading/loading9.gif" /> 正在查找中...</li>');
 	$( "#_ContentSearch" ).dialog({
 				width:410,height:250
@@ -630,7 +631,9 @@ function search(page){
 		},select:function(event,ui){
 		},success: function( data) {
 			data=data.replace(/<[^>]+>/g,"");
+			try{
 			data=eval("("+data+")");
+			}catch(e){data=null;}
 			$("#keywords").autocomplete("close");
 			$("#_ContentSearch").html('');
 			if(!data || !data.item || data.item.length==0){
@@ -763,9 +766,9 @@ var availableTags = [
 	
 });
 
-$("#_BtSearch").ready(function(){
-	$("#_BtSearch").click(function(){
-		search();
-	});
-});
+//$("#_BtSearch").ready(function(){
+//	$("#_BtSearch").click(function(){
+//		search();
+//	});
+//});
 //}}}
