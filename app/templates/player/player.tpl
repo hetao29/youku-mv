@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 		<head>
 				<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-				<title>YOUKU MV PLAYER</title>
+				<title>YouKu.FM</title>
 				{*
 				<script type="text/javascript" src="/assets/js/jquery-1.4.4.js"></script>
 				<script type="text/javascript" src="/assets/js/jquery-ui.min.js"></script>

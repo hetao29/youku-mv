@@ -339,11 +339,18 @@ var YoukuWs = function(){
 	/*可以优化为2分算法*/
 	function getLyric(t){
 			if(!gc || gc.length==0)return;
-			for (var k=0;k<gc.length && gc[k] &&gc[k+1];k++){
-					if(t>=gc[k].t && t<=gc[k+1].t){
-							var gc_tmp = gc[k];
-							gc_tmp.i=k;
-							return(gc_tmp);
+			for (var k=0;k<gc.length;k++){
+					if(t>=gc[k].t){
+							if(gc[k+1] && t<=gc[k+1].t){
+								var gc_tmp = gc[k];
+								gc_tmp.i=k;
+								return(gc_tmp);
+							}
+							if(!gc[k+1]){
+								var gc_tmp = gc[k];
+								gc_tmp.i=k;
+								return(gc_tmp);
+							}
 					}
 			}
 	};
@@ -439,7 +446,10 @@ var YoukuWs = function(){
 			if(vid)YoukuWs.play(vid);
 		},
 		setTitle:function(t){
-			if(t)document.title=t.replace(/<[^>]+>/g,"");
+			 var t = t.replace(/<[^>]+>/g,"");
+			 if(t)document.title=t;
+			 //t=t.substring(1)+t.substring(0,1);
+			 //setTimeout("YoukuWs.setTitle("+t+")",1000);
 		},
 		get:function(k){
 			//TODO userData for IE
