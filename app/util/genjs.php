@@ -1,6 +1,6 @@
 <?php
 chdir(dirname(__FILE__));
-system("cat ../../slightphp/js/jquery-1.4.4.min.js > /tmp/tmp.x.js");
+system("cat ../../assets/js/jquery-1.4.4.js > /tmp/tmp.x.js");
 system("cat ../../assets/js/jquery-ui.min.js >> /tmp/tmp.x.js");
 system("cat ../../assets/js/jquery.cookie.js >> /tmp/tmp.x.js");
 system("cat ../../assets/js/swfobject/swfobject.js >> /tmp/tmp.x.js");
