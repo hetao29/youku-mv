@@ -381,7 +381,7 @@ var YoukuWs = function(){
 						result={};
 					}
 					if(result){
-				   		if(result.LyricsContent){
+				   		if(result.LyricsContent && result.LyricsContent!=""){
 							showLyric(result.LyricsContent);
 							lyrics_offset = parseInt(result.LyricsOffset);
 							mvid = result.MvID;
