@@ -217,7 +217,7 @@ var YoukuWs = function(){
 					width:500,height:280, buttons: {
 							"增加": function() {
 								var k =($("#_DialogAdd textarea").val());
-								$.ajax({type:"POST",dataType:"json",url:"/player.main.getVideo",data:{"k":k},success:function(msg){
+								$.ajax({type:"POST",url:"/player.main.getVideo",data:{"k":k},success:function(msg){
 											msg=msg.replace(/<[^>]+>/g,"");
 											msg=eval("("+msg+")");
 											for(var i=0;i<msg.items.length;i++){
