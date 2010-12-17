@@ -6,6 +6,9 @@ class player_main extends SGui{
 	function __destruct(){
 		echo $this->render("footer.tpl");
 	}
+	function pageFaceBook($inPath){
+			$book = new player_facebook;
+	}
 	function pageEntry($inPath){
 		echo $this->render("player/player.tpl");
 	}
