@@ -100,19 +100,21 @@ class player_main extends SGui{
 			}
 			if(!empty($mv)){
 					$lyric = $db->getLyrics($mv['MvID']);
-					if(empty($lyric) || empty($lyric['LyricsContent']) || $lyric['LyricsStatus']==-2)
+					if(empty($lyric) || $lyric['LyricsStatus']==-2)
 					{
 						$api = new player_api;
 						$content = $api->downlyric($mv['MvAlias']);
-						if(!empty($content)){
-							$lyric = array();
-							$lyric['LyricsContent']=$content;
-							$lyric['LyricsOffset']=0;
-							$lyric['UserID']=1;
-							$lyric['LyricsStatus']=-1;
-							$lyric['MvID']=$mv['MvID'];
-							$db->addLyrics($lyric);
-						}
+						if(empty($content))$content="";
+						//if(!empty($content)){
+						//这样只下载一次，避免被发现有问题
+						$lyric = array();
+						$lyric['LyricsContent']=$content;
+						$lyric['LyricsOffset']=0;
+						$lyric['UserID']=1;
+						$lyric['LyricsStatus']=-1;
+						$lyric['MvID']=$mv['MvID'];
+						$db->addLyrics($lyric);
+						//}
 					}
 					return $lyric;
 			}

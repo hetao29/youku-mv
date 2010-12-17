@@ -26,6 +26,9 @@ SLanguage::setLocale("zh-CN");
 //}}}
 SlightPHP::setSplitFlag("-_.");
 #SError::$CONSOLE= true;
+if(!empty($_SERVER['HTTP_ORIGIN'])){
+  header('Access-Control-Allow-Origin: *');  
+}
 if(($r=SlightPHP::run())===false){
 	die("404 error");
 }else{
