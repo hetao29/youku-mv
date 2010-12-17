@@ -16,11 +16,33 @@ class player_api{
 		function downlyric($MvName){
 			//关键字过滤
 				$pattern = array(
+						"/主打歌/",
+						"/高清版/",
+						"/演唱会/",
+						"/无字幕/",
+						"/珍藏版/",
+						"/字幕版/",
+						"/有字幕/",
+						"/新春演唱会/",
+						"/优酷首播音乐/",
+						"/演唱会/",
+						"/拍客/",
+						"/猴姆独家/",
+						"/完整版/",
+						"/主题曲/",
 						"/MV/i",
 						"/高清/",
-						"/高清版/",
+						"/视频/",
+						"/专辑/",
+						"/主打/",
 						"/现场/",
-						"/演唱会/",
+						"/原版/",
+						"/正式/",
+						"/官方/",
+						"/DJ/",
+						"/演出版/",
+						"/杨晃/",
+						"/独家/",
 						"/\-/",
 						"/【/",
 						"/】/",
@@ -30,10 +52,12 @@ class player_api{
 						"/\>/",
 						"/\(/",
 						"/\)/",
+						"/\{/",
+						"/\}/",
 				);
-				$replacement= array(
-						"",
-						);
+			$replacement= array(
+				" ",
+			);
 			$MvName = preg_replace($pattern,$replacement,$MvName);
 			$MvName= mb_convert_encoding($MvName,"gbk","utf8,gbk");
 			$r = SHttp::get("http://mp3.sogou.com/lyric.so",array("query"=>$MvName,"class=3","w=0"));
