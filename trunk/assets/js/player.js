@@ -77,7 +77,7 @@ var YoukuWs = function(){
 								text:_LabelOk,
 								click: function() {
 									$.post("/user.main.login",$("#_FormLogin").serialize(),function(data){
-											data=data.replace(/<[^>]+>/g,"")
+											data=data.replace(/<[^>]+>/g,"");
 											data=eval("("+data+")");
 											if(data && data.result==1){
 												$('.header').load("/player.main.header");
@@ -218,7 +218,7 @@ var YoukuWs = function(){
 							"增加": function() {
 								var k =($("#_DialogAdd textarea").val());
 								$.ajax({type:"POST",dataType:"json",url:"/player.main.getVideo",data:{"k":k},success:function(msg){
-											msg=msg.replace(/<[^>]+>/g,"")
+											msg=msg.replace(/<[^>]+>/g,"");
 											msg=eval("("+msg+")");
 											for(var i=0;i<msg.items.length;i++){
 												if(msg.items[i].vid && msg.items[i].title && msg.items[i].seconds){
@@ -367,7 +367,7 @@ var YoukuWs = function(){
 				},
 				//dataType:"json",
 				success: function( result) {
-					result=result.replace(/<[^>]+>/g,"")
+					result=result.replace(/<[^>]+>/g,"");
 					try{
 						result=eval("("+result+")");
 					}catch(e){
@@ -619,7 +619,7 @@ function search(page){
 		beforeSend:function(xhr){
 		},select:function(event,ui){
 		},success: function( data) {
-			data=data.replace(/<[^>]+>/g,"")
+			data=data.replace(/<[^>]+>/g,"");
 			data=eval("("+data+")");
 			$("#keywords").autocomplete("close");
 			$("#_ContentSearch").html('');
@@ -736,7 +736,7 @@ var availableTags = [
 				beforeSend:function(xhr){
 				},select:function(event,ui){
 				},success: function( result) {
-						result=result.replace(/<[^>]+>/g,"")
+						result=result.replace(/<[^>]+>/g,"");
 						result=eval("("+result+")");
 					var r = result;
 					response( $.map( r.result, function( item ) {
