@@ -43,6 +43,7 @@ class player_api{
 						"/MTV/i",
 						"/YOUKU/i",
 						"/KTV/i",
+						"/FLV/i",
 						"/高清/",
 						"/网络歌曲/",
 						"/单曲/",
