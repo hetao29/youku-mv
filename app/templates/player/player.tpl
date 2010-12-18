@@ -15,6 +15,21 @@
 				<link rel="Shortcut Icon" href="/assets/images/ico/favicon_32x32.ico" />
 				<link href="/assets/css/jquery-ui-1.8.6.custom-smoothness.css" media="all" rel="stylesheet" type="text/css" />
 				<script type="text/javascript" src="/assets/js/youku.ws.js"></script>
+{literal}
+				<script type="text/javascript">
+				
+				  var _gaq = _gaq || [];
+				  _gaq.push(['_setAccount', 'UA-20312728-1']);
+				  _gaq.push(['_trackPageview']);
+				
+				  (function() {
+				    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+				    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+				    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+				  })();
+				
+				</script>
+{/literal}
 		</head>
 		<script>
 				var _LabelOk="{'确认'|tr}";
