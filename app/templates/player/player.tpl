@@ -21,6 +21,24 @@
 				var _LabelCancel="{'取消'|tr}";
 		</script>
 		<body>
+{if !empty($facebook)}
+{literal}
+<div id="fb-root"></div>
+<script src="http://connect.facebook.net/en_US/all.js"></script>
+<script>
+window.fbAsyncInit = function() {
+FB.init({
+    appId  : '173211992709193',
+    status : false, // check login status
+    cookie : true, // enable cookies to allow the server to access the session
+    xfbml  : true  // parse XFBML
+});
+FB.Canvas.setAutoResize();
+//FB.Canvas.setSize({ width: 910, height: 520 });
+}
+</script>
+{/literal}
+{/if}
 
 				<div class="header">
 						{part path="/player.main.header"}

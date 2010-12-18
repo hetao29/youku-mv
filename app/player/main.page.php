@@ -7,10 +7,19 @@ class player_main extends SGui{
 		echo $this->render("footer.tpl");
 	}
 	function pageFaceBook($inPath){
+			return $this->pageEntry($inPath,1);
+			try{
 			$book = new player_facebook;
+			}catch(Exception $e){
+					print_r($e);
+			}
 	}
-	function pageEntry($inPath){
-		echo $this->render("player/player.tpl");
+	function pageEntry($inPath,$facebook=0){
+		$param=array();
+		if(!empty($facebook)){
+			$param=array("facebook"=>1);
+		}
+		echo $this->render("player/player.tpl",$param);
 	}
 	function pageHeader($inPath){
 			$param = array();

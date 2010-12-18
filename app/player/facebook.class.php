@@ -1,4 +1,6 @@
 <?php
+class player_facebook{
+}
 
 require_once (SlightPHP::$appDir . "/../facebook.php");
 
@@ -48,6 +50,7 @@ $naitik = $facebook->api('/naitik');
       body {
         font-family: 'Lucida Grande', Verdana, Arial, sans-serif;
       }
+	#conash3D0{display:none;}
       h1 a {
         text-decoration: none;
         color: #3b5998;
