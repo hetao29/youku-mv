@@ -566,7 +566,9 @@ function onPlayerStart(vid,vidEncoded){
 		//PlayerColor("000000","4F4F4F",25);
 }
 function onPlayerError(vid){
-		$("#_ContentMusic [vid="+vid+"] A").html("<font color='red'>播放失败:</font> "+$("#_ContentMusic [vid="+vid+"] A").html());
+		var h = $("#_ContentMusic [vid="+vid+"] A[error!=1]");
+			h.attr("error",1);
+			h.html("<font color='red'>播放失败:</font> "+h.html());
 		YoukuWs.playNext();
 		//PlayerColor("000000","4F4F4F",25);
 }
