@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 		<head>
 				<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-				<title>YouKu.FM</title>
+				<title>{'标题'|tr}</title>
 				<script type="text/javascript" src="/assets/js/jquery-1.4.4.js"></script>
 				<script type="text/javascript" src="/assets/js/jquery-ui.min.js"></script>
 				<script type="text/javascript" src="/assets/js/jquery.cookie.js"></script>
@@ -138,11 +138,8 @@ FB.Canvas.setAutoResize();
 				</div>
 
 				<div>
-						<div id="info"></div>
-						<div id="debug"></div>
-						<div id="debug2"></div>
 
-						<div id="_DialogAdd" style="display:none;">
+						<div id="_DialogAdd" title="增加歌曲" style="display:none;">
 								<div>请输入优酷播放页地址:</div>
 								<div><textarea style="width:460px;height:24px">http://v.youku.com/v_show/id_XMjI2MDIxNTYw.html</textarea></div>
 								<div>如普通播放页：http://v.youku.com<span class="red">/v_show/id_XMjI2MDIxNTYw</span>.html</div>
@@ -165,17 +162,17 @@ FB.Canvas.setAutoResize();
 						</ul>
 						<div id="_ContentLogin" title="{'登录'|tr}" style="display:none">
 								<form id="_FormLogin" style="padding:10px;margin:auto;">
-										<table>
+										<table width="100%">
 												<tr><td class="info" colspan="2">&nbsp;</td></tr>
 												<tr><td>{'邮箱'|tr}:</td><td><input name="useremail"/></td></tr>
 												<tr><td>{'密码'|tr}:</td><td><input type="password" name="password"/></td></tr>
-												<tr><td></td><td><input type="checkbox" name="forever"/>记住登录</td></tr>
+												<tr><td></td><td><input type="checkbox" id="forever" name="forever"/><label for="forever">记住登录</label></td></tr>
 										</table>
 								</form>
 						</div>
 						<div id="_ContentSignup" title="{'注册'|tr}" style="display:none">
 								<form id="_FormSignup" style="padding:10px;margin:auto;">
-										<table>
+										<table width="100%">
 												<tr><td class="info" colspan="2">&nbsp;</td></li>
 												<tr><td>{'邮箱'|tr}:</td><td><input name="useremail"/></td></tr>
 												<tr><td>{'别名'|tr}:</td><td><input name="useralias"/></td></tr>
