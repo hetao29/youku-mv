@@ -15,13 +15,12 @@ KEY `SingerID` (`SingerID`)
 
 create table s_user(
 UserID int(10) unsigned NOT NULL AUTO_INCREMENT,
-UserName varchar(200),
+UserAlias varchar(200),
 UserEmail varchar(200),
 UserPassword varchar(200),
 UserStatus tinyint not null default 1 COMMENT '1正常',
 
 PRIMARY KEY (`UserID`),
-UNIQUE KEY `UserName` (`UserName`),
 UNIQUE KEY `UserEmail` (`UserEmail`),
 KEY `UserStatus` (`UserStatus`)
 )ENGINE=MyISAM DEFAULT CHARSET=utf8;

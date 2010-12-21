@@ -124,15 +124,30 @@ var YoukuWs = function(){
 			});
 			$("#_IDSignup").live("click",function(){
 					$("#_ContentSignup").dialog({
-						width:300,height:180, buttons: {
-								"注册": function() {
-									//TODO LOGIN
+						width:300,height:280, buttons: [
+							{
+								text:"注册",click: function() {
+									$.post("/user.main.signup",$("#_FormSignup").serialize(),function(data){
+											data=data.replace(/<[^>]+>/g,"");
+											data=eval("("+data+")");
+											if(data.uid){
+												//注册成功
+												$('.header').load("/player.main.header");
+												$("#_ContentSignup").dialog( "close" );
+												//登录成功
+											}else{
+												//登录失败
+												$("#_FormSignup .info").html("<b>"+data.info+"</b>").slideDown("fast");
+											}
+										});
 									return;
-								},
-								"取消": function() {
+								}
+							},{
+								text:"取消",click: function() {
 									$( this ).dialog( "close" );
 								}
-						}
+							}
+						]
 					});
 			});
 			//可以被放入和被排序
@@ -489,9 +504,12 @@ var YoukuWs = function(){
 
 				});
 			}
+		},isLogin:function(){
+				return this.get("uid");
 		}
 	}
 }();
+//alert(YoukuWs.isLogin());
 var YoukuWsPlaylist = function(){
 		var o={};
 		o.add=function(vid,title,noappend){
