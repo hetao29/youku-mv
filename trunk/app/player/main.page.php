@@ -53,7 +53,7 @@ class player_main extends SGui{
 			$Mv['UserID'] = 1;//我自己,TODO
 			$db= new player_db;
 			$db->addMv($Mv);
-			return true;
+			return $Mv;
 	}
 	/**
 	 * 增加列表
@@ -107,8 +107,8 @@ class player_main extends SGui{
 			$db = new player_db;
 			$mv  = $db->getMvByVid($vid);
 			if(empty($mv)){
-					$this->pageAddMv($inPath);
-					$mv  = $db->getMvByVid($vid);
+					$tmpmv  = $this->pageAddMv($inPath);
+					$mv 	= $db->getMvByVid($tmpmv['MvVideoID']);
 			}
 			if(!empty($mv)){
 					$lyric = $db->getLyrics($mv['MvID']);
