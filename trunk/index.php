@@ -30,7 +30,7 @@ if(!empty($_SERVER['HTTP_ORIGIN'])){
   header('Access-Control-Allow-Origin: *');  
 }
 $r=SlightPHP::run();
-if(!is_string($r)){
+if($r!==null && !is_string($r)){
 	echo SJson::encode($r);
 }else{
 	echo $r;

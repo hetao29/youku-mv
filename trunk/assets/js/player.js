@@ -69,36 +69,7 @@ var YoukuWs = function(){
 			$("#_IDLogout").live("click",function(){
 					$('.header').load("/user.main.logout");
 			});
-			$("#_IDLogin").live("click",function(){
-					$("#_FormLogin .info").html("").hide();;
-					$("#_ContentLogin").dialog({
-						width:320,height:230, buttons: [
-							{
-								text:_LabelOk,
-								click: function() {
-									$.post("/user.main.login",$("#_FormLogin").serialize(),function(data){
-											data=data.replace(/<[^>]+>/g,"");
-											data=eval("("+data+")");
-											if(data && data.result==1){
-												$('.header').load("/player.main.header");
-												$("#_ContentLogin").dialog( "close" );
-												//登录成功
-											}else{
-												//登录失败
-												$("#_FormLogin .info").html("<b>登录失败，用户名或者密码错</b>").slideDown("fast");
-											}
-										});
-								}
-							},
-							{
-								text:_LabelCancel,
-								click: function() {
-									$( this ).dialog( "close" );
-								}
-							}
-						]
-					});
-			});
+			$("#_IDLogin").live("click",YoukuWs.login);
 			$("#_IDUsage").live("click",function(){
 					$("#_ContentUsage").dialog({
 						width:600,height:480, buttons: [
@@ -219,12 +190,6 @@ var YoukuWs = function(){
 			$("#PlayModeSet" ).buttonset().show();
 			$("#_BtPlayModeSet").button("option","disabled",true).show();
 
-			$("#_BtOpenList").button({ icons: { primary: "ui-icon-folder-open" } }).click(function(){
-					//显示列表
-					$("#_ContentList").dialog({
-						width:300,height:250
-					});
-			}).show();
 			$("#_BtAddList").button({ icons: { primary: "ui-icon-plusthick" } });
 			$("#_BtAddMv").button({ icons: { primary: "ui-icon-plusthick" } }).click(function(){
 				$( "#_DialogAdd" ).dialog({
@@ -255,7 +220,23 @@ var YoukuWs = function(){
 					}
 				});
 			}).show();
-			$("#_BtSaveList").button({icons:{primary:"ui-icon-disk"}}).show();
+			$("#_BtSaveList").button({icons:{primary:"ui-icon-disk"}}).click(function(){
+					if(YoukuWs.isLogin()){
+						alert("Y");
+					}else{
+						YoukuWs.login(function(){$("#_BtSaveList").trigger("click");});
+					}
+			}).show();
+			$("#_BtOpenList").button({ icons: { primary: "ui-icon-folder-open" } }).click(function(){
+					if(YoukuWs.isLogin()){
+						//显示列表
+						$("#_ContentList").dialog({
+							width:300,height:250
+						});
+					}else{
+						YoukuWs.login(function(){$("#_BtOpenList").trigger("click");});
+					}
+			}).show();
 
 			setInterval(checkTime,500);
 			setInterval(YoukuWs.adReload,1000*60*10);// 10分钟一次
@@ -416,7 +397,8 @@ var YoukuWs = function(){
 
 			});
 			swfobject.embedSWF("http://static.youku.com/v1.0.0133/v/swf/qplayer.swf", playerId, "100%", "100%", "9.0.0", "expressInstall.swf",
-				{isAutoPlay:true,VideoIDS:vid,winType:"interior","show_pre":pre,"show_next":next},
+				//{isAutoPlay:true,VideoIDS:vid,winType:"interior","show_pre":pre,"show_next":next},
+				{isAutoPlay:false,VideoIDS:vid,winType:"interior","show_pre":pre,"show_next":next},
 				{allowFullScreen:true,allowscriptaccess:"always","wmode":"transparent"},{},function(){
 					var t = 0;
 					var o = $("#_ContentMusic [vid="+vid+"]");
@@ -462,8 +444,6 @@ var YoukuWs = function(){
 		setTitle:function(t){
 			 var t = t.replace(/<[^>]+>/g,"");
 			 if(t)document.title=t;
-			 //t=t.substring(1)+t.substring(0,1);
-			 //setTimeout("YoukuWs.setTitle("+t+")",1000);
 		},
 		get:function(k){
 			//TODO userData for IE
@@ -505,6 +485,35 @@ var YoukuWs = function(){
 			}
 		},isLogin:function(){
 				return this.get("uid");
+		},login:function(callback){
+			$("#_ContentLogin").dialog({
+				width:320,height:230, buttons: [
+					{
+						text:_LabelOk,
+						click: function() {
+							$.post("/user.main.login",$("#_FormLogin").serialize(),function(data){
+									data=data.replace(/<[^>]+>/g,"");
+									data=eval("("+data+")");
+									if(data && data.result==1){
+										$('.header').load("/player.main.header");
+										$("#_ContentLogin").dialog( "close" );
+										if(callback)callback();
+										//登录成功
+									}else{
+										//登录失败
+										$("#_FormLogin .info").html("<b>登录失败，用户名或者密码错</b>").slideDown("fast");
+									}
+								});
+						}
+					},
+					{
+						text:_LabelCancel,
+						click: function() {
+							$( this ).dialog( "close" );
+						}
+					}
+				]
+			});
 		}
 	}
 }();

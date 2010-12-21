@@ -14,7 +14,7 @@ body {
 		/*font-size:1.2em;*/
 		background:#dddddd;
 }
-label,button{
+button{
 		display:none;
 }
 div{
@@ -152,6 +152,10 @@ li{
 .lyrics{
 		margin:auto;
 		margin:5px;
+}
+.info{
+		color:red;
+		text-align:center;
 }
 .lyrics_top{
 		/*background: #999; /* for non-css3 browsers */
