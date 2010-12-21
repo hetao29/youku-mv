@@ -11,5 +11,11 @@ class user_db{
 	function getUser($username){
 		return $this->_db->selectOne("s_user",array("UserName"=>$username));
 	}
+	function addUser($User){
+		return $this->_db->insert("s_user",$User);
+	}
+	function getUserByEmail($useremail){
+		return $this->_db->selectOne("s_user",array("UserEmail"=>$useremail));
+	}
 }
 ?>

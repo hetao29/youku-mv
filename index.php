@@ -29,11 +29,9 @@ SlightPHP::setSplitFlag("-_.");
 if(!empty($_SERVER['HTTP_ORIGIN'])){
   header('Access-Control-Allow-Origin: *');  
 }
-if(($r=SlightPHP::run())===false){
-	die("404 error");
+$r=SlightPHP::run();
+if(!is_string($r)){
+	echo SJson::encode($r);
 }else{
-	if(is_object($r) || is_array($r)){
-			echo SJson::encode($r);
-	}else echo $r;
+	echo $r;
 }
-?>
