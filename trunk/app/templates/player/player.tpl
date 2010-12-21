@@ -164,23 +164,24 @@ FB.Canvas.setAutoResize();
 								</li>
 						</ul>
 						<div id="_ContentLogin" title="{'登录'|tr}" style="display:none">
-								<form id="_FormLogin" style="padding:15px;margin:auto;text-align:center">
-										<ul>
-												<li><div>{'邮箱'|tr}:<input name="useremail"/></div></li>
-												<li><div>{'密码'|tr}:<input type="password" name="password"/></div></li>
-												<li><div class="info"></div></li>
-										</ul>
+								<form id="_FormLogin" style="padding:10px;margin:auto;">
+										<table>
+												<tr><td class="info" colspan="2">&nbsp;</td></tr>
+												<tr><td>{'邮箱'|tr}:</td><td><input name="useremail"/></td></tr>
+												<tr><td>{'密码'|tr}:</td><td><input type="password" name="password"/></td></tr>
+												<tr><td></td><td><input type="checkbox" name="forever"/>记住登录</td></tr>
+										</table>
 								</form>
 						</div>
 						<div id="_ContentSignup" title="{'注册'|tr}" style="display:none">
-								<form id="_FormSignup" style="padding:15px;margin:auto;text-align:center">
-										<ul>
-												<li><div>邮箱:<input name="useremail"/></div></li>
-												<li><div>别名:<input name="useralias"/></div></li>
-												<li><div>密码:<input name="password"/></div></li>
-												<li><div>确认密码:<input name="password2"/></div></li>
-												<li><div class="info"></div></li>
-										</ul>
+								<form id="_FormSignup" style="padding:10px;margin:auto;">
+										<table>
+												<tr><td class="info" colspan="2">&nbsp;</td></li>
+												<tr><td>{'邮箱'|tr}:</td><td><input name="useremail"/></td></tr>
+												<tr><td>{'别名'|tr}:</td><td><input name="useralias"/></td></tr>
+												<tr><td>{'密码'|tr}:</td><td><input type="password" name="password"/></td></tr>
+												<tr><td>{'密码确认'|tr}:</td><td><input type="password" name="password2"/></td></tr>
+										</table>
 								</form>
 						</div>
 						<div id="_ContentAbout" title="{'关于'|tr}" style="display:none">

@@ -72,7 +72,7 @@ var YoukuWs = function(){
 			$("#_IDLogin").live("click",function(){
 					$("#_FormLogin .info").html("").hide();;
 					$("#_ContentLogin").dialog({
-						width:300,height:200, buttons: [
+						width:320,height:230, buttons: [
 							{
 								text:_LabelOk,
 								click: function() {
@@ -124,26 +124,25 @@ var YoukuWs = function(){
 			});
 			$("#_IDSignup").live("click",function(){
 					$("#_ContentSignup").dialog({
-						width:300,height:280, buttons: [
+						width:320,height:260, buttons: [
 							{
-								text:"注册",click: function() {
+								text:_LabelOk,click: function() {
 									$.post("/user.main.signup",$("#_FormSignup").serialize(),function(data){
-											data=data.replace(/<[^>]+>/g,"");
-											data=eval("("+data+")");
-											if(data.uid){
-												//注册成功
-												$('.header').load("/player.main.header");
-												$("#_ContentSignup").dialog( "close" );
-												//登录成功
-											}else{
-												//登录失败
-												$("#_FormSignup .info").html("<b>"+data.info+"</b>").slideDown("fast");
-											}
-										});
-									return;
+										data=data.replace(/<[^>]+>/g,"");
+										data=eval("("+data+")");
+										if(data.uid){
+											//注册成功
+											$('.header').load("/player.main.header");
+											$("#_ContentSignup").dialog( "close" );
+											//登录成功
+										}else{
+											//登录失败
+											$("#_FormSignup .info").html("<b>"+data.info+"</b>").slideDown("fast");
+										}
+									});
 								}
 							},{
-								text:"取消",click: function() {
+								text:_LabelCancel,click: function() {
 									$( this ).dialog( "close" );
 								}
 							}
