@@ -516,8 +516,8 @@ var YoukuWs = function(){
 				]
 			});
 		},autoLogin:function(){
-			if(this.get("token")){
-				$.post("/user.main.autologin","token="+this.get("token"),function(data){
+			if(this.get("token") && this.get("uid")){
+				$.post("/user.main.autologin","token="+this.get("token")+"&uid="+this.get("uid"),function(data){
 					if(data){
 						$('.header').load("/player.main.header");
 						//登录成功
