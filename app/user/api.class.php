@@ -4,11 +4,13 @@ class user_api{
 			if(!empty($User['UserID'])){
 				$_SESSION['user']=$User;
 				$db = new  user_db;
+				$expired=0;
 				if($forever){
+					$expired=time()+365*3600*24;//一年过期
 					$db->addUserToken(array("UserID"=>$User['UserID'],"UserToken"=>session_id()));
-					setcookie("token",session_id(),time()+365*3600*24);//一年过期
 				}
-				setcookie("uid",$User['UserID'],time()+365*3600*24);
+				setcookie("token",session_id(),$expired);
+				setcookie("uid",$User['UserID'],$expired);
 				return true;
 			}
 			return false;
@@ -20,7 +22,7 @@ class user_api{
 			$db = new  user_db;
 			$db->delUserToken($_SESSION['user']['UserID'],session_id());
 			unset($_SESSION['user']);
-			setcookie("uid",0,time()-3600);
-			setcookie("token",0,time()-3600);
+			setcookie("uid",0,time()-3600*24);
+			setcookie("token",0,time()-3600*24);
 		}
 }

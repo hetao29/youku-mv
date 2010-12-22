@@ -498,7 +498,7 @@ var YoukuWs = function(){
 									if(data && data.result==1){
 										$('.header').load("/player.main.header");
 										$("#_ContentLogin").dialog( "close" );
-										if(callback)callback();
+										if(callback && typeof(callback)=="function")callback();
 										//登录成功
 									}else{
 										//登录失败
