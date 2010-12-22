@@ -417,6 +417,11 @@ var YoukuWs = function(){
 					}
 					$("#_ContentMusic >li").removeClass("current");
 					o.addClass('current');
+					if(YoukuWs.isLogin()){
+							$.ajax({type:"POST",url:"/player.main.addListen",data:{"vid":vid},success:function(msg){
+									}
+							});
+					}
 			});
 		},
 		playRandom:function(){
