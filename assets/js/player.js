@@ -9,6 +9,7 @@ var YoukuWs = function(){
 
 	var order=[];
 	$(document).ready(function(){
+			YoukuWs.autoLogin();
 			$("#_ContentMusic >li,#_ContentSearch >li").live('click',function(){
 					var vid = $(this).attr('vid');
 					YoukuWs.play(vid);
@@ -514,10 +515,18 @@ var YoukuWs = function(){
 					}
 				]
 			});
+		},autoLogin:function(){
+			if(this.get("token")){
+				$.post("/user.main.autologin","token="+this.get("token"),function(data){
+					if(data){
+						$('.header').load("/player.main.header");
+						//登录成功
+					}
+				},"json");
+			}
 		}
 	}
 }();
-//alert(YoukuWs.isLogin());
 var YoukuWsPlaylist = function(){
 		var o={};
 		o.add=function(vid,title,noappend){

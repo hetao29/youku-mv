@@ -1,4 +1,5 @@
 --歌手名
+/*
 CREATE TABLE `s_singer` (
 `SingerID` int(10) unsigned NOT NULL AUTO_INCREMENT,
 `SingerName` varchar(200) DEFAULT NULL,
@@ -12,7 +13,9 @@ UNIQUE KEY `SingerName` (`SingerName`),
 KEY `SingerStatus` (`SingerStatus`),
 KEY `SingerID` (`SingerID`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+*/
 
+drop table s_user;
 create table s_user(
 UserID int(10) unsigned NOT NULL AUTO_INCREMENT,
 UserAlias varchar(200),
@@ -24,7 +27,15 @@ PRIMARY KEY (`UserID`),
 UNIQUE KEY `UserEmail` (`UserEmail`),
 KEY `UserStatus` (`UserStatus`)
 )ENGINE=MyISAM DEFAULT CHARSET=utf8;
-INSERT into s_user(UserID,UserName,UserEmail,UserPassword) values(1,'hetal','hetao@hetao.name','huoqiabc');
+INSERT into s_user(UserID,UserAlias,UserEmail,UserPassword) values(1,'hetal','hetao@hetao.name','huoqiabc');
+create table s_user_token(
+	UserID int(10) unsigned NOT NULL default 0,
+	UserToken char(26),
+	UserTokenExpiredTime int,
+	PRIMARY KEY (`UserID`),
+	KEY `UserToken` (`UserToken`),
+	KEY `UserTokenExpiredTime` (`UserTokenExpiredTime`)
+)ENGINE=HEAP DEFAULT CHARSET=utf8;
 
 
 --drop table s_mv;
@@ -95,6 +106,24 @@ KEY (`UserID`),
 KEY (`LyricsStatus`)
 
 )ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+--用户喜欢的歌
+create table s_user_fav(
+UserID int not null default 0,
+MvID int not null default 0,
+FavTime	timestamp,
+UNIQUE KEY `FavID` (`UserID`,MvID),
+KEY `FavTime` (`FavTime`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+--用户听过的歌
+create table s_user_listen(
+UserID int not null default 0,
+MvID int not null default 0,
+ListenTime	timestamp,
+UNIQUE KEY `ListenID` (`UserID`,MvID),
+KEY ListenTime(`ListenTime`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 
 
@@ -185,9 +214,4 @@ create table s_list_temp(
 		MvID
 		MvOrder
 		ListUpdateTime timestamp
-)
-create table s_listen_log(
-		UserID
-		MvID
-		ListenTime	timestamp
 )

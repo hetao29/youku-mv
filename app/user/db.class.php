@@ -8,11 +8,29 @@ class user_db{
 		$this->_db = SDb::getDbEngine("pdo_mysql");
 		$this->_db->init($this->_dbConfig);
 	}
-	function getUser($username){
-		return $this->_db->selectOne("s_user",array("UserName"=>$username));
+	function getUser($UserName){
+		return $this->_db->selectOne("s_user",array("UserName"=>$UserName));
+	}
+	function getUserByID($UserId){
+		return $this->_db->selectOne("s_user",array("UserID"=>$UserId));
+	}
+	function getUserToken($Token){
+		return $this->_db->selectOne("s_user_token",array("UserToken"=>$Token));
+	}
+	function addUserToken($Token){
+		$Token['UserTokenExpiredTime']=time()+3600*24*365;//一年过期
+		return $this->_db->insert("s_user_token",$Token,true);
 	}
 	function addUser($User){
 		return $this->_db->insert("s_user",$User);
+	}
+	/*增加收藏喜欢*/
+	function addFav($Fav){
+		return $this->_db->insert("s_user_fav",$Fav);
+	}
+	/*增加收听日志*/
+	function addListen($Listen){
+		return $this->_db->insert("s_user_listen",$Listen);
 	}
 	function getUserByEmail($useremail){
 		return $this->_db->selectOne("s_user",array("UserEmail"=>$useremail));

@@ -13,6 +13,17 @@ class user_main{
 	function pageisLogin($inPath){
 			return user_api::islogin();
 	}
+	function pageAutoLogin($inPath){
+			$token = $_REQUEST['token'];
+			$db = new user_db;
+			$UserToken = $db->getUserToken($token);
+			if(!empty($UserToken['UserID'])){
+					$UserID = $UserToken['UserID'];
+					$User = $db->getUserByID($UserID);
+					return user_api::login($User,true);
+			}
+			return false;
+	}
 	///user.main.login
 	function pageLogin($inPath){
 			$useremail= $_REQUEST['useremail'];
@@ -21,7 +32,7 @@ class user_main{
 			$user = $db->getUserByEmail($useremail);
 			$o  = new stdclass;
 			if(!empty($user) && $user['UserPassword']==$password){
-					user_api::login($user);
+					user_api::login($user,!empty($_REQUEST['forever']));
 					$o->result=1;
 			}else{
 					$o->result=-1;
