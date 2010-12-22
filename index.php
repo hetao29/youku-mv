@@ -8,6 +8,7 @@
  */
 /* use static */
 //{{{
+session_start();
 
 require_once("global.php");
 
