@@ -70,6 +70,10 @@ var YoukuWs = function(){
 			$("#_IDLogout").live("click",function(){
 					$('.header').load("/user.main.logout");
 			});
+			$("#_IDSignup2").live("click",function(){
+				$("#_ContentLogin").dialog("close");
+				$("#_IDSignup").trigger("click");
+			});
 			$("#_IDLogin").live("click",YoukuWs.login);
 			$("#_IDUsage").live("click",function(){
 					$("#_ContentUsage").dialog({

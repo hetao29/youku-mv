@@ -166,7 +166,12 @@ FB.Canvas.setAutoResize();
 												<tr><td class="info" colspan="2">&nbsp;</td></tr>
 												<tr><td>{'邮箱'|tr}:</td><td><input name="useremail"/></td></tr>
 												<tr><td>{'密码'|tr}:</td><td><input type="password" name="password"/></td></tr>
-												<tr><td></td><td><input type="checkbox" id="forever" name="forever"/><label for="forever">记住登录</label></td></tr>
+												<tr>
+													<td></td>
+													<td><input type="checkbox" id="forever" name="forever"/><label for="forever">记住登录</label>
+													<a id="_IDSignup2">注册</a>
+													</td>
+												</tr>
 										</table>
 								</form>
 						</div>
