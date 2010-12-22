@@ -32,8 +32,7 @@ create table s_user_token(
 	UserID int(10) unsigned NOT NULL default 0,
 	UserToken char(26),
 	UserTokenExpiredTime int,
-	PRIMARY KEY (`UserID`),
-	UNIQUE `UserToken` (`UserToken`),
+	PRIMARY KEY (`UserID`,`UserToken`),
 	KEY `UserTokenExpiredTime` (`UserTokenExpiredTime`)
 )ENGINE=HEAP DEFAULT CHARSET=utf8;
 

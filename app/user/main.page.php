@@ -13,11 +13,15 @@ class user_main{
 	function pageisLogin($inPath){
 			return user_api::islogin();
 	}
+	/**
+	 * 自动登录
+	 */
 	function pageAutoLogin($inPath){
 			$token = $_REQUEST['token'];
+			$uid = $_REQUEST['uid'];
 			$db = new user_db;
-			$UserToken = $db->getUserToken($token);
-			if(!empty($UserToken['UserID'])){
+			$UserToken = $db->getUserToken($uid,$token);
+			if(!empty($UserToken['UserID']) && $UserToken['UserTokenExpiredTime']>time()){
 					$UserID = $UserToken['UserID'];
 					$User = $db->getUserByID($UserID);
 					return user_api::login($User,true);

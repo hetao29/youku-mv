@@ -14,11 +14,11 @@ class user_db{
 	function getUserByID($UserId){
 		return $this->_db->selectOne("s_user",array("UserID"=>$UserId));
 	}
-	function delUserToken($Token){
-		return $this->_db->delete("s_user_token",array("UserToken"=>$Token));
+	function delUserToken($UserID,$Token){
+		return $this->_db->delete("s_user_token",array("UserToken"=>$Token,"UserID"=>$UserID));
 	}
-	function getUserToken($Token){
-		return $this->_db->selectOne("s_user_token",array("UserToken"=>$Token));
+	function getUserToken($UserID,$Token){
+		return $this->_db->selectOne("s_user_token",array("UserToken"=>$Token,"UserID"=>$UserID));
 	}
 	function addUserToken($Token){
 		$Token['UserTokenExpiredTime']=time()+3600*24*365;//一年过期
