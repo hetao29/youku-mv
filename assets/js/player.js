@@ -488,7 +488,7 @@ var YoukuWs = function(){
 				return this.get("uid");
 		},login:function(callback){
 			$("#_ContentLogin").dialog({
-				width:320,height:230, buttons: [
+				width:320,height:240, buttons: [
 					{
 						text:_LabelOk,
 						click: function() {
