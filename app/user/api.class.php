@@ -17,6 +17,8 @@ class user_api{
 			return isset($_SESSION['user']);
 		}
 		static public function logout(){
+			$db = new  user_db;
+			$db->delUserToken(session_id());
 			unset($_SESSION['user']);
 			setcookie("uid",0,time()-3600);
 			setcookie("token",0,time()-3600);

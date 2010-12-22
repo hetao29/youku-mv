@@ -14,6 +14,9 @@ class user_db{
 	function getUserByID($UserId){
 		return $this->_db->selectOne("s_user",array("UserID"=>$UserId));
 	}
+	function delUserToken($Token){
+		return $this->_db->delete("s_user_token",array("UserToken"=>$Token));
+	}
 	function getUserToken($Token){
 		return $this->_db->selectOne("s_user_token",array("UserToken"=>$Token));
 	}
