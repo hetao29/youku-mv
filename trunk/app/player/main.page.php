@@ -35,7 +35,7 @@ class player_main extends SGui{
 	 * @param [$MvListID]
 	 */
 
-	function pageAddMV($inPath){
+	function pageAddMv($inPath){
 			$Mv = array();
 			$api = new player_api;
 			$vid = $_REQUEST['vid'];
@@ -98,6 +98,19 @@ class player_main extends SGui{
 			}
 			$db->updateLyrics($MvID,array("LyricsStatus"=>-2));
 			return true;
+	}
+	function pageAddListen($inPath){
+			if(($User=user_api::islogin())!==false){
+					$db = new user_db;
+					$player_db = new player_db;
+					$vid = $_REQUEST['vid'];
+					$mv = $player_db->getMvByVid($vid);
+					if(empty($mv)){
+						$tmpmv  = $this->pageAddMv($inPath);
+						$mv 	= $db->getMvByVid($tmpmv['MvVideoID']);
+					}
+					return $db->addListen(array("MvID"=>$mv['MvID'],"UserID"=>$User['UserID']));
+			}
 	}
 	/**
 	 * 读取歌词

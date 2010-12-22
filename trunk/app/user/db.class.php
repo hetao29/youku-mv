@@ -29,11 +29,11 @@ class user_db{
 	}
 	/*增加收藏喜欢*/
 	function addFav($Fav){
-		return $this->_db->insert("s_user_fav",$Fav);
+		return $this->_db->insert("s_user_fav",$Fav,true);
 	}
 	/*增加收听日志*/
 	function addListen($Listen){
-		return $this->_db->insert("s_user_listen",$Listen);
+		return $this->_db->insert("s_user_listen",$Listen,true);
 	}
 	function getUserByEmail($useremail){
 		return $this->_db->selectOne("s_user",array("UserEmail"=>$useremail));

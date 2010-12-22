@@ -16,7 +16,7 @@ class user_api{
 			return false;
 		}
 		static public function  islogin(){
-			return isset($_SESSION['user']);
+			if(isset($_SESSION['user']))return $_SESSION['user'];else return false;
 		}
 		static public function logout(){
 			$db = new  user_db;
