@@ -3,18 +3,16 @@
 		<head>
 				<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 				<title>{'标题'|tr}</title>
-{*
 				<script type="text/javascript" src="/assets/js/jquery-1.4.4.js"></script>
 				<script type="text/javascript" src="/assets/js/jquery-ui.min.js"></script>
 				<script type="text/javascript" src="/assets/js/jquery.cookie.js"></script>
 				<script type="text/javascript" src="/assets/js/swfobject/swfobject.js"></script>
 				<script type="text/javascript" src="/assets/js/json2.js"></script>
 				<script type="text/javascript" src="/assets/js/player.js"></script>
-				*}
 				<link href="/assets/css/style.css" media="all" rel="stylesheet" type="text/css" />
 				<link rel="Shortcut Icon" href="/assets/images/ico/favicon_32x32.ico" />
 				<link href="/assets/css/jquery-ui-1.8.6.custom-smoothness.css" media="all" rel="stylesheet" type="text/css" />
-				<script type="text/javascript" src="/assets/js/youku.ws.js"></script>
+{*<script type="text/javascript" src="/assets/js/youku.ws.js"></script>*}
 {literal}
 				<script type="text/javascript">
 				
@@ -137,6 +135,8 @@ FB.Canvas.setAutoResize();
 						</div>
 				</div>
 
+				<div id="debug"></div>
+				<div id="debug2"></div>
 				<div>
 
 						<div id="_DialogAdd" title="增加歌曲" style="display:none;">

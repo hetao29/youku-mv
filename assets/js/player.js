@@ -409,13 +409,14 @@ var YoukuWs = function(){
 					var o = $("#_ContentMusic [vid="+vid+"]");
 					if(!o || !o.position())return;
 					YoukuWs.setTitle($("#_ContentMusic [vid="+vid+"] A").html());
+					$("#debug").html(o.parent().height()+":"+o.position().top+":"+o.parent().scrollTop()+":"+o.scrollTop());
 					t = o.position().top+o.outerHeight()-o.parent().height();
 					if(t>0){
 						t = o.parent().scrollTop() + o.position().top+o.height()-o.parent().height(); //432
 						o.parent().animate({scrollTop:t+"px"},"slow","linear",function(){
 						});
 					}else if( t<0-(o.parent().height()-o.outerHeight())){
-						t = o.parent().scrollTop() - o.outerHeight();//o.position().top;//-o.parent().height(); //432
+						t = (o.parent().scrollTop()+o.position().top)-10;
 						o.parent().animate({scrollTop:t+"px"},"slow","linear",function(){
 						});
 					}
