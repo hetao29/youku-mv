@@ -116,10 +116,12 @@ KEY `FavTime` (`FavTime`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 --用户听过的歌
+drop table s_user_listen;
 create table s_user_listen(
 UserID int not null default 0,
 MvID int not null default 0,
 ListenTime	timestamp,
+ListenTotal int not null default 1,
 UNIQUE KEY `ListenID` (`UserID`,MvID),
 KEY ListenTime(`ListenTime`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;

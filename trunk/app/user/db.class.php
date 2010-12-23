@@ -33,7 +33,7 @@ class user_db{
 	}
 	/*增加收听日志*/
 	function addListen($Listen){
-		return $this->_db->insert("s_user_listen",$Listen,true);
+		return $this->_db->insert("s_user_listen",$Listen,false,false,array("ListenTotal=ListenTotal+1","ListenTime=CURRENT_TIMESTAMP"));
 	}
 	function getUserByEmail($useremail){
 		return $this->_db->selectOne("s_user",array("UserEmail"=>$useremail));
