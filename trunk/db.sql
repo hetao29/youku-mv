@@ -20,11 +20,12 @@ create table s_user(
 UserID int(10) unsigned NOT NULL AUTO_INCREMENT,
 UserAlias varchar(200),
 UserEmail varchar(200),
+ParterID int(10) unsigned NOT NULL default 0 COMMENT '站外合作伙伴',
 UserPassword varchar(200),
 UserStatus tinyint not null default 1 COMMENT '1正常',
 
 PRIMARY KEY (`UserID`),
-UNIQUE KEY `UserEmail` (`UserEmail`),
+UNIQUE KEY `UserEmail` (`UserEmail`,`ParterID`),
 KEY `UserStatus` (`UserStatus`)
 )ENGINE=MyISAM DEFAULT CHARSET=utf8;
 INSERT into s_user(UserID,UserAlias,UserEmail,UserPassword) values(1,'hetal','hetao@hetao.name','huoqiabc');
