@@ -28,6 +28,23 @@ class player_main extends SGui{
 			}
 		echo $this->render("player/headerV2.tpl",$param);
 	}
+	function pageRadio($inPath){
+			//电台频道
+			//0表示私有频道，其它表示频道ID，甚至包括电视频道
+			$chanelId= empty($_REQUEST['cid'])?0:$_REQUEST['cid'];
+			//视频ID，当前的视频ID
+			$vid = $_REQUEST['vid'];
+			//如果是登录用户，在s_user_listen中找出不是这个用户听过的最新的歌，如果没有，就去s_mv 中找
+			//同时算出相互喜欢歌
+			//1.听过些歌的人，还听这的一些歌
+			//2.喜欢过这首歌的人，还听过的，和喜欢的
+			//同时不能包含用户不喜欢的歌
+			//如果没有登录的用户，在s_user_listen中找出不是当前歌的歌
+			$userid = 0;
+			if(($User=user_api::islogin())!==false){
+					$userid = $User['UserID'];
+			}
+	}
 	/**
 	 * 增加MV
 	 * @param $MvName
