@@ -1,10 +1,10 @@
 <?php
 class player_main extends SGui{
 	function __construct(){
-		echo $this->render("head.tpl");
+		//echo $this->render("head.tpl");
 	}
 	function __destruct(){
-		echo $this->render("footer.tpl");
+		//echo $this->render("footer.tpl");
 	}
 	function pageFaceBook($inPath){
 			return $this->pageEntry($inPath,1);
@@ -19,14 +19,14 @@ class player_main extends SGui{
 		if(!empty($facebook)){
 			$param=array("facebook"=>1);
 		}
-		echo $this->render("player/player.tpl",$param);
+		echo $this->render("player/playerV2.tpl",$param);
 	}
 	function pageHeader($inPath){
 			$param = array();
 			if(!empty($_SESSION['user'])){
 					$param['user'] = $_SESSION['user'];
 			}
-		echo $this->render("player/header.tpl",$param);
+		echo $this->render("player/headerV2.tpl",$param);
 	}
 	/**
 	 * 增加MV
@@ -107,7 +107,7 @@ class player_main extends SGui{
 					$mv = $player_db->getMvByVid($vid);
 					if(empty($mv)){
 						$tmpmv  = $this->pageAddMv($inPath);
-						$mv 	= $db->getMvByVid($tmpmv['MvVideoID']);
+						$mv 	= $player_db->getMvByVid($tmpmv['MvVideoID']);
 					}
 					return $db->addListen(array("MvID"=>$mv['MvID'],"UserID"=>$User['UserID']));
 			}
