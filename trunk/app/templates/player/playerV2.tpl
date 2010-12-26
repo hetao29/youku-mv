@@ -46,8 +46,8 @@
 						cookie : true, // enable cookies to allow the server to access the session
 						xfbml  : true  // parse XFBML
 						});
-						FB.Canvas.setAutoResize();
-						//FB.Canvas.setSize({ width: 910, height: 520 });
+						//FB.Canvas.setAutoResize();
+						FB.Canvas.setSize({ height: 550 });
 						}
 						//$(function() {
 						//						$( "#tabs" ).tabs();
@@ -56,13 +56,15 @@
 				{/literal}
 				{/if}
 
+				{if empty($facebook)}
 				<div class="header">
 						{part path="/player.main.header"}
 				</div>
+				{/if}
 				<div class="content">
 
 						<div class="main">
-								<div class="left" style="width:260px">
+								<div class="left" style="width:256px">
 										<div style="padding-top:10px;">
 												<ul id="_IDNav">
 														<li id="_IDShowRadio" style="padding:5px 15px;background-color:#ddd"><a>电台模式</a></li>

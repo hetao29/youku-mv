@@ -175,17 +175,10 @@ class player_main extends SGui{
 			if(empty($k))return;
 			if(preg_match("/v_show\/id_(.*?)\./",$k,$_m)){
 					//普通视频播放页
-					//v_show/id_XMjI3MTU1ODM2.html
-					$vid = urlencode($_m[1]);
-					$r = SHttp::get("http://api.youku.com/api_ptvideoinfo",array("pid"=>"XOA==","rt"=>3,"id"=>$k));
-					$r = SJson::decode($r);
+					$r = player_api::getVideoInfo($_m[1]);
 					$o = new stdclass;
-					$v = new stdclass;
 					$o->items=array();
-					$o->items[]=&$v;
-					$v->vid = $vid;
-					$v->title = $r->item->title;
-					$v->seconds= $r->item->duration;
+					$o->items[]=$r;
 					return SJson::encode($o);
 			}elseif(preg_match("/show_page\/id_(.*?)\./",$k,$_m)){
 					//节目显示页

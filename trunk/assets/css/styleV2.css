@@ -39,13 +39,13 @@ a:hover {text-decoration:underline;}
 		float:left;
 }
 .content {
-		width:760px;
+		width:756px;
 		display:block;height:530px;
 		margin:auto;
 		background:#fff; color:#111;  border:2px solid #ccc; text-align:center; 
 		padding:0px;
 }
-.header{width:760px;margin:10px auto;}
+.header{width:756px;margin:10px auto;}
 li{
 		/*font-size: 1.1em;
 		line-height: 10px;
