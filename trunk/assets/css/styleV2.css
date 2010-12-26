@@ -66,23 +66,24 @@ li{
 		padding-left:10px;
 }
 .list {
-		width:250px;
+		width:245px;
 }
 .list li  {
 		cursor:pointer;
 		clear:both;
-		padding:1px;
 		border-bottom:1px solid #E5E5E5;
 		text-align:left;
-		width:233px;
+		width:228px;
 		line-height:20px;
 }
 .list .current{
-		overflow:hidden;
+		/*overflow:hidden;
 		background: #6A9BC0 url(http://static.youku.com/index/img/master.png) no-repeat 5px -1312px;
+		 */
+		background-color: #ccc;
 }
 .list li a{
-		padding-left:10px;
+		padding-left:2px;
 		display:block;
 }
 /*
@@ -114,6 +115,7 @@ li{
 		font-size:12px;
 }
 .content .main{
+		height:420px;
 }
 .content .nav{
 		margin:18px auto;
