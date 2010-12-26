@@ -1,5 +1,11 @@
 //{{{主方法
+//$(document).keyup(function(event){
+//	if(event.keyCode==122){//F11
+//		YoukuWs.fullScreen=!YoukuWs.fullScreen;
+//	}
+//});
 var YoukuWs = function(){
+	var fullScreen=false;
 	var o_lyrics;
 	var gc= new Array();
 	var lyrics_offset=0;
