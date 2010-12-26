@@ -3,16 +3,17 @@
 		<head>
 				<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 				<title>{'标题'|tr}</title>
-				<script type="text/javascript" src="/assets/js/jquery-1.4.4.js"></script>
+{*				<script type="text/javascript" src="/assets/js/jquery-1.4.4.js"></script>
 				<script type="text/javascript" src="/assets/js/jquery-ui.min.js"></script>
 				<script type="text/javascript" src="/assets/js/jquery.cookie.js"></script>
 				<script type="text/javascript" src="/assets/js/swfobject/swfobject.js"></script>
 				<script type="text/javascript" src="/assets/js/json2.js"></script>
 				<script type="text/javascript" src="/assets/js/player.js"></script>
+*}
 				<link href="/assets/css/styleV2.css" media="all" rel="stylesheet" type="text/css" />
 				<link rel="Shortcut Icon" href="/assets/images/ico/favicon_32x32.ico" />
 				<link href="/assets/css/jquery-ui-1.8.6.custom-smoothness.css" media="all" rel="stylesheet" type="text/css" />
-				{*<script type="text/javascript" src="/assets/js/youku.ws.js"></script>*}
+				<script type="text/javascript" src="/assets/js/youku.ws.js"></script>
 				{literal}
 				<script type="text/javascript">
 
@@ -64,8 +65,11 @@
 				<div class="content">
 
 						<div class="main">
-								<div class="left" style="width:256px">
-										<div style="padding-top:10px;padding-left:10px;">
+								<div class="left">
+										<div class="playerBox"><div id="player"></div></div>
+								</div>
+								<div class="right" style="width:256px">
+										<div style="padding-top:10px;">
 												<ul id="_IDNav">
 														<li id="_IDShowRadio" style="padding:5px 15px;background-color:#ddd"><a>电台模式</a></li>
 														<li id="_IDShowLocalList" style="padding:5px 15px;"><a>本地列表</a></li>
@@ -123,9 +127,6 @@
 												</div>
 										</div>
 
-								</div>
-								<div class="right">
-										<div class="playerBox"><div id="player"></div></div>
 								</div>
 								<div class="clear"></div>
 						</div>
