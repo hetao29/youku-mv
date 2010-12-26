@@ -65,7 +65,7 @@
 
 						<div class="main">
 								<div class="left" style="width:256px">
-										<div style="padding-top:10px;">
+										<div style="padding-top:10px;padding-left:10px;">
 												<ul id="_IDNav">
 														<li id="_IDShowRadio" style="padding:5px 15px;background-color:#ddd"><a>电台模式</a></li>
 														<li id="_IDShowLocalList" style="padding:5px 15px;"><a>本地列表</a></li>
@@ -74,14 +74,14 @@
 												<div class="clear"></div>
 										</div>
 										<div class="list" id="_IDLocalList">
-												<div>
+												<div style="padding-bottom:5px;text-align:left">
 														<form onsubmit="search();return false;" style="vertical-align:middle">
 																<input style="vertical-align:middle" type="text" size="18" id="keywords" placeholder="请输入关键词" autofocus="" value="" autocomplete="off" class="ui-widget-content" />
 																<button id="_BtSearch" style="vertical-align:middle" class="ui-button ui-widget ui-state-default ui-corner-all">{'搜索'|tr}</button>
 														</form>
 												</div>
 												<div id="_Content" style="position:relative;">
-														<ul id="_ContentMusic" style="display:block;height:290px;overflow:hidden;overflow-y:auto;">
+														<ul id="_ContentMusic" style="display:block;height:280px;overflow:hidden;overflow-y:auto;">
 														</ul>
 												</div>
 												<div id="action">
@@ -120,7 +120,6 @@
 																<span id="_IDLyricsView" style="cursor:pointer;border:1px solid;">查看</span>
 																<span id="_IDLyricsInfo" style="position:absolute;top:348px;left:180px;"></span>
 														</div>
-														<div id="debug">debug</div>
 												</div>
 										</div>
 
