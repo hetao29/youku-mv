@@ -1,0 +1,172 @@
+@charset "utf-8";
+body,div,ul,ol,li{
+		padding:0px;
+		margin:0px;
+		font:12px/20px arial, helvetica, verdana, tahoma, sans-serif;
+}
+img{border:0;}
+h3 {font-weight:bold; margin:2px; text-align:left;}
+ol,ul{list-style:none;}
+body {
+		/*color:#5C71A2;*/
+		/*color:#000;*/
+		color:#222;
+		/*font-size:1.2em;*/
+		background:#dddddd;
+}
+button{
+		display:none;
+}
+div{
+		display: block;
+}
+img, a img {border:0;}
+a {
+		cursor:pointer;
+		color:#222;
+		text-decoration:none;
+}
+a:hover {text-decoration:underline;}
+.left{float:left;}
+.right{float:right;}
+.clear{clear:both;}
+.hide{display:none;}
+.red{
+		color:red
+}
+.handle{
+		cursor:pointer;
+		float:left;
+}
+.content {
+		width:760px;
+		display:block;height:530px;
+		margin:auto;
+		background:#fff; color:#111;  border:2px solid #ccc; text-align:center; 
+		padding:0px;
+}
+.header{width:760px;margin:10px auto;}
+li{
+		/*font-size: 1.1em;
+		line-height: 10px;
+		*/
+		cursor:pointer;
+}
+.list{
+		/*margin:auto;*/
+		padding:10px;
+}
+.list .head{
+		color: #014CCC;
+		background: #EAF9FE none;
+		/*border-color: #E5E5E5;*/
+		border: 1px solid #A7D6E0;
+		height: 20px;
+		width:210px;
+		padding-left:10px;
+}
+.list {
+		width:250px;
+}
+.list li  {
+		cursor:pointer;
+		clear:both;
+		padding:1px;
+		border-bottom:1px solid #E5E5E5;
+		text-align:left;
+		width:233px;
+		line-height:20px;
+}
+.list .current{
+		overflow:hidden;
+		background: #6A9BC0 url(http://static.youku.com/index/img/master.png) no-repeat 5px -1312px;
+}
+.list li a{
+		padding-left:10px;
+		display:block;
+}
+/*
+.list .current a:hover {
+		background: #6A9BC0 url(http://static.youku.com/index/img/master.png) no-repeat 5px -1312px;
+}
+*/
+.list a:hover {
+		/*background:#daf3fa;*/
+		text-decoration:none;
+}
+.list .trash{
+		border: 1px solid #A7D6E0;
+		width:210px;
+		padding-left:10px;
+}
+.header li  {
+		float: right;
+		padding-left:5px;
+		padding-right:5px;
+}
+.header .nav{
+		margin-left:auto;
+}
+.content li{
+		float: left;
+}
+.content li{
+		font-size:12px;
+}
+.content .main{
+}
+.content .nav{
+		margin:18px auto;
+}
+.content{
+		padding-top:5px;
+}
+.footer li{
+		float: left;
+		padding:10px;
+}
+.footer .nav{
+		padding:8px auto;
+		padding-bottom:8px;
+		padding-left:auto;
+}
+.footer a{
+		color:#5C71A2;
+}
+.playerBox{
+		padding:10px;
+		width:480px;
+		height:400px;
+}
+.lyrics{
+		margin:auto;
+		margin:5px;
+}
+.info{
+		color:red;
+		text-align:center;
+}
+.lyrics_top{
+		/*background: #999; /* for non-css3 browsers */
+		-moz-opacity:0.3;              /* Moz + FF */ 
+		opacity: 0.3; 
+		position:absolute;
+		top:0px;
+		filter:alpha(opacity=30) progid:DXImageTransform.Microsoft.gradient(startColorstr='#cccccc', endColorstr='#000000'); /* for IE */
+		background: -webkit-gradient(linear, left top, left bottom, from(#ccc), to(#000)); /* for webkit browsers */
+		background: -moz-linear-gradient(top, #ccc, #000); /* for firefox 3.6+ */
+		/* not ie */
+		-webkit-border-radius: 5px;
+		-moz-border-radius: 5px;
+		border-radius: 5px;
+}
+button{
+		padding: 0;
+		font-size:12px;
+		height:23;
+		background-color:#ece9d8;
+		border-width:1;
+}
+#conash3D0{
+		display:none;
+}
