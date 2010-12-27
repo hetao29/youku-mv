@@ -207,19 +207,28 @@ var YoukuWs = function(){
 
 			$("#_BtClearList").button({ icons: { primary: "ui-icon-plusthick" } }).click(function(){
 							});
-			$("#_IDShowLyrics").click(function(){
-							$("#_IDLyrics").show();
-							$("#_IDLocalList").hide();
-						});
-			$("#_IDShowLocalList").click(function(){
-							$("#_IDLyrics").hide();
-							$("#_IDLocalList").show();
-						});
+			//{{{
+			PlayType = YoukuWs.get("PlayType",0);
+			$(".list").each(function(i,item){
+					if(i==PlayType){
+						$("#_IDNav >li").eq(i).css("background-color","").show();
+						$(item).show();
+					}else{
+						$("#_IDNav >li").eq(i).css("background-color","#ddd").show();
+				   		$(item).hide();
+					}
+			});
 			$("#_IDNav >li").click(function(){
 							var id = $(this).attr("id");
-							$(this).parent().find("li[id!="+id+"]").css("background-color","#ddd");//html());
-							$(this).parent().find("li[id="+id+"]").css("background-color","");//html());
+							var index = $("#_IDNav >li").index( $("#_IDNav >li[id="+id+"]"));
+							YoukuWs.set("PlayType",index);
+							$("#_IDNav >li[id="+id+"]").css("background-color","");
+							$("#_IDNav >li[id!="+id+"]").css("background-color","#ddd");
+							$(".list").each(function(i,item){
+								if(i==index)$(item).show();else $(item).hide();
 							});
+						});
+			//}}}
 			$("#_BtAddList").button({ icons: { primary: "ui-icon-plusthick" } });
 			$("#_BtAddMv").button({ icons: { primary: "ui-icon-plusthick" } }).click(function(){
 				$( "#_DialogAdd" ).dialog({
@@ -481,12 +490,13 @@ var YoukuWs = function(){
 			 var t = t.replace(/<[^>]+>/g,"");
 			 if(t)document.title=t;
 		},
-		get:function(k){
+		get:function(k,defaultValue){
 			//TODO userData for IE
 			if('localStorage' in window && window['localStorage'] !== null){
 				if(localStorage[k])return localStorage[k];
 			}
 			if($.cookie(k))return $.cookie(k);
+			return defaultValue;
 		},
 		set:function(k,v){
 			//TODO userData for IE
@@ -631,6 +641,12 @@ var playerId="player";
   * 3 随机播放
   */
 var PlayMode=2;
+/**
+  * 播放类型
+  * 0 电台
+  * 1 列表播放
+  */
+var PlayType=0;
 var CurrentVideoID="";
 function onPlayerStart(vid,vidEncoded){
 		//PlayerColor("000000","4F4F4F",25);
