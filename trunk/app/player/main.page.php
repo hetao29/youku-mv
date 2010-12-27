@@ -29,6 +29,15 @@ class player_main extends SGui{
 		echo $this->render("player/headerV2.tpl",$param);
 	}
 	function pageRadio($inPath){
+			//$result = new stdclass;
+			$db = new player_db;
+			$mvid = $_REQUEST['mvid'];
+			$result=array();
+			$mvid++;
+			$result[] = $db->getMv($mvid);
+			$mvid++;
+			$result[] = $db->getMv($mvid);
+			return $result;
 			//电台频道
 			//0表示私有频道，其它表示频道ID，甚至包括电视频道
 			$chanelId= empty($_REQUEST['cid'])?0:$_REQUEST['cid'];

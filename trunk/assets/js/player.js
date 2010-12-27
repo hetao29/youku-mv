@@ -13,6 +13,7 @@ var YoukuWs = function(){
 	var uid=1;
 	var mvid=1;
 
+
 	var order=[];
 	$(document).ready(function(){
 					//{{{
@@ -85,6 +86,7 @@ var YoukuWs = function(){
 				$("#_IDSignup").trigger("click");
 			});
 			$("#_IDLogin").live("click",YoukuWs.login);
+			$("#_IDLogin2").live("click",YoukuWs.login);
 			$("#_IDUsage").live("click",function(){
 					$("#_ContentUsage").dialog({
 						width:600,height:480, buttons: [
@@ -204,6 +206,7 @@ var YoukuWs = function(){
 			}
 			//$("#PlayModeSet" ).buttonset().show();
 			$("#_BtPlayModeSet").button("option","disabled",true).show();
+			$("button").button().show();
 
 			$("#_BtClearList").button({ icons: { primary: "ui-icon-plusthick" } }).click(function(){
 							});
@@ -282,6 +285,7 @@ var YoukuWs = function(){
 
 			setInterval(checkTime,500);
 			setInterval(YoukuWs.adReload,1000*60*10);// 10分钟一次
+			CurrentMvID = YoukuWs.get("CurrentMvID");
 			if(YoukuWs.get("vid")){
 				YoukuWs.play(YoukuWs.get("vid"));
 			}else{
@@ -400,7 +404,7 @@ var YoukuWs = function(){
 			mvid = 0;
 			showLyric("");
 			vid = vid?vid:"XMjI4MTczMDIw";
-			pre=1;
+			pre=PlayType==0?0:1;
 			next=1;
 			CurrentVideoID=vid;
 			YoukuWs.set("vid",CurrentVideoID);
@@ -446,25 +450,58 @@ var YoukuWs = function(){
 					var o = $("#_ContentMusic [vid="+vid+"]");
 					if(!o || !o.position())return;
 					YoukuWs.setTitle($("#_ContentMusic [vid="+vid+"] A").html());
-					//$("#debug").html(o.parent().height()+":"+o.position().top+":"+o.parent().scrollTop()+":"+o.scrollTop());
-					t = o.position().top+o.outerHeight()-o.parent().height();
-					if(t>0){
-						t = o.parent().scrollTop() + o.position().top+o.height()-o.parent().height(); //432
-						o.parent().animate({scrollTop:t+"px"},"slow","linear",function(){
-						});
-					}else if( t<0-(o.parent().height()-o.outerHeight())){
-						t = (o.parent().scrollTop()+o.position().top);
-						o.parent().animate({scrollTop:t+"px"},"slow","linear",function(){
-						});
+					if(PlayType!=0){//非收听模式
+						t = o.position().top+o.outerHeight()-o.parent().height();
+						if(t>0){
+							t = o.parent().scrollTop() + o.position().top+o.height()-o.parent().height(); //432
+							o.parent().animate({scrollTop:t+"px"},"slow","linear",function(){
+							});
+						}else if( t<0-(o.parent().height()-o.outerHeight())){
+							t = (o.parent().scrollTop()+o.position().top);
+							o.parent().animate({scrollTop:t+"px"},"slow","linear",function(){
+							});
+						}
+						$("#_ContentMusic >li").removeClass("current");
+						o.addClass('current');
 					}
-					$("#_ContentMusic >li").removeClass("current");
-					o.addClass('current');
 					if(YoukuWs.isLogin()){
 							$.ajax({type:"POST",url:"/player.main.addListen",data:{"vid":vid},success:function(msg){
 									}
 							});
 					}
 			});
+		},
+		listRadio:function(){
+				if(radioPlayList.length<2){
+					$.ajax({
+						url: "/player.main.radio",
+						data: {
+							cid:0,
+							mvid:CurrentMvID
+						},
+						dataType:"json",
+						success: function( result) {
+							if(result){
+								radioPlayList=radioPlayList.concat(result);
+							}
+						}
+					});
+				}
+	  	},
+		playRadio:function(onlyGet){
+			//获取当前队列的数据，如果为空就从服务器取
+			var o= radioPlayList.shift();
+			if(o){
+				//队列里有数据
+				CurrentMvID = o.MvID;
+				$("#_IDVideoTitle").html(o.MvName);
+				YoukuWs.set("CurrentMvID",CurrentMvID);
+				if(!onlyGet)YoukuWs.play(o.MvVideoID);
+			}
+				if(radioPlayList[0]){
+							$("#_IDNextVideoTitle").html(radioPlayList[0].MvName);
+				}
+			YoukuWs.listRadio();
 		},
 		playRandom:function(){
 			var rand_num = Math.floor(Math.random()*$('#_ContentMusic li').size());
@@ -650,15 +687,23 @@ var PlayMode=2;
   * 1 列表播放
   */
 var PlayType=0;
+//当前播放视频ID，主要是播放模式用
 var CurrentVideoID="";
+//当前听歌的MvID，主要是收音模式用
+var CurrentMvID=0;
+var radioPlayList=[];
 function onPlayerStart(vid,vidEncoded){
 		//PlayerColor("000000","4F4F4F",25);
 }
 function onPlayerError(vid){
+		if(PlayType!=0){
 		var h = $("#_ContentMusic [vid="+vid+"] A[error!=1]");
 			h.attr("error",1);
 			h.html("<font color='red'>播放失败:</font> "+h.html());
-		YoukuWs.playNext();
+			YoukuWs.playNext();
+		}else{
+			YoukuWs.playRadio();
+		}
 		//PlayerColor("000000","4F4F4F",25);
 }
 function onPlayerComplete(vid,vidEncoded,isFullScreen){
@@ -699,7 +744,11 @@ function PlayerPlayPre(vid,vidEncoded,isFullScreen){
 		YoukuWs.playPre();
 }
 function PlayerPlayNext(vid,vidEncoded,isFullScreen){
-		YoukuWs.playNext();
+		if(PlayType==0){
+			YoukuWs.playRadio();
+		}else{
+			YoukuWs.playNext();
+		}
 }
 //}}}
 //{{{

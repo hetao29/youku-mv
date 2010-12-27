@@ -11,6 +11,9 @@ class player_db{
 	function getMvByVid($vid){
 		return $this->_db->selectOne("s_mv",array("MvVideoID"=>$vid));
 	}
+	function getMv($mvid){
+		return $this->_db->selectOne("s_mv",array("MvID"=>$mvid));
+	}
 	function addMv($Mv){
 		return $this->_db->insert("s_mv",$Mv);
 	}
