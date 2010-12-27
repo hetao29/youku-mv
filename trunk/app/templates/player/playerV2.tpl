@@ -72,7 +72,7 @@
 										<div style="padding-top:10px;">
 												<ul id="_IDNav">
 														<li id="_IDShowRadio" style="padding:5px 15px;background-color:#ddd"><a>电台模式</a></li>
-														<li id="_IDShowLocalList" style="padding:5px 15px;"><a>本地列表</a></li>
+														<li id="_IDShowLocalList" style="padding:5px 15px;"><a>播放模式</a></li>
 														<li id="_IDShowLyrics" style="padding:5px 15px;background-color:#ddd"><a>显示歌词</a></li>
 												</ul>
 												<div class="clear"></div>
