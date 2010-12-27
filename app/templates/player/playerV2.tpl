@@ -78,11 +78,10 @@
 												<div class="clear"></div>
 										</div>
 										<div class="list" id="_IDRadio" style="display:none;">
-											<div>当前视频：我恨我关心</div>
-											<div>下一个视频：</div>
-											<div>跳过</div>
-											<div>喜欢/不喜欢，不再播放</div>
-											<div>登录后，能记住你所喜好</div>
+											<div style="padding-top:30px;height:100px">当前视频：<span id="_IDVideoTitle"></span></div>
+											<div style="height:100px">下一个视频：<span id="_IDNextVideoTitle"></span></div>
+											<div><button>跳过</button><button>喜欢</button><button>删除</button></div>
+											<div style="padding-top:10px"><span id="_IDLogin2"><a>登录</a></span>后，能记住你所喜好</div>
 										</div>
 										<div class="list" id="_IDLocalList" style="display:none">
 												<div style="padding-bottom:5px;text-align:left">
