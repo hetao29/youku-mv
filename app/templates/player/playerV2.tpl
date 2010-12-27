@@ -71,13 +71,20 @@
 								<div class="right" style="width:256px">
 										<div style="padding-top:10px;">
 												<ul id="_IDNav">
-														<li id="_IDShowRadio" style="padding:5px 15px;background-color:#ddd"><a>电台模式</a></li>
-														<li id="_IDShowLocalList" style="padding:5px 15px;"><a>播放模式</a></li>
-														<li id="_IDShowLyrics" style="padding:5px 15px;background-color:#ddd"><a>显示歌词</a></li>
+														<li id="_IDShowRadio" style="padding:5px 15px;display:none;"><a>电台模式</a></li>
+														<li id="_IDShowLocalList" style="padding:5px 15px;display:none;"><a>播放模式</a></li>
+														<li id="_IDShowLyrics" style="padding:5px 15px;display:none;"><a>显示歌词</a></li>
 												</ul>
 												<div class="clear"></div>
 										</div>
-										<div class="list" id="_IDLocalList">
+										<div class="list" id="_IDRadio" style="display:none;">
+									电台模式
+									当前视频：
+									下一个视频：
+									跳过:
+									喜欢/不喜欢，不再播放
+										</div>
+										<div class="list" id="_IDLocalList" style="display:none">
 												<div style="padding-bottom:5px;text-align:left">
 														<form onsubmit="search();return false;" style="vertical-align:middle">
 																<input style="vertical-align:middle" type="text" size="18" id="keywords" placeholder="请输入关键词" autofocus="" value="" autocomplete="off" class="ui-widget-content" />
