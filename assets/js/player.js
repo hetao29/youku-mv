@@ -219,15 +219,18 @@ var YoukuWs = function(){
 					}
 			});
 			$("#_IDNav >li").click(function(){
-							var id = $(this).attr("id");
-							var index = $("#_IDNav >li").index( $("#_IDNav >li[id="+id+"]"));
-							YoukuWs.set("PlayType",index);
-							$("#_IDNav >li[id="+id+"]").css("background-color","");
-							$("#_IDNav >li[id!="+id+"]").css("background-color","#ddd");
-							$(".list").each(function(i,item){
-								if(i==index)$(item).show();else $(item).hide();
-							});
-						});
+					var _this = this;
+					$("#_IDNav >li").each(function(i,item){
+							if($(_this).html()==$(item).html()){
+								$(item).css("background-color","");
+								YoukuWs.set("PlayType",i);
+								$(".list").eq(i).show();
+							}else{
+								$(item).css("background-color","#ddd");
+								$(".list").eq(i).hide();
+							}
+					});
+				});
 			//}}}
 			$("#_BtAddList").button({ icons: { primary: "ui-icon-plusthick" } });
 			$("#_BtAddMv").button({ icons: { primary: "ui-icon-plusthick" } }).click(function(){
