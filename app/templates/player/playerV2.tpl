@@ -78,8 +78,10 @@
 												<div class="clear"></div>
 										</div>
 										<div class="list" id="_IDRadio" style="display:none;">
-											<div style="padding-top:30px;height:100px">当前视频：<span id="_IDVideoTitle"></span></div>
-											<div style="height:100px">下一个视频：<span id="_IDNextVideoTitle"></span></div>
+											<div style="padding-top:30px;height:100px">当前视频：<span id="_IDVideoTitle"></span><img id="_IDVideoPic" /></div>
+											<div style="height:100px">下一个视频：<span id="_IDNextVideoTitle"></span>
+											<img id="_IDNextVideoPic" />
+											</div>
 											<div><button id="_IDSkip">跳过</button><button>顶</button><button>踩</button></div>
 											<div style="padding-top:10px"><span id="_IDLogin2"><a>登录</a></span>后，能记住你所喜好</div>
 										</div>
