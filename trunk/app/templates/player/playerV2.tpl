@@ -3,17 +3,19 @@
 		<head>
 				<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 				<title>{'标题'|tr}</title>
+{*
 				<script type="text/javascript" src="/assets/js/jquery-1.4.4.js"></script>
 				<script type="text/javascript" src="/assets/js/jquery-ui.min.js"></script>
 				<script type="text/javascript" src="/assets/js/jquery.cookie.js"></script>
 				<script type="text/javascript" src="/assets/js/swfobject/swfobject.js"></script>
 				<script type="text/javascript" src="/assets/js/json2.js"></script>
 				<script type="text/javascript" src="/assets/js/player.js"></script>
+				*}
 
 				<link href="/assets/css/styleV2.css" media="all" rel="stylesheet" type="text/css" />
 				<link rel="Shortcut Icon" href="/assets/images/ico/favicon_32x32.ico" />
 				<link href="/assets/css/jquery-ui-1.8.6.custom-smoothness.css" media="all" rel="stylesheet" type="text/css" />
-{*<script type="text/javascript" src="/assets/js/youku.ws.js"></script>*}
+<script type="text/javascript" src="/assets/js/youku.ws.js"></script>
 				{literal}
 				<script type="text/javascript">
 
@@ -78,9 +80,9 @@
 												<div class="clear"></div>
 										</div>
 										<div class="list" id="_IDRadio" style="display:none;">
-											<div style="padding-top:30px;height:100px">当前视频：<span id="_IDVideoTitle"></span><img id="_IDVideoPic" /></div>
-											<div style="height:100px">下一个视频：<span id="_IDNextVideoTitle"></span>
-											<img id="_IDNextVideoPic" />
+											<div style="padding:10px;"><b>当前播放：</b><span id="_IDVideoTitle"></span><div><img id="_IDVideoPic" /></div></div>
+											<div style="padding:10px"><b>接着播放：</b><span id="_IDNextVideoTitle"></span>
+												<div><img id="_IDNextVideoPic" /></div>
 											</div>
 											<div><button id="_IDSkip">跳过</button><button>顶</button><button>踩</button></div>
 											<div style="padding-top:10px"><span id="_IDLogin2"><a>登录</a></span>后，能记住你所喜好</div>
