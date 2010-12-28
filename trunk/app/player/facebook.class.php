@@ -6,8 +6,8 @@ require_once (SlightPHP::$appDir . "/../facebook.php");
 
 // Create our Application instance (replace this with your appId and secret).
 $facebook = new Facebook(array(
-  'appId'  => '173211992709193',
-  'secret' => '14f21eacd434f2060dc84e6dee6ffc39',
+  'appId'  => '187834637899054',
+  'secret' => '5607d1b6cb8b03c6a812028c279ae47b',
   'cookie' => true,
 ));
 
