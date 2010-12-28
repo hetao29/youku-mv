@@ -229,8 +229,10 @@ var YoukuWs = function(){
 					$("#_IDNav >li").each(function(i,item){
 							if($(_this).html()==$(item).html()){
 								$(item).css("background-color","");
-								PlayType=i;
-								YoukuWs.set("PlayType",i);
+								if(i<=1){
+									PlayType=i;
+									YoukuWs.set("PlayType",i);
+								}
 								$(".list").eq(i).show();
 							}else{
 								$(item).css("background-color","#ddd");
