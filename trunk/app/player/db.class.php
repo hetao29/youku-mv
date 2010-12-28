@@ -14,6 +14,10 @@ class player_db{
 	function getMv($mvid){
 		return $this->_db->selectOne("s_mv",array("MvID"=>$mvid));
 	}
+	function getMvCount(){
+		$row = $this->_db->selectOne("s_mv",array(),"count(*) ct");
+		return $row['ct'];
+	}
 	function addMv($Mv){
 		return $this->_db->insert("s_mv",$Mv);
 	}
