@@ -6,13 +6,11 @@ class player_main extends SGui{
 	function __destruct(){
 		//echo $this->render("footer.tpl");
 	}
+	function pageQQ($inPath){
+			return $this->pageEntry($inPath,1);
+	}
 	function pageFaceBook($inPath){
 			return $this->pageEntry($inPath,1);
-			try{
-			$book = new player_facebook;
-			}catch(Exception $e){
-					print_r($e);
-			}
 	}
 	function pageEntry($inPath,$facebook=0){
 		$param=array();
