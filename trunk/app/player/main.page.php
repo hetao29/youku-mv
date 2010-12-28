@@ -76,6 +76,7 @@ class player_main extends SGui{
 				$Mv['MvName'] = $Mv['MvAlias']=$video->title;
 				$Mv['MvSeconds'] = $video->seconds;
 				$Mv['MvVideoID'] = $video->vid;
+				$Mv['MvPic'] = $video->pic;
 			}
 			$Mv['UserID'] = 1;//我自己,TODO
 			$db= new player_db;

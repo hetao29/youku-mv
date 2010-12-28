@@ -6,6 +6,7 @@ class player_api{
 			$v = new stdclass;
 			if(!empty($r->item->title)){
 				$v->title = $r->item->title;
+				$v->pic = $r->item->imagelink;
 				$v->seconds= $r->item->duration;
 				if(preg_match("/v_show\/id_(.*?)\./",$r->item->playlink,$_m)){
 						$v->vid = $_m[1];
