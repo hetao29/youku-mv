@@ -31,11 +31,12 @@ class player_main extends SGui{
 	function pageRadio($inPath){
 			//$result = new stdclass;
 			$db = new player_db;
+			$ct = $db->getMvCount();
 			$mvid = $_REQUEST['mvid'];
 			$result=array();
-			$mvid++;
+			$mvid=rand(1,$ct);
 			$result[] = $db->getMv($mvid);
-			$mvid++;
+			$mvid=rand(1,$ct);
 			$result[] = $db->getMv($mvid);
 			return $result;
 			//电台频道
