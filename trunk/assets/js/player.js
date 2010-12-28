@@ -229,6 +229,7 @@ var YoukuWs = function(){
 					$("#_IDNav >li").each(function(i,item){
 							if($(_this).html()==$(item).html()){
 								$(item).css("background-color","");
+								PlayType=i;
 								YoukuWs.set("PlayType",i);
 								$(".list").eq(i).show();
 							}else{
@@ -456,13 +457,13 @@ var YoukuWs = function(){
 					var t = 0;
 					var o = $("#_ContentMusic [vid="+vid+"]");
 					if(!o || !o.position())return;
-					YoukuWs.setTitle($("#_ContentMusic [vid="+vid+"] A").html());
 					if(YoukuWs.isLogin()){
 							$.ajax({type:"POST",url:"/player.main.addListen",data:{"vid":vid},success:function(msg){
 									}
 							});
 					}
 					if(PlayType!=0){//非收听模式
+						YoukuWs.setTitle($("#_ContentMusic [vid="+vid+"] A").html());
 						t = o.position().top+o.outerHeight()-o.parent().height();
 						if(t>0){
 							t = o.parent().scrollTop() + o.position().top+o.height()-o.parent().height(); //432
@@ -486,6 +487,7 @@ var YoukuWs = function(){
 				$("#_IDVideoTitle").html(o.MvName);
 				YoukuWs.set("CurrentMvID",CurrentMvID);
 				YoukuWs.play(o.MvVideoID);
+				YoukuWs.setTitle(o.MvName);
 			}
 			if(radioPlayList[0]){
 						$("#_IDNextVideoTitle").html(radioPlayList[0].MvName);
