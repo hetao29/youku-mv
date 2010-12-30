@@ -480,11 +480,6 @@ var YoukuWs = function(){
 					var t = 0;
 					var o = $("#_ContentMusic [vid="+vid+"]");
 					if(!o || !o.position())return;
-					if(YoukuWs.isLogin()){
-							$.ajax({type:"POST",url:"/player.main.addListen",data:{"vid":vid},success:function(msg){
-									}
-							});
-					}
 					if(PlayType!=0){//非收听模式
 						YoukuWs.setTitle($("#_ContentMusic [vid="+vid+"] A").html());
 						t = o.position().top+o.outerHeight()-o.parent().height();
@@ -570,7 +565,20 @@ var YoukuWs = function(){
 		MvAction:function(type,mvid){
 			$.ajax({
 				url: "/player.main.mvaction/"+type+"."+mvid,
+				dataType:"json",
 				success: function( result) {
+					if(result&&result.type){
+						if(YoukuWs.isLogin()){
+							switch(result.type){
+								case "down":$("#_CtDown").html(parseInt($("#_CtDown").html())+1);
+								break;
+								case "up":$("#_CtUp").html(parseInt($("#_CtUp").html())+1);
+								break;
+								case "skip":$("#_CtSkip").html(parseInt($("#_CtSkip").html())+1);
+								break;
+							}
+						}
+					}
 				}
 
 			});
@@ -738,6 +746,12 @@ var CurrentVideoID="";
 var CurrentMvID=0;
 var radioPlayList=[];
 function onPlayerStart(vid,vidEncoded){
+		if(YoukuWs.isLogin()){
+				$.ajax({type:"POST",url:"/player.main.addListen",data:{"vid":vid},success:function(msg){
+							$("#_CtListen").html(parseInt($("#_CtListen").html())+1);
+						}
+				});
+		}
 		//PlayerColor("000000","4F4F4F",25);
 }
 function onPlayerError(vid){
