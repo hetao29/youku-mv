@@ -4,6 +4,7 @@
 	{if empty($user)}
 	<li><a id="_IDSignup">{'注册'|tr}</a></li>
 	<li><a id="_IDLogin">{'登录'|tr}</a></li>
+	<li>登录后，能记住你所喜好</li>
 	{else}
 	<li><a id="_IDLogout">{'退出'|tr}</a></li>
 	<li><a>{"欢迎"|tr} {$user.UserAlias}</a></li>
