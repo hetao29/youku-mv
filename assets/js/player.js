@@ -871,7 +871,6 @@ function onPlayerStart(obj){
 		//PlayerColor("000000","4F4F4F",25);
 }
 function onPlayerError(vid){
-		alert(vid);
 		if(PlayType!=0){
 		var h = $("#_ContentMusic [vid="+vid+"] A[error!=1]");
 			h.attr("error",1);
