@@ -29,7 +29,10 @@ class player_main extends SGui{
 	/**
 	 * 跳过视频,顶视频,踩视频
 	 * 如果登录,记住用户跳过的记录,如果没有登录,只是更新s_mv
-	 * @param $type=$inPath[3] skip|up|down
+	 * @param $actiontype=$inPath[3] skip|up|down
+	 * 0 喜欢(up)
+	 * 1 删除(down)
+	 * 2 跳过(skip)
 	 * @param $mvid=$inPath[4] 
 	 */
 	function pageMvAction($inPath){
@@ -52,6 +55,8 @@ class player_main extends SGui{
 							return $result;
 				}
 				$db = new player_db;
+				$mv = $db->getMv($inPath[4]);
+				if(empty($mv))return $result;
 				$result->type=$inPath[3];
 				if(!empty($fileds)){
 					$result->result= $db->updateMv($inPath[4],array("$fileds=$fileds+1"));
