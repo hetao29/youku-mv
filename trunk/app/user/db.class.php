@@ -45,6 +45,10 @@ class user_db{
 	function addListen($Listen){
 		return $this->_db->insert("s_user_listen",$Listen,false,false,array("ListenTotal=ListenTotal+1","ListenTime=CURRENT_TIMESTAMP"));
 	}
+	function getListenCount($UserID){
+		$row = $this->_db->selectOne("s_user_listen",array("UserID"=>$UserID),array("count(*) ct"));
+		return $row['ct'];
+	}
 	function getUserByEmail($useremail){
 		return $this->_db->selectOne("s_user",array("UserEmail"=>$useremail));
 	}

@@ -26,6 +26,7 @@ class player_main extends SGui{
 					$db = new user_db;
 					$action = $db->getAction($User['UserID']);
 					$param['user'] = $User;
+					$param['_CtListen'] = $db->getListenCount($User['UserID']);
 					$act = array();
 					if(!empty($action->items)){
 							foreach($action->items as $item){
