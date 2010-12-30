@@ -259,8 +259,16 @@ var YoukuWs = function(){
 						}
 					});
 			//$("#_BtTrash").button({ icons: { primary: "ui-icon-trash" }}).droppable({
-			$("#_BtPre").click(function(){YoukuWs.playPre();});
-			$("#_BtNext").click(function(){YoukuWs.playNext();});
+			$("#_BtPre").click(function(){
+					PlayType=1;
+					YoukuWs.set("PlayType",PlayType);
+					YoukuWs.playPre();
+			});
+			$("#_BtNext").click(function(){
+					PlayType=1;
+					YoukuWs.set("PlayType",PlayType);
+					YoukuWs.playNext();
+			});
 			$("#_BtTrash").button().droppable({
 					activeClass: "ui-state-highlight",
 					hoverClass: "ui-state-error",
@@ -559,7 +567,7 @@ var YoukuWs = function(){
 
 			});
 			swfobject.embedSWF("http://static.youku.com/v/swf/qplayer.swf", playerId, "100%", "100%", "9.0.0", "expressInstall.swf",
-				{isAutoPlay:true,VideoIDS:vid,winType:"index","show_pre":pre,"show_next":next},
+				{isAutoPlay:false,VideoIDS:vid,winType:"index","show_pre":pre,"show_next":next},
 				{allowFullScreen:true,allowscriptaccess:"always","wmode":"transparent"},{},function(){
 					var t = 0;
 					var o = $("#_ContentMusic [vid="+vid+"]");
@@ -626,6 +634,7 @@ var YoukuWs = function(){
 		},
 		/*播放下一个*/
 		playNext:function(){
+			if(parseInt(PlayMode)==3)return YoukuWs.playRandom();
 			vid = CurrentVideoID;
 			vid = $("#_ContentMusic [vid="+vid+"]").next().attr("vid");
 			if(!vid){
@@ -635,6 +644,7 @@ var YoukuWs = function(){
 		},
 		/*播放上一个*/
 		playPre:function(){
+			if(parseInt(PlayMode)==3)return YoukuWs.playRandom();
 			 vid = CurrentVideoID;
 			 vid = $("#_ContentMusic [vid="+vid+"]").prev().attr("vid");
 			 if(!vid){
