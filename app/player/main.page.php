@@ -38,12 +38,15 @@ class player_main extends SGui{
 				switch($inPath[3]){
 					case "up":
 							$fileds="MvUpTimes";
+							$actiontype = 0;
 						break;
 					case "down":
 							$fileds="MvDownTimes";
+							$actiontype = 1;
 						break;
 					case "skip":
 							$fileds="MvSkipTimes";
+							$actiontype = 2;
 						break;
 					default:
 							return $result;
@@ -55,11 +58,7 @@ class player_main extends SGui{
 				}
 				if(($User=user_api::islogin())!==false){
 						$user_db = new user_db;
-						if($inPath[3]=="down" || $inPath[3]=="up"){
-								$result->record=$user_db->addUpDown(array("UserID"=>$User['UserID'],"MvID"=>$inPath[4],"UpDown"=>$inPath[3]));
-						}elseif($inPath[3]=="skip"){
-								$result->record=$user_db->addSkip(array("UserID"=>$User['UserID'],"MvID"=>$inPath[4]));
-						}
+						$result->record=$user_db->addAction(array("UserID"=>$User['UserID'],"MvID"=>$inPath[4],"ActionType"=>$actiontype));
 				}
 
 			}

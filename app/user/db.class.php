@@ -27,12 +27,14 @@ class user_db{
 	function addUser($User){
 		return $this->_db->insert("s_user",$User);
 	}
-	/*视频顶踩*/
-	function addUpDown($UpDown){
-		return $this->_db->insert("s_user_updown",$UpDown,true);
-	}
-	function addSkip($Skip){
-		return $this->_db->insert("s_user_skip",$Skip,true);
+	/*视频顶踩
+	--ActionType 
+	--0 喜欢(up)
+	--1 删除(down)
+	--2 跳过(skip)
+	 */
+	function addAction($Action){
+		return $this->_db->insert("s_user_action",$Action,true);
 	}
 	/*增加收听日志*/
 	function addListen($Listen){
