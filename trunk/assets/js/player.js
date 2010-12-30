@@ -22,16 +22,16 @@ var YoukuWs = function(){
 					//}}}
 			YoukuWs.autoLogin();
 			$("#_IDSkip").click(function(){
+					YoukuWs.MvAction("skip",CurrentMvID);
 					//{{{播放模式
 					PlayType=0;
 					YoukuWs.set("PlayType",PlayType);
 					//}}}
 					YoukuWs.playRadio();
-					YoukuWs.MvAction("skip",CurrentMvID);
 			});
 			$("#_IDDown").click(function(){
-					YoukuWs.playRadio();
 					YoukuWs.MvAction("down",CurrentMvID);
+					YoukuWs.playRadio();
 			});
 			$("#_IDUp").click(function(){
 					YoukuWs.MvAction("up",CurrentMvID);
@@ -829,9 +829,9 @@ var CurrentVideoID="";
 //当前听歌的MvID，主要是收音模式用
 var CurrentMvID=0;
 var radioPlayList=[];
-function onPlayerStart(vid,vidEncoded){
+function onPlayerStart(obj){
 		if(YoukuWs.isLogin()){
-				$.ajax({type:"POST",url:"/player.main.addListen",data:{"vid":vid},success:function(msg){
+				$.ajax({type:"POST",url:"/player.main.addListen",data:{"vid":obj.vid},success:function(msg){
 							$("#_CtListen").html(parseInt($("#_CtListen").html())+1);
 						}
 				});
@@ -839,6 +839,7 @@ function onPlayerStart(vid,vidEncoded){
 		//PlayerColor("000000","4F4F4F",25);
 }
 function onPlayerError(vid){
+		alert(vid);
 		if(PlayType!=0){
 		var h = $("#_ContentMusic [vid="+vid+"] A[error!=1]");
 			h.attr("error",1);
@@ -849,7 +850,7 @@ function onPlayerError(vid){
 		}
 		//PlayerColor("000000","4F4F4F",25);
 }
-function onPlayerComplete(vid,vidEncoded,isFullScreen){
+function onPlayerComplete(obj){
 		if(PlayType==0){
 			YoukuWs.playRadio();
 			return;
@@ -887,10 +888,10 @@ function PlayerSeek(s){
 		s = isNaN(parseInt(s))?0:parseInt(s);
 		_player().nsseek(parseInt(s));
 };
-function PlayerPlayPre(vid,vidEncoded,isFullScreen){
+function PlayerPlayPre(obj){
 		YoukuWs.playPre();
 }
-function PlayerPlayNext(vid,vidEncoded,isFullScreen){
+function PlayerPlayNext(obj){
 		if(PlayType==0){
 			YoukuWs.playRadio();
 		}else{
