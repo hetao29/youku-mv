@@ -215,6 +215,12 @@
 								<div style="padding:15px;margin:auto;text-align:center">
 								</div>
 						</div>
+						<div id="_ContentListen" title="{'听过的歌'|tr}" style="display:none">
+								<ul style="padding:15px;margin:auto;text-align:center">
+									<li>歌　Vyp</li>
+									<li>歌　Vyp</li>
+								</ul>
+						</div>
 				</div>
 		</body>
 </html>
