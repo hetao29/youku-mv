@@ -82,7 +82,7 @@
 											<div style="padding:10px"><b>接着播放：</b><span id="_IDNextVideoTitle"></span>
 												<div><img id="_IDNextVideoPic" /></div>
 											</div>
-											<div><button id="_IDSkip">跳过</button><button id="_IDUp">顶</button><button id="_IDDown">踩</button></div>
+											<div><button id="_IDSkip">跳过</button><button id="_IDUp">顶</button><button id="_IDDown">删</button></div>
 											<div style="padding-top:10px"><span id="_IDLogin2"><a>登录</a></span>后，能记住你所喜好</div>
 										</div>
 										<div class="list" id="_IDLocalList" style="display:none">

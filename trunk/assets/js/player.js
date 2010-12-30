@@ -30,6 +30,7 @@ var YoukuWs = function(){
 					YoukuWs.MvAction("skip",CurrentMvID);
 			});
 			$("#_IDDown").click(function(){
+					YoukuWs.playRadio();
 					YoukuWs.MvAction("down",CurrentMvID);
 			});
 			$("#_IDUp").click(function(){

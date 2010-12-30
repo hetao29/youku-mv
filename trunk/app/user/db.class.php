@@ -27,9 +27,12 @@ class user_db{
 	function addUser($User){
 		return $this->_db->insert("s_user",$User);
 	}
-	/*增加收藏喜欢*/
-	function addFav($Fav){
-		return $this->_db->insert("s_user_fav",$Fav,true);
+	/*视频顶踩*/
+	function addUpDown($UpDown){
+		return $this->_db->insert("s_user_updown",$UpDown,true);
+	}
+	function addSkip($Skip){
+		return $this->_db->insert("s_user_skip",$Skip,true);
 	}
 	/*增加收听日志*/
 	function addListen($Listen){
