@@ -109,15 +109,19 @@ KEY (`UserID`),
 KEY (`LyricsStatus`)
 
 )ENGINE=MyISAM DEFAULT CHARSET=utf8;
-
+--用户行为表
+--ActionType 
+--0 喜欢(up)
+--1 删除(down)
+--2 跳过(skip)
 --用户顶,踩的歌,一个视频可以顶,也可以踩,踩过的视频不再给用户播放
-create table s_user_updown(
+create table s_user_action(
 UserID int not null default 0,
 MvID int not null default 0,
-UpDown enum('up','down') not null default 'up',
-UpDownTime timestamp,
-UNIQUE KEY `UpDown` (`UserID`,MvID,UpDown),
-KEY `UpDownTime` (`UpDownTime`)
+ActionType int not null default 0,
+ActionTime timestamp,
+UNIQUE KEY `Action` (`UserID`,MvID,ActionType),
+KEY `ActionTime` (`ActionTime`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 --跳过的视频,跳过的视频表示用户不喜欢,也不给用户推荐
 create table s_user_skip(
