@@ -27,7 +27,7 @@ UserStatus tinyint not null default 1 COMMENT '1正常',
 PRIMARY KEY (`UserID`),
 UNIQUE KEY `UserEmail` (`UserEmail`,`ParterID`),
 KEY `UserStatus` (`UserStatus`)
-)ENGINE=MyISAM DEFAULT CHARSET=utf8;
+)ENGINE=MyISAM AUTO_INCREMENT=10000 DEFAULT CHARSET=utf8;
 INSERT into s_user(UserID,UserAlias,UserEmail,UserPassword) values(1,'hetal','hetao@hetao.name','huoqiabc');
 create table s_user_token(
 	UserID int(10) unsigned NOT NULL default 0,
