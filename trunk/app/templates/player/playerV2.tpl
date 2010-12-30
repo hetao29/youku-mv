@@ -98,24 +98,26 @@
 												</div>
 												<div id="action">
 														<div>
-																<div id="PlayModeSet" style="display:none">
-																		<input type="radio" disabled id="set0" name="set" value="0"/>
-																		<label style="width:95px;" for="set0">{'播放设置'|tr}</label>
+																<div id="PlayModeSet" style="">
 																		<input type="radio" id="set1" name="set" value="1"/>
-																		<label style="width:95px;" for="set1">{'单曲循环'|tr}</label>
+																		<label style="width:95px;" for="set1">{'单曲'|tr}</label>
 																		<input type="radio" id="set2" name="set" value="2" checked/>
-																		<label style="width:95px;" for="set2">{'循环播放'|tr}</label>
+																		<label style="width:95px;" for="set2">{'循环'|tr}</label>
 																		<input type="radio" id="set3" name="set" value="3"/>
-																		<label style="width:95px;" for="set3">{'随机播放'|tr}</label>
+																		<label style="width:95px;" for="set3">{'随机'|tr}</label>
 																</div>
 														</div>
 														<div>
-																<button style="width:100px;" id="_BtAddMv">增加歌曲</button>
-																<button style="width:100px;" id="_BtTrash">回收站</button>
-																<button style="width:100px;" id="_BtSaveList">保存歌曲</button>
-																<button style="width:100px;" id="_BtClearList">清空列表</button>
+																<button id="_BtAddMv">增加</button>
+																<button id="_BtTrash">删除</button>
+																<button id="_BtSaveList">保存</button>
+																<button id="_BtClearList">清空</button>
 																<!--<button style="width:100px;" id="_BtOpenList">打开歌单</button>-->
 																<!--<button style="width:110px;" id="_BtAddList">增加歌单</button>-->
+														</div>
+														<div>
+																<button id="_BtPre">上一首</button>
+																<button id="_BtNext">下一首</button>
 														</div>
 												</div>
 
@@ -209,6 +211,11 @@
 								<div style="padding:15px;margin:auto;padding-left:45px;">
 										作者:Hetal 2010-12-15<br/>
 										版本所有(beta 0.1),山寨必究
+								</div>
+						</div>
+						<div id="_ContentClearList" title="{'删除确认'|tr}" style="display:none">
+								<div style="padding:15px;margin:auto;padding-left:45px;">
+								您确定要清空吗?
 								</div>
 						</div>
 						<div id="_ContentLyricsView" title="{'查看歌词'|tr}" style="display:none">
