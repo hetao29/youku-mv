@@ -41,14 +41,17 @@
 				<script src="http://connect.facebook.net/en_US/all.js"></script>
 				<script>
 						window.fbAsyncInit = function() {
-						FB.init({
-						appId  : '173211992709193',
-						status : false, // check login status
-						cookie : true, // enable cookies to allow the server to access the session
-						xfbml  : true  // parse XFBML
-						});
-						//FB.Canvas.setAutoResize();
-						FB.Canvas.setSize({ height: 550 });
+							FB.init({
+								appId  : '173211992709193',
+								status : false, // check login status
+								cookie : true, // enable cookies to allow the server to access the session
+								xfbml  : true  // parse XFBML
+							});
+							FB.Canvas.setSize({ height: 540 });
+							window.setTimeout(function() {
+									//FB.Canvas.setAutoResize();
+									FB.Canvas.setSize({ height: 540 });
+								},250);
 						}
 						//$(function() {
 						//						$( "#tabs" ).tabs();
@@ -93,7 +96,7 @@
 														</form>
 												</div>
 												<div id="_Content" style="position:relative;">
-														<ul id="_ContentMusic" style="display:block;height:280px;overflow:hidden;overflow-y:auto;">
+														<ul id="_ContentMusic" style="display:block;height:230px;overflow:hidden;overflow-y:auto;">
 														</ul>
 												</div>
 												<div id="action">
