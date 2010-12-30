@@ -36,6 +36,11 @@ class user_db{
 	function addAction($Action){
 		return $this->_db->insert("s_user_action",$Action,true);
 	}
+	function getAction($UserID){
+		return $this->_db->select("s_user_action",array("UserID"=>$UserID),array("ActionType","count(*) ct"),$groupBy="group by ActionType");
+	}
+	function listAction($UserID,$ActionType){
+	}
 	/*增加收听日志*/
 	function addListen($Listen){
 		return $this->_db->insert("s_user_listen",$Listen,false,false,array("ListenTotal=ListenTotal+1","ListenTime=CURRENT_TIMESTAMP"));

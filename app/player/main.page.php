@@ -20,9 +20,21 @@ class player_main extends SGui{
 		echo $this->render("player/playerV2.tpl",$param);
 	}
 	function pageHeader($inPath){
+
 			$param = array();
-			if(!empty($_SESSION['user'])){
-					$param['user'] = $_SESSION['user'];
+			if(($User=user_api::islogin())!==false){
+					$db = new user_db;
+					$action = $db->getAction($User['UserID']);
+					$param['user'] = $User;
+					$act = array();
+					if(!empty($action->items)){
+							foreach($action->items as $item){
+									$k=$item['ActionType'];
+									$v=$item['ct'];
+									$act[$k]=$v;
+							}
+					}
+					$param['act'] = $act;
 			}
 		echo $this->render("player/headerV2.tpl",$param);
 	}
