@@ -22,9 +22,24 @@ var YoukuWs = function(){
 					//}}}
 			YoukuWs.autoLogin();
 			$("#_IDSkip").click(function(){
+					//{{{播放模式
+					PlayType=0;
+					YoukuWs.set("PlayType",PlayType);
+					//}}}
 					YoukuWs.playRadio();
+					YoukuWs.MvAction("skip",CurrentMvID);
+			});
+			$("#_IDDown").click(function(){
+					YoukuWs.MvAction("down",CurrentMvID);
+			});
+			$("#_IDUp").click(function(){
+					YoukuWs.MvAction("up",CurrentMvID);
 			});
 			$("#_ContentMusic >li,#_ContentSearch >li").live('click',function(){
+					//{{{播放模式
+					PlayType=1;
+					YoukuWs.set("PlayType",PlayType);
+					//}}}
 					var vid = $(this).attr('vid');
 					YoukuWs.play(vid);
 					return false;
@@ -229,10 +244,10 @@ var YoukuWs = function(){
 					$("#_IDNav >li").each(function(i,item){
 							if($(_this).html()==$(item).html()){
 								$(item).css("background-color","");
-								if(i<=1){
-									PlayType=i;
-									YoukuWs.set("PlayType",i);
-								}
+								//if(i<=1){
+								//	PlayType=i;
+								//	YoukuWs.set("PlayType",i);
+								//}
 								$(".list").eq(i).show();
 							}else{
 								$(item).css("background-color","#ddd");
@@ -415,6 +430,11 @@ var YoukuWs = function(){
 			showLyric("");
 			vid = vid?vid:"XMjI4MTczMDIw";
 			pre=PlayType==0?0:1;
+			if(PlayType==0){
+					$("#_IDSkip").button({label:"跳过"});
+			}else{
+					$("#_IDSkip").button({label:"播放"});
+			}
 			next=1;
 			CurrentVideoID=vid;
 			YoukuWs.set("vid",CurrentVideoID);
@@ -454,7 +474,7 @@ var YoukuWs = function(){
 
 			});
 			swfobject.embedSWF("http://static.youku.com/v1.0.0133/v/swf/qplayer.swf", playerId, "100%", "100%", "9.0.0", "expressInstall.swf",
-				{isAutoPlay:true,VideoIDS:vid,winType:"interior","show_pre":pre,"show_next":next},
+				{isAutoPlay:false,VideoIDS:vid,winType:"interior","show_pre":pre,"show_next":next},
 				{allowFullScreen:true,allowscriptaccess:"always","wmode":"transparent"},{},function(){
 					var t = 0;
 					var o = $("#_ContentMusic [vid="+vid+"]");
@@ -546,6 +566,14 @@ var YoukuWs = function(){
 			 var t = t.replace(/<[^>]+>/g,"");
 			 if(t)document.title=t;
 		},
+		MvAction:function(type,mvid){
+			$.ajax({
+				url: "/player.main.mvaction/"+type+"."+mvid,
+				success: function( result) {
+				}
+
+			});
+	 	},
 		get:function(k,defaultValue){
 			//TODO userData for IE
 			if('localStorage' in window && window['localStorage'] !== null){
