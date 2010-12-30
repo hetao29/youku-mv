@@ -258,7 +258,10 @@ var YoukuWs = function(){
 								//应该保存数据
 						}
 					});
-			$("#_BtTrash").button({ icons: { primary: "ui-icon-trash" }}).droppable({
+			//$("#_BtTrash").button({ icons: { primary: "ui-icon-trash" }}).droppable({
+			$("#_BtPre").click(function(){YoukuWs.playPre();});
+			$("#_BtNext").click(function(){YoukuWs.playNext();});
+			$("#_BtTrash").button().droppable({
 					activeClass: "ui-state-highlight",
 					hoverClass: "ui-state-error",
 					accept:"#_ContentMusic >li,#_ContentList >li",
@@ -267,7 +270,13 @@ var YoukuWs = function(){
 							YoukuWsPlaylist.del(ui.draggable.attr("vid"));
 							setTimeout(function() { ui.draggable.remove(); }, 1);//fro ie patch
 					}
-				});
+			}).click(function(){
+					var li=$("#_ContentMusic >li[class*=current]");
+					if(li.html()==null)return;
+					YoukuWs.playNext();
+					YoukuWsPlaylist.del(li.attr("vid"));
+					setTimeout(function() { li.remove(); }, 1);//fro ie patch
+			});
 			$("#PlayModeSet [name=set]").click(function(){
 				YoukuWs.set("PlayModeSet",$("#PlayModeSet [name=set]:checked").val());
 			});
@@ -279,8 +288,27 @@ var YoukuWs = function(){
 			$("#_BtPlayModeSet").button("option","disabled",true).show();
 			$("button").button().show();
 
-			$("#_BtClearList").button({ icons: { primary: "ui-icon-plusthick" } }).click(function(){
-							});
+			//$("#_BtClearList").button({ icons: { primary: "ui-icon-plusthick" } }).click(function(){ });
+			$("#_BtClearList").button().click(function(){
+				$("#_ContentClearList").dialog({
+					modal: true, width:320,height:240, buttons: [
+						{
+							text:_LabelOk,
+							click: function() {
+								YoukuWsPlaylist.empty();
+								$("#_ContentMusic").html("");
+								$( this ).dialog( "close" );
+							}
+						},
+						{
+							text:_LabelCancel,
+							click: function() {
+								$( this ).dialog( "close" );
+							}
+						}
+					]
+				});
+			});
 			//{{{
 			PlayType = YoukuWs.get("PlayType",0);
 			$(".list").each(function(i,item){
@@ -309,8 +337,10 @@ var YoukuWs = function(){
 					});
 				});
 			//}}}
-			$("#_BtAddList").button({ icons: { primary: "ui-icon-plusthick" } });
-			$("#_BtAddMv").button({ icons: { primary: "ui-icon-plusthick" } }).click(function(){
+			//$("#_BtAddList").button({ icons: { primary: "ui-icon-plusthick" } });
+			$("#_BtAddList").button();
+			//$("#_BtAddMv").button({ icons: { primary: "ui-icon-plusthick" } }).click(function(){
+			$("#_BtAddMv").button().click(function(){
 				$( "#_DialogAdd" ).dialog({
 					width:500,height:280, buttons: {
 							"增加": function() {
@@ -339,14 +369,16 @@ var YoukuWs = function(){
 					}
 				});
 			}).show();
-			$("#_BtSaveList").button({icons:{primary:"ui-icon-disk"}}).click(function(){
+			//$("#_BtSaveList").button({icons:{primary:"ui-icon-disk"}}).click(function(){
+			$("#_BtSaveList").button().click(function(){
 					if(YoukuWs.isLogin()){
 						alert("Y");
 					}else{
 						YoukuWs.login(function(){$("#_BtSaveList").trigger("click");});
 					}
 			}).show();
-			$("#_BtOpenList").button({ icons: { primary: "ui-icon-folder-open" } }).click(function(){
+			//$("#_BtOpenList").button({ icons: { primary: "ui-icon-folder-open" } }).click(function(){
+			$("#_BtOpenList").button().click(function(){
 					if(YoukuWs.isLogin()){
 						//显示列表
 						$("#_ContentList").dialog({
