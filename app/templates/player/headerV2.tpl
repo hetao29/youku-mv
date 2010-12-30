@@ -8,7 +8,7 @@
 	<li><a id="_IDLogout">{'退出'|tr}</a></li>
 	<li><a>{"欢迎"|tr} {$user.UserAlias}</a></li>
 	<li><a>歌单(32)</a></li>
-	<li><a>听过(<span id="_CtListen">32</span>)</a></li>
+	<li><a>听过(<span id="_CtListen">{$_CtListen}</span>)</a></li>
 	<li><a>顶(<span id="_CtUp">{$act[0]}</span>)</a></li>
 	<li><a>删(<span id="_CtDown">{$act[1]}</span>)</a></li>
 	<li><a>跳过(<span id="_CtSkip">{$act[2]}</span>)</a></li>
