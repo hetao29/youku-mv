@@ -26,6 +26,15 @@ class player_main extends SGui{
 			}
 		echo $this->render("player/headerV2.tpl",$param);
 	}
+	/**
+	 * 跳过视频,顶视频,踩视频
+	 * 如果登录,记住用户跳过的记录,如果没有登录,只是更新s_mv
+	 * @param $type=$inPath[3] skip|up|down
+	 * @param $mvid=$inPath[4] 
+	 */
+	function pageMvAction($inPath){
+			print_r($inPath);
+	}
 	function pageRadio($inPath){
 			//$result = new stdclass;
 			$db = new player_db;
