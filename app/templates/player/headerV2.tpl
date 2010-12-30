@@ -7,7 +7,11 @@
 	{else}
 	<li><a id="_IDLogout">{'退出'|tr}</a></li>
 	<li><a>{"欢迎"|tr} {$user.UserAlias}</a></li>
-	<li><a>听过的歌</a></li>
+	<li><a>歌单(32)</a></li>
+	<li><a>听过(32)</a></li>
+	<li><a>顶(3)</a></li>
+	<li><a>删(3)</a></li>
+	<li><a>跳过(3)</a></li>
 	{/if}
 </ul>
 <div class="clear"></div>

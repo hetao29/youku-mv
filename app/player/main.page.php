@@ -33,7 +33,37 @@ class player_main extends SGui{
 	 * @param $mvid=$inPath[4] 
 	 */
 	function pageMvAction($inPath){
-			print_r($inPath);
+			$result=new stdclass;
+			if(!empty($inPath[3]) && !empty($inPath[4])){
+				switch($inPath[3]){
+					case "up":
+							$fileds="MvUpTimes";
+						break;
+					case "down":
+							$fileds="MvDownTimes";
+						break;
+					case "skip":
+							$fileds="MvSkipTimes";
+						break;
+					default:
+							return $result;
+				}
+				$db = new player_db;
+				$result->type=$inPath[3];
+				if(!empty($fileds)){
+					$result->result= $db->updateMv($inPath[4],array("$fileds=$fileds+1"));
+				}
+				if(($User=user_api::islogin())!==false){
+						$user_db = new user_db;
+						if($inPath[3]=="down" || $inPath[3]=="up"){
+								$result->record=$user_db->addUpDown(array("UserID"=>$User['UserID'],"MvID"=>$inPath[4],"UpDown"=>$inPath[3]));
+						}elseif($inPath[3]=="skip"){
+								$result->record=$user_db->addSkip(array("UserID"=>$User['UserID'],"MvID"=>$inPath[4]));
+						}
+				}
+
+			}
+			return $result;
 	}
 	function pageRadio($inPath){
 			//$result = new stdclass;

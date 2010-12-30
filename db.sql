@@ -49,7 +49,7 @@ MvTag varchar(200) COMMENT 'MTV标签,多个用,分开',
 MvName varchar(200) COMMENT '视频的真实名字,用户不可修改',
 MvAlias varchar(200) COMMENT 'MV的名字，编辑后的，默认和MvName一样',
 MvPic varchar(200),
-MvPassTimes int(10) unsigned NOT NULL default 0,
+MvSkipTimes int(10) unsigned NOT NULL default 0,
 MvUpTimes int(10) unsigned NOT NULL default 0,
 MvDownTimes int(10) unsigned NOT NULL default 0,
 CategoryID int(10) unsigned NOT NULL default 0,
@@ -110,13 +110,22 @@ KEY (`LyricsStatus`)
 
 )ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
---用户喜欢的歌
-create table s_user_fav(
+--用户顶,踩的歌,一个视频可以顶,也可以踩,踩过的视频不再给用户播放
+create table s_user_updown(
 UserID int not null default 0,
 MvID int not null default 0,
-FavTime	timestamp,
-UNIQUE KEY `FavID` (`UserID`,MvID),
-KEY `FavTime` (`FavTime`)
+UpDown enum('up','down') not null default 'up',
+UpDownTime timestamp,
+UNIQUE KEY `UpDown` (`UserID`,MvID,UpDown),
+KEY `UpDownTime` (`UpDownTime`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+--跳过的视频,跳过的视频表示用户不喜欢,也不给用户推荐
+create table s_user_skip(
+UserID int not null default 0,
+MvID int not null default 0,
+SkipTime timestamp,
+UNIQUE KEY `Skip` (`UserID`,MvID),
+KEY `SkipTime` (`SkipTime`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 --用户听过的歌
