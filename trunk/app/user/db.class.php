@@ -39,11 +39,30 @@ class user_db{
 	function getAction($UserID){
 		return $this->_db->select("s_user_action",array("UserID"=>$UserID),array("ActionType","count(*) ct"),$groupBy="group by ActionType");
 	}
-	function listAction($UserID,$ActionType){
+	function listAction($UserID,$ActionType,$page,$pageSize=10){
+		$this->_db->setLimit($pageSize);
+		$this->_db->setPage($page);
+		return $this->_db->select(
+				array("s_user_action","s_mv"),
+				array("s_user_action.UserID"=>$UserID,"s_user_action.MvID=s_mv.MvID","s_user_action.ActionType"=>$ActionType),
+				array("s_user_action.MvID","MvName","MvVideoID","MvSeconds","ActionTime"),
+				"ORDER BY ActionTime DESC"
+		);
 	}
 	/*增加收听日志*/
 	function addListen($Listen){
 		return $this->_db->insert("s_user_listen",$Listen,false,false,array("ListenTotal=ListenTotal+1","ListenTime=CURRENT_TIMESTAMP"));
+	}
+	/*收听日志*/
+	function ListListen($UserID,$page,$pageSize=10){
+		$this->_db->setLimit($pageSize);
+		$this->_db->setPage($page);
+		return $this->_db->select(
+				array("s_user_listen","s_mv"),
+				array("s_user_listen.UserID"=>$UserID,"s_user_listen.MvID=s_mv.MvID"),
+				array("s_user_listen.MvID","MvName","MvVideoID","MvSeconds","ListenTime"),
+				"ORDER BY ListenTime DESC"
+		);
 	}
 	function getListenCount($UserID){
 		$row = $this->_db->selectOne("s_user_listen",array("UserID"=>$UserID),array("count(*) ct"));

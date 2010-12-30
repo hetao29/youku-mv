@@ -152,8 +152,6 @@ class player_main extends SGui{
 	/**
 	 * 列出所有列表
 	 */
-	function pageListList($inPath){
-	}
 	function pageSaveOffset($inPath){
 			$MvID= $_REQUEST['MvID'];
 			$offset = $_REQUEST['offset'];
@@ -180,6 +178,30 @@ class player_main extends SGui{
 			}
 			$db->updateLyrics($MvID,array("LyricsStatus"=>-2));
 			return true;
+	}
+	function pageListAction($inPath){
+			if(($User=user_api::islogin())!==false){
+					$action =!empty($inPath[3])?$inPath[3]:0;
+					$page =!empty($inPath[4])?$inPath[4]:1;
+					switch($action){
+							case "up":	$actiontype=0;	break;
+							case "down":$actiontype=1;	break;
+							case "skip":$actiontype=2;	break;
+					}
+					$db = new user_db;
+					return $db->listAction($User['UserID'],$actiontype,$page);
+			}
+	}
+	/**
+	 * 获取已经播放历史
+	 * @param $page $inPath[3]
+	 **/
+	function pageListListen($inPath){
+			if(($User=user_api::islogin())!==false){
+					$page =!empty($inPath[3])?$inPath[3]:1;
+					$db = new user_db;
+					return $db->ListListen($User['UserID'],$page);
+			}
 	}
 	function pageAddListen($inPath){
 			if(($User=user_api::islogin())!==false){

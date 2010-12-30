@@ -36,6 +36,58 @@ var YoukuWs = function(){
 			$("#_IDUp").click(function(){
 					YoukuWs.MvAction("up",CurrentMvID);
 			});
+			$("#_LiUp").live('click',function(){
+				$("#_ContentListen").dialog({
+					width:400,height:300, buttons: [
+					{
+						text:_LabelOk,
+						click: function() {
+							$("#_ContentListen").dialog("close");
+						}
+					}
+					]
+				});
+				YoukuWs.listAction("up",1);
+			});
+			$("#_LiSkip").live('click',function(){
+				$("#_ContentListen").dialog({
+					width:400,height:300, buttons: [
+					{
+						text:_LabelOk,
+						click: function() {
+							$("#_ContentListen").dialog("close");
+						}
+					}
+					]
+				});
+				YoukuWs.listAction("skip",1);
+			});
+			$("#_LiDown").live('click',function(){
+				$("#_ContentListen").dialog({
+					width:400,height:300, buttons: [
+					{
+						text:_LabelOk,
+						click: function() {
+							$("#_ContentListen").dialog("close");
+						}
+					}
+					]
+				});
+				YoukuWs.listAction("down",1);
+			});
+			$("#_LiListen").live('click',function(){
+				$("#_ContentListen").dialog({
+					width:400,height:300, buttons: [
+					{
+						text:_LabelOk,
+						click: function() {
+							$("#_ContentListen").dialog("close");
+						}
+					}
+					]
+				});
+				YoukuWs.listListen(1);
+			});
 			$("#_ContentMusic >li,#_ContentSearch >li").live('click',function(){
 					//{{{播放模式
 					PlayType=1;
@@ -662,6 +714,38 @@ var YoukuWs = function(){
 					}
 				},"json");
 			}
+		},
+		listListen:function(page){
+				$("#_ContentListen >ul" ).html('<li><img style="vertical-align: middle;" src="/assets/images/loading/loading9.gif" /> 正在加载中...</li>');
+				$.ajax({
+					url: "/player.main.listListen."+page,
+					dataType:"json",
+					success: function( result) {
+						$("#_ContentListen >ul" ).html('');
+						for(var i=0;i<result.items.length;i++){
+							$("#_ContentListen >ul").append("<li>"+result.items[i].MvName+"</li>");
+						}
+						var pager="<li><a onclick='YoukuWs.listListen(2)'>2</a></li>";
+						$("#_ContentListen >ul").append(pager);
+					}
+
+				});
+		},
+		listAction:function(action,page){
+				$("#_ContentListen >ul" ).html('<li><img style="vertical-align: middle;" src="/assets/images/loading/loading9.gif" /> 正在加载中...</li>');
+				$.ajax({
+					url: "/player.main.listAction."+action+"."+page,
+					dataType:"json",
+					success: function( result) {
+						$("#_ContentListen >ul" ).html('');
+						for(var i=0;i<result.items.length;i++){
+							$("#_ContentListen >ul").append("<li>"+result.items[i].MvName+"</li>");
+						}
+						var pager="";
+						$("#_ContentListen >ul").append(pager);
+					}
+
+				});
 		}
 	}
 }();
