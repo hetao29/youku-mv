@@ -10,6 +10,7 @@ class player_css extends SGui{
 			header("Pragma: public");
 			header("Cache-Control: maxage=".$expires);
 			header('Expires: ' . gmdate('D, d M Y H:i:s', time()+$expires) . ' GMT');
-			return file_get_contents(WWW_ROOT."/"."assets/css/styleV2.css");
+			echo file_get_contents(WWW_ROOT."/"."assets/css/styleV2.css");
+			return file_get_contents(WWW_ROOT."/"."assets/css/jquery-ui-1.8.6.custom-smoothness.css");
 	}
 }

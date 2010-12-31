@@ -10,11 +10,11 @@
 				<script type="text/javascript" src="/assets/js/swfobject/swfobject.js"></script>
 				<script type="text/javascript" src="/assets/js/json2.js"></script>
 				<script type="text/javascript" src="/assets/js/player.js"></script>
+				<link href="/assets/css/jquery-ui-1.8.6.custom-smoothness.css" media="all" rel="stylesheet" type="text/css" />
 				*}
 
 				<link href="/player.css" media="all" rel="stylesheet" type="text/css" />
 				<link rel="Shortcut Icon" href="/assets/images/ico/favicon_32x32.ico" />
-				<link href="/assets/css/jquery-ui-1.8.6.custom-smoothness.css" media="all" rel="stylesheet" type="text/css" />
 <script type="text/javascript" src="/player.js"></script>
 				{literal}
 				<script type="text/javascript">
