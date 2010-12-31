@@ -1,9 +1,10 @@
 <?php
 require_once("slightphp/SlightPHP.php");
+define("DEV","true");
 define("PLUGINS_DIR","slightphp/plugins");
 define("WWW_ROOT",dirname(__FILE__));
 /*echo error info*/
-SlightPHP::setDebug(true);
+//SlightPHP::setDebug(true);
 
 SlightPHP::setAppDir(dirname(__FILE__)."/app");
 SlightPHP::setDefaultZone("player");
