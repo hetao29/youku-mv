@@ -68,10 +68,13 @@ Key (`CategoryID`)
 )ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 --播放列表
+drop table s_list;
 create table s_list(
 ListID int(10) unsigned NOT NULL AUTO_INCREMENT,
-UserID int(10) unsigned NOT NULL,
+UserID int(10) unsigned NOT NULL default 0 COMMENT '0表示系统用户',
 ListName varchar(200),
+ListType tinyint unsigned NOT NULL default 0 COMMENT '列表类型,0表示用户自已建立的,1表示频道',
+ListCount int unsigned NOT NULL default 0 COMMENT '总数',
 ListOrder int unsigned not null default 0,
 ListStatus tinyint not null default 1,
 ListCreateTime datetime,
@@ -80,6 +83,7 @@ ListUpdateTime timestamp,
 PRIMARY KEY (`ListID`),
 Key (`ListName`),
 Key (`UserID`),
+Key (`ListType`),
 Key (`ListUpdateTime`),
 Key (`ListCreateTime`)
 
