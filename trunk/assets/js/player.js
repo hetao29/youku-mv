@@ -333,36 +333,27 @@ var YoukuWs = function(){
 					$("#_IDNav >li").each(function(i,item){
 							if($(_this).html()==$(item).html()){
 								$(item).css("background-color","");
-								//if(i<=1){
-								//	PlayType=i;
-								//	YoukuWs.set("PlayType",i);
-								//}
 								$(".list").eq(i).show();
-								if(i==1 && PlayType==1){//非收听模式
-									var t = 0;
-									var o = $("#_ContentMusic [vid="+CurrentVideoID+"]");
-									if(!o || !o.position())return;
-									t = o.position().top+o.outerHeight()-o.parent().height();
-									if(t>0){
-										t = o.parent().scrollTop() + o.position().top+o.height()-o.parent().height(); //432
-										//o.parent().animate({scrollTop:t+"px"},"slow","linear",function(){});
-										o.parent().scrollTop(t);//+"px"},"slow","linear",function(){});
-									}else if( t<0-(o.parent().height()-o.outerHeight())){
-										t = (o.parent().scrollTop()+o.position().top);
-										//o.parent().animate({scrollTop:t+"px"},"slow","linear",function(){});
-										o.parent().scrollTop(t);//+"px"},"slow","linear",function(){});
-									}
+
+								//{{{ restore scrollTop
+								if(window._ContentMusicTop>0){
+									$("#_ContentMusic").scrollTop(window._ContentMusicTop);
 								}
+								//}}}
 							}else{
+								//{{{ save scrollTop
+								window._ContentMusicTop=window._ContentMusicTop?window._ContentMusicTop:0;
+								if(i!=1 && $("#_ContentMusic").scrollTop()>0){
+									window._ContentMusicTop = $("#_ContentMusic").scrollTop();
+								}
+								//}}}
 								$(item).css("background-color","#ddd");
 								$(".list").eq(i).hide();
 							}
 					});
 				});
 			//}}}
-			//$("#_BtAddList").button({ icons: { primary: "ui-icon-plusthick" } });
 			$("#_BtAddList").button();
-			//$("#_BtAddMv").button({ icons: { primary: "ui-icon-plusthick" } }).click(function(){
 			$("#_BtAddMv").button().click(function(){
 				$( "#_DialogAdd" ).dialog({
 					width:500,height:280, buttons: {
