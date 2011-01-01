@@ -16,10 +16,11 @@ class player_api{
 						$Mv['MvSeconds'] = $video->seconds;
 						$Mv['MvVideoID'] = $video->vid;
 						$Mv['MvPic'] = $video->pic;
+						$Mv['MvPubDate'] = $video->pubDate;
 					}
 					$Mv['UserID'] = 1;//我自己,TODO
 					$db= new player_db;
-					$db->addMv($Mv);
+					$Mv['MvID']=$db->addMv($Mv);
 				}
 				return $Mv;
 		}
@@ -30,6 +31,7 @@ class player_api{
 			if(!empty($r->item->title)){
 				$v->title = $r->item->title;
 				$v->pic = $r->item->imagelink;
+				$v->pubdate= $r->item->pubdate;
 				$v->seconds= $r->item->duration;
 				if(preg_match("/v_show\/id_(.*?)\./",$r->item->playlink,$_m)){
 						$v->vid = $_m[1];
