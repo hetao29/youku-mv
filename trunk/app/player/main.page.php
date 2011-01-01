@@ -309,7 +309,7 @@ class player_main extends SGui{
 					$st = 8;
 			}
 			if(!empty($pid)){
-					$r = SHttp::get("http://api.youku.com/api_ptvideo/st_$st",array("pid"=>"XOA==","rt"=>3,"pz"=>300,"sv"=>$pid));
+					$r = SHttp::get("http://api.youku.com/api_ptvideo/st_$st",array("pid"=>"XOA==","rt"=>3,"pz"=>100,"sv"=>$pid));
 					$r = SJson::decode($r);
 					$db= new player_db;
 					foreach($r->item as $item){
