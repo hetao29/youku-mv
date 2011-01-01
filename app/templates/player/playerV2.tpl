@@ -173,14 +173,28 @@
 
 						<ul id="_ContentSearch" style="display:none">
 						</ul>
-						<ul id="_ContentList" style="display:none;">
-								<li lid="">
-										<div class="left">黄晓明 2</div><div>9首</div>
-								</li>
-								<li lid="">
-										<div>黄晓明 2</div>
-								</li>
-						</ul>
+						<div id="_IDList" title="歌单" style="display:none;">
+							<div><span>请选择歌单或者<b><a id="_AListAdd">新建歌单</a></b></span></div>
+							<div id="_CtListAdd" style="display:none">
+								<form>
+									<div>歌单名：<input type="text" id="_IDListName"/><input id="_IDListAdd" type="button" value="建立"/></div>
+								</form>
+								<hr/>
+							</div>
+							<ul id="_ContentList">
+									<!--<li lid="">
+											<div class="left"><input style="vertical-align:top" type="checkbox"/>黄晓明 2</div>
+											<div class="right hide"><span>加载</span><span>删除</span><span>改名</span></div>
+											<div class="clear"></div>
+									</li>
+									<li lid="">
+											<div class="left"><input style="vertical-align:top" type="checkbox"/>黄晓明吕中口口口口口口口口口口口口口口口口口口口口口：:w 2</div>
+											<div class="right hide"><span>加载</span><span>删除</span><span>改名</span></div>
+											<div class="clear"></div>
+									</li>
+									-->
+							</ul>
+						</div>
 						<div id="_ContentLogin" title="{'登录'|tr}" style="display:none">
 								<form id="_FormLogin" style="padding:10px;margin:auto;">
 										<table width="100%">

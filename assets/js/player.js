@@ -229,6 +229,36 @@ var YoukuWs = function(){
 					}
 
 			});
+			$( "#_ContentList >li .del" ).live("click",function(){
+				_this = this;
+				$("<div>你确定要删除么?</div>" ).dialog({
+					resizable: false,
+					height:140,
+					modal: true,
+					buttons: {
+						"Delete all items": function() {
+							$( this ).dialog( "close" );
+							var lid = $(_this).parents("li").attr("lid");
+							$.ajax({
+								url: "/user.list.del",
+								data: {
+									ListID:lid
+								},
+								dataType:"json",
+								success: function( List) {
+									if(List){
+										YoukuWs.listList();
+									}
+								}
+
+							});
+						},
+						Cancel: function() {
+							$( this ).dialog( "close" );
+						}
+					}
+				});
+			});
 			$( "#_ContentList >li" ).droppable({
 					accept:"#_ContentMusic >li,#_ContentSearch >li",
 					activeClass: "ui-state-highlight",
@@ -239,6 +269,8 @@ var YoukuWs = function(){
 							//TODO移动到另一个列表
 							alert("MV");
 					}
+			}).live("mouseover",function(){$(this).find(".right").show();
+			}).live("mouseout",function(){$(this).find(".right").hide();
 			});
 			$( "#_ContentList" ).sortable({
 						stop:function(event,ui){
@@ -384,9 +416,44 @@ var YoukuWs = function(){
 				});
 			}).show();
 			//$("#_BtSaveList").button({icons:{primary:"ui-icon-disk"}}).click(function(){
+			$("#_AListAdd").click(function(){
+				$("#_CtListAdd").toggle("fast");
+			});
+			$("#_IDListAdd").click(function(){
+				if($("#_IDListName").val()=="")return;
+				$.ajax({
+					url: "/user.list.add",
+					data: {
+						ListName:$("#_IDListName").val()
+					},
+					dataType:"json",
+					success: function( List) {
+						if(List){
+							YoukuWs.listList();
+						}
+					}
+
+				});
+			});
 			$("#_BtSaveList").button().click(function(){
 					if(YoukuWs.isLogin()){
-						alert("Y");
+						$("#_IDList").dialog({
+							width:410,height:280,buttons: [
+								{
+									text:_LabelOk,
+									click: function() {
+									}
+								},
+								{
+									text:_LabelCancel,
+									click: function() {
+										$( this ).dialog( "close" );
+									}
+								}
+							],open:function(event,ui){
+								YoukuWs.listList();
+							}
+						});
 					}else{
 						YoukuWs.login(function(){$("#_BtSaveList").trigger("click");});
 					}
@@ -534,7 +601,7 @@ var YoukuWs = function(){
 
 			});
 			swfobject.embedSWF("http://static.youku.com/v/swf/qplayer.swf", playerId, "100%", "100%", "9.0.0", "expressInstall.swf",
-				{isAutoPlay:true,VideoIDS:vid,winType:"index","show_pre":pre,"show_next":next},
+				{isAutoPlay:false,VideoIDS:vid,winType:"index","show_pre":pre,"show_next":next},
 				{allowFullScreen:true,allowscriptaccess:"always","wmode":"transparent"},{},function(){
 					if(PlayType!=0){//非收听模式
 						var t = 0;
@@ -791,6 +858,25 @@ var YoukuWs = function(){
 						}
 						var pager="";
 						$("#_ContentListen >ul").append(pager);
+					}
+
+				});
+		},listList:function(){
+				$("#_ContentList").html("");
+				$.ajax({
+					url: "/user.list.list",
+					dataType:"json",
+					success: function( result) {
+						if(result && result.items && result.items.length>0){
+							for(var i=0;i<result.items.length;i++){
+								var r='<li lid="'+result.items[i].ListID+'"><div class="left"><input style="vertical-align:top" type="checkbox"/><span class="name">'+result.items[i].ListName+'</span> ('+result.items[i].ListCount+'首)</div><div class="right hide"><span>加载</span> <span class="del">删除</span> <span>改名</span></div><div class="clear"></div></li>';
+								$("#_ContentList").append(r);
+							}
+							$("#_CtListAdd").hide("fast");
+						}else{
+							$("#_CtListAdd").show("fast");
+						}
+
 					}
 
 				});

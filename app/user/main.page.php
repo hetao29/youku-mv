@@ -20,13 +20,19 @@ class user_main{
 			$token = $_REQUEST['token'];
 			$uid = $_REQUEST['uid'];
 			$db = new user_db;
+			$logined = false;
 			$UserToken = $db->getUserToken($uid,$token);
 			if(!empty($UserToken['UserID']) && $UserToken['UserTokenExpiredTime']>time()){
 					$UserID = $UserToken['UserID'];
 					$User = $db->getUserByID($UserID);
-					return user_api::login($User,true);
+					$logined = user_api::login($User,true);
 			}
-			return false;
+			if(!$logined){
+					//自动登录失败，就自动退出
+					user_api::logout();
+					return false;
+			}
+			return true;
 	}
 	///user.main.login
 	function pageLogin($inPath){
