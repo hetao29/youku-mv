@@ -16,7 +16,19 @@ var YoukuWs = function(){
 
 	var order=[];
 	$(document).ready(function(){
-					//{{{
+			var objURL={};
+			window.location.search.replace(
+				new RegExp( "([^?=&]+)(=([^&]*))?", "g" ),
+				function( $0, $1, $2, $3 ){
+				objURL[ $1 ] = $3;
+				}
+			);
+			if(objURL.lid){
+				PlayType=1;
+				YoukuWs.set("PlayType",PlayType);
+				YoukuWs.listContents(objURL.lid);
+			};
+			//{{{
 					$("#_BtMode").click(function(){
 							});
 					//}}}

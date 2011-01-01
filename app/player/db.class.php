@@ -11,6 +11,11 @@ class player_db{
 	function getMvByVid($vid){
 		return $this->_db->selectOne("s_mv",array("MvVideoID"=>$vid));
 	}
+	function getRandMv(){
+		return $this->_db->selectOne(
+					array("s_mv","s_list_content"),
+					array("s_mv.MvID=s_list_content.MvID","s_list_content.ListID"=>1),"","ORDER BY rand()");
+	}
 	function getMv($mvid){
 		return $this->_db->selectOne("s_mv",array("MvID"=>$mvid));
 	}

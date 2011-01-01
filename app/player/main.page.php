@@ -84,15 +84,14 @@ class player_main extends SGui{
 			return $result;
 	}
 	function pageRadio($inPath){
-			//$result = new stdclass;
 			$db = new player_db;
-			$ct = $db->getMvCount();
-			$mvid = $_REQUEST['mvid'];
-			$result=array();
-			$mvid=rand(1,$ct);
-			$result[] = $db->getMv($mvid);
-			$mvid=rand(1,$ct);
-			$result[] = $db->getMv($mvid);
+			//$ct = $db->getMvCount();
+			//$mvid = $_REQUEST['mvid'];
+			//$result=array();
+			//$mvid=rand(1,$ct);
+			$result[] = $db->getRandMv();
+			//$mvid=rand(1,$ct);
+			$result[] = $db->getRandMv();
 			return $result;
 			//电台频道
 			//0表示私有频道，其它表示频道ID，甚至包括电视频道
