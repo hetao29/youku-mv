@@ -299,6 +299,10 @@ var YoukuWs = function(){
 					}
 				});
 			});
+			$( "#_ContentList >li .load" ).live("click",function(){
+				var lid = $(this).parents("li").attr("lid");
+				YoukuWs.listContents(lid);
+			});
 			$( "#_ContentList >li .rename" ).live("click",function(){
 				var lname = $(this).parents("li").find(".name").html();//attr("lid");
 				var lid = $(this).parents("li").attr("lid");
@@ -518,7 +522,7 @@ var YoukuWs = function(){
 													vids.push($(n).attr("vid"));
 											});
 											$.ajax({
-												url: "/user.list.contents",
+												url: "/user.list.addContents",
 												data: {
 													lids:lids,
 													vids:vids
@@ -700,10 +704,10 @@ var YoukuWs = function(){
 				{isAutoPlay:false,VideoIDS:vid,winType:"index","show_pre":pre,"show_next":next},
 				{allowFullScreen:true,allowscriptaccess:"always","wmode":"transparent"},{},function(){
 					if(PlayType!=0){//非收听模式
+					//{{{
 						var t = 0;
 						var o = $("#_ContentMusic [vid="+vid+"]");
 						if(!o || !o.position())return;
-						YoukuWs.setTitle($("#_ContentMusic [vid="+vid+"] A").html());
 						t = o.position().top+o.outerHeight()-o.parent().height();
 						if(t>0){
 							t = o.parent().scrollTop() + o.position().top+o.height()-o.parent().height(); //432
@@ -714,8 +718,10 @@ var YoukuWs = function(){
 							o.parent().animate({scrollTop:t+"px"},"slow","linear",function(){
 							});
 						}
+					//}}}
 						$("#_ContentMusic >li").removeClass("current");
 						o.addClass('current');
+						YoukuWs.setTitle($("#_ContentMusic [vid="+vid+"] A").html());
 					}
 			});
 		},
@@ -965,7 +971,7 @@ var YoukuWs = function(){
 					success: function( result) {
 						if(result && result.items && result.items.length>0){
 							for(var i=0;i<result.items.length;i++){
-								var r='<li lid="'+result.items[i].ListID+'"><div class="left"><input value="'+result.items[i].ListID+'" style="vertical-align:top" type="checkbox"/><span class="name">'+result.items[i].ListName+'</span> ('+result.items[i].ListCount+'首)</div><div class="right hide"><span>加载</span> <span class="empty">清空</span> <span class="del">删除</span> <span class="rename">改名</span></div><div class="clear"></div></li>';
+								var r='<li lid="'+result.items[i].ListID+'"><div class="left"><input value="'+result.items[i].ListID+'" style="vertical-align:top" type="checkbox"/><span class="name">'+result.items[i].ListName+'</span> ('+result.items[i].ListCount+'首)</div><div class="right hide"><span class="load">加载</span> <span class="empty">清空</span> <span class="del">删除</span> <span class="rename">改名</span></div><div class="clear"></div></li>';
 								$("#_ContentList").append(r);
 							}
 							$( "#_ContentList >li" ).droppable({
@@ -987,6 +993,22 @@ var YoukuWs = function(){
 					}
 
 				});
+		},listContents:function(lid){
+				$.ajax({
+					url: "/user.list.listContents",
+					data:{lid:lid},
+					dataType:"json",
+					success: function( result) {
+						if(result && result.items && result.items.length>0){
+							for(var i=0;i<result.items.length;i++){
+								YoukuWsPlaylist.add(result.items[i].MvVideoID,result.items[i].MvName);
+							}
+						}else{
+						}
+
+					}
+
+				});
 		}
 	}
 }();
@@ -995,8 +1017,6 @@ var YoukuWsPlaylist = function(){
 		o.add=function(vid,title,noappend){
 				var all = $.parseJSON(YoukuWs.get("list"))||[];
 				finded = false;
-				//v = vid;
-				//t = title
 				$.each(all,function(i,item){
 						if(item.v == vid){
 								finded = true;
@@ -1011,15 +1031,17 @@ var YoukuWsPlaylist = function(){
 					if(!noappend){
 						var o = '<li vid="'+vid+'"><a>'+title+'</a></li>';
 						$("#_ContentMusic").append(o);
-						//$.ajax({
-						//	url: "/player.main.addmv",
-						//	data: {
-						//		vid:vid
-						//	},
-						//	success: function( result) {
-						//	}
-
-						//});
+						var t = 0;
+						var o = $("#_ContentMusic [vid="+vid+"]");
+						if(!o || !o.position())return;
+						t = o.position().top+o.outerHeight()-o.parent().height();
+						if(t>0){
+							t = o.parent().scrollTop() + o.position().top+o.height()-o.parent().height(); //432
+							o.parent().scrollTop(t);
+						}else if( t<0-(o.parent().height()-o.outerHeight())){
+							t = (o.parent().scrollTop()+o.position().top);
+							o.parent().scrollTop(t);
+						}
 					}
 				}
 				YoukuWs.set("list",JSON.stringify(all));
