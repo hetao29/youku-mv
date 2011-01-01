@@ -197,11 +197,6 @@ class player_main extends SGui{
 					$vid = $_REQUEST['vid'];
 					$api = new player_api;
 					$mv=$api->getMvByVid($vid);
-					//$mv = $player_db->getMvByVid($vid);
-					//if(empty($mv)){
-					//	$tmpmv  = $this->pageAddMv($inPath);
-					//	$mv 	= $player_db->getMvByVid($tmpmv['MvVideoID']);
-					//}
 					return $db->addListen(array("MvID"=>$mv['MvID'],"UserID"=>$User['UserID']));
 			}
 	}
@@ -212,10 +207,6 @@ class player_main extends SGui{
 			$vid = $_REQUEST['vid'];
 			$db = new player_db;
 			$mv  = $db->getMvByVid($vid);
-			if(empty($mv)){
-					$tmpmv  = $this->pageAddMv($inPath);
-					$mv 	= $db->getMvByVid($tmpmv['MvVideoID']);
-			}
 			if(!empty($mv)){
 					$lyric = $db->getLyrics($mv['MvID']);
 					if(empty($lyric) || $lyric['LyricsStatus']==-2)
