@@ -253,6 +253,7 @@ var YoukuWs = function(){
 								},type:"post",
 								dataType:"json",
 								success: function( List) {
+									$('.header').load("/player.main.header");
 									if(List){
 										YoukuWs.listList();
 									}
@@ -492,6 +493,7 @@ var YoukuWs = function(){
 					dataType:"json",
 					success: function( List) {
 						if(List){
+							$('.header').load("/player.main.header");
 							YoukuWs.listList();
 						}
 					}
