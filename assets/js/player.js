@@ -778,6 +778,8 @@ var YoukuWs = function(){
 	},
 		_realPlayRadio:function(){
 			var o= radioPlayList.shift();
+			$("#_IDRadio3").hide();
+			$("#_IDRadio2").show();
 			if(o){
 				//队列里有数据
 				CurrentMvID = o.MvID;
