@@ -1,5 +1,28 @@
 <?php
 class player_api{
+		function getMvByVid($vid){
+				$player_db = new player_db;
+				$Mv = $player_db->getMvByVid($vid);
+				if(empty($Mv)){
+					$Mv = array();
+					$Mv['MvSourceID']=1;
+					switch($Mv['MvSourceID']){
+						case 1:
+							$video = $this->getVideoInfo($vid);
+						break;
+					}
+					if(!empty($video)){
+						$Mv['MvName'] = $Mv['MvAlias']=$video->title;
+						$Mv['MvSeconds'] = $video->seconds;
+						$Mv['MvVideoID'] = $video->vid;
+						$Mv['MvPic'] = $video->pic;
+					}
+					$Mv['UserID'] = 1;//我自己,TODO
+					$db= new player_db;
+					$db->addMv($Mv);
+				}
+				return $Mv;
+		}
 		function getVideoInfo($vid){
 			$r = SHttp::get("http://api.youku.com/api_ptvideoinfo",array("pid"=>"XOA==","rt"=>3,"id"=>$vid));
 			$r = SJson::decode($r);
