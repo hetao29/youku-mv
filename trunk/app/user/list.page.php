@@ -62,7 +62,7 @@ class user_list{
 		}
 		return false;
 	}
-	function pageContents($inPath){
+	function pageAddContents($inPath){
 		if(($User=user_api::islogin())!==false && !empty($_REQUEST['lids']) && !empty($_REQUEST['vids'])){
 				$realLids=array();
 				if(is_numeric($_REQUEST['lids'])){
@@ -100,6 +100,16 @@ class user_list{
 							}
 					}
 					return true;
+				}
+		}
+		return false;
+	}
+	function pageListContents($inPath){
+		if(($User=user_api::islogin())!==false && !empty($_REQUEST['lid'])){
+				$db = new user_db;
+				$List = $db->getList($_REQUEST['lid']);
+				if(!empty($List)){
+						return $db->listContent($List['ListID']);
 				}
 		}
 		return false;

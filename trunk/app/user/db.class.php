@@ -58,6 +58,13 @@ class user_db{
 			$this->_db->update("s_list",array("ListID"=>$ListID),array("ListCount=ListCount+1"));
 		};
 	}
+	function listContent($ListID,$MvID){
+			$this->_db->setLimit(-1);
+			return $this->_db->select(
+					array("s_mv","s_list_content"),
+					array("s_mv.MvID=s_list_content.MvID","s_list_content.ListID"=>$ListID)
+			);
+	}
 	function getListCount($UserID){
 		$row = $this->_db->selectOne("s_list",array("UserID"=>$UserID),array("count(*) ct"));
 		return $row['ct'];
