@@ -49,6 +49,19 @@ class user_db{
 				"ORDER BY ActionTime DESC"
 		);
 	}
+	function addList($List){
+		return $this->_db->insert("s_list",$List);
+	}
+	function delList($ListID){
+		return $this->_db->delete("s_list",array("ListID"=>$ListID));
+		return $this->_db->delete("s_list_content",array("ListID"=>$ListID));
+	}
+	function getList($ListID){
+		return $this->_db->selectOne("s_list",array("ListID"=>$ListID));
+	}
+	function ListList($UserID){
+		return $this->_db->select("s_list",array("UserID"=>$UserID),"*","ORDER BY ListOrder");
+	}
 	/*增加收听日志*/
 	function addListen($Listen){
 		return $this->_db->insert("s_user_listen",$Listen,false,false,array("ListenTotal=ListenTotal+1","ListenTime=CURRENT_TIMESTAMP"));
