@@ -259,17 +259,7 @@ var YoukuWs = function(){
 					}
 				});
 			});
-			$( "#_ContentList >li" ).droppable({
-					accept:"#_ContentMusic >li,#_ContentSearch >li",
-					activeClass: "ui-state-highlight",
-					hoverClass: "ui-state-error",
-					tolerance:"pointer",
-					drop: function( event, ui ) {
-							setTimeout(function() { ui.draggable.remove(); }, 1);//fro ie patch
-							//TODO移动到另一个列表
-							alert("MV");
-					}
-			}).live("mouseover",function(){$(this).find(".right").show();
+			$( "#_ContentList >li" ).live("mouseover",function(){$(this).find(".right").show();
 			}).live("mouseout",function(){$(this).find(".right").hide();
 			});
 			$( "#_ContentList" ).sortable({
@@ -872,6 +862,17 @@ var YoukuWs = function(){
 								var r='<li lid="'+result.items[i].ListID+'"><div class="left"><input style="vertical-align:top" type="checkbox"/><span class="name">'+result.items[i].ListName+'</span> ('+result.items[i].ListCount+'首)</div><div class="right hide"><span>加载</span> <span class="del">删除</span> <span>改名</span></div><div class="clear"></div></li>';
 								$("#_ContentList").append(r);
 							}
+							$( "#_ContentList >li" ).droppable({
+									accept:"#_ContentMusic >li,#_ContentSearch >li",
+									activeClass: "ui-state-highlight",
+									hoverClass: "ui-state-error",
+									tolerance:"pointer",
+									drop: function( event, ui ) {
+											setTimeout(function() { ui.draggable.remove(); }, 1);//fro ie patch
+											//TODO移动到另一个列表
+											alert("MV");
+									}
+							});
 							$("#_CtListAdd").hide("fast");
 						}else{
 							$("#_CtListAdd").show("fast");
