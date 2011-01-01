@@ -236,25 +236,60 @@ var YoukuWs = function(){
 					height:140,
 					modal: true,
 					buttons: {
-						"Delete all items": function() {
-							$( this ).dialog( "close" );
+						"删除": function() {
+							_this2=this;
 							var lid = $(_this).parents("li").attr("lid");
 							$.ajax({
 								url: "/user.list.del",
 								data: {
 									ListID:lid
-								},
+								},type:"post",
 								dataType:"json",
 								success: function( List) {
 									if(List){
 										YoukuWs.listList();
 									}
+									$( _this2 ).dialog( "destroy");
 								}
 
 							});
 						},
 						Cancel: function() {
-							$( this ).dialog( "close" );
+							$( this ).dialog( "destroy");
+						}
+					}
+				});
+			});
+			$( "#_ContentList >li .rename" ).live("click",function(){
+				var lname = $(this).parents("li").find(".name").html();//attr("lid");
+				var lid = $(this).parents("li").attr("lid");
+				var html='<div>新的歌单：<input type="text" value="'+lname+'"/></div>';
+				$(html).dialog({
+					resizable: false,
+					height:140,
+					modal: true,
+					buttons: {
+						"改名": function() {
+							_this=this;
+							if($("#_IDNewName").val()=="")return;
+							$.ajax({
+								url: "/user.list.edit",
+								data: {
+									ListID:lid,
+									ListName:$(_this).find("input").val()
+								},type:"post",
+								dataType:"json",
+								success: function( result) {
+									if(result){
+										YoukuWs.listList();
+									}
+									$( _this ).dialog( "destroy");
+								}
+
+							});
+						},
+						Cancel: function() {
+							$( this ).dialog( "destroy");
 						}
 					}
 				});
@@ -859,7 +894,7 @@ var YoukuWs = function(){
 					success: function( result) {
 						if(result && result.items && result.items.length>0){
 							for(var i=0;i<result.items.length;i++){
-								var r='<li lid="'+result.items[i].ListID+'"><div class="left"><input style="vertical-align:top" type="checkbox"/><span class="name">'+result.items[i].ListName+'</span> ('+result.items[i].ListCount+'首)</div><div class="right hide"><span>加载</span> <span class="del">删除</span> <span>改名</span></div><div class="clear"></div></li>';
+								var r='<li lid="'+result.items[i].ListID+'"><div class="left"><input style="vertical-align:top" type="checkbox"/><span class="name">'+result.items[i].ListName+'</span> ('+result.items[i].ListCount+'首)</div><div class="right hide"><span>加载</span> <span class="del">删除</span> <span class="rename">改名</span></div><div class="clear"></div></li>';
 								$("#_ContentList").append(r);
 							}
 							$( "#_ContentList >li" ).droppable({
