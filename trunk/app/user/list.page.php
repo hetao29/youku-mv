@@ -63,7 +63,7 @@ class user_list{
 		return false;
 	}
 	function pageAddContents($inPath){
-		if(($User=user_api::islogin())!==false && !empty($_REQUEST['lids']) && !empty($_REQUEST['vids'])){
+		if(($User=user_api::islogin())!==false && !empty($_REQUEST['lids']) && !empty($_REQUEST['mvids'])){
 				$realLids=array();
 				if(is_numeric($_REQUEST['lids'])){
 						$realLids[]=$_REQUEST['lids'];
@@ -71,21 +71,21 @@ class user_list{
 						$realLids=$_REQUEST['lids'];
 				}
 
-				$realVids=array();
-				if(is_numeric($_REQUEST['vids'])){
-						$realVids[]=$_REQUEST['vids'];
-				}elseif(is_array($_REQUEST['vids'])){
-						$realVids=$_REQUEST['vids'];
+				$realMvids=array();
+				if(is_numeric($_REQUEST['mvids'])){
+						$realMvids[]=$_REQUEST['mvids'];
+				}elseif(is_array($_REQUEST['mvids'])){
+						$realMvids=$_REQUEST['mvids'];
 				}
 				$api = new player_api;
 				$db = new user_db;
-				$mvs=array();
-				foreach($realVids as $vid){
-					$mv=$api->getMvByVid($vid);
-					if(!empty($mv)){
-						$mvs[]=$mv;
-					}
-				}
+				//$mvs=array();
+				//foreach($realVids as $vid){
+				//	$mv=$api->getMvByVid($vid);
+				//	if(!empty($mv)){
+				//		$mvs[]=$mv;
+				//	}
+				//}
 				$lists=array();
 				foreach($realLids as $lid){
 					$list=$db->getList($lid);
@@ -93,10 +93,10 @@ class user_list{
 						$lists[]=$list;
 					}
 				}
-				if(!empty($lists) && !empty($mvs)){
+				if(!empty($lists) && !empty($realMvids)){
 					foreach($lists as $list){
-							foreach($mvs as $mv){
-									$db->addListContent($list["ListID"],$mv['MvID']);
+							foreach($realMvids as $mvid){
+									$db->addListContent($list["ListID"],$mvid);
 							}
 					}
 					return true;

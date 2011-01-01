@@ -173,7 +173,8 @@
 
 						<ul id="_ContentSearch" style="display:none">
 						</ul>
-						<div id="_IDList" title="歌单" style="display:none;">
+						<div id="_IDList" title="歌单" style="display:none;position:relative;">
+							<div id="_IDListDialogAdding" style="position:absolute;padding:30px;left:140px;top:40px;z-index:99;text-align:center;display:none"><img style="vertical-align: middle;" src="/assets/images/loading/loading9.gif" /> 正在添加中...</div>
 							<div><span>请选择歌单或者<b><a id="_AListAdd">新建歌单</a></b></span></div>
 							<div id="_CtListAdd" style="display:none">
 								<form>

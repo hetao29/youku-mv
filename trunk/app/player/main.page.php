@@ -123,25 +123,6 @@ class player_main extends SGui{
 				$api = new player_api;
 				return $api->getMvByVid($vid);
 			}
-			/*
-			$Mv = array();
-			$Mv['MvSourceID']=1;
-			switch($Mv['MvSourceID']){
-				case 1:
-					$video = $api->getVideoInfo($vid);
-				break;
-			}
-			if(!empty($video)){
-				$Mv['MvName'] = $Mv['MvAlias']=$video->title;
-				$Mv['MvSeconds'] = $video->seconds;
-				$Mv['MvVideoID'] = $video->vid;
-				$Mv['MvPic'] = $video->pic;
-			}
-			$Mv['UserID'] = 1;//我自己,TODO
-			$db= new player_db;
-			$db->addMv($Mv);
-			return $Mv;
-			*/
 	}
 	/**
 	 * 增加列表
@@ -277,21 +258,40 @@ class player_main extends SGui{
 	function pageSearch($inPath){
 			$k = $_REQUEST['k'];
 			if(empty($k))return;
-			//$k = urlencode($k);
 			$r = SHttp::get("http://www.youku.com/api_ptvideo/st_3_pid_XOA",array("sv"=>$k,"rt"=>3,"ob"=>6,"pz"=>30,"pg"=>1));
-			return $r;
+			$r = SJson::decode($r);
+			$o = array();
+			$db= new player_db;
+			foreach($r->item as $item){
+				$vid = $item->videoid;
+				$Mv = $db->getMvByVid($vid);
+				if(empty($Mv)){
+					//{{{
+					$Mv = array();
+					$Mv['MvSourceID']=1;
+					$Mv['MvName'] = $Mv['MvAlias']=$item->title;
+					$Mv['MvSeconds'] = $item->duration;
+					$Mv['MvVideoID'] = $item->videoid;
+					$Mv['MvPic'] = $item->snapshot;
+					$Mv['MvPubDate'] = $item->pubDate;
+					$Mv['UserID'] = 1;//我自己,TODO
+					$Mv['MvID']=$db->addMv($Mv);
+					//}}}
+				}
+				$o[]=$Mv;
+			}
+			return $o;
 	}
 	/*得到视频信息*/
 	function pageGetVideo($inPath){
+			$o = array();
 			$k = $_REQUEST['k'];
 			if(empty($k))return;
 			if(preg_match("/v_show\/id_(.*?)\./",$k,$_m)){
 					//普通视频播放页
-					$r = player_api::getVideoInfo($_m[1]);
-					$o = new stdclass;
-					$o->items=array();
-					$o->items[]=$r;
-					return SJson::encode($o);
+					$api = new player_api;
+					$r = $api->getMvByVid($_m[1]);
+					$o[]=$r;
 			}elseif(preg_match("/show_page\/id_(.*?)\./",$k,$_m)){
 					//节目显示页
 					$pid = $_m[1];
@@ -309,20 +309,29 @@ class player_main extends SGui{
 					$st = 8;
 			}
 			if(!empty($pid)){
-					$r = SHttp::get("http://api.youku.com/api_ptvideo/st_$st",array("pid"=>"XOA==","rt"=>3,"pz"=>100,"sv"=>$pid));
+					$r = SHttp::get("http://api.youku.com/api_ptvideo/st_$st",array("pid"=>"XOA==","rt"=>3,"pz"=>300,"sv"=>$pid));
 					$r = SJson::decode($r);
-					$o = new stdclass;
-					$o->items=array();
+					$db= new player_db;
 					foreach($r->item as $item){
-						$v = new stdclass;
-						$v->vid = $item->videoid;
-						$v->title = $item->title;
-						$v->seconds= $item->duration;
-						$o->items[]=$v;
+						$vid = $item->videoid;
+						$Mv = $db->getMvByVid($vid);
+						if(empty($Mv)){
+							//{{{
+							$Mv = array();
+							$Mv['MvSourceID']=1;
+							$Mv['MvName'] = $Mv['MvAlias']=$item->title;
+							$Mv['MvSeconds'] = $item->duration;
+							$Mv['MvVideoID'] = $item->videoid;
+							$Mv['MvPic'] = $item->snapshot;
+							$Mv['MvPubDate'] = $item->pubDate;
+							$Mv['UserID'] = 1;//我自己,TODO
+							$Mv['MvID']=$db->addMv($Mv);
+							//}}}
+						}
+						$o[]=$Mv;
 					}
-					return SJson::encode($o);
 			}
-			return "{}";
+			return $o;
 	}
 }
 ?>
