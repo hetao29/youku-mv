@@ -66,8 +66,9 @@ class user_db{
 		return $this->_db->update("s_list",array("ListID"=>$ListID),$List);
 	}
 	function delList($ListID){
-		return $this->_db->delete("s_list",array("ListID"=>$ListID));
-		return $this->_db->delete("s_list_content",array("ListID"=>$ListID));
+		if($this->_db->delete("s_list",array("ListID"=>$ListID))){
+			return $this->_db->delete("s_list_content",array("ListID"=>$ListID));
+		}
 	}
 	function emptyList($ListID){
 		$this->editList($ListID,array("ListCount"=>0));
