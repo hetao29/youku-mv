@@ -2,6 +2,8 @@
 class user_main{
 	function __construct(){
 	}
+	function pageKeepAlive($inPath){
+	}
 	function pageEntry($inPath){
 		echo "User";
 	}
