@@ -53,11 +53,24 @@ class user_db{
 	function addList($List){
 		return $this->_db->insert("s_list",$List);
 	}
+	function addListContent($ListID,$MvID){
+		if($this->_db->insert("s_list_content",array("ListID"=>$ListID,"MvID"=>$MvID))){
+			$this->_db->update("s_list",array("ListID"=>$ListID),array("ListCount=ListCount+1"));
+		};
+	}
+	function getListCount($UserID){
+		$row = $this->_db->selectOne("s_list",array("UserID"=>$UserID),array("count(*) ct"));
+		return $row['ct'];
+	}
 	function editList($ListID,$List){
 		return $this->_db->update("s_list",array("ListID"=>$ListID),$List);
 	}
 	function delList($ListID){
 		return $this->_db->delete("s_list",array("ListID"=>$ListID));
+		return $this->_db->delete("s_list_content",array("ListID"=>$ListID));
+	}
+	function emptyList($ListID){
+		$this->editList($ListID,array("ListCount"=>0));
 		return $this->_db->delete("s_list_content",array("ListID"=>$ListID));
 	}
 	function getList($ListID){

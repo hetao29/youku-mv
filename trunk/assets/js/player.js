@@ -75,6 +75,13 @@ var YoukuWs = function(){
 				});
 				YoukuWs.listAction("down",1);
 			});
+			$("#_LiList").live('click',function(){
+						$("#_IDList").dialog({
+							width:410,height:280,buttons: [],open:function(event,ui){
+								YoukuWs.listList();
+							}
+						});
+			});
 			$("#_LiListen").live('click',function(){
 				$("#_ContentListen").dialog({
 					width:400,height:300, buttons: [
@@ -241,6 +248,37 @@ var YoukuWs = function(){
 							var lid = $(_this).parents("li").attr("lid");
 							$.ajax({
 								url: "/user.list.del",
+								data: {
+									ListID:lid
+								},type:"post",
+								dataType:"json",
+								success: function( List) {
+									if(List){
+										YoukuWs.listList();
+									}
+									$( _this2 ).dialog( "destroy");
+								}
+
+							});
+						},
+						Cancel: function() {
+							$( this ).dialog( "destroy");
+						}
+					}
+				});
+			});
+			$( "#_ContentList >li .empty" ).live("click",function(){
+				_this = this;
+				$("<div>你确定要清空么?</div>" ).dialog({
+					resizable: false,
+					height:140,
+					modal: true,
+					buttons: {
+						"清空": function() {
+							_this2=this;
+							var lid = $(_this).parents("li").attr("lid");
+							$.ajax({
+								url: "/user.list.empty",
 								data: {
 									ListID:lid
 								},type:"post",
@@ -467,6 +505,37 @@ var YoukuWs = function(){
 								{
 									text:_LabelOk,
 									click: function() {
+										_this2=this;
+										var lids=[];
+									   	$("#_ContentList input:checked").each(function(i,n){
+												lids.push($(n).val());
+										});
+										if(lids.length>0){
+											var vids=[];
+									   		$("#_ContentMusic >li").each(function(i,n){
+													vids.push($(n).attr("vid"));
+											});
+											$.ajax({
+												url: "/user.list.contents",
+												data: {
+													lids:lids,
+													vids:vids
+												},type:"post",
+												dataType:"json",
+												success: function( List) {
+													if(List){
+														YoukuWs.listList();
+													}
+													$( _this2 ).dialog( "destroy");
+													alert("保存成功");
+												}
+
+											});
+											
+											
+										}else{
+											alert("请选择你要保存的歌单");
+										}
 									}
 								},
 								{
@@ -894,7 +963,7 @@ var YoukuWs = function(){
 					success: function( result) {
 						if(result && result.items && result.items.length>0){
 							for(var i=0;i<result.items.length;i++){
-								var r='<li lid="'+result.items[i].ListID+'"><div class="left"><input style="vertical-align:top" type="checkbox"/><span class="name">'+result.items[i].ListName+'</span> ('+result.items[i].ListCount+'首)</div><div class="right hide"><span>加载</span> <span class="del">删除</span> <span class="rename">改名</span></div><div class="clear"></div></li>';
+								var r='<li lid="'+result.items[i].ListID+'"><div class="left"><input value="'+result.items[i].ListID+'" style="vertical-align:top" type="checkbox"/><span class="name">'+result.items[i].ListName+'</span> ('+result.items[i].ListCount+'首)</div><div class="right hide"><span>加载</span> <span class="empty">清空</span> <span class="del">删除</span> <span class="rename">改名</span></div><div class="clear"></div></li>';
 								$("#_ContentList").append(r);
 							}
 							$( "#_ContentList >li" ).droppable({

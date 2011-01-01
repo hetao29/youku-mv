@@ -27,6 +27,7 @@ class player_main extends SGui{
 					$action = $db->getAction($User['UserID']);
 					$param['user'] = $User;
 					$param['_CtListen'] = $db->getListenCount($User['UserID']);
+					$param['_CtList'] = $db->getListCount($User['UserID']);
 					$act = array();
 					if(!empty($action->items)){
 							foreach($action->items as $item){
@@ -117,9 +118,13 @@ class player_main extends SGui{
 	 */
 
 	function pageAddMv($inPath){
-			$Mv = array();
-			$api = new player_api;
 			$vid = $_REQUEST['vid'];
+			if(!empty($vid)){
+				$api = new player_api;
+				return $api->getMvByVid($vid);
+			}
+			/*
+			$Mv = array();
 			$Mv['MvSourceID']=1;
 			switch($Mv['MvSourceID']){
 				case 1:
@@ -136,6 +141,7 @@ class player_main extends SGui{
 			$db= new player_db;
 			$db->addMv($Mv);
 			return $Mv;
+			*/
 	}
 	/**
 	 * 增加列表
@@ -208,11 +214,13 @@ class player_main extends SGui{
 					$db = new user_db;
 					$player_db = new player_db;
 					$vid = $_REQUEST['vid'];
-					$mv = $player_db->getMvByVid($vid);
-					if(empty($mv)){
-						$tmpmv  = $this->pageAddMv($inPath);
-						$mv 	= $player_db->getMvByVid($tmpmv['MvVideoID']);
-					}
+					$api = new player_api;
+					$mv=$api->getMvByVid($vid);
+					//$mv = $player_db->getMvByVid($vid);
+					//if(empty($mv)){
+					//	$tmpmv  = $this->pageAddMv($inPath);
+					//	$mv 	= $player_db->getMvByVid($tmpmv['MvVideoID']);
+					//}
 					return $db->addListen(array("MvID"=>$mv['MvID'],"UserID"=>$User['UserID']));
 			}
 	}
