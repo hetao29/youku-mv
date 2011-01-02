@@ -167,9 +167,9 @@
 								<div>请输入优酷播放页地址:</div>
 								<div><textarea style="width:460px;height:24px">http://v.youku.com/v_show/id_XMjI2MDIxNTYw.html</textarea></div>
 								<div>如普通播放页：http://v.youku.com<span class="red">/v_show/id_XMjI2MDIxNTYw</span>.html</div>
-								<div>如专辑播放页：http://v.youku.com<span class="red">/v_playlist/f5358705o1p2</span>.html</div>
+								<div>如专辑播放页：http://v.youku.com<span class="red">/v_playlist/f5365488o1p0</span>.html</div>
 								<div>如节目显示页：http://www.youku.com<span class="red">/show_page/id_zd121155eef0a11df97c0</span>.html</div>
-								<div>如专辑显示页：http://www.youku.com<span class="red">/playlist_show/id_5358705</span>.html</div>
+								<div>如专辑显示页：http://www.youku.com<span class="red">/playlist_show/id_5365488</span>.html</div>
 								<div>一次只能添加一种地址</div>
 								<div id="_DialogAdding" style="text-align:center;display:none"><img style="vertical-align: middle;" src="/assets/images/loading/loading9.gif" /> 正在添加中...</div>
 						</div>
