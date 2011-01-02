@@ -205,7 +205,8 @@ class player_main extends SGui{
 	function pageGetLyric($inPath){
 			$vid = $_REQUEST['vid'];
 			$db = new player_db;
-			$mv  = $db->getMvByVid($vid);
+			$api = new player_api;
+			$mv  = $api->getMvByVid($vid);
 			if(!empty($mv)){
 					$lyric = $db->getLyrics($mv['MvID']);
 					if(empty($lyric) || $lyric['LyricsStatus']==-2)
