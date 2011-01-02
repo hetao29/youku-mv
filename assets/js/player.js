@@ -448,14 +448,14 @@ var YoukuWs = function(){
 								$(".list").eq(i).show();
 
 								//{{{ restore scrollTop
-								if(window._ContentMusicTop>0){
+								if(i==1 && window._ContentMusicTop>0){
 									$("#_ContentMusic").scrollTop(window._ContentMusicTop);
 								}
 								//}}}
 							}else{
 								//{{{ save scrollTop
 								window._ContentMusicTop=window._ContentMusicTop?window._ContentMusicTop:0;
-								if(i!=1 && $("#_ContentMusic").scrollTop()>0){
+								if($("#_ContentMusic").scrollTop()>0){
 									window._ContentMusicTop = $("#_ContentMusic").scrollTop();
 								}
 								//}}}
