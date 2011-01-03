@@ -1,5 +1,4 @@
 <ul class="nav">
-	<!--<li><a id="_IDUsage">{'使用说明'|tr:'main'}</a></li>-->
 	<li><a id="_IDAbout">{'关于'|tr}</a></li>
 	{if empty($user)}
 	<li><a id="_IDSignup">{'注册'|tr}</a></li>

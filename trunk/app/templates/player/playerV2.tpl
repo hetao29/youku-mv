@@ -85,14 +85,13 @@
 										</div>
 										<div class="list" id="_IDRadio" style="display:none;">
 											<div id="_IDRadio2" style="display:none">
-												<div style="padding:10px;"><b>当前播放：</b><span id="_IDVideoTitle"></span><div><img id="_IDVideoPic" /></div></div>
-												<div style="padding:10px"><b>接着播放：</b><span id="_IDNextVideoTitle"></span>
+												<div style="padding:10px;"><b>{"当前播放"|tr}:</b><span id="_IDVideoTitle"></span><div><img id="_IDVideoPic" /></div></div>
+												<div style="padding:10px"><b>{"接着播放"|tr}:</b><span id="_IDNextVideoTitle"></span>
 													<div><img id="_IDNextVideoPic" /></div>
 												</div>
 											</div>
 											<div id="_IDRadio3" style="height:150px"></div>
 											<div><button id="_IDSkip">{'跳过'|tr}</button><button id="_IDPlay" style="display:none">{'播放'|tr}</button><button id="_IDUp">{"顶"|tr}</button><button id="_IDDown">{"删"|tr}</button></div>
-											<!--<div style="padding-top:10px"><span id="_IDLogin2"><a>登录</a></span>后，能记住你所喜好</div>-->
 										</div>
 										<div class="list" id="_IDLocalList" style="display:none">
 												<div style="padding-bottom:5px;text-align:left">
@@ -161,14 +160,13 @@
 
 				<div>
 
-						<div id="_DialogAdd" title="增加歌曲" style="display:none;">
-								<div>请输入优酷播放页地址:</div>
+						<div id="_DialogAdd" title="{'增加歌曲'|tr}" style="display:none;">
+								<div>{"请输入优酷播放页地址"|tr}({"一次只能添加一种地址"|tr}):</b></div>
 								<div><textarea style="width:460px;height:24px">http://v.youku.com/v_show/id_XMjI2MDIxNTYw.html</textarea></div>
-								<div>如普通播放页：http://v.youku.com<span class="red">/v_show/id_XMjI2MDIxNTYw</span>.html</div>
-								<div>如专辑播放页：http://v.youku.com<span class="red">/v_playlist/f5365488o1p0</span>.html</div>
-								<div>如节目显示页：http://www.youku.com<span class="red">/show_page/id_zd121155eef0a11df97c0</span>.html</div>
-								<div>如专辑显示页：http://www.youku.com<span class="red">/playlist_show/id_5365488</span>.html</div>
-								<div>一次只能添加一种地址</div>
+								<div>{"如普通播放页"|tr}:<br/>http://v.youku.com<span class="red">/v_show/id_XMjI2MDIxNTYw</span>.html</div>
+								<div>{"如专辑播放页"|tr}:<br/>http://v.youku.com<span class="red">/v_playlist/f5365488o1p0</span>.html</div>
+								<div>{"如节目显示页"|tr}:<br/>http://www.youku.com<span class="red">/show_page/id_zd121155eef0a11df97c0</span>.html</div>
+								<div>{"如专辑显示页"|tr}:<br/>http://www.youku.com<span class="red">/playlist_show/id_5365488</span>.html</div>
 								<div id="_DialogAdding" style="text-align:center;display:none"><img style="vertical-align: middle;" src="/assets/images/loading/loading9.gif" /> {"正在添加中"|tr}...</div>
 						</div>
 
@@ -214,19 +212,17 @@
 						</div>
 						<div id="_ContentAbout" title="{'关于'|tr}" style="display:none">
 								<div style="padding:15px;margin:auto;padding-left:45px;">
-										作者:Hetal 2010-12-15<br/>
-										版本所有(beta 0.1),山寨必究
+									{"copyright"|tr}
 								</div>
 						</div>
 						<div id="_ContentUsage" title="{'使用说明'|tr}" style="display:none">
 								<div style="padding:15px;margin:auto;padding-left:45px;">
-										作者:Hetal 2010-12-15<br/>
-										版本所有(beta 0.1),山寨必究
+									{"copyright"|tr}
 								</div>
 						</div>
 						<div id="_ContentClearList" title="{'删除确认'|tr}" style="display:none">
 								<div style="padding:15px;margin:auto;padding-left:45px;">
-								您确定要清空吗?
+									{"您确定要清空吗"|tr}?
 								</div>
 						</div>
 						<div id="_ContentLyricsView" title="{'显示歌词'|tr}" style="display:none">

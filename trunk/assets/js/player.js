@@ -415,10 +415,9 @@ var YoukuWs = function(){
 			$("#_BtPlayModeSet").button("option","disabled",true).show();
 			$("button").button().show();
 
-			//$("#_BtClearList").button({ icons: { primary: "ui-icon-plusthick" } }).click(function(){ });
 			$("#_BtClearList").button().click(function(){
 				$("#_ContentClearList").dialog({
-					modal: true, width:320,height:240, buttons: [
+					modal: true, width:320,height:200, buttons: [
 						{
 							text:_LabelOk,
 							click: function() {
@@ -475,7 +474,7 @@ var YoukuWs = function(){
 			$("#_BtAddList").button();
 			$("#_BtAddMv").button().click(function(){
 				$( "#_DialogAdd" ).dialog({
-					width:500,height:280, buttons: {
+					width:500,height:320, buttons: {
 							"增加": function() {
 								var k =($("#_DialogAdd textarea").val());
 								$.ajax({type:"POST",dataType:"json",url:"/player.main.getVideo",data:{"k":k},success:function(msg){
