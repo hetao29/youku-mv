@@ -3,7 +3,7 @@
 		<head>
 				<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 				<title>{'标题'|tr}</title>
-{if defined($smarty.const.DEV)}
+				{if defined($smarty.const.DEV)}
 				<script type="text/javascript" src="/assets/js/jquery-1.4.4.min.js"></script>
 				<script type="text/javascript" src="/assets/js/jquery-ui-1.8.7.custom.min.js"></script>
 				<script type="text/javascript" src="/assets/js/jquery.cookie.js"></script>
@@ -12,12 +12,12 @@
 				<script type="text/javascript" src="/assets/js/player.js"></script>
 				<link href="/assets/css/jquery-ui-1.8.6.custom-smoothness.css" media="all" rel="stylesheet" type="text/css" />
 				<link href="/assets/css/styleV2.css" media="all" rel="stylesheet" type="text/css" />
-{else}
+				{else}
 				<script type="text/javascript" src="/player.js"></script>
 				<link href="/player.css" media="all" rel="stylesheet" type="text/css" />
-{/if}
+				{/if}
 				<link rel="Shortcut Icon" href="/assets/images/ico/favicon_32x32.ico" />
-{literal}
+				{literal}
 				<script type="text/javascript">
 
 						var _gaq = _gaq || [];
@@ -31,15 +31,15 @@
 						})();
 
 				</script>
-{/literal}
+				{/literal}
 		</head>
 		<script>
 				var _LabelOk="{'确认'|tr}";
 				var _LabelCancel="{'取消'|tr}";
 		</script>
 		<body>
-{if !empty($facebook)}
-{literal}
+				{if !empty($facebook)}
+				{literal}
 				<div id="fb-root"></div>
 				<script src="http://connect.facebook.net/en_US/all.js"></script>
 				<script>
@@ -60,14 +60,14 @@
 						//						$( "#tabs" ).tabs();
 						//							});
 				</script>
-{/literal}
-{/if}
+				{/literal}
+				{/if}
 
-{if empty($facebook)}
+				{if empty($facebook)}
 				<div class="header">
 						{part path="/player.main.header"}
 				</div>
-{/if}
+				{/if}
 				<div class="content">
 
 						<div class="main">
@@ -161,79 +161,79 @@
 				<div>
 
 						<div id="_DialogAdd" title="{'增加歌曲'|tr}" style="display:none;">
-								<div>{"请输入优酷播放页地址"|tr}({"一次只能添加一种地址"|tr}):</b></div>
-						<div><textarea style="width:460px;height:24px">http://v.youku.com/v_show/id_XMjI2MDIxNTYw.html</textarea></div>
-						<div>{"如普通播放页"|tr}:<br/>http://v.youku.com<span class="red">/v_show/id_XMjI2MDIxNTYw</span>.html</div>
-						<div>{"如专辑播放页"|tr}:<br/>http://v.youku.com<span class="red">/v_playlist/f5365488o1p0</span>.html</div>
-						<div>{"如节目显示页"|tr}:<br/>http://www.youku.com<span class="red">/show_page/id_zd121155eef0a11df97c0</span>.html</div>
-						<div>{"如专辑显示页"|tr}:<br/>http://www.youku.com<span class="red">/playlist_show/id_5365488</span>.html</div>
-						<div id="_DialogAdding" style="text-align:center;display:none"><img style="vertical-align: middle;" src="/assets/images/loading/loading9.gif" /> {"正在添加中"|tr}...</div>
-				</div>
+								<div>{"请输入优酷播放页地址"|tr}({"一次只能添加一种地址"|tr}):</div>
+								<div><textarea style="width:460px;height:24px">http://v.youku.com/v_show/id_XMjI2MDIxNTYw.html</textarea></div>
+								<div>{"如普通播放页"|tr}:<br/>http://v.youku.com<span class="red">/v_show/id_XMjI2MDIxNTYw</span>.html</div>
+								<div>{"如专辑播放页"|tr}:<br/>http://v.youku.com<span class="red">/v_playlist/f5365488o1p0</span>.html</div>
+								<div>{"如节目显示页"|tr}:<br/>http://www.youku.com<span class="red">/show_page/id_zd121155eef0a11df97c0</span>.html</div>
+								<div>{"如专辑显示页"|tr}:<br/>http://www.youku.com<span class="red">/playlist_show/id_5365488</span>.html</div>
+								<div id="_DialogAdding" style="text-align:center;display:none"><img style="vertical-align: middle;" src="/assets/images/loading/loading9.gif" /> {"正在添加中"|tr}...</div>
+						</div>
 
-				<ul id="_ContentSearch" style="display:none">
-				</ul>
-				<div id="_IDList" title="{'歌单'|tr}" style="display:none;position:relative;">
-						<div id="_IDListDialogAdding" style="position:absolute;padding:30px;left:140px;top:40px;z-index:99;text-align:center;display:none"><img style="vertical-align: middle;" src="/assets/images/loading/loading9.gif" /> {"正在添加中"|tr}...</div>
-						<div><span>{"请选择歌单或者"|tr}<b><a id="_AListAdd">{"新建歌单"|tr}</a></b></span></div>
-						<div id="_CtListAdd" style="display:none">
-								<form>
-										<div>{"歌单名"|tr}：<input type="text" id="_IDListName"/><input id="_IDListAdd" type="button" value="{'建立'|tr}"/></div>
+						<ul id="_ContentSearch" style="display:none">
+						</ul>
+						<div id="_IDList" title="{'歌单'|tr}" style="display:none;position:relative;">
+								<div id="_IDListDialogAdding" style="position:absolute;padding:30px;left:140px;top:40px;z-index:99;text-align:center;display:none"><img style="vertical-align: middle;" src="/assets/images/loading/loading9.gif" /> {"正在添加中"|tr}...</div>
+								<div><span>{"请选择歌单或者"|tr}<b><a id="_AListAdd">{"新建歌单"|tr}</a></b></span></div>
+								<div id="_CtListAdd" style="display:none">
+										<form>
+												<div>{"歌单名"|tr}：<input type="text" id="_IDListName"/><input id="_IDListAdd" type="button" value="{'建立'|tr}"/></div>
+										</form>
+										<hr/>
+								</div>
+								<ul id="_ContentList">
+								</ul>
+						</div>
+						<div id="_ContentLogin" title="{'登录'|tr}" style="display:none">
+								<form id="_FormLogin" style="padding:10px;margin:auto;">
+										<table width="100%">
+												<tr><td class="info" colspan="2">&nbsp;</td></tr>
+												<tr><td>{'邮箱'|tr}:</td><td><input name="useremail"/></td></tr>
+												<tr><td>{'密码'|tr}:</td><td><input type="password" name="password"/></td></tr>
+												<tr>
+														<td></td>
+														<td><input type="checkbox" id="forever" name="forever"/><label for="forever">{"记住登录"|tr}</label>
+																<a id="_IDSignup2">{"注册"|tr}</a>
+														</td>
+												</tr>
+										</table>
 								</form>
-								<hr/>
 						</div>
-						<ul id="_ContentList">
-						</ul>
-				</div>
-				<div id="_ContentLogin" title="{'登录'|tr}" style="display:none">
-						<form id="_FormLogin" style="padding:10px;margin:auto;">
-								<table width="100%">
-										<tr><td class="info" colspan="2">&nbsp;</td></tr>
-										<tr><td>{'邮箱'|tr}:</td><td><input name="useremail"/></td></tr>
-										<tr><td>{'密码'|tr}:</td><td><input type="password" name="password"/></td></tr>
-										<tr>
-												<td></td>
-												<td><input type="checkbox" id="forever" name="forever"/><label for="forever">{"记住登录"|tr}</label>
-														<a id="_IDSignup2">{"注册"|tr}</a>
-												</td>
-										</tr>
-								</table>
-						</form>
-				</div>
-				<div id="_ContentSignup" title="{'注册'|tr}" style="display:none">
-						<form id="_FormSignup" style="padding:10px;margin:auto;">
-								<table width="100%">
-										<tr><td class="info" colspan="2">&nbsp;</td></li>
-										<tr><td>{'邮箱'|tr}:</td><td><input name="useremail"/></td></tr>
-										<tr><td>{'别名'|tr}:</td><td><input name="useralias"/></td></tr>
-										<tr><td>{'密码'|tr}:</td><td><input type="password" name="password"/></td></tr>
-										<tr><td>{'密码确认'|tr}:</td><td><input type="password" name="password2"/></td></tr>
-								</table>
-						</form>
-				</div>
-				<div id="_ContentAbout" title="{'关于'|tr}" style="display:none">
-						<div style="padding:15px;margin:auto;padding-left:45px;">
-								{"copyright"|tr}
+						<div id="_ContentSignup" title="{'注册'|tr}" style="display:none">
+								<form id="_FormSignup" style="padding:10px;margin:auto;">
+										<table width="100%">
+												<tr><td class="info" colspan="2">&nbsp;</td></li>
+												<tr><td>{'邮箱'|tr}:</td><td><input name="useremail"/></td></tr>
+												<tr><td>{'别名'|tr}:</td><td><input name="useralias"/></td></tr>
+												<tr><td>{'密码'|tr}:</td><td><input type="password" name="password"/></td></tr>
+												<tr><td>{'密码确认'|tr}:</td><td><input type="password" name="password2"/></td></tr>
+										</table>
+								</form>
 						</div>
-				</div>
-				<div id="_ContentUsage" title="{'使用说明'|tr}" style="display:none">
-						<div style="padding:15px;margin:auto;padding-left:45px;">
-								{"copyright"|tr}
+						<div id="_ContentAbout" title="{'关于'|tr}" style="display:none">
+								<div style="padding:15px;margin:auto;padding-left:45px;">
+										{"copyright"|tr}
+								</div>
+						</div>
+						<div id="_ContentUsage" title="{'使用说明'|tr}" style="display:none">
+								<div style="padding:15px;margin:auto;padding-left:45px;">
+										{"copyright"|tr}
+								</div>
+						</div>
+						<div id="_ContentClearList" title="{'删除确认'|tr}" style="display:none">
+								<div style="padding:15px;margin:auto;padding-left:45px;">
+										{"您确定要清空吗"|tr}?
+								</div>
+						</div>
+						<div id="_ContentLyricsView" title="{'显示歌词'|tr}" style="display:none">
+								<div style="padding:15px;margin:auto;text-align:center">
+								</div>
+						</div>
+						<div id="_ContentListen" style="display:none">
+								<ul style="padding:15px;margin:auto;text-align:center">
+										<li></li>
+								</ul>
 						</div>
 				</div>
-				<div id="_ContentClearList" title="{'删除确认'|tr}" style="display:none">
-						<div style="padding:15px;margin:auto;padding-left:45px;">
-								{"您确定要清空吗"|tr}?
-						</div>
-				</div>
-				<div id="_ContentLyricsView" title="{'显示歌词'|tr}" style="display:none">
-						<div style="padding:15px;margin:auto;text-align:center">
-						</div>
-				</div>
-				<div id="_ContentListen" style="display:none">
-						<ul style="padding:15px;margin:auto;text-align:center">
-								<li></li>
-						</ul>
-				</div>
-		</div>
-</body>
+		</body>
 </html>
