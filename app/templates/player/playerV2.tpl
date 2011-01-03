@@ -77,9 +77,9 @@
 								<div class="right" style="width:256px">
 										<div style="padding-top:10px;">
 												<ul id="_IDNav">
-														<li style="padding:5px 15px;display:none;"><a>电台模式</a></li>
-														<li style="padding:5px 15px;display:none;"><a>播放模式</a></li>
-														<li style="padding:5px 15px;display:none;"><a>显示歌词</a></li>
+														<li style="padding:5px 15px;display:none;"><a>{'电台模式'|tr}</a></li>
+														<li style="padding:5px 15px;display:none;"><a>{'播放模式'|tr}</a></li>
+														<li style="padding:5px 15px;display:none;"><a>{'显示歌词'|tr}</a></li>
 												</ul>
 												<div class="clear"></div>
 										</div>
@@ -91,7 +91,7 @@
 												</div>
 											</div>
 											<div id="_IDRadio3" style="height:150px"></div>
-											<div><button id="_IDSkip">跳过</button><button id="_IDUp">顶</button><button id="_IDDown">删</button></div>
+											<div><button id="_IDSkip">{'跳过'|tr}</button><button id="_IDPlay" style="display:none">{'播放'|tr}</button><button id="_IDUp">{"顶"|tr}</button><button id="_IDDown">{"删"|tr}</button></div>
 											<!--<div style="padding-top:10px"><span id="_IDLogin2"><a>登录</a></span>后，能记住你所喜好</div>-->
 										</div>
 										<div class="list" id="_IDLocalList" style="display:none">
@@ -117,16 +117,14 @@
 																</div>
 														</div>
 														<div>
-																<button id="_BtAddMv">增加</button>
-																<button id="_BtTrash">删除</button>
-																<button id="_BtSaveList">保存</button>
-																<button id="_BtClearList">清空</button>
-																<!--<button style="width:100px;" id="_BtOpenList">打开歌单</button>-->
-																<!--<button style="width:110px;" id="_BtAddList">增加歌单</button>-->
+																<button id="_BtAddMv">{'增加'|tr}</button>
+																<button id="_BtTrash">{'删除'|tr}</button>
+																<button id="_BtSaveList">{'保存'|tr}</button>
+																<button id="_BtClearList">{'清空'|tr}</button>
 														</div>
 														<div>
-																<button id="_BtPre">上一首</button>
-																<button id="_BtNext">下一首</button>
+																<button id="_BtPre">{'上一首'|tr}</button>
+																<button id="_BtNext">{'下一首'|tr}</button>
 														</div>
 												</div>
 
@@ -136,11 +134,11 @@
 														<div id="_LyricsTop" class="lyrics_top" style="display:none;padding-left:5px;padding-right:5px;width:225px;"></div>
 														<div id="_ContentLyrics" class="lyrics" style="overflow:hidden;width:225px;height:278px;"></div>
 														<div id="_IDLyricsAdmin" style="display:none">
-																<span id="_IDLyricsBk" style="cursor:pointer;border:1px solid;">后退</span>
-																<span id="_IDLyricsPr" style="cursor:pointer;border:1px solid;">前进</span> 
-																<span id="_IDLyricsEd" style="cursor:pointer;border:1px solid;">编辑</span>
-																<span id="_IDLyricsErr" style="cursor:pointer;border:1px solid;">报错</span>
-																<span id="_IDLyricsView" style="cursor:pointer;border:1px solid;">查看</span>
+																<span id="_IDLyricsBk" style="cursor:pointer;border:1px solid;">{"后退"|tr}</span>
+																<span id="_IDLyricsPr" style="cursor:pointer;border:1px solid;">{"前进"|tr}</span> 
+{*<span id="_IDLyricsEd" style="cursor:pointer;border:1px solid;">{"编辑"|tr}</span>*}
+																<span id="_IDLyricsErr" style="cursor:pointer;border:1px solid;">{"报错"|tr}</span>
+																<span id="_IDLyricsView" style="cursor:pointer;border:1px solid;">{"查看"|tr}</span>
 																<span id="_IDLyricsInfo" style="position:absolute;top:348px;left:180px;"></span>
 														</div>
 												</div>
@@ -171,32 +169,21 @@
 								<div>如节目显示页：http://www.youku.com<span class="red">/show_page/id_zd121155eef0a11df97c0</span>.html</div>
 								<div>如专辑显示页：http://www.youku.com<span class="red">/playlist_show/id_5365488</span>.html</div>
 								<div>一次只能添加一种地址</div>
-								<div id="_DialogAdding" style="text-align:center;display:none"><img style="vertical-align: middle;" src="/assets/images/loading/loading9.gif" /> 正在添加中...</div>
+								<div id="_DialogAdding" style="text-align:center;display:none"><img style="vertical-align: middle;" src="/assets/images/loading/loading9.gif" /> {"正在添加中"|tr}...</div>
 						</div>
 
 						<ul id="_ContentSearch" style="display:none">
 						</ul>
-						<div id="_IDList" title="歌单" style="display:none;position:relative;">
-							<div id="_IDListDialogAdding" style="position:absolute;padding:30px;left:140px;top:40px;z-index:99;text-align:center;display:none"><img style="vertical-align: middle;" src="/assets/images/loading/loading9.gif" /> 正在添加中...</div>
-							<div><span>请选择歌单或者<b><a id="_AListAdd">新建歌单</a></b></span></div>
+						<div id="_IDList" title="{'歌单'|tr}" style="display:none;position:relative;">
+							<div id="_IDListDialogAdding" style="position:absolute;padding:30px;left:140px;top:40px;z-index:99;text-align:center;display:none"><img style="vertical-align: middle;" src="/assets/images/loading/loading9.gif" /> {"正在添加中"|tr}...</div>
+							<div><span>{"请选择歌单或者"|tr}<b><a id="_AListAdd">{"新建歌单"|tr}</a></b></span></div>
 							<div id="_CtListAdd" style="display:none">
 								<form>
-									<div>歌单名：<input type="text" id="_IDListName"/><input id="_IDListAdd" type="button" value="建立"/></div>
+									<div>{"歌单名"|tr}：<input type="text" id="_IDListName"/><input id="_IDListAdd" type="button" value="{'建立'|tr}"/></div>
 								</form>
 								<hr/>
 							</div>
 							<ul id="_ContentList">
-									<!--<li lid="">
-											<div class="left"><input style="vertical-align:top" type="checkbox"/>黄晓明 2</div>
-											<div class="right hide"><span>加载</span><span>删除</span><span>改名</span></div>
-											<div class="clear"></div>
-									</li>
-									<li lid="">
-											<div class="left"><input style="vertical-align:top" type="checkbox"/>黄晓明吕中口口口口口口口口口口口口口口口口口口口口口：:w 2</div>
-											<div class="right hide"><span>加载</span><span>删除</span><span>改名</span></div>
-											<div class="clear"></div>
-									</li>
-									-->
 							</ul>
 						</div>
 						<div id="_ContentLogin" title="{'登录'|tr}" style="display:none">
@@ -207,8 +194,8 @@
 												<tr><td>{'密码'|tr}:</td><td><input type="password" name="password"/></td></tr>
 												<tr>
 														<td></td>
-														<td><input type="checkbox" id="forever" name="forever"/><label for="forever">记住登录</label>
-																<a id="_IDSignup2">注册</a>
+														<td><input type="checkbox" id="forever" name="forever"/><label for="forever">{"记住登录"|tr}</label>
+																<a id="_IDSignup2">{"注册"|tr}</a>
 														</td>
 												</tr>
 										</table>
@@ -242,14 +229,13 @@
 								您确定要清空吗?
 								</div>
 						</div>
-						<div id="_ContentLyricsView" title="{'查看歌词'|tr}" style="display:none">
+						<div id="_ContentLyricsView" title="{'显示歌词'|tr}" style="display:none">
 								<div style="padding:15px;margin:auto;text-align:center">
 								</div>
 						</div>
-						<div id="_ContentListen" title="{'听过的歌'|tr}" style="display:none">
+						<div id="_ContentListen" style="display:none">
 								<ul style="padding:15px;margin:auto;text-align:center">
-									<li>歌　Vyp</li>
-									<li>歌　Vyp</li>
+									<li></li>
 								</ul>
 						</div>
 				</div>

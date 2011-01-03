@@ -33,6 +33,13 @@ var YoukuWs = function(){
 							});
 					//}}}
 			YoukuWs.autoLogin();
+			$("#_IDPlay").click(function(){
+					//{{{播放模式
+					PlayType=0;
+					YoukuWs.set("PlayType",PlayType);
+					//}}}
+					YoukuWs.playRadio();
+			}).button({icons:{primary:"ui-icon-play"}});
 			$("#_IDSkip").click(function(){
 					YoukuWs.MvAction("skip",CurrentMvID);
 					//{{{播放模式
@@ -40,7 +47,7 @@ var YoukuWs = function(){
 					YoukuWs.set("PlayType",PlayType);
 					//}}}
 					YoukuWs.playRadio();
-			});
+			}).button({icons:{primary:"ui-icon-seek-next"}});
 			$("#_IDDown").click(function(){
 					YoukuWs.MvAction("down",CurrentMvID);
 					YoukuWs.playRadio();
@@ -370,17 +377,16 @@ var YoukuWs = function(){
 								//应该保存数据
 						}
 					});
-			//$("#_BtTrash").button({ icons: { primary: "ui-icon-trash" }}).droppable({
 			$("#_BtPre").click(function(){
 					PlayType=1;
 					YoukuWs.set("PlayType",PlayType);
 					YoukuWs.playPre();
-			});
+			}).button({icons:{primary:"ui-icon-seek-prev"}});;
 			$("#_BtNext").click(function(){
 					PlayType=1;
 					YoukuWs.set("PlayType",PlayType);
 					YoukuWs.playNext();
-			});
+			}).button({icons:{primary:"ui-icon-seek-next"}});;
 			$("#_BtTrash").button().droppable({
 					activeClass: "ui-state-highlight",
 					hoverClass: "ui-state-error",
@@ -671,9 +677,11 @@ var YoukuWs = function(){
 			vid = vid?vid:"XMjI4MTczMDIw";
 			pre=PlayType==0?0:1;
 			if(PlayType==0){
-					$("#_IDSkip").button({label:"跳过"});
+					$("#_IDSkip").show();
+					$("#_IDPlay").hide();
 			}else{
-					$("#_IDSkip").button({label:"播放"});
+					$("#_IDSkip").hide();
+					$("#_IDPlay").show();
 			}
 			next=1;
 			CurrentVideoID=vid;
