@@ -8,7 +8,7 @@
  */
 /* use static */
 //{{{
-session_start();
+@session_start();
 
 ob_start("ob_gzhandler");
 require_once("global.php");
