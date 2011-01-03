@@ -17,7 +17,6 @@
 				<link href="/player.css" media="all" rel="stylesheet" type="text/css" />
 				{/if}
 				<link rel="Shortcut Icon" href="/assets/images/ico/favicon_32x32.ico" />
-				{literal}
 				<script type="text/javascript">
 
 						var _gaq = _gaq || [];
@@ -31,7 +30,6 @@
 						})();
 
 				</script>
-				{/literal}
 		</head>
 		<script>
 				var _LabelOk="{'确认'|tr}";
@@ -39,7 +37,6 @@
 		</script>
 		<body>
 				{if !empty($facebook)}
-				{literal}
 				<div id="fb-root"></div>
 				<script src="http://connect.facebook.net/en_US/all.js"></script>
 				<script>
@@ -60,7 +57,6 @@
 						//						$( "#tabs" ).tabs();
 						//							});
 				</script>
-				{/literal}
 				{/if}
 
 				{if empty($facebook)}

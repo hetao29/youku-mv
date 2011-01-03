@@ -16,7 +16,7 @@ class player_api{
 						$Mv['MvSeconds'] = $video->seconds;
 						$Mv['MvVideoID'] = $video->vid;
 						$Mv['MvPic'] = $video->pic;
-						$Mv['MvPubDate'] = $video->pubDate;
+						$Mv['MvPubDate'] = $video->pubdate;
 					}
 					$Mv['UserID'] = 1;//我自己,TODO
 					$db= new player_db;
