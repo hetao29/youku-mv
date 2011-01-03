@@ -398,7 +398,8 @@ var YoukuWs = function(){
 					setTimeout(function() { li.remove(); }, 1);//fro ie patch
 			});
 			$("#PlayModeSet [name=set]").click(function(){
-				YoukuWs.set("PlayModeSet",$("#PlayModeSet [name=set]:checked").val());
+				PlayMode = $("#PlayModeSet [name=set]:checked").val();
+				YoukuWs.set("PlayModeSet",PlayMode);
 			});
 			if(YoukuWs.get("PlayModeSet")){
 					PlayMode = YoukuWs.get("PlayModeSet");
@@ -1132,7 +1133,6 @@ function onPlayerComplete(obj){
 			YoukuWs.playRadio();
 			return;
 		}
-		PlayMode = $("#PlayModeSet [name=set]:checked").val();
 		switch(parseInt(PlayMode)){
 				case 1:
 						YoukuWs.play(CurrentVideoID);
