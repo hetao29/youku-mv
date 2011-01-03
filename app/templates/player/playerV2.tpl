@@ -90,7 +90,7 @@
 												<div><button id="_IDSkip">{'跳过'|tr}</button><button id="_IDPlay" style="display:none">{'播放'|tr}</button><button id="_IDUp">{"顶"|tr}</button><button id="_IDDown">{"删"|tr}</button></div>
 										</div>
 										<div class="list" id="_IDLocalList" style="display:none">
-												<div style="padding-bottom:5px;text-align:left">
+												<div style="padding-bottom:5px;padding-top:5px;text-align:left">
 														<form onsubmit="search();return false;" style="vertical-align:middle">
 																<input style="vertical-align:middle" type="text" size="18" id="keywords" placeholder="请输入关键词" autofocus="" value="" autocomplete="off" class="ui-widget-content" />
 																<button id="_BtSearch" style="vertical-align:middle" class="ui-button ui-widget ui-state-default ui-corner-all">{'搜索'|tr}</button>
