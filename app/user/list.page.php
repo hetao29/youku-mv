@@ -105,14 +105,13 @@ class user_list{
 		return false;
 	}
 	function pageListContents($inPath){
-		if(($User=user_api::islogin())!==false && !empty($_REQUEST['lid'])){
+		if(!empty($_REQUEST['lid'])){
 				$db = new user_db;
 				$List = $db->getList($_REQUEST['lid']);
 				if(!empty($List)){
 						return $db->listContent($List['ListID']);
 				}
 		}
-		return false;
 	}
 }
 ?>
