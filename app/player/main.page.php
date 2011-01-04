@@ -203,9 +203,15 @@ class player_main extends SGui{
 	 * 读取歌词
 	 **/
 	function pageGetLyric($inPath){
-			$vid = $_REQUEST['vid'];
 			$db = new player_db;
+			$vid = $_REQUEST['vid'];
 			$api = new player_api;
+			//{{{把播放页url翻译成真正的vid
+			if(preg_match("/http\:\/\//i",$vid)){
+				$video = $api->getVideoInfo($vid);
+				$vid = $video->vid;
+			}
+			//}}}
 			$mv  = $api->getMvByVid($vid);
 			if(!empty($mv)){
 					$lyric = $db->getLyrics($mv['MvID']);
