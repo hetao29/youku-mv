@@ -287,7 +287,7 @@ class player_main extends SGui{
 					//节目显示页
 					$pid = $_m[1];
 					$st = 11;
-			}elseif(preg_match("/playlist_show\/id_(.*?)\./",$k,$_m)){
+			}elseif(preg_match("/playlist_show\/id_(\\d*)/",$k,$_m)){
 					//专辑显示页
 					$pid = $_m[1];
 					$st = 8;
