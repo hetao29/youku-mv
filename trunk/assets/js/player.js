@@ -1108,10 +1108,16 @@ var YoukuWsPlaylist = function(){
 				return $.parseJSON(YoukuWs.get("list"))||[];
 		};
 		o.save=function(){
-			o.empty();
+			var all = [];
 			$("#_ContentMusic >li").each(function(i,n){
-				YoukuWsPlaylist.add($(n).attr("mvid"),$(n).attr("vid"),$(n).find("a").html(),true);
+				var o=$(n);
+				var m = {};
+				m.v = o.attr("vid");
+				m.m = o.attr("mvid");
+				m.t = o.find("a").html();
+				all.push(m);
 			});
+			YoukuWs.set("list",JSON.stringify(all));
 		};
 		o.empty=function(){
 				YoukuWs.set("list",JSON.stringify([]));
