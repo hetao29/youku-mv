@@ -824,9 +824,44 @@ var YoukuWs = function(){
 								YoukuWs._realPlayRadio();
 				}
 		},
-		playRandom:function(){
-			var rand_num = Math.floor(Math.random()*$('#_ContentMusic li').size());
-			vid = $("#_ContentMusic li").eq(rand_num).attr("vid");
+		playRandom:function(pre){
+			if(randMusicList.length!=$('#_ContentMusic li').size()){
+				randMusicList=[];
+				$('#_ContentMusic li').each(function(i,n){
+						randMusicList.push($(n).attr("vid"));
+				});
+				randMusicList.sort(function(){return (Math.round(Math.random())-0.5);});
+			}
+			vid ="";
+			if(randMusicList.length>0){
+					if(pre){
+						for(var i=0;i<randMusicList.length;i++){
+								if(randMusicList[i]==CurrentVideoID){
+										if(randMusicList[i-1]){
+												vid = randMusicList[i-1];
+										}else{
+												vid = randMusicList[randMusicList.length-1];
+										}
+										break;
+								}
+						}
+					}else{
+						for(var i=0;i<randMusicList.length;i++){
+								if(randMusicList[i]==CurrentVideoID){
+										if(randMusicList[i+1]){
+												vid = randMusicList[i+1];
+										}else{
+												vid = randMusicList[0];
+										}
+										break;
+								}
+						}
+					}
+			}
+			if(!vid){
+				vid = $("#_ContentMusic li").first().attr("vid");
+				randMusicList=[];
+			}
 			if(vid)YoukuWs.play(vid);
 		},
 		/*播放下一个*/
@@ -841,7 +876,7 @@ var YoukuWs = function(){
 		},
 		/*播放上一个*/
 		playPre:function(){
-			if(parseInt(PlayMode)==3)return YoukuWs.playRandom();
+			if(parseInt(PlayMode)==3)return YoukuWs.playRandom(true);
 			 vid = CurrentVideoID;
 			 vid = $("#_ContentMusic [vid="+vid+"]").prev().attr("vid");
 			 if(!vid){
@@ -1109,6 +1144,8 @@ var PlayMode=2;
   * 0 电台
   * 1 列表播放
   */
+var randMusicList=[];
+var randMusicListIndex=0;
 var PlayType=0;
 //当前播放视频ID，主要是播放模式用
 var CurrentVideoID="";
