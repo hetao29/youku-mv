@@ -13,7 +13,7 @@ SlightPHP::setDefaultEntry("entry");
 
 SlightPHP::setSplitFlag("-_.");
 //{{{
-SDb::setConfigFile(SlightPHP::$appDir . "/index/db.ini.php");
+SDb::setConfigFile(SlightPHP::$appDir . "/db.ini.php");
 SLanguage::setLanguageDir(SlightPHP::$appDir."/../locale");
 //SLanguage::$defaultLocale="zh-CN";
 //SLanguage::setLocale("zh-CN");
