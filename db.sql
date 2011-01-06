@@ -82,6 +82,7 @@ ListUpdateTime timestamp,
 
 PRIMARY KEY (`ListID`),
 Key (`ListName`),
+Key (`ListOrder`),
 Key (`UserID`),
 Key (`ListType`),
 Key (`ListUpdateTime`),
