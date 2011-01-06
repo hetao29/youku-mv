@@ -2,8 +2,9 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 		<head>
 				<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+				<link rel="Shortcut Icon" href="/assets/images/ico/favicon_32x32.ico" />
 				<title>{'标题'|tr}</title>
-				{if defined($smarty.const.DEV)}
+{if defined($smarty.const.DEV)}
 				<script type="text/javascript" src="/assets/js/jquery-1.4.4.min.js"></script>
 				<script type="text/javascript" src="/assets/js/jquery-ui-1.8.7.custom.min.js"></script>
 				<script type="text/javascript" src="/assets/js/jquery.cookie.js"></script>
@@ -12,13 +13,11 @@
 				<script type="text/javascript" src="/assets/js/player.js"></script>
 				<link href="/assets/css/jquery-ui-1.8.6.custom-smoothness.css" media="all" rel="stylesheet" type="text/css" />
 				<link href="/assets/css/styleV2.css" media="all" rel="stylesheet" type="text/css" />
-				{else}
+{else}
 				<script type="text/javascript" src="/player.js"></script>
 				<link href="/player.css" media="all" rel="stylesheet" type="text/css" />
-				{/if}
-				<link rel="Shortcut Icon" href="/assets/images/ico/favicon_32x32.ico" />
+{/if}
 				<script type="text/javascript">
-
 						var _gaq = _gaq || [];
 						_gaq.push(['_setAccount', 'UA-20312728-1']);
 						_gaq.push(['_trackPageview']);
@@ -28,18 +27,17 @@
 						ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
 						var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
 						})();
-
 				</script>
 		</head>
-		<script>
+		<script type="text/javascript">
 				var _LabelOk="{'确认'|tr}";
 				var _LabelCancel="{'取消'|tr}";
 		</script>
 		<body>
-				{if !empty($facebook)}
+{if !empty($facebook)}
 				<div id="fb-root"></div>
 				<script src="http://connect.facebook.net/en_US/all.js"></script>
-				<script>
+				<script type="text/javascript">
 						window.fbAsyncInit = function() {
 						FB.init({
 						appId  : '173211992709193',
@@ -57,13 +55,12 @@
 						//						$( "#tabs" ).tabs();
 						//							});
 				</script>
-				{/if}
-
-				{if empty($facebook)}
+{/if}
+{if empty($facebook)}
 				<div class="header">
 						{part path="/player.main.header"}
 				</div>
-				{/if}
+{/if}
 				<div class="content">
 
 						<div class="main">
