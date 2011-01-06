@@ -63,6 +63,7 @@ class user_list{
 		return false;
 	}
 	function pageAddContents($inPath){
+		$result=false;
 		if(($User=user_api::islogin())!==false && !empty($_REQUEST['lids']) && !empty($_REQUEST['mvids'])){
 				$realLids=array();
 				if(is_numeric($_REQUEST['lids'])){
@@ -96,13 +97,12 @@ class user_list{
 				if(!empty($lists) && !empty($realMvids)){
 					foreach($lists as $list){
 							foreach($realMvids as $mvid){
-									$db->addListContent($list["ListID"],$mvid);
+									$result = $db->addListContent($list["ListID"],$mvid);
 							}
 					}
-					return true;
 				}
 		}
-		return false;
+		return $result;
 	}
 	function pageListContents($inPath){
 		if(!empty($_REQUEST['lid'])){
