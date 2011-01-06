@@ -612,18 +612,16 @@ var YoukuWs = function(){
 	function showLyric(str){
 			gc= new Array();
 			parseLyric(str);
-			$(".lyrics").html('');
-			//var tmp_top=0;
 			if(!gc ||gc.length==0)return;
+			var o = $(".lyrics");
+			o.html('');
 			for (var k=0;k<gc.length;k++)
 			{
 					if(gc[k].w==""){
 							gc[k].w="&nbsp;";
 					}
 					var c = '<div time="'+gc[k].t+'" id="_ID'+k+'">'+gc[k].w+'</div>';
-					$(".lyrics").append(c);
-					//gc[k].top = tmp_top;
-					//tmp_top+= $("#_ID"+k).height();
+					o.append(c);
 			}
 	}
 	
@@ -1001,12 +999,13 @@ var YoukuWs = function(){
 					url: "/player.main.listListen."+page,
 					dataType:"json",
 					success: function( result) {
-						$("#_ContentListen >ul" ).html('');
+						var o = $("#_ContentListen >ul");
+						o.html('');
 						for(var i=0;i<result.items.length;i++){
-							$("#_ContentListen >ul").append("<li>"+result.items[i].MvName+"</li>");
+							o.append("<li>"+result.items[i].MvName+"</li>");
 						}
 						var pager="<li><a onclick='YoukuWs.listListen(2)'>2</a></li>";
-						$("#_ContentListen >ul").append(pager);
+						o.append(pager);
 					}
 
 				});
@@ -1017,12 +1016,13 @@ var YoukuWs = function(){
 					url: "/player.main.listAction."+action+"."+page,
 					dataType:"json",
 					success: function( result) {
-						$("#_ContentListen >ul" ).html('');
+						var o =$("#_ContentListen >ul" );
+						o.html('');
 						for(var i=0;i<result.items.length;i++){
-							$("#_ContentListen >ul").append("<li>"+result.items[i].MvName+"</li>");
+							o.append("<li>"+result.items[i].MvName+"</li>");
 						}
 						var pager="";
-						$("#_ContentListen >ul").append(pager);
+						o.append(pager);
 					}
 
 				});
@@ -1033,9 +1033,10 @@ var YoukuWs = function(){
 					dataType:"json",
 					success: function( result) {
 						if(result && result.items && result.items.length>0){
+							var o = $("#_ContentList");
 							for(var i=0;i<result.items.length;i++){
 								var r='<li lid="'+result.items[i].ListID+'"><div class="left"><input value="'+result.items[i].ListID+'" style="vertical-align:top" type="checkbox"/><span class="name">'+result.items[i].ListName+'</span> ('+result.items[i].ListCount+'首)</div><div class="right hide"><span class="load">加载</span> <span class="empty">清空</span> <span class="del">删除</span> <span class="rename">改名</span></div><div class="clear"></div></li>';
-								$("#_ContentList").append(r);
+								o.append(r);
 							}
 							$( "#_ContentList >li" ).droppable({
 									accept:"#_ContentMusic >li,#_ContentSearch >li",
@@ -1268,8 +1269,9 @@ function search(page){
 	YoukuWs.set("keywords",$("#keywords").val());
 	var key = $("#keywords").val();
 	if(key=="")return;
-	$( "#_ContentSearch" ).html('<li><img style="vertical-align: middle;" src="/assets/images/loading/loading9.gif" /> 正在查找中...</li>');
-	$( "#_ContentSearch" ).dialog({
+	var o =$("#_ContentSearch");
+	o.html('<li><img style="vertical-align: middle;" src="/assets/images/loading/loading9.gif" /> 正在查找中...</li>');
+	o.dialog({
 				width:410,height:250
 				});
 	$.ajax({
@@ -1281,109 +1283,32 @@ function search(page){
 		},select:function(event,ui){
 		},success: function( data) {
 			$("#keywords").autocomplete("close");
-			$("#_ContentSearch").html('');
+			var o =$("#_ContentSearch");
+			o.html('');
 			if(!data || data.length==0){
-				$("#_ContentSearch").html('<li>没有找到,请换下搜索条件试试</li>');
+				o.html('<li>没有找到,请换下搜索条件试试</li>');
 			}else{
 				for(var i=0;i<data.length;i++){
-					var o = '<li title="点击播放:'+data[i].MvName+'" mvid="'+data[i].MvID+'" vid="'+data[i].MvVideoID+
+					var html = '<li title="点击播放:'+data[i].MvName+'" mvid="'+data[i].MvID+'" vid="'+data[i].MvVideoID+
 							'"><a><span class="left"><span class="handle ui-icon ui-icon-arrow-4"></span></span>'+
 							'<span class="left">'+ data[i].MvName+'</span>'+
 							'<span class="right">'+data[i].MvSeconds+'</span>'+
 							'<div class="clear"></div></a></li>';
-					$("#_ContentSearch").append(o);
+					o.append(html);
 				}
 			};
-			$( "#_ContentSearch" ).dialog({
-					width:410,height:250,
-					close:function(event,ui){
-					}
-			});
 		}
 
 	});
-	/*
-	$.getJSON("/player.main.search?k="+key, function(data){
-					alert(data);
-						data=data.replace(/<[^>]+>/g,"")
-						data=eval("("+data+")");
-		$("#keywords").autocomplete("close");
-		$("#_ContentSearch").html('');
-		if(!data || !data.item || data.item.length==0){
-			$("#_ContentSearch").html('<li>没有找到,请换下搜索条件试试</li>');
-		}else{
-			for(var i=0;i<data.item.length;i++){
-				var o = '<li title="点击播放:'+data.item[i].title+'" vid="'+data.item[i].videoid+
-						'"><a><span class="left"><span class="handle ui-icon ui-icon-arrow-4"></span></span>'+
-						'<span class="left">'+ data.item[i].title+'</span>'+
-						'<span class="right">'+data.item[i].duration+'</span>'+
-						'<div class="clear"></div></a></li>';
-				$("#_ContentSearch").append(o);
-			}
-		};
-		$( "#_ContentSearch" ).dialog({
-				width:410,height:250,
-				close:function(event,ui){
-				}
-		});
-	});
-	*/
 }
-//function parse(data) {
-//	data = data.replace("showresult('","").replace("',false)","");                                                                         
-//	var r = eval(data);                                                                                                                    
-//	var parsed=[];                                                                                                                         
-//	if(!r)return;
-//	for(var i=0;i<r.result.length;i++){                                                                                                    
-//		parsed[i]={                                                                                                                        
-//			data:r.result[i] ,                                                                                                             
-//			value:r.result[i].keyword ,                                                                                                    
-//			result:r.result[i].keyword
-//		}
-//	}
-//	return parsed;
-//}
 $("#keywords").ready(function(){
 	$("#keywords").change(function(){
 		YoukuWs.set("keywords",$("#keywords").val());
 	});
-	//return;
 	var keywords = YoukuWs.get("keywords");
 	if(keywords){
 		$("#keywords").val(keywords);
 	};
-		
-/*
-var availableTags = [
-			"ActionScript",
-			"AppleScript",
-			"Asp",
-			"BASIC",
-			"C",
-			"C++",
-			"Clojure",
-			"COBOL",
-			"ColdFusion",
-			"Erlang",
-			"Fortran",
-			"Groovy",
-			"Haskell",
-			"Java",
-			"JavaScript",
-			"Lisp",
-			"Perl",
-			"PHP",
-			"Python",
-			"Ruby",
-			"Scala",
-			"Scheme"
-		];
-
-		$( "#keywords" ).autocomplete({
-			source: availableTags
-		});
-
-*/
 	$("#keywords").autocomplete({
 		minLength:1,
 		source: function( request, response ) {
@@ -1411,10 +1336,3 @@ var availableTags = [
 	});
 	
 });
-
-//$("#_BtSearch").ready(function(){
-//	$("#_BtSearch").click(function(){
-//		search();
-//	});
-//});
-//}}}
