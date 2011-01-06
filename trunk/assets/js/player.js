@@ -478,11 +478,17 @@ var YoukuWs = function(){
 							"增加": function() {
 								var k =($("#_DialogAdd textarea").val());
 								$.ajax({type:"POST",dataType:"json",url:"/player.main.getVideo",data:{"k":k},success:function(msg){
+											var o=[];
 											for(var i=0;i<msg.length;i++){
 												if(msg[i].MvVideoID&& msg[i].MvName&& msg[i].MvSeconds){
-													YoukuWsPlaylist.add(msg[i].MvID,msg[i].MvVideoID,msg[i].MvName);
+													var item={};
+													item.vid=msg[i].MvVideoID;
+													item.mvid=msg[i].MvID;
+													item.title=msg[i].MvName;
+													o.push(item);
 												}
 											}
+											YoukuWsPlaylist.addArray(o);
 											$("#_DialogAdding").hide();
 											$("#_DialogAdd").dialog( "close" );
 										},beforeSend:function(xhr){
@@ -1074,10 +1080,15 @@ var YoukuWs = function(){
 					dataType:"json",
 					success: function( result) {
 						if(result && result.items && result.items.length>0){
+							var o=[];
 							for(var i=0;i<result.items.length;i++){
-								YoukuWsPlaylist.add(result.items[i].MvID,result.items[i].MvVideoID,result.items[i].MvName);
+								var item={};
+								item.vid=result.items[i].MvVideoID;
+								item.mvid=result.items[i].MvID;
+								item.title=result.items[i].MvName;
+								o.push(item);
 							}
-						}else{
+							YoukuWsPlaylist.addArray(o);
 						}
 
 					}
@@ -1088,53 +1099,59 @@ var YoukuWs = function(){
 }();
 var YoukuWsPlaylist = function(){
 		var o={};
-		o.add=function(mvid,vid,title,noappend){
+		o.addArray=function(arr,noappend){
 				var all = $.parseJSON(YoukuWs.get("list"))||[];
-				finded = false;
-				$.each(all,function(i,item){
-						if(item.v == vid){
-								finded = true;
-								all[i].t=title;
-						}
-				});
-				if(!finded){
+				for(var i=0;i<arr.length;i++){
 					var m = {};
-					m.v = vid;
-					m.m = mvid;
-					m.t= title;
-					all[all.length]=m;
-					if(!noappend){
-						var o = '<li mvid="'+mvid+'" vid="'+vid+'"><a>'+title+'</a></li>';
-						$("#_ContentMusic").append(o);
-						var t = 0;
-						var o = $("#_ContentMusic [vid="+vid+"]");
-						if(!o || !o.position())return;
-						t = o.position().top+o.outerHeight()-o.parent().height();
-						if(t>0){
-							t = o.parent().scrollTop() + o.position().top+o.height()-o.parent().height(); //432
-							o.parent().scrollTop(t);
-						}else if( t<0-(o.parent().height()-o.outerHeight())){
-							t = (o.parent().scrollTop()+o.position().top);
-							o.parent().scrollTop(t);
+					m.v = arr[i].vid;
+					m.m = arr[i].mvid;
+					m.t = arr[i].title;
+					finded = false;
+					$.each(all,function(i,item){
+							if(item.v == m.v){
+									finded = true;
+									return;
+							}
+					});
+					if(!finded){
+						all.push(m);
+						var html = '<li mvid="'+m.m+'" vid="'+m.v+'"><a>'+m.t+'</a></li>';
+						$("#_ContentMusic").append(html);
+						if(!noappend){
+							var t = 0;
+							var o = $("#_ContentMusic [vid="+m.v+"]");
+							if(!o || !o.position())return;
+							t = o.position().top+o.outerHeight()-o.parent().height();
+							if(t>0){
+								t = o.parent().scrollTop() + o.position().top+o.height()-o.parent().height();
+								o.parent().scrollTop(t);
+							}else if( t<0-(o.parent().height()-o.outerHeight())){
+								t = (o.parent().scrollTop()+o.position().top);
+								o.parent().scrollTop(t);
+							}
 						}
 					}
-				}
+				};
 				YoukuWs.set("list",JSON.stringify(all));
+		};
+		o.add=function(mvid,vid,title){
+				YoukuWsPlaylist.addArray([{vid:vid,mvid:mvid,title:title}]);
 		};
 		o.list=function(){
 				return $.parseJSON(YoukuWs.get("list"))||[];
 		};
 		o.save=function(){
+			this.empty();
 			var all = [];
 			$("#_ContentMusic >li").each(function(i,n){
 				var o=$(n);
 				var m = {};
-				m.v = o.attr("vid");
-				m.m = o.attr("mvid");
-				m.t = o.find("a").html();
+				m.vid = o.attr("vid");
+				m.mvid = o.attr("mvid");
+				m.title = o.find("a").html();
 				all.push(m);
 			});
-			YoukuWs.set("list",JSON.stringify(all));
+			YoukuWsPlaylist.addArray(all,true);
 		};
 		o.empty=function(){
 				YoukuWs.set("list",JSON.stringify([]));
