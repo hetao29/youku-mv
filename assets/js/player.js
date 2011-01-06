@@ -1101,6 +1101,7 @@ var YoukuWsPlaylist = function(){
 		var o={};
 		o.addArray=function(arr,noappend){
 				var all = $.parseJSON(YoukuWs.get("list"))||[];
+				var o   = $("#_ContentMusic");
 				for(var i=0;i<arr.length;i++){
 					var m = {};
 					m.v = arr[i].vid;
@@ -1116,7 +1117,7 @@ var YoukuWsPlaylist = function(){
 					if(!finded){
 						all.push(m);
 						var html = '<li mvid="'+m.m+'" vid="'+m.v+'"><a>'+m.t+'</a></li>';
-						$("#_ContentMusic").append(html);
+						o.append(html);
 					}
 				};
 				if(!noappend && m){
