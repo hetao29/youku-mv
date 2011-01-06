@@ -1088,7 +1088,7 @@ var YoukuWs = function(){
 								item.title=result.items[i].MvName;
 								o.push(item);
 							}
-							YoukuWsPlaylist.addArray(o);
+							YoukuWsPlaylist.addArray(o,true);
 						}
 
 					}
@@ -1117,18 +1117,18 @@ var YoukuWsPlaylist = function(){
 						all.push(m);
 						var html = '<li mvid="'+m.m+'" vid="'+m.v+'"><a>'+m.t+'</a></li>';
 						$("#_ContentMusic").append(html);
-						if(!noappend){
-							var t = 0;
-							var o = $("#_ContentMusic [vid="+m.v+"]");
-							if(!o || !o.position())return;
-							t = o.position().top+o.outerHeight()-o.parent().height();
-							if(t>0){
-								t = o.parent().scrollTop() + o.position().top+o.height()-o.parent().height();
-								o.parent().scrollTop(t);
-							}else if( t<0-(o.parent().height()-o.outerHeight())){
-								t = (o.parent().scrollTop()+o.position().top);
-								o.parent().scrollTop(t);
-							}
+					}
+					if(!noappend){
+						var t = 0;
+						var o = $("#_ContentMusic [vid="+m.v+"]");
+						if(!o || !o.position())return;
+						t = o.position().top+o.outerHeight()-o.parent().height();
+						if(t>0){
+							t = o.parent().scrollTop() + o.position().top+o.height()-o.parent().height();
+							o.parent().scrollTop(t);
+						}else if( t<0-(o.parent().height()-o.outerHeight())){
+							t = (o.parent().scrollTop()+o.position().top);
+							o.parent().scrollTop(t);
 						}
 					}
 				};
