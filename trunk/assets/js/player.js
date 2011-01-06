@@ -1049,8 +1049,8 @@ var YoukuWs = function(){
 												success: function( List) {
 													$("#_IDListDialogAdding").hide();
 													if(List){
-														alert("保存成功");
 														YoukuWs.listList();
+														alert("保存成功");
 													}else{
 														alert("已经成功添加");
 													}
