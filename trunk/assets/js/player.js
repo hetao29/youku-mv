@@ -1113,8 +1113,10 @@ var YoukuWsPlaylist = function(){
 									return;
 							}
 					});
-					if(!noappend && !finded){
+					if(!finded){
 						all.push(m);
+					};
+					if(!noappend && !finded){
 						var html = '<li mvid="'+m.m+'" vid="'+m.v+'"><a>'+m.t+'</a></li>';
 						content.append(html);
 						var t = 0;
