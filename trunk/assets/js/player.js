@@ -435,7 +435,7 @@ var YoukuWs = function(){
 			});
 			//{{{
 			PlayType = YoukuWs.get("PlayType",0);
-			$(".list").each(function(i,item){
+			$("#_IDRight >.list").each(function(i,item){
 					if(i==PlayType){
 						$("#_IDNav >li").eq(i).css("background-color","").show();
 						$(item).show();
@@ -449,7 +449,7 @@ var YoukuWs = function(){
 					$("#_IDNav >li").each(function(i,item){
 							if($(_this).html()==$(item).html()){
 								$(item).css("background-color","");
-								$(".list").eq(i).show();
+								$("#_IDRight >.list").eq(i).show();
 
 								//{{{ restore scrollTop
 								if(i==1 && window._ContentMusicTop>0){
@@ -464,7 +464,7 @@ var YoukuWs = function(){
 								}
 								//}}}
 								$(item).css("background-color","#ddd");
-								$(".list").eq(i).hide();
+								$("#_IDRight >.list").eq(i).hide();
 							}
 					});
 				});
@@ -517,7 +517,7 @@ var YoukuWs = function(){
 					dataType:"json",
 					success: function( List) {
 						if(List){
-							$('.header').load("/player.main.header");
+							$('_IDHeader').load("/player.main.header");
 							YoukuWs.listList();
 						}
 					}
@@ -608,11 +608,11 @@ var YoukuWs = function(){
 	});
 	var pre_index=0;
 	function showLyric(str){
+			var o = $("#_ContentLyrics");
+			o.html('');
 			gc= new Array();
 			parseLyric(str);
 			if(!gc ||gc.length==0)return;
-			var o = $(".lyrics");
-			o.html('');
 			for (var k=0;k<gc.length;k++)
 			{
 					if(gc[k].w==""){
@@ -689,18 +689,12 @@ var YoukuWs = function(){
 			YoukuWs.set("vid",CurrentVideoID);
 			//下载歌词
 			$.ajax({
-				url: "/player.main.getlyric",
+				url: "/player.main.getLyric",
 				data: {
 					vid:vid
 				},
-				//dataType:"json",
+				dataType:"json",
 				success: function( result) {
-					result=result.replace(/<[^>]+>/g,"");
-					try{
-						result=eval("("+result+")");
-					}catch(e){
-						result={};
-					}
 					if(result){
 				   		if(result.LyricsContent && result.LyricsContent!=""){
 							showLyric(result.LyricsContent);
@@ -749,7 +743,7 @@ var YoukuWs = function(){
 		},
 		checkTime:function(){
 			if(!o_lyrics){
-					o_lyrics = $('.lyrics');
+					o_lyrics = $('#_ContentLyrics');
 			}
 			var LyricTop = $("#_LyricsTop");
 			var r= PlayerInfo();
@@ -771,7 +765,7 @@ var YoukuWs = function(){
 			//向上移动
 			var LyricCurrent = $("#"+id);
 			//var t = l.top - 100;
-			var t = LyricCurrent.position().top + $("#_ContentLyrics").scrollTop()- 100;
+			var t = LyricCurrent.position().top + $("#_ContentLyrics").scrollTop()- 120;
 			LyricTop.show();
 			$("#_ContentLyrics .red").removeClass("red");
 			o_lyrics.animate({scrollTop:t+"px"},"fast","linear",function(){
@@ -985,7 +979,7 @@ var YoukuWs = function(){
 			if(this.get("token") && this.get("uid")){
 				$.post("/user.main.autologin","token="+this.get("token")+"&uid="+this.get("uid"),function(data){
 					if(data){
-						$('.header').load("/player.main.header");
+						$('#_IDHeader').load("/player.main.header");
 						//登录成功
 					}
 				},"json");
@@ -1332,5 +1326,4 @@ $("#keywords").ready(function(){
 			});
 		}
 	});
-	
 });

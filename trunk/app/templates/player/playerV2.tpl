@@ -57,7 +57,7 @@
 				</script>
 {/if}
 {if empty($facebook)}
-				<div class="header">
+				<div class="header" id="_IDHeader">
 						{part path="/player.main.header"}
 				</div>
 {/if}
@@ -67,7 +67,7 @@
 								<div class="left">
 										<div class="playerBox"><div id="player"></div></div>
 								</div>
-								<div class="right" style="width:256px">
+								<div id="_IDRight" class="right" style="width:256px">
 										<div style="padding-top:10px;">
 												<ul id="_IDNav">
 														<li style="padding:5px 15px;display:none;"><a>{'电台模式'|tr}</a></li>
@@ -124,14 +124,14 @@
 										<div class="list" id="_IDLyrics" style="display:none">
 												<div id="tabs-lyrics" style="width:240px;position:relative;">
 														<div id="_LyricsTop" class="lyrics_top" style="display:none;padding-left:5px;padding-right:5px;width:225px;"></div>
-														<div id="_ContentLyrics" class="lyrics" style="overflow:hidden;width:225px;height:278px;"></div>
+														<div id="_ContentLyrics" class="lyrics" style="overflow:hidden;width:225px;height:300px;"></div>
 														<div id="_IDLyricsAdmin" style="display:none">
 																<span id="_IDLyricsBk" style="cursor:pointer;border:1px solid;">{"后退"|tr}</span>
 																<span id="_IDLyricsPr" style="cursor:pointer;border:1px solid;">{"前进"|tr}</span> 
 																{*<span id="_IDLyricsEd" style="cursor:pointer;border:1px solid;">{"编辑"|tr}</span>*}
 																<span id="_IDLyricsErr" style="cursor:pointer;border:1px solid;">{"报错"|tr}</span>
 																<span id="_IDLyricsView" style="cursor:pointer;border:1px solid;">{"查看"|tr}</span>
-																<span id="_IDLyricsInfo" style="position:absolute;top:348px;left:180px;"></span>
+																<span id="_IDLyricsInfo" style="position:absolute;top:304px;left:200px;width:60px;"></span>
 														</div>
 												</div>
 										</div>
