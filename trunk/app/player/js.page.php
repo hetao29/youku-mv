@@ -1,5 +1,5 @@
 <?php
-class player_js extends SGui{
+class player_js{
 	function __construct(){
 	}
 	function __destruct(){
