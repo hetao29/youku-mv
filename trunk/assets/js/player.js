@@ -1037,9 +1037,26 @@ var YoukuWs = function(){
 									hoverClass: "ui-state-error",
 									tolerance:"pointer",
 									drop: function( event, ui ) {
-											setTimeout(function() { ui.draggable.remove(); }, 1);//fro ie patch
+											//setTimeout(function() { ui.draggable.remove(); }, 1);//fro ie patch
 											//TODO移动到另一个列表
-											alert("MV");
+											$.ajax({
+												url: "/user.list.addContents",
+												data: {
+													lids:$(this).attr("lid"),
+													mvids:$(ui.draggable).attr("mvid")
+												},type:"post",
+												dataType:"json",
+												success: function( List) {
+													$("#_IDListDialogAdding").hide();
+													if(List){
+														alert("保存成功");
+														YoukuWs.listList();
+													}else{
+														alert("已经成功添加");
+													}
+												}
+
+											});
 									}
 							});
 							$("#_CtListAdd").hide("fast");

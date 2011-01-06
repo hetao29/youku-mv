@@ -55,8 +55,9 @@ class user_db{
 	}
 	function addListContent($ListID,$MvID){
 		if($this->_db->insert("s_list_content",array("ListID"=>$ListID,"MvID"=>$MvID))){
-			$this->_db->update("s_list",array("ListID"=>$ListID),array("ListCount=ListCount+1"));
+			return $this->_db->update("s_list",array("ListID"=>$ListID),array("ListCount=ListCount+1"));
 		};
+		return false;
 	}
 	function listContent($ListID){
 			$this->_db->setLimit(-1);
