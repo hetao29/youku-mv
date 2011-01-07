@@ -11,8 +11,9 @@ class player_db{
 	function getMvByVid($vid){
 		return $this->_db->selectOne("s_mv",array("MvVideoID"=>$vid));
 	}
-	function getRandMv(){
-		return $this->_db->selectOne(
+	function getRandMv($pageSize=10){
+		$this->_db->setLimit($pageSize);
+		return $this->_db->select(
 					array("s_mv","s_list_content"),
 					array("s_mv.MvID=s_list_content.MvID","s_list_content.ListID"=>1),"","ORDER BY rand()");
 	}

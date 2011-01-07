@@ -785,7 +785,7 @@ var YoukuWs = function(){
 					}
 			});
 	
-	},
+		},
 		_realPlayRadio:function(){
 			var o= radioPlayList.shift();
 			$("#_IDRadio3").hide();
@@ -815,9 +815,8 @@ var YoukuWs = function(){
 						},
 						dataType:"json",
 						success: function( result) {
-							if(result){
-								radioPlayList=radioPlayList.concat(result);
-								//radioPlayList=(result);
+							if(result && result.items){
+								radioPlayList=radioPlayList.concat(result.items);
 								YoukuWs._realPlayRadio();
 							}
 						}

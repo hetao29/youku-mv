@@ -85,14 +85,7 @@ class player_main extends SGui{
 	}
 	function pageRadio($inPath){
 			$db = new player_db;
-			//$ct = $db->getMvCount();
-			//$mvid = $_REQUEST['mvid'];
-			//$result=array();
-			//$mvid=rand(1,$ct);
-			$result[] = $db->getRandMv();
-			//$mvid=rand(1,$ct);
-			$result[] = $db->getRandMv();
-			return $result;
+			return $db->getRandMv();
 			//电台频道
 			//0表示私有频道，其它表示频道ID，甚至包括电视频道
 			$chanelId= empty($_REQUEST['cid'])?0:$_REQUEST['cid'];
