@@ -229,4 +229,5 @@
 						</div>
 				</div>
 		</body>
+		<div style="display:none"><script src="http://s16.cnzz.com/stat.php?id=2780428&web_id=2780428&show=pic" language="JavaScript"></script></div>
 </html>
