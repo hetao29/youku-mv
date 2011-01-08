@@ -426,6 +426,16 @@ var YoukuWs = function(){
 			$("#_IDNav >li").click(function(){
 					var _this = this;
 					$("#_IDNav >li").each(function(i,item){
+								//{{{ save scrollTop
+								window._ContentMusicTop=window._ContentMusicTop?window._ContentMusicTop:0;
+								if($("#_ContentMusic").scrollTop()>0){
+									window._ContentMusicTop = $("#_ContentMusic").scrollTop();
+								}
+								//}}}
+								$(item).css("background-color","#ddd");
+								$("#_IDRight >.list").eq(i).hide();
+					});
+					$("#_IDNav >li").each(function(i,item){
 							if($(_this).html()==$(item).html()){
 								$(item).css("background-color","");
 								$("#_IDRight >.list").eq(i).show();
@@ -435,15 +445,6 @@ var YoukuWs = function(){
 									$("#_ContentMusic").scrollTop(window._ContentMusicTop);
 								}
 								//}}}
-							}else{
-								//{{{ save scrollTop
-								window._ContentMusicTop=window._ContentMusicTop?window._ContentMusicTop:0;
-								if($("#_ContentMusic").scrollTop()>0){
-									window._ContentMusicTop = $("#_ContentMusic").scrollTop();
-								}
-								//}}}
-								$(item).css("background-color","#ddd");
-								$("#_IDRight >.list").eq(i).hide();
 							}
 					});
 				});
