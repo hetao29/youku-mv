@@ -77,7 +77,12 @@ class player_main extends SGui{
 				}
 				if(($User=user_api::islogin())!==false){
 						$user_db = new user_db;
-						$result->record=$user_db->addAction(array("UserID"=>$User['UserID'],"MvID"=>$inPath[4],"ActionType"=>$actiontype));
+						$record=$user_db->addAction(array("UserID"=>$User['UserID'],"MvID"=>$inPath[4],"ActionType"=>$actiontype));
+						if($record==1){
+							$result->record=true;
+						}else{
+							$result->record=false;
+						}
 				}
 
 			}
@@ -189,8 +194,11 @@ class player_main extends SGui{
 					$vid = $_REQUEST['vid'];
 					$api = new player_api;
 					$mv=$api->getMvByVid($vid);
-					return $db->addListen(array("MvID"=>$mv['MvID'],"UserID"=>$User['UserID']));
+					if(($r=$db->addListen(array("MvID"=>$mv['MvID'],"UserID"=>$User['UserID'])))===1){
+							return true;
+					}
 			}
+			return false;
 	}
 	/**
 	 * 读取歌词

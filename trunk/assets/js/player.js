@@ -897,6 +897,7 @@ var YoukuWs = function(){
 				success: function( result) {
 					if(result&&result.type){
 						if(YoukuWs.isLogin()){
+							if(result.result && result.record){
 							switch(result.type){
 								case "down":$("#_CtDown").html(parseInt($("#_CtDown").html())+1);
 								break;
@@ -904,6 +905,7 @@ var YoukuWs = function(){
 								break;
 								case "skip":$("#_CtSkip").html(parseInt($("#_CtSkip").html())+1);
 								break;
+							}
 							}
 						}
 					}
@@ -1194,8 +1196,10 @@ var CurrentMvID=0;
 var radioPlayList=[];
 function onPlayerStart(obj){
 		if(YoukuWs.isLogin()){
-				$.ajax({type:"POST",url:"/player.main.addListen",data:{"vid":obj.vid},success:function(msg){
-							$("#_CtListen").html(parseInt($("#_CtListen").html())+1);
+				$.ajax({type:"POST",dataType:"json",url:"/player.main.addListen",data:{"vid":obj.vidEncoded},success:function(msg){
+							if(msg){
+								$("#_CtListen").html(parseInt($("#_CtListen").html())+1);
+							}
 						}
 				});
 		}
