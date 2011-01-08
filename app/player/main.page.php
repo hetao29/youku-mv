@@ -194,7 +194,7 @@ class player_main extends SGui{
 					$vid = $_REQUEST['vid'];
 					$api = new player_api;
 					$mv=$api->getMvByVid($vid);
-					if(($r=$db->addListen(array("MvID"=>$mv['MvID'],"UserID"=>$User['UserID'])))===1){
+					if(!empty($mv) && ($r=$db->addListen(array("MvID"=>$mv['MvID'],"UserID"=>$User['UserID'])))===1){
 							return true;
 					}
 			}
