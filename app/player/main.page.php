@@ -12,6 +12,9 @@ class player_main extends SGui{
 	function pageFaceBook($inPath){
 			return $this->pageEntry($inPath,1);
 	}
+	function pageRenren($inPath){
+			return $this->pageEntry($inPath,1);
+	}
 	function pageEntry($inPath,$facebook=0){
 		$param=array();
 		if(!empty($facebook)){
