@@ -339,20 +339,21 @@ var YoukuWs = function(){
 			}).live("mouseout",function(){$(this).find(".right").hide();
 			});
 			$( "#_ContentList" ).sortable({
-						//stop:function(event,ui){
-						//	$(this).find("li:not(.ui-sortable-placeholder)").each(function (index, domEle) { 
-
-						//		if(order[index]!=$(domEle).attr("vid")){
-						//		};
-						//	});
-						//},start:function(event,ui){
-						//	$(this).find("li:not(.ui-sortable-placeholder)").each(function (index, domEle) { 
-						//		order[index]=$(domEle).attr("vid");
-						//	});
-						//},remove:function(event,ui){
-						//		//alert("REMOVE");
-						//		//应该保存数据
-						//}
+						stop:function(event,ui){
+							var order=[];
+							$(this).find("li").each(function (index, domEle) { 
+								var o={lid:$(domEle).attr("lid"),order:index};
+								order.push(o);
+							});
+							$.ajax({
+								url: "/user.list.order",
+								type:"POST",
+								data: {
+									order:order
+								},
+								dataType:"json"
+							});
+						}
 					});
 			$("#_BtPre").click(function(){
 					PlayType=1;
@@ -483,7 +484,6 @@ var YoukuWs = function(){
 					}
 				});
 			}).show();
-			//$("#_BtSaveList").button({icons:{primary:"ui-icon-disk"}}).click(function(){
 			$("#_AListAdd").click(function(){
 				$("#_CtListAdd").toggle("fast");
 			});
@@ -560,7 +560,6 @@ var YoukuWs = function(){
 						YoukuWs.login(function(){$("#_BtSaveList").trigger("click");});
 					}
 			}).show();
-			//$("#_BtOpenList").button({ icons: { primary: "ui-icon-folder-open" } }).click(function(){
 			$("#_BtOpenList").button().click(function(){
 					if(YoukuWs.isLogin()){
 						//显示列表
@@ -1337,3 +1336,4 @@ $("#keywords").ready(function(){
 		}
 	});
 });
+//}}}
