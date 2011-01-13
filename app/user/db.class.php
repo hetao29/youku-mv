@@ -36,6 +36,13 @@ class user_db{
 	function addAction($Action){
 		return $this->_db->insert("s_user_action",$Action,true);
 	}
+	function delAction($UserID,$MvID,$ActionType=null){
+		$condition=array("UserID"=>$UserID,"MvID"=>$MvID);
+		if($ActionType!==null){
+				$condition['ActionType']=$ActionType;
+		}
+		return $this->_db->delete("s_user_action",$condition);
+	}
 	function getAction($UserID){
 		return $this->_db->select("s_user_action",array("UserID"=>$UserID),array("ActionType","count(*) ct"),$groupBy="group by ActionType");
 	}
@@ -45,7 +52,7 @@ class user_db{
 		return $this->_db->select(
 				array("s_user_action","s_mv"),
 				array("s_user_action.UserID"=>$UserID,"s_user_action.MvID=s_mv.MvID","s_user_action.ActionType"=>$ActionType),
-				array("s_user_action.MvID","MvName","MvVideoID","MvSeconds","ActionTime"),
+				array("s_user_action.MvID","s_user_action.ActionType","MvName","MvVideoID","MvSeconds","ActionTime"),
 				"ORDER BY ActionTime DESC"
 		);
 	}
@@ -59,12 +66,18 @@ class user_db{
 		};
 		return false;
 	}
+	function delListContent($ListID,$MvID){
+		if($this->_db->delete("s_list_content",array("ListID"=>$ListID,"MvID"=>$MvID))){
+			return $this->_db->update("s_list",array("ListID"=>$ListID),array("ListCount=ListCount-1"));
+		};
+		return false;
+	}
 	function listContent($ListID){
 			$this->_db->setLimit(-1);
 			return $this->_db->select(
 					array("s_mv","s_list_content"),
 					array("s_mv.MvID=s_list_content.MvID","s_list_content.ListID"=>$ListID),
-					array("s_mv.MvID","s_mv.MvName","s_mv.MvVideoID","s_list_content.ListID","s_list_content.MvOrder"),"ORDER BY MvOrder"
+					array("s_mv.MvID","s_mv.MvName","s_mv.MvSeconds","s_mv.MvVideoID","s_list_content.ListID","s_list_content.MvOrder"),"ORDER BY MvOrder"
 			);
 	}
 	function getListCount($UserID){
@@ -73,6 +86,9 @@ class user_db{
 	}
 	function updateListOrder($UserID,$ListID,$ListOrder){
 		return $this->_db->update("s_list",array("ListID"=>$ListID,"UserID"=>$UserID),array("ListOrder"=>$ListOrder));
+	}
+	function updateListContentsOrder($ListID,$MvID,$MvOrder){
+		return $this->_db->update("s_list_content",array("ListID"=>$ListID,"MvID"=>$MvID),array("MvOrder"=>$MvOrder));
 	}
 	function editList($ListID,$List){
 		return $this->_db->update("s_list",array("ListID"=>$ListID),$List);

@@ -223,7 +223,7 @@
 								</div>
 						</div>
 						<div id="_ContentListen" style="display:none">
-								<ul style="padding:15px;margin:auto;text-align:center">
+								<ul style="padding:15px;margin:auto;">
 										<li></li>
 								</ul>
 						</div>

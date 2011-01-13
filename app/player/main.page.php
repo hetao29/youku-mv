@@ -91,6 +91,15 @@ class player_main extends SGui{
 			}
 			return $result;
 	}
+	function pageDelAction($inPath){
+		if(($User=user_api::islogin())!==false && isset($_REQUEST['actiontype']) && !empty($_REQUEST['mvid'])){
+				$MvID = $_REQUEST['mvid'];
+				$ActionType = $_REQUEST['actiontype'];
+				$UserID=$User['UserID'];
+				$db = new user_db;
+				return $db->delAction($UserID,$MvID,$ActionType);
+		}
+	}
 	function pageRadio($inPath){
 			$db = new player_db;
 			return $db->getRandMv();
