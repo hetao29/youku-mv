@@ -116,6 +116,9 @@ class user_db{
 	function addListen($Listen){
 		return $this->_db->insert("s_user_listen",$Listen,false,false,array("ListenTotal=ListenTotal+1","ListenTime=CURRENT_TIMESTAMP"));
 	}
+	function delListen($UserID,$MvID){
+		return $this->_db->delete("s_user_listen",array("UserID"=>$UserID,"MvID"=>$MvID));
+	}
 	/*收听日志*/
 	function ListListen($UserID,$page,$pageSize=10){
 		$this->_db->setLimit($pageSize);
