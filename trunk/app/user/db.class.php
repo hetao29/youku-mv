@@ -70,6 +70,9 @@ class user_db{
 		$row = $this->_db->selectOne("s_list",array("UserID"=>$UserID),array("count(*) ct"));
 		return $row['ct'];
 	}
+	function updateListOrder($UserID,$ListID,$ListOrder){
+		return $this->_db->update("s_list",array("ListID"=>$ListID,"UserID"=>$UserID),array("ListOrder"=>$ListOrder));
+	}
 	function editList($ListID,$List){
 		return $this->_db->update("s_list",array("ListID"=>$ListID),$List);
 	}

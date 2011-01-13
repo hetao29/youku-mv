@@ -48,6 +48,17 @@ class user_list{
 		}
 		return false;
 	}
+	//保存列表顺序
+	function pageOrder($inPath){
+		if(($User=user_api::islogin())!==false && !empty($_REQUEST['order'])){
+				$UserID=$User['UserID'];
+				$db = new user_db;
+				foreach($_REQUEST['order'] as $order){
+					$db->updateListOrder($UserID,$order['lid'],$order['order']);
+					print_r($order);
+				}
+		}
+	}
 	function pageEdit($inPath){
 		if(($User=user_api::islogin())!==false && !empty($_REQUEST['ListID']) && !empty($_REQUEST['ListName'])){
 				$ListName = strip_tags($_REQUEST['ListName']);
