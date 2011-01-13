@@ -50,14 +50,15 @@ class user_list{
 	}
 	//保存列表顺序
 	function pageOrder($inPath){
+		$result=false;
 		if(($User=user_api::islogin())!==false && !empty($_REQUEST['order'])){
 				$UserID=$User['UserID'];
 				$db = new user_db;
 				foreach($_REQUEST['order'] as $order){
-					$db->updateListOrder($UserID,$order['lid'],$order['order']);
-					print_r($order);
+					$result|=$db->updateListOrder($UserID,$order['lid'],$order['order']);
 				}
 		}
+		return $result;
 	}
 	function pageEdit($inPath){
 		if(($User=user_api::islogin())!==false && !empty($_REQUEST['ListID']) && !empty($_REQUEST['ListName'])){
