@@ -63,7 +63,8 @@ class user_db{
 			$this->_db->setLimit(-1);
 			return $this->_db->select(
 					array("s_mv","s_list_content"),
-					array("s_mv.MvID=s_list_content.MvID","s_list_content.ListID"=>$ListID)
+					array("s_mv.MvID=s_list_content.MvID","s_list_content.ListID"=>$ListID),
+					array("s_mv.MvID","s_mv.MvName","s_mv.MvVideoID","s_list_content.ListID","s_list_content.MvOrder"),"ORDER BY MvOrder"
 			);
 	}
 	function getListCount($UserID){
