@@ -102,7 +102,11 @@ class player_main extends SGui{
 	}
 	function pageRadio($inPath){
 			$db = new player_db;
-			return $db->getRandMv();
+			$UserID=0;
+			if(($User=user_api::islogin())!==false){
+					$UserID= $User['UserID'];
+			}
+			return $db->getRandMv($ListID=1,$UserID);
 			//电台频道
 			//0表示私有频道，其它表示频道ID，甚至包括电视频道
 			$chanelId= empty($_REQUEST['cid'])?0:$_REQUEST['cid'];

@@ -11,11 +11,24 @@ class player_db{
 	function getMvByVid($vid){
 		return $this->_db->selectOne("s_mv",array("MvVideoID"=>$vid));
 	}
-	function getRandMv($pageSize=10){
+	function getRandMv($ListID=1,$UserID=0,$pageSize=50){
 		$this->_db->setLimit($pageSize);
+		if(!empty($UserID) && is_numeric($UserID)){
+			return $this->_db->select(
+					array("s_mv","s_list_content"),
+					array(
+							"s_mv.MvID=s_list_content.MvID",
+							"s_list_content.ListID"=>$ListID,
+							"s_mv.MvID not in(select MvID from s_user_action where UserID=$UserID and ActionType!=2)"
+					)
+					,array("s_mv.MvID","s_mv.MvName","s_mv.MvVideoID","s_mv.MvSeconds","s_mv.MvPic")
+					,"ORDER BY rand()");
+		}
 		return $this->_db->select(
 					array("s_mv","s_list_content"),
-					array("s_mv.MvID=s_list_content.MvID","s_list_content.ListID"=>1),"","ORDER BY rand()");
+					array("s_mv.MvID=s_list_content.MvID","s_list_content.ListID"=>$ListID)
+					,array("s_mv.MvID","s_mv.MvName","s_mv.MvVideoID","s_mv.MvSeconds","s_mv.MvPic")
+					,"ORDER BY rand()");
 	}
 	function getMv($mvid){
 		return $this->_db->selectOne("s_mv",array("MvID"=>$mvid));
