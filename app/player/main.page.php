@@ -212,6 +212,15 @@ class player_main extends SGui{
 			}
 			return false;
 	}
+	function pageDelListen($inPath){
+			if(($User=user_api::islogin())!==false){
+					$db = new user_db;
+					$UserID= $User['UserID'];
+					$MvID = $_REQUEST['mvid'];
+					return $db->delListen($UserID,$MvID);
+			}
+			return false;
+	}
 	/**
 	 * 读取歌词
 	 **/

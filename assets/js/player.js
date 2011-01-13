@@ -394,6 +394,18 @@ var YoukuWs = function(){
 							setTimeout(function() { $(_this).parents("li").remove(); }, 1);//fro ie patch
 						}
 					});
+				}else if(type=="listen"){
+					$.ajax({
+						url: "/player.main.delListen",
+						data: {
+							mvid:mvid
+						},type:"post",
+						dataType:"json",
+						success: function( result) {
+							$('#_IDHeader').load("/player.main.header");
+							setTimeout(function() { $(_this).parents("li").remove(); }, 1);//fro ie patch
+						}
+					});
 				};
 				return false;
 			});
@@ -1169,10 +1181,12 @@ var YoukuWs = function(){
 									drop: function( event, ui ) {
 											//setTimeout(function() { ui.draggable.remove(); }, 1);//fro ie patch
 											//TODO移动到另一个列表
+											var lid=$(this).attr("lid");
+											if(!lid)return;
 											$.ajax({
 												url: "/user.list.addContents",
 												data: {
-													lids:$(this).attr("lid"),
+													lids:lid,
 													mvids:$(ui.draggable).attr("mvid")
 												},type:"post",
 												dataType:"json",
