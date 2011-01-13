@@ -1110,6 +1110,7 @@ var YoukuWs = function(){
 			}
 		},
 		listListen:function(page){
+				$("#_ContentListen DIV").html("");
 				$("#_ContentListen >ul" ).html('<li><img style="vertical-align: middle;" src="/assets/images/loading/loading9.gif" /> 正在加载中...</li>');
 				$.ajax({
 					url: "/player.main.listListen."+page,
@@ -1125,20 +1126,27 @@ var YoukuWs = function(){
 							'</li>';
 							o.append(html);
 						}
-						var pager="<li><a onclick='YoukuWs.listListen(2)'>2</a></li>";
+						var pager="<div>";
+						if(parseInt(result.page)-2>0)pager+="<a onclick='YoukuWs.listListen("+(parseInt(result.page)-2)+")'>"+(parseInt(result.page)-2)+"</a>";
+						if(parseInt(result.page)-1>0)pager+="<a onclick='YoukuWs.listListen("+(parseInt(result.page)-1)+")'>"+(parseInt(result.page)-1)+"</a>";
+						pager+="<b>"+result.page+"</b>";
+						if(parseInt(result.page)+1<=result.totalPage)pager+="<a onclick='YoukuWs.listListen("+(parseInt(result.page)+1)+")'>"+(parseInt(result.page)+1)+"</a>";
+						if(parseInt(result.page)+2<=result.totalPage)pager+="<a onclick='YoukuWs.listListen("+(parseInt(result.page)+2)+")'>"+(parseInt(result.page)+2)+"</a>";
+						pager+="</div>";
 						o.append(pager);
 					}
 
 				});
 		},
 		listAction:function(action,page){
+				$("#_ContentListen DIV").html("");
 				$("#_ContentListen >ul" ).html('<li><img style="vertical-align: middle;" src="/assets/images/loading/loading9.gif" /> 正在加载中...</li>');
 				$.ajax({
 					url: "/player.main.listAction."+action+"."+page,
 					dataType:"json",
 					success: function( result) {
 						var o = $("#_ContentListen >ul");
-						o.html('');
+						o.html("");
 						for(var i=0;i<result.items.length;i++){
 							var html='<li type="action" actiontype="'+result.items[i].ActionType+'" mvname="'+result.items[i].MvName+'" vid="'+result.items[i].MvVideoID+'" mvid="'+result.items[i].MvID+'">'+
 							'<span class="left">'+result.items[i].MvName+'</span>'+
@@ -1147,15 +1155,14 @@ var YoukuWs = function(){
 							'</li>';
 							o.append(html);
 						}
-						var pager="<li><a onclick='YoukuWs.listListen(2)'>2</a></li>";
-						o.append(pager);
-						//var o =$("#_ContentListen >ul" );
-						//o.html('');
-						//for(var i=0;i<result.items.length;i++){
-						//	o.append("<li>"+result.items[i].MvName+"</li>");
-						//}
-						//var pager="";
-						//o.append(pager);
+						var pager="<div>";
+						if(parseInt(result.page)-2>0)pager+="<a onclick='YoukuWs.listAction(\""+action+"\","+(parseInt(result.page)-2)+")'>"+(parseInt(result.page)-2)+"</a>";
+						if(parseInt(result.page)-1>0)pager+="<a onclick='YoukuWs.listAction(\""+action+"\","+(parseInt(result.page)-1)+")'>"+(parseInt(result.page)-1)+"</a>";
+						pager+="<b>"+result.page+"</b>";
+						if(parseInt(result.page)+1<=result.totalPage)pager+="<a onclick='YoukuWs.listAction(\""+action+"\","+(parseInt(result.page)+1)+")'>"+(parseInt(result.page)+1)+"</a>";
+						if(parseInt(result.page)+2<=result.totalPage)pager+="<a onclick='YoukuWs.listAction(\""+action+"\","+(parseInt(result.page)+2)+")'>"+(parseInt(result.page)+2)+"</a>";
+						pager+="</div>";
+						$("#_ContentListen").append(pager);
 					}
 
 				});
