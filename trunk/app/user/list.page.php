@@ -60,6 +60,21 @@ class user_list{
 		}
 		return $result;
 	}
+	//保存列表内容顺序
+	function pageContentsOrder($inPath){
+		$result=false;
+		if(($User=user_api::islogin())!==false && !empty($_REQUEST['order']) && !empty($_REQUEST['lid'])){
+				$UserID=$User['UserID'];
+				$ListID=$_REQUEST['lid'];
+				$db = new user_db;
+				$List = $db->getList($_REQUEST['lid']);
+				if(empty($List) || $List['UserID']!=$UserID)return false;
+				foreach($_REQUEST['order'] as $order){
+					$result|=$db->updateListContentsOrder($ListID,$order['mvid'],$order['order']);
+				}
+		}
+		return $result;
+	}
 	function pageEdit($inPath){
 		if(($User=user_api::islogin())!==false && !empty($_REQUEST['ListID']) && !empty($_REQUEST['ListName'])){
 				$ListName = strip_tags($_REQUEST['ListName']);
@@ -92,13 +107,6 @@ class user_list{
 				}
 				$api = new player_api;
 				$db = new user_db;
-				//$mvs=array();
-				//foreach($realVids as $vid){
-				//	$mv=$api->getMvByVid($vid);
-				//	if(!empty($mv)){
-				//		$mvs[]=$mv;
-				//	}
-				//}
 				$lists=array();
 				foreach($realLids as $lid){
 					$list=$db->getList($lid);
@@ -115,6 +123,19 @@ class user_list{
 							}
 					}
 				}
+		}
+		return $result;
+	}
+	function pageDelContent($inPath){
+		$result=false;
+		if(($User=user_api::islogin())!==false && !empty($_REQUEST['lid']) && !empty($_REQUEST['mvid'])){
+				$UserID=$User['UserID'];
+				$ListID=$_REQUEST['lid'];
+				$MvID=$_REQUEST['mvid'];
+				$db = new user_db;
+				$List = $db->getList($ListID);
+				if(empty($List) || $List['UserID']!=$UserID)return false;
+				$result=$db->delListContent($ListID,$MvID);
 		}
 		return $result;
 	}

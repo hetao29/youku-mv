@@ -97,7 +97,7 @@ var YoukuWs = function(){
 				});
 				YoukuWs.listListen(1);
 			});
-			$("#_ContentMusic >li,#_ContentSearch >li").live('click',function(){
+			$("#_ContentMusic >li,#_ContentListen >ul >li,#_ContentSearch >li").live('click',function(){
 					//{{{播放模式
 					PlayType=1;
 					YoukuWs.set("PlayType",PlayType);
@@ -219,10 +219,10 @@ var YoukuWs = function(){
 					activeClass: "ui-state-highlight",
 					hoverClass: "ui-state-error",
 					tolerance:"pointer",
-					accept:"#_ContentSearch >li",
+					accept:"#_ContentSearch >li,#_ContentListen >ul >li",
 							drop: function( event, ui ) {
 									//这里是从搜索结果拖到当前播放列表
-									YoukuWsPlaylist.add(ui.draggable.attr("mvid"),ui.draggable.attr('vid'),ui.draggable.find("span").eq(2).html());
+									YoukuWsPlaylist.add(ui.draggable.attr("mvid"),ui.draggable.attr('vid'),ui.draggable.attr("mvname"));
 									//TODO 服务保存
 									setTimeout(function() { ui.draggable.remove(); }, 1);//fro ie patch
 							}
@@ -301,6 +301,102 @@ var YoukuWs = function(){
 				var lid = $(this).parents("li").attr("lid");
 				YoukuWs.listContents(lid);
 			});
+			$("#_ContentListen >ul").sortable({
+				stop:function(event,ui){
+					var order=[];
+					var lid=0;
+					$(this).find("li").each(function (index, domEle) { 
+						lid = $(domEle).attr("lid");
+						if(index!=$(domEle).attr("ord")){
+							var o={order:index,mvid:$(domEle).attr("mvid")};
+							order.push(o);
+						}
+					});
+					if(order.length==0 || lid==0)return;
+					$.ajax({
+						url: "/user.list.contentsorder",
+						type:"POST",
+						data: {
+							order:order,lid:lid
+						},
+						dataType:"json",
+						success: function( result) {
+							//应该修改当前的ord值
+							for(var i in  order){
+								$("#_ContentListen >ul >li[mvid="+order[i].mvid+"]").attr("ord",order[i].order);
+							}
+						}
+					});
+				}
+			});
+			$( "#_ContentList >li .edit" ).live("click",function(){
+				var lid = $(this).parents("li").attr("lid");
+				$("#_ContentListen >ul" ).html('<li><img style="vertical-align: middle;" src="/assets/images/loading/loading9.gif" /> 正在加载中...</li>');
+				$("#_ContentListen").dialog({
+					width:400,height:300, buttons: [
+					{
+						text:_LabelOk,
+						click: function() {
+							$("#_ContentListen").dialog("close");
+						}
+					}
+					]
+				});
+				$.ajax({
+					url: "/user.list.listContents",
+					data:{lid:lid},
+					dataType:"json",
+					success: function( result) {
+						if(result && result.items && result.items.length>0){
+							var o = $("#_ContentListen >ul");
+							o.html('');
+							for(var i=0;i<result.items.length;i++){
+								var html='<li type="list" mvname="'+result.items[i].MvName+'" vid="'+result.items[i].MvVideoID+'" lid="'+result.items[i].ListID+'" ord="'+result.items[i].MvOrder+'" mvid="'+result.items[i].MvID+'">'+
+								'<span class="left">'+result.items[i].MvName+'</span>'+
+								'<span class="right">'+result.items[i].MvSeconds+' <a class="delMv">X</a></span>'+
+								'<div class="clear"></div>'+
+								'</li>';
+								o.append(html);
+							}
+						}
+					}
+				});
+			});
+			$( "#_ContentListen .delMv" ).live("click",function(){
+				var type= $(this).parents("li").attr("type");
+				var mvid= $(this).parents("li").attr("mvid");
+				var _this=this;
+				if(type=="list"){
+					var lid= $(this).parents("li").attr("lid");
+					//删除列表里的歌曲
+					$.ajax({
+						url: "/user.list.delcontent",
+						data: {
+							lid:lid,
+							mvid:mvid
+						},type:"post",
+						dataType:"json",
+						success: function( result) {
+							setTimeout(function() { $(_this).parents("li").remove(); }, 1);//fro ie patch
+						}
+					});
+				}else if(type=="action"){
+					var actiontype = $(this).parents("li").attr("actiontype");
+					$.ajax({
+						url: "/player.main.delAction",
+						data: {
+							actiontype:actiontype,
+							mvid:mvid
+						},type:"post",
+						dataType:"json",
+						success: function( result) {
+							$('#_IDHeader').load("/player.main.header");
+							setTimeout(function() { $(_this).parents("li").remove(); }, 1);//fro ie patch
+						}
+					});
+				};
+				return false;
+			});
 			$( "#_ContentList >li .rename" ).live("click",function(){
 				var lname = $(this).parents("li").find(".name").html();//attr("lid");
 				var lid = $(this).parents("li").attr("lid");
@@ -342,16 +438,25 @@ var YoukuWs = function(){
 						stop:function(event,ui){
 							var order=[];
 							$(this).find("li").each(function (index, domEle) { 
-								var o={lid:$(domEle).attr("lid"),order:index};
-								order.push(o);
+								if(index!=$(domEle).attr("ord")){
+									var o={lid:$(domEle).attr("lid"),order:index};
+									order.push(o);
+								}
 							});
+							if(order.length==0)return;
 							$.ajax({
 								url: "/user.list.order",
 								type:"POST",
 								data: {
 									order:order
 								},
-								dataType:"json"
+								dataType:"json",
+								success: function( result) {
+									//应该修改当前的ord值
+									for(var i in  order){
+										$("#_ContentList >li[lid="+order[i].lid+"]").attr("ord",order[i].order);
+									}
+								}
 							});
 						}
 					});
@@ -497,7 +602,7 @@ var YoukuWs = function(){
 					dataType:"json",
 					success: function( List) {
 						if(List){
-							$('_IDHeader').load("/player.main.header");
+							$('#_IDHeader').load("/player.main.header");
 							YoukuWs.listList();
 						}
 					}
@@ -1001,7 +1106,12 @@ var YoukuWs = function(){
 						var o = $("#_ContentListen >ul");
 						o.html('');
 						for(var i=0;i<result.items.length;i++){
-							o.append("<li>"+result.items[i].MvName+"</li>");
+							var html='<li type="listen" mvname="'+result.items[i].MvName+'" vid="'+result.items[i].MvVideoID+'" mvid="'+result.items[i].MvID+'">'+
+							'<span class="left">'+result.items[i].MvName+'</span>'+
+							'<span class="right">'+result.items[i].MvSeconds+' <a class="delMv">X</a></span>'+
+							'<div class="clear"></div>'+
+							'</li>';
+							o.append(html);
 						}
 						var pager="<li><a onclick='YoukuWs.listListen(2)'>2</a></li>";
 						o.append(pager);
@@ -1015,13 +1125,25 @@ var YoukuWs = function(){
 					url: "/player.main.listAction."+action+"."+page,
 					dataType:"json",
 					success: function( result) {
-						var o =$("#_ContentListen >ul" );
+						var o = $("#_ContentListen >ul");
 						o.html('');
 						for(var i=0;i<result.items.length;i++){
-							o.append("<li>"+result.items[i].MvName+"</li>");
+							var html='<li type="action" actiontype="'+result.items[i].ActionType+'" mvname="'+result.items[i].MvName+'" vid="'+result.items[i].MvVideoID+'" mvid="'+result.items[i].MvID+'">'+
+							'<span class="left">'+result.items[i].MvName+'</span>'+
+							'<span class="right">'+result.items[i].MvSeconds+' <a class="delMv">X</a></span>'+
+							'<div class="clear"></div>'+
+							'</li>';
+							o.append(html);
 						}
-						var pager="";
+						var pager="<li><a onclick='YoukuWs.listListen(2)'>2</a></li>";
 						o.append(pager);
+						//var o =$("#_ContentListen >ul" );
+						//o.html('');
+						//for(var i=0;i<result.items.length;i++){
+						//	o.append("<li>"+result.items[i].MvName+"</li>");
+						//}
+						//var pager="";
+						//o.append(pager);
 					}
 
 				});
@@ -1034,7 +1156,9 @@ var YoukuWs = function(){
 						if(result && result.items && result.items.length>0){
 							var o = $("#_ContentList");
 							for(var i=0;i<result.items.length;i++){
-								var r='<li lid="'+result.items[i].ListID+'"><div class="left"><input value="'+result.items[i].ListID+'" style="vertical-align:top" type="checkbox"/><span class="name">'+result.items[i].ListName+'</span> ('+result.items[i].ListCount+'首)</div><div class="right hide"><span class="load">加载</span> <span class="empty">清空</span> <span class="del">删除</span> <span class="rename">改名</span></div><div class="clear"></div></li>';
+								var r='<li ord="'+result.items[i].ListOrder+'" lid="'+result.items[i].ListID+'"><div class="left"><input value="'+result.items[i].ListID+'" style="vertical-align:top" type="checkbox"/><span class="name">'+result.items[i].ListName+'</span> ('+result.items[i].ListCount+'首)</div><div class="right hide">';
+								if(result.items[i].ListCount>0)r+='<span class="edit">歌曲整理</span> ';
+								r+='<span class="load">加载</span> <span class="empty">清空</span> <span class="del">删除</span> <span class="rename">改名</span></div><div class="clear"></div></li>';
 								o.append(r);
 							}
 							$( "#_ContentList >li" ).droppable({
@@ -1290,7 +1414,7 @@ function search(page){
 				o.html('<li>没有找到,请换下搜索条件试试</li>');
 			}else{
 				for(var i=0;i<data.length;i++){
-					var html = '<li title="点击播放:'+data[i].MvName+'" mvid="'+data[i].MvID+'" vid="'+data[i].MvVideoID+
+					var html = '<li mvname="'+data[i].MvName+'" title="点击播放:'+data[i].MvName+'" mvid="'+data[i].MvID+'" vid="'+data[i].MvVideoID+
 							'"><a><span class="left"><span class="handle ui-icon ui-icon-arrow-4"></span></span>'+
 							'<span class="left">'+ data[i].MvName+'</span>'+
 							'<span class="right">'+data[i].MvSeconds+'</span>'+
