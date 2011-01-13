@@ -575,17 +575,7 @@ var YoukuWs = function(){
 							"增加": function() {
 								var k =($("#_DialogAdd textarea").val());
 								$.ajax({type:"POST",dataType:"json",url:"/player.main.getVideo",data:{"k":k},success:function(msg){
-											var o=[];
-											for(var i=0;i<msg.length;i++){
-												if(msg[i].MvVideoID&& msg[i].MvName&& msg[i].MvSeconds){
-													var item={};
-													item.vid=msg[i].MvVideoID;
-													item.mvid=msg[i].MvID;
-													item.title=msg[i].MvName;
-													o.push(item);
-												}
-											}
-											YoukuWsPlaylist.addArray(o);
+											YoukuWsPlaylist.addArray(msg);
 											$("#_DialogAdding").hide();
 											$("#_DialogAdd").dialog( "close" );
 										},beforeSend:function(xhr){
@@ -1226,15 +1216,7 @@ var YoukuWs = function(){
 					dataType:"json",
 					success: function( result) {
 						if(result && result.items && result.items.length>0){
-							var o=[];
-							for(var i=0;i<result.items.length;i++){
-								var item={};
-								item.vid=result.items[i].MvVideoID;
-								item.mvid=result.items[i].MvID;
-								item.title=result.items[i].MvName;
-								o.push(item);
-							}
-							YoukuWsPlaylist.addArray(o);
+							YoukuWsPlaylist.addArray(result.items);
 						}
 
 					}
@@ -1248,11 +1230,12 @@ var YoukuWsPlaylist = function(){
 		o.addArray=function(arr,noappend){
 				var all = $.parseJSON(YoukuWs.get("list"))||[];
 				var content   = $("#_ContentMusic");
+				var isappend=false;
 				for(var i=0;i<arr.length;i++){
 					var m = {};
-					m.v = arr[i].vid;
-					m.m = arr[i].mvid;
-					m.t = arr[i].title;
+					m.v = arr[i].MvVideoID;
+					m.m = arr[i].MvID;
+					m.t = arr[i].MvName;
 					finded = false;
 					$.each(all,function(i,item){
 							if(item.v == m.v){
@@ -1266,23 +1249,26 @@ var YoukuWsPlaylist = function(){
 					if(!noappend && !finded){
 						var html = '<li mvid="'+m.m+'" vid="'+m.v+'"><a>'+m.t+'</a></li>';
 						content.append(html);
-						var t = 0;
-						var o = $("#_ContentMusic [vid="+m.v+"]");
-						if(!o || !o.position())return;
-						t = o.position().top+o.outerHeight()-o.parent().height();
-						if(t>0){
-							t = o.parent().scrollTop() + o.position().top+o.height()-o.parent().height();
-							o.parent().scrollTop(t);
-						}else if( t<0-(o.parent().height()-o.outerHeight())){
-							t = (o.parent().scrollTop()+o.position().top);
-							o.parent().scrollTop(t);
-						}
+						isappend=true;
 					}
 				};
+				if(isappend){
+					var t = 0;
+					var o = $("#_ContentMusic [vid="+m.v+"]");
+					if(!o || !o.position())return;
+					t = o.position().top+o.outerHeight()-o.parent().height();
+					if(t>0){
+						t = o.parent().scrollTop() + o.position().top+o.height()-o.parent().height();
+						o.parent().scrollTop(t);
+					}else if( t<0-(o.parent().height()-o.outerHeight())){
+						t = (o.parent().scrollTop()+o.position().top);
+						o.parent().scrollTop(t);
+					}
+				}
 				YoukuWs.set("list",JSON.stringify(all));
 		};
 		o.add=function(mvid,vid,title){
-				YoukuWsPlaylist.addArray([{vid:vid,mvid:mvid,title:title}]);
+				YoukuWsPlaylist.addArray([{MvVideoID:vid,MvID:mvid,MvName:title}]);
 		};
 		o.list=function(){
 				return $.parseJSON(YoukuWs.get("list"))||[];
@@ -1293,9 +1279,9 @@ var YoukuWsPlaylist = function(){
 			$("#_ContentMusic >li").each(function(i,n){
 				var o=$(n);
 				var m = {};
-				m.vid = o.attr("vid");
-				m.mvid = o.attr("mvid");
-				m.title = o.find("a").html();
+				m.MvVideoID= o.attr("vid");
+				m.MvID= o.attr("mvid");
+				m.MvName= o.find("a").html();
 				all.push(m);
 			});
 			YoukuWsPlaylist.addArray(all,true);
