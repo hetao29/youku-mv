@@ -110,8 +110,8 @@ class user_list{
 					foreach($lists as $list){
 							$i=0;
 							foreach($realMvids as $mvid){
-									$i++;
 									$result = $db->addListContent($list["ListID"],$mvid,$i);
+									$i++;
 							}
 					}
 				}
