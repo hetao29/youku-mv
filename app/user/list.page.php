@@ -108,8 +108,10 @@ class user_list{
 				}
 				if(!empty($lists) && !empty($realMvids)){
 					foreach($lists as $list){
+							$i=0;
 							foreach($realMvids as $mvid){
-									$result = $db->addListContent($list["ListID"],$mvid);
+									$i++;
+									$result = $db->addListContent($list["ListID"],$mvid,$i);
 							}
 					}
 				}
