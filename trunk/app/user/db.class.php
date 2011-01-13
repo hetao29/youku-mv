@@ -46,7 +46,7 @@ class user_db{
 	function getAction($UserID){
 		return $this->_db->select("s_user_action",array("UserID"=>$UserID),array("ActionType","count(*) ct"),$groupBy="group by ActionType");
 	}
-	function listAction($UserID,$ActionType,$page,$pageSize=10){
+	function listAction($UserID,$ActionType,$page,$pageSize=50){
 		$this->_db->setLimit($pageSize);
 		$this->_db->setPage($page);
 		return $this->_db->select(
@@ -120,7 +120,7 @@ class user_db{
 		return $this->_db->delete("s_user_listen",array("UserID"=>$UserID,"MvID"=>$MvID));
 	}
 	/*收听日志*/
-	function ListListen($UserID,$page,$pageSize=10){
+	function ListListen($UserID,$page,$pageSize=50){
 		$this->_db->setLimit($pageSize);
 		$this->_db->setPage($page);
 		return $this->_db->select(

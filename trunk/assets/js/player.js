@@ -331,6 +331,7 @@ var YoukuWs = function(){
 			});
 			$( "#_ContentList >li .edit" ).live("click",function(){
 				var lid = $(this).parents("li").attr("lid");
+				$("#_ContentListen DIV").html("");
 				$("#_ContentListen >ul" ).html('<li><img style="vertical-align: middle;" src="/assets/images/loading/loading9.gif" /> 正在加载中...</li>');
 				$("#_ContentListen").dialog({
 					width:400,height:300, buttons: [
