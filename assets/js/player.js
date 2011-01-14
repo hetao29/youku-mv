@@ -1,9 +1,4 @@
 //{{{主方法
-//$(document).keyup(function(event){
-//	if(event.keyCode==122){//F11
-//		YoukuWs.fullScreen=!YoukuWs.fullScreen;
-//	}
-//});
 var YoukuWs = function(){
 	var fullScreen=false;
 	var o_lyrics;
@@ -16,6 +11,41 @@ var YoukuWs = function(){
 
 	var order=[];
 	$(document).ready(function(){
+			$("#_IDFullscreen").click(function(){
+					if(!YoukuWs.fullScreen){
+						$("#playerBox").removeClass("playerBox");
+						$("#playerBox").addClass("playerBoxFullscreen");
+					}else{
+						$("#playerBox").removeClass("playerBoxFullscreen");
+						$("#playerBox").addClass("playerBox");
+					}
+					YoukuWs.fullScreen=!YoukuWs.fullScreen;
+					
+			});
+			$(document).mousemove(function(e){
+				if($(document).height()-e.pageY<100){
+					var t = $(document).height()-$("#fullscreen").height();
+					var l = ($(document).width()-$("#fullscreen").width())/2;
+					$("#fullscreen").css({top:t,width:"100%",left:l});
+					$("#fullscreen").show();
+				}else{
+					$("#fullscreen").hide();
+				}
+			}); 
+			$(window).resize(function(){
+				if($(document).height()+24>=screen.height && $(window).width()==screen.width){
+					//认为是全屏
+					$("#playerBox").removeClass("playerBox");
+					$("#playerBox").addClass("playerBoxFullscreen");
+					YoukuWs.fullScreen=true;
+				}else{
+					$("#playerBox").removeClass("playerBoxFullscreen");
+					$("#playerBox").addClass("playerBox");
+					YoukuWs.fullScreen=false;
+				}
+				//$('#status').html("resize"+", "+$(window).height()+", "+$(document).height()+", "+screen.height);
+				//$('#status').html("resize"+", "+$(window).width()+", "+$(document).width()+", "+screen.width);
+			});
 			$("#_IDPlay").click(function(){
 					//{{{播放模式
 					PlayType=0;

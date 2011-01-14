@@ -138,6 +138,15 @@ li{
 		width:480px;
 		height:371px;
 }
+.playerBoxFullscreen{
+		padding:0px;
+		width:100%;
+		z-index:99;
+		height:100%;
+		position:absolute;
+		top:0px;
+		left:0px;
+}
 .lyrics{
 		margin:auto;
 		margin:5px;
