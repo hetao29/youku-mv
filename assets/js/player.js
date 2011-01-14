@@ -23,10 +23,9 @@ var YoukuWs = function(){
 					
 			});
 			$(document).mousemove(function(e){
-				if($(document).height()-e.pageY<100){
+				if($(document).height()-e.pageY<100 && YoukuWs.fullScreen){
 					var t = $(document).height()-$("#fullscreen").height();
-					var l = ($(document).width()-$("#fullscreen").width())/2;
-					$("#fullscreen").css({top:t,width:"100%",left:l});
+					$("#fullscreen").css({top:t,width:"100%"});
 					$("#fullscreen").show();
 				}else{
 					$("#fullscreen").hide();
@@ -1403,6 +1402,9 @@ function _player(moviename) {
 };
 function PlayerColor(bgcolor,gracolor,trans){
 		return _player().setSkinColor(bgcolor,gracolor,trans);
+};
+function PlayerPause(flag){
+	    return _player().pauseVideo(flag);
 };
 function PlayerInfo(){
 		try{
