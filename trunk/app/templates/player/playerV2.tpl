@@ -65,7 +65,7 @@
 
 						<div class="main">
 								<div class="left">
-										<div class="playerBox"><div id="player"></div></div>
+										<div id="playerBox" class="playerBox"><div id="player"></div></div>
 								</div>
 								<div id="_IDRight" class="right" style="width:256px">
 										<div style="padding-top:10px;">
@@ -227,6 +227,7 @@
 										<li></li>
 								</ul>
 						</div>
+						<div id="fullscreen" style="display:none;z-index:100;width:100%;text-align:center;position:absolute;"><button id="_IDFullscreen">fullscreen</button></div>
 				</div>
 		</body>
 		<div style="display:none"><script src="http://s16.cnzz.com/stat.php?id=2780428&web_id=2780428&show=pic" language="JavaScript"></script></div>
