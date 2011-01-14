@@ -227,6 +227,9 @@
 										<li></li>
 								</ul>
 						</div>
+{*<a onclick="PlayerPause(true)">d</a>
+						<a onclick="PlayerPause(false)">e</a>
+*}
 						<div id="fullscreen" style="display:none;z-index:100;width:100%;text-align:center;position:absolute;"><button id="_IDFullscreen">fullscreen</button></div>
 				</div>
 		</body>
