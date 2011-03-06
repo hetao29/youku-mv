@@ -23,6 +23,7 @@ UserEmail varchar(200),
 ParterID int(10) unsigned NOT NULL default 0 COMMENT '站外合作伙伴',
 UserPassword varchar(200),
 UserStatus tinyint not null default 1 COMMENT '1正常',
+UserType tinyint(10) unsigned NOT NULL default 0 COMMENT '用户组,0普通用户,1管理员',
 
 PRIMARY KEY (`UserID`),
 UNIQUE KEY `UserEmail` (`UserEmail`,`ParterID`),
