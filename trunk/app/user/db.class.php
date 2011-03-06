@@ -111,6 +111,11 @@ class user_db{
 	function ListList($UserID){
 		return $this->_db->select("s_list",array("UserID"=>$UserID),"*","ORDER BY ListOrder");
 	}
+	function ListAllList($page=1,$limit=50){
+		$this->_db->setPage($page);
+		$this->_db->setLimit($limit);
+		return $this->_db->select("s_list",array(),"*","ORDER BY ListOrder");
+	}
 	//}}}
 	/*增加收听日志*/
 	function addListen($Listen){

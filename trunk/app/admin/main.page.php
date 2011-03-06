@@ -16,6 +16,9 @@ class admin_main extends SGui{
 	function __destruct(){
 	}
 	function pageEntry($inPath){
+		$page=empty($inPath[3])?1:$inPath[3];
+		$db = new user_db;
+		$param['lists']= $db->ListAllList($page);
 		echo $this->render("admin/main.tpl",$param);
 	}
 }
