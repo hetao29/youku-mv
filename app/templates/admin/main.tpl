@@ -19,6 +19,19 @@
 				{/if}
 		</head>
 		<body>
-				OK
+				<h1>电台维护</h1>
+				<table border=1>
+						<tr>
+								<td>顺序号</td><td>曲目</td><td>类型</td><td>用户ID</td><td>名字</td></tr>
+						{foreach item=item from=$lists->items}
+						<tr>
+								<td>{$item.ListOrder}</td>
+								<td>{$item.ListCount}</td>
+								<td>{if $item.ListType==0}用户列表{else}<span class="red">电台频道</span>{/if}</td>
+								<td>{$item.UserID}</td>
+								<td>{$item.ListName}</td>
+						</tr>
+						{/foreach}
+				</table>
 		</body>
 </html>
