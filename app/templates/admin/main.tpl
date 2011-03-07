@@ -23,9 +23,10 @@
 				<h1>电台维护</h1>
 				<table border=1 id="_IDLists">
 						<tr>
-								<td>顺序号</td><td>曲目</td><td>类型</td><td>用户ID</td><td>名字</td><td>&nbsp;</td></tr>
+								<td>节目ID</td><td>顺序号</td><td>曲目</td><td>类型</td><td>用户ID</td><td>名字</td><td>&nbsp;</td></tr>
 						{foreach item=item from=$lists->items}
 						<tr>
+								<td>{$item.ListID}</td>
 								<td>{$item.ListOrder}</td>
 								<td>{$item.ListCount}</td>
 								<td>{if $item.ListType==0}用户列表{else}<span class="red">电台频道</span>{/if}</td>
@@ -42,7 +43,7 @@
 								<ul>
 										<li>名称:<span class="name"></span></li>
 										<li>类型:<select name="ListType" class="type"><option value=0>用户类型</option><option value=1>电台视频</option></select></li>
-										<li>顺序:<input class="order" name="ListOrder" type="text"/></li>
+										<li>顺序:<input readonly class="order" name="ListOrder" type="text"/></li>
 										<li><input type="hidden" class="id" name="ListID" value=""/></li>
 								</ul>
 								<button value="修改" class="commit">修改</button>
