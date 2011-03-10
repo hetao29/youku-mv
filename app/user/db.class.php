@@ -114,10 +114,10 @@ class user_db{
 	function ListAllList($page=1,$limit=50){
 		$this->_db->setPage($page);
 		$this->_db->setLimit($limit);
-		return $this->_db->select("s_list",array(),"*","ORDER BY ListType DESC ,ListOrder ASC");
+		return $this->_db->select("s_list",array(),"*","ORDER BY ListType DESC ,EditOrder ASC");
 	}
 	function ListRadioList(){
-		return $this->_db->select("s_list",array("ListType"=>1),"*","ORDER BY ListOrder ASC");
+		return $this->_db->select("s_list",array("ListType"=>1),"*","ORDER BY EditOrder ASC");
 	}
 	//}}}
 	/*增加收听日志*/
