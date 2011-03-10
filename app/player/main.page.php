@@ -334,6 +334,17 @@ class player_main extends SGui{
 			if(!empty($pid)){
 					$r = SHttp::get("http://api.youku.com/api_ptvideo/st_$st",array("pid"=>"XOA==","rt"=>3,"pz"=>100,"sv"=>$pid));
 					$r = SJson::decode($r);
+					$totalPage=1;
+					if(!empty($r->totalSize) && !empty($r->pageSize)){
+							$totalPage = ceil($r->totalSize / $r->pageSize);
+					}
+					if($totalPage>1){
+						for($i=2;$i<=$totalPage;$i++){
+							$r2 = SHttp::get("http://api.youku.com/api_ptvideo/st_$st",array("pid"=>"XOA==","rt"=>3,"pz"=>100,"pg"=>$i,"sv"=>$pid));
+							$r2 = SJson::decode($r2);
+							if(!empty($r2))$r->item=array_merge($r->item,$r2->item);
+						}
+					}
 					$db= new player_db;
 					foreach($r->item as $item){
 						$vid = $item->videoid;
