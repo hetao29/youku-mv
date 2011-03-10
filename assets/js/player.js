@@ -77,7 +77,7 @@ var YoukuWs = function(){
 									dsb="";
 								}
 								//$("#_RadioChannel ul").append("<li><button "+dsb+" id='"+result.items[i].ListID+"'>播放</button> "+result.items[i].ListName+"("+result.items[i].ListCount+"个视频)</li>");
-								$("#_RadioChannel ul").append("<li><button "+dsb+" id='"+result.items[i].ListID+"'>播放</button> "+result.items[i].ListName+"个视频)</li>");
+								$("#_RadioChannel ul").append("<li><button "+dsb+" id='"+result.items[i].ListID+"'>播放</button> "+result.items[i].ListName+"</li>");
 							}
 							//$("#_RadioChannel button[id="+cid+"]").attr("disabled","disabled");
 							//$("#_RadioChannel button[id!="+cid+"]").removeAttr("disabled");
@@ -989,6 +989,7 @@ var YoukuWs = function(){
 						dataType:"json",
 						success: function( result) {
 							if(result && result.items){
+								YoukuWs.set("cid",result.cid);
 								radioPlayList=radioPlayList.concat(result.items);
 								YoukuWs._realPlayRadio();
 							}
