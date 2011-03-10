@@ -29,8 +29,8 @@ class admin_main extends SGui{
 		$db = new user_db;
 		$ListID=!empty($_REQUEST['ListID'])?$_REQUEST['ListID']:0;
 		$ListType=!empty($_REQUEST['ListType'])?$_REQUEST['ListType']:0;
-		$ListOrder=!empty($_REQUEST['ListOrder'])?$_REQUEST['ListOrder']:0;
+		$EditOrder=!empty($_REQUEST['EditOrder'])?$_REQUEST['EditOrder']:0;
 		if(empty($ListID))return false;
-		return $db->editList($ListID,array("ListType"=>$ListType,"ListOrder"=>$ListOrder));
+		return $db->editList($ListID,array("ListType"=>$ListType,"EditOrder"=>$EditOrder));
 	}
 }
