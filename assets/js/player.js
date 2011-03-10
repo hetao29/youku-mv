@@ -62,21 +62,40 @@ var YoukuWs = function(){
 			}).button({icons:{primary:"ui-icon-seek-next"}});
 			$("#_IDChange").click(function(){
 				//换台模式
-				var cid = YoukuWs.get("cid");
-				$("#_RadioChannel button[id="+cid+"]").attr("disabled","disabled");
-				$("#_RadioChannel button[id!="+cid+"]").removeAttr("disabled");
-				$("#_RadioChannel").dialog({
-					width:400,height:300
+				$.ajax({
+					url: "/player.main.radioList",
+					dataType:"json",type:"post",
+					success: function( result) {
+						if(result && result.items){
+							$("#_RadioChannel ul").html("");
+							for(var i=0;i<result.items.length;i++){
+								var cid = YoukuWs.get("cid");
+								var dsb ="";
+								if(cid==result.items[i].ListID){
+									dsb="disabled='disabled'";
+								}else{
+									dsb="";
+								}
+								//$("#_RadioChannel ul").append("<li><button "+dsb+" id='"+result.items[i].ListID+"'>播放</button> "+result.items[i].ListName+"("+result.items[i].ListCount+"个视频)</li>");
+								$("#_RadioChannel ul").append("<li><button "+dsb+" id='"+result.items[i].ListID+"'>播放</button> "+result.items[i].ListName+"个视频)</li>");
+							}
+							//$("#_RadioChannel button[id="+cid+"]").attr("disabled","disabled");
+							//$("#_RadioChannel button[id!="+cid+"]").removeAttr("disabled");
+							$("#_RadioChannel").dialog({
+								width:400,height:300
+							});
+							$("#_RadioChannel button").live("click",function(){
+								$("#_RadioChannel").dialog("close");
+								//alert($(this).attr("id"));
+								YoukuWs.set("cid",$(this).attr("id"));
+								radioPlayList=[];
+								YoukuWs.playRadio();
+							});
+							$("#_RadioChannel button").button({icons:{primary:"ui-icon-play"}});
+						}
+					}
 				});
 			}).button();
-			$("#_RadioChannel button").live("click",function(){
-				$("#_RadioChannel").dialog("close");
-				//alert($(this).attr("id"));
-				YoukuWs.set("cid",$(this).attr("id"));
-				radioPlayList=[];
-				YoukuWs.playRadio();
-			});
-			$("#_RadioChannel button").button({icons:{primary:"ui-icon-play"}});
 			$("#_IDDown").click(function(){
 					YoukuWs.MvAction("down",CurrentMvID);
 					YoukuWs.playRadio();

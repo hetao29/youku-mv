@@ -21,10 +21,14 @@ class player_main extends SGui{
 			$param=array("facebook"=>1);
 		}
 		//获取电台列表
-		$db = new user_db;
-		$param['radios'] = $db->ListRadioList();
+		//$db = new user_db;
+		//$param['radios'] = $db->ListRadioList();
 		//
 		echo $this->render("player/playerV2.tpl",$param);
+	}
+	function pageRadioList($inPath){
+		$db = new user_db;
+		return $db->ListRadioList();
 	}
 	function pageHeader($inPath){
 
