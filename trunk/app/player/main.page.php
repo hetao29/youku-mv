@@ -116,8 +116,19 @@ class player_main extends SGui{
 			if(($User=user_api::islogin())!==false){
 					$UserID= $User['UserID'];
 			}
-			$chanelId= empty($_REQUEST['cid'])?1:$_REQUEST['cid'];
-			return $db->getRandMv($chanelId,$UserID);
+			$chanelId=1;
+			$db_user = new user_db;
+			$radios = $db_user->ListRadioList();
+			if(empty($_REQUEST['cid'])){
+					if(!empty($radios->items)){
+							$chanelId=$radios->items[0]['ListID'];
+					}
+			}else{
+					$chanelId=$_REQUEST['cid'];
+			}
+			$r = $db->getRandMv($chanelId,$UserID);
+			$r->cid = $chanelId;
+			return $r;
 			//电台频道
 			//0表示私有频道，其它表示频道ID，甚至包括电视频道
 			//视频ID，当前的视频ID
