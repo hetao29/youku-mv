@@ -123,10 +123,12 @@
 										</div>
 										<div title="电台选择" id="_RadioChannel" style="display:none">
 <ul>
+{*
 {foreach item=item from=$radios->items}
 	<li><button {if empty($item.ListCount)}disabled{/if} id="{$item.ListID}" ct="{$item.ListCount}">播放</button> {$item.ListName}({$item.ListCount}个视频)</li>
 {/foreach}
-</li>
+*}
+</ul>
 										</div>
 										<div class="list" id="_IDLyrics" style="display:none">
 												<div id="tabs-lyrics" style="width:240px;position:relative;">

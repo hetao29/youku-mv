@@ -15,6 +15,9 @@ KEY `SingerID` (`SingerID`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 */
 
+/*
+ParterID 1:Youku
+*/
 drop table s_user;
 create table s_user(
 UserID int(10) unsigned NOT NULL AUTO_INCREMENT,
