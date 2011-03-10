@@ -20,6 +20,8 @@ class player_main extends SGui{
 		if(!empty($facebook)){
 			$param=array("facebook"=>1);
 		}
+		$param['jsversion']=filemtime(WWW_ROOT."/"."assets/js/youku.ws.js");
+		$param['cssversion']=filemtime(WWW_ROOT."/"."assets/css/styleV2.css");
 		//获取电台列表
 		//$db = new user_db;
 		//$param['radios'] = $db->ListRadioList();

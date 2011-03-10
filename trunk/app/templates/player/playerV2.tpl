@@ -14,8 +14,8 @@
 				<link href="/assets/css/jquery-ui-1.8.6.custom-smoothness.css" media="all" rel="stylesheet" type="text/css" />
 				<link href="/assets/css/styleV2.css" media="all" rel="stylesheet" type="text/css" />
 {else}
-				<script type="text/javascript" src="/player.js"></script>
-				<link href="/player.css" media="all" rel="stylesheet" type="text/css" />
+				<script type="text/javascript" src="{'/player.js'|version:$jsversion}"></script>
+				<link href="{'/player.css'|version:$cssversion}" media="all" rel="stylesheet" type="text/css" />
 {/if}
 				<script type="text/javascript">
 						var _gaq = _gaq || [];
