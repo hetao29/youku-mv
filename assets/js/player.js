@@ -60,6 +60,23 @@ var YoukuWs = function(){
 					//}}}
 					YoukuWs.playRadio();
 			}).button({icons:{primary:"ui-icon-seek-next"}});
+			$("#_IDChange").click(function(){
+				//换台模式
+				var cid = YoukuWs.get("cid");
+				$("#_RadioChannel button[id="+cid+"]").attr("disabled","disabled");
+				$("#_RadioChannel button[id!="+cid+"]").removeAttr("disabled");
+				$("#_RadioChannel").dialog({
+					width:400,height:300
+				});
+			}).button();
+			$("#_RadioChannel button").live("click",function(){
+				$("#_RadioChannel").dialog("close");
+				//alert($(this).attr("id"));
+				YoukuWs.set("cid",$(this).attr("id"));
+				radioPlayList=[];
+				YoukuWs.playRadio();
+			});
+			$("#_RadioChannel button").button({icons:{primary:"ui-icon-play"}});
 			$("#_IDDown").click(function(){
 					YoukuWs.MvAction("down",CurrentMvID);
 					YoukuWs.playRadio();
@@ -947,7 +964,7 @@ var YoukuWs = function(){
 					$.ajax({
 						url: "/player.main.radio",
 						data: {
-							cid:0,
+							cid:YoukuWs.get("cid"),
 							mvid:CurrentMvID
 						},
 						dataType:"json",

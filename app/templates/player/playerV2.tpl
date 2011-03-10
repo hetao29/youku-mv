@@ -84,7 +84,7 @@
 														</div>
 												</div>
 												<div id="_IDRadio3" style="height:150px"></div>
-												<div><button id="_IDSkip">{'跳过'|tr}</button><button id="_IDPlay" style="display:none">{'播放'|tr}</button><button id="_IDUp">{"顶"|tr}</button><button id="_IDDown">{"删"|tr}</button></div>
+												<div><button id="_IDSkip">{'跳过'|tr}</button><button id="_IDChange">{'换台'|tr}</button><button id="_IDPlay" style="display:none">{'播放'|tr}</button><button id="_IDUp">{"顶"|tr}</button><button id="_IDDown">{"删"|tr}</button></div>
 										</div>
 										<div class="list" id="_IDLocalList" style="display:none">
 												<div style="padding-bottom:5px;padding-top:5px;text-align:left">
@@ -120,6 +120,13 @@
 														</div>
 												</div>
 
+										</div>
+										<div title="电台选择" id="_RadioChannel" style="display:none">
+<ul>
+{foreach item=item from=$radios->items}
+	<li><button {if empty($item.ListCount)}disabled{/if} id="{$item.ListID}" ct="{$item.ListCount}">播放</button> {$item.ListName}({$item.ListCount}个视频)</li>
+{/foreach}
+</li>
 										</div>
 										<div class="list" id="_IDLyrics" style="display:none">
 												<div id="tabs-lyrics" style="width:240px;position:relative;">

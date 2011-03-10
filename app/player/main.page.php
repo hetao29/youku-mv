@@ -20,6 +20,10 @@ class player_main extends SGui{
 		if(!empty($facebook)){
 			$param=array("facebook"=>1);
 		}
+		//获取电台列表
+		$db = new user_db;
+		$param['radios'] = $db->ListRadioList();
+		//
 		echo $this->render("player/playerV2.tpl",$param);
 	}
 	function pageHeader($inPath){
@@ -106,10 +110,10 @@ class player_main extends SGui{
 			if(($User=user_api::islogin())!==false){
 					$UserID= $User['UserID'];
 			}
-			return $db->getRandMv($ListID=1,$UserID);
+			$chanelId= empty($_REQUEST['cid'])?1:$_REQUEST['cid'];
+			return $db->getRandMv($chanelId,$UserID);
 			//电台频道
 			//0表示私有频道，其它表示频道ID，甚至包括电视频道
-			$chanelId= empty($_REQUEST['cid'])?0:$_REQUEST['cid'];
 			//视频ID，当前的视频ID
 			$vid = $_REQUEST['vid'];
 			//如果是登录用户，在s_user_listen中找出不是这个用户听过的最新的歌，如果没有，就去s_mv 中找

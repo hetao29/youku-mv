@@ -116,6 +116,9 @@ class user_db{
 		$this->_db->setLimit($limit);
 		return $this->_db->select("s_list",array(),"*","ORDER BY ListType DESC ,ListOrder ASC");
 	}
+	function ListRadioList(){
+		return $this->_db->select("s_list",array("ListType"=>1),"*","ORDER BY ListOrder ASC");
+	}
 	//}}}
 	/*增加收听日志*/
 	function addListen($Listen){
