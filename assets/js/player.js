@@ -901,7 +901,7 @@ var YoukuWs = function(){
 					if(PlayType!=0){//非收听模式
 					//{{{
 						var t = 0;
-						var o = $("#_ContentMusic [vid="+vid+"]");
+						var o = $("#_ContentMusic [vid='"+vid+"']");
 						if(!o || !o.position())return;
 						t = o.position().top+o.outerHeight()-o.parent().height();
 						if(t>0){
@@ -916,7 +916,7 @@ var YoukuWs = function(){
 					//}}}
 						$("#_ContentMusic >li").removeClass("current");
 						o.addClass('current');
-						YoukuWs.setTitle($("#_ContentMusic [vid="+vid+"] A").html());
+						YoukuWs.setTitle($("#_ContentMusic [vid='"+vid+"'] A").html());
 					}
 			});
 		},
@@ -1043,7 +1043,7 @@ var YoukuWs = function(){
 		playNext:function(){
 			if(parseInt(PlayMode)==3)return YoukuWs.playRandom();
 			vid = CurrentVideoID;
-			vid = $("#_ContentMusic [vid="+vid+"]").next().attr("vid");
+			vid = $("#_ContentMusic [vid='"+vid+"']").next().attr("vid");
 			if(!vid){
 				vid = $("#_ContentMusic li").first().attr("vid");
 			}
@@ -1053,7 +1053,7 @@ var YoukuWs = function(){
 		playPre:function(){
 			if(parseInt(PlayMode)==3)return YoukuWs.playRandom(true);
 			 vid = CurrentVideoID;
-			 vid = $("#_ContentMusic [vid="+vid+"]").prev().attr("vid");
+			 vid = $("#_ContentMusic [vid='"+vid+"']").prev().attr("vid");
 			 if(!vid){
 			 vid = $("#_ContentMusic li").last().attr("vid");
 			 }
@@ -1320,7 +1320,7 @@ var YoukuWsPlaylist = function(){
 				};
 				if(isappend){
 					var t = 0;
-					var o = $("#_ContentMusic [vid="+m.v+"]");
+					var o = $("#_ContentMusic [vid='"+m.v+"']");
 					if(!o || !o.position())return;
 					t = o.position().top+o.outerHeight()-o.parent().height();
 					if(t>0){
@@ -1404,7 +1404,7 @@ function onPlayerStart(obj){
 }
 function onPlayerError(vid){
 		if(PlayType!=0){
-		var h = $("#_ContentMusic [vid="+vid+"] A[error!=1]");
+		var h = $("#_ContentMusic [vid='"+vid+"'] A[error!=1]");
 			h.attr("error",1);
 			h.html("<font color='red'>播放失败:</font> "+h.html());
 			YoukuWs.playNext();
