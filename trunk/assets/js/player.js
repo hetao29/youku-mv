@@ -773,7 +773,7 @@ var YoukuWs = function(){
 				}
 			});
 			setInterval(YoukuWs.checkTime,500);
-			setInterval(YoukuWs.adReload,1000*60*10);// 10分钟一次
+			//setInterval(YoukuWs.adReload,1000*60*10);// 10分钟一次
 			CurrentMvID = YoukuWs.get("CurrentMvID");
 			if(PlayType==0){
 				YoukuWs.playRadio();
