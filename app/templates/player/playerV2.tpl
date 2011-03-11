@@ -148,7 +148,7 @@
 								</div>
 								<div class="clear"></div>
 						</div>
-						<div class="googlead" style="padding:5px;margin:auto;zoom:1;">
+						<div id="googlead" class="googlead" style="padding:5px;margin:auto;zoom:1;">
 								<script type="text/javascript">
 										google_ad_client = "ca-pub-8444474852440924";
 										/* YOUKU */

@@ -1128,12 +1128,9 @@ var YoukuWs = function(){
 			if($.browser.mozilla){
 					return;
 			}
-			$(".googlead").each(function(index,dom){
-				var a = $(dom).clone();
-				$(dom).html('');
-				$(dom).html(a.html());
-			});
-
+			var a=$("#googlead").html();
+			$("#googlead").html("");
+			$("#googlead").html(a);
 		},saveOffset:function(){
 			if(mvid>0 && uid>0){
 				$.ajax({
