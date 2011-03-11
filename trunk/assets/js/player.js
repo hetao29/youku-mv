@@ -89,6 +89,8 @@ var YoukuWs = function(){
 								//alert($(this).attr("id"));
 								YoukuWs.set("cid",$(this).attr("id"));
 								radioPlayList=[];
+								PlayType=0;
+								YoukuWs.set("PlayType",PlayType);
 								YoukuWs.playRadio();
 							});
 							$("#_RadioChannel button").button({icons:{primary:"ui-icon-play"}});

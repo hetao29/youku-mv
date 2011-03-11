@@ -84,7 +84,7 @@
 														</div>
 												</div>
 												<div id="_IDRadio3" style="height:150px"></div>
-												<div><button id="_IDSkip">{'跳过'|tr}</button><button id="_IDChange">{'换台'|tr}</button><button id="_IDPlay" style="display:none">{'播放'|tr}</button><button id="_IDUp">{"顶"|tr}</button><button id="_IDDown">{"删"|tr}</button></div>
+												<div><button id="_IDSkip">{'跳过'|tr}</button><button id="_IDPlay" style="display:none">{'播放'|tr}</button><button id="_IDChange">{'换台'|tr}</button><button id="_IDUp">{"顶"|tr}</button><button id="_IDDown">{"删"|tr}</button></div>
 										</div>
 										<div class="list" id="_IDLocalList" style="display:none">
 												<div style="padding-bottom:5px;padding-top:5px;text-align:left">
