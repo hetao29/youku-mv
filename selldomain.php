@@ -16,7 +16,7 @@ if(stristr($_SERVER['HTTP_ACCEPT_LANGUAGE'],"zh")!==false){
 	$info = "";
 }else{
 	$inCN=1;
-	$title="This domain is for sale(10,000$)";
+	$title="This domain is for sale(100,000$)";
 	$contact="Please contact me";
 	$info="";
 }
