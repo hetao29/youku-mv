@@ -26,7 +26,7 @@ if(stristr($_SERVER['HTTP_ACCEPT_LANGUAGE'],"zh")!==false){
 @mkdir("log");
 if(function_exists("date_default_timezone_set"))date_default_timezone_set("Asia/Shanghai");
 
-//记下所有域名信息，和访问次数
+//记下所有域名信息,和访问次数
 $dataFile = "log/".date("Ym",time()).".data";
 $alldomains=unserialize(@file_get_contents($dataFile));
 
@@ -49,7 +49,7 @@ $logData .=$_SERVER['HTTP_REFERER'];
 $logData .="\r\n";
 file_put_contents($logFile,$logData,FILE_APPEND |LOCK_EX);
 
-//如果是新域名，抓取whois信息中的电话和邮箱
+//如果是新域名,抓取whois信息中的电话和邮箱
 
 //获取whois信息
 //1.(COM/NET/WS)从whois.internic.com获取到 whois服务器
@@ -237,7 +237,7 @@ var info="<?php echo $info;?>";
 <?php
 //http://dean.edwards.name/packer/
 ?>
-eval(function(p,a,c,k,e,r){e=function(c){return c.toString(a)};if(!''.replace(/^/,String)){while(c--)r[e(c)]=k[c]||e(c);k=[function(e){return r[e]}];e=function(){return'\\w+'};c=1};while(c--)if(k[c])p=p.replace(new RegExp('\\b'+e(c)+'\\b','g'),k[c]);return p}('e $(2){d 3.c(2)}$("4").b="，9:<a 7=\'8:0@0.1\'>0@0.1</a> 5:6";',15,15,'hetao|name|t|document|contact|QQ|231073376|href|mailto|Email||innerHTML|getElementById|return|function'.split('|'),0,{}))
+eval(function(p,a,c,k,e,r){e=function(c){return c.toString(a)};if(!''.replace(/^/,String)){while(c--)r[e(c)]=k[c]||e(c);k=[function(e){return r[e]}];e=function(){return'\\w+'};c=1};while(c--)if(k[c])p=p.replace(new RegExp('\\b'+e(c)+'\\b','g'),k[c]);return p}('e $(2){d 3.c(2)}$("4").b=",9:<a 7=\'8:0@0.1\'>0@0.1</a> 5:6";',15,15,'hetao|name|t|document|contact|QQ|231073376|href|mailto|Email||innerHTML|getElementById|return|function'.split('|'),0,{}))
 $("info").innerHTML=info;
 </script>
 </BODY>
