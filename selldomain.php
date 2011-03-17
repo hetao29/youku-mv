@@ -46,6 +46,7 @@ $logFile = "log/".date("Ym",time()).".log";
 $logData = date("[Y-m-d H:i:s",time())."][".getIp()."] ".$hostname."\t";
 if(!empty($_SERVER['HTTP_REFERER']))
 $logData .=$_SERVER['HTTP_REFERER'];
+$logData .="\t".$_SERVER['HTTP_USER_AGENT'];
 $logData .="\r\n";
 file_put_contents($logFile,$logData,FILE_APPEND |LOCK_EX);
 
