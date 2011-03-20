@@ -661,7 +661,9 @@ $("#_IDRight").corner("tr br 8px");
 			}
 			//$("#PlayModeSet" ).buttonset().show();
 			$("#_BtPlayModeSet").button("option","disabled",true).show();
-			$("#_BtSearch").bt();
+			$("#_BtSearch").bt().click(function(){
+							search();
+							});
 			//$("button").bt().show();
 			//$("button").button().show();
 
