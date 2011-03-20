@@ -6,6 +6,7 @@
 				<title>{'标题'|tr}</title>
 {if defined($smarty.const.DEV)}
 				<script type="text/javascript" src="/assets/js/jquery-1.5.1.min.js"></script>
+				<script type="text/javascript" src="/assets/js/jquery.corner.js"></script>
 				<script type="text/javascript" src="/assets/js/jquery-ui-1.8.7.custom.min.js"></script>
 				<script type="text/javascript" src="/assets/js/jquery.cookie.js"></script>
 				<script type="text/javascript" src="/assets/js/swfobject/swfobject.js"></script>
@@ -34,6 +35,34 @@
 				var _LabelCancel="{'取消'|tr}";
 		</script>
 		<body>
+{*
+<a style="width:50px" id="test">fjiw</a>
+<a class="bt" bt_set="true" style="width:60px">
+	<span class="bt_b"> 
+		<span class="bt_c">&nbsp;</span> 
+		<span class="bt_d">
+			<span style="padding-top:3px" class="left ui-icon ui-icon-play"></span>
+			<span class="right">Play</span>
+		</span>
+	</span>
+</a>
+
+<a class="bt" bt_set="true">
+	<span class="bt_b"> 
+		<span class="bt_c">&nbsp;</span>
+		<span class="bt_d">Play</span>
+	</span>
+</a>
+*}
+{*
+<a href="#nogo" class="bt_a">
+    <span class="bt_b">
+        <span class="bt_c">&nbsp;</span>
+        <span class="bt_d">
+圆角按钮</span>
+    </span>
+</a>
+*}
 {if !empty($facebook)}
 				<div id="fb-root"></div>
 				<script src="http://connect.facebook.net/en_US/all.js"></script>
@@ -56,6 +85,7 @@
 						//							});
 				</script>
 {/if}
+
 {if empty($facebook)}
 				<div class="header" id="_IDHeader">
 						{part path="/player.main.header"}
@@ -64,10 +94,28 @@
 				<div class="content">
 
 						<div class="main">
-								<div class="left">
+								<div class="left" style="width:496px" id="box">
+										<div class="title">
+											<span id="title">Youku.FM</span>
+											<span class="right"><a title="宽屏" href="javascript:void(0);" id="_IDThx"><img width="20px" height="20px" src="/assets/images/style2/Forward.png"/></a></span>
+										</div>
+										<hr />
 										<div id="playerBox" class="playerBox"><div id="player"></div></div>
+{*<div style="height:65px">
+<img src="/assets/images/style2/center.png" />
+										</div>
+										*}
+										<hr />
+										<div id="copyright">2011 @copyright</div>
 								</div>
-								<div id="_IDRight" class="right" style="width:256px">
+								<div id="_IDRight" class="box2 right" style="width:255px">
+{*
+										<div id="rightTop" style="height:12px;margin-top:15px;background-color:rgb(136,136,136)">
+										</div>
+										<div style="height:40px;background-color:rgb(115,139,170)">
+<input style="margin:8px" type="text"/>
+										</div>
+										*}
 										<div style="padding-top:10px;">
 												<ul id="_IDNav">
 														<li style="padding:5px 15px;display:none;"><a>{'电台模式'|tr}</a></li>
@@ -84,13 +132,18 @@
 														</div>
 												</div>
 												<div id="_IDRadio3" style="height:150px"></div>
-												<div><button id="_IDSkip">{'跳过'|tr}</button><button id="_IDPlay" style="display:none">{'播放'|tr}</button><button id="_IDChange">{'换台'|tr}</button><button id="_IDUp">{"顶"|tr}</button><button id="_IDDown">{"删"|tr}</button></div>
+												<div>
+<a id="_IDSkip" style="" title="跳过这个视频">{'跳过'|tr}</a>
+<a id="_IDPlay" style="display:none">{'播放'|tr}</a>
+<a id="_IDChange">{'换台'|tr}</a>
+<a id="_IDUp">{"顶"|tr}</a>
+<a id="_IDDown">{"删"|tr}</a></div>
 										</div>
 										<div class="list" id="_IDLocalList" style="display:none">
 												<div style="padding-bottom:5px;padding-top:5px;text-align:left">
 														<form onsubmit="search();return false;" style="vertical-align:middle">
-																<input style="vertical-align:middle" type="text" size="18" id="keywords" placeholder="请输入关键词" autofocus="" value="" autocomplete="off" class="ui-widget-content" />
-																<button id="_BtSearch" style="vertical-align:middle" class="ui-button ui-widget ui-state-default ui-corner-all">{'搜索'|tr}</button>
+																<input style="vertical-align:middle" type="text" size="18" id="keywords" placeholder="请输入关键词" autofocus="" value="" autocomplete="off" />
+																<a id="_BtSearch">{'搜索'|tr}</a>
 														</form>
 												</div>
 												<div id="_Content" style="position:relative;">
@@ -108,15 +161,15 @@
 																		<label style="width:95px;" for="set3">{'随机'|tr}</label>
 																</div>
 														</div>
-														<div>
-																<button id="_BtAddMv">{'增加'|tr}</button>
-																<button id="_BtTrash">{'删除'|tr}</button>
-																<button id="_BtSaveList">{'保存'|tr}</button>
-																<button id="_BtClearList">{'清空'|tr}</button>
+														<div style="padding-bottom:6px">
+																<a id="_BtAddMv">{'增加'|tr}</a>
+																<a id="_BtTrash">{'删除'|tr}</a>
+																<a id="_BtSaveList">{'保存'|tr}</a>
+																<a id="_BtClearList">{'清空'|tr}</a>
 														</div>
 														<div>
-																<button id="_BtPre">{'上一首'|tr}</button>
-																<button id="_BtNext">{'下一首'|tr}</button>
+																<a id="_BtPre">{'上一首'|tr}</a>
+																<a id="_BtNext">{'下一首'|tr}</a>
 														</div>
 												</div>
 
@@ -148,7 +201,7 @@
 								</div>
 								<div class="clear"></div>
 						</div>
-						<div id="googlead" class="googlead" style="padding:5px;margin:auto;zoom:1;">
+{*						<div id="googlead" class="googlead" style="padding:5px;margin:auto;zoom:1;">
 								<script type="text/javascript">
 										google_ad_client = "ca-pub-8444474852440924";
 										/* YOUKU */
@@ -158,6 +211,7 @@
 								</script>
 								<script type="text/javascript" src="http://pagead2.googlesyndication.com/pagead/show_ads.js"> </script>
 						</div>
+*}
 				</div>
 
 				<div>
@@ -238,8 +292,8 @@
 						</div>
 {*<a onclick="PlayerPause(true)">d</a>
 						<a onclick="PlayerPause(false)">e</a>
-*}
 						<div id="fullscreen" style="display:none;z-index:100;width:100%;text-align:center;position:absolute;"><button id="_IDFullscreen">fullscreen</button></div>
+*}
 				</div>
 		</body>
 		<div style="display:none"><script src="http://s16.cnzz.com/stat.php?id=2780428&web_id=2780428&show=pic" language="JavaScript"></script></div>

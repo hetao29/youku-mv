@@ -1,3 +1,56 @@
+
+(function($){
+	$.fn.bt = function(options){
+		var defaults = {position:"left"}; 
+		var options = $.extend(defaults, options); 
+		this.each(function(item){ 
+			var t = $(this);
+			if(t.attr("bt_set"))return;
+			var html = t.html();
+			//var html2='<span class="bt_b" ';
+			//if(options.width)html2+="style='width:"+options.width+"px'";
+			//else html2+="style='width:38px'";
+			//html2+=' >';
+			//if(options.icon){
+			//	if(options.position=="left"){
+			//				html2+='<span class="bt_c">&nbsp;</span> <span class="bt_d"><span style="padding-top:3px" class="left ui-icon '+options.icon+'"></span><span class="right">'+html+'</span></span></span>';
+			//	}else{
+			//				html2+='<span class="bt_c">&nbsp;</span> <span class="bt_d"><span style="padding-top:3px" class="right ui-icon '+options.icon+'"></span><span class="left">'+html+'</span></span></span>';
+			//	}
+			//}else{
+			var	html2='<span class="bt_b"><span class="bt_c">&nbsp;</span> <span class="bt_d">'+html+'</span> </span>';
+			//}
+			t.html(html2);
+			if(!t.hasClass("bt"))t.addClass("bt");
+			t.attr("bt_set",true);
+			t.attr("href","javascript:void(0);");
+		}); 
+		return this;
+	}; 
+})(jQuery); 
+
+/*
+function correctPNG(){
+	if($.support.opacity)return;
+	for(var i=0; i<document.images.length; i++){
+		var img = document.images[i];
+		var imgName = img.src.toUpperCase();
+		if (imgName.substring(imgName.length-3, imgName.length) == "PNG"){
+			var imgID = (img.id) ? "id='" + img.id + "' " : "";
+			var imgClass = (img.className) ? "class='" + img.className + "' " : "";
+			var imgTitle = (img.title) ? "title='" + img.title + "' " : "title='" + img.alt + "' ";
+			var imgStyle = "display:inline-block;" + img.style.cssText;
+			if (img.align == "left") imgStyle = "float:left;" + imgStyle;
+			if (img.align == "right") imgStyle = "float:right;" + imgStyle;
+			if (img.parentElement.href) imgStyle = "cursor:hand;" + imgStyle;
+			var strNewHTML = "<span "+ imgID + imgClass + imgTitle + "style=\"" + "width:" + img.width + "px; height:" + img.height + "px;" + imgStyle + ";" 
+			+ "filter:progid:DXImageTransform.Microsoft.AlphaImageLoader" + "(src='" + img.src + "', sizingMethod='scale');\"></span>";
+			img.outerHTML = strNewHTML;
+			i = i-1;
+		}
+	}
+}
+*/
 //{{{主方法
 var YoukuWs = function(){
 	var fullScreen=false;
@@ -11,7 +64,15 @@ var YoukuWs = function(){
 
 	var order=[];
 	$(document).ready(function(){
-			$("#_IDFullscreen").click(function(){
+	//correctPNG();
+$("#test").bt();
+					//{{{
+if (!$.support.borderRadius){
+$('#box').corner();
+$("#_IDRight").corner("tr br 8px");
+}
+					//}}}
+			/*$("#_IDFullscreen").click(function(){
 					if(!YoukuWs.fullScreen){
 						$("#playerBox").removeClass("playerBox");
 						$("#playerBox").addClass("playerBoxFullscreen");
@@ -31,7 +92,8 @@ var YoukuWs = function(){
 					$("#fullscreen").hide();
 				}
 			}); 
-			$(window).resize(function(){
+			*/
+			/*$(window).resize(function(){
 				if($(document).height()+24>=screen.height && $(window).width()==screen.width){
 					//认为是全屏
 					$("#playerBox").removeClass("playerBox");
@@ -45,13 +107,36 @@ var YoukuWs = function(){
 				//$('#status').html("resize"+", "+$(window).height()+", "+$(document).height()+", "+screen.height);
 				//$('#status').html("resize"+", "+$(window).width()+", "+$(document).width()+", "+screen.width);
 			});
+			*/
 			$("#_IDPlay").click(function(){
 					//{{{播放模式
 					PlayType=0;
 					YoukuWs.set("PlayType",PlayType);
 					//}}}
 					YoukuWs.playRadio();
-			}).button({icons:{primary:"ui-icon-play"}});
+			}).bt({icon:"ui-icon-play"});
+			$("#_IDThx").click(function(){
+				//宽屏模式
+				var o = $("#box img");
+				if(o.attr("src").indexOf("Forward")!==-1){
+					//to 
+					$("#_IDRight").fadeOut("fast",function(){
+						$("#box").animate({"width":"100%"},function(){
+								o.attr("src","/assets/images/style2/Reverse.png");
+								YoukuWs.set("thx","open");
+						});
+					});
+				}else{
+					$("#box").animate({"width":"496px"},function(){
+							YoukuWs.set("thx","close");
+							o.attr("src","/assets/images/style2/Forward.png");
+							$("#_IDRight").fadeIn("fast");
+					});
+				}
+			});
+			if(YoukuWs.get("thx")=="open"){
+				$("#_IDThx").trigger("click");
+			}
 			$("#_IDSkip").click(function(){
 					YoukuWs.MvAction("skip",CurrentMvID);
 					//{{{播放模式
@@ -59,7 +144,7 @@ var YoukuWs = function(){
 					YoukuWs.set("PlayType",PlayType);
 					//}}}
 					YoukuWs.playRadio();
-			}).button({icons:{primary:"ui-icon-seek-next"}});
+			}).bt({icon:"ui-icon-seek-next",position:"left"});//button({icons:{primary:"ui-icon-seek-next"}});
 			$("#_IDChange").click(function(){
 				//换台模式
 				$.ajax({
@@ -97,14 +182,14 @@ var YoukuWs = function(){
 						}
 					}
 				});
-			}).button();
+			}).bt();
 			$("#_IDDown").click(function(){
 					YoukuWs.MvAction("down",CurrentMvID);
 					YoukuWs.playRadio();
-			});
+			}).bt();
 			$("#_IDUp").click(function(){
 					YoukuWs.MvAction("up",CurrentMvID);
-			});
+			}).bt();
 			$("#_LiUp").live('click',function(){
 				$("#_ContentListen").dialog({
 					width:400,height:300, buttons: [
@@ -544,13 +629,13 @@ var YoukuWs = function(){
 					PlayType=1;
 					YoukuWs.set("PlayType",PlayType);
 					YoukuWs.playPre();
-			}).button({icons:{primary:"ui-icon-seek-prev"}});;
+			}).bt();//button({icons:{primary:"ui-icon-seek-prev"}});;
 			$("#_BtNext").click(function(){
 					PlayType=1;
 					YoukuWs.set("PlayType",PlayType);
 					YoukuWs.playNext();
-			}).button({icons:{primary:"ui-icon-seek-next"}});;
-			$("#_BtTrash").button().droppable({
+			}).bt();//({icons:{primary:"ui-icon-seek-next"}});;
+			$("#_BtTrash").bt().droppable({
 					activeClass: "ui-state-highlight",
 					hoverClass: "ui-state-error",
 					accept:"#_ContentMusic >li,#_ContentList >li",
@@ -576,9 +661,11 @@ var YoukuWs = function(){
 			}
 			//$("#PlayModeSet" ).buttonset().show();
 			$("#_BtPlayModeSet").button("option","disabled",true).show();
-			$("button").button().show();
+			$("#_BtSearch").bt();
+			//$("button").bt().show();
+			//$("button").button().show();
 
-			$("#_BtClearList").button().click(function(){
+			$("#_BtClearList").bt().click(function(){
 				$("#_ContentClearList").dialog({
 					modal: true, width:320,height:200, buttons: [
 						{
@@ -636,7 +723,7 @@ var YoukuWs = function(){
 				});
 			//}}}
 			$("#_BtAddList").button();
-			$("#_BtAddMv").button().click(function(){
+			$("#_BtAddMv").bt().click(function(){
 				$( "#_DialogAdd" ).dialog({
 					width:500,height:320, buttons: {
 							"增加": function() {
@@ -679,7 +766,7 @@ var YoukuWs = function(){
 
 				});
 			});
-			$("#_BtSaveList").button().click(function(){
+			$("#_BtSaveList").bt().click(function(){
 					if(YoukuWs.isLogin()){
 						$("#_IDList").dialog({
 							width:410,height:280,buttons: [
@@ -1085,6 +1172,7 @@ var YoukuWs = function(){
 		},
 		setTitle:function(t){
 			 var t = t.replace(/<[^>]+>/g,"");
+			 $("#title").html(t);
 			 if(t)document.title=t;
 		},
 		MvAction:function(type,mvid){
