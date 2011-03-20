@@ -105,7 +105,6 @@
 <img src="/assets/images/style2/center.png" />
 										</div>
 										*}
-										<hr />
 										<div id="copyright">2011 @copyright</div>
 								</div>
 								<div id="_IDRight" class="box2 right" style="width:255px">
