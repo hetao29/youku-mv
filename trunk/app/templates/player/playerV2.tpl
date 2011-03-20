@@ -97,7 +97,7 @@
 								<div class="left" id="box">
 										<div class="title">
 											<span class="right"><a title="宽屏" href="javascript:void(0);" id="_IDThx"><span class="thx_close"/></span></a></span>
-											<span id="title">Youku.FM</span>
+											<span style="line-height:22px" id="title">Youku.FM</span>
 										</div>
 										<hr />
 										<div id="playerBox" class="playerBox"><div id="player"></div></div>
