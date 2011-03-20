@@ -94,9 +94,9 @@
 				<div class="content">
 
 						<div class="main">
-								<div class="left" style="width:496px" id="box">
+								<div class="left" id="box">
 										<div class="title">
-											<span class="right"><a title="宽屏" href="javascript:void(0);" id="_IDThx"><img width="20px" height="20px" src="/assets/images/style2/Forward.png"/></a></span>
+											<span class="right"><a title="宽屏" href="javascript:void(0);" id="_IDThx"><span class="thx_close"/></span></a></span>
 											<span id="title">Youku.FM</span>
 										</div>
 										<hr />

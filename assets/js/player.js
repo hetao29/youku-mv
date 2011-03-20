@@ -117,24 +117,25 @@ $("#_IDRight").corner("tr br 8px");
 			}).bt({icon:"ui-icon-play"});
 			$("#_IDThx").click(function(){
 				//宽屏模式
-				var o = $("#box img");
-				if(o.attr("src").indexOf("Forward")!==-1){
-					//to 
-					$("#_IDRight").fadeOut("fast",function(){
-						$("#box").animate({"width":"100%"},function(){
-								o.attr("src","/assets/images/style2/Reverse.png");
-								YoukuWs.set("thx","open");
-						});
-					});
+				var o = $(this).find("span");
+				if(YoukuWs.get("thx")!="open"){
+					//to open
+					$("#_IDRight").hide();
+					$("#box").css("width","756px");
+					YoukuWs.set("thx","open");
+					o.removeClass("thx_close");
+					o.addClass("thx_open");
 				}else{
-					$("#box").animate({"width":"496px"},function(){
-							YoukuWs.set("thx","close");
-							o.attr("src","/assets/images/style2/Forward.png");
-							$("#_IDRight").fadeIn("fast");
-					});
+					//to close
+					$("#box").css("width","496px");//.hide();
+					$("#_IDRight").show();
+					o.addClass("thx_close");
+					o.removeClass("thx_open");
+					YoukuWs.set("thx","close");
 				}
 			});
 			if(YoukuWs.get("thx")=="open"){
+				YoukuWs.set("thx","close");
 				$("#_IDThx").trigger("click");
 			}
 			$("#_IDSkip").click(function(){
