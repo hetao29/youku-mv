@@ -141,7 +141,7 @@
 										<div class="list" id="_IDLocalList" style="display:none">
 												<div style="padding-bottom:5px;padding-top:5px;text-align:left">
 														<form onsubmit="search();return false;" style="vertical-align:middle">
-																<input style="vertical-align:middle" type="text" size="18" id="keywords" placeholder="请输入关键词" autofocus="" value="" autocomplete="off" />
+																<input style="vertical-align:middle" type="search" size="18" id="keywords" placeholder="请输入关键词" autofocus="" value="" autocomplete="off" />
 																<a id="_BtSearch">{'搜索'|tr}</a>
 														</form>
 												</div>
