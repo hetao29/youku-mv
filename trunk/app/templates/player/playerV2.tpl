@@ -29,11 +29,11 @@
 						var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
 						})();
 				</script>
-		</head>
 		<script type="text/javascript">
 				var _LabelOk="{'确认'|tr}";
 				var _LabelCancel="{'取消'|tr}";
 		</script>
+		</head>
 		<body>
 {*
 <a style="width:50px" id="test">fjiw</a>
@@ -96,7 +96,7 @@
 						<div class="main">
 								<div class="left" id="box">
 										<div class="title">
-											<span class="right"><a title="宽屏" href="javascript:void(0);" id="_IDThx"><span class="thx_close"/></span></a></span>
+											<span class="right"><a title="宽屏" href="javascript:void(0);" id="_IDThx"><span class="thx_close"></span></a></span>
 											<span style="line-height:22px" id="title">Youku.FM</span>
 										</div>
 										<hr />
