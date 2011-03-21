@@ -2,7 +2,6 @@
 body{
 background-color:rgb(66,66,66);
 background-image:url(/assets/images/style2/bg.png);
-_background-image:url(/assets/images/style2/bg.gif);
 }
 body,div,ul,ol,li{
 		padding:0px;
@@ -327,10 +326,8 @@ button{
 .thx_close{
 width:20px;height:20px;display:block;line-height:20px;
 background-image:url(/assets/images/style2/Forward.png);
-_background-image:url(/assets/images/style2/Forward.gif);
 }
 .thx_open{
 width:20px;height:20px;display:block;line-height:20px;
 background-image:url(/assets/images/style2/Reverse.png);
-_background-image:url(/assets/images/style2/Reverse.gif);
 }
