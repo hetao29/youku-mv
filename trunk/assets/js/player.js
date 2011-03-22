@@ -1182,7 +1182,7 @@ $("#_IDRight").corner("tr br 8px");
 		setTitle:function(t){
 			 var t = t.replace(/<[^>]+>/g,"");
 			 if(t)$("#title").html("正在播放:"+t);
-			 //if(t)document.title=t;
+			 if(t)document.title="YouKu.FM - "+t;
 		},
 		MvAction:function(type,mvid){
 			$.ajax({
