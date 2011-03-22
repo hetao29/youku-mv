@@ -11,11 +11,10 @@ img{border:0;}
 h3 {font-weight:bold; margin:2px; text-align:left;}
 ol,ul{list-style:none;}
 body {
-		/*color:#5C71A2;*/
-		/*color:#000;*/
-		color:rgb(193,193,193);
-		/*font-size:1.2em;*/
-		/*background:#dddddd;*/
+		color:#AAA;
+}
+body a{
+		color:#DDD;
 }
 button{
 		display:none;
@@ -27,7 +26,7 @@ img, a img {border:0;}
 a {
 		cursor:pointer;
 		/*color:#222;*/
-		color:rgb(193,193,193);
+		/*color:rgb(193,193,193);*/
 		text-decoration:none;
 }
 #box{
@@ -51,11 +50,13 @@ border-bottom-left-radius: 8px 8px;
 border-bottom-right-radius: 8px 8px;
 
 background-color:rgb(193,193,193);
+
+}
+.shadow{
 -moz-box-shadow: 5px 5px 5px rgb(63, 63, 63);
 -webkit-box-shadow:5px 5px 5px rgb(63,63,63);
 box-shadow: 5px 5px 5px rgba(13, 13, 13, 0.5);
 filter:progid:DXImageTransform.Microsoft.Shadow(color=#3F3F3F,direction=135,strength=5);
-
 }
 .box2{
 border-top-right-radius:8px 8px;
@@ -126,7 +127,7 @@ a:hover {text-decoration:underline;}
 .clear{clear:both;}
 .hide{display:none;}
 .red{
-		color:red
+		color:red;
 }
 .handle{
 		cursor:pointer;
@@ -137,7 +138,8 @@ a:hover {text-decoration:underline;}
 		display:block;height:530px;
 		margin:auto;
 		/*background:#fff; */
-		color:#111;  text-align:center; 
+		color:#111;
+		text-align:center; 
 		padding:0px;
 }
 .header{width:756px;margin:25px auto;}
@@ -172,22 +174,27 @@ li{
 		line-height:20px;
 }
 .list .current{
-		/*overflow:hidden;
-		background: #6A9BC0 url(http://static.youku.com/index/img/master.png) no-repeat 5px -1312px;
-		 */
-		background-color: #ccc;
+		background-color: #DDDEE0;
 }
 .list li a{
 		padding-left:2px;
 		display:block;
 }
+#_IDNav li{
+		background-color:#ddd;
+		padding:5px 15px;
+}
+#_IDNav .current{
+		font-weight:bold;
+		background-color:#C1C1C1;
+}
 /*
 .list .current a:hover {
-		background: #6A9BC0 url(http://static.youku.com/index/img/master.png) no-repeat 5px -1312px;
+		background: #6A9BC0;
 }
 */
 .list a:hover {
-		/*background:#daf3fa;*/
+		background:#daf3fa;
 		text-decoration:none;
 }
 .list .trash{

@@ -94,7 +94,7 @@
 				<div class="content">
 
 						<div class="main">
-								<div class="left" id="box">
+								<div class="left shadow" id="box">
 										<div class="title">
 											<span class="right"><a title="宽屏" href="javascript:void(0);" id="_IDThx"><span class="thx_close"></span></a></span>
 											<span style="line-height:22px" id="title">Youku.FM</span>
@@ -117,17 +117,17 @@
 										*}
 										<div style="padding-top:10px;">
 												<ul id="_IDNav">
-														<li style="padding:5px 15px;display:none;"><a>{'电台模式'|tr}</a></li>
-														<li style="padding:5px 15px;display:none;"><a>{'播放模式'|tr}</a></li>
-														<li style="padding:5px 15px;display:none;"><a>{'显示歌词'|tr}</a></li>
+														<li><a>{'电台模式'|tr}</a></li>
+														<li><a>{'播放模式'|tr}</a></li>
+														<li><a>{'显示歌词'|tr}</a></li>
 												</ul>
 												<div class="clear"></div>
 										</div>
 										<div class="list" id="_IDRadio" style="display:none;">
 												<div id="_IDRadio2" style="display:none">
-														<div style="padding:10px;"><b>{"当前播放"|tr}:</b><span id="_IDVideoTitle"></span><div><img id="_IDVideoPic" /></div></div>
+														<div style="padding:10px;"><b>{"当前播放"|tr}:</b><span id="_IDVideoTitle"></span><div><img id="_IDVideoPic" class="shadow" /></div></div>
 														<div style="padding:10px"><b>{"接着播放"|tr}:</b><span id="_IDNextVideoTitle"></span>
-																<div><img id="_IDNextVideoPic" /></div>
+																<div><img id="_IDNextVideoPic" class="shadow" /></div>
 														</div>
 												</div>
 												<div id="_IDRadio3" style="height:150px"></div>
@@ -187,11 +187,16 @@
 														<div id="_LyricsTop" class="lyrics_top" style="display:none;padding-left:5px;padding-right:5px;width:225px;"></div>
 														<div id="_ContentLyrics" class="lyrics" style="overflow:hidden;width:225px;height:300px;"></div>
 														<div id="_IDLyricsAdmin" style="display:none">
+															<a id="_IDLyricsBk">{"后退"|tr}</a>
+															<a id="_IDLyricsPr">{"前进"|tr}</a>
+															<a id="_IDLyricsErr">{"报错"|tr}</a>
+															<a id="_IDLyricsView">{"查看"|tr}</a>
+{*
 																<span id="_IDLyricsBk" style="cursor:pointer;border:1px solid;">{"后退"|tr}</span>
 																<span id="_IDLyricsPr" style="cursor:pointer;border:1px solid;">{"前进"|tr}</span> 
-																{*<span id="_IDLyricsEd" style="cursor:pointer;border:1px solid;">{"编辑"|tr}</span>*}
 																<span id="_IDLyricsErr" style="cursor:pointer;border:1px solid;">{"报错"|tr}</span>
 																<span id="_IDLyricsView" style="cursor:pointer;border:1px solid;">{"查看"|tr}</span>
+*}
 																<span id="_IDLyricsInfo" style="position:absolute;top:304px;left:200px;width:60px;"></span>
 														</div>
 												</div>

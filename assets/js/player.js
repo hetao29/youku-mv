@@ -65,7 +65,8 @@ var YoukuWs = function(){
 	var order=[];
 	$(document).ready(function(){
 	//correctPNG();
-$("#test").bt();
+	//$("#test").bt();
+	$("#_IDLyricsAdmin >a").bt();
 					//{{{
 if (!$.support.borderRadius){
 $('#box').corner();
@@ -692,10 +693,12 @@ $("#_IDRight").corner("tr br 8px");
 			PlayType = YoukuWs.get("PlayType",0);
 			$("#_IDRight >.list").each(function(i,item){
 					if(i==PlayType){
-						$("#_IDNav >li").eq(i).css("background-color","").show();
+						//$("#_IDNav >li").eq(i).css("background-color","").show();
+						$("#_IDNav >li").eq(i).addClass("current").show();
 						$(item).show();
 					}else{
-						$("#_IDNav >li").eq(i).css("background-color","#ddd").show();
+						//$("#_IDNav >li").eq(i).css("background-color","#ddd").show();
+						$("#_IDNav >li").eq(i).removeClass("current").show();
 				   		$(item).hide();
 					}
 			});
@@ -708,12 +711,15 @@ $("#_IDRight").corner("tr br 8px");
 									window._ContentMusicTop = $("#_ContentMusic").scrollTop();
 								}
 								//}}}
-								$(item).css("background-color","#ddd");
+							//	$("#_IDNav >li").eq(i).addClass("current").show();
+								$(item).removeClass("current");
+								//$(item).css("background-color","#ddd");
 								$("#_IDRight >.list").eq(i).hide();
 					});
 					$("#_IDNav >li").each(function(i,item){
 							if($(_this).html()==$(item).html()){
-								$(item).css("background-color","");
+								//$(item).css("background-color","");
+								$(item).addClass("current");
 								$("#_IDRight >.list").eq(i).show();
 
 								//{{{ restore scrollTop
