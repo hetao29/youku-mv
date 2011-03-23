@@ -993,6 +993,7 @@ $("#_IDRight").corner("tr br 8px");
 					}
 				}
 			});
+			//swfobject.createSWF({data:"http://static.youku.com/v/swf/qplayer.swf",width:"100%",height:"100%"},{allowFullScreen:true,allowscriptaccess:"always",wmode:"transparent",flashvars:"isAutoPlay=true&showbar=false&VideoIDS="+vid+"&winType=index&firsttime="+time},playerId);
 			swfobject.createSWF({data:"http://static.youku.com/v/swf/qplayer.swf",width:"100%",height:"100%"},{allowFullScreen:true,allowscriptaccess:"always",wmode:"transparent",flashvars:"isAutoPlay=true&VideoIDS="+vid+"&winType=index&firsttime="+time},playerId);
 			if(PlayType!=0){//非收听模式
 				//{{{
