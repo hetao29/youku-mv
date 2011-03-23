@@ -5,6 +5,24 @@
 				<link rel="Shortcut Icon" href="/assets/images/ico/favicon_32x32.ico" />
 				<title>{'标题'|tr}</title>
 {if defined($smarty.const.DEV)}
+<script type="text/javascript" src="/assets/js/jquery-1.5.1.js"></script>
+<script type="text/javascript" src="/assets/js/development-bundle/ui/jquery.ui.core.js"></script>
+<script type="text/javascript" src="/assets/js/development-bundle/ui/jquery.ui.widget.js"></script>
+<script type="text/javascript" src="/assets/js/development-bundle/ui/jquery.ui.mouse.js"></script>
+<script type="text/javascript" src="/assets/js/development-bundle/ui/jquery.ui.position.js"></script>
+<script type="text/javascript" src="/assets/js/development-bundle/ui/jquery.ui.button.js"></script>
+<script type="text/javascript" src="/assets/js/development-bundle/ui/jquery.ui.autocomplete.js"></script>
+<script type="text/javascript" src="/assets/js/development-bundle/ui/jquery.ui.resizable.js"></script>
+<script type="text/javascript" src="/assets/js/development-bundle/ui/jquery.ui.sortable.js"></script>
+<script type="text/javascript" src="/assets/js/development-bundle/ui/jquery.ui.dialog.js"></script>
+<script type="text/javascript" src="/assets/js/development-bundle/ui/jquery.ui.draggable.js"></script>
+<script type="text/javascript" src="/assets/js/development-bundle/ui/jquery.ui.droppable.js"></script>
+<script type="text/javascript" src="/assets/js/jquery.cookie.js"></script>
+<script type="text/javascript" src="/assets/js/jquery.corner.js"></script>
+<script type="text/javascript" src="/assets/js/json2.js"></script>
+<script type="text/javascript" src="/assets/js/player.js"></script>
+<script type="text/javascript" src="/assets/js/swfobject/swfobject.js"></script>
+{*
 				<script type="text/javascript" src="/assets/js/jquery-1.5.1.min.js"></script>
 				<script type="text/javascript" src="/assets/js/jquery.corner.js"></script>
 				<script type="text/javascript" src="/assets/js/jquery-ui-1.8.7.custom.min.js"></script>
@@ -12,6 +30,7 @@
 				<script type="text/javascript" src="/assets/js/swfobject/swfobject.js"></script>
 				<script type="text/javascript" src="/assets/js/json2.js"></script>
 				<script type="text/javascript" src="/assets/js/player.js"></script>
+*}
 				<link href="/assets/css/jquery-ui-1.8.6.custom-smoothness.css" media="all" rel="stylesheet" type="text/css" />
 				<link href="/assets/css/styleV2.css" media="all" rel="stylesheet" type="text/css" />
 {else}
