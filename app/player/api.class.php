@@ -53,7 +53,7 @@ class player_api{
 						"/翻唱/",
 						"/无字幕/",
 						"/字幕/",
-						"/同步/",
+						"/字幕/",
 						"/珍藏版/",
 						"/高音质/",
 						"/字幕版/",
@@ -102,8 +102,9 @@ class player_api{
 						"/演出版/",
 						"/杨晃/",
 						"/心月/",
-						"/【茹】/",
-						"/【天籁之音】/",
+						"/当红新人/",
+						"/新人/",
+						"/【.*】/",
 						"/FM首播/",
 						"/独家/",
 						"/最新/",
@@ -132,6 +133,7 @@ class player_api{
 				" ",
 			);
 			$MvName = preg_replace($pattern,$replacement,$MvName);
+			echo $MvName;
 			$MvName= mb_convert_encoding($MvName,"gbk","utf8,gbk");
 			$r = SHttp::get("http://mp3.sogou.com/lyric.so",array("query"=>$MvName,"class=3","w=0"));
 			preg_match_all("/downlrc\.jsp(.+?)\"/",$r,$_m);
