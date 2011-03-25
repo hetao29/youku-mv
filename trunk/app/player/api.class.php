@@ -133,7 +133,6 @@ class player_api{
 				" ",
 			);
 			$MvName = preg_replace($pattern,$replacement,$MvName);
-			echo $MvName;
 			$MvName= mb_convert_encoding($MvName,"gbk","utf8,gbk");
 			$r = SHttp::get("http://mp3.sogou.com/lyric.so",array("query"=>$MvName,"class=3","w=0"));
 			preg_match_all("/downlrc\.jsp(.+?)\"/",$r,$_m);
