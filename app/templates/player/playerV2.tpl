@@ -258,12 +258,12 @@
 								<form id="_FormLogin" style="padding:10px;margin:auto;">
 										<table width="100%">
 												<tr><td class="info" colspan="2">&nbsp;</td></tr>
-												<tr><td>{'邮箱'|tr}:</td><td><input name="useremail"/></td></tr>
+												<tr><td>{'邮箱'|tr}/{'用户名'|tr}:</td><td><input name="useremail"/></td></tr>
 												<tr><td>{'密码'|tr}:</td><td><input type="password" name="password"/></td></tr>
 												<tr>
 														<td></td>
 														<td><input type="checkbox" id="forever" name="forever"/><label for="forever">{"记住登录"|tr}</label>
-																<a id="_IDSignup2">{"注册"|tr}</a>
+																<a id="_IDSignup2" style="text-decoration:underline;"><b>{"注册"|tr}</b></a>
 														</td>
 												</tr>
 										</table>
