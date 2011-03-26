@@ -145,8 +145,8 @@
 <a id="_IDSkip" style="" title="跳过这个视频">{'跳过'|tr}</a>
 <a id="_IDPlay" style="display:none">{'播放'|tr}</a>
 <a id="_IDChange">{'换台'|tr}</a>
-<a id="_IDUp">{"顶"|tr}</a>
-<a id="_IDDown">{"删"|tr}</a></div>
+<a id="_IDUp">{"喜欢"|tr}</a>
+<a id="_IDDown">{"不喜欢"|tr}</a></div>
 										</div>
 										<div class="list" id="_IDLocalList" style="display:none">
 												<div style="padding-bottom:5px;padding-top:5px;text-align:left">
