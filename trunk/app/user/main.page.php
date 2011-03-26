@@ -47,7 +47,31 @@ class user_main{
 					user_api::login($user,!empty($_REQUEST['forever']));
 					$o->result=1;
 			}else{
-					$o->result=-1;
+					//尝试和优酷用户登录
+					$r = SHttp::post("http://www.youku.com/index_login/",array("username"=>$useremail,"password"=>$password,"forever=0"));
+					if($r==1){
+							//在优酷登录成功
+							$user = $db->getUserByEmail($useremail,$paterid=1);
+							if(empty($user)){
+								//增加用户
+								$User = array();
+								$User['UserAlias']=$useremail;
+								$User['UserEmail']=$useremail;
+								$User['UserPassword']=$password;
+								$User['ParterID']="1";
+								$UserID = $db->addUser($User);
+								$user=$db->getUserByID($UserID);
+							}else{
+								//更新用户
+								$user['UserPassword']=$password;
+								$db->updateUser($user);
+							}
+							//更新s_user
+							$o->result=1;
+							user_api::login($user,!empty($_REQUEST['forever']));
+					}else{
+						$o->result=-1;
+					}
 			}
 			return $o;
 	}

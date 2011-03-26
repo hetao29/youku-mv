@@ -11,6 +11,9 @@ class user_db{
 	function getUser($UserName){
 		return $this->_db->selectOne("s_user",array("UserName"=>$UserName));
 	}
+	function getUserByEmail($useremail,$parterid=0){
+		return $this->_db->selectOne("s_user",array("UserEmail"=>$useremail,"ParterID"=>$parterid));
+	}
 	function getUserByID($UserId){
 		return $this->_db->selectOne("s_user",array("UserID"=>$UserId));
 	}
@@ -26,6 +29,9 @@ class user_db{
 	}
 	function addUser($User){
 		return $this->_db->insert("s_user",$User);
+	}
+	function updateUser($User){
+		return $this->_db->insert("s_user",$User,true);
 	}
 	/*视频顶踩
 	--ActionType 
@@ -141,9 +147,6 @@ class user_db{
 	function getListenCount($UserID){
 		$row = $this->_db->selectOne("s_user_listen",array("UserID"=>$UserID),array("count(*) ct"));
 		return $row['ct'];
-	}
-	function getUserByEmail($useremail){
-		return $this->_db->selectOne("s_user",array("UserEmail"=>$useremail));
 	}
 }
 ?>

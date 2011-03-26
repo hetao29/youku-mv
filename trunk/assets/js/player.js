@@ -510,7 +510,7 @@ $("#_IDRight").corner("tr br 8px");
 							var o = $("#_ContentListen >ul");
 							o.html('');
 							for(var i=0;i<result.items.length;i++){
-								var html='<li type="list" mvname="'+result.items[i].MvName+'" vid="'+result.items[i].MvVideoID+'" lid="'+result.items[i].ListID+'" ord="'+result.items[i].MvOrder+'" mvid="'+result.items[i].MvID+'">'+
+								var html='<li _type="list" mvname="'+result.items[i].MvName+'" vid="'+result.items[i].MvVideoID+'" lid="'+result.items[i].ListID+'" ord="'+result.items[i].MvOrder+'" mvid="'+result.items[i].MvID+'">'+
 								'<span class="left">'+result.items[i].MvName+'</span>'+
 								'<span class="right">'+result.items[i].MvSeconds+' <a class="delMv">X</a></span>'+
 								'<div class="clear"></div>'+
@@ -522,7 +522,7 @@ $("#_IDRight").corner("tr br 8px");
 				});
 			});
 			$( "#_ContentListen .delMv" ).live("click",function(){
-				var type= $(this).parents("li").attr("type");
+				var type= $(this).parents("li").attr("_type");
 				var mvid= $(this).parents("li").attr("mvid");
 				var _this=this;
 				if(type=="list"){
@@ -1299,7 +1299,7 @@ $("#_IDRight").corner("tr br 8px");
 						var o = $("#_ContentListen >ul");
 						o.html('');
 						for(var i=0;i<result.items.length;i++){
-							var html='<li type="listen" mvname="'+result.items[i].MvName+'" vid="'+result.items[i].MvVideoID+'" mvid="'+result.items[i].MvID+'">'+
+							var html='<li _type="listen" mvname="'+result.items[i].MvName+'" vid="'+result.items[i].MvVideoID+'" mvid="'+result.items[i].MvID+'">'+
 							'<span class="left">'+result.items[i].MvName+'</span>'+
 							'<span class="right">'+result.items[i].MvSeconds+' <a class="delMv">X</a></span>'+
 							'<div class="clear"></div>'+
@@ -1328,7 +1328,7 @@ $("#_IDRight").corner("tr br 8px");
 						var o = $("#_ContentListen >ul");
 						o.html("");
 						for(var i=0;i<result.items.length;i++){
-							var html='<li type="action" actiontype="'+result.items[i].ActionType+'" mvname="'+result.items[i].MvName+'" vid="'+result.items[i].MvVideoID+'" mvid="'+result.items[i].MvID+'">'+
+							var html='<li _type="action" actiontype="'+result.items[i].ActionType+'" mvname="'+result.items[i].MvName+'" vid="'+result.items[i].MvVideoID+'" mvid="'+result.items[i].MvID+'">'+
 							'<span class="left">'+result.items[i].MvName+'</span>'+
 							'<span class="right">'+result.items[i].MvSeconds+' <a class="delMv">X</a></span>'+
 							'<div class="clear"></div>'+
