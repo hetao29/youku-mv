@@ -337,3 +337,6 @@ background-image:url(/assets/images/style2/Forward.png);
 width:20px;height:20px;display:block;line-height:20px;
 background-image:url(/assets/images/style2/Reverse.png);
 }
+.ui-dialog-content li{
+		border-bottom: 1px solid #CCC;
+}
