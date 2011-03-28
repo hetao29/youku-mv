@@ -954,6 +954,8 @@ $("#_IDRight").corner("tr br 8px");
 		version:"1.1",
 		/*播放视频*/
 		play:function(vid,time){
+			//fix other used
+			if(document.getElementById("playerBox")==null)return;
 			if(!time)time=0;
 			mvid = 0;
 			showLyric("");
@@ -997,8 +999,49 @@ $("#_IDRight").corner("tr br 8px");
 					}
 				}
 			});
-			//swfobject.createSWF({data:"http://static.youku.com/v/swf/qplayer.swf",width:"100%",height:"100%"},{allowFullScreen:true,allowscriptaccess:"always",wmode:"transparent",flashvars:"isAutoPlay=true&showbar=false&VideoIDS="+vid+"&winType=index&firsttime="+time},playerId);
-			swfobject.createSWF({data:"http://static.youku.com/v/swf/qplayer.swf",width:"100%",height:"100%"},{allowFullScreen:true,allowscriptaccess:"always",wmode:"transparent",flashvars:"isAutoPlay=true&VideoIDS="+vid+"&winType=index&firsttime="+time},playerId);
+			if(this.isIpad()){
+				var video = document.getElementById(playerId);
+				var src="http://api.youku.com/player/getm3u8/vid/"+vid+"/type/flv/v.m3u8";
+				if(!video.src){
+					//$("#playerBox").html('<video id="'+playerId+'" style="width:100%;height:100%" src="http://10.10.221.13/15722B45A0033732E23A45737/0300080A004C31B8F2078F000014124FFBE3C3-66AE-72D7-B8D3-55CFF5F21C3C.mp4" controls="controls" autoplay=true></video>');
+					$("#playerBox").html('<video id="'+playerId+'" style="width:100%;height:100%" src="'+src+'" controls="controls" autoplay=true></video>');
+					video = document.getElementById(playerId);
+					video.addEventListener('play', 	onPlayerStart, false);
+					video.addEventListener('ended', onPlayerComplete, false);
+					video.addEventListener('error', onPlayerError, false);
+					//this.video.addEventListener('loadedmetadata', onLoadedmetadata, false);
+					//this.video.addEventListener('ended', onEnded, false);
+					//this.video.addEventListener('timeupdate', onTimeUpdate, false);
+					//this.video.addEventListener('error', onError, false);
+					//$("#"+playerId).addEventListener('play', onPlay, false);
+					//this.video.addEventListener('pause', onPause, false);
+					//this.video.addEventListener('volumechange', onVolumechange, false);
+					//this.video.addEventListener('playing', onPlaying, false);
+					//this.video.addEventListener('loadstart', onLoadstart, false);
+					////this.video.addEventListener('seeked', onSeeked, false);
+					////this.video.addEventListener('seeking', onSeeking, false);
+					////this.video.addEventListener('waiting', onWaiting, false);
+					//this.video.addEventListener('abort', onAbort, false);
+					//this.video.addEventListener('progress', onProgress, false);
+				}else{
+					//video.src="http://hetalbeta.youku.com/player/getm3u8/vid/51809490/type/mp4/v.m3u8";
+					video.src=src;
+				}
+				//{{{for ipad hack code
+        		video.load();
+				if(document.createEvent){
+        		    evt = document.createEvent("MouseEvents");
+					var evt;
+        		    if (evt.initMouseEvent) {
+        		        evt.initMouseEvent("click", true, true, window, 0, 0, 0, 0, 0, false, false, false, false, 0, null);
+        		        video.dispatchEvent(evt);
+        		    }
+        		}
+				video.play();
+				//}}}
+			}else{
+				swfobject.createSWF({data:"http://static.youku.com/v/swf/qplayer.swf",width:"100%",height:"100%"},{allowFullScreen:true,allowscriptaccess:"always",wmode:"transparent",flashvars:"isAutoPlay=true&VideoIDS="+vid+"&winType=index&firsttime="+time},playerId);
+			}
 			if(PlayType!=0){//非收听模式
 				//{{{
 					var t = 0;
@@ -1019,31 +1062,6 @@ $("#_IDRight").corner("tr br 8px");
 				o.addClass('current');
 				YoukuWs.setTitle($("#_ContentMusic [vid='"+vid+"'] A").html());
 			}
-			/*swfobject.embedSWF("http://static.youku.com/v/swf/qplayer.swf", playerId, "100%", "100%", "9.0.0", "expressInstall.swf",
-				{isAutoPlay:true,VideoIDS:vid,winType:"index","show_pre":pre,"show_next":next,firsttime:time},
-				{allowFullScreen:true,allowscriptaccess:"always","wmode":"transparent"},{},function(){
-					if(PlayType!=0){//非收听模式
-					//{{{
-						var t = 0;
-						var o = $("#_ContentMusic [vid='"+vid+"']");
-						if(!o || !o.position())return;
-						t = o.position().top+o.outerHeight()-o.parent().height();
-						if(t>0){
-							t = o.parent().scrollTop() + o.position().top+o.height()-o.parent().height(); //432
-							o.parent().animate({scrollTop:t+"px"},"slow","linear",function(){
-							});
-						}else if( t<0-(o.parent().height()-o.outerHeight())){
-							t = (o.parent().scrollTop()+o.position().top);
-							o.parent().animate({scrollTop:t+"px"},"slow","linear",function(){
-							});
-						}
-					//}}}
-						$("#_ContentMusic >li").removeClass("current");
-						o.addClass('current');
-						YoukuWs.setTitle($("#_ContentMusic [vid='"+vid+"'] A").html());
-					}
-			});
-			*/
 		},
 		checkTime:function(){
 			if(!o_lyrics){
@@ -1121,7 +1139,7 @@ $("#_IDRight").corner("tr br 8px");
 						}
 					});
 				}else{
-								YoukuWs._realPlayRadio();
+					YoukuWs._realPlayRadio();
 				}
 		},
 		playRandom:function(pre){
@@ -1411,7 +1429,17 @@ $("#_IDRight").corner("tr br 8px");
 					}
 
 				});
-		}
+		},isIpad:function(){
+return true;
+        	if(
+        	    (navigator.userAgent.indexOf('iPod') != -1) ||
+        	    (navigator.userAgent.indexOf('iPhone') != -1) ||
+        	    (navigator.userAgent.indexOf('iPad') != -1)
+        	){
+        	    return true;
+        	}
+        	return false;
+    	}
 	}
 }();
 var YoukuWsPlaylist = function(){
@@ -1516,7 +1544,7 @@ var CurrentMvID=0;
 var radioPlayList=[];
 function onPlayerStart(obj){
 		if(YoukuWs.isLogin()){
-				$.ajax({type:"POST",dataType:"json",url:"/player.main.addListen",data:{"vid":obj.vidEncoded},success:function(msg){
+				$.ajax({type:"POST",dataType:"json",url:"/player.main.addListen",data:{"vid":CurrentVideoID},success:function(msg){
 							if(msg){
 								$("#_CtListen").html(parseInt($("#_CtListen").html())+1);
 							}
