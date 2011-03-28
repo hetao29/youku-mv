@@ -171,6 +171,9 @@ pageTracker._setAllowLinker(true);
 pageTracker._trackPageview();
 } catch(err) {}</script>
 <BODY>
+<div style="display:none">
+<script src="http://s21.cnzz.com/stat.php?id=2958455&web_id=2958455&show=pic" language="JavaScript"></script>
+</div>
 <div id="page">
   <div id="header">
     <div class="left domain"><?php echo $host;?></div>
