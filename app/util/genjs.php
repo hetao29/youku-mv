@@ -14,6 +14,7 @@ system("cat ../../assets/js/development-bundle/ui/jquery.ui.draggable.js>> /tmp/
 system("cat ../../assets/js/development-bundle/ui/jquery.ui.droppable.js>> /tmp/tmp.x.js");
 system("cat ../../assets/js/jquery.cookie.js>> /tmp/tmp.x.js");
 system("cat ../../assets/js/jquery.corner.js>> /tmp/tmp.x.js");
+//system("cat ../../assets/js/jquery.ui.touch.js>> /tmp/tmp.x.js");
 system("cat ../../assets/js/json2.js>> /tmp/tmp.x.js");
 system("cat ../../assets/js/player.js>> /tmp/tmp.x.js");
 system("cat ../../assets/js/swfobject/swfobject.js>> /tmp/tmp.x.js");
