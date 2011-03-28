@@ -239,6 +239,7 @@ li{
 .playerBox{
 		padding:10px;
 		height:371px;
+		z-index:-1;
 }
 /*
 .playerBoxFullscreen{
