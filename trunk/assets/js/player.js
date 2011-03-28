@@ -1068,12 +1068,22 @@ $("#_IDRight").corner("tr br 8px");
 					o_lyrics = $('#_ContentLyrics');
 			}
 			var LyricTop = $("#_LyricsTop");
-			var r= PlayerInfo();
-			if(!r){
-				LyricTop.hide();
-				return;
+			var time="";
+			if(YoukuWs.isIpad()){
+				var video = document.getElementById(playerId);
+				if(video!=null){
+					time  = video.currentTime;
+				}else{
+					return;
+				}
+			}else{
+				var r= PlayerInfo();
+				if(!r){
+					LyricTop.hide();
+					return;
+				}
+				time = isNaN(r.time)?0:r.time;
 			}
-			var time = isNaN(r.time)?0:r.time;
 			var l = getLyric(time*1000+parseInt(lyrics_offset));
 			if(!l){
 				LyricTop.hide();

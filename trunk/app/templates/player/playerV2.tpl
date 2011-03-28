@@ -151,7 +151,7 @@
 										<div class="list" id="_IDLocalList" style="display:none">
 												<div style="padding-bottom:5px;padding-top:5px;text-align:left">
 														<form onsubmit="search();return false;" style="vertical-align:middle">
-																<input style="vertical-align:middle" type="search" size="18" id="keywords" placeholder="请输入关键词" autofocus="" value="" autocomplete="off" />
+																<input style="vertical-align:middle" type="search" size="18" id="keywords" placeholder="请输入关键词" value="" autocomplete="off" />
 																<a id="_BtSearch">{'搜索'|tr}</a>
 														</form>
 												</div>
@@ -246,7 +246,7 @@
 								<div id="_IDListDialogAdding" style="position:absolute;padding:30px;left:140px;top:40px;z-index:99;text-align:center;display:none"><img style="vertical-align: middle;" src="/assets/images/loading/loading9.gif" /> {"正在添加中"|tr}...</div>
 								<div><span>{"请选择歌单或者"|tr}<b><a id="_AListAdd">{"新建歌单"|tr}</a></b></span></div>
 								<div id="_CtListAdd" style="display:none">
-										<form>
+										<form onsubmit="return false" >
 												<div>{"歌单名"|tr}：<input type="text" id="_IDListName"/><input id="_IDListAdd" type="button" value="{'建立'|tr}"/></div>
 										</form>
 										<hr/>
@@ -255,7 +255,7 @@
 								</ul>
 						</div>
 						<div id="_ContentLogin" title="{'登录'|tr}" style="display:none">
-								<form id="_FormLogin" style="padding:10px;margin:auto;">
+								<form onsubmit="return false" id="_FormLogin" style="padding:10px;margin:auto;">
 										<table width="100%">
 												<tr><td class="info" colspan="2">&nbsp;</td></tr>
 												<tr><td>{'邮箱'|tr}/{'用户名'|tr}:</td><td><input type="text" name="useremail"/></td></tr>
@@ -270,7 +270,7 @@
 								</form>
 						</div>
 						<div id="_ContentSignup" title="{'注册'|tr}" style="display:none">
-								<form id="_FormSignup" style="padding:10px;margin:auto;">
+								<form onsubmit="return false"  id="_FormSignup" style="padding:10px;margin:auto;">
 										<table width="100%">
 												<tr><td class="info" colspan="2">&nbsp;</td></li>
 												<tr><td>{'邮箱'|tr}:</td><td><input name="useremail"/></td></tr>
