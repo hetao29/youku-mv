@@ -1430,7 +1430,6 @@ $("#_IDRight").corner("tr br 8px");
 
 				});
 		},isIpad:function(){
-return true;
         	if(
         	    (navigator.userAgent.indexOf('iPod') != -1) ||
         	    (navigator.userAgent.indexOf('iPhone') != -1) ||
