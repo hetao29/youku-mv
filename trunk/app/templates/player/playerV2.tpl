@@ -39,41 +39,41 @@
 						var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
 						})();
 				</script>
-		<script type="text/javascript">
-				var _LabelOk="{'确认'|tr}";
-				var _LabelCancel="{'取消'|tr}";
-		</script>
+				<script type="text/javascript">
+						var _LabelOk="{'确认'|tr}";
+						var _LabelCancel="{'取消'|tr}";
+				</script>
 		</head>
 		<body>
-{*
-<a style="width:50px" id="test">fjiw</a>
-<a class="bt" bt_set="true" style="width:60px">
-	<span class="bt_b"> 
-		<span class="bt_c">&nbsp;</span> 
-		<span class="bt_d">
-			<span style="padding-top:3px" class="left ui-icon ui-icon-play"></span>
-			<span class="right">Play</span>
-		</span>
-	</span>
-</a>
+				{*
+				<a style="width:50px" id="test">fjiw</a>
+				<a class="bt" bt_set="true" style="width:60px">
+						<span class="bt_b"> 
+								<span class="bt_c">&nbsp;</span> 
+								<span class="bt_d">
+										<span style="padding-top:3px" class="left ui-icon ui-icon-play"></span>
+										<span class="right">Play</span>
+								</span>
+						</span>
+				</a>
 
-<a class="bt" bt_set="true">
-	<span class="bt_b"> 
-		<span class="bt_c">&nbsp;</span>
-		<span class="bt_d">Play</span>
-	</span>
-</a>
-*}
-{*
-<a href="#nogo" class="bt_a">
-    <span class="bt_b">
-        <span class="bt_c">&nbsp;</span>
-        <span class="bt_d">
-圆角按钮</span>
-    </span>
-</a>
-*}
-{if !empty($facebook)}
+				<a class="bt" bt_set="true">
+						<span class="bt_b"> 
+								<span class="bt_c">&nbsp;</span>
+								<span class="bt_d">Play</span>
+						</span>
+				</a>
+				*}
+				{*
+				<a href="#nogo" class="bt_a">
+						<span class="bt_b">
+								<span class="bt_c">&nbsp;</span>
+								<span class="bt_d">
+										圆角按钮</span>
+						</span>
+				</a>
+				*}
+				{if !empty($facebook)}
 				<div id="fb-root"></div>
 				<script src="http://connect.facebook.net/en_US/all.js"></script>
 				<script type="text/javascript">
@@ -94,35 +94,35 @@
 						//						$( "#tabs" ).tabs();
 						//							});
 				</script>
-{/if}
+				{/if}
 
-{if empty($facebook)}
+				{if empty($facebook)}
 				<div class="header" id="_IDHeader">
 						{part path="/player.main.header"}
 				</div>
-{/if}
+				{/if}
 				<div class="content">
 
 						<div class="main">
 								<div class="left shadow" id="box">
 										<div class="title">
-											<span class="right"><a title="宽屏" href="javascript:void(0);" id="_IDThx"><span class="thx_close"></span></a></span>
-											<span style="line-height:22px" id="title">Youku.FM</span>
+												<span class="right"><a title="宽屏" href="javascript:void(0);" id="_IDThx"><span class="thx_close"></span></a></span>
+												<span style="line-height:22px" id="title">Youku.FM</span>
 										</div>
 										<hr />
 										<div id="playerBox" class="playerBox"><div id="player"></div></div>
-{*<div style="height:65px">
-<img src="/assets/images/style2/center.png" />
+										{*<div style="height:65px">
+												<img src="/assets/images/style2/center.png" />
 										</div>
 										*}
 										<div id="copyright"> ©2010-2011   Youku.FM</div>
 								</div>
 								<div id="_IDRight" class="box2 right" style="width:255px">
-{*
+										{*
 										<div id="rightTop" style="height:12px;margin-top:15px;background-color:rgb(136,136,136)">
 										</div>
 										<div style="height:40px;background-color:rgb(115,139,170)">
-<input style="margin:8px" type="text"/>
+												<input style="margin:8px" type="text"/>
 										</div>
 										*}
 										<div style="padding-top:10px;">
@@ -142,11 +142,11 @@
 												</div>
 												<div id="_IDRadio3" style="height:150px"></div>
 												<div>
-<a id="_IDSkip" style="" title="跳过这个视频">{'跳过'|tr}</a>
-<a id="_IDPlay" style="display:none">{'播放'|tr}</a>
-<a id="_IDChange">{'换台'|tr}</a>
-<a id="_IDUp">{"喜欢"|tr}</a>
-<a id="_IDDown">{"不喜欢"|tr}</a></div>
+														<a id="_IDSkip" style="" title="跳过这个视频">{'跳过'|tr}</a>
+														<a id="_IDPlay" style="display:none">{'播放'|tr}</a>
+														<a id="_IDChange">{'换台'|tr}</a>
+														<a id="_IDUp">{"喜欢"|tr}</a>
+														<a id="_IDDown">{"不喜欢"|tr}</a></div>
 										</div>
 										<div class="list" id="_IDLocalList" style="display:none">
 												<div style="padding-bottom:5px;padding-top:5px;text-align:left">
@@ -184,29 +184,17 @@
 
 										</div>
 										<div title="电台选择" id="_RadioChannel" style="display:none">
-<ul>
-{*
-{foreach item=item from=$radios->items}
-	<li><button {if empty($item.ListCount)}disabled{/if} id="{$item.ListID}" ct="{$item.ListCount}">播放</button> {$item.ListName}({$item.ListCount}个视频)</li>
-{/foreach}
-*}
-</ul>
+												<ul></ul>
 										</div>
 										<div class="list" id="_IDLyrics" style="display:none">
 												<div id="tabs-lyrics" style="width:240px;position:relative;">
 														<div id="_LyricsTop" class="lyrics_top" style="display:none;padding-left:5px;padding-right:5px;width:225px;"></div>
 														<div id="_ContentLyrics" class="lyrics" style="overflow:hidden;width:225px;height:300px;"></div>
 														<div id="_IDLyricsAdmin" style="display:none">
-															<a id="_IDLyricsBk">{"后退"|tr}</a>
-															<a id="_IDLyricsPr">{"前进"|tr}</a>
-															<a id="_IDLyricsErr">{"报错"|tr}</a>
-															<a id="_IDLyricsView">{"查看"|tr}</a>
-{*
-																<span id="_IDLyricsBk" style="cursor:pointer;border:1px solid;">{"后退"|tr}</span>
-																<span id="_IDLyricsPr" style="cursor:pointer;border:1px solid;">{"前进"|tr}</span> 
-																<span id="_IDLyricsErr" style="cursor:pointer;border:1px solid;">{"报错"|tr}</span>
-																<span id="_IDLyricsView" style="cursor:pointer;border:1px solid;">{"查看"|tr}</span>
-*}
+																<a id="_IDLyricsBk">{"后退"|tr}</a>
+																<a id="_IDLyricsPr">{"前进"|tr}</a>
+																<a id="_IDLyricsErr">{"报错"|tr}</a>
+																<a id="_IDLyricsView">{"查看"|tr}</a>
 																<span id="_IDLyricsInfo" style="position:absolute;top:304px;left:200px;width:60px;"></span>
 														</div>
 												</div>
@@ -215,7 +203,7 @@
 								</div>
 								<div class="clear"></div>
 						</div>
-{*						<div id="googlead" class="googlead" style="padding:5px;margin:auto;zoom:1;">
+						{*						<div id="googlead" class="googlead" style="padding:5px;margin:auto;zoom:1;">
 								<script type="text/javascript">
 										google_ad_client = "ca-pub-8444474852440924";
 										/* YOUKU */
@@ -225,7 +213,7 @@
 								</script>
 								<script type="text/javascript" src="http://pagead2.googlesyndication.com/pagead/show_ads.js"> </script>
 						</div>
-*}
+						*}
 				</div>
 
 				<div>
@@ -255,7 +243,7 @@
 								</ul>
 						</div>
 						<div id="_ContentLogin" title="{'登录'|tr}" style="display:none">
-								<form onsubmit="return false" id="_FormLogin" style="padding:10px;margin:auto;">
+								<form id="_FormLogin" onsubmit="return YoukuWs.formlogin();" style="padding:10px;margin:auto;">
 										<table width="100%">
 												<tr><td class="info" colspan="2">&nbsp;</td></tr>
 												<tr><td>{'邮箱'|tr}/{'用户名'|tr}:</td><td><input type="text" name="useremail"/></td></tr>
@@ -266,17 +254,19 @@
 																<a id="_IDSignup2" style="text-decoration:underline;"><b>{"注册"|tr}</b></a>
 														</td>
 												</tr>
+												<tr><td></td><td><button id="_IDLoginSubmit" type="submit">{'登录'|tr}</button></td></tr>
 										</table>
 								</form>
 						</div>
 						<div id="_ContentSignup" title="{'注册'|tr}" style="display:none">
-								<form onsubmit="return false"  id="_FormSignup" style="padding:10px;margin:auto;">
+								<form onsubmit="return YoukuWs.formsignup();"  id="_FormSignup" style="padding:10px;margin:auto;">
 										<table width="100%">
 												<tr><td class="info" colspan="2">&nbsp;</td></li>
 												<tr><td>{'邮箱'|tr}:</td><td><input name="useremail"/></td></tr>
 												<tr><td>{'别名'|tr}:</td><td><input name="useralias"/></td></tr>
 												<tr><td>{'密码'|tr}:</td><td><input type="password" name="password"/></td></tr>
 												<tr><td>{'密码确认'|tr}:</td><td><input type="password" name="password2"/></td></tr>
+												<tr><td></td><td><button id="_IDSingupSubmit" type="submit">{'注册'|tr}</button></td></tr>
 										</table>
 								</form>
 						</div>
@@ -304,11 +294,11 @@
 										<li></li>
 								</ul>
 						</div>
-{*<a onclick="PlayerPause(true)">d</a>
+						{*<a onclick="PlayerPause(true)">d</a>
 						<a onclick="PlayerPause(false)">e</a>
 						<div id="fullscreen" style="display:none;z-index:100;width:100%;text-align:center;position:absolute;"><button id="_IDFullscreen">fullscreen</button></div>
-*}
+						*}
 				</div>
-		<div style="display:none"><script src="http://s16.cnzz.com/stat.php?id=2780428&web_id=2780428&show=pic" language="JavaScript"></script></div>
+				<div style="display:none"><script src="http://s16.cnzz.com/stat.php?id=2780428&web_id=2780428&show=pic" language="JavaScript"></script></div>
 		</body>
 </html>

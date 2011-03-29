@@ -1,6 +1,7 @@
 @charset "utf-8";
 body{
-background:rgb(66,66,66) url(/assets/images/style2/bg.png) no-repeat center center;
+/*background:rgb(66,66,66) url(/assets/images/style2/bg.png) no-repeat center center;*/
+background:rgb(66,66,66) url(http://youku-mv.googlecode.com/svn/trunk/assets/images/style2/bg.png) no-repeat center center;
 }
 body,div,ul,ol,li{
 		padding:0px;
@@ -332,11 +333,11 @@ button{
 }
 .thx_close{
 width:20px;height:20px;display:block;line-height:20px;
-background-image:url(/assets/images/style2/Forward.png);
+background-image:url(http://youku-mv.googlecode.com/svn/trunk/assets/images/style2/Forward.png);
 }
 .thx_open{
 width:20px;height:20px;display:block;line-height:20px;
-background-image:url(/assets/images/style2/Reverse.png);
+background-image:url(http://youku-mv.googlecode.com/svn/trunk/assets/images/style2/Reverse.png);
 }
 .ui-dialog-content li{
 		border-bottom: 1px solid #CCC;
