@@ -345,31 +345,8 @@ $("#_IDRight").corner("tr br 8px");
 					});
 			});
 			$("#_IDSignup").live("click",function(){
-					$("#_ContentSignup").dialog({
-						width:320,height:260, buttons: [
-							{
-								text:_LabelOk,click: function() {
-									$.post("/user.main.signup",$("#_FormSignup").serialize(),function(data){
-										data=data.replace(/<[^>]+>/g,"");
-										data=eval("("+data+")");
-										if(data.uid){
-											//注册成功
-											$('.header').load("/player.main.header");
-											$("#_ContentSignup").dialog( "close" );
-											//登录成功
-										}else{
-											//登录失败
-											$("#_FormSignup .info").html("<b>"+data.info+"</b>").slideDown("fast");
-										}
-									});
-								}
-							},{
-								text:_LabelCancel,click: function() {
-									$( this ).dialog( "close" );
-								}
-							}
-						]
-					});
+					$("#_IDSingupSubmit").button();
+					$("#_ContentSignup").dialog({ width:320,height:240 });
 			});
 			//可以被放入和被排序
 			$( "#_ContentSearch" ).sortable();
@@ -1001,7 +978,7 @@ $("#_IDRight").corner("tr br 8px");
 			});
 			if(this.isIpad()){
 				var video = document.getElementById(playerId);
-				var src="http://api.youku.com/player/getm3u8/vid/"+vid+"/type/flv/v.m3u8";
+				var src="http://api.youku.com/player/getM3U8/vid/"+vid+"/type/flv/v.m3u8";
 				if(!video.src){
 					//$("#playerBox").html('<video id="'+playerId+'" style="width:100%;height:100%" src="http://10.10.221.13/15722B45A0033732E23A45737/0300080A004C31B8F2078F000014124FFBE3C3-66AE-72D7-B8D3-55CFF5F21C3C.mp4" controls="controls" autoplay=true></video>');
 					$("#playerBox").html('<video id="'+playerId+'" style="width:100%;height:100%" src="'+src+'" controls="controls" autoplay=true></video>');
@@ -1278,35 +1255,24 @@ $("#_IDRight").corner("tr br 8px");
 			}
 		},isLogin:function(){
 				return YoukuWs.get("uid");
-		},login:function(callback){
-			$("#_ContentLogin").dialog({
-				width:320,height:240, buttons: [
-					{
-						text:_LabelOk,
-						click: function() {
-							$.post("/user.main.login",$("#_FormLogin").serialize(),function(data){
-									data=data.replace(/<[^>]+>/g,"");
-									data=eval("("+data+")");
-									if(data && data.result==1){
-										$('.header').load("/player.main.header");
-										$("#_ContentLogin").dialog( "close" );
-										if(callback && typeof(callback)=="function")callback();
-										//登录成功
-									}else{
-										//登录失败
-										$("#_FormLogin .info").html("<b>登录失败，用户名或者密码错</b>").slideDown("fast");
-									}
-								});
-						}
-					},
-					{
-						text:_LabelCancel,
-						click: function() {
-							$( this ).dialog( "close" );
-						}
+		},formlogin:function(callback){
+			$.post("/user.main.login",$("#_FormLogin").serialize(),function(data){
+					//data=data.replace(/<[^>]+>/g,"");
+					//data=eval("("+data+")");
+					if(data && data.result==1){
+						$('.header').load("/player.main.header");
+						$("#_ContentLogin").dialog( "close" );
+						if(callback && typeof(callback)=="function")callback();
+						//登录成功
+					}else{
+						//登录失败
+						$("#_FormLogin .info").html("<b>登录失败，用户名或者密码错</b>").slideDown("fast");
 					}
-				]
-			});
+				},"json");
+			return false;
+		},login:function(callback){
+			$("#_IDLoginSubmit").button();
+			$("#_ContentLogin").dialog({ width:320,height:220 });
 		},autoLogin:function(){
 			if(this.get("token") && this.get("uid")){
 				$.post("/user.main.autologin","token="+this.get("token")+"&uid="+this.get("uid"),function(data){
@@ -1316,8 +1282,20 @@ $("#_IDRight").corner("tr br 8px");
 					}
 				},"json");
 			}
-		},
-		listListen:function(page){
+		},formsignup: function() {
+			$.post("/user.main.signup",$("#_FormSignup").serialize(),function(data){
+				if(data.uid){
+					//注册成功
+					$('.header').load("/player.main.header");
+					$("#_ContentSignup").dialog( "close" );
+					//登录成功
+				}else{
+					//登录失败
+					$("#_FormSignup .info").html("<b>"+data.info+"</b>").slideDown("fast");
+				}
+			},"json");
+			return false;
+		},listListen:function(page){
 				$("#_ContentListen DIV").html("");
 				$("#_ContentListen >ul" ).html('<li><img style="vertical-align: middle;" src="/assets/images/loading/loading9.gif" /> 正在加载中...</li>');
 				$.ajax({
