@@ -121,6 +121,8 @@ padding-right:8px;
 */
 hr{
 padding:0px;margin:0px;
+margin-right: 1px;
+margin-left: 1px;
 }
 a:hover {text-decoration:underline;}
 .left{float:left;}

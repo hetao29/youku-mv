@@ -978,7 +978,7 @@ $("#_IDRight").corner("tr br 8px");
 			});
 			if(this.isIpad()){
 				var video = document.getElementById(playerId);
-				var src="http://api.youku.com/player/getM3U8/vid/"+vid+"/type/flv/v.m3u8";
+				var src="http://v.youku.com/player/getM3U8/vid/"+vid+"/type/flv/v.m3u8";
 				if(!video.src){
 					//$("#playerBox").html('<video id="'+playerId+'" style="width:100%;height:100%" src="http://10.10.221.13/15722B45A0033732E23A45737/0300080A004C31B8F2078F000014124FFBE3C3-66AE-72D7-B8D3-55CFF5F21C3C.mp4" controls="controls" autoplay=true></video>');
 					$("#playerBox").html('<video id="'+playerId+'" style="width:100%;height:100%" src="'+src+'" controls="controls" autoplay=true></video>');
