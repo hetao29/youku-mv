@@ -671,6 +671,18 @@ $("#_IDRight").corner("tr br 8px");
 				});
 			});
 			//{{{
+			var objURL={};
+			window.location.search.replace(
+				new RegExp( "([^?=&]+)(=([^&]*))?", "g" ),
+				function( $0, $1, $2, $3 ){
+				objURL[ $1 ] = $3;
+				}
+			);
+			if(objURL.lid){
+				PlayType=1;
+				YoukuWs.set("PlayType",PlayType);
+				YoukuWs.listContents(objURL.lid);
+			};
 			PlayType = YoukuWs.get("PlayType",0);
 			$("#_IDRight >.list").each(function(i,item){
 					if(i==PlayType){
@@ -823,18 +835,6 @@ $("#_IDRight").corner("tr br 8px");
 					}
 			}).show();
 
-			var objURL={};
-			window.location.search.replace(
-				new RegExp( "([^?=&]+)(=([^&]*))?", "g" ),
-				function( $0, $1, $2, $3 ){
-				objURL[ $1 ] = $3;
-				}
-			);
-			if(objURL.lid){
-				PlayType=1;
-				YoukuWs.set("PlayType",PlayType);
-				YoukuWs.listContents(objURL.lid);
-			};
 			YoukuWs.autoLogin();
 			$.each(YoukuWsPlaylist.list(),function(i,n){
 					var o = '<li mvid="'+n.m+'" vid="'+n.v+'"><a>'+n.t+'</a></li>';
@@ -858,9 +858,9 @@ $("#_IDRight").corner("tr br 8px");
 				if(YoukuWs.get("vid")){
 					var time = YoukuWs.get("time",0);
 					YoukuWs.play(YoukuWs.get("vid"),time);
-				}else{
-					vid = $("#_ContentMusic >li").first().attr("vid");
-					YoukuWs.play(vid);
+				//}else{
+				//	vid = $("#_ContentMusic >li").first().attr("vid");
+				//	YoukuWs.play(vid);
 				};
 			}
 	});
@@ -934,9 +934,10 @@ $("#_IDRight").corner("tr br 8px");
 			//fix other used
 			if(document.getElementById("playerBox")==null)return;
 			if(!time)time=0;
+			if(!vid)return;
 			mvid = 0;
 			showLyric("");
-			vid = vid?vid:"XMjI4MTczMDIw";
+			//vid = vid?vid:"XMjI4MTczMDIw";
 			pre=PlayType==0?0:1;
 			if(PlayType==0){
 					$("#_IDSkip").show();
@@ -1412,6 +1413,10 @@ $("#_IDRight").corner("tr br 8px");
 					success: function( result) {
 						if(result && result.items && result.items.length>0){
 							YoukuWsPlaylist.addArray(result.items);
+							if(!YoukuWs.get("vid")){
+								YoukuWs.play(result.items[0].MvVideoID);
+								//YoukuWs.play(YoukuWs.get("vid"),time);
+							};
 						}
 
 					}
