@@ -262,6 +262,7 @@ $("#_IDRight").corner("tr br 8px");
 					//}}}
 					var vid = $(this).attr('vid');
 					YoukuWs.play(vid);
+					YoukuWs.setTitle($(this).attr("mvname"));
 					return false;
 			});
 			$("#_IDLyricsPr").click(function(){
