@@ -183,11 +183,11 @@ li{
 		padding-left:2px;
 		display:block;
 }
-#_IDNav li{
+#IDNav li{
 		background-color:#ddd;
 		padding:5px 15px;
 }
-#_IDNav .current{
+#IDNav .current{
 		font-weight:bold;
 		background-color:#C1C1C1;
 }
