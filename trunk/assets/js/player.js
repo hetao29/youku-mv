@@ -687,30 +687,27 @@ $("#_IDRight").corner("tr br 8px");
 			PlayType = YoukuWs.get("PlayType",0);
 			$("#_IDRight >.list").each(function(i,item){
 					if(i==PlayType){
-						//$("#_IDNav >li").eq(i).css("background-color","").show();
-						$("#_IDNav >li").eq(i).addClass("current").show();
+						$("#IDNav >li").eq(i).addClass("current").show();
 						$(item).show();
 					}else{
-						//$("#_IDNav >li").eq(i).css("background-color","#ddd").show();
-						$("#_IDNav >li").eq(i).removeClass("current").show();
+						$("#IDNav >li").eq(i).removeClass("current").show();
 				   		$(item).hide();
 					}
 			});
-			$("#_IDNav >li").click(function(){
+			$("#IDNav >li").click(function(){
 					var _this = this;
-					$("#_IDNav >li").each(function(i,item){
+					$("#IDNav >li").each(function(i,item){
 								//{{{ save scrollTop
 								window._ContentMusicTop=window._ContentMusicTop?window._ContentMusicTop:0;
 								if($("#_ContentMusic").scrollTop()>0){
 									window._ContentMusicTop = $("#_ContentMusic").scrollTop();
 								}
 								//}}}
-							//	$("#_IDNav >li").eq(i).addClass("current").show();
 								$(item).removeClass("current");
 								//$(item).css("background-color","#ddd");
 								$("#_IDRight >.list").eq(i).hide();
 					});
-					$("#_IDNav >li").each(function(i,item){
+					$("#IDNav >li").each(function(i,item){
 							if($(_this).html()==$(item).html()){
 								//$(item).css("background-color","");
 								$(item).addClass("current");

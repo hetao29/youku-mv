@@ -126,7 +126,7 @@
 										</div>
 										*}
 										<div style="padding-top:10px;">
-												<ul id="_IDNav">
+												<ul id="IDNav">
 														<li><a>{'电台模式'|tr}</a></li>
 														<li><a>{'播放模式'|tr}</a></li>
 														<li><a>{'显示歌词'|tr}</a></li>
