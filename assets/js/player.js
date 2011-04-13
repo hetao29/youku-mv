@@ -1,4 +1,3 @@
-
 (function($){
 	$.fn.bt = function(options){
 		var defaults = {position:"left"}; 
@@ -28,29 +27,6 @@
 		return this;
 	}; 
 })(jQuery); 
-
-/*
-function correctPNG(){
-	if($.support.opacity)return;
-	for(var i=0; i<document.images.length; i++){
-		var img = document.images[i];
-		var imgName = img.src.toUpperCase();
-		if (imgName.substring(imgName.length-3, imgName.length) == "PNG"){
-			var imgID = (img.id) ? "id='" + img.id + "' " : "";
-			var imgClass = (img.className) ? "class='" + img.className + "' " : "";
-			var imgTitle = (img.title) ? "title='" + img.title + "' " : "title='" + img.alt + "' ";
-			var imgStyle = "display:inline-block;" + img.style.cssText;
-			if (img.align == "left") imgStyle = "float:left;" + imgStyle;
-			if (img.align == "right") imgStyle = "float:right;" + imgStyle;
-			if (img.parentElement.href) imgStyle = "cursor:hand;" + imgStyle;
-			var strNewHTML = "<span "+ imgID + imgClass + imgTitle + "style=\"" + "width:" + img.width + "px; height:" + img.height + "px;" + imgStyle + ";" 
-			+ "filter:progid:DXImageTransform.Microsoft.AlphaImageLoader" + "(src='" + img.src + "', sizingMethod='scale');\"></span>";
-			img.outerHTML = strNewHTML;
-			i = i-1;
-		}
-	}
-}
-*/
 //{{{主方法
 var YoukuWs = function(){
 	var fullScreen=false;
@@ -64,16 +40,14 @@ var YoukuWs = function(){
 
 	var order=[];
 	$(document).ready(function(){
-	//correctPNG();
-	//$("#test").bt();
 	$("#_IDLyricsAdmin >a").bt();
-					//{{{
-if (!$.support.borderRadius){
-$('#box').corner();
-$("#_IDRight").corner("tr br 8px");
-}
-					//}}}
-			/*$("#_IDFullscreen").click(function(){
+	//{{{
+	if (!$.support.borderRadius){
+		$('#box').corner();
+		$("#_IDRight").corner("tr br 8px");
+	}
+	//}}}
+		/*$("#_IDFullscreen").click(function(){
 					if(!YoukuWs.fullScreen){
 						$("#playerBox").removeClass("playerBox");
 						$("#playerBox").addClass("playerBoxFullscreen");
@@ -1016,7 +990,12 @@ $("#_IDRight").corner("tr br 8px");
 				video.play();
 				//}}}
 			}else{
-				swfobject.createSWF({data:"http://static.youku.com/v/swf/qplayer.swf",width:"100%",height:"100%"},{allowFullScreen:true,allowscriptaccess:"always",wmode:"transparent",flashvars:"isAutoPlay=true&VideoIDS="+vid+"&winType=index&firsttime="+time},playerId);
+				try{
+					PlayerReplay(vid);
+				}catch(e){
+					swfobject.createSWF({data:"http://static.youku.com/v/swf/qplayer.swf",width:"100%",height:"100%"},{allowFullScreen:true,allowscriptaccess:"always",wmode:"transparent",flashvars:"isAutoPlay=true&VideoIDS="+vid+"&winType=index&ad=0&firsttime="+time},playerId);
+					PlayerColor("DDDDDD","000000",20);
+				}
 			}
 			if(PlayType!=0){//非收听模式
 				//{{{
@@ -1579,7 +1558,14 @@ function _player(moviename) {
 		return document[moviename?moviename:playerId];
 };
 function PlayerColor(bgcolor,gracolor,trans){
-		return _player().setSkinColor(bgcolor,gracolor,trans);
+		try{
+			return _player().setSkinColor(bgcolor,gracolor,trans);
+		}catch(e){
+			setTimeout("PlayerColor('"+bgcolor+"','"+gracolor+"','"+trans+"')",100);
+		}
+};
+function PlayerReplay(vid){
+	    _player().refreshplayer(vid);
 };
 function PlayerPause(flag){
 	    return _player().pauseVideo(flag);
