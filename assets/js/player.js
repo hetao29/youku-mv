@@ -229,7 +229,13 @@ var YoukuWs = function(){
 				});
 				YoukuWs.listListen(1);
 			});
-			$("#_ContentMusic >li,#_ContentListen >ul >li,#_ContentSearch >li").live('click',function(){
+			$("#_ContentListen >ul >li .add,#_ContentSearch >li .add").live('click',function(){
+					var li =$(this).parentsUntil("li").parent();
+					YoukuWsPlaylist.add(li.attr("mvid"),li.attr('vid'),li.attr("mvname"));
+					//TODO 服务保存
+					//setTimeout(function() { li.remove(); }, 1);//fro ie patch
+			});
+			$("#_ContentMusic >li").live('click',function(){
 					//{{{播放模式
 					PlayType=1;
 					YoukuWs.set("PlayType",PlayType);
@@ -237,6 +243,17 @@ var YoukuWs = function(){
 					var vid = $(this).attr('vid');
 					YoukuWs.play(vid);
 					YoukuWs.setTitle($(this).attr("mvname"));
+					return false;
+			});
+			$("#_ContentListen >ul >li .name,#_ContentSearch >li .name").live('click',function(){
+					//{{{播放模式
+					var li = $(this).parent();
+					PlayType=1;
+					YoukuWs.set("PlayType",PlayType);
+					//}}}
+					var vid = li.attr('vid');
+					YoukuWs.play(vid);
+					YoukuWs.setTitle(li.attr("mvname"));
 					return false;
 			});
 			$("#_IDLyricsPr").click(function(){
@@ -462,9 +479,9 @@ var YoukuWs = function(){
 							var o = $("#_ContentListen >ul");
 							o.html('');
 							for(var i=0;i<result.items.length;i++){
-								var html='<li _type="list" mvname="'+result.items[i].MvName+'" vid="'+result.items[i].MvVideoID+'" lid="'+result.items[i].ListID+'" ord="'+result.items[i].MvOrder+'" mvid="'+result.items[i].MvID+'">'+
-								'<span class="left">'+result.items[i].MvName+'</span>'+
-								'<span class="right">'+result.items[i].MvSeconds+' <a class="delMv">X</a></span>'+
+								var html='<li _type="list" title="点击拖动到右边播放列表" mvname="'+result.items[i].MvName+'" vid="'+result.items[i].MvVideoID+'" lid="'+result.items[i].ListID+'" ord="'+result.items[i].MvOrder+'" mvid="'+result.items[i].MvID+'">'+
+								'<span class="left name" title="点击播放:'+result.items[i].MvName+'">'+result.items[i].MvName+'</span>'+
+								'<span class="right">'+result.items[i].MvSeconds+' <a class="delMv" title="删除"><img src="/assets/images/style2/DeleteDisabled.png" style="vertical-align:middle" /></a><img title="点击添加到播放列表" class="add" src="/assets/images/style2/plus.png" style="vertical-align:top"></span>'+
 								'<div class="clear"></div>'+
 								'</li>';
 								o.append(html);
@@ -1283,9 +1300,14 @@ var YoukuWs = function(){
 						var o = $("#_ContentListen >ul");
 						o.html('');
 						for(var i=0;i<result.items.length;i++){
-							var html='<li _type="listen" mvname="'+result.items[i].MvName+'" vid="'+result.items[i].MvVideoID+'" mvid="'+result.items[i].MvID+'">'+
-							'<span class="left">'+result.items[i].MvName+'</span>'+
-							'<span class="right">'+result.items[i].MvSeconds+' <a class="delMv">X</a></span>'+
+								//var html='<li _type="list" title="点击拖动到右边播放列表" mvname="'+result.items[i].MvName+'" vid="'+result.items[i].MvVideoID+'" lid="'+result.items[i].ListID+'" ord="'+result.items[i].MvOrder+'" mvid="'+result.items[i].MvID+'">'+
+								//'<span class="left name" title="点击播放:'+result.items[i].MvName+'">'+result.items[i].MvName+'</span>'+
+								//'<span class="right">'+result.items[i].MvSeconds+' <a class="delMv" title="删除">X</a></span>'+
+								//'<div class="clear"></div>'+
+								//'</li>';
+							var html='<li _type="listen"  title="点击拖动到右边播放列表" mvname="'+result.items[i].MvName+'" vid="'+result.items[i].MvVideoID+'" mvid="'+result.items[i].MvID+'">'+
+							'<span class="left name" title="点击播放:'+result.items[i].MvName+'">'+result.items[i].MvName+'</span>'+
+							'<span class="right">'+result.items[i].MvSeconds+' <a class="delMv" title="删除"><img src="/assets/images/style2/DeleteDisabled.png" style="vertical-align:middle" /></a><img title="点击添加到播放列表" class="add" src="/assets/images/style2/plus.png" style="vertical-align:top"></span>'+
 							'<div class="clear"></div>'+
 							'</li>';
 							o.append(html);
@@ -1312,9 +1334,14 @@ var YoukuWs = function(){
 						var o = $("#_ContentListen >ul");
 						o.html("");
 						for(var i=0;i<result.items.length;i++){
-							var html='<li _type="action" actiontype="'+result.items[i].ActionType+'" mvname="'+result.items[i].MvName+'" vid="'+result.items[i].MvVideoID+'" mvid="'+result.items[i].MvID+'">'+
-							'<span class="left">'+result.items[i].MvName+'</span>'+
-							'<span class="right">'+result.items[i].MvSeconds+' <a class="delMv">X</a></span>'+
+							//var html='<li _type="action" actiontype="'+result.items[i].ActionType+'" mvname="'+result.items[i].MvName+'" vid="'+result.items[i].MvVideoID+'" mvid="'+result.items[i].MvID+'">'+
+							//'<span class="left">'+result.items[i].MvName+'</span>'+
+							//'<span class="right">'+result.items[i].MvSeconds+' <a class="delMv">X</a></span>'+
+							//'<div class="clear"></div>'+
+							//'</li>';
+							var html='<li _type="action"  actiontype="'+result.items[i].ActionType+'" title="点击拖动到右边播放列表" mvname="'+result.items[i].MvName+'" vid="'+result.items[i].MvVideoID+'" mvid="'+result.items[i].MvID+'">'+
+							'<span class="left name" title="点击播放:'+result.items[i].MvName+'">'+result.items[i].MvName+'</span>'+
+							'<span class="right">'+result.items[i].MvSeconds+' <a class="delMv" title="删除"><img src="/assets/images/style2/DeleteDisabled.png" style="vertical-align:middle" /></a><img title="点击添加到播放列表" class="add" src="/assets/images/style2/plus.png" style="vertical-align:top"></span>'+
 							'<div class="clear"></div>'+
 							'</li>';
 							o.append(html);
@@ -1618,11 +1645,12 @@ function search(page){
 				o.html('<li>没有找到,请换下搜索条件试试</li>');
 			}else{
 				for(var i=0;i<data.length;i++){
-					var html = '<li mvname="'+data[i].MvName+'" title="点击播放:'+data[i].MvName+'" mvid="'+data[i].MvID+'" vid="'+data[i].MvVideoID+
-							'"><a><span class="left"><span class="handle ui-icon ui-icon-arrow-4"></span></span>'+
-							'<span class="left">'+ data[i].MvName+'</span>'+
-							'<span class="right">'+data[i].MvSeconds+'</span>'+
-							'<div class="clear"></div></a></li>';
+					var html = '<li mvname="'+data[i].MvName+'" title="可以拖到右边播放列表" mvid="'+data[i].MvID+'" vid="'+data[i].MvVideoID+
+							'">'+//<span class="left"><span class="handle ui-icon ui-icon-arrow-4"></span></span>'+
+							'<span class="left name"  title="点击播放:'+data[i].MvName+'">'+ data[i].MvName+'</span>'+
+							//YoukuWsPlaylist.add(ui.draggable.attr("mvid"),ui.draggable.attr('vid'),ui.draggable.attr("mvname"));
+							'<span class="right">'+data[i].MvSeconds+' <img title="点击添加到播放列表" class="add" src="/assets/images/style2/plus.png" style="vertical-align:top"></span>'+
+							'<div class="clear"></div></li>';
 					o.append(html);
 				}
 			};
