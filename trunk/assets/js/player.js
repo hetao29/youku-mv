@@ -83,6 +83,28 @@ var YoukuWs = function(){
 				//$('#status').html("resize"+", "+$(window).width()+", "+$(document).width()+", "+screen.width);
 			});
 			*/
+			$("#share a").click(function(){
+					var href = ($(this).attr("_href")).replace(/:vid:/g,CurrentVideoID).replace(/:title:/g,document.title);
+					$(this).attr("href",href);
+			});
+			$("#share_handle").click(function(){
+					if($("#share").css("display")=="none"){
+						//$("#share_handle").html(">>");
+						$("#ImgUp").show();
+						$("#ImgDown").hide();
+
+						$("#share").show();
+						$("#share").animate({height:$("#share").height()+30},function(){
+						});
+					}else{
+						$("#ImgUp").hide();
+						$("#ImgDown").show();
+						//$("#share_handle").html("<<");
+						$("#share").animate({height:$("#share").height()-30},function(){
+						$("#share").hide();
+						});
+					};
+			});
 			$("#_IDPlay").click(function(){
 					//{{{播放模式
 					PlayType=0;
@@ -674,6 +696,10 @@ var YoukuWs = function(){
 				PlayType=1;
 				YoukuWs.set("PlayType",PlayType);
 				YoukuWs.listContents(objURL.lid);
+			}else if(objURL.vid){
+				PlayType=1;
+				YoukuWs.set("PlayType",PlayType);
+				YoukuWs.getVideoByVid(objURL.vid);
 			};
 			PlayType = YoukuWs.get("PlayType",0);
 			$("#_IDRight >.list").each(function(i,item){
@@ -1425,6 +1451,16 @@ var YoukuWs = function(){
 
 					}
 
+				});
+		},getVideoByVid:function(vid){
+				$.ajax({
+					url: "/player.main.getVideoByVid",
+					data:{vid:vid},
+					dataType:"json",
+					success: function( result) {
+						YoukuWsPlaylist.add(result.MvID,result.MvVideoID,result.MvName);
+						YoukuWs.play(result.MvVideoID);
+					}
 				});
 		},isIpad:function(){
         	if(
