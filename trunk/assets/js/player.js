@@ -43,7 +43,7 @@ var YoukuWs = function(){
 	$("#_IDLyricsAdmin >a").bt();
 	//{{{
 	if (!$.support.borderRadius){
-		$('#box').corner();
+		$('#box').corner("tr tl 8px");
 		$("#_IDRight").corner("tr br 8px");
 	}
 	//}}}
@@ -93,16 +93,18 @@ var YoukuWs = function(){
 						$("#ImgUp").show();
 						$("#ImgDown").hide();
 
-						$("#share").show();
-						$("#share").animate({height:$("#share").height()+30},function(){
-						});
+						$("#share").slideDown("fast");
+						//$("#share").show();
+						//$("#share").animate({height:$("#share").height()+30},function(){
+						//});
 					}else{
 						$("#ImgUp").hide();
 						$("#ImgDown").show();
 						//$("#share_handle").html("<<");
-						$("#share").animate({height:$("#share").height()-30},function(){
-						$("#share").hide();
-						});
+						$("#share").slideUp("fast");
+						//$("#share").animate({height:$("#share").height()-30},function(){
+						//$("#share").hide();
+						//});
 					};
 			});
 			$("#_IDPlay").click(function(){
