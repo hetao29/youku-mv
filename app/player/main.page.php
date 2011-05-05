@@ -326,6 +326,13 @@ class player_main extends SGui{
 			}
 			return $o;
 	}
+	function pageGetVideoByVid($inPath){
+			$o = array();
+			$vid = $_REQUEST['vid'];
+			if(empty($vid))return;
+			$api = new player_api;
+			return $api->getMvByVid($vid);
+	}
 	/*得到视频信息*/
 	function pageGetVideo($inPath){
 			$o = array();

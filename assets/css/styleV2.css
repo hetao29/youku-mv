@@ -53,6 +53,9 @@ border-bottom-right-radius: 8px 8px;
 background-color:rgb(193,193,193);
 
 }
+#share span{
+		padding-left:2px;padding-right:2px;
+}
 .shadow{
 -moz-box-shadow: 5px 5px 5px rgb(63, 63, 63);
 -webkit-box-shadow:5px 5px 5px rgb(63,63,63);
