@@ -1038,8 +1038,7 @@ var YoukuWs = function(){
 				try{
 					PlayerReplay(vid);
 				}catch(e){
-					swfobject.createSWF({data:"http://static.youku.com/v/swf/qplayer.swf",width:"100%",height:"100%"},{allowFullScreen:true,allowscriptaccess:"always",wmode:"transparent",flashvars:"isAutoPlay=true&VideoIDS="+vid+"&winType=index&ad=0&firsttime="+time},playerId);
-					//PlayerColor("DDDDDD","000000",20);
+					swfobject.createSWF({data:"http://static.youku.com/v/swf/qplayer.swf",width:"100%",height:"100%"},{allowFullScreen:true,allowscriptaccess:"always",wmode:"transparent",flashvars:"isAutoPlay=true&VideoIDS="+vid+"&winType=index&ad=0&skincolor1=EEEEEE&skincolor2=4F4F4F&skilalpha=40&firsttime="+time},playerId);
 				}
 			}
 			if(PlayType!=0){//非收听模式
