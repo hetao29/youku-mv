@@ -31,7 +31,11 @@ class player_main extends SGui{
 	function pageRadioList($inPath){
 		$db = new user_db;
 		$r = $db->ListRadioList();
-		$_testRadio=array("ListID"=>10000,"ListName"=>"80后经典","ListOrder"=>0);
+		$_testRadio=array("ListID"=>-1,"ListName"=>"80后经典","ListOrder"=>0);
+		array_push($r->items,$_testRadio);
+		$_testRadio=array("ListID"=>-3,"ListName"=>"2010年新歌","ListOrder"=>0);
+		array_push($r->items,$_testRadio);
+		$_testRadio=array("ListID"=>-2,"ListName"=>"2011年新歌","ListOrder"=>0);
 		array_push($r->items,$_testRadio);
 		return $r;
 	}
@@ -129,9 +133,13 @@ class player_main extends SGui{
 					$chanelId=$_REQUEST['cid'];
 			}
 			$db = new player_db;
-			if($chanelId==10000){
-				$r=new stdclass;
+			$r=new stdclass;
+			if($chanelId==-1){
 				$r->items=$db->getRandMusic();
+			}elseif($chanelId==-2){
+				$r->items=$db->getRandMusicNew();
+			}elseif($chanelId==-3){
+				$r->items=$db->getRandMusicNew2010();
 			}else{
 				$r = $db->getRandMv($chanelId,$UserID);
 			}

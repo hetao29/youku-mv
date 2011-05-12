@@ -11,6 +11,42 @@ class player_db{
 	function getMvByVid($vid){
 		return $this->_db->selectOne("s_video",array("VideoID"=>$vid));
 	}
+	function getRandMusicNew(){
+$sql='
+SELECT 
+ s_music.MusicID,s_music.VideoID,s_singer.SingerName,s_music.MusicName,
+ concat(s_singer.SingerName," - ",s_music.MusicName)  MvName,
+ s_music_video.snapshot MvPic,s_music_video.duration MvSeconds
+FROM s_singer,s_music,s_music_video 
+WHERE 
+ s_music._Finished=1 and  
+ s_singer.SingerID=s_music.SingerID and  
+ s_music.MusicPubdate >"2011-01-01" and
+ s_music.MusicID=s_music_video.MusicID and 
+ s_music.VideoID=s_music_video.VideoID 
+ORDER BY RAND() ASC 
+LIMIT 50;
+';
+		return ($this->_db->query($sql));
+	}
+	function getRandMusicNew2010(){
+$sql='
+SELECT 
+ s_music.MusicID,s_music.VideoID,s_singer.SingerName,s_music.MusicName,
+ concat(s_singer.SingerName," - ",s_music.MusicName)  MvName,
+ s_music_video.snapshot MvPic,s_music_video.duration MvSeconds
+FROM s_singer,s_music,s_music_video 
+WHERE 
+ s_music._Finished=1 and  
+ s_singer.SingerID=s_music.SingerID and  
+ s_music.MusicPubdate between "2010-01-01" and "2011-01-01" and
+ s_music.MusicID=s_music_video.MusicID and 
+ s_music.VideoID=s_music_video.VideoID 
+ORDER BY RAND() ASC 
+LIMIT 50;
+';
+		return ($this->_db->query($sql));
+	}
 	function getRandMusic($ListID=1,$UserID=0,$pageSize=50){
 		//80后经典
 			//1.s_singer.SingerType=1,2,3
