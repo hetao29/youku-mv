@@ -1,6 +1,7 @@
 <?php
 class player_api{
 		function getMvByVid($vid){
+				$vid = singer_music::decode($vid);
 				$player_db = new player_db;
 				$Mv = $player_db->getMvByVid($vid);
 				if(empty($Mv)){
@@ -14,12 +15,12 @@ class player_api{
 					if(!empty($video)){
 						$Mv['MvName'] = $Mv['MvAlias']=$video->title;
 						$Mv['MvSeconds'] = $video->seconds;
-						$Mv['MvVideoID'] = $video->vid;
+						$Mv['VideoID'] = singer_music::decode($video->vid);
 						$Mv['MvPic'] = $video->pic;
 						$Mv['MvPubDate'] = $video->pubdate;
 					}
 					$Mv['UserID'] = 1;//我自己,TODO
-					$Mv['MvID']=$player_db->addMv($Mv);
+					$player_db->addMv($Mv);
 				}
 				return $Mv;
 		}
@@ -137,12 +138,11 @@ class player_api{
 				" ",
 			);
 			$MvName = preg_replace($pattern,$replacement,$MvName);
-			$MvName= mb_convert_encoding($MvName,"gbk","utf8,gbk");
-			$r = SHttp::get("http://mp3.sogou.com/lyric.so",array("query"=>$MvName,"class=3","w=0"));
-			preg_match_all("/downlrc\.jsp(.+?)\"/",$r,$_m);
-			if(!empty($_m[0][0])){
-					$r = SHttp::get("http://mp3.sogou.com/".$_m[0][0]);
-					return mb_convert_encoding($r,"utf8","gbk,utf8");
+			$MvName=urlencode($MvName);
+			$r = SHttp::get("http://mp3.sogou.com/api/lrc2?query=$MvName&id=1");
+			preg_match('/lrc":"(.+?)","/ims',$r,$_m);
+			if(!empty($_m[1])){
+					return mb_convert_encoding($_m[1],"utf8","gbk,utf8");
 			}
 		}
 }

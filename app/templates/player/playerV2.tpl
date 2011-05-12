@@ -73,6 +73,11 @@
 						</span>
 				</a>
 				*}
+{*
+				<div style="position:absolute;width: 100%;margin: auto;background-color:green;text-align:center;">fwef
+					<div class="center" style="position:absolute;width: 756px;background-color:red;text-align:center;">fwef</div>
+				</div>
+				*}
 				{if !empty($facebook)}
 				<div id="fb-root"></div>
 				<script src="http://connect.facebook.net/en_US/all.js"></script>
@@ -95,6 +100,34 @@
 						//							});
 				</script>
 				{/if}
+
+{*
+				<div style="width:800px;margin: 0px auto;position:relative">
+					<div class="center" style="-moz-opacity:0.5;filter:alpha(opacity=50);opacity:0.5;z-index:99;background-color:#101010;position:fixed;_position:absolute;width: 800px;height:600px;background-color:red;text-align:center;color:#000">
+						<span style="position:relative;color:yellow">图层背景半透明，字体颜色不半透明</span>
+						<span style="position:relative;color:yellow">图层背景半透明，字体颜色不半透明</span>
+						<span style="position:relative;color:yellow">图层背景半透明，字体颜色不半透明</span>
+						<span style="position:relative;color:yellow">图层背景半透明，字体颜色不半透明</span>
+						<span style="position:relative;color:yellow">图层背景半透明，字体颜色不半透明</span>
+						<span style="position:relative;color:yellow">图层背景半透明，字体颜色不半透明</span>
+						<span style="position:relative;color:yellow">图层背景半透明，字体颜色不半透明</span>
+						<span style="position:relative;color:yellow">图层背景半透明，字体颜色不半透明</span>
+						<span style="position:relative;color:yellow">图层背景半透明，字体颜色不半透明</span>
+						<span style="position:relative;color:yellow">图层背景半透明，字体颜色不半透明</span>
+						<span style="position:relative;color:yellow">图层背景半透明，字体颜色不半透明</span>
+						fwef<br />
+						fwef<br />
+						fwef<br />
+						fwef<br />
+						fwef<br />
+						fwef<br />
+						fwef<br />
+						fwef<br />
+						fwef<br />
+						fwef<br />
+					</div>
+				</div>
+*}
 
 				{if empty($facebook)}
 				<div class="header" id="_IDHeader">

@@ -60,7 +60,7 @@ class player_main extends SGui{
 	 * 0 喜欢(up)
 	 * 1 删除(down)
 	 * 2 跳过(skip)
-	 * @param $mvid=$inPath[4] 
+	 * @param $vid=$inPath[4] 
 	 */
 	function pageMvAction($inPath){
 			$result=new stdclass;
@@ -90,7 +90,7 @@ class player_main extends SGui{
 				}
 				if(($User=user_api::islogin())!==false){
 						$user_db = new user_db;
-						$record=$user_db->addAction(array("UserID"=>$User['UserID'],"MvID"=>$inPath[4],"ActionType"=>$actiontype));
+						$record=$user_db->addAction(array("UserID"=>$User['UserID'],"VideoID"=>$inPath[4],"ActionType"=>$actiontype));
 						if($record==1){
 							$result->record=true;
 						}else{
@@ -102,15 +102,16 @@ class player_main extends SGui{
 			return $result;
 	}
 	function pageDelAction($inPath){
-		if(($User=user_api::islogin())!==false && isset($_REQUEST['actiontype']) && !empty($_REQUEST['mvid'])){
-				$MvID = $_REQUEST['mvid'];
+		if(($User=user_api::islogin())!==false && isset($_REQUEST['actiontype']) && !empty($_REQUEST['vid'])){
+				$VideoID= $_REQUEST['vid'];
 				$ActionType = $_REQUEST['actiontype'];
 				$UserID=$User['UserID'];
 				$db = new user_db;
-				return $db->delAction($UserID,$MvID,$ActionType);
+				return $db->delAction($UserID,$VideoID,$ActionType);
 		}
 	}
 	function pageRadio($inPath){
+			//select s_singer.SingerName,s_music.MusicName,concat(s_singer.SingerName," - ",s_music.MusicName)  MvName,s_music_video.snapshot MvPic,s_music_video.duration MvSeconds from s_singer,s_music,s_music_video where s_singer.SingerID=s_music.SingerID and  s_music.MusicID=s_music_video.MusicID and s_music.VideoID=s_music_video.VideoID limit 3;
 			$db = new player_db;
 			$UserID=0;
 			if(($User=user_api::islogin())!==false){
@@ -129,25 +130,11 @@ class player_main extends SGui{
 			$r = $db->getRandMv($chanelId,$UserID);
 			$r->cid = $chanelId;
 			return $r;
-			//电台频道
-			//0表示私有频道，其它表示频道ID，甚至包括电视频道
-			//视频ID，当前的视频ID
-			$vid = $_REQUEST['vid'];
-			//如果是登录用户，在s_user_listen中找出不是这个用户听过的最新的歌，如果没有，就去s_mv 中找
-			//同时算出相互喜欢歌
-			//1.听过些歌的人，还听这的一些歌
-			//2.喜欢过这首歌的人，还听过的，和喜欢的
-			//同时不能包含用户不喜欢的歌
-			//如果没有登录的用户，在s_user_listen中找出不是当前歌的歌
-			$userid = 0;
-			if(($User=user_api::islogin())!==false){
-					$userid = $User['UserID'];
-			}
 	}
 	/**
 	 * 增加MV
 	 * @param $MvName
-	 * @param $MvVideoID (url)
+	 * @param $VideoID (url)
 	 * @param [$MvListID]
 	 */
 
@@ -174,30 +161,30 @@ class player_main extends SGui{
 	 * 列出所有列表
 	 */
 	function pageSaveOffset($inPath){
-			$MvID= $_REQUEST['MvID'];
+			$VideoID= $_REQUEST['VideoID'];
 			$offset = $_REQUEST['offset'];
-			if(empty($MvID) || empty($offset)){
+			if(empty($VideoID) || empty($offset)){
 					return;
 			}
 			$db = new player_db;
-			$lyric = $db->getLyrics($MvID);
+			$lyric = $db->getLyrics($VideoID);
 			if(empty($lyric)  || $lyric['UserID']!=1){//TODO，当前登录用户
 					return;
 			}
-			$db->updateLyrics($MvID,array("LyricsOffset"=>$offset));
+			$db->updateLyrics($VideoID,array("LyricsOffset"=>$offset));
 			return true;
 	}
 	function pageLyricsError($inPath){
-			$MvID= $_REQUEST['MvID'];
-			if(empty($MvID)){
+			$VideoID= $_REQUEST['VideoID'];
+			if(empty($VideoID)){
 					return;
 			}
 			$db = new player_db;
-			$lyric = $db->getLyrics($MvID);
+			$lyric = $db->getLyrics($VideoID);
 			if(empty($lyric)  || $lyric['UserID']!=1){//TODO，当前登录用户
 					return;
 			}
-			$db->updateLyrics($MvID,array("LyricsStatus"=>-2));
+			$db->updateLyrics($VideoID,array("LyricsStatus"=>-2));
 			return true;
 	}
 	function pageListAction($inPath){
@@ -228,10 +215,10 @@ class player_main extends SGui{
 			if(($User=user_api::islogin())!==false){
 					$db = new user_db;
 					$player_db = new player_db;
-					$vid = $_REQUEST['vid'];
+					$vid = singer_music::decode($_REQUEST['vid']);
 					$api = new player_api;
 					$mv=$api->getMvByVid($vid);
-					if(!empty($mv) && ($r=$db->addListen(array("MvID"=>$mv['MvID'],"UserID"=>$User['UserID'])))===1){
+					if(!empty($mv) && ($r=$db->addListen(array("VideoID"=>$mv['VideoID'],"UserID"=>$User['UserID'])))===1){
 							return true;
 					}
 			}
@@ -241,8 +228,8 @@ class player_main extends SGui{
 			if(($User=user_api::islogin())!==false){
 					$db = new user_db;
 					$UserID= $User['UserID'];
-					$MvID = $_REQUEST['mvid'];
-					return $db->delListen($UserID,$MvID);
+					$VideoID= singer_music::decode($_REQUEST['vid']);
+					return $db->delListen($UserID,$VideoID);
 			}
 			return false;
 	}
@@ -251,7 +238,7 @@ class player_main extends SGui{
 	 **/
 	function pageGetLyric($inPath){
 			$db = new player_db;
-			$vid = $_REQUEST['vid'];
+			$vid = singer_music::decode($_REQUEST['vid']);
 			$api = new player_api;
 			//{{{把播放页url翻译成真正的vid
 			if(preg_match("/http\:\/\//i",$vid)){
@@ -261,22 +248,24 @@ class player_main extends SGui{
 			//}}}
 			$mv  = $api->getMvByVid($vid);
 			if(!empty($mv)){
-					$lyric = $db->getLyrics($mv['MvID']);
+					$lyric = $db->getLyrics($mv['VideoID']);
 					if(empty($lyric) || $lyric['LyricsStatus']==-2)
 					{
 						$api = new player_api;
-						$content = $api->downlyric($mv['MvAlias']);
+						$content = $api->downlyric($mv['MvName']);
 						if(empty($content))$content="";
-						//if(!empty($content)){
+						if(!empty($content)){
+							$lyric['LyricsStatus']=1;
+						}else{
+							$lyric['LyricsStatus']=-1;
+						}
 						//这样只下载一次，避免被发现有问题
 						$lyric = array();
 						$lyric['LyricsContent']=$content;
 						$lyric['LyricsOffset']=0;
 						$lyric['UserID']=1;
-						$lyric['LyricsStatus']=-1;
-						$lyric['MvID']=$mv['MvID'];
+						$lyric['VideoID']=$mv['VideoID'];
 						$db->addLyrics($lyric);
-						//}
 					}
 					return $lyric;
 			}
@@ -315,11 +304,11 @@ class player_main extends SGui{
 					$Mv['MvSourceID']=1;
 					$Mv['MvName'] = $Mv['MvAlias']=$item->title;
 					$Mv['MvSeconds'] = $item->duration;
-					$Mv['MvVideoID'] = $item->videoid;
+					$Mv['VideoID'] = singer_music::decode($item->videoid);
 					$Mv['MvPic'] = $item->snapshot;
 					$Mv['MvPubDate'] = $item->pubDate;
 					$Mv['UserID'] = 1;//我自己,TODO
-					$Mv['MvID']=$db->addMv($Mv);
+					$db->addMv($Mv);
 					//}}}
 				}
 				$o[]=$Mv;
@@ -328,7 +317,7 @@ class player_main extends SGui{
 	}
 	function pageGetVideoByVid($inPath){
 			$o = array();
-			$vid = $_REQUEST['vid'];
+			$vid = singer_music::decode($_REQUEST['vid']);
 			if(empty($vid))return;
 			$api = new player_api;
 			return $api->getMvByVid($vid);
@@ -383,11 +372,11 @@ class player_main extends SGui{
 							$Mv['MvSourceID']=1;
 							$Mv['MvName'] = $Mv['MvAlias']=$item->title;
 							$Mv['MvSeconds'] = $item->duration;
-							$Mv['MvVideoID'] = $item->videoid;
+							$Mv['VideoID'] = singer_music::decode($item->videoid);
 							$Mv['MvPic'] = $item->snapshot;
 							$Mv['MvPubDate'] = $item->pubDate;
 							$Mv['UserID'] = 1;//我自己,TODO
-							$Mv['MvID']=$db->addMv($Mv);
+							$db->addMv($Mv);
 							//}}}
 						}
 						$o[]=$Mv;

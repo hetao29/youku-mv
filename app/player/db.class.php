@@ -9,45 +9,45 @@ class player_db{
 		$this->_db->init($this->_dbConfig);
 	}
 	function getMvByVid($vid){
-		return $this->_db->selectOne("s_mv",array("MvVideoID"=>$vid));
+		return $this->_db->selectOne("s_video",array("VideoID"=>$vid));
 	}
 	function getRandMv($ListID=1,$UserID=0,$pageSize=50){
 		$this->_db->setLimit($pageSize);
 		if(!empty($UserID) && is_numeric($UserID)){
 			return $this->_db->select(
-					array("s_mv","s_list_content"),
+					array("s_video","s_list_content"),
 					array(
-							"s_mv.MvID=s_list_content.MvID",
+							"s_video.VideoID=s_list_content.VideoID",
 							"s_list_content.ListID"=>$ListID,
-							"s_mv.MvID not in(select MvID from s_user_action where UserID=$UserID and ActionType!=2)"
+							"s_video.VideoID not in(select VideoID from s_user_action where UserID=$UserID and ActionType!=2)"
 					)
-					,array("s_mv.MvID","s_mv.MvName","s_mv.MvVideoID","s_mv.MvSeconds","s_mv.MvPic")
+					,array("s_video.VideoID","s_video.MvName","s_video.MvSeconds","s_video.MvPic")
 					,"ORDER BY rand()");
 		}
 		return $this->_db->select(
-					array("s_mv","s_list_content"),
-					array("s_mv.MvID=s_list_content.MvID","s_list_content.ListID"=>$ListID)
-					,array("s_mv.MvID","s_mv.MvName","s_mv.MvVideoID","s_mv.MvSeconds","s_mv.MvPic")
+					array("s_video","s_list_content"),
+					array("s_video.VideoID=s_list_content.VideoID","s_list_content.ListID"=>$ListID)
+					,array("s_video.VideoID","s_video.MvName","s_video.MvSeconds","s_video.MvPic")
 					,"ORDER BY rand()");
 	}
-	function getMv($mvid){
-		return $this->_db->selectOne("s_mv",array("MvID"=>$mvid));
+	function getMv($vid){
+		return $this->_db->selectOne("s_video",array("VideoID"=>$vid));
 	}
-	function updateMv($mvid,$Mv){
-		return $this->_db->update("s_mv",array("MvID"=>$mvid),$Mv);
+	function updateMv($vid,$Mv){
+		return $this->_db->update("s_video",array("VideoID"=>$vid),$Mv);
 	}
 	function getMvCount(){
-		$row = $this->_db->selectOne("s_mv",array(),"count(*) ct");
+		$row = $this->_db->selectOne("s_video",array(),"count(*) ct");
 		return $row['ct'];
 	}
 	function addMv($Mv){
-		return $this->_db->insert("s_mv",$Mv);
+		return $this->_db->insert("s_video",$Mv);
 	}
-	function updateLyrics($MvID,$Lyrics){
-		return $this->_db->update("s_lyrics",array("MvID"=>$MvID),$Lyrics);
+	function updateLyrics($VideoID,$Lyrics){
+		return $this->_db->update("s_lyrics",array("VideoID"=>$VideoID),$Lyrics);
 	}
-	function getLyrics($MvID){
-		return $this->_db->selectOne("s_lyrics",array("MvID"=>$MvID));
+	function getLyrics($VideoID){
+		return $this->_db->selectOne("s_lyrics",array("VideoID"=>$VideoID));
 	}
 	function addLyrics($Lyrics){
 		return $this->_db->insert("s_lyrics",$Lyrics,$replace = true);

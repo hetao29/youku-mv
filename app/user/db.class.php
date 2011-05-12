@@ -42,8 +42,8 @@ class user_db{
 	function addAction($Action){
 		return $this->_db->insert("s_user_action",$Action,true);
 	}
-	function delAction($UserID,$MvID,$ActionType=null){
-		$condition=array("UserID"=>$UserID,"MvID"=>$MvID);
+	function delAction($UserID,$VideoID,$ActionType=null){
+		$condition=array("UserID"=>$UserID,"VideoID"=>$VideoID);
 		if($ActionType!==null){
 				$condition['ActionType']=$ActionType;
 		}
@@ -56,9 +56,9 @@ class user_db{
 		$this->_db->setLimit($pageSize);
 		$this->_db->setPage($page);
 		return $this->_db->select(
-				array("s_user_action","s_mv"),
-				array("s_user_action.UserID"=>$UserID,"s_user_action.MvID=s_mv.MvID","s_user_action.ActionType"=>$ActionType),
-				array("s_user_action.MvID","s_user_action.ActionType","MvName","MvVideoID","MvSeconds","ActionTime"),
+				array("s_user_action","s_video"),
+				array("s_user_action.UserID"=>$UserID,"s_user_action.VideoID=s_video.VideoID","s_user_action.ActionType"=>$ActionType),
+				array("s_user_action.VideoID","s_user_action.ActionType","MvName","MvSeconds","ActionTime"),
 				"ORDER BY ActionTime DESC"
 		);
 	}
@@ -66,14 +66,14 @@ class user_db{
 	function addList($List){
 		return $this->_db->insert("s_list",$List);
 	}
-	function addListContent($ListID,$MvID,$MvOrder=0){
-		if(($r=$this->_db->insert("s_list_content",array("ListID"=>$ListID,"MvID"=>$MvID,"MvOrder"=>$MvOrder),true))===1){
+	function addListContent($ListID,$VideoID,$MvOrder=0){
+		if(($r=$this->_db->insert("s_list_content",array("ListID"=>$ListID,"VideoID"=>$VideoID,"MvOrder"=>$MvOrder),true))===1){
 			return $this->_db->update("s_list",array("ListID"=>$ListID),array("ListCount=ListCount+1"));
 		};
 		return false;
 	}
-	function delListContent($ListID,$MvID){
-		if($this->_db->delete("s_list_content",array("ListID"=>$ListID,"MvID"=>$MvID))){
+	function delListContent($ListID,$VideoID){
+		if($this->_db->delete("s_list_content",array("ListID"=>$ListID,"VideoID"=>$VideoID))){
 			return $this->_db->update("s_list",array("ListID"=>$ListID),array("ListCount=ListCount-1"));
 		};
 		return false;
@@ -81,9 +81,9 @@ class user_db{
 	function listContent($ListID){
 			$this->_db->setLimit(-1);
 			return $this->_db->select(
-					array("s_mv","s_list_content"),
-					array("s_mv.MvID=s_list_content.MvID","s_list_content.ListID"=>$ListID),
-					array("s_mv.MvID","s_mv.MvName","s_mv.MvSeconds","s_mv.MvVideoID","s_list_content.ListID","s_list_content.MvOrder"),"ORDER BY MvOrder"
+					array("s_video","s_list_content"),
+					array("s_video.VideoID=s_list_content.VideoID","s_list_content.ListID"=>$ListID),
+					array("s_video.VideoID","s_video.MvName","s_video.MvSeconds","s_list_content.ListID","s_list_content.MvOrder"),"ORDER BY MvOrder"
 			);
 	}
 	function getListCount($UserID){
@@ -93,8 +93,8 @@ class user_db{
 	function updateListOrder($UserID,$ListID,$ListOrder){
 		return $this->_db->update("s_list",array("ListID"=>$ListID,"UserID"=>$UserID),array("ListOrder"=>$ListOrder));
 	}
-	function updateListContentsOrder($ListID,$MvID,$MvOrder){
-		return $this->_db->update("s_list_content",array("ListID"=>$ListID,"MvID"=>$MvID),array("MvOrder"=>$MvOrder));
+	function updateListContentsOrder($ListID,$VideoID,$MvOrder){
+		return $this->_db->update("s_list_content",array("ListID"=>$ListID,"VideoID"=>$VideoID),array("MvOrder"=>$MvOrder));
 	}
 	function editList($ListID,$List){
 		return $this->_db->update("s_list",array("ListID"=>$ListID),$List);
@@ -130,17 +130,17 @@ class user_db{
 	function addListen($Listen){
 		return $this->_db->insert("s_user_listen",$Listen,false,false,array("ListenTotal=ListenTotal+1","ListenTime=CURRENT_TIMESTAMP"));
 	}
-	function delListen($UserID,$MvID){
-		return $this->_db->delete("s_user_listen",array("UserID"=>$UserID,"MvID"=>$MvID));
+	function delListen($UserID,$VideoID){
+		return $this->_db->delete("s_user_listen",array("UserID"=>$UserID,"VideoID"=>$VideoID));
 	}
 	/*收听日志*/
 	function ListListen($UserID,$page,$pageSize=50){
 		$this->_db->setLimit($pageSize);
 		$this->_db->setPage($page);
 		return $this->_db->select(
-				array("s_user_listen","s_mv"),
-				array("s_user_listen.UserID"=>$UserID,"s_user_listen.MvID=s_mv.MvID"),
-				array("s_user_listen.MvID","MvName","MvVideoID","MvSeconds","ListenTime"),
+				array("s_user_listen","s_video"),
+				array("s_user_listen.UserID"=>$UserID,"s_user_listen.VideoID=s_video.VideoID"),
+				array("s_user_listen.VideoID","MvName","MvSeconds","ListenTime"),
 				"ORDER BY ListenTime DESC"
 		);
 	}

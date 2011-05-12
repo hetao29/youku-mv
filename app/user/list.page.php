@@ -70,7 +70,7 @@ class user_list{
 				$List = $db->getList($_REQUEST['lid']);
 				if(empty($List) || $List['UserID']!=$UserID)return false;
 				foreach($_REQUEST['order'] as $order){
-					$result|=$db->updateListContentsOrder($ListID,$order['mvid'],$order['order']);
+					$result|=$db->updateListContentsOrder($ListID,singer_music::decode($order['vid']),$order['order']);
 				}
 		}
 		return $result;
@@ -91,7 +91,7 @@ class user_list{
 	}
 	function pageAddContents($inPath){
 		$result=false;
-		if(($User=user_api::islogin())!==false && !empty($_REQUEST['lids']) && !empty($_REQUEST['mvids'])){
+		if(($User=user_api::islogin())!==false && !empty($_REQUEST['lids']) && !empty($_REQUEST['vids'])){
 				$realLids=array();
 				if(is_numeric($_REQUEST['lids'])){
 						$realLids[]=$_REQUEST['lids'];
@@ -100,10 +100,10 @@ class user_list{
 				}
 
 				$realMvids=array();
-				if(is_numeric($_REQUEST['mvids'])){
-						$realMvids[]=$_REQUEST['mvids'];
-				}elseif(is_array($_REQUEST['mvids'])){
-						$realMvids=$_REQUEST['mvids'];
+				if(is_numeric($_REQUEST['vids'])){
+						$realMvids[]=$_REQUEST['vids'];
+				}elseif(is_array($_REQUEST['vids'])){
+						$realMvids=$_REQUEST['vids'];
 				}
 				$api = new player_api;
 				$db = new user_db;
@@ -117,8 +117,8 @@ class user_list{
 				if(!empty($lists) && !empty($realMvids)){
 					foreach($lists as $list){
 							$i=0;
-							foreach($realMvids as $mvid){
-									$result = $db->addListContent($list["ListID"],$mvid,$i);
+							foreach($realMvids as $vid){
+									$result = $db->addListContent($list["ListID"],singer_music::decode($vid),$i);
 									$i++;
 							}
 					}
@@ -128,14 +128,14 @@ class user_list{
 	}
 	function pageDelContent($inPath){
 		$result=false;
-		if(($User=user_api::islogin())!==false && !empty($_REQUEST['lid']) && !empty($_REQUEST['mvid'])){
+		if(($User=user_api::islogin())!==false && !empty($_REQUEST['lid']) && !empty($_REQUEST['vid'])){
 				$UserID=$User['UserID'];
 				$ListID=$_REQUEST['lid'];
-				$MvID=$_REQUEST['mvid'];
+				$VideoID=singer_music::decode($_REQUEST['vid']);
 				$db = new user_db;
 				$List = $db->getList($ListID);
 				if(empty($List) || $List['UserID']!=$UserID)return false;
-				$result=$db->delListContent($ListID,$MvID);
+				$result=$db->delListContent($ListID,$VideoID);
 		}
 		return $result;
 	}
