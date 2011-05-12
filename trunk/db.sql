@@ -15,6 +15,7 @@ CREATE TABLE `s_singer` (
 PRIMARY KEY (`SingerID`),
 UNIQUE KEY `SingerName` (`SingerName`,`SingerType`),
 KEY `SingerStatus` (`SingerStatus`),
+KEY `SingerType` (`SingerType`),
 KEY `SingerID` (`SingerID`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
@@ -55,6 +56,25 @@ UNIQUE KEY `MusicName` (`MusicName`,`SpecialID`),
 KEY `MusicPubdate` (`MusicPubdate`),
 KEY `SpecialID` (`SpecialID`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+/*
+--频道,定义到文件里,singer_channel::
+--1.80后频道
+CREATE TABLE `s_channel`(
+`ChannelID` int unsigned NOT NULL default 0 AUTO_INCREMENT,
+`ChannelName` varchar(200),
+PRIMARY KEY (`ChannelID`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+--频道内容
+CREATE TABLE `s_channel_music`(
+`_ID` int unsigned NOT NULL default 0 AUTO_INCREMENT,
+`ChannelID` int unsigned NOT NULL default,
+`MusicID` int unsigned NOT NULL default,
+`VideoID` int unsigned NOT NULL default,
+PRIMARY KEY (`_ID`),
+UNIQUE KEY (`ChannelID`,`MusicID`),
+KEY (`VideoID`,`VideoID`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+*/
 /**
 音乐和视频临时关联表
 */

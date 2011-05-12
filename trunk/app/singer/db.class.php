@@ -50,6 +50,13 @@ class singer_db{
 	function addMusic($Music){
 		return $this->_db->insert("s_music",$Music);
 	}
+	function getMusic($MusicID){
+		return $this->_db->selectOne(
+			array("s_music","s_singer","s_special"),
+			array("s_music.MusicID"=>$MusicID,"s_music.SingerID=s_singer.SingerID","s_music.SpecialID=s_special.SpecialID"),
+			array("s_music.MusicID","s_music.MusicName","s_singer.SingerID","s_singer.SingerName","s_sepcial.SpecialID","s_special.SpecialName")
+			);
+	}
 	function updateMusic($Music){
 		return $this->_db->update("s_music",array("MusicID"=>$Music['MusicID']),$Music);
 	}
@@ -73,18 +80,24 @@ class singer_db{
 				"ORDER BY MusicID"
 		);
 	}
+	function getMusicIDByVideoID($VideoID){
+		return $this->_db->selectOne("s_music",array("VideoID"=>$VideoID));
+	}
+	function getMusicIDByVideoID2($VideoID){
+		return $this->_db->selectOne("s_music_video",array("VideoID"=>$VideoID));
+	}
+	function addMusicVideo($MusicVideo){
+		return $this->_db->insert("s_music_video",$MusicVideo);
+	}
+	function updateMusicVideo($MusicVideo){
+		return $this->_db->update("s_music_video",array("MusicID"=>$MusicVideo['MusicID']),$MusicVideo);
+	}
 /*
-	function addMusicMv($MusicMv){
-		return $this->_db->insert("s_music_mv",$MusicMv);
-	}
-	function updateMusicMv($MusicMv){
-		return $this->_db->update("s_music_mv",array("MusicID"=>$MusicMv['MusicID']),$MusicMv);
-	}
-	function listMusicMv($page,$pageSize=50){
+	function listMusicVideo($page,$pageSize=50){
 		$this->_db->setLimit($pageSize);
 		$this->_db->setPage($page);
 		return $this->_db->select(
-				array("s_music_mv"),
+				array("s_music_video"),
 				array(),
 				"*",
 				"ORDER BY MusicID"

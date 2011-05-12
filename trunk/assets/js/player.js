@@ -169,7 +169,7 @@ var YoukuWs = function(){
 							$("#_RadioChannel button").live("click",function(){
 								$("#_RadioChannel").dialog("close");
 								YoukuWs.set("cid",$(this).attr("id"));
-								radioPlayList=[];
+								radioPlayList=new Array();
 								PlayType=0;
 								YoukuWs.set("PlayType",PlayType);
 								YoukuWs.playRadio();
@@ -964,7 +964,7 @@ var YoukuWs = function(){
 			}
 			next=1;
 			CurrentVideoID=vid;
-			YoukuWs.set("vid",CurrentVideoID);
+			YoukuWs.set("CurrentVideoID",CurrentVideoID);
 			//下载歌词
 			$.ajax({
 				url: "/player.main.getLyric",
@@ -1263,11 +1263,11 @@ var YoukuWs = function(){
 			$("#googlead").html("");
 			$("#googlead").html(a);
 		},saveOffset:function(){
-			if(vid>0 && uid>0){
+			if(CurrentVideoID>0 && uid>0){
 				$.ajax({
 					url: "/player.main.saveoffset",
 					data: {
-						VideoID:vid,
+						VideoID:CurrentVideoID,
 						offset:lyrics_offset
 					},
 					success: function( result) {
