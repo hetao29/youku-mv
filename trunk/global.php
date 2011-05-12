@@ -1,8 +1,8 @@
 <?php
 require_once("slightphp/SlightPHP.php");
 define("DEV","true");
-define("PLUGINS_DIR","slightphp/plugins");
 define("WWW_ROOT",dirname(__FILE__));
+define("PLUGINS_DIR",WWW_ROOT."/slightphp/plugins");
 /*echo error info*/
 //SlightPHP::setDebug(true);
 

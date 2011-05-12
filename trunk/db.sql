@@ -1,19 +1,82 @@
 --歌手名
-/*
 CREATE TABLE `s_singer` (
+`_TmpUrl` varchar(250),
+`_Finished` tinyint not null default 0,
 `SingerID` int(10) unsigned NOT NULL AUTO_INCREMENT,
 `SingerName` varchar(200) DEFAULT NULL,
+`SingerNamePinYin` varchar(200) DEFAULT NULL,
 `SingerGender` tinyint(3) unsigned NOT NULL DEFAULT '0' COMMENT '男，女，组合',
-`SingerNationality` varchar(100) DEFAULT NULL COMMENT '国籍',
+`SingerCountry` varchar(8) NOT NULL DEFAULT "",
+`SingerType` int(10) NOT NULL DEFAULT 0,
 `SingerComment` text,
 `SingerOrder` int(10) unsigned NOT NULL DEFAULT '0',
+`MvCount` int(10) unsigned NOT NULL DEFAULT '0',
 `SingerStatus` tinyint(4) NOT NULL default -1 COMMENT '１正常，-1未审核',
 PRIMARY KEY (`SingerID`),
-UNIQUE KEY `SingerName` (`SingerName`),
+UNIQUE KEY `SingerName` (`SingerName`,`SingerType`),
 KEY `SingerStatus` (`SingerStatus`),
 KEY `SingerID` (`SingerID`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+CREATE TABLE `s_special`(
+`_TmpUrl` varchar(250),
+`_Finished` tinyint not null default 0,
+`SpecialID` int(10) unsigned NOT NULL AUTO_INCREMENT, 
+`SingerID` int(10) unsigned NOT NULL default 0, 
+`SpecialName` varchar(200) DEFAULT NULL,
+`SpecialLanguage` varchar(20) DEFAULT NULL,
+`SpecialPubDate` date,
+`SpecialType` tinyint default 0,
+`SpecialStyle` varchar(200) DEFAULT NULL,
+`SpecialCompany` varchar(200) DEFAULT NULL,
+`SpecialTotalScore` tinyint not null default 0,
+`SpecialComment` text,
+`SpecialCover` varchar(200),
+`_TmpSpecialCover` varchar(200),
+PRIMARY KEY(`SpecialID`),
+UNIQUE KEY `SpecialName` (`SpecialName`,`SingerID`),
+KEY SingerID(`SingerID`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+/**
+音乐表
 */
+CREATE TABLE `s_music`(
+`_Finished` tinyint not null default 0,
+`MusicID` int(10) unsigned NOT NULL AUTO_INCREMENT, 
+`SingerID` int(10) unsigned NOT NULL default 0,
+`SpecialID` int(10) unsigned NOT NULL default 0,
+`MusicName` varchar(200),
+`MusicPubdate` date,
+`VideoID` int(10) unsigned NOT NULL default 0,
+PRIMARY KEY (`MusicID`),
+KEY `VideoID` (`VideoID`),
+UNIQUE KEY `MusicName` (`MusicName`,`SpecialID`),
+KEY `MusicPubdate` (`MusicPubdate`),
+KEY `SpecialID` (`SpecialID`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+/**
+音乐和视频临时关联表
+*/
+CREATE TABLE `s_music_video`(
+`MusicID` int(10) unsigned NOT NULL, 
+`VideoID` int(10) unsigned NOT NULL default 0,
+`title` varchar(250),
+`snapshot` varchar(200),
+`duration` varchar(20),
+`author` varchar(200),
+`pubDate` datetime,
+`pv` int,
+UNIQUE KEY `MusicID` (`MusicID`,`VideoID`),
+KEY `pubDate` (`pubDate`),
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+
+CREATE TABLE `s_singer_profile` (
+`SingerID` int(10) unsigned NOT NULL ,
+PRIMARY KEY (`SingerID`),
+KEY `SingerStatus` (`SingerStatus`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 /*
 ParterID 1:Youku
@@ -42,13 +105,10 @@ create table s_user_token(
 )ENGINE=HEAP DEFAULT CHARSET=utf8;
 
 
---drop table s_mv;
---s_mv表
-drop table s_mv;
-create table s_mv(
-MvID int(10) unsigned NOT NULL AUTO_INCREMENT,
+drop table s_video;
+create table s_video(
+VideoID int(10) unsigned NOT NULL,
 UserID int(10) unsigned NOT NULL default 0 COMMENT '增加的用户ID',
-SingerName varchar(250) NOT NULL default "" COMMENT '歌手名，乐队名等，多个用,号分开',
 MvTag varchar(200) COMMENT 'MTV标签,多个用,分开',
 MvName varchar(200) COMMENT '视频的真实名字,用户不可修改',
 MvAlias varchar(200) COMMENT 'MV的名字，编辑后的，默认和MvName一样',
@@ -57,15 +117,13 @@ MvSkipTimes int(10) unsigned NOT NULL default 0,
 MvUpTimes int(10) unsigned NOT NULL default 0,
 MvDownTimes int(10) unsigned NOT NULL default 0,
 CategoryID int(10) unsigned NOT NULL default 0,
-SpecialID int(10) unsigned NOT NULL default 0,
-MvVideoID varchar(50),
 MvSourceID tinyint unsigned not null default 1 COMMENT'来源,1.优酷，2.土豆 3...',
 MvPubDate date,
 MvSeconds varchar(10) not null default '' COMMENT 'MTV播放时间，秒',
 MvUpdateTime timestamp,
 MvStatus tinyint not null default -1 COMMENT '１正常，-1未审核',
 
-PRIMARY KEY (`MvID`),
+PRIMARY KEY (`VideoID`),
 UNIQUE KEY `Mv` (`MvVideoID`,`MvSourceID`),
 Key (`UserID`),
 Key (`CategoryID`)
@@ -97,10 +155,10 @@ Key (`ListCreateTime`)
 --列表内容
 create table s_list_content(
 ListID int(10) unsigned NOT NULL,
-MvID int(10) unsigned NOT NULL,
+VideoID int(10) unsigned NOT NULL,
 MvOrder int unsigned not null default 0,
 
-PRIMARY KEY (`ListID`,`MvID`)
+PRIMARY KEY (`ListID`,`VideoID`)
 
 )ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
@@ -109,12 +167,12 @@ PRIMARY KEY (`ListID`,`MvID`)
 drop table s_lyrics;
 create table s_lyrics(
 UserID int(10) unsigned NOT NULL DEFAULT 0,
-MvID int(10) unsigned NOT NULL,
+VideoID int(10) unsigned NOT NULL,
 LyricsOffset int NOT NULL  DEFAULT 0 COMMENT '偏移,毫秒,正数表是延迟,负数表是推前,只有当前所属用户才能修改',
 LyricsContent  text,
 LyricsStatus tinyint not null default 1 COMMENT'1正常 -1没审核 -2用户报错',
 
-UNIQUE (`MvID`),
+UNIQUE (`VideoID`),
 KEY (`UserID`),
 KEY (`LyricsStatus`)
 
@@ -127,29 +185,22 @@ KEY (`LyricsStatus`)
 --用户顶,踩的歌,一个视频可以顶,也可以踩,踩过的视频不再给用户播放
 create table s_user_action(
 UserID int not null default 0,
-MvID int not null default 0,
+VideoID int not null default 0,
 ActionType int not null default 0,
 ActionTime timestamp,
-UNIQUE KEY `Action` (`UserID`,MvID,ActionType),
+UNIQUE KEY `Action` (`UserID`,VideoID,ActionType),
 KEY `ActionTime` (`ActionTime`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 --跳过的视频,跳过的视频表示用户不喜欢,也不给用户推荐
-create table s_user_skip(
-UserID int not null default 0,
-MvID int not null default 0,
-SkipTime timestamp,
-UNIQUE KEY `Skip` (`UserID`,MvID),
-KEY `SkipTime` (`SkipTime`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 --用户听过的歌
 drop table s_user_listen;
 create table s_user_listen(
 UserID int not null default 0,
-MvID int not null default 0,
+VideoID int not null default 0,
 ListenTime	timestamp,
 ListenTotal int not null default 1,
-UNIQUE KEY `ListenID` (`UserID`,MvID),
+UNIQUE KEY `ListenID` (`UserID`,VideoID),
 KEY ListenTime(`ListenTime`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
@@ -177,31 +228,32 @@ KEY ListenTime(`ListenTime`)
 
 
 --打分记录，一个用户只能打分一次
-create table s_mv_rate(
-		MvID
+create table s_video_rate(
+		VideoID
 		UserID
 		RateTime	timestamp
 )
-create table s_mv_comment(
-		MvID
+create table s_video_comment(
+		VideoID
 		UserID
 		CommentTitle
 		CommentContent
 		CommentTime timestamp
 		CommentStatus 1 正常-1隐藏
 );
-create table s_mv_status(
-		MvID
+create table s_video_status(
+		VideoID
 		MvRate--平均打分数
 		MvTotalRate	--打人总数
 		MvTotalRatePeople	--打人总人数
 		MvListenTimes	--视听次数
 )
-create table s_mv_tag(
+create table s_video_tag(
+		VideoID
 		TagID
 		TagName
 );
-create table s_mv_category(
+create table s_video_category(
 		CategoryID
 		CategoryParentID	0
 		CategoryName

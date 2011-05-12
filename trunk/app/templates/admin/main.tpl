@@ -23,7 +23,7 @@
 <script type="text/javascript" src="/assets/js/player.js"></script>
 <script type="text/javascript" src="/assets/js/swfobject/swfobject.js"></script>
 				<link href="/assets/css/jquery-ui-1.8.6.custom-smoothness.css" media="all" rel="stylesheet" type="text/css" />
-				<link href="/assets/css/styleV2.css" media="all" rel="stylesheet" type="text/css" />
+				<link href="/assets/css/admin.css" media="all" rel="stylesheet" type="text/css" />
 {else}
 				<script type="text/javascript" src="{'/player.js'|version:$jsversion}"></script>
 				<link href="{'/player.css'|version:$cssversion}" media="all" rel="stylesheet" type="text/css" />

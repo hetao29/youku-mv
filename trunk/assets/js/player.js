@@ -35,7 +35,7 @@ var YoukuWs = function(){
 	var lyrics_offset=0;
 	//用户ID
 	var uid=1;
-	var mvid=1;
+	var vid=1;
 
 
 	var order=[];
@@ -138,7 +138,7 @@ var YoukuWs = function(){
 				$("#_IDThx").trigger("click");
 			}
 			$("#_IDSkip").click(function(){
-					YoukuWs.MvAction("skip",CurrentMvID);
+					YoukuWs.MvAction("skip",CurrentVideoID);
 					//{{{播放模式
 					PlayType=0;
 					YoukuWs.set("PlayType",PlayType);
@@ -181,7 +181,7 @@ var YoukuWs = function(){
 			}).bt();
 			$("#_IDDown").click(function(){
 					if(YoukuWs.isLogin()){
-						YoukuWs.MvAction("down",CurrentMvID);
+						YoukuWs.MvAction("down",CurrentVideoID);
 						YoukuWs.playRadio();
 					}else{
 						YoukuWs.login(function(){$("#_IDDown").trigger("click");});
@@ -189,7 +189,7 @@ var YoukuWs = function(){
 			}).bt();
 			$("#_IDUp").click(function(){
 					if(YoukuWs.isLogin()){
-						YoukuWs.MvAction("up",CurrentMvID);
+						YoukuWs.MvAction("up",CurrentVideoID);
 					}else{
 						YoukuWs.login(function(){$("#_IDUp").trigger("click");});
 					}
@@ -255,7 +255,7 @@ var YoukuWs = function(){
 			});
 			$("#_ContentListen >ul >li .add,#_ContentSearch >li .add").live('click',function(){
 					var li =$(this).parentsUntil("li").parent();
-					YoukuWsPlaylist.add(li.attr("mvid"),li.attr('vid'),li.attr("mvname"));
+					YoukuWsPlaylist.add(li.attr("vid"),li.attr("mvname"));
 					//TODO 服务保存
 					//setTimeout(function() { li.remove(); }, 1);//fro ie patch
 			});
@@ -288,11 +288,11 @@ var YoukuWs = function(){
 					YoukuWs.saveOffset();
 			});
 			$("#_IDLyricsErr").click(function(){
-				if(mvid>0 && uid>0){
+				if(vid>0 && uid>0){
 					$.ajax({
 						url: "/player.main.LyricsError",
 						data: {
-							MvID:mvid
+							VideoID:vid
 						},
 						success: function( result) {
 							$("#_IDLyricsInfo").html("已报错").fadeIn("slow",function(){
@@ -373,7 +373,7 @@ var YoukuWs = function(){
 					accept:"#_ContentSearch >li,#_ContentListen >ul >li",
 							drop: function( event, ui ) {
 									//这里是从搜索结果拖到当前播放列表
-									YoukuWsPlaylist.add(ui.draggable.attr("mvid"),ui.draggable.attr('vid'),ui.draggable.attr("mvname"));
+									YoukuWsPlaylist.add(ui.draggable.attr("vid"),ui.draggable.attr("mvname"));
 									//TODO 服务保存
 									setTimeout(function() { ui.draggable.remove(); }, 1);//fro ie patch
 							}
@@ -459,7 +459,7 @@ var YoukuWs = function(){
 					$(this).find("li").each(function (index, domEle) { 
 						lid = $(domEle).attr("lid");
 						if(index!=$(domEle).attr("ord")){
-							var o={order:index,mvid:$(domEle).attr("mvid")};
+							var o={order:index,vid:$(domEle).attr("vid")};
 							order.push(o);
 						}
 					});
@@ -474,7 +474,7 @@ var YoukuWs = function(){
 						success: function( result) {
 							//应该修改当前的ord值
 							for(var i in  order){
-								$("#_ContentListen >ul >li[mvid="+order[i].mvid+"]").attr("ord",order[i].order);
+								$("#_ContentListen >ul >li[vid="+order[i].vid+"]").attr("ord",order[i].order);
 							}
 						}
 					});
@@ -503,7 +503,7 @@ var YoukuWs = function(){
 							var o = $("#_ContentListen >ul");
 							o.html('');
 							for(var i=0;i<result.items.length;i++){
-								var html='<li _type="list" title="点击拖动到右边播放列表" mvname="'+result.items[i].MvName+'" vid="'+result.items[i].MvVideoID+'" lid="'+result.items[i].ListID+'" ord="'+result.items[i].MvOrder+'" mvid="'+result.items[i].MvID+'">'+
+								var html='<li _type="list" title="点击拖动到右边播放列表" mvname="'+result.items[i].MvName+'" lid="'+result.items[i].ListID+'" ord="'+result.items[i].MvOrder+'" vid="'+result.items[i].VideoID+'">'+
 								'<span class="left name" title="点击播放:'+result.items[i].MvName+'">'+result.items[i].MvName+'</span>'+
 								'<span class="right">'+result.items[i].MvSeconds+' <a class="delMv" title="删除"><img src="/assets/images/style2/DeleteDisabled.png" style="vertical-align:middle" /></a><img title="点击添加到播放列表" class="add" src="/assets/images/style2/plus.png" style="vertical-align:top"></span>'+
 								'<div class="clear"></div>'+
@@ -516,7 +516,7 @@ var YoukuWs = function(){
 			});
 			$( "#_ContentListen .delMv" ).live("click",function(){
 				var type= $(this).parents("li").attr("_type");
-				var mvid= $(this).parents("li").attr("mvid");
+				var vid= $(this).parents("li").attr("vid");
 				var _this=this;
 				if(type=="list"){
 					var lid= $(this).parents("li").attr("lid");
@@ -525,7 +525,7 @@ var YoukuWs = function(){
 						url: "/user.list.delcontent",
 						data: {
 							lid:lid,
-							mvid:mvid
+							vid:vid
 						},type:"post",
 						dataType:"json",
 						success: function( result) {
@@ -538,7 +538,7 @@ var YoukuWs = function(){
 						url: "/player.main.delAction",
 						data: {
 							actiontype:actiontype,
-							mvid:mvid
+							vid:vid
 						},type:"post",
 						dataType:"json",
 						success: function( result) {
@@ -550,7 +550,7 @@ var YoukuWs = function(){
 					$.ajax({
 						url: "/player.main.delListen",
 						data: {
-							mvid:mvid
+							vid:vid
 						},type:"post",
 						dataType:"json",
 						success: function( result) {
@@ -798,16 +798,16 @@ var YoukuWs = function(){
 												lids.push($(n).val());
 										});
 										if(lids.length>0){
-											var mvids=[];
+											var vids=[];
 									   		$("#_ContentMusic >li").each(function(i,n){
-													mvids.push($(n).attr("mvid"));
+													vids.push($(n).attr("vid"));
 											});
 											$("#_IDListDialogAdding").show();
 											$.ajax({
 												url: "/user.list.addContents",
 												data: {
 													lids:lids,
-													mvids:mvids
+													vids:vids
 												},type:"post",
 												dataType:"json",
 												success: function( List) {
@@ -854,7 +854,7 @@ var YoukuWs = function(){
 
 			YoukuWs.autoLogin();
 			$.each(YoukuWsPlaylist.list(),function(i,n){
-					var o = '<li mvid="'+n.m+'" vid="'+n.v+'"><a>'+n.t+'</a></li>';
+					var o = '<li vid="'+n.v+'"><a>'+n.t+'</a></li>';
 					$("#_ContentMusic").append(o);
 			});
 			$(window).bind("beforeunload",function(){
@@ -868,7 +868,7 @@ var YoukuWs = function(){
 			});
 			setInterval(YoukuWs.checkTime,500);
 			//setInterval(YoukuWs.adReload,1000*60*10);// 10分钟一次
-			CurrentMvID = YoukuWs.get("CurrentMvID");
+			CurrentVideoID= YoukuWs.get("CurrentVideoID");
 			if(PlayType==0){
 				YoukuWs.playRadio();
 			}else{
@@ -908,6 +908,7 @@ var YoukuWs = function(){
 			otime=parseInt(/\[offset:(.+)\]/i.test(str)?RegExp.$1:0);
 	
 			str=str.replace(/[^\]]\[/g,"\n[");
+			str=str.replace(/\\/g,"");
 			matches = str.match(/\n\[\d+:.+\][^\[\r\n]*/ig);
 			if(!matches)return;
 			rr=matches.length;
@@ -952,9 +953,7 @@ var YoukuWs = function(){
 			if(document.getElementById("playerBox")==null)return;
 			if(!time)time=0;
 			if(!vid)return;
-			mvid = 0;
 			showLyric("");
-			//vid = vid?vid:"XMjI4MTczMDIw";
 			pre=PlayType==0?0:1;
 			if(PlayType==0){
 					$("#_IDSkip").show();
@@ -978,7 +977,7 @@ var YoukuWs = function(){
 				   		if(result.LyricsContent && result.LyricsContent!=""){
 							showLyric(result.LyricsContent);
 							lyrics_offset = parseInt(result.LyricsOffset);
-							mvid = result.MvID;
+							vid = result.VideoID;
 							$("#_IDLyricsAdmin").fadeIn("slow");
 						}else{
 							//显示没有歌词
@@ -998,7 +997,6 @@ var YoukuWs = function(){
 				var video = document.getElementById(playerId);
 				var src="http://v.youku.com/player/getM3U8/vid/"+vid+"/type/flv/v.m3u8";
 				if(!video.src){
-					//$("#playerBox").html('<video id="'+playerId+'" style="width:100%;height:100%" src="http://10.10.221.13/15722B45A0033732E23A45737/0300080A004C31B8F2078F000014124FFBE3C3-66AE-72D7-B8D3-55CFF5F21C3C.mp4" controls="controls" autoplay=true></video>');
 					$("#playerBox").html('<video id="'+playerId+'" style="width:100%;height:100%" src="'+src+'" controls="controls" autoplay=true></video>');
 					video = document.getElementById(playerId);
 					video.addEventListener('play', 	onPlayerStart, false);
@@ -1038,6 +1036,7 @@ var YoukuWs = function(){
 				try{
 					PlayerReplay(vid);
 				}catch(e){
+					//swfobject.createSWF({data:"http://static.youku.com/v/swf/qplayer.swf",width:"100%",height:"100%"},{allowFullScreen:true,allowscriptaccess:"always",wmode:"transparent",flashvars:"isAutoPlay=false&VideoIDS="+vid+"&winType=index&ad=0&skincolor1=EEEEEE&skincolor2=4F4F4F&skilalpha=40&firsttime="+time},playerId);
 					swfobject.createSWF({data:"http://static.youku.com/v/swf/qplayer.swf",width:"100%",height:"100%"},{allowFullScreen:true,allowscriptaccess:"always",wmode:"transparent",flashvars:"isAutoPlay=true&VideoIDS="+vid+"&winType=index&ad=0&skincolor1=EEEEEE&skincolor2=4F4F4F&skilalpha=40&firsttime="+time},playerId);
 				}
 			}
@@ -1117,11 +1116,11 @@ var YoukuWs = function(){
 			$("#_IDRadio2").show();
 			if(o){
 				//队列里有数据
-				CurrentMvID = o.MvID;
+				CurrentVideoID= o.VideoID;
 				$("#_IDVideoTitle").html(o.MvName);
 				$("#_IDVideoPic").attr("src",o.MvPic);
-				YoukuWs.set("CurrentMvID",CurrentMvID);
-				YoukuWs.play(o.MvVideoID);
+				YoukuWs.set("CurrentVideoID",CurrentVideoID);
+				YoukuWs.play(o.VideoID);
 				YoukuWs.setTitle(o.MvName);
 			}
 			if(radioPlayList[0]){
@@ -1136,7 +1135,7 @@ var YoukuWs = function(){
 						url: "/player.main.radio",
 						data: {
 							cid:YoukuWs.get("cid"),
-							mvid:CurrentMvID
+							vid:CurrentVideoID
 						},
 						dataType:"json",
 						success: function( result) {
@@ -1212,13 +1211,14 @@ var YoukuWs = function(){
 			if(vid)YoukuWs.play(vid);
 		},
 		setTitle:function(t){
+			if(!t)return;
 			 var t = t.replace(/<[^>]+>/g,"");
 			 if(t)$("#title").html("正在播放:"+t);
 			 if(t)document.title="YouKu.FM - "+t;
 		},
-		MvAction:function(type,mvid){
+		MvAction:function(type,vid){
 			$.ajax({
-				url: "/player.main.mvaction/"+type+"."+mvid,
+				url: "/player.main.mvaction/"+type+"."+vid,
 				dataType:"json",
 				success: function( result) {
 					if(result&&result.type){
@@ -1263,11 +1263,11 @@ var YoukuWs = function(){
 			$("#googlead").html("");
 			$("#googlead").html(a);
 		},saveOffset:function(){
-			if(mvid>0 && uid>0){
+			if(vid>0 && uid>0){
 				$.ajax({
 					url: "/player.main.saveoffset",
 					data: {
-						MvID:mvid,
+						VideoID:vid,
 						offset:lyrics_offset
 					},
 					success: function( result) {
@@ -1327,12 +1327,7 @@ var YoukuWs = function(){
 						var o = $("#_ContentListen >ul");
 						o.html('');
 						for(var i=0;i<result.items.length;i++){
-								//var html='<li _type="list" title="点击拖动到右边播放列表" mvname="'+result.items[i].MvName+'" vid="'+result.items[i].MvVideoID+'" lid="'+result.items[i].ListID+'" ord="'+result.items[i].MvOrder+'" mvid="'+result.items[i].MvID+'">'+
-								//'<span class="left name" title="点击播放:'+result.items[i].MvName+'">'+result.items[i].MvName+'</span>'+
-								//'<span class="right">'+result.items[i].MvSeconds+' <a class="delMv" title="删除">X</a></span>'+
-								//'<div class="clear"></div>'+
-								//'</li>';
-							var html='<li _type="listen"  title="点击拖动到右边播放列表" mvname="'+result.items[i].MvName+'" vid="'+result.items[i].MvVideoID+'" mvid="'+result.items[i].MvID+'">'+
+							var html='<li _type="listen"  title="点击拖动到右边播放列表" mvname="'+result.items[i].MvName+'" vid="'+result.items[i].VideoID+'">'+
 							'<span class="left name" title="点击播放:'+result.items[i].MvName+'">'+result.items[i].MvName+'</span>'+
 							'<span class="right">'+result.items[i].MvSeconds+' <a class="delMv" title="删除"><img src="/assets/images/style2/DeleteDisabled.png" style="vertical-align:middle" /></a><img title="点击添加到播放列表" class="add" src="/assets/images/style2/plus.png" style="vertical-align:top"></span>'+
 							'<div class="clear"></div>'+
@@ -1361,12 +1356,7 @@ var YoukuWs = function(){
 						var o = $("#_ContentListen >ul");
 						o.html("");
 						for(var i=0;i<result.items.length;i++){
-							//var html='<li _type="action" actiontype="'+result.items[i].ActionType+'" mvname="'+result.items[i].MvName+'" vid="'+result.items[i].MvVideoID+'" mvid="'+result.items[i].MvID+'">'+
-							//'<span class="left">'+result.items[i].MvName+'</span>'+
-							//'<span class="right">'+result.items[i].MvSeconds+' <a class="delMv">X</a></span>'+
-							//'<div class="clear"></div>'+
-							//'</li>';
-							var html='<li _type="action"  actiontype="'+result.items[i].ActionType+'" title="点击拖动到右边播放列表" mvname="'+result.items[i].MvName+'" vid="'+result.items[i].MvVideoID+'" mvid="'+result.items[i].MvID+'">'+
+							var html='<li _type="action"  actiontype="'+result.items[i].ActionType+'" title="点击拖动到右边播放列表" mvname="'+result.items[i].MvName+'" vid="'+result.items[i].VideoID+'">'+
 							'<span class="left name" title="点击播放:'+result.items[i].MvName+'">'+result.items[i].MvName+'</span>'+
 							'<span class="right">'+result.items[i].MvSeconds+' <a class="delMv" title="删除"><img src="/assets/images/style2/DeleteDisabled.png" style="vertical-align:middle" /></a><img title="点击添加到播放列表" class="add" src="/assets/images/style2/plus.png" style="vertical-align:top"></span>'+
 							'<div class="clear"></div>'+
@@ -1412,7 +1402,7 @@ var YoukuWs = function(){
 												url: "/user.list.addContents",
 												data: {
 													lids:lid,
-													mvids:$(ui.draggable).attr("mvid")
+													vids:$(ui.draggable).attr("vid")
 												},type:"post",
 												dataType:"json",
 												success: function( List) {
@@ -1445,7 +1435,7 @@ var YoukuWs = function(){
 						if(result && result.items && result.items.length>0){
 							YoukuWsPlaylist.addArray(result.items);
 							if(!YoukuWs.get("vid")){
-								YoukuWs.play(result.items[0].MvVideoID);
+								YoukuWs.play(result.items[0].VideoID);
 								//YoukuWs.play(YoukuWs.get("vid"),time);
 							};
 						}
@@ -1459,8 +1449,8 @@ var YoukuWs = function(){
 					data:{vid:vid},
 					dataType:"json",
 					success: function( result) {
-						YoukuWsPlaylist.add(result.MvID,result.MvVideoID,result.MvName);
-						YoukuWs.play(result.MvVideoID);
+						YoukuWsPlaylist.add(result.VideoID,result.MvName);
+						YoukuWs.play(result.VideoID);
 					}
 				});
 		},isIpad:function(){
@@ -1483,8 +1473,7 @@ var YoukuWsPlaylist = function(){
 				var isappend=false;
 				for(var i=0;i<arr.length;i++){
 					var m = {};
-					m.v = arr[i].MvVideoID;
-					m.m = arr[i].MvID;
+					m.v = arr[i].VideoID;
 					m.t = arr[i].MvName;
 					finded = false;
 					$.each(all,function(i,item){
@@ -1497,7 +1486,7 @@ var YoukuWsPlaylist = function(){
 						all.push(m);
 					};
 					if(!noappend && !finded){
-						var html = '<li mvid="'+m.m+'" vid="'+m.v+'"><a>'+m.t+'</a></li>';
+						var html = '<li vid="'+m.v+'"><a>'+m.t+'</a></li>';
 						content.append(html);
 						isappend=true;
 					}
@@ -1517,8 +1506,8 @@ var YoukuWsPlaylist = function(){
 				}
 				YoukuWs.set("list",JSON.stringify(all));
 		};
-		o.add=function(mvid,vid,title){
-				YoukuWsPlaylist.addArray([{MvVideoID:vid,MvID:mvid,MvName:title}]);
+		o.add=function(vid,title){
+				YoukuWsPlaylist.addArray([{VideoID:vid,MvName:title}]);
 		};
 		o.list=function(){
 				return $.parseJSON(YoukuWs.get("list"))||[];
@@ -1529,8 +1518,7 @@ var YoukuWsPlaylist = function(){
 			$("#_ContentMusic >li").each(function(i,n){
 				var o=$(n);
 				var m = {};
-				m.MvVideoID= o.attr("vid");
-				m.MvID= o.attr("mvid");
+				m.VideoID= o.attr("vid");
 				m.MvName= o.find("a").html();
 				all.push(m);
 			});
@@ -1572,8 +1560,6 @@ var randMusicListIndex=0;
 var PlayType=0;
 //当前播放视频ID，主要是播放模式用
 var CurrentVideoID="";
-//当前听歌的MvID，主要是收音模式用
-var CurrentMvID=0;
 var radioPlayList=[];
 function onPlayerStart(obj){
 		if(YoukuWs.isLogin()){
@@ -1682,10 +1668,8 @@ function search(page){
 				o.html('<li>没有找到,请换下搜索条件试试</li>');
 			}else{
 				for(var i=0;i<data.length;i++){
-					var html = '<li mvname="'+data[i].MvName+'" title="可以拖到右边播放列表" mvid="'+data[i].MvID+'" vid="'+data[i].MvVideoID+
-							'">'+//<span class="left"><span class="handle ui-icon ui-icon-arrow-4"></span></span>'+
+					var html = '<li mvname="'+data[i].MvName+'" title="可以拖到右边播放列表" vid="'+data[i].VideoID+'">'+
 							'<span class="left name"  title="点击播放:'+data[i].MvName+'">'+ data[i].MvName+'</span>'+
-							//YoukuWsPlaylist.add(ui.draggable.attr("mvid"),ui.draggable.attr('vid'),ui.draggable.attr("mvname"));
 							'<span class="right">'+data[i].MvSeconds+' <img title="点击添加到播放列表" class="add" src="/assets/images/style2/plus.png" style="vertical-align:top"></span>'+
 							'<div class="clear"></div></li>';
 					o.append(html);
