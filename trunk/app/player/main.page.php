@@ -122,7 +122,7 @@ class player_main extends SGui{
 			if(($User=user_api::islogin())!==false){
 					$UserID= $User['UserID'];
 			}
-			$chanelId=1;
+			$chanelId=-3;
 			$db_user = new user_db;
 			$radios = $db_user->ListRadioList();
 			if(empty($_REQUEST['cid'])){
