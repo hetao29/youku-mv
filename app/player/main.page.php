@@ -30,7 +30,10 @@ class player_main extends SGui{
 	}
 	function pageRadioList($inPath){
 		$db = new user_db;
-		return $db->ListRadioList();
+		$r = $db->ListRadioList();
+		$_testRadio=array("ListID"=>10000,"ListName"=>"80后经典","ListOrder"=>0);
+		array_push($r->items,$_testRadio);
+		return $r;
 	}
 	function pageHeader($inPath){
 
@@ -111,8 +114,6 @@ class player_main extends SGui{
 		}
 	}
 	function pageRadio($inPath){
-			//select s_singer.SingerName,s_music.MusicName,concat(s_singer.SingerName," - ",s_music.MusicName)  MvName,s_music_video.snapshot MvPic,s_music_video.duration MvSeconds from s_singer,s_music,s_music_video where s_singer.SingerID=s_music.SingerID and  s_music.MusicID=s_music_video.MusicID and s_music.VideoID=s_music_video.VideoID limit 3;
-			$db = new player_db;
 			$UserID=0;
 			if(($User=user_api::islogin())!==false){
 					$UserID= $User['UserID'];
@@ -127,7 +128,13 @@ class player_main extends SGui{
 			}else{
 					$chanelId=$_REQUEST['cid'];
 			}
-			$r = $db->getRandMv($chanelId,$UserID);
+			$db = new player_db;
+			if($chanelId==10000){
+				$r=new stdclass;
+				$r->items=$db->getRandMusic();
+			}else{
+				$r = $db->getRandMv($chanelId,$UserID);
+			}
 			$r->cid = $chanelId;
 			return $r;
 	}
@@ -161,9 +168,9 @@ class player_main extends SGui{
 	 * 列出所有列表
 	 */
 	function pageSaveOffset($inPath){
-			$VideoID= $_REQUEST['VideoID'];
+			$VideoID= singer_music::decode($_REQUEST['VideoID']);
 			$offset = $_REQUEST['offset'];
-			if(empty($VideoID) || empty($offset)){
+			if(empty($VideoID) || !isset($offset)){
 					return;
 			}
 			$db = new player_db;
@@ -175,7 +182,7 @@ class player_main extends SGui{
 			return true;
 	}
 	function pageLyricsError($inPath){
-			$VideoID= $_REQUEST['VideoID'];
+			$VideoID= singer_music::decode($_REQUEST['VideoID']);
 			if(empty($VideoID)){
 					return;
 			}
@@ -251,6 +258,21 @@ class player_main extends SGui{
 					$lyric = $db->getLyrics($mv['VideoID']);
 					if(empty($lyric) || $lyric['LyricsStatus']==-2)
 					{
+						//{{{去曲库里找音乐信息
+						$singer_db = new singer_db;
+						//直接获取
+						$music_video=$singer_db->getMusicIDByVideoID($mv['VideoID']);
+						if(empty($music_video)){
+							//从关联表中获取
+							$music_video=$singer_db->getMusicIDByVideoID2($mv['VideoID']);
+						}
+						if(!empty($music_video['MusicID'])){
+							$music = $singer_db->getMusic($music_video['MusicID']);
+							if(!empty($music)){
+								$mv['MvName'] = $music['SingerName']." - ".$music['MusicName'];
+							}
+						}
+						//}}}
 						$api = new player_api;
 						$content = $api->downlyric($mv['MvName']);
 						if(empty($content))$content="";
