@@ -29,6 +29,10 @@ a {
 		/*color:rgb(193,193,193);*/
 		text-decoration:none;
 }
+#box a{
+		color:#000;
+		text-decoration:underline;
+}
 #box{
 /*width:756px;*/
 width:496px;

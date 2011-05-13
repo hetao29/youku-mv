@@ -8,6 +8,9 @@ class singer_db{
 		$this->_db = SDb::getDbEngine("pdo_mysql");
 		$this->_db->init($this->_dbConfig);
 	}
+	function getSinger($SingerID){
+		return $this->_db->selectOne("s_singer",array("SingerID"=>$SingerID),array("SingerID","SingerName","SingerType","MvCount"));
+	}
 	function addSinger($Singer){
 		return $this->_db->insert("s_singer",$Singer);
 	}
@@ -50,12 +53,35 @@ class singer_db{
 	function addMusic($Music){
 		return $this->_db->insert("s_music",$Music);
 	}
+	function listMusicBySingerID($SingerID){
+		return $this->_db->select(
+			array("s_music","s_music_video","s_singer"),
+			array("s_music.SingerID"=>$SingerID,"s_music.SingerID=s_singer.SingerID","s_music.VideoID=s_music_video.VideoID","s_music.MusicID=s_music_video.MusicID"),
+			array(
+					"s_singer.SingerName","s_music.MusicID", "s_music.MusicName", "s_music.VideoID","s_music.MusicPubdate","title","snapshot","duration",
+			),
+			"ORDER BY MusicPubdate desc"
+		);
+	}
+	function listMusicBySpecialID($SpecialID){
+		return $this->_db->select(
+			array("s_music","s_music_video","s_special"),
+			array("s_music.SpecialID"=>$SpecialID,"s_special.SpecialID=s_music.SpecialID","s_music.VideoID=s_music_video.VideoID","s_music.MusicID=s_music_video.MusicID"),
+			array(
+					"s_special.SpecialName","s_music.MusicID", "s_music.MusicName", "s_music.VideoID","s_music.MusicPubdate","title","snapshot","duration",
+			),
+			"ORDER BY MusicPubdate desc"
+		);
+	}
 	function getMusic($MusicID){
 		return $this->_db->selectOne(
 			array("s_music","s_singer","s_special"),
 			array("s_music.MusicID"=>$MusicID,"s_music.SingerID=s_singer.SingerID","s_music.SpecialID=s_special.SpecialID"),
-			array("s_music.MusicID","s_music.MusicName","s_singer.SingerID","s_singer.SingerName","s_sepcial.SpecialID","s_special.SpecialName")
-			);
+			array(
+					"s_music.MusicID", "s_singer.MvCount", "s_singer.SingerType","s_music.MusicName", "s_singer.SingerID",
+					"s_singer.SingerName", "s_special.SpecialID", "s_special.SpecialName",
+			)
+		);
 	}
 	function updateMusic($Music){
 		return $this->_db->update("s_music",array("MusicID"=>$Music['MusicID']),$Music);

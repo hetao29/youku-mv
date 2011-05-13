@@ -83,6 +83,73 @@ var YoukuWs = function(){
 				//$('#status').html("resize"+", "+$(window).width()+", "+$(document).width()+", "+screen.width);
 			});
 			*/
+			//歌手信息点击
+			$("#musicInfo .singer").live("click",function(){
+				$("#_ContentListen DIV").html("");
+				$("#_ContentListen >ul" ).html('<li><img style="vertical-align: middle;" src="/assets/images/loading/loading9.gif" /> 正在加载中...</li>');
+				$("#_ContentListen").dialog({
+					width:400,height:300, buttons: [
+					{
+						text:_LabelOk,
+						click: function() {
+							$("#_ContentListen").dialog("close");
+						}
+					}
+					]
+				});
+				$.ajax({
+					url: "/player.main.getSinger",
+					data: { sid:$(this).attr("id")},
+					dataType:"json",
+					success: function( result) {
+						if(result){
+							var o = $("#_ContentListen >ul");
+							o.html("");
+							for(var i=0;i<result.items.length;i++){
+								var html='<li title="点击拖动到右边播放列表" mvname="'+result.items[i].SingerName+" - "+result.items[i].MusicName+'" vid="'+result.items[i].VideoID+'">'+
+								'<span class="left name" title="点击播放:'+result.items[i].MusicName+'">'+result.items[i].SingerName+" - "+result.items[i].MusicName+'</span>'+
+								'<span class="right">('+ result.items[i].MusicPubdate+") "+result.items[i].duration+' <img title="点击添加到播放列表" class="add" src="/assets/images/style2/plus.png" style="vertical-align:top"></span>'+
+								'<div class="clear"></div>'+
+								'</li>';
+								o.append(html);
+							}
+						}
+					}
+				});
+			});
+			$("#musicInfo .special").live("click",function(){
+				$("#_ContentListen DIV").html("");
+				$("#_ContentListen >ul" ).html('<li><img style="vertical-align: middle;" src="/assets/images/loading/loading9.gif" /> 正在加载中...</li>');
+				$("#_ContentListen").dialog({
+					width:400,height:300, buttons: [
+					{
+						text:_LabelOk,
+						click: function() {
+							$("#_ContentListen").dialog("close");
+						}
+					}
+					]
+				});
+				$.ajax({
+					url: "/player.main.getSpecial",
+					data: { sid:$(this).attr("id")},
+					dataType:"json",
+					success: function( result) {
+						if(result){
+							var o = $("#_ContentListen >ul");
+							o.html("");
+							for(var i=0;i<result.items.length;i++){
+								var html='<li title="点击拖动到右边播放列表" mvname="'+result.items[i].SpecialName+" - "+result.items[i].MusicName+'" vid="'+result.items[i].VideoID+'">'+
+								'<span class="left name" title="点击播放:'+result.items[i].MusicName+'">'+result.items[i].SpecialName+" - "+result.items[i].MusicName+'</span>'+
+								'<span class="right">('+ result.items[i].MusicPubdate+") "+result.items[i].duration+' <img title="点击添加到播放列表" class="add" src="/assets/images/style2/plus.png" style="vertical-align:top"></span>'+
+								'<div class="clear"></div>'+
+								'</li>';
+								o.append(html);
+							}
+						}
+					}
+				});
+			});
 			$("#share a").click(function(){
 					var href = ($(this).attr("_href")).replace(/:vid:/g,CurrentVideoID).replace(/:title:/g,document.title);
 					$(this).attr("href",href);
@@ -256,8 +323,7 @@ var YoukuWs = function(){
 			$("#_ContentListen >ul >li .add,#_ContentSearch >li .add").live('click',function(){
 					var li =$(this).parentsUntil("li").parent();
 					YoukuWsPlaylist.add(li.attr("vid"),li.attr("mvname"));
-					//TODO 服务保存
-					//setTimeout(function() { li.remove(); }, 1);//fro ie patch
+					$("#IDNav >li").eq(1).trigger("click");
 			});
 			$("#_ContentMusic >li").live('click',function(){
 					//{{{播放模式
@@ -872,12 +938,9 @@ var YoukuWs = function(){
 			if(PlayType==0){
 				YoukuWs.playRadio();
 			}else{
-				if(YoukuWs.get("vid")){
+				if(YoukuWs.get("CurrentVideoID")){
 					var time = YoukuWs.get("time",0);
-					YoukuWs.play(YoukuWs.get("vid"),time);
-				//}else{
-				//	vid = $("#_ContentMusic >li").first().attr("vid");
-				//	YoukuWs.play(vid);
+					YoukuWs.play(YoukuWs.get("CurrentVideoID"),time);
 				};
 			}
 	});
@@ -965,6 +1028,25 @@ var YoukuWs = function(){
 			next=1;
 			CurrentVideoID=vid;
 			YoukuWs.set("CurrentVideoID",CurrentVideoID);
+			//获取曲库信息
+			$.ajax({
+				url: "/player.main.getMusic",
+				data: { vid:vid },
+				dataType:"json",
+				success: function( result) {
+					if(result){
+						var singer="";
+						if(result.SingerType<=8){
+								singer="歌手:<a class='singer' id='"+result.SingerID+"'>"+result.SingerName+"("+result.MvCount+"首)</a>";
+						}
+						//$("#musicInfo").html(singer+" 专辑:<a class='special' id='"+result.SpecialID+"'>"+result.SpecialName+"</a> <a class='correct'>纠错</a>");
+						$("#musicInfo").html(singer+" 专辑:<a class='special' id='"+result.SpecialID+"'>"+result.SpecialName+"</a>");
+						$("#musicInfo").slideDown("fast");
+					}else{
+						$("#musicInfo").slideUp("fast");
+					}
+				}
+			});
 			//下载歌词
 			$.ajax({
 				url: "/player.main.getLyric",
@@ -1036,8 +1118,9 @@ var YoukuWs = function(){
 				try{
 					PlayerReplay(vid);
 				}catch(e){
-					//swfobject.createSWF({data:"http://static.youku.com/v/swf/qplayer.swf",width:"100%",height:"100%"},{allowFullScreen:true,allowscriptaccess:"always",wmode:"transparent",flashvars:"isAutoPlay=false&VideoIDS="+vid+"&winType=index&ad=0&skincolor1=EEEEEE&skincolor2=4F4F4F&skilalpha=40&firsttime="+time},playerId);
+					//swfobject.createSWF({data:"http://static.youku.com/v/swf/player.swf",width:"100%",height:"100%"},{allowFullScreen:true,allowscriptaccess:"always",wmode:"transparent",flashvars:"isAutoPlay=false&VideoIDS="+vid+"&winType=index&ad=0&skincolor1=EEEEEE&skincolor2=4F4F4F&skilalpha=40&firsttime="+time},playerId);
 					swfobject.createSWF({data:"http://static.youku.com/v/swf/qplayer.swf",width:"100%",height:"100%"},{allowFullScreen:true,allowscriptaccess:"always",wmode:"transparent",flashvars:"isAutoPlay=true&VideoIDS="+vid+"&winType=index&ad=0&skincolor1=EEEEEE&skincolor2=4F4F4F&skilalpha=40&firsttime="+time},playerId);
+					//swfobject.createSWF({data:"http://static.youku.com/v/swf/player.swf",width:"100%",height:"100%"},{allowFullScreen:true,allowscriptaccess:"always",wmode:"transparent",flashvars:"isAutoPlay=true&VideoIDS="+vid+"&firsttime="+time},playerId);
 				}
 			}
 			if(PlayType!=0){//非收听模式

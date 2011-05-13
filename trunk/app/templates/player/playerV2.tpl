@@ -148,6 +148,7 @@
 												<img src="/assets/images/style2/center.png" />
 										</div>
 										*}
+										<div id="musicInfo"></div>
 										<div id="share_handle"> 
 											<img id="ImgDown" style="" width="16" src="/assets/images/ico/down.png" />
 											<img id="ImgUp" style="display:none" width="16" src="/assets/images/ico/up.png" />
@@ -161,21 +162,6 @@
 												<span><a target="_blank" href="#" _href="http://www.139.com/share/share.php?tl=953010001&source=shareto139_youku&url=http://v.youku.com/v_show/id_:vid:.html&title=title=:title: http://youku.fm?vid=:vid:" ><img title=分享到139说客" src="http://static.youku.com/v1.0.0659/v/img/ico_139.gif" /></a></span>
 												<span><a target="_blank" href="#" _href="http://share.renren.com/share/buttonshare.do?link=http://v.youku.com/v_show/id_:vid:.html&title=:title:"><img src="http://static.youku.com/v/img/ico_renren.gif" /></a></span>
 										</div>
-										<!--
-										<div id="share" style="display:none;height:0px;"> 
-											<ul>
-												<li><img title="分享到新浪微薄" src="http://static.youku.com/v/img/ico_sina.gif" /></a></li>
-												<li><img src="http://static.youku.com/v/img/ico_renren.gif" /></li>
-												<li><img src="http://static.youku.com/v/img/feixin_14px.png" /></li>
-												<li><img src="http://static.youku.com/v/img/ico_dou_16x16.png" /></li>
-												<li><img src="http://static.youku.com/v/img/feixin_14px.png" /></li>
-												<li><img src="http://static.youku.com/v/img/ico_139.gif" /></li>
-												<li><img src="http://static.youku.com/v/img/ico_tianya.png" /></li>
-												<li><img src="http://static.youku.com/v/img/ico_qq_t.png" /></li>
-											</ul>
-											<div class="clear"></div>
-										</div>
-										-->
 										<div id="copyright"> 
 											©2010-2011   Youku.FM
 										</div>

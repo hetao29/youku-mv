@@ -248,6 +248,37 @@ class player_main extends SGui{
 			}
 			return false;
 	}
+	/*获取曲库信息*/
+	function pageGetMusic($inPath){
+			$vid = singer_music::decode($_REQUEST['vid']);
+			$singer_db = new singer_db;
+			$music_video=$singer_db->getMusicIDByVideoID($vid);
+			if(empty($music_video)){
+				//从关联表中获取
+				$music_video=$singer_db->getMusicIDByVideoID2($vid);
+			}
+			if(!empty($music_video['MusicID'])){
+				return $singer_db->getMusic($music_video['MusicID']);
+			}
+	}
+	/**获取歌手信息和歌手歌曲列表*/
+	function pageGetSinger($inPath){
+			$sid = $_REQUEST['sid'];
+			$singer_db = new singer_db;
+			//$singer = $singer_db->getSinger($sid);
+			//if(!empty($singer)){
+					return $singer_db->listMusicBySingerID($sid);
+		//			if(!empty($music))
+		//			$music->singer=$singer;
+		//			return $music;
+		//	}
+	}
+	/**获取专辑信息*/
+	function pageGetSpecial($inPath){
+			$sid = $_REQUEST['sid'];
+			$singer_db = new singer_db;
+			return $singer_db->listMusicBySpecialID($sid);
+	}
 	/**
 	 * 读取歌词
 	 **/
