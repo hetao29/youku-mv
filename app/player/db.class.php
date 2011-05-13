@@ -21,6 +21,7 @@ FROM s_singer,s_music,s_music_video
 WHERE 
  s_music._Finished=1 and  
  s_singer.SingerID=s_music.SingerID and  
+ s_singer.SingerType in(1,2,3,4,5,6,7,8) and  
  s_music.MusicPubdate >"2011-01-01" and
  s_music.MusicID=s_music_video.MusicID and 
  s_music.VideoID=s_music_video.VideoID 
@@ -38,6 +39,7 @@ SELECT
 FROM s_singer,s_music,s_music_video 
 WHERE 
  s_music._Finished=1 and  
+ s_singer.SingerType in(1,2,3,4,5,6,7,8) and  
  s_singer.SingerID=s_music.SingerID and  
  s_music.MusicPubdate between "2010-01-01" and "2011-01-01" and
  s_music.MusicID=s_music_video.MusicID and 
