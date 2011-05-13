@@ -1029,6 +1029,7 @@ var YoukuWs = function(){
 			CurrentVideoID=vid;
 			YoukuWs.set("CurrentVideoID",CurrentVideoID);
 			//获取曲库信息
+			$("#musicInfo").html("&nbsp;");
 			$.ajax({
 				url: "/player.main.getMusic",
 				data: { vid:vid },
