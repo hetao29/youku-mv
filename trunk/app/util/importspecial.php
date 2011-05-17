@@ -54,8 +54,8 @@ function getSpecial($content,$singerid){
 			//pubdate
 			preg_match("/href=\"\/arch.+?\">(.+?)\</ims",$li,$_m);
 			$special['SpecialPubDate']=trim($_m[1]);
-			$db->addSpecial($special);
-			print_r($special);
+			if($db->addSpecial($special)){
+				print_r($special);
+			}
 		}
 }
-exit;

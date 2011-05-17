@@ -1,4 +1,6 @@
 <?php
+//这个文件要没有用了,更新歌手的时候自动更新了
+exit;
 //更新s_singer.SingerPinyin里的数
 chdir(dirname(__FILE__));
 include("ChineseSpellUtils.php");
