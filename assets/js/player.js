@@ -38,6 +38,7 @@ var YoukuWs = function(){
 		var lyrics_offset=0;
 		//用户ID
 		var uid=1;
+		var LyricsInterval=0;
 
 		var order=[];
 		$(document).ready(function(){
@@ -796,6 +797,11 @@ var YoukuWs = function(){
 								});
 								$("#IDNav >li").click(function(){
 										var _this = this;
+										if($("#IDNav >li").index(_this)==2){
+											YoukuWs.LyricsInterval = setInterval(YoukuWs.checkTime,200);
+										}else{
+											clearInterval(YoukuWs.LyricsInterval);
+										};
 										$("#IDNav >li").each(function(i,item){
 												//{{{ save scrollTop
 												window._ContentMusicTop=window._ContentMusicTop?window._ContentMusicTop:0;
@@ -945,7 +951,6 @@ var YoukuWs = function(){
 												}
 										}
 								});
-								setInterval(YoukuWs.checkTime,500);
 								//setInterval(YoukuWs.adReload,1000*60*10);// 10分钟一次
 								CurrentVideoID= YoukuWs.get("CurrentVideoID");
 								if(PlayType==0){
