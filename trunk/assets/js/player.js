@@ -1098,7 +1098,7 @@ var YoukuWs = function(){
 										var video = document.getElementById(playerId);
 										var src="http://v.youku.com/player/getM3U8/vid/"+vid+"/type/flv/v.m3u8";
 										if(!video.src){
-												$("#playerBox").html('<video id="'+playerId+'" style="width:100%;height:100%" src="'+src+'" controls="controls" autoplay=true></video>');
+												$("#playerBox").html('<video x-webkit-airplay="allow" id="'+playerId+'" style="width:100%;height:100%" src="'+src+'" controls="controls" autoplay=true></video>');
 												video = document.getElementById(playerId);
 												video.addEventListener('play', 	onPlayerStart, false);
 												video.addEventListener('ended', onPlayerComplete, false);
