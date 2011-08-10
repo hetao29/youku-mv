@@ -1061,11 +1061,15 @@ var YoukuWs = function(){
 										success: function( result) {
 												if(result){
 														var singer="";
-														if(result.SingerType<=8){
-																singer="歌手:<a class='singer' id='"+result.SingerID+"'>"+result.SingerName+"("+result.MvCount+"首)</a>";
+														if(result.Singers){
+															singer="歌手:";
+
+															for(var i in result.Singers){
+															singer +="<a class='singer' id='"+result.Singers[i].SingerID+"'>"+result.Singers[i].SingerName+"("+result.Singers[i].MvCount+"首)</a>";
+															}
 														}
-														//$("#musicInfo").html(singer+" 专辑:<a class='special' id='"+result.SpecialID+"'>"+result.SpecialName+"</a> <a class='correct'>纠错</a>");
-														$("#musicInfo").html(singer+" 专辑:<a class='special' id='"+result.SpecialID+"'>"+result.SpecialName+"</a>");
+														if(result.Album)
+														$("#musicInfo").html(singer+" 专辑:<a class='special' id='"+result.Album.AlbumID+"'>"+result.Album.AlbumName+"</a>");
 														$("#musicInfo").slideDown("fast");
 												}else{
 														$("#musicInfo").slideUp("fast");

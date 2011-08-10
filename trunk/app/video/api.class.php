@@ -5,8 +5,8 @@ class video_api{
 		 */
 		function getVideo($vid){
 				$vid = singer_music::decode($vid);
-				$player_db = new player_db;
-				$Mv = $player_db->getVideo($vid);
+				$video_db = new video_db;
+				$Mv = $video_db->getVideo($vid);
 				if(empty($Mv)){
 					$Mv = array();
 					$Mv['VideoSourceID']=1;
@@ -22,7 +22,7 @@ class video_api{
 						$Mv['VideoThumb'] = $video->pic;
 						$Mv['VideoPubdate'] = $video->pubdate;
 					}
-					$player_db->addVideo($Mv);
+					$video_db->addVideo($Mv);
 				}
 				return $Mv;
 		}
