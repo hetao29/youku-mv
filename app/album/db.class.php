@@ -12,6 +12,9 @@ class album_db{
 		$this->_db = SDb::getDbEngine("pdo_mysql");
 		$this->_db->init($this->_dbConfig);
 	}
+	function getAlbum($AlbumID){
+		return $this->_db->selectOne("s_album",array("AlbumID"=>$AlbumID),array("AlbumID","AlbumName"));
+	}
 	function addAlbum($Album){
 		return $this->_db->insert("s_album",$Album);
 	}

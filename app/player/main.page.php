@@ -83,7 +83,7 @@ class player_main extends SGui{
 					default:
 							return $result;
 				}
-				$db = new player_db;
+				$db = new video_db;
 				$extension = $db->getVideoExtension($inPath[4]);
 				if(empty($extension)){
 					$result->result= $db->addVideoExtension(array("$fileds=1","VideoID"=>$inPath[4]));
@@ -128,7 +128,7 @@ class player_main extends SGui{
 			}else{
 					$chanelId=$_REQUEST['cid'];
 			}
-			$db = new player_db;
+			$db = new video_db;
 			$r=new stdclass;
 			if($chanelId==-1){
 				$r->items=$db->getRandMusic();
@@ -137,7 +137,7 @@ class player_main extends SGui{
 			}elseif($chanelId==-3){
 				$r->items=$db->getRandMusicNew2010();
 			}else{
-				$r = $db->getRandVideo($chanelId,$UserID);
+				$r->items = $db->getRandVideo($chanelId,$UserID);
 			}
 			$r->cid = $chanelId;
 			return $r;
@@ -152,7 +152,7 @@ class player_main extends SGui{
 	function pageAddVideo($inPath){
 			$vid = $_REQUEST['vid'];
 			if(!empty($vid)){
-				$api = new player_api;
+				$api = new video_api;
 				return $api->getVideoByVid($vid);
 			}
 	}
@@ -177,7 +177,7 @@ class player_main extends SGui{
 			if(empty($VideoID) || !isset($offset)){
 					return;
 			}
-			$db = new player_db;
+			$db = new video_db;
 			$lyric = $db->getLyrics($VideoID);
 			if(empty($lyric)  || $lyric['UserID']!=1){//TODO，当前登录用户
 					return;
@@ -190,7 +190,7 @@ class player_main extends SGui{
 			if(empty($VideoID)){
 					return;
 			}
-			$db = new player_db;
+			$db = new video_db;
 			$lyric = $db->getLyrics($VideoID);
 			if(empty($lyric)  || $lyric['UserID']!=1){//TODO，当前登录用户
 					return;
@@ -225,9 +225,9 @@ class player_main extends SGui{
 	function pageAddListen($inPath){
 			if(($User=user_api::islogin())!==false){
 					$db = new user_db;
-					$player_db = new player_db;
+					$video_db = new video_db;
 					$vid = singer_music::decode($_REQUEST['vid']);
-					$api = new player_api;
+					$api = new video_api;
 					$v=$api->getVideo($vid);
 					if(!empty($v) && ($r=$db->addListen(array("VideoID"=>$v['VideoID'],"UserID"=>$User['UserID'])))===1){
 							return true;
@@ -247,15 +247,26 @@ class player_main extends SGui{
 	/*获取曲库信息*/
 	function pageGetMusic($inPath){
 			$vid = singer_music::decode($_REQUEST['vid']);
-			$singer_db = new singer_db;
-			$music_video=$singer_db->getMusicIDByVideoID($vid);
-			if(empty($music_video)){
-				//从关联表中获取
-				$music_video=$singer_db->getMusicIDByVideoID2($vid);
+			$video_db = new video_db;
+			$v=$video_db->getVideo($vid);
+			if(!empty($v)){
+				if(!empty($v['SingerIDS'])){
+					//获取歌手信息 
+					$singer_db = new singer_db;
+					$tmp=explode("/",$v['SingerIDS']);
+					$singers=array();
+					foreach($tmp as $id){
+							$singers[]=$singer_db->getSinger($id);
+					}
+					$v['Singers']=$singers;
+				}
+				if(!empty($v['AlbumID'])){
+					//获取专辑信息 
+					$album_db=new album_db;
+					$v['Album']=$album_db->getAlbum($v['AlbumID']);
+				}
 			}
-			if(!empty($music_video['MusicID'])){
-				return $singer_db->getMusic($music_video['MusicID']);
-			}
+			return $v;
 	}
 	/**获取歌手信息和歌手歌曲列表*/
 	function pageGetSinger($inPath){
@@ -271,23 +282,24 @@ class player_main extends SGui{
 	}
 	/**获取专辑信息*/
 	function pageGetSpecial($inPath){
+			//从搜索出数据
 			$sid = $_REQUEST['sid'];
-			$singer_db = new singer_db;
-			return $singer_db->listMusicBySpecialID($sid);
+			$video_db= new video_db;
+			return $video_db->listVideoByAlbumID($sid);
 	}
 	/**
 	 * 读取歌词
 	 **/
 	function pageGetLyric($inPath){
-			$db = new player_db;
+			$db = new video_db;
 			$vid = singer_music::decode($_REQUEST['vid']);
-			$api = new player_api;
+			$api = new video_api;
 			$mv  = $api->getVideo($vid);
 			if(!empty($mv)){
 					$lyric = $db->getLyrics($mv['VideoID']);
 					if(empty($lyric) || $lyric['LyricsStatus']==-2)
 					{
-						$api = new player_api;
+						$api = new video_api;
 						$content = $api->downlyric($mv['VideoName']);
 						if(empty($content))$content="";
 						if(!empty($content)){
@@ -330,7 +342,7 @@ class player_main extends SGui{
 			$r = SHttp::get("http://api.youku.com/api_ptvideo/st_3_pid_XOA",array("sv"=>$k,"rt"=>3,"ob"=>6,"pz"=>100,"pg"=>1));
 			$r = SJson::decode($r);
 			$o = array();
-			$db= new player_db;
+			$db= new video_db;
 			foreach($r->item as $item){
 				$vid = $item->videoid;
 				$Video = $db->getVideoByVid($vid);
@@ -339,7 +351,7 @@ class player_main extends SGui{
 					$Video = array();
 					$Video['VideoSourceID']=1;
 					$Video['VideoName'] = $item->title;
-					$Video['VideoDuration'] = player_api::strTotime($item->duration);
+					$Video['VideoDuration'] = video_api::strTotime($item->duration);
 					$Video['VideoID'] = singer_music::decode($item->videoid);
 					$Video['VideoThumb'] = $item->snapshot;
 					$Video['VideoPubDate'] = $item->pubDate;
@@ -354,7 +366,7 @@ class player_main extends SGui{
 			$o = array();
 			$vid = singer_music::decode($_REQUEST['vid']);
 			if(empty($vid))return;
-			$api = new player_api;
+			$api = new video_api;
 			return $api->getVideo($vid);
 	}
 	/*得到视频信息*/
@@ -364,7 +376,7 @@ class player_main extends SGui{
 			if(empty($k))return;
 			if(preg_match("/v_show\/id_(.*?)\./",$k,$_m)){
 					//普通视频播放页
-					$api = new player_api;
+					$api = new video_api;
 					$r = $api->getVideo($_m[1]);
 					$o[]=$r;
 			}elseif(preg_match("/show_page\/id_(.*?)\./",$k,$_m)){
@@ -397,7 +409,7 @@ class player_main extends SGui{
 							if(!empty($r2))$r->item=array_merge($r->item,$r2->item);
 						}
 					}
-					$db= new player_db;
+					$db= new video_db;
 					foreach($r->item as $item){
 						$vid = $item->videoid;
 						$Video = $db->getVideo($vid);
@@ -406,7 +418,7 @@ class player_main extends SGui{
 							$Video = array();
 							$Video['VideoSourceID']=1;
 							$Video['VideoName'] = $item->title;
-							$Video['VideoDuration'] = player_api::strTotime($item->duration);
+							$Video['VideoDuration'] = video_api::strTotime($item->duration);
 							$Video['VideoID'] = singer_music::decode($item->videoid);
 							$Video['VideoThumb'] = $item->snapshot;
 							$Video['VideoPubDate'] = $item->pubDate;

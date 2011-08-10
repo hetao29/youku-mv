@@ -9,7 +9,7 @@ class singer_db{
 		$this->_db->init($this->_dbConfig);
 	}
 	function getSinger($SingerID){
-		return $this->_db->selectOne("s_singer",array("SingerID"=>$SingerID),array("SingerID","SingerName","SingerType","MvCount"));
+		return $this->_db->selectOne("s_singer",array("SingerID"=>$SingerID),array("SingerID","SingerName","MvCount"));
 	}
 	function addSinger($Singer){
 		return $this->_db->insert("s_singer",$Singer);
