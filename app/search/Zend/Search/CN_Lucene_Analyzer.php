@@ -20,6 +20,7 @@ class CN_Lucene_Analyzer extends Zend_Search_Lucene_Analysis_Analyzer_Common {
 				$search = array(",", "/", "\\", ".", ";", ":", "\"", "!", "~", "`", "^", "(", ")", "?", "-", "'", "<", ">", "$", "&", "%", "#", "@", "+", "=", "{", "}", "[", "]", "：", "）", "（", "．", "。", "，", "！", "；", "“", "”", "‘", "’", "［", "］", "、", "—", "　", "《", "》", "－", "…", "【", "】","的");
 				$this->_input = str_replace($search,' ',$this->_input);
 				$this->_input = str_replace($this->_cnStopWords,' ',$this->_input);
+				mb_internal_encoding(mb_detect_encoding($this->_input)); 
 		}
 
 		/**
@@ -29,23 +30,21 @@ class CN_Lucene_Analyzer extends Zend_Search_Lucene_Analysis_Analyzer_Common {
 		 * 
 		 * @return Zend_Search_Lucene_Analysis_Token|null 
 		 */ 
-		public function nextToken()
-		{
+		public function nextToken(){
 				if ($this->_input === null) {
 						return null;
 				}
-				$encoding=mb_detect_encoding($this->_input);
-				$len = mb_strlen($this->_input,$encoding);
+				$len = mb_strlen($this->_input);
 				while ($this->_position < $len) {
 						$termStartPosition = $this->_position;
 						$length=1;
-						$current_char = mb_substr($this->_input,$this->_position,1,$encoding);
-						$next_char = mb_substr($this->_input,$this->_position+1,1,$encoding);
+						$current_char = mb_substr($this->_input,$this->_position,1);
+						$next_char = mb_substr($this->_input,$this->_position+1,1);
 						if(ord($current_char)>127){
 								$i=0;
 								while ($this->_position < $len && ord( $next_char)>127) {
 										$this->_position++;
-										$next_char = mb_substr($this->_input,$this->_position+1,1,$encoding);
+										$next_char = mb_substr($this->_input,$this->_position+1,1);
 										$length=2;
 										if($i++==1){
 												$this->_position--;
@@ -57,17 +56,18 @@ class CN_Lucene_Analyzer extends Zend_Search_Lucene_Analysis_Analyzer_Common {
 								while ($this->_position < $len && ctype_alnum( $next_char)) {
 										$this->_position++;
 										$length++;
-										$next_char = mb_substr($this->_input,$this->_position+1,1,$encoding);
+										$next_char = mb_substr($this->_input,$this->_position+1,1);
 								}
 						}
 						$this->_position++;
 
+						$str = trim(mb_substr($this->_input,$termStartPosition,$length));
 						$token = new Zend_Search_Lucene_Analysis_Token(
-								mb_substr($this->_input,$termStartPosition,$length,$encoding),
-								$termStartPosition,
-								$this->_position);
+								$str,
+								0,
+								strlen($str)
+						);
 						$token = $this->normalize($token);
-						//print_r($token);
 						if ($token !== null) {
 								return $token;
 						}
