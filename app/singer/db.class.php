@@ -30,24 +30,24 @@ class singer_db{
 		);
 	}
 	function getMvCount($SingerID){
-		return $this->_db->selectOne("s_music",array("SingerID"=>$SingerID,"_Finished"=>1),array("count(*) as _Ct"));
+			//从搜索取
+			return 0;
 	}
-	function addSpecial($Special){
-		return $this->_db->insert("s_special",$Special);
+	/*
+	function addAlbum($Album){
+		return $this->_db->insert("s_album",$Album);
 	}
-	function updateSpecial($Special){
-		return $this->_db->update("s_special",array("SpecialID"=>$Special['SpecialID']),$Special);
+	function updateAlbum($Album){
+		return $this->_db->update("s_special",array("AlbumID"=>$Album['AlbumID']),$Album);
 	}
-	function listSpecial($page,$pageSize=50){
+	function listAlbum($page,$pageSize=50){
 		$this->_db->setLimit($pageSize);
 		$this->_db->setPage($page);
 		return $this->_db->select(
-				array("s_special"),
-				//array("SpecialID"=>11177),
-				//array("SpecialID"=>193),
+				array("s_album"),
 				array(),
 				"*",
-				"ORDER BY SpecialID"
+				"ORDER BY Album"
 		);
 	}
 	function addMusic($Music){
@@ -56,7 +56,7 @@ class singer_db{
 	function listMusicBySingerID($SingerID){
 		return $this->_db->select(
 			array("s_music","s_music_video","s_singer"),
-			array("s_music.SingerID"=>$SingerID,"s_music.SingerID=s_singer.SingerID","s_music.VideoID=s_music_video.VideoID","s_music.MusicID=s_music_video.MusicID"),
+			array("s_singer.SingerID"=>$SingerID,"s_music.SingerName=s_singer.SingerName","s_music.VideoID=s_music_video.VideoID","s_music.MusicID=s_music_video.MusicID"),
 			array(
 					"s_singer.SingerName","s_music.MusicID", "s_music.MusicName", "s_music.VideoID","s_music.MusicPubdate","title","snapshot","duration",
 			),
@@ -76,7 +76,7 @@ class singer_db{
 	function getMusic($MusicID){
 		return $this->_db->selectOne(
 			array("s_music","s_singer","s_special"),
-			array("s_music.MusicID"=>$MusicID,"s_music.SingerID=s_singer.SingerID","s_music.SpecialID=s_special.SpecialID"),
+			array("s_music.MusicID"=>$MusicID,"s_music.SingerName=s_singer.SingerName","s_music.SpecialID=s_special.SpecialID"),
 			array(
 					"s_music.MusicID", "s_singer.MvCount", "s_singer.SingerType","s_music.MusicName", "s_singer.SingerID",
 					"s_singer.SingerName", "s_special.SpecialID", "s_special.SpecialName",
@@ -91,7 +91,7 @@ class singer_db{
 		$this->_db->setPage($page);
 		return $this->_db->select(
 				array("s_music","s_singer"),
-				array("s_music.SingerID=s_singer.SingerID","s_music._Finished=1"),
+				array("s_music.SingerName=s_singer.SingerName","s_music._Finished=1"),
 				array("s_music.MusicName","s_singer.SingerName","s_music.MusicID","s_singer.SingerType"),
 				"ORDER BY MusicID"
 		);
@@ -118,6 +118,7 @@ class singer_db{
 	function updateMusicVideo($MusicVideo){
 		return $this->_db->update("s_music_video",array("MusicID"=>$MusicVideo['MusicID']),$MusicVideo);
 	}
+	 */
 /*
 	function listMusicVideo($page,$pageSize=50){
 		$this->_db->setLimit($pageSize);
@@ -129,7 +130,6 @@ class singer_db{
 				"ORDER BY MusicID"
 		);
 	}
-*/
 	function listMusicVideo($MusicID){
 		$this->_db->setLimit(-1);
 		$this->_db->setPage(1);
@@ -140,5 +140,6 @@ class singer_db{
 				"ORDER BY pv desc ,pubDate desc"
 		);
 	}
+*/
 }
 ?>
