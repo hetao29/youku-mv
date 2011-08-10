@@ -58,7 +58,7 @@ class user_db{
 		return $this->_db->select(
 				array("s_user_action","s_video"),
 				array("s_user_action.UserID"=>$UserID,"s_user_action.VideoID=s_video.VideoID","s_user_action.ActionType"=>$ActionType),
-				array("s_user_action.VideoID","s_user_action.ActionType","MvName","MvSeconds","ActionTime"),
+				array("s_user_action.VideoID","s_user_action.ActionType","VideoName","VideoDuration","ActionTime"),
 				"ORDER BY ActionTime DESC"
 		);
 	}
@@ -83,7 +83,7 @@ class user_db{
 			return $this->_db->select(
 					array("s_video","s_list_content"),
 					array("s_video.VideoID=s_list_content.VideoID","s_list_content.ListID"=>$ListID),
-					array("s_video.VideoID","s_video.MvName","s_video.MvSeconds","s_list_content.ListID","s_list_content.MvOrder"),"ORDER BY MvOrder"
+					array("s_video.VideoID","s_video.VideoName","s_video.VideoDuration","s_list_content.ListID","s_list_content.MvOrder"),"ORDER BY MvOrder"
 			);
 	}
 	function getListCount($UserID){
@@ -140,7 +140,7 @@ class user_db{
 		return $this->_db->select(
 				array("s_user_listen","s_video"),
 				array("s_user_listen.UserID"=>$UserID,"s_user_listen.VideoID=s_video.VideoID"),
-				array("s_user_listen.VideoID","MvName","MvSeconds","ListenTime"),
+				array("s_user_listen.VideoID","VideoName","VideoDuration","ListenTime"),
 				"ORDER BY ListenTime DESC"
 		);
 	}

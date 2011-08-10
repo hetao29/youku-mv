@@ -1,0 +1,58 @@
+<?php
+/*
+ * 此类操作下面的表
+ * s_video 
+ * s_video_extension 
+ * s_lyrics 
+ */
+class video_db{
+	private $_dbConfig;
+	private $_zone;
+	function __construct($zone="video"){
+		$this->_zone = $zone;
+		$this->_dbConfig = SDb::getConfig($this->_zone);
+		$this->_db = SDb::getDbEngine("pdo_mysql");
+		$this->_db->init($this->_dbConfig);
+	}
+	/**
+	 * get
+	 */
+	function getVideo($vid){
+		return $this->_db->selectOne("s_video",array("VideoID"=>$vid));
+	}
+	function getVideoExtension($vid){
+		return $this->_db->selectOne("s_video_extension",array("VideoID"=>$vid));
+	}
+	function getLyrics($VideoID){
+		return $this->_db->selectOne("s_lyrics",array("VideoID"=>$VideoID));
+	}
+	//function getVideoCount(){
+	//	$row = $this->_db->selectOne("s_video",array(),"count(*) ct");
+	//	return $row['ct'];
+	//}
+	/**
+	 * update
+	 */
+	function updateVideo($vid,$Video){
+		return $this->_db->update("s_video",array("VideoID"=>$vid),$Video);
+	}
+	function updateVideoExtension($vid,$Video){
+		return $this->_db->update("s_video_extension",array("VideoID"=>$vid),$Video);
+	}
+	function updateLyrics($VideoID,$Lyrics){
+		return $this->_db->update("s_lyrics",array("VideoID"=>$VideoID),$Lyrics);
+	}
+	/**
+	 * add
+	 */
+	function addVideo($Video){
+		return $this->_db->insert("s_video",$Video);
+	}
+	function addVideoExtension($Video){
+		return $this->_db->insert("s_video_extension",$Video);
+	}
+	function addLyrics($Lyrics){
+		return $this->_db->insert("s_lyrics",$Lyrics,$replace = true);
+	}
+}
+?>
