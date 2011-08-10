@@ -61,7 +61,7 @@ class CN_Lucene_Analyzer extends Zend_Search_Lucene_Analysis_Analyzer_Common {
 						}
 						$this->_position++;
 
-						$str = trim(mb_substr($this->_input,$termStartPosition,$length));
+						$str = strtolower(trim(mb_substr($this->_input,$termStartPosition,$length)));
 						$token = new Zend_Search_Lucene_Analysis_Token(
 								$str,
 								0,
