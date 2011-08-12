@@ -1,31 +1,41 @@
 <?php
 class video_api{
 		/**
+		 * 增加视频记录,普通增加
+		 */
+		function addVideo($Video){
+				$video_db = new video_db;
+				//加入到数据库里
+				if($video_db->addVideo($Video)){
+						$v=$this->getVideoInfo($Video['VideoID']);
+						$search_api = new search_api;
+						$search_api->update($Video['VideoID'],$v);
+						return true;
+				};
+				return false;
+		}
+		/**
 		 * 从数据库,或者API上获取视频
 		 */
 		function getVideo($vid){
 				$vid = singer_music::decode($vid);
+				//从数据库里获取
 				$video_db = new video_db;
 				$Mv = $video_db->getVideo($vid);
 				if(empty($Mv)){
-					$Mv = array();
-					$Mv['VideoSourceID']=1;
+					//如果没有,从API中获取
 					switch($Mv['VideoSourceID']){
 						case 1:
-							$video = $this->__getVideoInfo($vid);
+							$Mv= $this->__getVideoInfo($vid);
+							return $Mv;
 						break;
 					}
-					if(!empty($video)){
-						$Mv['VideoName'] = $video->title;
-						$Mv['VideoDuration'] = $video->seconds;
-						$Mv['VideoID'] = singer_music::decode($video->vid);
-						$Mv['VideoThumb'] = $video->pic;
-						$Mv['VideoPubdate'] = $video->pubdate;
-					}
-					$video_db->addVideo($Mv);
 				}
 				return $Mv;
 		}
+		/**
+		 * 获取视频详细信息
+		 */
 		function getVideoInfo($vid){
 			$v = $this->getVideo($vid);
 			if(!empty($v)){
@@ -47,7 +57,7 @@ class video_api{
 			}
 			return $v;
 		}
-		public static function strTotime($str){
+		private function __strTotime($str){
 				$tmp = explode(":",$str);
 				$len = count($tmp);
 				$sec = $tmp[$len-1];
@@ -56,25 +66,110 @@ class video_api{
 				if($len>2)$hour=$tmp[$len-3];
 				return $sec+$min*60+$hour*3600;
 		}
+		private function __search($key){
+			$r = SHttp::get("http://api.youku.com/api_ptvideo/st_3_pid_XOA",array("sv"=>$key,"rt"=>3,"ob"=>6,"pz"=>100,"pg"=>1));
+			$r = SJson::decode($r);
+			$o = array();
+			foreach($r->item as $item){
+				$vid = $item->videoid;
+				$Video = $db->getVideoByVid($vid);
+				if(empty($Video)){
+					//{{{
+					$Video = array();
+					$Video['VideoSourceID']=1;
+					$Video['VideoName'] = $item->title;
+					$Video['VideoDuration'] = $this->__strTotime($item->duration);
+					$Video['VideoID'] = singer_music::decode($item->videoid);
+					$Video['VideoThumb'] = $item->snapshot;
+					$Video['VideoPubDate'] = $item->pubDate;
+					$this->addVideo($Video);
+					//}}}
+				}
+				$o[]=$Video;
+			}
+			return $o;
+		}
 		/**
-		 * 从API上获取视频信息
+		 * 从API上获取视频信息,获取一个视频信息
 		 */
 		private function __getVideoInfo($vid){
 			$r = SHttp::get("http://api.youku.com/api_ptvideoinfo",array("pid"=>"XOA==","rt"=>3,"id"=>$vid));
 			$r = SJson::decode($r);
-			$v = new stdclass;
 			if(!empty($r->item->title)){
-				$v->title = $r->item->title;
-				$v->pic = $r->item->imagelink;
-				$v->pubdate= $r->item->pubdate;
-				//
-
-				$v->seconds= $this->strTotime($r->item->duration);
 				if(preg_match("/v_show\/id_(.*?)\./",$r->item->playlink,$_m)){
-						$v->vid = $_m[1];
+					$video = array();
+					$video['VideoSourceID']=1;
+					$video['VideoName'] = $r->item->title;
+					$video['VideoDuration'] = $this->__strTotime($r->item->duration);
+					$video['VideoID'] = singer_music::decode($_m[1]);
+					$video['VideoThumb'] = $r->item->imagelink;
+					$video['VideoPubdate'] = $r->item->pubdate;;
+					$this->addVideo($video);
+					return $video;
 				}
 			}
-			return $v;
+		}
+		/**
+		 * 从API上获取信息,获取很多信息
+		 */
+		private function __getVideoInfoByURL($k){
+			$o = array();
+			$k = $_REQUEST['k'];
+			if(empty($k))return;
+			if(preg_match("/v_show\/id_(.*?)\./",$k,$_m)){
+					//普通视频播放页
+					$api = new video_api;
+					$r = $api->getVideo($_m[1]);
+					$o[]=$r;
+			}elseif(preg_match("/show_page\/id_(.*?)\./",$k,$_m)){
+					//节目显示页
+					$pid = $_m[1];
+					$st = 11;
+			}elseif(preg_match("/playlist_show\/id_(\\d*)/",$k,$_m)){
+					//专辑显示页
+					$pid = $_m[1];
+					$st = 8;
+					//playlist_show/id_5358637.html
+
+			}elseif(preg_match("/v_playlist\/f(\\d*)/",$k,$_m)){
+					//专辑播放页
+					//v_playlist/f5358637o1p1.html
+					$pid = $_m[1];
+					$st = 8;
+			}
+			if(!empty($pid)){
+					$r = SHttp::get("http://api.youku.com/api_ptvideo/st_$st",array("pid"=>"XOA==","rt"=>3,"pz"=>100,"sv"=>$pid));
+					$r = SJson::decode($r);
+					$totalPage=1;
+					if(!empty($r->totalSize) && !empty($r->pageSize)){
+							$totalPage = ceil($r->totalSize / $r->pageSize);
+					}
+					if($totalPage>1){
+						for($i=2;$i<=$totalPage;$i++){
+							$r2 = SHttp::get("http://api.youku.com/api_ptvideo/st_$st",array("pid"=>"XOA==","rt"=>3,"pz"=>100,"pg"=>$i,"sv"=>$pid));
+							$r2 = SJson::decode($r2);
+							if(!empty($r2))$r->item=array_merge($r->item,$r2->item);
+						}
+					}
+					foreach($r->item as $item){
+						$vid = $item->videoid;
+						$video = $db->getVideo($vid);
+						if(empty($video)){
+							//{{{
+							$video = array();
+							$video['VideoSourceID']=1;
+							$video['VideoName'] = $item->title;
+							$video['VideoDuration'] = $this->__strTotime($item->duration);
+							$video['VideoID'] = singer_music::decode($item->videoid);
+							$video['VideoThumb'] = $item->snapshot;
+							$video['VideoPubDate'] = $item->pubDate;
+							$this->addVideo($video);
+							//}}}
+						}
+						$o[]=$video;
+					}
+			}
+			return $o;
 		}
 		function downlyric($MvName){
 			//关键字过滤

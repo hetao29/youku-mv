@@ -102,11 +102,11 @@ class search_api{
 		}
 }
 //{{{ testcase
+/*
 $api = new search_api;
 $v = $api->get($vid=57520070);
 print_r($v);
 //print_r($api->query("山丹丹"));
-/*
 //$api->optimize();
 chdir(dirname(__FILE__));
 require("../../global.php");
