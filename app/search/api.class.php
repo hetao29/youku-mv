@@ -102,11 +102,16 @@ class search_api{
 		}
 }
 //{{{ testcase
+
 /*
 $api = new search_api;
-$v = $api->get($vid=57520070);
-print_r($v);
-//print_r($api->query("山丹丹"));
+//$api->optimize();
+//$v = $api->get($vid=55656278 );
+//print_r($v);
+//print_r($api->query("SingerNames:刘德华"));
+print_r($api->query("AlbumName:千古情 AND VideoArea:大陆"));
+/*
+exit;
 //$api->optimize();
 chdir(dirname(__FILE__));
 require("../../global.php");

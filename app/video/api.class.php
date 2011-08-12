@@ -7,12 +7,13 @@ class video_api{
 				$video_db = new video_db;
 				//加入到数据库里
 				if($video_db->addVideo($Video)){
-						$v=$this->getVideoInfo($Video['VideoID']);
-						$search_api = new search_api;
-						$search_api->update($Video['VideoID'],$v);
-						return true;
+						$Video=$this->getVideoInfo($Video['VideoID']);
+				}else{
+						$video_db->updateVideo($Video['VideoID'],$Video);
 				};
-				return false;
+				$search_api = new search_api;
+				$search_api->update($Video['VideoID'],$Video);
+				return true;
 		}
 		/**
 		 * 从数据库,或者API上获取视频

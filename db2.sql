@@ -2,8 +2,20 @@
 中间层音乐查询
 --showcategory:音乐 completed:1 releasedate:-19800101	--80年代以前的
 showcategory:音乐 completed:1 showid:105077-106077
-fields:	showname show_thumburl mv_genre singer showlastupdate firstepisode_videoid releasedate area singertype language album
-orderby:showid:desc
+fields:	showname show_thumburl mv_type mv_genre singer showlastupdate firstepisode_videoid releasedate area singertype language album
+	showname (VideoName)
+	show_thumburl (VideoThumb)
+	mv_type(str_replace("音乐","",mv_type), str_replace("MV","",mv_type)) (VideoStyle)
+	mv_genre (VideoStyle)
+	singer (s_singer.SingerName)
+	showlastupdate ()
+	firstepisode_videoid (VideoID)
+	releasedate (VideoPubdate)
+	area (VideoArea)
+	singertype (s_singer.SingerGender)
+	language (VideoLanguage)
+	album (s_alubm.AlbumName)
+orderby:showlastupdate:asc
 
 --音乐表,核心表
 CREATE TABLE `s_video`(
