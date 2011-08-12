@@ -321,6 +321,7 @@ class player_main extends SGui{
 	function pageSearch($inPath){
 			$k = $_REQUEST['k'];
 			if(empty($k))return;
+			/*
 			$r = SHttp::get("http://api.youku.com/api_ptvideo/st_3_pid_XOA",array("sv"=>$k,"rt"=>3,"ob"=>6,"pz"=>100,"pg"=>1));
 			$r = SJson::decode($r);
 			$o = array();
@@ -343,6 +344,7 @@ class player_main extends SGui{
 				$o[]=$Video;
 			}
 			return $o;
+			 */
 	}
 	function pageGetVideoByVid($inPath){
 			$o = array();
@@ -353,6 +355,7 @@ class player_main extends SGui{
 	}
 	/*得到视频信息*/
 	function pageGetVideo($inPath){
+			/*
 			$o = array();
 			$k = $_REQUEST['k'];
 			if(empty($k))return;
@@ -411,6 +414,7 @@ class player_main extends SGui{
 					}
 			}
 			return $o;
+			 */
 	}
 }
 ?>
