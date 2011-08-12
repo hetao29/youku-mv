@@ -26,6 +26,27 @@ class video_api{
 				}
 				return $Mv;
 		}
+		function getVideoInfo($vid){
+			$v = $this->getVideo($vid);
+			if(!empty($v)){
+				if(!empty($v['SingerIDS'])){
+					//获取歌手信息 
+					$singer_db = new singer_db;
+					$tmp=explode("/",$v['SingerIDS']);
+					$singers=array();
+					foreach($tmp as $id){
+							$singers[]=$singer_db->getSinger($id);
+					}
+					$v['Singers']=$singers;
+				}
+				if(!empty($v['AlbumID'])){
+					//获取专辑信息 
+					$album_db=new album_db;
+					$v['Album']=$album_db->getAlbum($v['AlbumID']);
+				}
+			}
+			return $v;
+		}
 		public static function strTotime($str){
 				$tmp = explode(":",$str);
 				$len = count($tmp);

@@ -247,26 +247,8 @@ class player_main extends SGui{
 	/*获取曲库信息*/
 	function pageGetMusic($inPath){
 			$vid = singer_music::decode($_REQUEST['vid']);
-			$video_db = new video_db;
-			$v=$video_db->getVideo($vid);
-			if(!empty($v)){
-				if(!empty($v['SingerIDS'])){
-					//获取歌手信息 
-					$singer_db = new singer_db;
-					$tmp=explode("/",$v['SingerIDS']);
-					$singers=array();
-					foreach($tmp as $id){
-							$singers[]=$singer_db->getSinger($id);
-					}
-					$v['Singers']=$singers;
-				}
-				if(!empty($v['AlbumID'])){
-					//获取专辑信息 
-					$album_db=new album_db;
-					$v['Album']=$album_db->getAlbum($v['AlbumID']);
-				}
-			}
-			return $v;
+			$video_api= new video_api;
+			return $video_api->getVideoInfo($vid);
 	}
 	/**获取歌手信息和歌手歌曲列表*/
 	function pageGetSinger($inPath){

@@ -1,92 +1,127 @@
 <?php
-set_time_limit(0);
-error_reporting(E_ALL ^E_NOTICE);
 ini_set("include_path",dirname(__FILE__));
-
 require_once 'Zend/Search/Lucene.php';
 require_once('Zend/Search/CN_Lucene_Analyzer.php');
 Zend_Search_Lucene_Analysis_Analyzer::setDefault(new CN_Lucene_Analyzer());
-$dataDir=dirname(__FILE__)."/data";
-try{
-	$index = Zend_Search_Lucene::open($dataDir);
-}catch(Exception $e){
-	$index = new Zend_Search_Lucene($dataDir,true);//建立索引对象，TRUE表示一个新的索引
-
-	$db=mysql_connect("localhost","root");
-	mysql_select_db("youku");
-	mysql_query("set names utf8");
-	$r = mysql_query("select  VideoName,VideoID,AlbumName,s_video.SingerIDS,VideoStyle,VideoArea,VideoPubdate from s_video,s_album where s_video.AlbumID=s_album.AlbumID ");
-	$textos=array();
-	$t = microtime_float();
-	//{{{
-	//得到所有的singer
-			$r2=mysql_query("select singerid,singername from s_singer");
-			$singernames=array();
-			while($row2=mysql_fetch_row($r2)){
-					$id=$row2[0];
-					$singernames[$id]=$row2[1];
-			}
-	//}}}
-	$i=0;
-	$total=0;
-	//try{
-		while($row=mysql_fetch_row($r)){
-				$singerids=$row[3];
-				$singerids=explode("/",$row[3]);
-				$names=array();
-				foreach($singerids as $id){
-						$names[]=$singernames[$id];
-				}
-				//print_r($row);
-				//print_r($names);
-				//echo $row[0]."\n";
-				$doc = new Zend_Search_Lucene_Document();//建立一个索引文档
-				$doc->addField(Zend_Search_Lucene_Field::Keyword('VideoID', 	$row[1]));
-				$doc->addField(Zend_Search_Lucene_Field::Text('VideoName', 	$row[0]));
-				$doc->addField(Zend_Search_Lucene_Field::Text('AlbumName', 	$row[2]));
-				$doc->addField(Zend_Search_Lucene_Field::Text('SingerNames',implode("/",$names)));
-				$doc->addField(Zend_Search_Lucene_Field::Unstored('VideoStyle',	$row[4]));
-				$doc->addField(Zend_Search_Lucene_Field::Unstored('VideoArea', 	$row[5]));
-				$doc->addField(Zend_Search_Lucene_Field::Keyword('VideoPubdate',$row[6]));
-				$index->addDocument($doc); //将这个文档加到索引中
-				$total++;
-				if($i++>2000){
-						$index->commit();
-						echo "$total, ";
-						$t2=microtime_float();
-						echo $t2-$t." seconds\n";
-						$t=$t2;
-						$i=0;
+class search_api{
+		var $dataDir;
+		var $index;
+		function __construct(){
+				$this->dataDir=dirname(__FILE__)."/data";
+				try{
+						$this->index = Zend_Search_Lucene::open($this->dataDir);
+				}catch(Exception $e){
+						$this->index = new Zend_Search_Lucene($this->dataDir,true);//建立索引对象，TRUE表示一个新的索引
 				}
 		}
-		$index->commit();//提交，保存索引资料
-		$index->optimize();
-	$t = microtime_float() - $t;
+		/**
+		 * 删除一条索引
+		 */
+		function del($vid){
+				$v=$this->get($vid);
+				if(!empty($v)){
+						$r = $this->index->delete($v->_id);
+				}
+		}
+		/**
+		 * 获取视频
+		 */
+		function get($vid){
+				$query="VideoID:".$vid;
+				$hits = $this->query($query);
+				if(!empty($hits)) return $hits[0];
+		}
+		/**
+		 * 更新/增加一条索引
+		 */
+		function update($vid,$Video){
+				$this->del($vid);
+				$this->__add($Video);
+		}
+		/**
+		 * 检索
+		 */
+		function query($query){
+				$hits = $this->index->find($query);
+				$results=array();
+				$names=array();
+				foreach($hits as $hit){
+						$o=new stdclass;
+						$names = empty($names)?$hit->getDocument()->getFieldNames():$names;
+						foreach($names as $name){
+								$o->_id = $hit->id;
+								if($name=='VideoPubdate'){
+									$str = $hit->getDocument()->getFieldUtf8Value($name);
+									$o->$name = substr($str,0,4)."-".substr($str,4,2)."-".substr($str,6,2);
+								}else{
+									$o->$name = $hit->getDocument()->getFieldUtf8Value($name);
+								}
+
+						}
+						$results[]=$o;
+				}
+				return $results;
+		}
+		/**
+		 * 优化
+		 */
+		function optimize(){
+				$this->index->optimize();
+				$this->index->commit();
+		}
+		/**
+		 * 增加
+		 * @param @VideoInfo = video_api::getVideoInfo($vid)
+		 */
+		private function __add($VideoInfo){
+				$doc = new Zend_Search_Lucene_Document();
+				if(empty($VideoInfo['VideoID'])||empty($VideoInfo['VideoName']))return false;
+
+				$doc->addField(Zend_Search_Lucene_Field::Keyword('VideoID', 	$VideoInfo['VideoID']));
+				$doc->addField(Zend_Search_Lucene_Field::Text('VideoName', 		$VideoInfo['VideoName']));
+				if(!empty($VideoInfo['Album'])){
+						$doc->addField(Zend_Search_Lucene_Field::Text('AlbumName',	$VideoInfo['Album']['AlbumName']));
+				}
+				if(!empty($VideoInfo['Singers'])){
+						$singernames=array();
+						foreach($VideoInfo['Singers'] as $singer){
+								$singernames[]=$singer['SingerName'];
+						}
+						$doc->addField(Zend_Search_Lucene_Field::Text('SingerNames',implode("/",$singernames)));
+				}
+				if(!empty($VideoInfo['VideoStyle'])){
+						$doc->addField(Zend_Search_Lucene_Field::Text('VideoStyle',	$VideoInfo['VideoStyle']));
+				}
+				if(!empty($VideoInfo['VideoArea']))$doc->addField(Zend_Search_Lucene_Field::Keyword('VideoArea', 	$VideoInfo['VideoArea']));
+				if(!empty($VideoInfo['VideoLanguage']))$doc->addField(Zend_Search_Lucene_Field::Keyword('VideoLanguage',$VideoInfo['VideoLanguage']));
+				if(!empty($VideoInfo['VideoPubdate'])){
+						//把时间的-号取消,如2011-11-11变成20111111
+						$doc->addField(Zend_Search_Lucene_Field::Keyword('VideoPubdate',str_replace("-","",$VideoInfo['VideoPubdate'])));
+				}
+				$this->index->addDocument($doc); //将这个文档加到索引中
+		}
 }
-//{{{
+//{{{ testcase
+$api = new search_api;
+$v = $api->get($vid=57520070);
+print_r($v);
+//print_r($api->query("山丹丹"));
 /*
-exit;
- */
+//$api->optimize();
+chdir(dirname(__FILE__));
+require("../../global.php");
+$vid = 17682534;
+//$vid = 20959074;
+$video_api = new video_api;
+$v=$video_api->getVideoInfo($vid);
+print_r($v);
+$v['VideoName']="DDDDD32";
+//$v=new stdclass;
+//$v->VideoID=57520070;
+//$v->VideoName="XX";
+$api->update($vid,$v);
+$v = $api->get($vid);
+print_r($v);
+//$api->del($vid);
 //}}}
-echo "\n\nSEARCH\n\n";
-$keyword="VideoName:相爱";
-//$keyword="66472591";
-$keyword="SingerNames:启靓";
-$keyword="VideoName:+see +Me";
-$keyword="VideoName:pet~";
-//$keyword="VideoName:关不住";
-//$query = new Zend_Search_Lucene_Search_Query_Phrase( array($keyword));
-//$query = Zend_Search_Lucene_Search_QueryParser::parse($keyword);
-// $hits = $index->find($query);
-//print_r($hits[0]->name);
- $hits = $index->find($keyword);
-foreach($hits as $h){
-echo($h->id.":".$h->VideoID.":".$h->SingerNames.":".$h->VideoName);
-echo "\n";
-}
-function microtime_float()
-{
-   list($usec, $sec) = explode(" ", microtime());
-   return ((float)$usec + (float)$sec);
-}
-?>
+//*/
