@@ -5,6 +5,7 @@
  */
 class ChineseSpell {
 
+	public static $str;
 	/**
 	 * @var array $chineseSpellList 拼音编码对应表
 	 * @access private
@@ -435,10 +436,10 @@ class ChineseSpell {
 			$spell = substr($spell, 0, $length);
 		}
         if(empty($spell)||(ord(strtolower($spell))<ord('a')||ord(strtolower($spell))>ord('z'))){
-            $str=file_get_contents('pinyin.TXT', true);
+				if(empty(self::$str)) self::$str=file_get_contents('pinyin.TXT', true);
 //            $subject = "abcdef";
             $pattern = "/{$chinese}([a-z])/";
-            preg_match($pattern, $str, $matches);
+            preg_match($pattern, self::$str, $matches);
 //            $match=$matches[0];
 //            print_r($matches);
             if(!empty($matches)){
@@ -485,7 +486,8 @@ class ChineseSpell {
 				$q = ord(substr($chinese,++$i,1));
 				$p = $p*256 + $q - 65536;
 			}
-			$result[] = $this->getChineseSpell($p);
+			$tmp = $this->getChineseSpell($p);
+			if(!empty($tmp))$result[] = $tmp;
 			if ($first) {
 				return $result[0];
 			}

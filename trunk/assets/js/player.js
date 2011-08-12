@@ -212,7 +212,7 @@ var YoukuWs = function(){
 										$("#_IDThx").trigger("click");
 								}
 								$("#_IDSkip").click(function(){
-										YoukuWs.MvAction("skip",CurrentVideoID);
+										YoukuWs.VideoAction("skip",CurrentVideoID);
 										//{{{播放模式
 										PlayType=0;
 										YoukuWs.set("PlayType",PlayType);
@@ -255,7 +255,7 @@ var YoukuWs = function(){
 								}).bt();
 								$("#_IDDown").click(function(){
 										if(YoukuWs.isLogin()){
-												YoukuWs.MvAction("down",CurrentVideoID);
+												YoukuWs.VideoAction("down",CurrentVideoID);
 												YoukuWs.playRadio();
 										}else{
 												YoukuWs.login(function(){$("#_IDDown").trigger("click");});
@@ -263,7 +263,7 @@ var YoukuWs = function(){
 								}).bt();
 								$("#_IDUp").click(function(){
 										if(YoukuWs.isLogin()){
-												YoukuWs.MvAction("up",CurrentVideoID);
+												YoukuWs.VideoAction("up",CurrentVideoID);
 										}else{
 												YoukuWs.login(function(){$("#_IDUp").trigger("click");});
 										}
@@ -1327,9 +1327,9 @@ var YoukuWs = function(){
 										 if(t)$("#title").html("正在播放:"+t);
 										 if(t)document.title="YouKu.FM - "+t;
 								 },
-						MvAction:function(type,vid){
+						VideoAction:function(type,vid){
 										 $.ajax({
-												 url: "/player.main.mvaction/"+type+"."+vid,
+												 url: "/player.main.VideoAction/"+type+"."+vid,
 										 success: function( result) {
 												 if(result&&result.type){
 														 if(YoukuWs.isLogin()){

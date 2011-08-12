@@ -11,6 +11,9 @@ class singer_db{
 	function getSinger($SingerID){
 		return $this->_db->selectOne("s_singer",array("SingerID"=>$SingerID),array("SingerID","SingerName","MvCount"));
 	}
+	function getSingerByName($SingerName){
+		return $this->_db->selectOne("s_singer",array("SingerName"=>$SingerName),array("SingerID","SingerName","MvCount"));
+	}
 	function addSinger($Singer){
 		return $this->_db->insert("s_singer",$Singer);
 	}

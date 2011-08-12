@@ -15,6 +15,9 @@ class album_db{
 	function getAlbum($AlbumID){
 		return $this->_db->selectOne("s_album",array("AlbumID"=>$AlbumID),array("AlbumID","AlbumName"));
 	}
+	function getAlbumByName($AlbumName,$SingerIDS){
+		return $this->_db->selectOne("s_album",array("AlbumName"=>$AlbumName,"SingerIDS"=>$SingerIDS),array("AlbumID","AlbumName","SingerIDS"));
+	}
 	function addAlbum($Album){
 		return $this->_db->insert("s_album",$Album);
 	}
