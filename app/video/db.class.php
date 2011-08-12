@@ -20,6 +20,12 @@ class video_db{
 	function getVideo($vid){
 		return $this->_db->selectOne("s_video",array("VideoID"=>$vid));
 	}
+	/**
+	 * 主要是给rebuild.php来用来做索引的
+	 */
+	function listVideo($startTime){
+		return $this->_db->select("s_video",array("VideoUpdateTime>='$startTime'"),"VideoID","ORDER BY VideoUpdateTime ASC,VideoID ASC");
+	}
 	function getVideoExtension($vid){
 		return $this->_db->selectOne("s_video_extension",array("VideoID"=>$vid));
 	}
