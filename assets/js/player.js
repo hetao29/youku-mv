@@ -140,6 +140,7 @@ var YoukuWs = function(){
 						$("#_RadioChannel").dialog("close");
 						YoukuWs.set("cid",$(this).attr("id"));
 						window.radioPlayList=new Array();
+						//换台，这里要快速相应 
 						PlayType=0;
 						YoukuWs.set("PlayType",PlayType);
 						YoukuWs.playRadio();
@@ -1339,12 +1340,13 @@ var YoukuWs = function(){
 									  },
 						playRadio:function(){
 										  //获取当前队列的数据，如果为空就从服务器取
-										  if(window.radioPlayList.length<2){
+										  if(window.radioPlayList.length<3){
 												  $.ajax({
 														  url: "/player.main.radio",
 														  data: {
 																  cid:YoukuWs.get("cid"),
-														  vid:CurrentVideoID
+														  vid:CurrentVideoID,
+														  length:window.radioPlayList.length
 														  },
 														  success: function( result) {
 																		   if(result && result.items){
@@ -1879,6 +1881,6 @@ var playTime={time:0,alltime:0};
 				}
 
 		}
-		setInterval(getPlayTime,200);
+		setInterval(getPlayTime,100);
 		//}}}
 })(jQuery);
