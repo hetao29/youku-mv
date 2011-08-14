@@ -1871,16 +1871,14 @@ var playTime={time:0,alltime:0};
 						var time =playTime.time = isNaN(r.time)?0:r.time;
 						var alltime= playTime.alltime = isNaN(r.alltime)?0:r.alltime;
 						if(time>0 && alltime>0 && adCheck==time && Math.ceil(time)>=alltime){
-								onPlayerComplete({});
-								//$("#debug2").html("广告");
+								//先不跳过广告
+								//onPlayerComplete({});
 						}else{
-								//$("#debug2").html("");
 						}
-						//$("#debug").html(time+":"+alltime);
 						adCheck=time;
 				}
 
 		}
-		setInterval(getPlayTime,100);
+		setInterval(getPlayTime,200);
 		//}}}
 })(jQuery);
