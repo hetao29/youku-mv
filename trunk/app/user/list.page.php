@@ -148,7 +148,7 @@ class user_list{
 						$r = $db->listContent($List['ListID']);
 						if(!empty($r->items)){
 								foreach($r->items as &$item){
-										$item = $video_api->getVideoInfo($item['VideoID']);
+										$item = array_merge($item,$video_api->getVideoInfo($item['VideoID']));
 								}
 						}
 						return $r;

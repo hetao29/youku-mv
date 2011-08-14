@@ -1340,7 +1340,7 @@ var YoukuWs = function(){
 									  },
 						playRadio:function(){
 										  //获取当前队列的数据，如果为空就从服务器取
-										  if(window.radioPlayList.length<3){
+										  if(window.radioPlayList.length<2){
 												  $.ajax({
 														  url: "/player.main.radio",
 														  data: {
