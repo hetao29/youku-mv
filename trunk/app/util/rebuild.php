@@ -7,7 +7,7 @@ require("../../global.php");
 $log="rebuild.log";
 $db = new video_db;
 $video_api = new video_api;
-$search_api = new search_api;
+$search_api = new search_api("data.new");
 $logData = trim(file_get_contents($log));
 $startTime=0;$startVideoID=0;
 if(!empty($logData)){
@@ -24,6 +24,7 @@ foreach($tmp->items as $item){
 		$id = $item['SingerID'];
 		$singers[$id]=$item;
 }
+unset($tmp);
 
 $album_db = new album_db;
 $tmp = $album_db->listAlbum(1,-1);
@@ -32,6 +33,8 @@ foreach($tmp->items as $item){
 		$id = $item['AlbumID'];
 		$albums[$id]=$item;
 }
+unset($tmp);
+
 $i=0;
 $total=0;
 $len=count($videos->items);
@@ -58,7 +61,6 @@ foreach($videos->items as $item){
 		$item['Singers']=$singernames;
 		$id = $item['AlbumID'];
 		$item['Album']=@$albums[$id];
-		$v   = $video_api->getVideoInfo($vid);
 		$search_api->add($item);
 		file_put_contents($log,$item['VideoUpdateTime']."/".$item['VideoID']);
 }

@@ -25,10 +25,8 @@ class singer_db{
 		$this->_db->setPage($page);
 		return $this->_db->select(
 				array("s_singer"),
-				//array("SingerID"=>4048),
-				//array("SingerID"=>1),
 				array(),
-				"*",
+				array("SingerID","SingerName","MvCount"),
 				"ORDER BY SingerID"
 		);
 	}
