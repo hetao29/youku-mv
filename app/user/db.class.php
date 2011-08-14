@@ -83,7 +83,7 @@ class user_db{
 			return $this->_db->select(
 					array("s_list_content"),
 					array("ListID"=>$ListID),
-					array("ListID","MvOrder"),"ORDER BY MvOrder"
+					array("ListID","VideoID","MvOrder"),"ORDER BY MvOrder"
 			);
 	}
 	function getListCount($UserID){
