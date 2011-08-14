@@ -77,45 +77,10 @@ class video_db{
 	function addLyrics($Lyrics){
 		return $this->_db->insert("s_lyrics",$Lyrics,$replace = true);
 	}
-	function getRandVideo($ListID=1,$UserID=0,$pageSize=50){
-		//算法要优化
+	function getRandVideo($ListID=1,$pageSize=20){
 		$this->_db->setPage(1);
 		$this->_db->setLimit($pageSize);
-/*
-$sql="SELECT 
- s_video.VideoID,s_video.VideoID,s_singer.SingerName,s_video.VideoName,
- concat(s_singer.SingerName,' - ',s_video.VideoName)  MvName,
- s_video_video.snapshot MvPic,s_video_video.duration MvSeconds
-FROM s_singer,s_video,s_video_video JOIN
- (SELECT (RAND() *
-  (SELECT MAX(VideoID) FROM s_video where 
-  VideoPubdate between '1995-01-01' and 
-  '2005-01-01' and _Finished=1)) AS VideoID)
- AS p2
-WHERE 
- s_video.VideoID >= p2.VideoID and 
- s_video._Finished=1 and  
- s_singer.SingerID=s_video.SingerID and  
- s_singer.SingerType in(1,2,3) and  
- s_video.VideoPubdate between '1995-01-01' and '2005-01-01' and
- s_video.VideoID=s_video_video.VideoID and 
- s_video.VideoID=s_video_video.VideoID 
-group by s_video.VideoID 
-ORDER BY s_video.VideoID ASC 
-LIMIT 100";
-*/
-$sql='
-SELECT 
- s_video.VideoID,s_singer.SingerName,s_video.VideoName,
- concat(s_singer.SingerName," - ",s_video.VideoName)  VideoName,
- s_video.VideoThumb VideoThumb,s_video.VideoDuration VideoDuration 
-FROM s_singer,s_video
-WHERE 
- s_singer.SingerID=s_video.SingerIDS and  
- s_video.VideoPubdate between "1995-01-01" and "2005-01-01" 
-ORDER BY RAND() ASC 
-LIMIT 50;';
-		return ($this->_db->query($sql));
+		return $this->_db->select("s_list_content",array("ListID"=>$ListID),array("VideoID"),"ORDER BY RAND() ASC");
 	}
 }
 ?>
