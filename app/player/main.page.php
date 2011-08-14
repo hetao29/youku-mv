@@ -107,7 +107,7 @@ class player_main extends SGui{
 		return $db->ListRadioList();
 	}
 	function pageRadio($inPath){
-			$chanelId=empty($_REQUEST['cid'])?1:$_REQUEST['cid'];
+			$chanelId=empty($_REQUEST['cid'])?2:$_REQUEST['cid'];
 
 			$user_db = new user_db;
 			$video_api = new video_api;
@@ -141,48 +141,6 @@ class player_main extends SGui{
 				$api = new video_api;
 				return $api->getVideoByVid($vid);
 			}
-	}
-	/**
-	 * 增加列表
-	 * @param $ListName
-	 */
-	function pageAddList($inPath){
-	}
-	/**
-	 * 获取一个列表歌曲
-	 * @param $ListID
-	 */
-	function pageListVideo($inPath){
-	}
-	/**
-	 * 列出所有列表
-	 */
-	function pageSaveOffset($inPath){
-			$VideoID= singer_music::decode($_REQUEST['VideoID']);
-			$offset = $_REQUEST['offset'];
-			if(empty($VideoID) || !isset($offset)){
-					return;
-			}
-			$db = new video_db;
-			$lyric = $db->getLyrics($VideoID);
-			if(empty($lyric)  || $lyric['UserID']!=1){//TODO，当前登录用户
-					return;
-			}
-			$db->updateLyrics($VideoID,array("LyricsOffset"=>$offset));
-			return true;
-	}
-	function pageLyricsError($inPath){
-			$VideoID= singer_music::decode($_REQUEST['VideoID']);
-			if(empty($VideoID)){
-					return;
-			}
-			$db = new video_db;
-			$lyric = $db->getLyrics($VideoID);
-			if(empty($lyric)  || $lyric['UserID']!=1){//TODO，当前登录用户
-					return;
-			}
-			$db->updateLyrics($VideoID,array("LyricsStatus"=>-2));
-			return true;
 	}
 	function pageListAction($inPath){
 			if(($User=user_api::islogin())!==false){
@@ -310,10 +268,34 @@ class player_main extends SGui{
 			}
 			return array();
 	}
-	/**
-	 * 添加歌词
-	 */
-	function pageAddLyric($inPath){
+
+
+	function pageSaveOffset($inPath){
+			$VideoID= singer_music::decode($_REQUEST['VideoID']);
+			$offset = $_REQUEST['offset'];
+			if(empty($VideoID) || !isset($offset)){
+					return;
+			}
+			$db = new video_db;
+			$lyric = $db->getLyrics($VideoID);
+			if(empty($lyric)  || $lyric['UserID']!=1){//TODO，当前登录用户
+					return;
+			}
+			$db->updateLyrics($VideoID,array("LyricsOffset"=>$offset));
+			return true;
+	}
+	function pageLyricsError($inPath){
+			$VideoID= singer_music::decode($_REQUEST['VideoID']);
+			if(empty($VideoID)){
+					return;
+			}
+			$db = new video_db;
+			$lyric = $db->getLyrics($VideoID);
+			if(empty($lyric)  || $lyric['UserID']!=1){//TODO，当前登录用户
+					return;
+			}
+			$db->updateLyrics($VideoID,array("LyricsStatus"=>-2));
+			return true;
 	}
 	function pageComplete($inPath){
 			$k = $_REQUEST['k'];
@@ -333,10 +315,8 @@ class player_main extends SGui{
 			if(empty($k))return;
 			$video_api = new video_api;
 
-			//有漏洞
 			$search_api = new search_api;
 			$r = $search_api->search($k,30);
-		//print_r($r);
 			if(!empty($r)){
 					foreach($r as &$item){
 						$item = $video_api->getVideoInfoByLuceneVideo($item);
