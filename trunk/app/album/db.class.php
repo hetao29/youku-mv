@@ -15,6 +15,10 @@ class album_db{
 	function getAlbum($AlbumID){
 		return $this->_db->selectOne("s_album",array("AlbumID"=>$AlbumID),array("AlbumID","AlbumName"));
 	}
+	function getAlbumName($AlbumID){
+		$album = $this->_db->selectOne("s_album",array("AlbumID"=>$AlbumID),array("AlbumID","AlbumName"));
+		return !empty($album['AlbumName'])?$album['AlbumName']:"";
+	}
 	function getAlbumByName($AlbumName,$SingerIDS){
 		return $this->_db->selectOne("s_album",array("AlbumName"=>$AlbumName,"SingerIDS"=>$SingerIDS),array("AlbumID","AlbumName","SingerIDS"));
 	}
@@ -30,8 +34,8 @@ class album_db{
 		return $this->_db->select(
 				array("s_album"),
 				array(),
-				"*",
-				"ORDER BY Album"
+				array("AlbumID","AlbumName"),
+				"ORDER BY AlbumID"
 		);
 	}
 }

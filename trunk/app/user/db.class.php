@@ -56,9 +56,9 @@ class user_db{
 		$this->_db->setLimit($pageSize);
 		$this->_db->setPage($page);
 		return $this->_db->select(
-				array("s_user_action","s_video"),
-				array("s_user_action.UserID"=>$UserID,"s_user_action.VideoID=s_video.VideoID","s_user_action.ActionType"=>$ActionType),
-				array("s_user_action.VideoID","s_user_action.ActionType","VideoName","VideoDuration","ActionTime"),
+				array("s_user_action"),
+				array("s_user_action.UserID"=>$UserID,"s_user_action.ActionType"=>$ActionType),
+				array("s_user_action.VideoID","s_user_action.ActionType","ActionTime"),
 				"ORDER BY ActionTime DESC"
 		);
 	}
@@ -138,9 +138,9 @@ class user_db{
 		$this->_db->setLimit($pageSize);
 		$this->_db->setPage($page);
 		return $this->_db->select(
-				array("s_user_listen","s_video"),
-				array("s_user_listen.UserID"=>$UserID,"s_user_listen.VideoID=s_video.VideoID"),
-				array("s_user_listen.VideoID","VideoName","VideoDuration","ListenTime"),
+				array("s_user_listen"),
+				array("s_user_listen.UserID"=>$UserID),
+				array("s_user_listen.VideoID"),
 				"ORDER BY ListenTime DESC"
 		);
 	}

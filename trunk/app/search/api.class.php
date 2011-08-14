@@ -3,6 +3,7 @@ ini_set("include_path",dirname(__FILE__));
 require_once 'Zend/Search/Lucene.php';
 require_once('Zend/Search/CN_Lucene_Analyzer.php');
 Zend_Search_Lucene_Analysis_Analyzer::setDefault(new CN_Lucene_Analyzer());
+Zend_Search_Lucene_Search_QueryParser::setDefaultEncoding('utf-8');
 class search_api{
 		var $dataDir;
 		var $index;
@@ -26,40 +27,61 @@ class search_api{
 		/**
 		 * 获取视频
 		 */
-		function get($vid){
+		function get($vid,$cache=false){
 				$query="VideoID:".$vid;
-				$hits = $this->query($query);
+				$hits = $this->query($query,0,$cache);
 				if(!empty($hits)) return $hits[0];
+		}
+		function search($key,$limit,$cache=true){
+				$keys=split(" ",$key);
+				$query="contents:(";
+				foreach($keys as $key){
+						$query.="+'".trim($key)."'";
+				}
+				$query.=")";
+				return $this->query($query,0,$cache);
 		}
 		/**
 		 * 更新/增加一条索引
 		 */
 		function update($vid,$Video){
 				$this->del($vid);
-				$this->__add($Video);
+				$this->add($Video);
 		}
 		/**
 		 * 检索
 		 */
-		function query($query){
+		function query($query,$limit=0,$cache=false){
+				//{{{
+				if($cache){
+					$cache_api  = SCache::getCacheEngine($cacheengine="File");
+					$cache_api->init(array("dir"=>WWW_ROOT."/cache","depth"=>3));
+					$key = md5($query.":".$limit);
+					if($r = $cache_api->get($key)){
+							return $r;
+					}
+				}
+				//}}}
+				$this->index->setResultSetLimit($limit);
 				$hits = $this->index->find($query);
 				$results=array();
 				$names=array();
 				foreach($hits as $hit){
-						$o=new stdclass;
+						$o=array();
 						$names = empty($names)?$hit->getDocument()->getFieldNames():$names;
 						foreach($names as $name){
-								$o->_id = $hit->id;
+								$o['_id'] = $hit->id;
 								if($name=='VideoPubdate'){
 									$str = $hit->getDocument()->getFieldUtf8Value($name);
-									$o->$name = substr($str,0,4)."-".substr($str,4,2)."-".substr($str,6,2);
+									$o[$name] = substr($str,0,4)."-".substr($str,4,2)."-".substr($str,6,2);
 								}else{
-									$o->$name = $hit->getDocument()->getFieldUtf8Value($name);
+									$o[$name] = $hit->getDocument()->getFieldUtf8Value($name);
 								}
 
 						}
 						$results[]=$o;
 				}
+				if($cache)$cache_api->set($key,$results,60*60*24*7);
 				return $results;
 		}
 		/**
@@ -73,60 +95,35 @@ class search_api{
 		 * 增加
 		 * @param @VideoInfo = video_api::getVideoInfo($vid)
 		 */
-		private function __add($VideoInfo){
-				$doc = new Zend_Search_Lucene_Document();
-				if(empty($VideoInfo['VideoID'])||empty($VideoInfo['VideoName']))return false;
+		public function add($VideoInfo){
+				if(empty($VideoInfo['VideoID'])||empty($VideoInfo['VideoName'])||empty($VideoInfo['Singers']))return false;
 
-				$doc->addField(Zend_Search_Lucene_Field::Keyword('VideoID', 	$VideoInfo['VideoID']));
-				$doc->addField(Zend_Search_Lucene_Field::Text('VideoName', 		$VideoInfo['VideoName']));
-				if(!empty($VideoInfo['Album'])){
-						$doc->addField(Zend_Search_Lucene_Field::Text('AlbumName',	$VideoInfo['Album']['AlbumName']));
-				}
+
+				$singernames=array();
+				$singerids=array();
 				if(!empty($VideoInfo['Singers'])){
 						$singernames=array();
 						foreach($VideoInfo['Singers'] as $singer){
 								$singernames[]=$singer['SingerName'];
+								$singerids[]=$singer['SingerID'];
 						}
-						$doc->addField(Zend_Search_Lucene_Field::Text('SingerNames',implode("/",$singernames)));
 				}
-				if(!empty($VideoInfo['VideoStyle'])){
-						$doc->addField(Zend_Search_Lucene_Field::Text('VideoStyle',	$VideoInfo['VideoStyle']));
-				}
-				if(!empty($VideoInfo['VideoArea']))$doc->addField(Zend_Search_Lucene_Field::Keyword('VideoArea', 	$VideoInfo['VideoArea']));
-				if(!empty($VideoInfo['VideoLanguage']))$doc->addField(Zend_Search_Lucene_Field::Keyword('VideoLanguage',$VideoInfo['VideoLanguage']));
-				if(!empty($VideoInfo['VideoPubdate'])){
-						//把时间的-号取消,如2011-11-11变成20111111
-						$doc->addField(Zend_Search_Lucene_Field::Keyword('VideoPubdate',str_replace("-","",$VideoInfo['VideoPubdate'])));
-				}
+				$contents=	implode("/",$singernames)."/".$VideoInfo['VideoName']."/".
+							@$VideoInfo['Album']['AlbumName']."/";
+				$doc = new Zend_Search_Lucene_Document();
+				$doc->addField(Zend_Search_Lucene_Field::Keyword('VideoID', 	$VideoInfo['VideoID']));
+				$doc->addField(Zend_Search_Lucene_Field::UnStored('contents',$contents));
+				//$doc->addField(Zend_Search_Lucene_Field::Text('SingerNameS',implode("/",$singernames)));
+				$doc->addField(Zend_Search_Lucene_Field::UnStored('SingerIDS',implode("/",$singerids)));
+				//$doc->addField(Zend_Search_Lucene_Field::UnIndexed('VideoName', 		$VideoInfo['VideoName']));
+				//$doc->addField(Zend_Search_Lucene_Field::UnIndexed('AlbumID',	@$VideoInfo['Album']['AlbumID']));
+
+				$doc->addField(Zend_Search_Lucene_Field::UnStored('VideoStyle',	@$VideoInfo['VideoStyle']));
+				//$doc->addField(Zend_Search_Lucene_Field::UnIndexed('VideoDuration',	@$VideoInfo['VideoDuration']));
+				$doc->addField(Zend_Search_Lucene_Field::UnStored('VideoArea', 	@$VideoInfo['VideoArea']));
+				$doc->addField(Zend_Search_Lucene_Field::UnStored('VideoLanguage',@$VideoInfo['VideoLanguage']));
+				//把时间的-号取消,如2011-11-11变成20111111
+				$doc->addField(Zend_Search_Lucene_Field::UnStored('VideoPubdate',str_replace("-","",@$VideoInfo['VideoPubdate'])));
 				$this->index->addDocument($doc); //将这个文档加到索引中
 		}
 }
-//{{{ testcase
-
-/*
-$api = new search_api;
-//$api->optimize();
-//$v = $api->get($vid=55656278 );
-//print_r($v);
-//print_r($api->query("SingerNames:刘德华"));
-print_r($api->query("AlbumName:千古情 AND VideoArea:大陆"));
-/*
-exit;
-//$api->optimize();
-chdir(dirname(__FILE__));
-require("../../global.php");
-$vid = 17682534;
-//$vid = 20959074;
-$video_api = new video_api;
-$v=$video_api->getVideoInfo($vid);
-print_r($v);
-$v['VideoName']="DDDDD32";
-//$v=new stdclass;
-//$v->VideoID=57520070;
-//$v->VideoName="XX";
-$api->update($vid,$v);
-$v = $api->get($vid);
-print_r($v);
-//$api->del($vid);
-//}}}
-//*/
