@@ -104,28 +104,15 @@ class player_main extends SGui{
 	}
 	function pageRadioList($inPath){
 		$db = new user_db;
-		$r = $db->ListRadioList();
-		/*
-		$_testRadio=array("ListID"=>-1,"ListName"=>"80后经典","ListOrder"=>0);
-		array_push($r->items,$_testRadio);
-		$_testRadio=array("ListID"=>-3,"ListName"=>"2010年新歌","ListOrder"=>0);
-		array_push($r->items,$_testRadio);
-		$_testRadio=array("ListID"=>-2,"ListName"=>"2011年新歌","ListOrder"=>0);
-		array_push($r->items,$_testRadio);
-		$_testRadio=array("ListID"=>-4,"ListName"=>"欧美最新歌","ListOrder"=>0);
-		array_push($r->items,$_testRadio);
-		$_testRadio=array("ListID"=>-5,"ListName"=>"日韩最新歌","ListOrder"=>0);
-		array_push($r->items,$_testRadio);
-		*/
-		return $r;
+		return $db->ListRadioList();
 	}
 	function pageRadio($inPath){
 			$chanelId=empty($_REQUEST['cid'])?1:$_REQUEST['cid'];
 
-			$db = new video_db;
+			$user_db = new user_db;
 			$video_api = new video_api;
 
-			$r = $db->getRandVideo($chanelId);
+			$r = $user_db->listContentRand($chanelId);
 
 			foreach($r->items as &$item){
 					$item = $video_api->getVideoInfo($item['VideoID']);

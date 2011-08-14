@@ -77,10 +77,5 @@ class video_db{
 	function addLyrics($Lyrics){
 		return $this->_db->insert("s_lyrics",$Lyrics,$replace = true);
 	}
-	function getRandVideo($ListID=1,$pageSize=20){
-		$this->_db->setPage(1);
-		$this->_db->setLimit($pageSize);
-		return $this->_db->select("s_list_content",array("ListID"=>$ListID),array("VideoID"),"ORDER BY RAND() ASC");
-	}
 }
 ?>

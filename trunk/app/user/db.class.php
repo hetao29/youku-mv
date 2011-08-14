@@ -86,6 +86,12 @@ class user_db{
 					array("ListID","VideoID","MvOrder"),"ORDER BY MvOrder"
 			);
 	}
+	
+	function listContentRand($ListID=1,$pageSize=20){
+		$this->_db->setPage(1);
+		$this->_db->setLimit($pageSize);
+		return $this->_db->select("s_list_content",array("ListID"=>$ListID),array("VideoID"),"ORDER BY RAND() ASC");
+	}
 	function getListCount($UserID){
 		$row = $this->_db->selectOne("s_list",array("UserID"=>$UserID),array("count(*) ct"));
 		return $row['ct'];
