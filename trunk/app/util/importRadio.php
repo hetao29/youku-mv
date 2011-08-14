@@ -4,9 +4,9 @@
 $config =	array(
 				array(
 					"ListID"=>"1",
-					"ListName"=>"2010年至今年流行金曲",
-					"QUERY"=>"VideoPubdate:[20100101 TO 20120100] AND AND VideoArea:(台湾 大陆 香港)",
-					"LIMIT"=>20000
+					"ListName"=>"去年流行金曲",
+					"QUERY"=>"VideoPubdate:[20100101 TO 20110100] AND AND VideoArea:(台湾 大陆 香港)",
+					"LIMIT"=>10000
 				),
 				array(
 					"ListID"=>"2",

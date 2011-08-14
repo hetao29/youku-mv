@@ -4,3 +4,5 @@
 	app/util/official.php
 3.生成js
 	app/util/genjs.php
+4.生成频道
+	app/util/importRadio.php
