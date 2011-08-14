@@ -125,6 +125,8 @@ class player_main extends SGui{
 			$chanelId=-3;
 			$db_user = new user_db;
 			$radios = $db_user->ListRadioList();
+			//用户队列里的文件
+			$length = empty($_REQUEST['length'])?0:$_REQUEST['length'];
 			if(empty($_REQUEST['cid'])){
 					if(!empty($radios->items)){
 							$chanelId=$radios->items[0]['ListID'];
@@ -136,9 +138,15 @@ class player_main extends SGui{
 			$video_api = new video_api;
 			$r=new stdclass;
 			$now = date("Ym",time()+60*60*24*365)."01";
+			if($length==0){
+				$start = 10*24*60*60;//取10天数据  
+				$limit = 3;
+			}else{
+				$limit = 10000;
+			}
 			if($chanelId==-1){
 				$api=new search_api;
-				$items=$api->query("VideoPubdate:[19950101 TO 20000102] AND VideoArea:(台湾 大陆 香港)",10000,false);
+				$items=$api->query("VideoPubdate:[19950101 TO 20000102] AND VideoArea:(台湾 大陆 香港)",10000,true);
 				$items=array_slice($items,rand(1,count($items)-30),30);
 				shuffle ($items);
 				foreach($items as &$item){
