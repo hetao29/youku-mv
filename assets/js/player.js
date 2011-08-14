@@ -1305,7 +1305,6 @@ var YoukuWs = function(){
 
 								  },
 						getVideoName:function(Video){
-											 if(Video){
 																		var mvname="";
 																		var names=[];
 																		if(Video.Singers){
@@ -1315,8 +1314,6 @@ var YoukuWs = function(){
 																				mvname=names.join("/")+" - ";
 																		}
 																		return  mvname+=Video.VideoName;
-											 }
-											 return "";
 								  },
 						_realPlayRadio:function(){
 											   var o= window.radioPlayList[0];
@@ -1564,12 +1561,14 @@ var YoukuWs = function(){
 																			var o = $("#_ContentListen >ul");
 																			o.html("");
 																			for(var i=0;i<result.items.length;i++){
+																					if(result.items[i]){
 																					var mvname=YoukuWs.getVideoName(result.items[i]);
 																					var html='<li _type="action"  actiontype="'+result.items[i].ActionType+'" title="点击拖动到右边播放列表" mvname="'+mvname+'" vid="'+result.items[i].VideoID+'">'+
 																	'<span class="left name" title="点击播放:'+mvname+'">'+mvname+'</span>'+
 																	'<span class="right">'+timeFormat(result.items[i].VideoDuration)+' <a class="delMv" title="删除"><img src="/assets/images/style2/DeleteDisabled.png" style="vertical-align:middle" /></a><img title="点击添加到播放列表" class="add" src="/assets/images/style2/plus.png" style="vertical-align:top"></span>'+
 																	'<div class="clear"></div>'+
 																	'</li>';
+																					}
 															o.append(html);
 																			}
 																			var pager="<div>";
