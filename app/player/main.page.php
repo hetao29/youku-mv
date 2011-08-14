@@ -24,17 +24,6 @@ class player_main extends SGui{
 		$param['cssversion']=filemtime(WWW_ROOT."/"."assets/css/styleV2.css");
 		return $this->render("player/playerV2.tpl",$param);
 	}
-	function pageRadioList($inPath){
-		$db = new user_db;
-		$r = $db->ListRadioList();
-		$_testRadio=array("ListID"=>-1,"ListName"=>"80后经典","ListOrder"=>0);
-		array_push($r->items,$_testRadio);
-		$_testRadio=array("ListID"=>-3,"ListName"=>"2010年新歌","ListOrder"=>0);
-		array_push($r->items,$_testRadio);
-		$_testRadio=array("ListID"=>-2,"ListName"=>"2011年新歌","ListOrder"=>0);
-		array_push($r->items,$_testRadio);
-		return $r;
-	}
 	function pageHeader($inPath){
 			$param = array();
 			if(($User=user_api::islogin())!==false){
@@ -113,6 +102,21 @@ class player_main extends SGui{
 				return $db->delAction($UserID,$VideoID,$ActionType);
 		}
 	}
+	function pageRadioList($inPath){
+		$db = new user_db;
+		$r = $db->ListRadioList();
+		$_testRadio=array("ListID"=>-1,"ListName"=>"80后经典","ListOrder"=>0);
+		array_push($r->items,$_testRadio);
+		$_testRadio=array("ListID"=>-3,"ListName"=>"2010年新歌","ListOrder"=>0);
+		array_push($r->items,$_testRadio);
+		$_testRadio=array("ListID"=>-2,"ListName"=>"2011年新歌","ListOrder"=>0);
+		array_push($r->items,$_testRadio);
+		$_testRadio=array("ListID"=>-4,"ListName"=>"欧美最新歌","ListOrder"=>0);
+		array_push($r->items,$_testRadio);
+		$_testRadio=array("ListID"=>-5,"ListName"=>"日韩最新歌","ListOrder"=>0);
+		array_push($r->items,$_testRadio);
+		return $r;
+	}
 	function pageRadio($inPath){
 			$UserID=0;
 			if(($User=user_api::islogin())!==false){
@@ -129,13 +133,55 @@ class player_main extends SGui{
 					$chanelId=$_REQUEST['cid'];
 			}
 			$db = new video_db;
+			$video_api = new video_api;
 			$r=new stdclass;
+			$now = date("Ym",time()+60*60*24*365)."01";
 			if($chanelId==-1){
-				$r->items=$db->getRandMusic();
+				$api=new search_api;
+				$items=$api->query("VideoPubdate:[19950101 TO 20000102] AND VideoArea:(台湾 大陆 香港)",10000,false);
+				$items=array_slice($items,rand(1,count($items)-30),30);
+				shuffle ($items);
+				foreach($items as &$item){
+						$item = $video_api->getVideoInfoByLuceneVideo($item);
+				}
+				$r->items=$items;
 			}elseif($chanelId==-2){
-				$r->items=$db->getRandMusicNew();
+				$api=new search_api;
+				$items=$api->query("VideoPubdate:[20110101 TO $now] AND VideoArea:(台湾 大陆 香港)",10000,true);
+				$items=array_slice($items,rand(1,count($items)-30),30);
+				shuffle ($items);
+				foreach($items as &$item){
+						$item = $video_api->getVideoInfoByLuceneVideo($item);
+				}
+				$r->items=$items;
 			}elseif($chanelId==-3){
-				$r->items=$db->getRandMusicNew2010();
+				$api=new search_api;
+				$items=$api->query("VideoPubdate:[20100101 TO 20110102] AND VideoArea:(台湾 大陆 香港)",10000,true);
+				$items=array_slice($items,rand(1,count($items)-30),30);
+				shuffle ($items);
+				foreach($items as &$item){
+						$item = $video_api->getVideoInfoByLuceneVideo($item);
+				}
+				$r->items=$items;
+			}elseif($chanelId==-4){
+				$api=new search_api;
+				$items=$api->query("VideoPubdate:[20100101 TO $now] AND VideoLanguage:(英语 其它)",10000,true);
+				$items=array_slice($items,rand(1,count($items)-30),30);
+				shuffle ($items);
+				foreach($items as $i=>$item){
+						$items[$i] = $video_api->getVideoInfoByLuceneVideo($item);
+				}
+				$r->items=$items;
+			}elseif($chanelId==-5){
+				$api=new search_api;
+				$items=$api->query("VideoPubdate:[20100101 TO $now] AND VideoArea:(日本 韩国)",10000,true);
+				$items=array_slice($items,rand(1,count($items)-30),30);
+				shuffle ($items);
+				foreach($items as &$item){
+						$item = $video_api->getVideoInfoByLuceneVideo($item);
+				}
+				$r->items=$items;
+			}elseif($chanelId==-4){
 			}else{
 				$r->items = $db->getRandVideo($chanelId,$UserID);
 			}
@@ -150,6 +196,13 @@ class player_main extends SGui{
 	 */
 
 	function pageAddVideo($inPath){
+			$vid = $_REQUEST['vid'];
+			if(!empty($vid)){
+				$api = new video_api;
+				return $api->getVideoByVid($vid);
+			}
+	}
+	function pageGetVideoByVid($inPath){
 			$vid = $_REQUEST['vid'];
 			if(!empty($vid)){
 				$api = new video_api;
@@ -208,7 +261,14 @@ class player_main extends SGui{
 							case "skip":$actiontype=2;	break;
 					}
 					$db = new user_db;
-					return $db->listAction($User['UserID'],$actiontype,$page);
+					$video_api = new video_api;
+					$r = $db->listAction($User['UserID'],$actiontype,$page);
+					if(!empty($r->items)){
+							foreach($r->items as &$item){
+									$item = $video_api->getVideoInfo($item['VideoID']);
+							}
+					}
+					return $r;
 			}
 	}
 	/**
@@ -219,7 +279,14 @@ class player_main extends SGui{
 			if(($User=user_api::islogin())!==false){
 					$page =!empty($inPath[3])?$inPath[3]:1;
 					$db = new user_db;
-					return $db->ListListen($User['UserID'],$page);
+					$video_api = new video_api;
+					$r= $db->ListListen($User['UserID'],$page);
+					if(!empty($r->items)){
+							foreach($r->items as &$item){
+									$item = $video_api->getVideoInfo($item['VideoID']);
+							}
+					}
+					return $r;
 			}
 	}
 	function pageAddListen($inPath){
@@ -253,21 +320,30 @@ class player_main extends SGui{
 	/**获取歌手信息和歌手歌曲列表*/
 	function pageGetSinger($inPath){
 			$sid = $_REQUEST['sid'];
-			$singer_db = new singer_db;
-			//$singer = $singer_db->getSinger($sid);
-			//if(!empty($singer)){
-					return $singer_db->listMusicBySingerID($sid);
-		//			if(!empty($music))
-		//			$music->singer=$singer;
-		//			return $music;
-		//	}
+			$video_api = new video_api;
+			$search_api = new search_api;
+			$r = new stdclass;
+			$r->items = $search_api->query("SingerIDS:$sid");
+			if(!empty($r->items)){
+				foreach($r->items as &$item){
+						$item = $video_api->getVideoInfoByLuceneVideo($item);
+				}
+			}
+			return $r;
 	}
 	/**获取专辑信息*/
-	function pageGetSpecial($inPath){
+	function pageGetAlbum($inPath){
 			//从搜索出数据
 			$sid = $_REQUEST['sid'];
 			$video_db= new video_db;
-			return $video_db->listVideoByAlbumID($sid);
+			$video_api = new video_api;
+			$r = $video_db->listVideoByAlbumID($sid);
+			if(!empty($r->items)){
+					foreach($r->items as &$item){
+							$item = $video_api->getVideoInfo($item['VideoID']);
+					}
+			}
+			return $r;
 	}
 	/**
 	 * 读取歌词
@@ -308,113 +384,39 @@ class player_main extends SGui{
 	}
 	function pageComplete($inPath){
 			$k = $_REQUEST['k'];
-			if(empty($k))return "{}";
+			if(empty($k))return "[]";
 			$k = urlencode($k);
 			$r = file_get_contents("http://tip.so.youku.com/search_keys?type=video&k=$k&limit=10");
-			if($r===false){
-					return "{}";
+			if($r){
+				preg_match("/\[.*?\]/",$r,$_m);
+				if(!empty($_m)){
+						return $_m[0];
+				}
 			}
-			$r = str_replace("showresult('","",$r);
-			$r = str_replace("',false)","",$r);
-			return $r;
+			return "[]";
 	}
 	function pageSearch($inPath){
 			$k = $_REQUEST['k'];
 			if(empty($k))return;
-			/*
-			$r = SHttp::get("http://api.youku.com/api_ptvideo/st_3_pid_XOA",array("sv"=>$k,"rt"=>3,"ob"=>6,"pz"=>100,"pg"=>1));
-			$r = SJson::decode($r);
-			$o = array();
-			$db= new video_db;
-			foreach($r->item as $item){
-				$vid = $item->videoid;
-				$Video = $db->getVideoByVid($vid);
-				if(empty($Video)){
-					//{{{
-					$Video = array();
-					$Video['VideoSourceID']=1;
-					$Video['VideoName'] = $item->title;
-					$Video['VideoDuration'] = video_api::strTotime($item->duration);
-					$Video['VideoID'] = singer_music::decode($item->videoid);
-					$Video['VideoThumb'] = $item->snapshot;
-					$Video['VideoPubDate'] = $item->pubDate;
-					$db->addVideo($Video);
-					//}}}
-				}
-				$o[]=$Video;
+			$video_api = new video_api;
+
+			//有漏洞
+			$search_api = new search_api;
+			$r = $search_api->search($k,30);
+			if(!empty($r)){
+					foreach($r as &$item){
+						$item = $video_api->getVideoInfoByLuceneVideo($item);
+					}
+			}else{
+					$r=$video_api->search($k);
 			}
-			return $o;
-			 */
-	}
-	function pageGetVideoByVid($inPath){
-			$o = array();
-			$vid = singer_music::decode($_REQUEST['vid']);
-			if(empty($vid))return;
-			$api = new video_api;
-			return $api->getVideo($vid);
+			return $r;
 	}
 	/*得到视频信息*/
 	function pageGetVideo($inPath){
-			/*
-			$o = array();
+			$api = new video_api;
 			$k = $_REQUEST['k'];
-			if(empty($k))return;
-			if(preg_match("/v_show\/id_(.*?)\./",$k,$_m)){
-					//普通视频播放页
-					$api = new video_api;
-					$r = $api->getVideo($_m[1]);
-					$o[]=$r;
-			}elseif(preg_match("/show_page\/id_(.*?)\./",$k,$_m)){
-					//节目显示页
-					$pid = $_m[1];
-					$st = 11;
-			}elseif(preg_match("/playlist_show\/id_(\\d*)/",$k,$_m)){
-					//专辑显示页
-					$pid = $_m[1];
-					$st = 8;
-					//playlist_show/id_5358637.html
-
-			}elseif(preg_match("/v_playlist\/f(\\d*)/",$k,$_m)){
-					//专辑播放页
-					//v_playlist/f5358637o1p1.html
-					$pid = $_m[1];
-					$st = 8;
-			}
-			if(!empty($pid)){
-					$r = SHttp::get("http://api.youku.com/api_ptvideo/st_$st",array("pid"=>"XOA==","rt"=>3,"pz"=>100,"sv"=>$pid));
-					$r = SJson::decode($r);
-					$totalPage=1;
-					if(!empty($r->totalSize) && !empty($r->pageSize)){
-							$totalPage = ceil($r->totalSize / $r->pageSize);
-					}
-					if($totalPage>1){
-						for($i=2;$i<=$totalPage;$i++){
-							$r2 = SHttp::get("http://api.youku.com/api_ptvideo/st_$st",array("pid"=>"XOA==","rt"=>3,"pz"=>100,"pg"=>$i,"sv"=>$pid));
-							$r2 = SJson::decode($r2);
-							if(!empty($r2))$r->item=array_merge($r->item,$r2->item);
-						}
-					}
-					$db= new video_db;
-					foreach($r->item as $item){
-						$vid = $item->videoid;
-						$Video = $db->getVideo($vid);
-						if(empty($Video)){
-							//{{{
-							$Video = array();
-							$Video['VideoSourceID']=1;
-							$Video['VideoName'] = $item->title;
-							$Video['VideoDuration'] = video_api::strTotime($item->duration);
-							$Video['VideoID'] = singer_music::decode($item->videoid);
-							$Video['VideoThumb'] = $item->snapshot;
-							$Video['VideoPubDate'] = $item->pubDate;
-							$db->addVideo($Video);
-							//}}}
-						}
-						$o[]=$Video;
-					}
-			}
-			return $o;
-			 */
+			return $api->getVideoInfoByURL($k);
 	}
 }
 ?>

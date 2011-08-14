@@ -17,6 +17,21 @@ if(!empty($logData)){
 }
 echo "START FROM $startTime / $startVideoID\n";
 $videos = $db->listVideo($startTime,$startVideoID);
+$singer_db = new singer_db;
+$tmp = $singer_db->listSinger(1,-1);
+$singers=array();
+foreach($tmp->items as $item){
+		$id = $item['SingerID'];
+		$singers[$id]=$item;
+}
+
+$album_db = new album_db;
+$tmp = $album_db->listAlbum(1,-1);
+$albums=array();
+foreach($tmp->items as $item){
+		$id = $item['AlbumID'];
+		$albums[$id]=$item;
+}
 $i=0;
 $total=0;
 $len=count($videos->items);
@@ -27,15 +42,24 @@ function microtime_float() {
 $t = microtime_float();
 foreach($videos->items as $item){
 		$total++;
-		if($i++>=20){
+		if($i++>=100){
 				$t2 = microtime_float();
 				echo ($total)."/$len\t".($t2-$t)." seconds\n";
 				$t  = $t2;
 				$i=0;
 		};
 		$vid = $item['VideoID'];
+		$singerids = split("/",$item['SingerIDS']);
+		$singernames=array();
+		foreach($singerids as $singerid){
+				$singernames[]=@$singers[$singerid];
+		}
+		if(empty($singernames))continue;
+		$item['Singers']=$singernames;
+		$id = $item['AlbumID'];
+		$item['Album']=@$albums[$id];
 		$v   = $video_api->getVideoInfo($vid);
-		$search_api->update($vid,$v);
-		file_put_contents($log,$v['VideoUpdateTime']."/".$v['VideoID']);
+		$search_api->add($item);
+		file_put_contents($log,$item['VideoUpdateTime']."/".$item['VideoID']);
 }
 $search_api->optimize();

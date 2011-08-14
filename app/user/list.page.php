@@ -142,9 +142,16 @@ class user_list{
 	function pageListContents($inPath){
 		if(!empty($_REQUEST['lid'])){
 				$db = new user_db;
+				$video_api = new video_api;
 				$List = $db->getList($_REQUEST['lid']);
 				if(!empty($List)){
-						return $db->listContent($List['ListID']);
+						$r = $db->listContent($List['ListID']);
+						if(!empty($r->items)){
+								foreach($r->items as &$item){
+										$item = $video_api->getVideoInfo($item['VideoID']);
+								}
+						}
+						return $r;
 				}
 		}
 	}

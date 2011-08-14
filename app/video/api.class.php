@@ -10,27 +10,32 @@ class video_api{
 						$Video=$this->getVideoInfo($Video['VideoID']);
 				}else{
 						$video_db->updateVideo($Video['VideoID'],$Video);
+						$Video=$this->getVideoInfo($Video['VideoID']);
 				};
-				$search_api = new search_api;
-				$search_api->update($Video['VideoID'],$Video);
 				return true;
+
 		}
 		/**
 		 * 从数据库,或者API上获取视频
 		 */
+		function getVideoDuration($vid){
+				$vid = singer_music::decode($vid);
+				//从数据库里获取
+				$video_db = new video_db;
+				$v = $video_db->getVideo($vid);
+				if(!empty($v) && empty($v['VideoDuration'])){
+					$v= $this->__getVideoInfo($vid,false);
+					$video_db->updateVideo($v['VideoID'],array("VideoDuration"=>$v['VideoDuration']));
+				}
+				return $v['VideoDuration'];
+		}
 		function getVideo($vid){
 				$vid = singer_music::decode($vid);
 				//从数据库里获取
 				$video_db = new video_db;
 				$Mv = $video_db->getVideo($vid);
 				if(empty($Mv)){
-					//如果没有,从API中获取
-					switch($Mv['VideoSourceID']){
-						case 1:
-							$Mv= $this->__getVideoInfo($vid);
-							return $Mv;
-						break;
-					}
+					return  $this->__getVideoInfo($vid);
 				}
 				return $Mv;
 		}
@@ -53,27 +58,44 @@ class video_api{
 				if(!empty($v['AlbumID'])){
 					//获取专辑信息 
 					$album_db=new album_db;
-					$v['Album']=$album_db->getAlbum($v['AlbumID']);
+					$v['AlbumName']=$album_db->getAlbumName($v['AlbumID']);
 				}
 			}
 			return $v;
 		}
-		private function __strTotime($str){
-				$tmp = explode(":",$str);
-				$len = count($tmp);
-				$sec = $tmp[$len-1];
-				$min = $tmp[$len-2];
-				$hour=0;
-				if($len>2)$hour=$tmp[$len-3];
-				return $sec+$min*60+$hour*3600;
+		/**
+		 * 补充 Video信息
+		 */
+		function getVideoInfoByLuceneVideo($v){
+				return $this->getVideoInfo($v['VideoID']);
+				/*
+			$v=array_merge($v,$this->getVideo($v['VideoID']));
+			if(!empty($v)){
+				if(!empty($v['SingerIDS']) && !empty($v['SingerNameS'])){
+					$ids = explode("/",$v['SingerIDS']);
+					$names = explode("/",$v['SingerNameS']);
+					$singers=array();
+					foreach($ids as $i=>$id){
+						$singers[]=array("SingerID"=>$id,"SingerName"=>$names[$i]);
+					}
+					$v['Singers']=$singers;
+				}
+			}
+			return $v;
+				 */
 		}
-		private function __search($key){
+		/**
+		 * 搜索
+		 **/
+		public function search($key){
 			$r = SHttp::get("http://api.youku.com/api_ptvideo/st_3_pid_XOA",array("sv"=>$key,"rt"=>3,"ob"=>6,"pz"=>100,"pg"=>1));
 			$r = SJson::decode($r);
 			$o = array();
 			foreach($r->item as $item){
 				$vid = $item->videoid;
-				$Video = $db->getVideoByVid($vid);
+				$db=new video_db;
+				$vid = singer_music::decode($vid);
+				$Video = $db->getVideo($vid);
 				if(empty($Video)){
 					//{{{
 					$Video = array();
@@ -90,10 +112,19 @@ class video_api{
 			}
 			return $o;
 		}
+		private function __strTotime($str){
+				$tmp = explode(":",$str);
+				$len = count($tmp);
+				$sec = $tmp[$len-1];
+				$min = $tmp[$len-2];
+				$hour=0;
+				if($len>2)$hour=$tmp[$len-3];
+				return $sec+$min*60+$hour*3600;
+		}
 		/**
 		 * 从API上获取视频信息,获取一个视频信息
 		 */
-		private function __getVideoInfo($vid){
+		private function __getVideoInfo($vid,$add=true){
 			$r = SHttp::get("http://api.youku.com/api_ptvideoinfo",array("pid"=>"XOA==","rt"=>3,"id"=>$vid));
 			$r = SJson::decode($r);
 			if(!empty($r->item->title)){
@@ -105,7 +136,7 @@ class video_api{
 					$video['VideoID'] = singer_music::decode($_m[1]);
 					$video['VideoThumb'] = $r->item->imagelink;
 					$video['VideoPubdate'] = $r->item->pubdate;;
-					$this->addVideo($video);
+					if($add)$this->addVideo($video);
 					return $video;
 				}
 			}
@@ -113,14 +144,14 @@ class video_api{
 		/**
 		 * 从API上获取信息,获取很多信息
 		 */
-		private function __getVideoInfoByURL($k){
+		public function getVideoInfoByURL($k){
 			$o = array();
 			$k = $_REQUEST['k'];
 			if(empty($k))return;
 			if(preg_match("/v_show\/id_(.*?)\./",$k,$_m)){
 					//普通视频播放页
 					$api = new video_api;
-					$r = $api->getVideo($_m[1]);
+					$r = $api->getVideoInfo($_m[1]);
 					$o[]=$r;
 			}elseif(preg_match("/show_page\/id_(.*?)\./",$k,$_m)){
 					//节目显示页
@@ -154,7 +185,7 @@ class video_api{
 					}
 					foreach($r->item as $item){
 						$vid = $item->videoid;
-						$video = $db->getVideo($vid);
+						$video = $this->getVideoInfo($vid);
 						if(empty($video)){
 							//{{{
 							$video = array();
