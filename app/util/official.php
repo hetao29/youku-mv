@@ -24,7 +24,7 @@ function listVideoFromOfficial($startTime){
 		$r = SJson::decode($r);
 		return $r;
 }
-$log=dirname(__FILE__)."/"."official.log";
+$log="official.log";
 
 
 while(true){

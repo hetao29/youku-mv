@@ -4,7 +4,7 @@
  */
 chdir(dirname(__FILE__));
 require("../../global.php");
-$log=dirname(__FILE__)."/"."rebuild.log";
+$log="rebuild.log";
 $db = new video_db;
 $video_api = new video_api;
 $search_api = new search_api;
