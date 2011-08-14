@@ -105,6 +105,7 @@ class player_main extends SGui{
 	function pageRadioList($inPath){
 		$db = new user_db;
 		$r = $db->ListRadioList();
+		/*
 		$_testRadio=array("ListID"=>-1,"ListName"=>"80后经典","ListOrder"=>0);
 		array_push($r->items,$_testRadio);
 		$_testRadio=array("ListID"=>-3,"ListName"=>"2010年新歌","ListOrder"=>0);
@@ -115,84 +116,21 @@ class player_main extends SGui{
 		array_push($r->items,$_testRadio);
 		$_testRadio=array("ListID"=>-5,"ListName"=>"日韩最新歌","ListOrder"=>0);
 		array_push($r->items,$_testRadio);
+		*/
 		return $r;
 	}
 	function pageRadio($inPath){
-			$UserID=0;
-			if(($User=user_api::islogin())!==false){
-					$UserID= $User['UserID'];
-			}
-			$chanelId=-3;
-			$db_user = new user_db;
-			$radios = $db_user->ListRadioList();
-			//用户队列里的文件
-			$length = empty($_REQUEST['length'])?0:$_REQUEST['length'];
-			if(empty($_REQUEST['cid'])){
-					if(!empty($radios->items)){
-							$chanelId=$radios->items[0]['ListID'];
-					}
-			}else{
-					$chanelId=$_REQUEST['cid'];
-			}
+			$chanelId=empty($_REQUEST['cid'])?1:$_REQUEST['cid'];
+
 			$db = new video_db;
 			$video_api = new video_api;
-			$r=new stdclass;
-			$now = date("Ym",time()+60*60*24*365)."01";
-			if($length==0){
-				$start = 10*24*60*60;//取10天数据  
-				$limit = 3;
-			}else{
-				$limit = 10000;
+
+			$r = $db->getRandVideo($chanelId);
+
+			foreach($r->items as &$item){
+					$item = $video_api->getVideoInfo($item['VideoID']);
 			}
-			if($chanelId==-1){
-				$api=new search_api;
-				$items=$api->query("VideoPubdate:[19950101 TO 20000102] AND VideoArea:(台湾 大陆 香港)",10000,true);
-				$items=array_slice($items,rand(1,count($items)-30),30);
-				shuffle ($items);
-				foreach($items as &$item){
-						$item = $video_api->getVideoInfoByLuceneVideo($item);
-				}
-				$r->items=$items;
-			}elseif($chanelId==-2){
-				$api=new search_api;
-				$items=$api->query("VideoPubdate:[20110101 TO $now] AND VideoArea:(台湾 大陆 香港)",10000,true);
-				$items=array_slice($items,rand(1,count($items)-30),30);
-				shuffle ($items);
-				foreach($items as &$item){
-						$item = $video_api->getVideoInfoByLuceneVideo($item);
-				}
-				$r->items=$items;
-			}elseif($chanelId==-3){
-				$api=new search_api;
-				$items=$api->query("VideoPubdate:[20100101 TO 20110102] AND VideoArea:(台湾 大陆 香港)",10000,true);
-				$items=array_slice($items,rand(1,count($items)-30),30);
-				shuffle ($items);
-				foreach($items as &$item){
-						$item = $video_api->getVideoInfoByLuceneVideo($item);
-				}
-				$r->items=$items;
-			}elseif($chanelId==-4){
-				$api=new search_api;
-				$items=$api->query("VideoPubdate:[20110101 TO $now] AND VideoLanguage:(英语 其它)",10000,true);
-				$items=array_slice($items,rand(1,count($items)-30),30);
-				shuffle ($items);
-				foreach($items as $i=>$item){
-						$items[$i] = $video_api->getVideoInfoByLuceneVideo($item);
-				}
-				$r->items=$items;
-			}elseif($chanelId==-5){
-				$api=new search_api;
-				$items=$api->query("VideoPubdate:[20110101 TO $now] AND VideoArea:(日本 韩国)",10000,true);
-				$items=array_slice($items,rand(1,count($items)-30),30);
-				shuffle ($items);
-				foreach($items as &$item){
-						$item = $video_api->getVideoInfoByLuceneVideo($item);
-				}
-				$r->items=$items;
-			}elseif($chanelId==-4){
-			}else{
-				$r->items = $db->getRandVideo($chanelId,$UserID);
-			}
+
 			$r->cid = $chanelId;
 			return $r;
 	}
