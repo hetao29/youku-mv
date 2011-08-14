@@ -1305,6 +1305,7 @@ var YoukuWs = function(){
 
 								  },
 						getVideoName:function(Video){
+											 if(Video){
 																		var mvname="";
 																		var names=[];
 																		if(Video.Singers){
@@ -1314,6 +1315,8 @@ var YoukuWs = function(){
 																				mvname=names.join("/")+" - ";
 																		}
 																		return  mvname+=Video.VideoName;
+											 }
+											 return "";
 								  },
 						_realPlayRadio:function(){
 											   var o= window.radioPlayList[0];
