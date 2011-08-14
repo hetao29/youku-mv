@@ -1,4 +1,4 @@
-<?
+<?php
 require_once 'Zend/Search/Lucene/Analysis/Analyzer/Common.php';
 class CN_Lucene_Analyzer extends Zend_Search_Lucene_Analysis_Analyzer_Common {
 
