@@ -316,7 +316,7 @@ class player_main extends SGui{
 			$video_api = new video_api;
 
 			$search_api = new search_api;
-			$r = $search_api->search($k,30);
+			$r = $search_api->search($k,30,true);
 			if(!empty($r)){
 					foreach($r as &$item){
 						$item = $video_api->getVideoInfoByLuceneVideo($item);
