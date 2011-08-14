@@ -173,7 +173,7 @@ class player_main extends SGui{
 				$r->items=$items;
 			}elseif($chanelId==-4){
 				$api=new search_api;
-				$items=$api->query("VideoPubdate:[20100101 TO $now] AND VideoLanguage:(英语 其它)",10000,true);
+				$items=$api->query("VideoPubdate:[20110101 TO $now] AND VideoLanguage:(英语 其它)",10000,true);
 				$items=array_slice($items,rand(1,count($items)-30),30);
 				shuffle ($items);
 				foreach($items as $i=>$item){
@@ -182,7 +182,7 @@ class player_main extends SGui{
 				$r->items=$items;
 			}elseif($chanelId==-5){
 				$api=new search_api;
-				$items=$api->query("VideoPubdate:[20100101 TO $now] AND VideoArea:(日本 韩国)",10000,true);
+				$items=$api->query("VideoPubdate:[20110101 TO $now] AND VideoArea:(日本 韩国)",10000,true);
 				$items=array_slice($items,rand(1,count($items)-30),30);
 				shuffle ($items);
 				foreach($items as &$item){
@@ -411,6 +411,7 @@ class player_main extends SGui{
 			//有漏洞
 			$search_api = new search_api;
 			$r = $search_api->search($k,30);
+		//print_r($r);
 			if(!empty($r)){
 					foreach($r as &$item){
 						$item = $video_api->getVideoInfoByLuceneVideo($item);

@@ -7,8 +7,8 @@ Zend_Search_Lucene_Search_QueryParser::setDefaultEncoding('utf-8');
 class search_api{
 		var $dataDir;
 		var $index;
-		function __construct(){
-				$this->dataDir=dirname(__FILE__)."/data";
+		function __construct($name="data"){
+				$this->dataDir=dirname(__FILE__)."/$name";
 				try{
 						$this->index = Zend_Search_Lucene::open($this->dataDir);
 				}catch(Exception $e){
