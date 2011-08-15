@@ -225,7 +225,7 @@ li{
 		font-size:12px;
 }
 .content .main{
-		height:400px;
+		height:397px;
 }
 .content .nav{
 		margin:18px auto;
@@ -246,7 +246,7 @@ li{
 }
 .playerBox{
 		padding:10px;
-		height:371px;
+		height:400px;
 		z-index:-1;
 }
 /*
