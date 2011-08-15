@@ -107,13 +107,17 @@ class player_main extends SGui{
 		return $db->ListRadioList();
 	}
 	function pageRadio($inPath){
-			$chanelId=empty($_REQUEST['cid'])?2:$_REQUEST['cid'];
+			$defaultChannelID=2;
+			$chanelId=empty($_REQUEST['cid'])?$defaultChannelID:$_REQUEST['cid'];
 
 			$user_db = new user_db;
 			$video_api = new video_api;
 
 			$r = $user_db->listContentRand($chanelId);
 
+			if(empty($r->items)){
+				$r = $user_db->listContentRand($defaultChannelID);
+			}
 			foreach($r->items as &$item){
 					$item = $video_api->getVideoInfo($item['VideoID']);
 			}
