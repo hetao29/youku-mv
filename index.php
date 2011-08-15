@@ -11,13 +11,13 @@
 @session_start();
 
 ob_start("ob_gzhandler");
-//{{{
+/*/{{{
 $host = strtolower($_SERVER['HTTP_HOST']);
 if(strpos($host,"youku.ws")===false && strpos($host,"youku.fm")===false){
 		include(dirname(__FILE__)."/"."selldomain.php");
 		return;
 }
-//}}}
+*///}}}
 require_once("global.php");
 
 if(!empty($_SERVER['HTTP_ORIGIN'])){

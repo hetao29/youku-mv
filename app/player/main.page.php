@@ -143,7 +143,7 @@ class player_main extends SGui{
 			$vid = $_REQUEST['vid'];
 			if(!empty($vid)){
 				$api = new video_api;
-				return $api->getVideoByVid($vid);
+				return $api->getVideoInfo($vid);
 			}
 	}
 	function pageListAction($inPath){

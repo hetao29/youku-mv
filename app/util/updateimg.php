@@ -1,4 +1,5 @@
 <?php
+exit;
 chdir(dirname(__FILE__));
 include("../../global.php");
 include("../player/db.class.php");
