@@ -1,5 +1,6 @@
 <?php
 //更新s_singer.MvCount里的数
+exit;
 chdir(dirname(__FILE__));
 include("../../global.php");
 include("../player/db.class.php");
