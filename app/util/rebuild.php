@@ -7,7 +7,7 @@ require("../../global.php");
 $log="rebuild.log";
 $db = new video_db;
 $video_api = new video_api;
-$search_api = new search_api("data.new");
+$search_api = new search_api("data");
 $logData = trim(file_get_contents($log));
 $startTime=0;$startVideoID=0;
 if(!empty($logData)){
