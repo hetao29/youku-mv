@@ -16,7 +16,7 @@ if(!empty($logData)){
 		$startVideoID=trim($tmp[1]);
 }
 echo "START FROM $startTime / $startVideoID\n";
-$videos = $db->listVideo($startTime,$startVideoID);
+$videos = $db->listVideo($startTime);
 $singer_db = new singer_db;
 $tmp = $singer_db->listSinger(1,-1);
 $singers=array();

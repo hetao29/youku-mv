@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<sphinx:docset>
+
+<sphinx:schema>
+	<sphinx:field name="VideoID" attr="string"/> 
+	<sphinx:field name="AlbumID" attr="string"/> 
+	<sphinx:field name="AlbumName" attr="string"/> 
+	<sphinx:field name="VideoName" attr="string"/> 
+	<sphinx:field name="SingerNameS" attr="string"/> 
+	<sphinx:field name="VideoLanguage" attr="string"/> 
+	<sphinx:field name="VideoStyle" attr="string"/> 
+	<sphinx:attr name="VideoThumb" type="string"/> 
+	<sphinx:field name="VideoArea" attr="string"/> 
+	<sphinx:field name="SingerIDS" attr="string"/> 
+	<sphinx:attr name="VideoDuration" type="int"/> 
+	<sphinx:attr name="VideoUpdateTime" type="timestamp"/> 
+	<sphinx:field name="VideoPubdate" attr="string"/> 
+	<sphinx:attr name="VideoStatus" type="int"/> 
+</sphinx:schema>
+<sphinx:document id="11104944">
+	<VideoID>11104944</VideoID>
+	<VideoName><![CDATA[乌兰巴托的夜]]></VideoName>
+	<SingerIDS>4230</SingerIDS>
+	<AlbumID>11729</AlbumID>
+	<VideoLanguage><![CDATA[国语]]></VideoLanguage>
+	<VideoStyle><![CDATA[流行/Pop , 摇滚/Rock , 原声/OST , 电影原声]]></VideoStyle>
+	<VideoThumb><![CDATA[http://g2.ykimg.com/0100011F464C5A4F418AAB006086EF5C63ECAB-B915-E956-C575-8B664135FCDA]]></VideoThumb>
+	<VideoDuration>0</VideoDuration>
+	<VideoArea><![CDATA[]]></VideoArea>
+	<VideoPubdate><![CDATA[2006-04-01]]></VideoPubdate>
+	<VideoSourceID>1</VideoSourceID>
+	<VideoUpdateTime><![CDATA[2011-08-10 13:57:45]]></VideoUpdateTime>
+	<VideoStatus>-1</VideoStatus>
+	<SingerNameS><![CDATA[左小祖咒]]></SingerNameS>
+	<AlbumName><![CDATA[美国]]></AlbumName>
+</sphinx:document>
+
+<sphinx:document id="96">
+	<VideoID>96</VideoID>
+	<VideoName><![CDATA[流星下的愿]]></VideoName>
+	<SingerIDS>12579</SingerIDS>
+	<AlbumID>32826</AlbumID>
+	<VideoLanguage><![CDATA[国语]]></VideoLanguage>
+	<VideoStyle><![CDATA[流行/Pop]]></VideoStyle>
+	<VideoThumb><![CDATA[http://g2.ykimg.com/0130391F4647A29C9567E800000000E5FE1A0A-28DA-BC52-5FDC-F827E9463EC4]]></VideoThumb>
+	<VideoDuration>254</VideoDuration>
+	<VideoArea><![CDATA[]]></VideoArea>
+	<VideoPubdate><![CDATA[2006-05-29]]></VideoPubdate>
+	<VideoSourceID>1</VideoSourceID>
+	<VideoUpdateTime><![CDATA[2011-08-10 14:04:54]]></VideoUpdateTime>
+	<VideoStatus>-1</VideoStatus>
+	<SingerNameS><![CDATA[杂锦合辑6]]></SingerNameS>
+	<AlbumName><![CDATA[高低和鸣]]></AlbumName>
+</sphinx:document>
+
+<sphinx:document id="603">
+	<VideoID>603</VideoID>
+	<VideoName><![CDATA[Honey]]></VideoName>
+	<SingerIDS>1233</SingerIDS>
+	<AlbumID>3631</AlbumID>
+	<VideoLanguage><![CDATA[国语]]></VideoLanguage>
+	<VideoStyle><![CDATA[流行/Pop]]></VideoStyle>
+	<VideoThumb><![CDATA[http://g4.ykimg.com/0130391F4647A29BFBE62C00000000BF4F6761-A269-1325-4909-376EA4B1E1A1]]></VideoThumb>
+	<VideoDuration>212</VideoDuration>
+	<VideoArea><![CDATA[]]></VideoArea>
+	<VideoPubdate><![CDATA[2009-11-13]]></VideoPubdate>
+	<VideoSourceID>1</VideoSourceID>
+	<VideoUpdateTime><![CDATA[2011-08-10 14:04:54]]></VideoUpdateTime>
+	<VideoStatus>-1</VideoStatus>
+	<SingerNameS><![CDATA[王心凌]]></SingerNameS>
+	<AlbumName><![CDATA[美丽的日子 新歌+精选]]></AlbumName>
+</sphinx:document>
+
+</sphinx:docset>
+<!--
+<?xml version="1.0" encoding="utf-8"?>
+<sphinx:docset>
+
+<sphinx:schema>
+	<sphinx:field name="VideoID"/> 
+</sphinx:schema>
+
+<sphinx:document id="1234">
+</sphinx:document>
+
+<sphinx:document id="1235">
+</sphinx:document>
+<sphinx:killlist>
+<id>1234</id>
+<id>4567</id>
+</sphinx:killlist>
+
+</sphinx:docset>
+
+-->
