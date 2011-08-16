@@ -1,23 +1,28 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?php
+echo '<?xml version="1.0" encoding="utf-8"?>
 <sphinx:docset>
 
 <sphinx:schema>
-	<sphinx:field name="VideoID" attr="string"/> 
-	<sphinx:field name="AlbumID" attr="string"/> 
-	<sphinx:field name="AlbumName" attr="string"/> 
-	<sphinx:field name="VideoName" attr="string"/> 
-	<sphinx:field name="SingerNameS" attr="string"/> 
-	<sphinx:field name="VideoLanguage" attr="string"/> 
-	<sphinx:field name="VideoStyle" attr="string"/> 
-	<sphinx:attr name="VideoThumb" type="string"/> 
-	<sphinx:field name="VideoArea" attr="string"/> 
-	<sphinx:field name="SingerIDS" attr="string"/> 
-	<sphinx:attr name="VideoDuration" type="int"/> 
-	<sphinx:attr name="VideoUpdateTime" type="timestamp"/> 
-	<sphinx:field name="VideoPubdate" attr="string"/> 
-	<sphinx:attr name="VideoStatus" type="int"/> 
-</sphinx:schema>
-<?php
+	<sphinx:field name="albumname"/> 
+	<sphinx:field name="videoname"/> 
+	<sphinx:field name="singernames"/> 
+	<sphinx:field name="videolanguage"/> 
+	<sphinx:field name="videostyle"/> 
+	<sphinx:field name="videoarea"/> 
+
+	<sphinx:attr name="videoid" type="int"/> 
+	<sphinx:attr name="videoname" type="string"/> 
+	<sphinx:attr name="singernames" type="string"/> 
+	<sphinx:attr name="videolanguage" type="string"/> 
+	<sphinx:attr name="videostyle" type="string"/> 
+	<sphinx:attr name="videoarea" type="string"/> 
+	<sphinx:attr name="albumname" type="string"/> 
+	<sphinx:attr name="singerids" type="multi"/> 
+	<sphinx:attr name="albumid" type="int"/> 
+	<sphinx:attr name="videothumb" type="string"/> 
+	<sphinx:attr name="videopubdate" type="int"/> 
+	<sphinx:attr name="videoduration" type="int"/> 
+</sphinx:schema>';
 /**
  * 重作所有索引
  */
@@ -26,7 +31,7 @@ require("../../global.php");
 $log="sphinx.xmlpipe.log";
 $db = new video_db;
 $video_api = new video_api;
-$logData = trim(file_get_contents($log));
+$logData = trim(@file_get_contents($log));
 $startTime=0;$startVideoID=0;
 if(!empty($logData)){
 		$tmp = explode("/",$logData);
@@ -34,7 +39,7 @@ if(!empty($logData)){
 		$startVideoID=trim($tmp[1]);
 }
 //echo "START FROM $startTime / $startVideoID\n";
-$videos = $db->listVideo($startTime,3);
+$videos = $db->listVideo($startTime,-1);
 $singer_db = new singer_db;
 $tmp = $singer_db->listSinger(1,-1);
 $singers=array();
@@ -65,55 +70,47 @@ foreach($videos->items as $item){
 		$total++;
 		if($i++>=100){
 				$t2 = microtime_float();
-				echo ($total)."/$len\t".($t2-$t)." seconds\n";
+				//echo ($total)."/$len\t".($t2-$t)." seconds\n";
 				$t  = $t2;
 				$i=0;
 		};
 		$vid = $item['VideoID'];
 		$singerids = split("/",$item['SingerIDS']);
+		$item['SingerIDS'] = str_replace("/"," ",$item['SingerIDS']);
 		$singernames=array();
+		//$singerids2=array();
 		foreach($singerids as $singerid){
 				$singernames[]=@$singers[$singerid]['SingerName'];
+				//$singerids[]=array('SingerID'=>$singerid);
 		}
 		if(empty($singernames))continue;
 		$item['SingerNameS']=implode("/",$singernames);
+		//$item['SingerIDS']=$singerids;
 		$id = $item['AlbumID'];
 		$item['AlbumName']=@$albums[$id]['AlbumName'];
-		$item['VideoDuration'] = str_replace("-","",$item['VideoDuration']);
+		$item['VideoPubdate'] = str_replace("-","",$item['VideoPubdate']);
 		add($item);
 		file_put_contents($log,$item['VideoUpdateTime']."/".$item['VideoID']);
 }
 function add($item){
+	$item['id'] = $item['VideoID'];
 	echo '<sphinx:document id="'.$item['VideoID'].'">'."\n";
+	unset($item['VideoUpdateTime']);
 	foreach($item as $k=>$v){
+		$k = strtolower($k);
 		echo "\t<$k>";
 		if(is_numeric($v)){echo $v;}
+		elseif(is_array($v)){
+				foreach($v as $k2=>$v2){
+					$k2 = strtolower($k2);
+					echo "\t<$k2>$v2</$kw>\n";
+				}
+		}
 		else{echo "<![CDATA[$v]]>";}
 		echo "</$k>\n";
 	}
 	echo "</sphinx:document>\n\n";
-//print_r($item);
 }
+//echo' <sphinx:killlist> <id>96</id> <id>603</id> </sphinx:killlist>';
+echo '</sphinx:docset>';
 ?>
-</sphinx:docset>
-<!--
-<?xml version="1.0" encoding="utf-8"?>
-<sphinx:docset>
-
-<sphinx:schema>
-	<sphinx:field name="VideoID"/> 
-</sphinx:schema>
-
-<sphinx:document id="1234">
-</sphinx:document>
-
-<sphinx:document id="1235">
-</sphinx:document>
-<sphinx:killlist>
-<id>1234</id>
-<id>4567</id>
-</sphinx:killlist>
-
-</sphinx:docset>
-
--->
