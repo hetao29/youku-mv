@@ -216,9 +216,9 @@ class player_main extends SGui{
 	function pageGetSinger($inPath){
 			$sid = $_REQUEST['sid'];
 			$video_api = new video_api;
-			$search_api = new search_api;
+			$sphinx_api = new sphinx_api;
 			$r = new stdclass;
-			$r->items = $search_api->query("SingerIDS:$sid");
+			$r->items = $sphinx_api->listBySingerID($sid);
 			if(!empty($r->items)){
 				foreach($r->items as &$item){
 						$item = $video_api->getVideoInfoByLuceneVideo($item);
@@ -318,9 +318,9 @@ class player_main extends SGui{
 			$k = $_REQUEST['k'];
 			if(empty($k))return;
 			$video_api = new video_api;
-
-			$search_api = new search_api;
-			$r = $search_api->search($k,30,true);
+			
+			$sphinx_api = new sphinx_api;
+			$r = $sphinx_api->search($k,30,true);
 			if(!empty($r)){
 					foreach($r as &$item){
 						$item = $video_api->getVideoInfoByLuceneVideo($item);

@@ -67,9 +67,6 @@ class video_api{
 		 * 补充 Video信息
 		 */
 		function getVideoInfoByLuceneVideo($v){
-				return $this->getVideoInfo($v['VideoID']);
-				/*
-			$v=array_merge($v,$this->getVideo($v['VideoID']));
 			if(!empty($v)){
 				if(!empty($v['SingerIDS']) && !empty($v['SingerNameS'])){
 					$ids = explode("/",$v['SingerIDS']);
@@ -82,7 +79,6 @@ class video_api{
 				}
 			}
 			return $v;
-				 */
 		}
 		/**
 		 * 搜索
