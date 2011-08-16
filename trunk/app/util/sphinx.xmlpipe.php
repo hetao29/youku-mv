@@ -100,12 +100,6 @@ function add($item){
 		$k = strtolower($k);
 		echo "\t<$k>";
 		if(is_numeric($v)){echo $v;}
-		elseif(is_array($v)){
-				foreach($v as $k2=>$v2){
-					$k2 = strtolower($k2);
-					echo "\t<$k2>$v2</$kw>\n";
-				}
-		}
 		else{echo "<![CDATA[$v]]>";}
 		echo "</$k>\n";
 	}
