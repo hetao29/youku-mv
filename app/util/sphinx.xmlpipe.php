@@ -74,6 +74,7 @@ foreach($videos->items as $item){
 				$t  = $t2;
 				$i=0;
 		};
+		if(empty($item['SingerIDS']))continue;
 		$vid = $item['VideoID'];
 		$singerids = split("/",$item['SingerIDS']);
 		$item['SingerIDS'] = str_replace("/"," ",$item['SingerIDS']);
