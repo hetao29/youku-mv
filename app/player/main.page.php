@@ -306,11 +306,25 @@ class player_main extends SGui{
 			$k = $_REQUEST['k'];
 			if(empty($k))return "[]";
 			$k = urlencode($k);
-			$r = file_get_contents("http://tip.so.youku.com/search_keys?type=video&k=$k&limit=10");
+			$r = file_get_contents("http://tip.so.youku.com/search_keys?type=video&k=$k&limit=15");
 			if($r){
 				preg_match("/\[.*?\]/",$r,$_m);
 				if(!empty($_m)){
-						return $_m[0];
+						$keywords=array();
+						$r = SJson::decode($_m[0]);
+						if(!empty($r)){
+								for($i=0;$i<count($r);$i++){
+									$tmp = str_replace(array("mv","mtv"),"",$r[$i]->keyword);
+									if(!empty($keywords[$tmp])){
+										unset($r[$i]);
+									}else{
+										$keywords[$tmp]=1;
+										$r[$i]->keyword=$tmp;
+									}
+								}
+						}
+						sort($r);
+						return $r;
 				}
 			}
 			return "[]";
