@@ -320,7 +320,7 @@ class player_main extends SGui{
 			$video_api = new video_api;
 			
 			$sphinx_api = new sphinx_api;
-			$r = $sphinx_api->search($k,30,$mustHaveSingers=true);
+			$r = $sphinx_api->search($k,1000,$mustHaveSingers=true);
 			if(!empty($r)){
 					foreach($r as &$item){
 						$item = $video_api->getVideoInfoByLuceneVideo($item);
