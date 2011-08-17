@@ -247,13 +247,14 @@ class player_main extends SGui{
 			$db = new video_db;
 			$vid = singer_music::decode($_REQUEST['vid']);
 			$api = new video_api;
-			$mv  = $api->getVideo($vid);
+			$mv  = $api->getVideoInfo($vid);
 			if(!empty($mv)){
 					$lyric = $db->getLyrics($mv['VideoID']);
 					if(empty($lyric) || $lyric['LyricsStatus']==-2)
 					{
 						$api = new video_api;
-						$content = $api->downlyric($mv['VideoName']);
+						$k = (!empty($mv['Singers'][0]['SingerName'])?$mv['Singers'][0]['SingerName']." ":"").$mv['VideoName'];
+						$content = $api->downlyric($k);
 						if(empty($content))$content="";
 						if(!empty($content)){
 							$lyric['LyricsStatus']=1;
