@@ -17,15 +17,19 @@ rem \www\php5.3\php.exe \www\wwwroot\app\util\importRadio.php
 
 
 
+
 rem 完全重建
 
+rem del \www\wwwroot\app\util\sphinx.xmlpipe.log
 rem \www\wwwroot\app\sphinx\win32\bin\indexer --rotate -c \www\wwwroot\app\sphinx\config\s_video.win.conf video
+
 
 rem 增量重建
 
 \www\wwwroot\app\sphinx\win32\bin\indexer --rotate -c \www\wwwroot\app\sphinx\config\s_video.win.conf video_delta
 
 \www\wwwroot\app\sphinx\win32\bin\indexer --rotate -c \www\wwwroot\app\sphinx\config\s_video.win.conf --merge video video_delta
+
 
 rem 启动服务:
 
@@ -37,6 +41,7 @@ rem \www\wwwroot\app\sphinx\win32\bin\searchd --delete --servicename  SlightSphi
 rem \www\wwwroot\app\sphinx\win32\bin\searchd --install  -c \www\wwwroot\app\sphinx\config\s_video.win.conf --servicename  SlightSphinx
 
 net start SlightSphinx
+
 
 
 pause
