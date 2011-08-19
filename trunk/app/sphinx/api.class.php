@@ -21,6 +21,7 @@ class sphinx_api{
 		"videoduration"	=>"VideoDuration",
 		"videoarea"		=>"VideoArea",
 		"videostyle"	=>"VideoStyle",
+		"videostatus"	=>"VideoStatus",
 		"videolanguage"	=>"VideoLanguage");
 	var $sphinx;
 		function __construct(){
@@ -89,8 +90,8 @@ class sphinx_api{
 			$this->sphinx->SetMatchMode ( $mode=SPH_MATCH_EXTENDED );
 			//$this->sphinx->SetFilterRange ( $args[++$i], $args[++$i], $args[++$i] );
 			$this->sphinx->SetLimits(0,$limit,10000);
-			//$this->sphinx->SetSortMode (SPH_SORT_ATTR_DESC,"@singerids desc");
-			//$this->sphinx->SetFilter ("videoid",array($vid ));
+			$this->sphinx->SetSortMode (SPH_SORT_EXTENDED ,"videostatus desc, videopubdate desc");
+			//$this->sphinx->SetFilter ("@videostatus",array(-1 ));
 			//$this->sphinx->SetFilterRange("videoid",96,96);
 			$res = $this->sphinx->Query ( $q="@(videoname,singernames) $key", $index="video" );
 			$videos = $this->resToVideos($res);
