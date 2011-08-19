@@ -100,6 +100,7 @@ while(true){
 				}
 				$Video['AlbumID'] = $Album['AlbumID'];
 			}
+			$Video['VideoStatus']	=1;
 			if($video_api->addVideo($Video)){
 					$video_api->getVideoDuration($Video['VideoID']);//更新时间 
 					echo $Video['VideoID']." ".$v->showlastupdate." Success\n";

@@ -22,6 +22,7 @@ echo '<?xml version="1.0" encoding="utf-8"?>
 	<sphinx:attr name="videothumb" type="string"/> 
 	<sphinx:attr name="videopubdate" type="int"/> 
 	<sphinx:attr name="videoduration" type="int"/> 
+	<sphinx:attr name="videostatus" type="int"/> 
 </sphinx:schema>';
 /**
  * 重作所有索引
