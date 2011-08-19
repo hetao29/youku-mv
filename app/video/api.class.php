@@ -77,6 +77,8 @@ class video_api{
 					}
 					$v['Singers']=$singers;
 				}
+				//时间转换
+				$v['VideoPubdate']=substr($v['VideoPubdate'],0,4)."-".substr($v['VideoPubdate'],4,2)."-".substr($v['VideoPubdate'],6,2);
 			}
 			return $v;
 		}
