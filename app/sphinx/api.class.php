@@ -65,6 +65,7 @@ class sphinx_api{
 			$this->sphinx->SetMatchMode ( $mode=SPH_MATCH_EXTENDED );
 			//$this->sphinx->SetFilterRange ( $args[++$i], $args[++$i], $args[++$i] );
 			$this->sphinx->SetLimits(0,1000,1000);
+			$this->sphinx->SetSortMode (SPH_SORT_EXTENDED ,"videostatus desc, videopubdate desc");
 			$this->sphinx->SetFilter ("singerids",array($SingerID ));
 			//$this->sphinx->SetFilterRange("videoid",96,96);
 			$res = $this->sphinx->Query ( $q="", $index="video" );
