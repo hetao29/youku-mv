@@ -915,7 +915,7 @@ var YoukuWs = function(){
 										}
 								});
 								$(window).bind('hashchange', function() {
-										if(window.location.hash==""){
+										if(window.location.hash.replace("#","")==""){
 												PlayType=0;
 												YoukuWs.set("PlayType",PlayType);
 												$("#IDNav >li").eq(0).trigger("click");
