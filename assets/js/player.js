@@ -72,13 +72,13 @@ function search(page){
 				'<span class="left name"  title="点击播放:'+mvname+'">';
 		html+= mvname+'</span>'+
 				'<span class="right">'+timeFormat(data[i].VideoDuration)+' <img title="点击添加到播放列表" class="add" src="/assets/images/style2/plus.png" style="vertical-align:top"></span>'+
-						'<div class="clear"></div></li>';
-						o.append(html);
-						}
-						};
-						}
+				'<div class="clear"></div></li>';
+		o.append(html);
+										   }
+								   };
+						   }
 
-						});
+		});
 }
 //}}}
 var YoukuWs = function(){
@@ -99,42 +99,6 @@ var YoukuWs = function(){
 						$("#_IDRight").corner("tr br 8px");
 				}
 				//}}}
-				/*$("#_IDFullscreen").click(function(){
-				  if(!YoukuWs.fullScreen){
-				  $("#playerBox").removeClass("playerBox");
-				  $("#playerBox").addClass("playerBoxFullscreen");
-				  }else{
-				  $("#playerBox").removeClass("playerBoxFullscreen");
-				  $("#playerBox").addClass("playerBox");
-				  }
-				  YoukuWs.fullScreen=!YoukuWs.fullScreen;
-
-				  });
-				  $(document).mousemove(function(e){
-				  if($(document).height()-e.pageY<100 && YoukuWs.fullScreen){
-				  var t = $(document).height()-$("#fullscreen").height();
-				  $("#fullscreen").css({top:t,width:"100%"});
-				  $("#fullscreen").show();
-				  }else{
-				  $("#fullscreen").hide();
-				  }
-				  }); 
-				 */
-				/*$(window).resize(function(){
-				  if($(document).height()+24>=screen.height && $(window).width()==screen.width){
-				//认为是全屏
-				$("#playerBox").removeClass("playerBox");
-				$("#playerBox").addClass("playerBoxFullscreen");
-				YoukuWs.fullScreen=true;
-				}else{
-				$("#playerBox").removeClass("playerBoxFullscreen");
-				$("#playerBox").addClass("playerBox");
-				YoukuWs.fullScreen=false;
-				}
-				//$('#status').html("resize"+", "+$(window).height()+", "+$(document).height()+", "+screen.height);
-				//$('#status').html("resize"+", "+$(window).width()+", "+$(document).width()+", "+screen.width);
-				});
-				 */
 				//换台按钮
 				$("#_RadioChannel button").live("click",function(){
 						$("#_RadioChannel").dialog("close");
@@ -625,7 +589,7 @@ var YoukuWs = function(){
 												'<span class="right">'+timeFormat(result.items[i].VideoDuration)+' <a class="delMv" title="删除"><img src="/assets/images/style2/DeleteDisabled.png" style="vertical-align:middle" /></a><img title="点击添加到播放列表" class="add" src="/assets/images/style2/plus.png" style="vertical-align:top"></span>'+
 												'<div class="clear"></div>'+
 												'</li>';
-																		o.append(html);
+										o.append(html);
 																}
 														}
 												}
@@ -778,6 +742,8 @@ var YoukuWs = function(){
 								//$("button").bt().show();
 								//$("button").button().show();
 
+
+
 								$("#_BtClearList").bt().click(function(){
 										$("#_ContentClearList").dialog({
 												modal: true, width:320,height:200, buttons: [
@@ -797,58 +763,6 @@ var YoukuWs = function(){
 												}
 										]
 										});
-								});
-								//{{{
-								//$(window).bind('hashchange', function() {
-								//		var _tmp={};
-								//		window.location.hash.replace(
-								//				new RegExp( "([^#=&]+)(=([^&]*))?", "g" ),
-								//				function( $0, $1, $2, $3 ){
-								//						_tmp[ $1 ] = $3;
-								//				}
-								//				);
-								//		if(!_tmp.vid)return;
-								//		//判断不是不在播放列表内
-								//		var o = $("#_ContentMusic [vid='"+_tmp.vid+"']");
-								//		if(!o || !o.attr("vid"))return;
-								//		var vid = o.attr("vid");
-								//		if(CurrentVideoID!=vid){
-								//				PlayType=1;
-								//				YoukuWs.set("PlayType",PlayType);
-								//				YoukuWs.play(vid);
-								//		}
-								//});
-								var objURL={};
-								window.location.search.replace(
-												new RegExp( "([^?=&]+)(=([^&]*))?", "g" ),
-												function( $0, $1, $2, $3 ){
-														objURL[ $1 ] = $3;
-												}
-												);
-								//window.location.hash.replace(
-								//				new RegExp( "([^#=&]+)(=([^&]*))?", "g" ),
-								//				function( $0, $1, $2, $3 ){
-								//						objURL[ $1 ] = $3;
-								//				}
-								//				);
-								if(objURL.lid){
-										PlayType=1;
-										YoukuWs.set("PlayType",PlayType);
-										YoukuWs.listContents(objURL.lid);
-								}else if(objURL.vid){
-										PlayType=1;
-										YoukuWs.set("PlayType",PlayType);
-										YoukuWs.getVideoByVid(objURL.vid);
-								};
-								PlayType = YoukuWs.get("PlayType",0);
-								$("#_IDRight >.list").each(function(i,item){
-										if(i==PlayType){
-												$("#IDNav >li").eq(i).addClass("current").show();
-												$(item).show();
-										}else{
-												$("#IDNav >li").eq(i).removeClass("current").show();
-												$(item).hide();
-										}
 								});
 								$("#IDNav >li").click(function(){
 										var _this = this;
@@ -882,7 +796,6 @@ var YoukuWs = function(){
 												}
 										});
 								});
-								//}}}
 								$("#_BtAddList").button();
 								$("#_BtAddMv").bt().click(function(){
 										$( "#_DialogAdd" ).dialog({
@@ -992,11 +905,6 @@ var YoukuWs = function(){
 										}
 								}).show();
 
-								YoukuWs.autoLogin();
-								$.each(YoukuWsPlaylist.list(),function(i,n){
-										var o = '<li vid="'+n.v+'"><a>'+n.t+'</a></li>';
-										$("#_ContentMusic").append(o);
-								});
 								$(window).bind("beforeunload",function(){
 										var r= PlayerInfo();
 										if(r){
@@ -1006,7 +914,68 @@ var YoukuWs = function(){
 												}
 										}
 								});
-								//setInterval(YoukuWs.adReload,1000*60*10);// 10分钟一次
+								$(window).bind('hashchange', function() {
+										if(window.location.hash==""){
+												PlayType=0;
+												YoukuWs.set("PlayType",PlayType);
+												$("#IDNav >li").eq(0).trigger("click");
+												YoukuWs.playRadio();
+												return;
+										}
+										var _tmp={};
+										window.location.hash.replace(
+												new RegExp( "([^#=&]+)(=([^&]*))?", "g" ),
+												function( $0, $1, $2, $3 ){
+														_tmp[ $1 ] = $3;
+												}
+												);
+										if(!_tmp.vid)return;
+										//判断不是不在播放列表内
+										if(CurrentVideoID!=_tmp.vid){
+												PlayType=1;
+												YoukuWs.set("PlayType",PlayType);
+												YoukuWs.play(_tmp.vid);
+												$("#IDNav >li").eq(1).trigger("click");
+										}
+								});
+								var objURL={};
+								window.location.search.replace(
+												new RegExp( "([^?=&]+)(=([^&]*))?", "g" ),
+												function( $0, $1, $2, $3 ){
+														objURL[ $1 ] = $3;
+												}
+												);
+								window.location.hash.replace(
+												new RegExp( "([^#=&]+)(=([^&]*))?", "g" ),
+												function( $0, $1, $2, $3 ){
+														objURL[ $1 ] = $3;
+												}
+												);
+								if(objURL.lid){
+										PlayType=1;
+										YoukuWs.set("PlayType",PlayType);
+										YoukuWs.listContents(objURL.lid);
+								}else if(objURL.vid){
+										PlayType=1;
+										YoukuWs.set("PlayType",PlayType);
+										YoukuWs.getVideoByVid(objURL.vid);
+								};
+								//{{{显示播放模式的内容
+								PlayType = YoukuWs.get("PlayType",0);
+								$.each(YoukuWsPlaylist.list(),function(i,n){
+										var o = '<li vid="'+n.v+'"><a>'+n.t+'</a></li>';
+										$("#_ContentMusic").append(o);
+								});
+								$("#_IDRight >.list").each(function(i,item){
+										if(i==PlayType){
+												$("#IDNav >li").eq(i).addClass("current").show();
+												$(item).show();
+										}else{
+												$("#IDNav >li").eq(i).removeClass("current").show();
+												$(item).hide();
+										}
+								});
+								//}}}
 								CurrentVideoID= YoukuWs.get("CurrentVideoID");
 								if(PlayType==0){
 										YoukuWs.playRadio();
@@ -1016,6 +985,8 @@ var YoukuWs = function(){
 												YoukuWs.play(YoukuWs.get("CurrentVideoID"),time);
 										};
 								}
+								YoukuWs.autoLogin();
+
 		});
 		$("#keywords").ready(function(){
 				$("#keywords").change(function(){
@@ -1140,18 +1111,23 @@ var YoukuWs = function(){
 										success: function( result) {
 												if(result){
 														var singer="";
+														var tmp=[];
+														var t_tmp=[];
 														if(result.Singers){
 																singer="歌手:";
 
-																var tmp=[];
 																for(var i in result.Singers){
 																		tmp.push("<a class='singer' id='"+result.Singers[i].SingerID+"'>"+result.Singers[i].SingerName+"</a>");
+																		t_tmp.push(result.Singers[i].SingerName);
 																}
 																singer+=tmp.join(" / ");
 														}
 														if(result.AlbumID && result.AlbumName)
 										$("#musicInfo").html(singer+" 专辑:<a class='special' id='"+result.AlbumID+"'>"+result.AlbumName+"</a>");
 								$("#musicInfo").slideDown("fast");
+								//设置title
+								var title=""; if (t_tmp.length>0) title=t_tmp.join(" / ")+" - ";
+								YoukuWs.setTitle(title+result.VideoName);
 												}else{
 														$("#musicInfo").slideUp("fast");
 												}
@@ -1252,8 +1228,10 @@ var YoukuWs = function(){
 										$("#_ContentMusic >li").removeClass("current");
 										o.addClass('current');
 										YoukuWs.setTitle($("#_ContentMusic [vid='"+vid+"'] A").html());
+										window.location.hash="vid="+vid;
+								}else{
+										window.location.hash="";
 								}
-								//window.location.hash="vid="+vid;
 						},
 						checkTime:function(){
 										  if(!o_lyrics){
@@ -1305,16 +1283,16 @@ var YoukuWs = function(){
 
 								  },
 						getVideoName:function(Video){
-																		var mvname="";
-																		var names=[];
-																		if(Video.Singers){
-																				for(var j in Video.Singers){
-																						names.push(Video.Singers[j].SingerName);
-																				}
-																				mvname=names.join("/")+" - ";
-																		}
-																		return  mvname+=Video.VideoName;
-								  },
+											 var mvname="";
+											 var names=[];
+											 if(Video.Singers){
+													 for(var j in Video.Singers){
+															 names.push(Video.Singers[j].SingerName);
+													 }
+													 mvname=names.join("/")+" - ";
+											 }
+											 return  mvname+=Video.VideoName;
+									 },
 						_realPlayRadio:function(){
 											   var o= window.radioPlayList[0];
 
@@ -1531,7 +1509,7 @@ var YoukuWs = function(){
 														 var o = $("#_ContentListen >ul");
 														 o.html('');
 														 for(var i=0;i<result.items.length;i++){
-																var mvname=YoukuWs.getVideoName(result.items[i]);
+																 var mvname=YoukuWs.getVideoName(result.items[i]);
 																 var html='<li _type="listen"  title="点击拖动到右边播放列表" mvname="'+mvname+
 												 '" vid="'+result.items[i].VideoID+'">'+
 												 '<span class="left name" title="点击播放:'+mvname+'">'+mvname+'</span>'+
@@ -1562,14 +1540,14 @@ var YoukuWs = function(){
 																			o.html("");
 																			for(var i=0;i<result.items.length;i++){
 																					if(result.items[i]){
-																					var mvname=YoukuWs.getVideoName(result.items[i]);
-																					var html='<li _type="action"  actiontype="'+result.items[i].ActionType+'" title="点击拖动到右边播放列表" mvname="'+mvname+'" vid="'+result.items[i].VideoID+'">'+
+																							var mvname=YoukuWs.getVideoName(result.items[i]);
+																							var html='<li _type="action"  actiontype="'+result.items[i].ActionType+'" title="点击拖动到右边播放列表" mvname="'+mvname+'" vid="'+result.items[i].VideoID+'">'+
 																	'<span class="left name" title="点击播放:'+mvname+'">'+mvname+'</span>'+
 																	'<span class="right">'+timeFormat(result.items[i].VideoDuration)+' <a class="delMv" title="删除"><img src="/assets/images/style2/DeleteDisabled.png" style="vertical-align:middle" /></a><img title="点击添加到播放列表" class="add" src="/assets/images/style2/plus.png" style="vertical-align:top"></span>'+
 																	'<div class="clear"></div>'+
 																	'</li>';
 																					}
-															o.append(html);
+																					o.append(html);
 																			}
 																			var pager="<div>";
 																			if(parseInt(result.page)-2>0)pager+="<a onclick='YoukuWs.listAction(\""+action+"\","+(parseInt(result.page)-2)+")'>"+(parseInt(result.page)-2)+"</a>";
