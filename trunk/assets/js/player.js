@@ -108,7 +108,7 @@ var YoukuWs = function(){
 				*/
 			  $(document).keydown(function(e){
 				  var name 	= e.target.nodeName.toLowerCase();
-				  if( name !== "input" && name !== "textarea" && !e.altKey && !e.ctrlKey ) {
+				  if( name !== "input" && name !== "textarea" && name !=="button" && !e.altKey && !e.ctrlKey ) {
 					switch(e.which){
 						case 37://左
 						case 38://上
