@@ -1,26 +1,30 @@
 <?php
 chdir(dirname(__FILE__));
-system("cat ../../assets/js/jquery-1.5.1.js> /tmp/tmp.x.js");
-system("cat ../../assets/js/development-bundle/ui/jquery.ui.core.js>> /tmp/tmp.x.js");
-system("cat ../../assets/js/development-bundle/ui/jquery.ui.widget.js>> /tmp/tmp.x.js");
-system("cat ../../assets/js/development-bundle/ui/jquery.ui.mouse.js>> /tmp/tmp.x.js");
-system("cat ../../assets/js/development-bundle/ui/jquery.ui.position.js>> /tmp/tmp.x.js");
-system("cat ../../assets/js/development-bundle/ui/jquery.ui.button.js>> /tmp/tmp.x.js");
-system("cat ../../assets/js/development-bundle/ui/jquery.ui.autocomplete.js>> /tmp/tmp.x.js");
-system("cat ../../assets/js/development-bundle/ui/jquery.ui.resizable.js>> /tmp/tmp.x.js");
-system("cat ../../assets/js/development-bundle/ui/jquery.ui.sortable.js>> /tmp/tmp.x.js");
-system("cat ../../assets/js/development-bundle/ui/jquery.ui.dialog.js>> /tmp/tmp.x.js");
-system("cat ../../assets/js/development-bundle/ui/jquery.ui.draggable.js>> /tmp/tmp.x.js");
-system("cat ../../assets/js/development-bundle/ui/jquery.ui.droppable.js>> /tmp/tmp.x.js");
-system("cat ../../assets/js/jquery.cookie.js>> /tmp/tmp.x.js");
-system("cat ../../assets/js/jquery.corner.js>> /tmp/tmp.x.js");
-//system("cat ../../assets/js/jquery.ui.touch.js>> /tmp/tmp.x.js");
-system("cat ../../assets/js/json2.js>> /tmp/tmp.x.js");
-system("cat ../../assets/js/player.js>> /tmp/tmp.x.js");
-system("cat ../../assets/js/swfobject/swfobject.js>> /tmp/tmp.x.js");
-$src = '/tmp/tmp.x.js';
+$script="";
+$files=array(
+		"../../assets/js/jquery-1.5.1.js",
+		"../../assets/js/development-bundle/ui/jquery.ui.core.js",
+		"../../assets/js/development-bundle/ui/jquery.ui.widget.js",
+		"../../assets/js/development-bundle/ui/jquery.ui.mouse.js",
+		"../../assets/js/development-bundle/ui/jquery.ui.position.js",
+		"../../assets/js/development-bundle/ui/jquery.ui.button.js",
+		"../../assets/js/development-bundle/ui/jquery.ui.autocomplete.js",
+		"../../assets/js/development-bundle/ui/jquery.ui.resizable.js",
+		"../../assets/js/development-bundle/ui/jquery.ui.sortable.js",
+		"../../assets/js/development-bundle/ui/jquery.ui.dialog.js",
+		"../../assets/js/development-bundle/ui/jquery.ui.draggable.js",
+		"../../assets/js/development-bundle/ui/jquery.ui.droppable.js",
+		"../../assets/js/jquery.cookie.js",
+		"../../assets/js/jquery.corner.js",
+		"../../assets/js/json2.js",
+		"../../assets/js/player.js",
+		"../../assets/js/swfobject/swfobject.js",
+		);
+foreach($files as $src){
+	$script.= file_get_contents($src);
+
+}
 $out = '../../assets/js/youku.ws.js';
-$script = file_get_contents($src);
 
 $t1 = microtime(true);
 

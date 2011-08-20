@@ -89,7 +89,7 @@ var YoukuWs = function(){
 		//用户ID
 		var uid=1;
 		var LyricsInterval=0;
-
+		var flag=true;
 		var order=[];
 		$(document).ready(function(){
 				$("#_IDLyricsAdmin >a").bt();
@@ -98,6 +98,39 @@ var YoukuWs = function(){
 						$('#box').corner("tr tl 8px");
 						$("#_IDRight").corner("tr br 8px");
 				}
+				//}}}
+
+				//{{{键盘快捷键，
+				/*
+					上/左 Up：		上一首
+					下/右 Down：	下一首
+					空格 Space:		播放/暂停
+				*/
+			  $(document).keydown(function(e){
+				  var name 	= e.target.nodeName.toLowerCase();
+				  if( name !== "input" && name !== "textarea" ) {
+					switch(e.which){
+						case 37://左
+						case 38://上
+							//只有播放模式下才有下一首
+							if(PlayType==1)YoukuWs.playPre();
+							break;
+						case 39://右
+						case 40://下
+							if(PlayType!=0){
+									YoukuWs.playNext();
+							}else{
+									YoukuWs.playRadioNext();
+							}
+							break;
+						case 32://Space
+							PlayerPause(YoukuWs.flag);
+							YoukuWs.flag=!YoukuWs.flag;
+							break;
+					}
+				  }
+			//	$("#IDInfo").html(e.currentTarget +":"+e.target.nodeName+":"+e.which +":"+e.keyCode);
+				});
 				//}}}
 				//换台按钮
 				$("#_RadioChannel button").live("click",function(){
@@ -1643,7 +1676,7 @@ var YoukuWs = function(){
 																	return true;
 															}
 															return false;
-													}
+													},flag:flag
 		}
 }();
 var YoukuWsPlaylist = function(){
@@ -1786,7 +1819,7 @@ function onPlayerComplete(obj){
 }
 var movieObject=[];
 function _player(moviename) {
-		if(movieObject[moviename])return movieObject[moviename];
+	//	if(movieObject[moviename])return movieObject[moviename];
 		if (navigator.appName.indexOf("Microsoft") != -1){
 				movieObject[moviename] = window[moviename?moviename:playerId];
 		}else{
@@ -1805,7 +1838,10 @@ function PlayerReplay(vid){
 		_player().playVideoByID(vid);
 };
 function PlayerPause(flag){
+	try{
 		return _player().pauseVideo(flag);
+	}catch(e){
+	}
 };
 function PlayerInfo(){
 		try{

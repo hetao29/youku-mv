@@ -44,8 +44,9 @@
 						var _LabelCancel="{'取消'|tr}";
 				</script>
 		</head>
-		<body>
-				{*
+		<body>{*
+			<div id="IDInfo" style="position:absolute;top:0px;width:100%;text-align:center;margin:auto">wew</div>
+				
 				<a style="width:50px" id="test">fjiw</a>
 				<a class="bt" bt_set="true" style="width:60px">
 						<span class="bt_b"> 
