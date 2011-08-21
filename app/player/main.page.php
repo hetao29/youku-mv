@@ -102,6 +102,27 @@ class player_main extends SGui{
 				return $db->delAction($UserID,$VideoID,$ActionType);
 		}
 	}
+	function pageListAction($inPath){
+			if(($User=user_api::islogin())!==false){
+					$action =!empty($inPath[3])?$inPath[3]:0;
+					$page =!empty($inPath[4])?$inPath[4]:1;
+					switch($action){
+							case "up":	$actiontype=0;	break;
+							case "down":$actiontype=1;	break;
+							case "skip":$actiontype=2;	break;
+					}
+					$db = new user_db;
+					$video_api = new video_api;
+					$r = $db->listAction($User['UserID'],$actiontype,$page);
+					if(!empty($r->items)){
+							foreach($r->items as &$item){
+									$item = $video_api->getVideoInfo($item['VideoID']);
+							}
+					}
+					$r->actiontype=$actiontype;
+					return $r;
+			}
+	}
 	function pageRadioList($inPath){
 		$db = new user_db;
 		return $db->ListRadioList();
@@ -144,26 +165,6 @@ class player_main extends SGui{
 			if(!empty($vid)){
 				$api = new video_api;
 				return $api->getVideoInfo($vid);
-			}
-	}
-	function pageListAction($inPath){
-			if(($User=user_api::islogin())!==false){
-					$action =!empty($inPath[3])?$inPath[3]:0;
-					$page =!empty($inPath[4])?$inPath[4]:1;
-					switch($action){
-							case "up":	$actiontype=0;	break;
-							case "down":$actiontype=1;	break;
-							case "skip":$actiontype=2;	break;
-					}
-					$db = new user_db;
-					$video_api = new video_api;
-					$r = $db->listAction($User['UserID'],$actiontype,$page);
-					if(!empty($r->items)){
-							foreach($r->items as &$item){
-									$item = $video_api->getVideoInfo($item['VideoID']);
-							}
-					}
-					return $r;
 			}
 	}
 	/**
