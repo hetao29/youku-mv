@@ -1164,6 +1164,9 @@ var YoukuWs = function(){
 														}
 														if(result.AlbumID && result.AlbumName)
 										$("#musicInfo").html(singer+" 专辑:<a class='special' id='"+result.AlbumID+"'>"+result.AlbumName+"</a>");
+														else
+										$("#musicInfo").html(singer);
+
 								$("#musicInfo").slideDown("fast");
 								//设置title
 								var title=""; if (t_tmp.length>0) title=t_tmp.join(" / ")+" - ";
