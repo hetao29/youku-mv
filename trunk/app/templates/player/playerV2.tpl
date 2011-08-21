@@ -44,12 +44,9 @@
 						var _LabelCancel="{'取消'|tr}";
 				</script>
 		</head>
-		<body>{*
-			<div id="IDTips" style="position:absolute;top:0px;width:100%;text-align:center;margin:auto">
-				<span style="background: #FFF; color: #000; margin: 0px; padding: 5px; height: 25px; line-height: 25px; padding-left: 20px; padding-right: 25px; border-bottom-left-radius: 8px 8px; border-bottom-right-radius: 8px 8px;">
-				wfefwefef 中国人兴旺污染                  不
-				</span>
-			</div>
+		<body>
+			<div id="IDTips"><span></span></div>
+			{*<input type="button" onclick="YoukuWs.tips('xxx')" />
 				
 				<a style="width:50px" id="test">fjiw</a>
 				<a class="bt" bt_set="true" style="width:60px">
