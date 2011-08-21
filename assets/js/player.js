@@ -273,6 +273,12 @@ var YoukuWs = function(){
 								}).bt({icon:"ui-icon-seek-next",position:"left"});
 								$("#_IDChange").click(function(){
 										//换台模式
+										$("#_RadioChannel ul").html("");
+										 $("#_RadioChannel >ul" ).html('<li><img style="vertical-align: middle;" src="/assets/images/loading/loading9.gif" /> 正在加载中...</li>');
+
+										$("#_RadioChannel").dialog({
+												width:400,height:300
+										});
 										$.ajax({
 												url: "/player.main.radioList",
 												type:"post",
@@ -288,11 +294,9 @@ var YoukuWs = function(){
 																				dsb="";
 																		}
 																		$("#_RadioChannel ul").append("<li><button "+dsb+" id='"+result.items[i].ListID+"'>播放</button> "+result.items[i].ListName+"</li>");
+																		
+																		$("#_RadioChannel button").button({icons:{primary:"ui-icon-play"}});
 																}
-																$("#_RadioChannel").dialog({
-																		width:400,height:300
-																});
-																$("#_RadioChannel button").button({icons:{primary:"ui-icon-play"}});
 														}
 												}
 										});
