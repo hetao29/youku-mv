@@ -201,6 +201,22 @@ li{
 		font-weight:bold;
 		background-color:#C1C1C1;
 }
+#IDTips{
+		display:none;
+		position:absolute;top:0px;width:100%;text-align:center;margin:auto
+}
+#IDTips span{
+		background: #FFF; color: #000; margin: 0px; padding: 5px; height: 25px; 
+		line-height: 25px; padding-left: 20px; padding-right: 25px; 
+		border-bottom-left-radius: 8px 8px; 
+		border-bottom-right-radius: 8px 8px;
+
+		-moz-border-radius-bottomleft:8px 8px;
+		-moz-border-radius-bottomright:8px 8px;
+
+		-webkit-border-bottom-left-radius:8px 8px;
+		-webkit-border-bottom-right-radius:8px 8px;
+}
 /*
 .list .current a:hover {
 		background: #6A9BC0;

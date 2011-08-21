@@ -1448,15 +1448,21 @@ var YoukuWs = function(){
 											success: function( result) {
 													if(result&&result.type){
 															if(YoukuWs.isLogin()){
-																	if(result.result && result.record){
+																	if(result.result){
+																		if(result.record){
 																			switch(result.type){
 																					case "down":$("#_CtDown").html(parseInt($("#_CtDown").html())+1);
+																						YoukuWs.tips("添加成功!");
 																								break;
 																					case "up":$("#_CtUp").html(parseInt($("#_CtUp").html())+1);
+																						YoukuWs.tips("添加成功!");
 																							  break;
 																					case "skip":$("#_CtSkip").html(parseInt($("#_CtSkip").html())+1);
 																								break;
 																			}
+																		}else{
+																			YoukuWs.tips("已经添加过了!");
+																		}
 																	}
 															}
 													}
@@ -1683,7 +1689,18 @@ var YoukuWs = function(){
 																	return true;
 															}
 															return false;
-													},flag:flag
+													},flag:flag,
+													tips:function(v){
+														$("#IDTips span").html(v);
+															$("#IDTips").slideDown("fast",function(){
+																setTimeout(function() { 
+																	$("#IDTips").slideUp("fast");
+
+																}, 2000);//fro ie patch
+																
+															});
+														
+													}
 		}
 }();
 var YoukuWsPlaylist = function(){
