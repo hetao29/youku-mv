@@ -127,6 +127,9 @@ var YoukuWs = function(){
 							PlayerPause(YoukuWs.flag);
 							YoukuWs.flag=!YoukuWs.flag;
 							break;
+						case 13:
+							$("#_IDThx").trigger("click");
+							break;
 					}
 				  }
 			//	$("#IDInfo").html(e.currentTarget +":"+e.target.nodeName+":"+e.which +":"+e.keyCode);
