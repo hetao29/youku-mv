@@ -26,7 +26,7 @@ class sphinx_api{
 	var $sphinx;
 		function __construct(){
 			$this->sphinx = new SSphinx;
-			$this->sphinx->SetServer ( "localhost", 9312 );
+			$this->sphinx->SetServer ( "127.0.0.1", 9312 );
 			$this->sphinx->SetArrayResult ( true );
 		}
 		private function resToVideos($res){

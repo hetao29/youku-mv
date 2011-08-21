@@ -50,6 +50,9 @@ foreach( $config as $t){
 	print_r($t);
 	
 			$sphinx_api = new sphinx_api();
+
+
+
 			foreach($t['SetFilterRange'] as $k=>$v){
 				$sphinx_api->SetFilterRange($k,$v[0],$v[1]);
 			}
@@ -60,6 +63,7 @@ foreach( $config as $t){
 			foreach($items as $i=>$item){
 					$user_db->addListContent($t['ListID'],$item['VideoID'],$i++);
 			}
+			var_dump(count($items));
 	echo "SUCCESS\n";
 }
 	
