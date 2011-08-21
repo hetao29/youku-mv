@@ -456,7 +456,7 @@ var YoukuWs = function(){
 								$("#_IDLogin2").live("click",YoukuWs.login);
 								$("#_IDUsage").live("click",function(){
 										$("#_ContentUsage").dialog({
-												width:600,height:480, buttons: [
+												width:700,height:540, buttons: [
 										{
 												text:_LabelOk,
 												click: function() {
