@@ -9,12 +9,12 @@ rem 4.生成js(app/util/genjs.php)
 
 
 
-\www\php5.3\php.exe \www\wwwroot\app\util\official.php
+\www\php5.2\php.exe \www\wwwroot\app\util\official.php
 
-rem \www\php5.3\php.exe \www\wwwroot\app\util\rebuild.php
+rem \www\php5.2\php.exe \www\wwwroot\app\util\rebuild.php
 
-rem \www\php5.3\php.exe \www\wwwroot\app\util\importRadio.php
-rem \www\php5.3\php.exe \www\wwwroot\app\util\genjs.php
+rem \www\php5.2\php.exe \www\wwwroot\app\util\importRadio.php
+rem \www\php5.2\php.exe \www\wwwroot\app\util\genjs.php
 
 
 
