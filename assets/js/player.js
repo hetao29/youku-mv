@@ -113,22 +113,34 @@ var YoukuWs = function(){
 						case 37://左
 						case 38://上
 							//只有播放模式下才有下一首
-							if(PlayType==1)YoukuWs.playPre();
+							if(PlayType==1){
+								//	YoukuWs.playPre();
+								$("#_BtPre").trigger("click");
+							}
 							break;
 						case 39://右
 						case 40://下
-							if(PlayType!=0){
-									YoukuWs.playNext();
+							if(PlayType==0){
+								$("#_IDSkip").trigger("click");
+									//YoukuWs.playNext();
 							}else{
-									YoukuWs.playRadioNext();
+								$("#_BtNext").trigger("click");
+									//YoukuWs.playRadioNext();
 							}
 							break;
 						case 32://Space
 							PlayerPause(YoukuWs.flag);
 							YoukuWs.flag=!YoukuWs.flag;
 							break;
-						case 13:
+						case 13://Enter
 							$("#_IDThx").trigger("click");
+							break;
+						case 46://Del
+							if(PlayType==0){
+								$("#_IDDown").trigger("click");
+							}else{
+								$("#_BtTrash").trigger("click");
+							}
 							break;
 					}
 				  }
