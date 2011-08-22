@@ -106,27 +106,35 @@ var YoukuWs = function(){
 					下/右 Down：	下一首
 					空格 Space:		播放/暂停
 				*/
+				
 			  $(document).keydown(function(e){
 				  var name 	= e.target.nodeName.toLowerCase();
 				  if( name !== "input" && name !== "textarea" && name !=="button" && !e.altKey && !e.ctrlKey ) {
 					switch(e.which){
-						case 37://左
 						case 38://上
 							//只有播放模式下才有下一首
 							if(PlayType==1){
-								//	YoukuWs.playPre();
 								$("#_BtPre").trigger("click");
 							}
 							break;
-						case 39://右
 						case 40://下
 							if(PlayType==0){
 								$("#_IDSkip").trigger("click");
-									//YoukuWs.playNext();
 							}else{
 								$("#_BtNext").trigger("click");
-									//YoukuWs.playRadioNext();
 							}
+							break;
+						case 37://左
+							var li=$("#IDNav >li");
+							var i =li.index($("#IDNav .current"));
+							i = i>=1?i-1:li.size()-1;
+							$("#IDNav >li").eq(i).trigger("click");
+							break;
+						case 39://右
+							var li=$("#IDNav >li");
+							var i =li.index($("#IDNav .current"));
+							i = i>li.size()-i?0:i+1;
+							$("#IDNav >li").eq(i).trigger("click");
 							break;
 						case 32://Space
 							PlayerPause(YoukuWs.flag);
