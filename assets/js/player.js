@@ -1523,12 +1523,11 @@ var YoukuWs = function(){
 										 }
 								 },isLogin:function(){
 										 return YoukuWs.get("uid");
-								 },formlogin:function(callback){
+								 },formlogin:function(){
 										 $.post("/user.main.login",$("#_FormLogin").serialize(),function(data){
 												 if(data && data.result==1){
 														 $('.header').load("/player.main.header");
 														 $("#_ContentLogin").dialog( "close" );
-														 if(callback && typeof(callback)=="function")callback();
 														 //登录成功
 												 }else{
 														 //登录失败
@@ -1538,7 +1537,10 @@ var YoukuWs = function(){
 										 return false;
 								 },login:function(callback){
 										 $("#_IDLoginSubmit").button();
-										 $("#_ContentLogin").dialog({ width:320,height:220 });
+										 $("#_ContentLogin").dialog({ width:320,height:220,close:function(){
+													if(YoukuWs.isLogin() && callback && typeof(callback)=="function")callback();
+										 		}
+										 });
 								 },autoLogin:function(){
 										 if(this.get("token") && this.get("uid")){
 												 $.post("/user.main.autologin","token="+this.get("token")+"&uid="+this.get("uid"),function(data){
