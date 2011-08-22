@@ -29,11 +29,6 @@ class user_main{
 					$User = $db->getUserByID($UserID);
 					$logined = user_api::login($User,true);
 			}
-			if(!$logined){
-					//自动登录失败，就自动退出
-					user_api::logout();
-					return false;
-			}
 			return true;
 	}
 	///user.main.login
