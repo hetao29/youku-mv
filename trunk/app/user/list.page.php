@@ -105,7 +105,7 @@ class user_list{
 				}elseif(is_array($_REQUEST['vids'])){
 						$realMvids=$_REQUEST['vids'];
 				}
-				$api = new player_api;
+
 				$db = new user_db;
 				$lists=array();
 				foreach($realLids as $lid){
