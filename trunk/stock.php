@@ -50,16 +50,15 @@ function _getTotal(){
 			"+手续费("+parseInt(5.35*exchange_rate*100)/100+")";
 }
 //个人所得税
+//http://lvshi.sz.bendibao.com/z/geshui/
 var duties_config= new Array();
-duties_config[0]={"min":0,"max":500,"p":0.05,"t":0};
-duties_config[1]={"min":500.01,		"max":2000,		"p":"0.10","t":25};
-duties_config[2]={"min":2000.01,	"max":5000,		"p":"0.15","t":125};
-duties_config[3]={"min":5000.01,	"max":20000,	"p":"0.20","t":375};
-duties_config[4]={"min":20000.01,	"max":40000,	"p":"0.25","t":1375};
-duties_config[5]={"min":40000.01,	"max":60000,	"p":"0.30","t":3375};
-duties_config[6]={"min":60000.01,	"max":80000,	"p":"0.35","t":6375};
-duties_config[7]={"min":80000.01,	"max":100000,	"p":"0.40","t":10375};
-duties_config[8]={"min":100000.01,	"max":999999999,"p":"0.45","t":15375};
+duties_config[0]={"min":0,			"max":1500,		"p":"0.03","t":0};
+duties_config[1]={"min":1500.01,	"max":4500,		"p":"0.10","t":105};
+duties_config[2]={"min":4500.01,	"max":9000,		"p":"0.20","t":555};
+duties_config[3]={"min":9000.01,	"max":35000,	"p":"0.25","t":1005};
+duties_config[4]={"min":35000.01,	"max":55000,	"p":"0.30","t":2755};
+duties_config[5]={"min":55000.01,	"max":80000,	"p":"0.35","t":5505};
+duties_config[6]={"min":80000.01,	"max":999999999,"p":"0.45","t":13505};
 function _getDuties(total){
 		for(var i in duties_config){
 				var item = duties_config[i];
