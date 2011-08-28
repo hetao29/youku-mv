@@ -827,6 +827,7 @@ var YoukuWs = function(){
 								$("#IDNav >li").click(function(){
 										var _this = this;
 										if($("#IDNav >li").index(_this)==2){
+												pre_index=0;
 												YoukuWs.LyricsInterval = setInterval(YoukuWs.checkTime,200);
 										}else{
 												clearInterval(YoukuWs.LyricsInterval);
