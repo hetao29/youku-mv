@@ -1493,24 +1493,24 @@ var YoukuWs = function(){
 
 							 });
 					 }, get:function(k,defaultValue){
-							 if(!isSupportLocalStorage && isSupportBehavior){
+							 if(isSupportLocalStorage){
+									 return window.localStorage.getItem(k);
+							 }else if(isSupportBehavior){
 									 dataObj.load(configs.storeName);
 									 return dataObj.getAttribute(k);
 							 }else{
-									 return window.localStorage.getItem(k);
+									 if($.cookie(k))return $.cookie(k);
 							 }
-							 if($.cookie(k))return $.cookie(k);
 							 return defaultValue;
 					 }, set:function(k,v){
-							 if(!isSupportLocalStorage && isSupportBehavior){
+							 if(isSupportLocalStorage){
+									 window.localStorage.setItem(k, v);
+							 }else if(isSupportBehavior){
 									 dataObj.setAttribute(k, v);
 									 dataObj.save(configs.storeName);
-									 return true;
 							 }else{
-									 window.localStorage.setItem(k, v);
-									 return true;
+									 $.cookie(k,v,{expires:40});
 							 }
-							 $.cookie(k,v,{expires:40});
 							 return true;
 					 }, adReload:function(){
 							 if($.browser.mozilla){
