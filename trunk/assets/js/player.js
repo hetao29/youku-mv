@@ -1144,6 +1144,18 @@ var YoukuWs = function(){
 				}
 		};
 
+		var isSupportLocalStorage = !!window.localStorage, isSupportBehavior = false;
+		if(!isSupportLocalStorage){
+				var dataObj = document.createElement('input');
+				dataObj.type = 'hidden';
+				document.body.appendChild(dataObj);
+				isSupportBehavior = !! dataObj.addBehavior;
+				isSupportBehavior && dataObj.addBehavior('#default#userData');
+		}
+
+		var configs = {
+				storeName: 'editorContent'
+		};
 		return {
 				play:function(vid,time){
 							 //fix other used
@@ -1481,19 +1493,25 @@ var YoukuWs = function(){
 
 							 });
 					 }, get:function(k,defaultValue){
-							 //TODO userData for IE
-							 if('localStorage' in window && window['localStorage'] !== null){
-									 if(localStorage[k])return localStorage[k];
+							 if(!isSupportLocalStorage && isSupportBehavior){
+									 dataObj.load(configs.storeName);
+									 return dataObj.getAttribute(k);
+							 }else{
+									 return window.localStorage.getItem(k);
 							 }
 							 if($.cookie(k))return $.cookie(k);
 							 return defaultValue;
 					 }, set:function(k,v){
-							 //TODO userData for IE
-							 if('localStorage' in window && window['localStorage'] !== null){
-									 localStorage[k] = v;
-									 return;
+							 if(!isSupportLocalStorage && isSupportBehavior){
+									 dataObj.setAttribute(k, v);
+									 dataObj.save(configs.storeName);
+									 return true;
+							 }else{
+									 window.localStorage.setItem(k, v);
+									 return true;
 							 }
 							 $.cookie(k,v,{expires:40});
+							 return true;
 					 }, adReload:function(){
 							 if($.browser.mozilla){
 									 return;
