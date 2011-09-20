@@ -44,7 +44,7 @@ class video_db{
 	function listVideoRand($pageSize=20){
 		$this->_db->setPage(1);
 		$this->_db->setLimit($pageSize);
-		return $this->_db->select("s_video",array(),array("VideoID"),"ORDER BY RAND() ASC");
+		return $this->_db->select("s_video",array("VideoStatus"=>1),array("VideoID"),"ORDER BY RAND() ASC");
 	}
 
 	function listVideoBySingerID($SingerID){
