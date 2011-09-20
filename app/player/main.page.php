@@ -128,7 +128,7 @@ class player_main extends SGui{
 		return $db->ListRadioList();
 	}
 	function pageRadio($inPath){
-			$defaultChannelID=2;
+			$defaultChannelID=5;
 			$chanelId=empty($_REQUEST['cid'])?$defaultChannelID:$_REQUEST['cid'];
 
 			$video_api = new video_api;
