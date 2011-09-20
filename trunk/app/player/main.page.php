@@ -131,13 +131,17 @@ class player_main extends SGui{
 			$defaultChannelID=2;
 			$chanelId=empty($_REQUEST['cid'])?$defaultChannelID:$_REQUEST['cid'];
 
-			$user_db = new user_db;
 			$video_api = new video_api;
+			if($chanelId==5){
+				$video_db = new video_db;
+				$r = $video_db->listVideoRand(30);
+			}else{
+				$user_db = new user_db;
+				$r = $user_db->listContentRand($chanelId);
+				if(empty($r->items)){
+					$r = $user_db->listContentRand($defaultChannelID);
+				}
 
-			$r = $user_db->listContentRand($chanelId);
-
-			if(empty($r->items)){
-				$r = $user_db->listContentRand($defaultChannelID);
 			}
 			foreach($r->items as &$item){
 					$item = $video_api->getVideoInfo($item['VideoID']);

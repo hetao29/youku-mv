@@ -40,6 +40,13 @@ class video_db{
 		//从搜索出数据
 		return $this->_db->select(array("s_video"),array("AlbumID"=>$AlbumID));
 	}
+	
+	function listVideoRand($pageSize=20){
+		$this->_db->setPage(1);
+		$this->_db->setLimit($pageSize);
+		return $this->_db->select("s_video",array(),array("VideoID"),"ORDER BY RAND() ASC");
+	}
+
 	function listVideoBySingerID($SingerID){
 		return $this->_db->select(
 			array("s_video","s_singer"),
