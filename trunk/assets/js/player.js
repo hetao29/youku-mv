@@ -1023,6 +1023,7 @@ var YoukuWs = function(){
 								};
 								//{{{显示播放模式的内容
 								PlayType = YoukuWs.get("PlayType",0);
+								alert(PlayType);
 								$.each(YoukuWsPlaylist.list(),function(i,n){
 										var o = '<li vid="'+n.v+'"><a>'+n.t+'</a></li>';
 										$("#_ContentMusic").append(o);
@@ -1039,8 +1040,10 @@ var YoukuWs = function(){
 								//}}}
 								CurrentVideoID= YoukuWs.get("CurrentVideoID");
 								if(PlayType==0){
+										alert(1);
 										YoukuWs.playRadio();
 								}else{
+										alert(2);
 										if(YoukuWs.get("CurrentVideoID")){
 												var time = YoukuWs.get("time",0);
 												YoukuWs.play(YoukuWs.get("CurrentVideoID"),time);
@@ -1493,15 +1496,16 @@ var YoukuWs = function(){
 
 							 });
 					 }, get:function(k,defaultValue){
+							 var r=null;
 							 if(isSupportLocalStorage){
-									 return window.localStorage.getItem(k);
+									 r = window.localStorage.getItem(k);
 							 }else if(isSupportBehavior){
 									 dataObj.load(configs.storeName);
-									 return dataObj.getAttribute(k);
+									 r = dataObj.getAttribute(k);
 							 }else{
-									 if($.cookie(k))return $.cookie(k);
+									 if($.cookie(k))r = $.cookie(k);
 							 }
-							 return defaultValue;
+							 return r?r:defaultValue;
 					 }, set:function(k,v){
 							 if(isSupportLocalStorage){
 									 window.localStorage.setItem(k, v);
