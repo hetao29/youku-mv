@@ -1492,15 +1492,19 @@ var YoukuWs = function(){
 							 }
 
 							 });
-					 }, get:function(k,defaultValue){
+					 }, get:function(k,defaultValue,isCookie){
 							 var r=null;
-							 if(isSupportLocalStorage){
-									 r = window.localStorage.getItem(k);
-							 }else if(isSupportBehavior){
-									 dataObj.load(configs.storeName);
-									 r = dataObj.getAttribute(k);
+							 if(isCookie){
+								  if($.cookie(k))r = $.cookie(k);
 							 }else{
-									 if($.cookie(k))r = $.cookie(k);
+								 if(isSupportLocalStorage){
+										 r = window.localStorage.getItem(k);
+								 }else if(isSupportBehavior){
+										 dataObj.load(configs.storeName);
+										 r = dataObj.getAttribute(k);
+								 }else{
+										 if($.cookie(k))r = $.cookie(k);
+								 }
 							 }
 							 return r?r:defaultValue;
 					 }, set:function(k,v){
@@ -1534,7 +1538,7 @@ var YoukuWs = function(){
 									 });
 							 }
 					 },isLogin:function(){
-							 return YoukuWs.get("uid");
+							 return YoukuWs.get("uid",0,true);
 					 },formlogin:function(){
 							 $.post("/user.main.login",$("#_FormLogin").serialize(),function(data){
 									 if(data && data.result==1){
