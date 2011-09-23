@@ -1558,7 +1558,7 @@ var YoukuWs = function(){
 							 }
 							 });
 					 },autoLogin:function(){
-							 if(this.get("token") && this.get("uid")){
+							 if(this.get("token","",true) && this.get("uid","",true)){
 									 $.post("/user.main.autologin","token="+this.get("token")+"&uid="+this.get("uid"),function(data){
 											 if(data){
 													 $('#_IDHeader').load("/player.main.header");
