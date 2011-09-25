@@ -79,7 +79,7 @@ class user_db{
 		return false;
 	}
 	function listContent($ListID){
-			$this->_db->setLimit(-1);
+			$this->_db->setLimit(1000);
 			return $this->_db->select(
 					array("s_list_content"),
 					array("ListID"=>$ListID),
