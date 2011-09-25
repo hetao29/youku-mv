@@ -65,6 +65,39 @@ $config =	array(
 
 
 
+				array(
+					"ListID"=>"63",
+					"ListName"=>"70后 MHZ",
+					
+					"QUERY"=>'',
+					"SetFilterRange"=>array(
+									"videopubdate"=>array(19700101,19860101)
+								),
+					"LIMIT"=>10000
+				),
+				array(
+					"ListID"=>"64",
+					"ListName"=>"80后 MHZ",
+					
+					"QUERY"=>'',
+					"SetFilterRange"=>array(
+									"videopubdate"=>array(19800101,19960101)
+								),
+					"LIMIT"=>10000
+				),
+
+				array(
+					"ListID"=>"65",
+					"ListName"=>"90后 MHZ",
+					
+					"QUERY"=>'',
+					"SetFilterRange"=>array(
+									"videopubdate"=>array(19900101,20060101)
+								),
+					"LIMIT"=>10000
+				),
+
+
 
 
 
