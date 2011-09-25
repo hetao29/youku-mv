@@ -2,6 +2,72 @@
 /*自动音乐频道*/
 
 $config =	array(
+
+
+				array(
+					"ListID"=>"57",
+					"ListName"=>"华语 MHZ",
+					//"QUERY"=>'@videolanguage "国语" | "普通话"',
+					"QUERY"=>'@videolanguage "普通话"',
+					"SetFilterRange"=>array(
+									//"videopubdate"=>array(20100101,20110100)
+								),
+					"LIMIT"=>10000
+				),
+
+				array(
+					"ListID"=>"58",
+					"ListName"=>"粤语 MHZ",
+					"QUERY"=>'@videolanguage "粤语"',
+					"SetFilterRange"=>array(
+									//"videopubdate"=>array(20100101,20110100)
+								),
+					"LIMIT"=>10000
+				),
+
+
+
+				array(
+					"ListID"=>"59",
+					"ListName"=>"欧美 MHZ",
+					
+					//"QUERY"=>'@videoarea "欧美"',
+					
+					"QUERY"=>'@videolanguage "英语" | "其它"',
+					"SetFilterRange"=>array(
+									//"videopubdate"=>array(20110101,20120100)
+								),
+					"LIMIT"=>10000
+				),
+
+				array(
+					"ListID"=>"60",
+					"ListName"=>"日语 MHZ",
+					
+					"QUERY"=>'@videolanguage "日语"',
+					"SetFilterRange"=>array(
+									//"videopubdate"=>array(20110101,20120100)
+								),
+					"LIMIT"=>10000
+				),
+
+				array(
+					"ListID"=>"61",
+					"ListName"=>"韩语 MHZ",
+					
+					"QUERY"=>'@videolanguage "韩语"',
+					"SetFilterRange"=>array(
+									//"videopubdate"=>array(20110101,20120100)
+								),
+					"LIMIT"=>10000
+				),
+
+
+
+
+
+
+
 				array(
 					"ListID"=>"1",
 					"ListName"=>"去年流行金曲",
@@ -57,13 +123,13 @@ foreach( $config as $t){
 				$sphinx_api->SetFilterRange($k,$v[0],$v[1]);
 			}
 			$items=$sphinx_api->query($t['QUERY'],$t['LIMIT']);
+			var_dump(count($items));
 			//查出来后，清空原来的列表
 			$user_db->emptyList($t['ListID']);
 			$i=0;
 			foreach($items as $i=>$item){
 					$user_db->addListContent($t['ListID'],$item['VideoID'],$i++);
 			}
-			var_dump(count($items));
 	echo "SUCCESS\n";
 }
 	
