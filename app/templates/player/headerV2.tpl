@@ -7,7 +7,7 @@
 		<li>{"welcome"|tr}</li>
 		{else}
 		<li><a id="_IDLogout">{'退出'|tr}</a></li>
-		<li><a>{"欢迎"|tr} {$user.UserAlias}</a></li>
+		<li><a>{"欢迎"|tr} <b>{$user.UserAlias}</b></a></li>
 		<li id="_LiList"><a>{"歌单"|tr}({$_CtList})</a></li>
 		<li id="_LiListen"><a>{"听过"|tr}(<span id="_CtListen">{$_CtListen}</span>)</a></li>
 		<li id="_LiUp"><a>{"喜欢"|tr}(<span id="_CtUp">{$act[0]|default:0}</span>)</a></li>
