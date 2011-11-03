@@ -165,7 +165,7 @@ var YoukuWs = function(){
 						YoukuWs.set("PlayType",PlayType);
 						YoukuWs.playRadio();
 				});
-				$("#_IDBeian").attr("href","http://www.miibeian.gov.cn/").attr("target","_blank");
+				//$("#_IDBeian").attr("href","http://www.miibeian.gov.cn/").attr("target","_blank");
 				//歌手信息点击
 				$("#musicInfo .singer").live("click",function(){
 						$("#_ContentListen DIV").html("");
