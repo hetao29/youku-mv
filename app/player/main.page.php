@@ -6,6 +6,71 @@ class player_main extends SGui{
 	function __destruct(){
 		//echo $this->render("footer.tpl");
 	}
+	function pageSina($inPath){
+			//从POST过来的signed_request中提取oauth2信息
+			if(!empty($_REQUEST["signed_request"])){
+					require_once(WWW_ROOT."/lib/weibo/config.php");
+					require_once(WWW_ROOT."/lib/weibo/saetv2.ex.class.php");
+					$o = new SaeTOAuthV2( WB_AKEY , WB_SKEY  );
+					$data=$o->parseSignedRequest($_REQUEST["signed_request"]);
+					if($data=='-2'){
+							die('签名错误!');
+					}else{
+							$_SESSION['oauth2']=$data;
+					}
+					//判断用户是否授权
+					if (empty($_SESSION['oauth2']["user_id"])) {//若没有获取到access token，则发起授权请求
+echo '<html>
+<head>
+<style>
+body{
+	background:url("http://qimeng.appsina.com/images/1.jpg");
+}
+</style>
+
+<script src="http://tjs.sjs.sinajs.cn/t35/apps/opent/js/frames/client.js" language="JavaScript"></script>
+<script> 
+function authLoad(){
+ 	App.AuthDialog.show({
+	client_id : "'.WB_AKEY.'",    //必选，appkey
+	redirect_uri : "http://apps.weibo.com/youkufm",     //必选，授权后的回调地址，例如：http://apps.weibo.com/giftabc
+	height: 120    //可选，默认距顶端120px
+	});
+}
+</script>
+</head>
+<body>
+<script>authLoad();</script>
+</body>
+</html>
+';
+							exit;
+					} else {//若已获取到access token，则加载应用信息
+							$c = new SaeTClientV2( WB_AKEY , WB_SKEY ,$_SESSION['oauth2']['oauth_token'] ,'' );
+							$user_id = $_SESSION['oauth2']['user_id'];
+							$UserEmail = $user_id."@weibo.com";
+							$db = new user_db;
+							$user = $db->getUserByEmail($UserEmail,$paterid=2);
+							if(empty($user)){
+								$info = $c->show_user_by_id($user_id);
+								//增加用户
+								$User = array();
+								$User['UserAlias']=$info['name'];
+								$User['UserEmail']=$UserEmail;
+								$User['UserPassword']=$_SESSION['oauth2']['oauth_token'];
+								$User['ParterID']="2";
+								$UserID = $db->addUser($User);
+								$user=$db->getUserByID($UserID);
+							}else{
+								//更新用户
+								$user['UserPassword']=$_SESSION['oauth2']['oauth_token'];
+								$db->updateUser($user);
+							}
+							user_api::login($user,!empty($_REQUEST['forever']));
+					}
+			}
+			return $this->pageEntry($inPath);
+	}
 	function pageQQ($inPath){
 			return $this->pageEntry($inPath,1);
 	}
