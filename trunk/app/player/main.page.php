@@ -60,12 +60,12 @@ function authLoad(){
 									$user=$db->getUserByID($UserID);
 							}else{
 									//更新用户
-									if($user['UserPassword']!==$_SESSION['oauth2']['oauth_token']){
+									//if($user['UserPassword']!==$_SESSION['oauth2']['oauth_token']){
 											$info = $c->show_user_by_id($user_id);
 											$user['UserAlias']=$info['name'];
 											$user['UserPassword']=$_SESSION['oauth2']['oauth_token'];
 											$db->updateUser($user);
-									}
+									//}
 							}
 							user_api::logout();
 							user_api::login($user,!empty($_REQUEST['forever']));
