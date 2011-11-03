@@ -22,11 +22,7 @@ class player_main extends SGui{
 					if (empty($_SESSION['oauth2']["user_id"])) {//若没有获取到access token，则发起授权请求
 echo '<html>
 <head>
-<style>
-body{
-	background:url("http://qimeng.appsina.com/images/1.jpg");
-}
-</style>
+<link href="/player.css" media="all" rel="stylesheet" type="text/css" />
 
 <script src="http://tjs.sjs.sinajs.cn/t35/apps/opent/js/frames/client.js" language="JavaScript"></script>
 <script> 
@@ -51,21 +47,25 @@ function authLoad(){
 							$UserEmail = $user_id."@weibo.com";
 							$db = new user_db;
 							$user = $db->getUserByEmail($UserEmail,$paterid=2);
-							$info = $c->show_user_by_id($user_id);
 							if(empty($user)){
-								//增加用户
-								$User = array();
-								$User['UserAlias']=$info['name'];
-								$User['UserEmail']=$UserEmail;
-								$User['UserPassword']=$_SESSION['oauth2']['oauth_token'];
-								$User['ParterID']="2";
-								$UserID = $db->addUser($User);
-								$user=$db->getUserByID($UserID);
+									//增加用户
+									//新浪这个接口很慢
+									$info = $c->show_user_by_id($user_id);
+									$User = array();
+									$User['UserAlias']=$info['name'];
+									$User['UserEmail']=$UserEmail;
+									$User['UserPassword']=$_SESSION['oauth2']['oauth_token'];
+									$User['ParterID']="2";
+									$UserID = $db->addUser($User);
+									$user=$db->getUserByID($UserID);
 							}else{
-								//更新用户
-								$user['UserAlias']=$info['name'];
-								$user['UserPassword']=$_SESSION['oauth2']['oauth_token'];
-								$db->updateUser($user);
+									//更新用户
+									if($user['UserPassword']!==$_SESSION['oauth2']['oauth_token']){
+											$info = $c->show_user_by_id($user_id);
+											$user['UserAlias']=$info['name'];
+											$user['UserPassword']=$_SESSION['oauth2']['oauth_token'];
+											$db->updateUser($user);
+									}
 							}
 							user_api::login($user,!empty($_REQUEST['forever']));
 					}
