@@ -51,8 +51,8 @@ function authLoad(){
 							$UserEmail = $user_id."@weibo.com";
 							$db = new user_db;
 							$user = $db->getUserByEmail($UserEmail,$paterid=2);
+							$info = $c->show_user_by_id($user_id);
 							if(empty($user)){
-								$info = $c->show_user_by_id($user_id);
 								//增加用户
 								$User = array();
 								$User['UserAlias']=$info['name'];
@@ -63,6 +63,7 @@ function authLoad(){
 								$user=$db->getUserByID($UserID);
 							}else{
 								//更新用户
+								$user['UserAlias']=$info['name'];
 								$user['UserPassword']=$_SESSION['oauth2']['oauth_token'];
 								$db->updateUser($user);
 							}
