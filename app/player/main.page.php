@@ -67,6 +67,7 @@ function authLoad(){
 											$db->updateUser($user);
 									}
 							}
+							user_api::logout();
 							user_api::login($user,!empty($_REQUEST['forever']));
 					}
 			}
