@@ -9,8 +9,8 @@ class user_api{
 					$expired=time()+365*3600*24;//一年过期
 					$db->addUserToken(array("UserID"=>$User['UserID'],"UserToken"=>session_id()));
 				}
-				setcookie("token",session_id(),$expired);
-				setcookie("uid",$User['UserID'],$expired);
+				self::setCookie("token",session_id(),$expired);
+				self::setCookie("uid",$User['UserID'],$expired);
 				return true;
 			}
 			return false;
@@ -22,7 +22,10 @@ class user_api{
 			$db = new  user_db;
 			$db->delUserToken($_SESSION['user']['UserID'],session_id());
 			unset($_SESSION['user']);
-			setcookie("uid",0,time()-3600*24);
-			setcookie("token",0,time()-3600*24);
+			self::setCookie("uid",0,time()-3600*24);
+			self::setCookie("token",0,time()-3600*24);
+		}
+		static public function setCookie($k,$v,$t){
+			setcookie($k,$v,$t,"/",".youku.fm");
 		}
 }
