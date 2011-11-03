@@ -87,8 +87,8 @@ create table s_user(
 UserID int(10) unsigned NOT NULL AUTO_INCREMENT,
 UserAlias varchar(200),
 UserEmail varchar(200),
-ParterID int(10) unsigned NOT NULL default 0 COMMENT '站外合作伙伴',
-UserPassword varchar(200),
+ParterID int(10) unsigned NOT NULL default 0 COMMENT '0站外合作伙伴,1优酷,2新浪',
+UserPassword varchar(200) COMMENT "用户密码",
 UserStatus tinyint not null default 1 COMMENT '1正常',
 UserType tinyint(10) unsigned NOT NULL default 0 COMMENT '用户组,0普通用户,1管理员',
 
