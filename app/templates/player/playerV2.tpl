@@ -3,7 +3,7 @@
 		<head>
 				<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 				<link rel="Shortcut Icon" href="/assets/images/ico/favicon_32x32.ico" />
-				<title>{'标题'|tr}</title>
+				<title>{'优酷电台(Youku.FM)'|tr}</title>
 				{if defined($smarty.const.DEV)}
 				<script type="text/javascript" src="/assets/js/jquery-1.5.1.js"></script>
 				<script type="text/javascript" src="/assets/js/development-bundle/ui/jquery.ui.core.js"></script>
