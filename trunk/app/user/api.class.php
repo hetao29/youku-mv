@@ -26,6 +26,7 @@ class user_api{
 			self::setCookie("token",0,time()-3600*24);
 		}
 		static public function setCookie($k,$v,$t){
-			setcookie($k,$v,$t,"/",".youku.fm");
+			header( 'p3p:CP="IDC DSP COR ADM DEVi TAIi PSA PSD IVAi IVDi CONi HIS OUR IND CNT"');
+			setcookie($k,$v,$t);
 		}
 }
