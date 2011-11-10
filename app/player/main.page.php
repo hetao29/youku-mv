@@ -262,7 +262,7 @@ function authLoad(){
 					$vid = singer_music::decode($_REQUEST['vid']);
 					$api = new video_api;
 					$v=$api->getVideo($vid);
-					if(!empty($v) && ($r=$db->addListen(array("VideoID"=>$v['VideoID'],"UserID"=>$User['UserID'])))===1){
+					if(!empty($v) && ($r=$db->addListen(array("VideoID"=>$v['VideoID'],"UserID"=>$User['UserID'])))!==false){
 							return true;
 					}
 			}
