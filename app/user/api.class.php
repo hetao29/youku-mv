@@ -26,6 +26,6 @@ class user_api{
 			self::setCookie("token",0,time()-3600*24);
 		}
 		static public function setCookie($k,$v,$t){
-			setcookie($k,$v,$t,"/");
+			setcookie($k,$v,$t,"/",".youku.fm");
 		}
 }
