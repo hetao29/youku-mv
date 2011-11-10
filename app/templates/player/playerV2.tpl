@@ -42,8 +42,9 @@
 						})();
 				</script>
 				<script type="text/javascript">
-						var _LabelOk="{'确认'|tr}";
-						var _LabelCancel="{'取消'|tr}";
+				var out="{$out}";
+				var _LabelOk="{'确认'|tr}";
+				var _LabelCancel="{'取消'|tr}";
 				</script>
 		</head>
 		<body>
@@ -82,7 +83,7 @@
 					<div class="center" style="position:absolute;width: 756px;background-color:red;text-align:center;">fwef</div>
 				</div>
 				*}
-				{if !empty($facebook)}
+				{if $out=="facebook"}
 				<div id="fb-root"></div>
 				<script src="http://connect.facebook.net/en_US/all.js"></script>
 				<script type="text/javascript">
@@ -133,11 +134,9 @@
 				</div>
 *}
 
-				{if empty($facebook)}
 				<div class="header" id="_IDHeader">
-						{part path="/player.main.header"}
+						{part path="/player.main.header.`$out`"}
 				</div>
-				{/if}
 				<div class="content">
 
 						<div class="main">
@@ -153,6 +152,7 @@
 										</div>
 										*}
 										<div id="musicInfo"></div>
+{if empty($out)}
 										<div id="share_handle"> 
 											<img id="ImgDown" style="" width="16" src="/assets/images/ico/down.png" />
 											<img id="ImgUp" style="display:none" width="16" src="/assets/images/ico/up.png" />
@@ -166,6 +166,7 @@
 												<span><a target="_blank" href="#" _href="http://www.139.com/share/share.php?tl=953010001&source=shareto139_youku&url=http://v.youku.com/v_show/id_:vid:.html&title=title=:title: http://youku.fm?vid=:vid:" ><img title=分享到139说客" src="http://static.youku.com/v1.0.0659/v/img/ico_139.gif" /></a></span>
 												<span><a target="_blank" href="#" _href="http://share.renren.com/share/buttonshare.do?link=http://v.youku.com/v_show/id_:vid:.html&title=:title:"><img src="http://static.youku.com/v/img/ico_renren.gif" /></a></span>
 										</div>
+{/if}
 										<div id="copyright">  <a style="text-decoration:none" id="_IDBeian"><font color="#777">京ICP备11038100号</font></a> ©2010-2011 Youku.FM </div>
 								</div>
 								<div id="_IDRight" class="box2 right" style="width:255px">
@@ -290,6 +291,7 @@
 										</form>
 										<hr/>
 								</div>
+								<div id="_IDSaveTips" class="red" style="font-weight:bold;display:none">{"保存成功"|tr}</div>
 								<ul id="_ContentList">
 								</ul>
 						</div>

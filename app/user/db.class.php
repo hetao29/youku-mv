@@ -5,7 +5,7 @@ class user_db{
 	function __construct($zone="user"){
 		$this->_zone = $zone;
 		$this->_dbConfig = SDb::getConfig($this->_zone);
-		$this->_db = SDb::getDbEngine("pdo_mysql");
+		$this->_db = new SDb("pdo_mysql");
 		$this->_db->init($this->_dbConfig);
 	}
 	function getUser($UserName){
@@ -50,7 +50,7 @@ class user_db{
 		return $this->_db->delete("s_user_action",$condition);
 	}
 	function getAction($UserID){
-		return $this->_db->select("s_user_action",array("UserID"=>$UserID),array("ActionType","count(*) ct"),$groupBy="group by ActionType");
+		return $this->_db->select("s_user_action",array("UserID"=>$UserID),array("ActionType","count(*) ct"),$groupBy="ActionType");
 	}
 	function listAction($UserID,$ActionType,$page,$pageSize=50){
 		$this->_db->setLimit($pageSize);
@@ -59,7 +59,8 @@ class user_db{
 				array("s_user_action"),
 				array("s_user_action.UserID"=>$UserID,"s_user_action.ActionType"=>$ActionType),
 				array("s_user_action.VideoID","s_user_action.ActionType","ActionTime"),
-				"ORDER BY ActionTime DESC"
+				"",
+				array("ActionTime"=>"DESC")
 		);
 	}
 	//{{{
@@ -83,14 +84,14 @@ class user_db{
 			return $this->_db->select(
 					array("s_list_content"),
 					array("ListID"=>$ListID),
-					array("ListID","VideoID","MvOrder"),"ORDER BY MvOrder"
+					array("ListID","VideoID","MvOrder"),"","MvOrder"
 			);
 	}
 	
 	function listContentRand($ListID=1,$pageSize=20){
 		$this->_db->setPage(1);
 		$this->_db->setLimit($pageSize);
-		return $this->_db->select("s_list_content",array("ListID"=>$ListID),array("VideoID"),"ORDER BY RAND() ASC");
+		return $this->_db->select("s_list_content",array("ListID"=>$ListID),array("VideoID"),"",array("RAND()"=>"ASC"));
 	}
 	function getListCount($UserID){
 		$row = $this->_db->selectOne("s_list",array("UserID"=>$UserID),array("count(*) ct"));
@@ -121,15 +122,15 @@ class user_db{
 		return $this->_db->selectOne("s_list",array("ListID"=>$ListID));
 	}
 	function ListList($UserID){
-		return $this->_db->select("s_list",array("UserID"=>$UserID),"*","ORDER BY ListOrder");
+		return $this->_db->select("s_list",array("UserID"=>$UserID),"*","","ListOrder");
 	}
 	function ListAllList($page=1,$limit=50){
 		$this->_db->setPage($page);
 		$this->_db->setLimit($limit);
-		return $this->_db->select("s_list",array(),"*","ORDER BY ListType DESC ,EditOrder ASC");
+		return $this->_db->select("s_list",array(),"*","",array("ListType"=>"DESC" ,"EditOrder"=>"ASC"));
 	}
 	function ListRadioList(){
-		return $this->_db->select("s_list",array("ListType"=>1),"*","ORDER BY EditOrder ASC");
+		return $this->_db->select("s_list",array("ListType"=>1),"*","",array("EditOrder"=>"ASC"));
 	}
 	//}}}
 	/*增加收听日志*/
@@ -147,7 +148,8 @@ class user_db{
 				array("s_user_listen"),
 				array("s_user_listen.UserID"=>$UserID),
 				array("s_user_listen.VideoID"),
-				"ORDER BY ListenTime DESC"
+				"",
+				"ListenTime DESC"
 		);
 	}
 	function getListenCount($UserID){

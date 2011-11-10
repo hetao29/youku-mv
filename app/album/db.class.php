@@ -9,7 +9,7 @@ class album_db{
 	function __construct($zone="album"){
 		$this->_zone = $zone;
 		$this->_dbConfig = SDb::getConfig($this->_zone);
-		$this->_db = SDb::getDbEngine("pdo_mysql");
+		$this->_db = new SDb("pdo_mysql");
 		$this->_db->init($this->_dbConfig);
 	}
 	function getAlbum($AlbumID){
@@ -35,7 +35,8 @@ class album_db{
 				array("s_album"),
 				array(),
 				array("AlbumID","AlbumName"),
-				"ORDER BY AlbumID"
+				"",
+				"AlbumID"
 		);
 	}
 }

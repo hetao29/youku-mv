@@ -11,7 +11,7 @@ class video_db{
 	function __construct($zone="video"){
 		$this->_zone = $zone;
 		$this->_dbConfig = SDb::getConfig($this->_zone);
-		$this->_db = SDb::getDbEngine("pdo_mysql");
+		$this->_db = new SDb("pdo_mysql");
 		$this->_db->init($this->_dbConfig);
 	}
 	function getVideotmp(){
@@ -28,7 +28,7 @@ class video_db{
 	 */
 	function listVideo($startTime,$limit=-1){
 		$this->_db->setLimit($limit);
-		return $this->_db->select("s_video",array("VideoUpdateTime>='$startTime'"),"*","ORDER BY VideoUpdateTime ASC,VideoID ASC");
+		return $this->_db->select("s_video",array("VideoUpdateTime>='$startTime'"),"*","",array("VideoUpdateTime"=>"ASC","VideoID"=>"ASC"));
 	}
 	function getVideoExtension($vid){
 		return $this->_db->selectOne("s_video_extension",array("VideoID"=>$vid));
@@ -44,7 +44,7 @@ class video_db{
 	function listVideoRand($pageSize=20){
 		$this->_db->setPage(1);
 		$this->_db->setLimit($pageSize);
-		return $this->_db->select("s_video",array("VideoStatus"=>1),array("VideoID"),"ORDER BY RAND() ASC");
+		return $this->_db->select("s_video",array("VideoStatus"=>1),array("VideoID"),"",array("RAND()"=>"ASC"));
 	}
 
 	function listVideoBySingerID($SingerID){
@@ -54,7 +54,8 @@ class video_db{
 			array(
 					"s_singer.SingerName","s_video.VideoID", "s_video.VideoName", "s_video.VideoDuration","s_video.VideoPubdate"
 			),
-			"ORDER BY VideoPubdate desc"
+			"",
+			array("VideoPubdate"=>"desc")
 		);
 	}
 	//function getVideoCount(){
