@@ -149,7 +149,7 @@ function authLoad(){
 				if(($User=user_api::islogin())!==false){
 						$user_db = new user_db;
 						$record=$user_db->addAction(array("UserID"=>$User['UserID'],"VideoID"=>$inPath[4],"ActionType"=>$actiontype));
-						if($record==1){
+						if($record!==false){
 							$result->record=true;
 						}else{
 							$result->record=false;
