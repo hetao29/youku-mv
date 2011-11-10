@@ -71,45 +71,45 @@ function authLoad(){
 							user_api::login($user,!empty($_REQUEST['forever']));
 					}
 			}
-			return $this->pageEntry($inPath);
+			return $this->pageEntry($inPath,"sina");
 	}
 	function pageQQ($inPath){
-			return $this->pageEntry($inPath,1);
+			return $this->pageEntry($inPath,"qq");
 	}
 	function pageFaceBook($inPath){
-			return $this->pageEntry($inPath,1);
+			return $this->pageEntry($inPath,"facebook");
 	}
 	function pageRenren($inPath){
-			return $this->pageEntry($inPath,1);
+			return $this->pageEntry($inPath,"renren");
 	}
-	function pageEntry($inPath,$facebook=0){
+	function pageEntry($inPath,$out=""){
 		$param=array();
-		if(!empty($facebook)){
-			$param=array("facebook"=>1);
-		}
+		$param['out']=$out;
 		$param['jsversion']=filemtime(WWW_ROOT."/"."assets/js/youku.ws.js");
 		$param['cssversion']=filemtime(WWW_ROOT."/"."assets/css/styleV2.css");
 		return $this->render("player/playerV2.tpl",$param);
 	}
 	function pageHeader($inPath){
-			$param = array();
-			if(($User=user_api::islogin())!==false){
-					$db = new user_db;
-					$action = $db->getAction($User['UserID']);
-					$param['user'] = $User;
-					$param['_CtListen'] = $db->getListenCount($User['UserID']);
-					$param['_CtList'] = $db->getListCount($User['UserID']);
-					$act = array();
-					if(!empty($action->items)){
-							foreach($action->items as $item){
-									$k=$item['ActionType'];
-									$v=$item['ct'];
-									$act[$k]=$v;
-							}
-					}
-					$param['act'] = $act;
+		$param = array();
+		$out = !empty($inPath[3])?$inPath[3]:"";
+		$param['out']=$out;
+		if(($User=user_api::islogin())!==false){
+			$db = new user_db;
+			$action = $db->getAction($User['UserID']);
+			$param['user'] = $User;
+			$param['_CtListen'] = $db->getListenCount($User['UserID']);
+			$param['_CtList'] = $db->getListCount($User['UserID']);
+			$act = array();
+			if(!empty($action->items)){
+				foreach($action->items as $item){
+					$k=$item['ActionType'];
+					$v=$item['ct'];
+					$act[$k]=$v;
+				}
 			}
-		echo $this->render("player/headerV2.tpl",$param);
+			$param['act'] = $act;
+		}
+		return $this->render("player/headerV2.tpl",$param);
 	}
 	/**
 	 * 跳过视频,顶视频,踩视频
