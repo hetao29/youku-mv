@@ -141,10 +141,11 @@ function authLoad(){
 				$db = new video_db;
 				$extension = $db->getVideoExtension($inPath[4]);
 				if(empty($extension)){
-					$result->result= $db->addVideoExtension(array("$fileds=1","VideoID"=>$inPath[4]));
+					$r = $db->addVideoExtension(array("$fileds=1","VideoID"=>$inPath[4]));
 				}else{
-					$result->result= $db->updateVideoExtension($inPath[4],array("$fileds=$fileds+1"));
+					$r = $db->updateVideoExtension($inPath[4],array("$fileds=$fileds+1"));
 				}
+				$result->result = ($r!==false) ? true : false;
 				$result->type=$inPath[3];
 				if(($User=user_api::islogin())!==false){
 						$user_db = new user_db;
