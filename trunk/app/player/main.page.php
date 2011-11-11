@@ -257,7 +257,7 @@ function authLoad(){
 			}
 	}
 	function pageAddListen($inPath){
-			if(($User=user_api::islogin())!==false){
+			if(($User=user_api::islogin())!==false && !empty($_REQUEST['vid'])){
 					$db = new user_db;
 					$video_db = new video_db;
 					$vid = singer_music::decode($_REQUEST['vid']);
