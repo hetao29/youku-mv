@@ -195,7 +195,7 @@ function authLoad(){
 		return $db->ListRadioList();
 	}
 	function pageRadio($inPath){
-			$defaultChannelID=57;
+			$defaultChannelID=2;
 			$chanelId=empty($_REQUEST['cid'])?$defaultChannelID:$_REQUEST['cid'];
 
 			$video_api = new video_api;
