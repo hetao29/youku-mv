@@ -928,7 +928,7 @@ var YoukuWs = function(){
 										success: function( List) {
 												 $("#_IDListDialogAdding").hide();
 												 if(List){
-													 YoukuWs.listList();
+													 YoukuWs.listList(1);
 												 }
 												 $( _this2 ).dialog( "destroy");
 												 alert("保存成功");
@@ -1639,8 +1639,13 @@ var YoukuWs = function(){
 				     }
 
 			     });
-		     }, listList:function(){
+		     }, listList:function(flag){
 			     $("#_ContentList").html("");
+			     var t="";
+			     //if(flag!=1)
+			     {
+				     //t='type="hidden"';
+			     }
 			     $.ajax({
 				     url: "/user.list.list",
 				     success: function( result) {
@@ -1648,7 +1653,7 @@ var YoukuWs = function(){
 						     var o = $("#_ContentList");
 						     for(var i=0;i<result.items.length;i++){
 							     //var r='<li ord="'+result.items[i].ListOrder+'" lid="'+result.items[i].ListID+'"><div class="left"><input value="'+result.items[i].ListID+'" style="vertical-align:top" type="checkbox"/><span class="name">'+result.items[i].ListName+'</span> ('+result.items[i].ListCount+'首)</div><div class="right hide">';
-							     var r='<li ord="'+result.items[i].ListOrder+'" lid="'+result.items[i].ListID+'"><div class="left"><input type="hidden" value="'+result.items[i].ListID+'" style="vertical-align:top" type="checkbox"/><span class="name">'+result.items[i].ListName+'</span> ('+result.items[i].ListCount+'首)</div><div class="right hide">';
+							     var r='<li ord="'+result.items[i].ListOrder+'" lid="'+result.items[i].ListID+'"><div class="left"><input '+t+' value="'+result.items[i].ListID+'" style="vertical-align:top" type="checkbox"/><span class="name">'+result.items[i].ListName+'</span> ('+result.items[i].ListCount+'首)</div><div class="right hide">';
 							     if(result.items[i].ListCount>0)r+='<span class="edit">歌曲整理</span> ';
 							     r+='<span class="load">加载</span> <span class="empty">清空</span> <span class="del">删除</span> <span class="rename">改名</span></div><div class="clear"></div></li>';
 							     o.append(r);
