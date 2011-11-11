@@ -2,7 +2,7 @@
 chdir(dirname(__FILE__));
 $script="";
 $files=array(
-		"../../assets/js/jquery-1.5.1.js",
+		"../../slightphp/js/jquery-1.7.min.js",
 		"../../assets/js/development-bundle/ui/jquery.ui.core.js",
 		"../../assets/js/development-bundle/ui/jquery.ui.widget.js",
 		"../../assets/js/development-bundle/ui/jquery.ui.mouse.js",
