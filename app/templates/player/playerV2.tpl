@@ -7,7 +7,7 @@
 				<meta name="keywords" content="优酷电台, Youku.FM, 优酷也是可以聆听的" />
 				<meta name="description" content="优酷电台, Youku.FM, 提供优酷最流行MV, 最新金曲, 以电台模式和自定义模式播放, 加上动态歌词显示, 给你不一定的优酷视听体验" />
 				{if defined($smarty.const.DEV)}
-				<script type="text/javascript" src="/assets/js/jquery-1.5.1.js"></script>
+				<script type="text/javascript" src="/slightphp/js/jquery-1.7.min.js"></script>
 				<script type="text/javascript" src="/assets/js/development-bundle/ui/jquery.ui.core.js"></script>
 				<script type="text/javascript" src="/assets/js/development-bundle/ui/jquery.ui.widget.js"></script>
 				<script type="text/javascript" src="/assets/js/development-bundle/ui/jquery.ui.mouse.js"></script>
