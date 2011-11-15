@@ -1,5 +1,5 @@
 <?php
-class admin_main extends SGui{
+class admin_main extends STpl{
 	function __construct(){
 		if(($User=user_api::islogin())===false){
 				//登录
