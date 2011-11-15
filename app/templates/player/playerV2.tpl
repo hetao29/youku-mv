@@ -6,7 +6,7 @@
 				<title>{'优酷电台(Youku.FM)'|tr}</title>
 				<meta name="keywords" content="优酷电台, Youku.FM, 优酷也是可以聆听的" />
 				<meta name="description" content="优酷电台, Youku.FM, 提供优酷最流行MV, 最新金曲, 以电台模式和自定义模式播放, 加上动态歌词显示, 给你不一定的优酷视听体验" />
-				{if defined($smarty.const.DEV)}
+				{if defined(DEV)}
 				<script type="text/javascript" src="/slightphp/js/jquery-1.7.min.js"></script>
 				<script type="text/javascript" src="/assets/js/development-bundle/ui/jquery.ui.core.js"></script>
 				<script type="text/javascript" src="/assets/js/development-bundle/ui/jquery.ui.widget.js"></script>
@@ -27,8 +27,7 @@
 				<link href="/assets/css/jquery-ui-1.8.6.custom-smoothness.css" media="all" rel="stylesheet" type="text/css" />
 				<link href="/assets/css/styleV2.css" media="all" rel="stylesheet" type="text/css" />
 				{else}
-				<link href="{'/player.css'|version:$cssversion}" media="all" rel="stylesheet" type="text/css" />
-				<script type="text/javascript" src="{'/player.js'|version:$jsversion}"></script>
+				xxxxxxxxxxxxx
 				{/if}
 				<script type="text/javascript">
 						var _gaq = _gaq || [];
@@ -135,7 +134,7 @@
 *}
 
 				<div class="header" id="_IDHeader">
-						{part path="/player.main.header.`$out`"}
+						{part "/player.main.header" $out "xx" }
 				</div>
 				<div class="content">
 
@@ -258,7 +257,6 @@
 						{*						<div id="googlead" class="googlead" style="padding:5px;margin:auto;zoom:1;">
 								<script type="text/javascript">
 										google_ad_client = "ca-pub-8444474852440924";
-										/* YOUKU */
 										google_ad_slot = "2284360826";
 										google_ad_width = 728;
 										google_ad_height = 90;

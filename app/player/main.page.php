@@ -1,5 +1,5 @@
 <?php
-class player_main extends SGui{
+class player_main extends STpl{
 	function __construct(){
 		//echo $this->render("head.tpl");
 	}

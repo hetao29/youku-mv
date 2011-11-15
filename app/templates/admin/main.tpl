@@ -4,7 +4,7 @@
 				<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 				<link rel="Shortcut Icon" href="/assets/images/ico/favicon_32x32.ico" />
 				<title>{'标题'|tr}</title>
-{if defined($smarty.const.DEV)}
+{if defined(DEV)}
 <script type="text/javascript" src="/assets/js/jquery-1.5.1.js"></script>
 <script type="text/javascript" src="/assets/js/development-bundle/ui/jquery.ui.core.js"></script>
 <script type="text/javascript" src="/assets/js/development-bundle/ui/jquery.ui.widget.js"></script>
@@ -34,9 +34,9 @@
 				<table border=1 id="_IDLists">
 						<tr>
 								<td>节目ID</td><td>顺序号(越小越靠前)</td><td>曲目数</td><td>类型</td><td>用户ID</td><td>名字</td><td>&nbsp;</td></tr>
-						{foreach item=item from=$lists->items}
+						{foreach $lists->items as $item}
 						<tr>
-								<td>{$item.ListID}</td>
+								<td>{$item['ListID']}</td>
 								<td>{$item.EditOrder}</td>
 								<td>{$item.ListCount}</td>
 								<td>{if $item.ListType==0}用户列表{else}<span class="red">电台频道</span>{/if}</td>
@@ -46,7 +46,6 @@
 						</tr>
 						{/foreach}
 				</table>
-				{literal}
 				<div id="_EditBox" style="display:none">
 						<h3>修改</h3>
 						<form>
@@ -60,7 +59,6 @@
 						</form>
 
 				</div>
-				{/literal}
 				<script>
 						$(document).ready(function(){
 								$("#_IDLists ._Edit").live('click',function(){
