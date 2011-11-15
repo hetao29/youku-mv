@@ -37,12 +37,12 @@
 						{foreach $lists->items as $item}
 						<tr>
 								<td>{$item['ListID']}</td>
-								<td>{$item.EditOrder}</td>
-								<td>{$item.ListCount}</td>
-								<td>{if $item.ListType==0}用户列表{else}<span class="red">电台频道</span>{/if}</td>
-								<td>{$item.UserID}</td>
-								<td>{$item.ListName}</td>
-								<td><a id="{$item.ListID}" class="_Edit">编辑</a></td>
+								<td>{$item['EditOrder']}</td>
+								<td>{$item['ListCount']}</td>
+								<td>{if $item['ListType']==0}用户列表{else}<span class="red">电台频道</span>{/if}</td>
+								<td>{$item['UserID']}</td>
+								<td>{$item['ListName']}</td>
+								<td><a id="{$item['ListID']}" class="_Edit">编辑</a></td>
 						</tr>
 						{/foreach}
 				</table>
