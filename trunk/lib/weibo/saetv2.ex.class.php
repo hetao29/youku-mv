@@ -155,6 +155,7 @@ class SaeTOAuthV2 {
 	 */
 	function getAuthorizeURL( $url, $response_type = 'code', $state = NULL, $display = NULL ) {
 		$params = array();
+		$params['source'] = $this->client_id;
 		$params['client_id'] = $this->client_id;
 		$params['redirect_uri'] = $url;
 		$params['response_type'] = $response_type;
