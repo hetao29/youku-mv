@@ -11,7 +11,7 @@ class video_db{
 	function __construct($zone="video"){
 		$this->_zone = $zone;
 		$this->_dbConfig = SDb::getConfig($this->_zone);
-		$this->_db = new SDb("pdo_mysql");
+		$this->_db = new SDb();
 		$this->_db->init($this->_dbConfig);
 	}
 	function getVideotmp(){

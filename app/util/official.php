@@ -25,7 +25,7 @@ function listVideoFromOfficial($startTime){
 		return $r;
 }
 $log="official.log";
-
+define("DEBUG",true);
 
 while(true){
 	$logData = trim(file_get_contents($log));
@@ -101,10 +101,13 @@ while(true){
 				$Video['AlbumID'] = $Album['AlbumID'];
 			}
 			$Video['VideoStatus']	=1;
+			print_r($v);
+			print_r($Video);
 			if($video_api->addVideo($Video)){
 					$video_api->getVideoDuration($Video['VideoID']);//更新时间 
 					echo $Video['VideoID']." ".$v->showlastupdate." Success\n";
 			};
+			unset($Video);
 			file_put_contents($log,$v->showlastupdate."/".$v->firstepisode_videoid);
 	}
 }
