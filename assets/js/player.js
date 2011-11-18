@@ -260,7 +260,8 @@ var YoukuWs = function(){
 				$("#share_insite_handle a").click(function(){
 					var url= ($(this).attr("_href")).replace(/:vid:/g,CurrentVideoID);
 					$.get(url,function(data){
-						var data="<div style='width:300px;height:120px;overflow:hidden'><textarea id='share_content' style='width:100%;height:100%'>"+data+"</textarea><div>";
+						var _data = data;
+						var data="<div style='width:300px;height:120px;overflow:hidden'><textarea style='width:100%;height:100%'>"+data+"</textarea><div>";
 
 						$(data).dialog({
 							resizable: false,
@@ -269,11 +270,10 @@ var YoukuWs = function(){
 							buttons: {
 								"分享到微薄": function() {
 									_this2=this;
-									var ct = $("#share_content").val();
 									$.ajax({
 										url: "/player.api.sinaPost",
 										data: {
-											content:ct
+											content:_data
 										},type:"post",
 										success: function( List) {
 												 $( _this2 ).dialog( "destroy");
