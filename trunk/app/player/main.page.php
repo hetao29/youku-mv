@@ -7,6 +7,7 @@ class player_main extends STpl{
 		//echo $this->render("footer.tpl");
 	}
 	function pageSina($inPath){
+		$sina = new api_sina;
 			//从POST过来的signed_request中提取oauth2信息
 			if(!empty($_REQUEST["signed_request"])){
 					require_once(WWW_ROOT."/lib/weibo/config.php");
