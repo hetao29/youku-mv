@@ -10,9 +10,9 @@
 		<li><a>{"欢迎"|tr} <b style="font-size:13px">{$user['UserAlias']}</b></a></li>
 		<li id="_LiList"><a>{"歌单"|tr}({$_CtList})</a></li>
 		<li id="_LiListen"><a>{"听过"|tr}(<span id="_CtListen">{$_CtListen}</span>)</a></li>
-		<li id="_LiUp"><a>{"喜欢"|tr}(<span id="_CtUp">{$act[0]|default:0}</span>)</a></li>
-		<li id="_LiDown"><a>{"不喜欢"|tr}(<span id="_CtDown">{$act[1]|default:0}</span>)</a></li>
-{*<li id="_LiSkip"><a>{"跳过"|tr}(<span id="_CtSkip">{$act[2]|default:0}</span>)</a></li>*}
+		<li id="_LiUp"><a>{"喜欢"|tr}(<span id="_CtUp">{@$act[0]|default:0}</span>)</a></li>
+		<li id="_LiDown"><a>{"不喜欢"|tr}(<span id="_CtDown">{@$act[1]|default:0}</span>)</a></li>
+{*<li id="_LiSkip"><a>{"跳过"|tr}(<span id="_CtSkip">{@$act[2]|default:0}</span>)</a></li>*}
 		{/if}
 </ul>
 <div class="clear"></div>
