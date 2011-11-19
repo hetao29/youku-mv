@@ -10,7 +10,7 @@ class api_sina{
 			//$ms  = $c->home_timeline(); // done
 			//$uid_get = $c->get_uid();
 			//$uid = $uid_get['uid'];
-			$user_message = $c->show_user_by_id( $uid);//根据ID获取用户等基本信息
+			//$user_message = $c->show_user_by_id( $uid);//根据ID获取用户等基本信息
 			$r = $c->update($msg,NULL,NULL,array(array('x'=>'xx')));
 			//exit;
 		}
