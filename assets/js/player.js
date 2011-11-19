@@ -90,6 +90,7 @@ var YoukuWs = function(){
 	var uid=1;
 	var LyricsInterval=0;
 	var flag=true;
+	var title="";
 	var order=[];
 	$(document).ready(function(){
 		$("#_IDLyricsAdmin >a").bt();
@@ -234,7 +235,7 @@ var YoukuWs = function(){
 						});
 					});
 				$("#share a").click(function(){
-					var href = ($(this).attr("_href")).replace(/:vid:/g,CurrentVideoID).replace(/:title:/g,document.title);
+					var href = ($(this).attr("_href")).replace(/:vid:/g,CurrentVideoID).replace(/:title:/g,"我正在优酷FM收听 "+YoukuWs.title+" 你们也来听听吧: ");
 					$(this).attr("href",href);
 				});
 				$("#share_handle").click(function(){
@@ -1496,6 +1497,7 @@ var YoukuWs = function(){
 		     }, setTitle:function(t){
 			     if(!t)return;
 			     var t = t.replace(/<[^>]+>/g,"");
+			     this.title = t;
 			     if(t)$("#title").html("正在播放:"+t);
 			     if(t)document.title="YouKu.FM - "+t;
 		     }, VideoAction:function(type,vid){
