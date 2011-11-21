@@ -50,7 +50,7 @@ function search(page){
 	var o =$("#_ContentSearch");
 	o.html('<li><img style="vertical-align: middle;" src="/assets/images/loading/loading9.gif" /> 正在查找中...</li>');
 	o.dialog({
-		width:410,height:250
+		width:410,height:250,title:"搜索结果"
 	});
 	$.ajax({
 		url: "/player.main.search",
@@ -172,7 +172,7 @@ var YoukuWs = function(){
 			$("#_ContentListen DIV").html("");
 			$("#_ContentListen >ul" ).html('<li><img style="vertical-align: middle;" src="/assets/images/loading/loading9.gif" /> 正在加载中...</li>');
 			$("#_ContentListen").dialog({
-				width:400,height:300, buttons: [
+				title:"歌手全部MV",width:400,height:300, buttons: [
 			{
 				text:_LabelOk,
 				click: function() {
@@ -205,7 +205,7 @@ var YoukuWs = function(){
 				$("#_ContentListen DIV").html("");
 				$("#_ContentListen >ul" ).html('<li><img style="vertical-align: middle;" src="/assets/images/loading/loading9.gif" /> 正在加载中...</li>');
 				$("#_ContentListen").dialog({
-					width:400,height:300, buttons: [
+					width:400,height:300,title:"专辑里MV", buttons: [
 				{
 					text:_LabelOk,
 					click: function() {
@@ -267,7 +267,7 @@ var YoukuWs = function(){
 						$(data).dialog({
 							resizable: false,
 							height:220,width:320,
-							modal: true,
+							modal: true,title:"分享到微薄",
 							buttons: {
 								"分享到微薄": function() {
 									_this2=this;
@@ -334,7 +334,7 @@ var YoukuWs = function(){
 					$("#_RadioChannel >ul" ).html('<li><img style="vertical-align: middle;" src="/assets/images/loading/loading9.gif" /> 正在加载中...</li>');
 
 					$("#_RadioChannel").dialog({
-						width:400,height:300
+						width:400,height:300,title:"频道列表"
 					});
 					$.ajax({
 						url: "/player.main.radioList",
@@ -375,7 +375,7 @@ var YoukuWs = function(){
 				}).bt();
 				$("#_LiUp").live('click',function(){
 					$("#_ContentListen").dialog({
-						width:400,height:300, buttons: [
+						width:400,height:300,title:"喜欢的MV", buttons: [
 					{
 						text:_LabelOk,
 						click: function() {
@@ -401,7 +401,7 @@ var YoukuWs = function(){
 				});
 				$("#_LiDown").live('click',function(){
 					$("#_ContentListen").dialog({
-						width:400,height:300, buttons: [
+						width:400,height:300,title:"不喜欢的MV", buttons: [
 					{
 						text:_LabelOk,
 						click: function() {
@@ -414,14 +414,14 @@ var YoukuWs = function(){
 				});
 				$("#_LiList").live('click',function(){
 					$("#_IDList").dialog({
-						width:410,height:280,buttons: [],open:function(event,ui){
+						width:410,height:280,title:"歌单列表",buttons: [],open:function(event,ui){
 							      YoukuWs.listList();
 						      }
 					});
 				});
 				$("#_LiListen").live('click',function(){
 					$("#_ContentListen").dialog({
-						width:400,height:300, buttons: [
+						width:400,height:300,title:"听过的MV", buttons: [
 					{
 						text:_LabelOk,
 						click: function() {
@@ -488,7 +488,7 @@ var YoukuWs = function(){
 					});
 					$("#_ContentLyricsView >div").html(html);
 					$("#_ContentLyricsView").dialog({
-						width:400,height:300, buttons: [
+						width:400,height:300,title:"歌词信息", buttons: [
 					{
 						text:_LabelOk,
 						click: function() {
@@ -517,7 +517,7 @@ var YoukuWs = function(){
 				$("#_IDLogin2").live("click",YoukuWs.login);
 				$("#_IDUsage").live("click",function(){
 					$("#_ContentUsage").dialog({
-						width:700,height:540, buttons: [
+						width:700,height:540,title:"使用帮助", buttons: [
 					{
 						text:_LabelOk,
 						click: function() {
@@ -529,7 +529,7 @@ var YoukuWs = function(){
 				});
 				$("#_IDAbout").live("click",function(){
 					$("#_ContentAbout").dialog({
-						width:300,height:180, buttons: [
+						width:300,height:180,title:"关于", buttons: [
 					{
 						text:_LabelOk,click: function() {
 							     $( this ).dialog( "close" );
@@ -540,7 +540,7 @@ var YoukuWs = function(){
 				});
 				$("#_IDSignup").live("click",function(){
 					$("#_IDSingupSubmit").button();
-					$("#_ContentSignup").dialog({ width:320,height:240 });
+					$("#_ContentSignup").dialog({ title:"注册",width:320,height:240 });
 				});
 				//可以被放入和被排序
 				$( "#_ContentSearch" ).sortable();
@@ -660,7 +660,7 @@ var YoukuWs = function(){
 					$("#_ContentListen DIV").html("");
 					$("#_ContentListen >ul" ).html('<li><img style="vertical-align: middle;" src="/assets/images/loading/loading9.gif" /> 正在加载中...</li>');
 					$("#_ContentListen").dialog({
-						width:400,height:300, buttons: [
+						width:400,height:300,title:"MV列表", buttons: [
 					{
 						text:_LabelOk,
 						click: function() {
