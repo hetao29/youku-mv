@@ -12,8 +12,7 @@ class api_sina{
 			//$uid = $uid_get['uid'];
 			//$user_message = $c->show_user_by_id( $uid);//根据ID获取用户等基本信息
 			$r = $c->update($msg,NULL,NULL,array(array('x'=>'xx')));
-			$r = SJson::decode($r);
-			if(!empty($r->id)){
+			if(!empty($r['id'])){
 				return true;
 			}
 			//exit;
