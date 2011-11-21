@@ -12,7 +12,7 @@ class player_api{
 		foreach($item['Singers'] as $singer){
 			$SingerNameS[]=$singer['SingerName'];
 		}
-		return "我正在优酷FM收听 ".(implode(",",$SingerNameS))." - {$item['VideoName']} \n你们也来听听吧: http://youku.fm#vid={$item['VideoID']} \n( 优酷入口:\nhttp://v.youku.com/v_show/id_".(singer_music::encode($item['VideoID'])).".html )";
+		return "我正在优酷FM( http://apps.weibo.com/youkufm )\n收听 ".(implode(",",$SingerNameS))." - {$item['VideoName']} \n你们也来听听吧: http://youku.fm#vid={$item['VideoID']} \n\nhttp://v.youku.com/v_show/id_".(singer_music::encode($item['VideoID'])).".html";
 	}
 	function pageSinaPost($inPath){
 		if(!empty($_POST['content']) && ($user=user_api::islogin())!==false){
