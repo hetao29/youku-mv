@@ -279,7 +279,7 @@ var YoukuWs = function(){
 										YoukuWs.tips("分享视频失败，请稍后重试!");
 									}
 									},"json");
-									YoukuWs.tips("正在发布微薄...");
+									YoukuWs.tips("正在发布微薄...",true);
 									$( this ).dialog( "destroy");
 								},
 								Cancel: function() {
@@ -1764,9 +1764,10 @@ var YoukuWs = function(){
 				     return true;
 			     }
 			     return false;
-		     }, tips:function(v){
+		     }, tips:function(v,hold){
 			     $("#IDTips span").html(v);
 			     $("#IDTips").slideDown("fast",function(){
+					 if(hold)return;
 				     setTimeout(function() { 
 					     $("#IDTips").slideUp("fast");
 
