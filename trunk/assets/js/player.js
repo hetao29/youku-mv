@@ -262,25 +262,25 @@ var YoukuWs = function(){
 					var url= ($(this).attr("_href")).replace(/:vid:/g,CurrentVideoID);
 					$.get(url,function(data){
 						var _data = data;
-						var data="<div style='width:300px;height:120px;overflow:hidden'><textarea style='width:100%;height:100%'>"+data+"</textarea><div>";
+						var data="<div style='width:500px;height:120px;overflow:hidden'><textarea style='width:100%;height:100%'>"+data+"</textarea><div>";
 
 						$(data).dialog({
 							resizable: false,
-							height:220,
+							height:220,width:320,
 							modal: true,
 							buttons: {
 								"分享到微薄": function() {
 									_this2=this;
-									$.ajax({
-										url: "/player.api.sinaPost",
-										data: {
-											content:_data
-										},type:"post",
-										success: function( List) {
-												 $( _this2 ).dialog( "destroy");
-											 }
+									$.post("/player.api.sinaPost",{content:_data},function(data){
 
-									});
+									if(data){
+										YoukuWs.tips("分享视频成功...");
+									}else{
+										YoukuWs.tips("分享视频失败，请稍后重试!");
+									}
+									},"json");
+									YoukuWs.tips("正在发布微薄...");
+									$( this ).dialog( "destroy");
 								},
 								Cancel: function() {
 										$( this ).dialog( "destroy");
