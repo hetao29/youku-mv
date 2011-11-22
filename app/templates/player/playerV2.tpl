@@ -158,7 +158,7 @@
 											<img id="ImgUp" style="display:none" width="16" src="/assets/images/ico/up.png" />
 										</div>
 										<div id="share" style="display:none;"> 
-												<span><a target="_blank" href="#" _href="http://v.t.sina.com.cn/share/share.php?url=http://v.youku.com/v_show/id_:vid:.html&title=:title: http://youku.fm?vid=:vid:&content=utf8"><img title="分享到新浪微薄" src="http://static.youku.com/v/img/ico_sina.gif" /></a></span>
+												<span><a target="_blank" href="#" _href="http://v.t.sina.com.cn/share/share.php?url=http://v.youku.com/v_show/id_:vid:.html&title=:title: http://youku.fm?vid=:vid:&content=utf8"><img title="分享到新浪微博" src="http://static.youku.com/v/img/ico_sina.gif" /></a></span>
 												<span><a target="_blank" href="#" _href="http://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=http://v.youku.com/v_show/id_:vid:.html&title=:title: http://youku.fm?vid=:vid:" ><img title=分享到QQ空间" src="http://static.youku.com/v/img/ico_Qzone.gif" /></a></span>
 												<span><a target="_blank" href="#" _href="http://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?to=pengyou&url=http://v.youku.com/v_show/id_:vid:.html&title=:title: http://youku.fm?vid=:vid:" ><img title=分享到腾讯朋友" src="http://static.youku.com/v1.0.0659/v/img/ico_pengyou.png" /></a></span>
 												<span><a target="_blank" href="#" _href="http://www.kaixin001.com/repaste/share.php?rurl=http://v.youku.com/v_show/id_:vid:.html&rcontent=http://v.youku.com/v_show/id_:vid:.html&rtitle=:title: http://youku.fm?vid=:vid:" ><img title=分享到开心网" src="http://static.youku.com/v1.0.0659/v/img/ico_kaixin.gif" /></a></span>
@@ -168,7 +168,7 @@
 										</div>
 {else}
 										<div id="share_insite_handle"> 
-												<span><a _href="/player.api.sina.:vid:"><b style="font-size:14px">分享到新浪微薄<img title="分享到新浪微薄" src="http://static.youku.com/v/img/ico_sina.gif" /></b></a></span>
+												<span><a _href="/player.api.sina.:vid:"><b style="font-size:14px">分享到新浪微博<img title="分享到新浪微博" src="http://static.youku.com/v/img/ico_sina.gif" /></b></a></span>
 										</div>
 {/if}
 

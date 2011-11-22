@@ -267,7 +267,7 @@ var YoukuWs = function(){
 						$(data).dialog({
 							resizable: false,
 							height:220,width:320,title:"分享到微博",
-							modal: true,title:"分享到微薄",
+							modal: true,title:"分享到微博",
 							buttons: [{
 								text:"分享到微博",click:function() {
 									_this2=this;
