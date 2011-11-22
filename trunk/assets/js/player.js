@@ -266,27 +266,32 @@ var YoukuWs = function(){
 
 						$(data).dialog({
 							resizable: false,
-							height:220,width:320,
+							height:220,width:320,title:"分享到微博",
 							modal: true,title:"分享到微薄",
-							buttons: {
-								"分享到微薄": function() {
+							buttons: [{
+								text:"分享到微博",click:function() {
 									_this2=this;
 									$.post("/player.api.sinaPost",{content:_data},function(data){
 
 									if(data){
-										YoukuWs.tips("分享视频成功...");
+										YoukuWs.tips("分享视频成功.");
 									}else{
 										YoukuWs.tips("分享视频失败，请稍后重试!");
 									}
 									},"json");
-									YoukuWs.tips("正在发布微薄...",true);
+									YoukuWs.tips("正在发布微博...");
 									$( this ).dialog( "destroy");
-								},
-								Cancel: function() {
-										$( this ).dialog( "destroy");
-									}
+								}},
+							{
+								text:_LabelCancel,
+							click: function() {
+								$( this ).dialog( "destroy" );
 							}
-						});
+								//Cancel: function() {
+								//		$( this ).dialog( "destroy");
+								//	}
+							}
+						]});
 					},"text");
 					return false;
 				});
