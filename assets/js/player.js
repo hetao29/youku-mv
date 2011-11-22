@@ -262,7 +262,7 @@ var YoukuWs = function(){
 					var url= ($(this).attr("_href")).replace(/:vid:/g,CurrentVideoID);
 					$.get(url,function(data){
 						var _data = data;
-						var data="<div style='width:500px;height:120px;overflow:hidden'><textarea style='width:100%;height:100%'>"+data+"</textarea><div>";
+						var data="<div style='width:320px;height:220px;overflow:hidden'><textarea style='width:100%;height:100%'>"+data+"</textarea><div>";
 
 						$(data).dialog({
 							resizable: false,
