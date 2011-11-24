@@ -27,7 +27,7 @@
 		return this;
 	}; 
 })(jQuery); 
-var _location = window.parent ? window.parent.location : window.location;
+var _location = parent ? parent.location : window.location;
 
 //{{{主方法
 $.ajaxSetup({
