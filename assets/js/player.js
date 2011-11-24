@@ -27,6 +27,7 @@
 		return this;
 	}; 
 })(jQuery); 
+var _location = window.parent ? window.parent.location : window.location;
 
 //{{{主方法
 $.ajaxSetup({
@@ -1015,7 +1016,7 @@ var YoukuWs = function(){
 					}
 				});
 				$(window).bind('hashchange', function() {
-					if(window.location.hash.replace("#","")==""){
+					if(_location.hash.replace("#","")==""){
 						PlayType=0;
 						YoukuWs.set("PlayType",PlayType);
 						$("#IDNav >li").eq(0).trigger("click");
@@ -1023,7 +1024,7 @@ var YoukuWs = function(){
 						return;
 					}
 					var _tmp={};
-					window.location.hash.replace(
+					_location.hash.replace(
 						new RegExp( "([^#=&]+)(=([^&]*))?", "g" ),
 						function( $0, $1, $2, $3 ){
 							_tmp[ $1 ] = $3;
@@ -1039,13 +1040,13 @@ var YoukuWs = function(){
 					}
 				});
 				var objURL={};
-				window.location.search.replace(
+				_location.search.replace(
 						new RegExp( "([^?=&]+)(=([^&]*))?", "g" ),
 						function( $0, $1, $2, $3 ){
 							objURL[ $1 ] = $3;
 						}
 						);
-				window.location.hash.replace(
+				_location.hash.replace(
 						new RegExp( "([^#=&]+)(=([^&]*))?", "g" ),
 						function( $0, $1, $2, $3 ){
 							objURL[ $1 ] = $3;
@@ -1340,9 +1341,9 @@ var YoukuWs = function(){
 				     $("#_ContentMusic >li").removeClass("current");
 				     o.addClass('current');
 				     YoukuWs.setTitle($("#_ContentMusic [vid='"+vid+"'] A").html());
-				     window.location.hash="vid="+vid;
+				     _location.hash="vid="+vid;
 			     }else{
-				     window.location.hash="";
+				     _location.hash="";
 			     }
 		     },checkTime:function(){
 			     if(!o_lyrics){
