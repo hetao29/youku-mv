@@ -27,8 +27,7 @@
 		return this;
 	}; 
 })(jQuery); 
-//var _location = parent ? parent.location : window.location;
-var _location =  window.location;
+var _location = window.location;
 
 //{{{主方法
 $.ajaxSetup({
@@ -1061,6 +1060,10 @@ var YoukuWs = function(){
 					PlayType=1;
 					YoukuWs.set("PlayType",PlayType);
 					YoukuWs.getVideoByVid(objURL.vid);
+				}else if(_initVid!=""){
+					PlayType=1;
+					YoukuWs.set("PlayType",PlayType);
+					YoukuWs.getVideoByVid(_initVid);
 				};
 				//{{{显示播放模式的内容
 				PlayType = YoukuWs.get("PlayType",0);
