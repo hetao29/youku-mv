@@ -45,6 +45,7 @@
 				var out="{$out}";
 				var _LabelOk="{'确认'|tr}";
 				var _LabelCancel="{'取消'|tr}";
+				var _initVid="{$vid}";
 				</script>
 		</head>
 		<body>

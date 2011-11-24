@@ -7,6 +7,8 @@ class player_main extends STpl{
 		//echo $this->render("footer.tpl");
 	}
 	function pageSina($inPath){
+		$url = parse_url(@$_SERVER['HTTP_REFERER']);
+		parse_str(@$url['query'],$params);
 		$sina = new api_sina;
 			//从POST过来的signed_request中提取oauth2信息
 			if(!empty($_REQUEST["signed_request"])){
@@ -72,7 +74,7 @@ function authLoad(){
 							user_api::login($user,!empty($_REQUEST['forever']));
 					}
 			}
-			return $this->pageEntry($inPath,"sina");
+			return $this->pageEntry($inPath,"sina",@$params['vid']);
 	}
 	function pageQQ($inPath){
 			return $this->pageEntry($inPath,"qq");
@@ -83,9 +85,10 @@ function authLoad(){
 	function pageRenren($inPath){
 			return $this->pageEntry($inPath,"renren");
 	}
-	function pageEntry($inPath,$out=""){
+	function pageEntry($inPath,$out="",$vid=""){
 		$param=array();
 		$param['out']=$out;
+		$param['vid']=$vid;
 		$param['jsversion']=filemtime(WWW_ROOT."/"."assets/js/youku.ws.js");
 		$param['cssversion']=filemtime(WWW_ROOT."/"."assets/css/styleV2.css");
 		return $this->render("player/playerV2.tpl",$param);
