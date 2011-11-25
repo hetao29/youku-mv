@@ -10,9 +10,9 @@ class player_api{
 		$item = $video_api->getVideoInfo($vid);
 		$SingerNameS=array();
 		foreach($item['Singers'] as $singer){
-			$SingerNameS[]=$singer['SingerName'];
+			//$SingerNameS[]=$singer['SingerName'];
+			$SingerNameS[]="@".$singer['SingerName'];
 		}
-		//return "我正在#优酷电台# http://apps.weibo.com/youkufm?vid={$item['VideoID']} \n收听 《 ".(implode(" , ",$SingerNameS))." - {$item['VideoName']} 》\n你们也来这里听听吧! \n\n( 分享来自 @优酷电台 ，视频源：http://v.youku.com/v_show/id_".(singer_music::encode($item['VideoID'])).".html )";
 		return "我正在#优酷电台#收听《 ".(implode(" , ",$SingerNameS))." - {$item['VideoName']} 》\n您们也来这里听听吧: http://apps.weibo.com/youkufm?vid={$item['VideoID']}  \n\n( 分享来自 @优酷电台 ，视频源：http://v.youku.com/v_show/id_".(singer_music::encode($item['VideoID'])).".html )";
 	}
 	function pageSinaPost($inPath){
