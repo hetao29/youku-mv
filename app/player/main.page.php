@@ -9,9 +9,10 @@ class player_main extends STpl{
 	function pageSina($inPath){
 		$url = parse_url(@$_SERVER['HTTP_REFERER']);
 		parse_str(@$url['query'],$params);
+		$vid = @$params['vid'];
 		$sina = new api_sina;
 			//从POST过来的signed_request中提取oauth2信息
-			if(!empty($_REQUEST["signed_request"])){
+		if(!empty($_REQUEST["signed_request"])){
 					require_once(WWW_ROOT."/lib/weibo/config.php");
 					require_once(WWW_ROOT."/lib/weibo/saetv2.ex.class.php");
 					$o = new SaeTOAuthV2( WB_AKEY , WB_SKEY  );
@@ -22,7 +23,7 @@ class player_main extends STpl{
 							$_SESSION['oauth2']=$data;
 					}
 					//判断用户是否授权
-					if (empty($_SESSION['oauth2']["user_id"])) {//若没有获取到access token，则发起授权请求
+					if (empty($_SESSION['oauth2']["user_id"])) {
 echo '<html>
 <head>
 <link href="/player.css" media="all" rel="stylesheet" type="text/css" />
@@ -32,7 +33,9 @@ echo '<html>
 function authLoad(){
  	App.AuthDialog.show({
 	client_id : "'.WB_AKEY.'",    //必选，appkey
-	redirect_uri : "http://apps.weibo.com/youkufm",     //必选，授权后的回调地址，例如：http://apps.weibo.com/giftabc
+		redirect_uri : "http://apps.weibo.com/youkufm';
+	if(!empty($vid))echo "?vid=$vid";
+	echo '",
 	height: 120    //可选，默认距顶端120px
 	});
 }
@@ -43,7 +46,6 @@ function authLoad(){
 </body>
 </html>
 ';
-							exit;
 					} else {//若已获取到access token，则加载应用信息
 							$c = new SaeTClientV2( WB_AKEY , WB_SKEY ,$_SESSION['oauth2']['oauth_token'] ,'' );
 							$user_id = $_SESSION['oauth2']['user_id'];
