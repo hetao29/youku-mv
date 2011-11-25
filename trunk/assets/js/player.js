@@ -27,6 +27,13 @@
 		return this;
 	}; 
 })(jQuery); 
+jQuery.extend(String.prototype, { tr:function(){
+	if(locale && locale[this]){
+		return locale[this];
+	}
+	return this;
+}
+});
 var _location = window.location;
 
 //{{{主方法
@@ -173,7 +180,7 @@ var YoukuWs = function(){
 			$("#_ContentListen DIV").html("");
 			$("#_ContentListen >ul" ).html('<li><img style="vertical-align: middle;" src="/assets/images/loading/loading9.gif" /> 正在加载中...</li>');
 			$("#_ContentListen").dialog({
-				title:"歌手全部MV",width:400,height:300, buttons: [
+				title:"歌手".tr()+" MV",width:400,height:300, buttons: [
 			{
 				text:_LabelOk,
 				click: function() {
@@ -206,7 +213,7 @@ var YoukuWs = function(){
 				$("#_ContentListen DIV").html("");
 				$("#_ContentListen >ul" ).html('<li><img style="vertical-align: middle;" src="/assets/images/loading/loading9.gif" /> 正在加载中...</li>');
 				$("#_ContentListen").dialog({
-					width:400,height:300,title:"专辑里MV", buttons: [
+					width:400,height:300,title:"专辑".tr()+" MV", buttons: [
 				{
 					text:_LabelOk,
 					click: function() {
@@ -523,7 +530,7 @@ var YoukuWs = function(){
 				$("#_IDLogin2").live("click",YoukuWs.login);
 				$("#_IDUsage").live("click",function(){
 					$("#_ContentUsage").dialog({
-						width:700,height:540,title:"使用帮助", buttons: [
+						width:700,height:540,title:"帮助".tr(), buttons: [
 					{
 						text:_LabelOk,
 						click: function() {
@@ -535,7 +542,7 @@ var YoukuWs = function(){
 				});
 				$("#_IDAbout").live("click",function(){
 					$("#_ContentAbout").dialog({
-						width:300,height:180,title:"关于", buttons: [
+						width:300,height:180,title:"关于".tr(), buttons: [
 					{
 						text:_LabelOk,click: function() {
 							     $( this ).dialog( "close" );
@@ -1229,7 +1236,7 @@ var YoukuWs = function(){
 						     var tmp=[];
 						     var t_tmp=[];
 						     if(result.Singers){
-							     singer="歌手:";
+							     singer="歌手".tr()+":";
 
 							     for(var i in result.Singers){
 								     tmp.push("<a class='singer' id='"+result.Singers[i].SingerID+"'>"+result.Singers[i].SingerName+"</a>");
@@ -1238,7 +1245,7 @@ var YoukuWs = function(){
 							     singer+=tmp.join(" / ");
 						     }
 						     if(result.AlbumID && result.AlbumName)
-				     $("#musicInfo").html(singer+" 专辑:<a class='special' id='"+result.AlbumID+"'>"+result.AlbumName+"</a>");
+				     $("#musicInfo").html(singer+" "+"专辑".tr()+":<a class='special' id='"+result.AlbumID+"'>"+result.AlbumName+"</a>");
 						     else
 				     $("#musicInfo").html(singer);
 
@@ -1508,7 +1515,7 @@ var YoukuWs = function(){
 			     if(!t)return;
 			     var t = t.replace(/<[^>]+>/g,"");
 			     this.title = t;
-			     if(t)$("#title").html("正在播放:"+t);
+			     if(t)$("#title").html("正在播放".tr()+":"+t);
 			     if(t)document.title="YouKu.FM - "+t;
 		     }, VideoAction:function(type,vid){
 			     $.ajax({

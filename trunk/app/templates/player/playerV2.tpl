@@ -42,6 +42,17 @@
 						})();
 				</script>
 				<script type="text/javascript">
+				var locale={
+					"确认":"{"确认"|tr}",
+					"帮助":"{"帮助"|tr}",
+					"关于":"{"关于"|tr}",
+					"歌手":"{"歌手"|tr}",
+					"专辑":"{"专辑"|tr}",
+					"正在播放":"{"正在播放"|tr}",
+
+				};
+				</script>
+				<script type="text/javascript">
 				var out="{$out}";
 				var _LabelOk="{'确认'|tr}";
 				var _LabelCancel="{'取消'|tr}";
@@ -173,7 +184,7 @@
 										</div>
 {/if}
 
-										<div id="copyright">  <a style="text-decoration:none" id="_IDBeian"><font color="#777">京ICP备11038100号</font></a> ©2010-2011 Youku.FM </div>
+										<div id="copyright">  <a style="text-decoration:none" id="_IDBeian"><font color="#777">{"备案"|tr}</font></a> ©2010-2011 Youku.FM </div>
 								</div>
 								<div id="_IDRight" class="box2 right" style="width:255px">
 										{*
