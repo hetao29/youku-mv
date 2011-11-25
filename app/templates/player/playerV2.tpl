@@ -3,9 +3,9 @@
 		<head>
 				<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 				<link rel="Shortcut Icon" href="/assets/images/ico/favicon_32x32.ico" />
-				<title>{'优酷电台(Youku.FM)'|tr}</title>
-				<meta name="keywords" content="优酷电台, Youku.FM, 优酷也是可以聆听的" />
-				<meta name="description" content="优酷电台, Youku.FM, 提供优酷最流行MV, 最新金曲, 以电台模式和自定义模式播放, 加上动态歌词显示, 给你不一定的优酷视听体验" />
+				<title>{'优酷电台'|tr}</title>
+				<meta name="keywords" content="{'keywords'|tr}" />
+				<meta name="description" content="{'description'|tr}" />
 				{if defined("DEV")}
 				<script type="text/javascript" src="/slightphp/js/jquery-1.7.min.js"></script>
 				<script type="text/javascript" src="/assets/js/development-bundle/ui/jquery.ui.core.js"></script>
