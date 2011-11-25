@@ -46,6 +46,7 @@ function authLoad(){
 </body>
 </html>
 ';
+exit;
 					} else {//若已获取到access token，则加载应用信息
 							$c = new SaeTClientV2( WB_AKEY , WB_SKEY ,$_SESSION['oauth2']['oauth_token'] ,'' );
 							$user_id = $_SESSION['oauth2']['user_id'];
