@@ -180,7 +180,7 @@ var YoukuWs = function(){
 		});
 		$("#language >a").click(function(){
 			YoukuWs.set("language",$(this).attr("data"),true);
-			_location.reload();
+			_location.replace(_location.pathname);
 		});
 		//歌手信息点击
 		$("#musicInfo .singer").live("click",function(){
