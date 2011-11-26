@@ -90,6 +90,23 @@ exit;
 	}
 	function pageEntry($inPath,$out="",$vid=""){
 		$param=array();
+		$allLanguage=array(
+			"zh-cn"=>"中文 (简体)",
+			"zh-tw"=>"中文 (繁體)",
+			"en"=>"English",
+			"ko"=>"한국어",
+			"ja"=>"日本語",
+		);
+		$language="中文 (简体)";
+		if(!empty($_COOKIE['language'])){
+			$l = $_COOKIE['language'];
+			if(!empty($allLanguage[$l])){
+				$language = $allLanguage[$l];
+			}
+
+		}
+		$param['language']=$language;
+		$param['allLanguage']=$allLanguage;
 		$param['out']=$out;
 		$param['vid']=$vid;
 		$param['jsversion']=filemtime(WWW_ROOT."/"."assets/js/youku.ws.js");

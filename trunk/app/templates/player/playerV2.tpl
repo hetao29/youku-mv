@@ -184,7 +184,12 @@
 										</div>
 {/if}
 
-										<div id="copyright">  <a style="text-decoration:none" id="_IDBeian"><font color="#777">{"备案"|tr}</font></a> ©2010-2011 Youku.FM </div>
+										<div id="copyright">  <span style="color:#666">{'语言'|tr}:</span><a id="_IDLanguage">{$language}</a> <a style="text-decoration:none" id="_IDBeian"><font color="#777">{"备案"|tr}</font></a> ©2010-2011 Youku.FM </div>
+										<div id="language" style="display:none">  
+{foreach $allLanguage as $k=>$v}
+										<a data="{$k}">{$v}</a> 
+{/foreach}
+										</div>
 								</div>
 								<div id="_IDRight" class="box2 right" style="width:255px">
 										{*
