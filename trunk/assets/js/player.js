@@ -276,7 +276,6 @@ var YoukuWs = function(){
 				$("#share_insite_handle a").click(function(){
 					var url= ($(this).attr("_href")).replace(/:vid:/g,CurrentVideoID);
 					$.get(url,function(data){
-						var _data = data;
 						var data="<div style='width:320px;height:220px;overflow:hidden'><textarea style='width:100%;height:100%'>"+data+"</textarea><div>";
 
 						$(data).dialog({
@@ -285,7 +284,7 @@ var YoukuWs = function(){
 							modal: true,title:"分享到微博",
 							buttons: [{
 								text:"分享到微博",click:function() {
-									_this2=this;
+									var _data=$(this).parent('.ui-dialog').find("textarea").val();
 									$.post("/player.api.sinaPost",{content:_data},function(data){
 
 									if(data){
