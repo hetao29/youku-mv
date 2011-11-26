@@ -1568,7 +1568,7 @@ var YoukuWs = function(){
 			     return r?r:defaultValue;
 		     }, set:function(k,v,isCookie){
 			     if(isCookie){
-				     $.cookie(k,v,{expires:40});
+				     $.cookie(k,v,{expires:40,path:"/"});
 			     }else{
 				     if(isSupportLocalStorage){
 					     window.localStorage.setItem(k, v);
