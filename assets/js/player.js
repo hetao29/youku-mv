@@ -175,6 +175,13 @@ var YoukuWs = function(){
 			YoukuWs.playRadio();
 		});
 		//$("#_IDBeian").attr("href","http://www.miibeian.gov.cn/").attr("target","_blank");
+		$("#_IDLanguage").click(function(){
+			$("#language").slideToggle("fast");
+		});
+		$("#language >a").click(function(){
+			YoukuWs.set("language",$(this).attr("data"),true);
+			_location.reload();
+		});
 		//歌手信息点击
 		$("#musicInfo .singer").live("click",function(){
 			$("#_ContentListen DIV").html("");
@@ -1559,14 +1566,18 @@ var YoukuWs = function(){
 				     }
 			     }
 			     return r?r:defaultValue;
-		     }, set:function(k,v){
-			     if(isSupportLocalStorage){
-				     window.localStorage.setItem(k, v);
-			     }else if(isSupportBehavior){
-				     dataObj.setAttribute(k, v);
-				     dataObj.save(configs.storeName);
-			     }else{
+		     }, set:function(k,v,isCookie){
+			     if(isCookie){
 				     $.cookie(k,v,{expires:40});
+			     }else{
+				     if(isSupportLocalStorage){
+					     window.localStorage.setItem(k, v);
+				     }else if(isSupportBehavior){
+					     dataObj.setAttribute(k, v);
+					     dataObj.save(configs.storeName);
+				     }else{
+					     $.cookie(k,v,{expires:40});
+				     }
 			     }
 			     return true;
 		     }, adReload:function(){
