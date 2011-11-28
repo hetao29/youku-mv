@@ -18,8 +18,7 @@ class player_api{
 	function pageSinaPost($inPath){
 		if(!empty($_POST['content']) && ($user=user_api::islogin())!==false){
 			$sina = new api_sina;
-			$sina->postWeibo($_POST['content']);
-			return true;
+			return $sina->postWeibo($_POST['content']);
 		}
 		return false;
 	}
