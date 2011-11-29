@@ -36,7 +36,11 @@ class user_main{
 			$useremail= $_REQUEST['useremail'];
 			$password = $_REQUEST['password'];
 			$db = new user_db;
-			$user = $db->getUserByEmail($useremail);
+			if(SUtil::validEmail($useremail)){
+				$user = $db->getUserByEmail($useremail);
+			}else{
+				$user = $db->getUser($useremail);
+			}
 			$o  = new stdclass;
 			if(!empty($user) && $user['UserPassword']==$password){
 					user_api::login($user,!empty($_REQUEST['forever']));
