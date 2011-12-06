@@ -250,7 +250,7 @@ var YoukuWs = function(){
 						});
 					});
 				$("#share a").click(function(){
-					var href = ($(this).attr("_href")).replace(/:vid:/g,CurrentVideoID).replace(/:title:/g,"我正在优酷FM收听 "+YoukuWs.title+" 你们也来听听吧: ");
+					var href = ($(this).attr("_href")).replace(/:vid:/g,CurrentVideoID).replace(/:title:/g,"我正在%23优酷电台%23收听《 "+YoukuWs.title+" 》你们也来听听吧: ");
 					$(this).attr("href",href);
 				});
 				$("#share_handle").click(function(){
