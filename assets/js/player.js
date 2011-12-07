@@ -28,8 +28,8 @@
 	}; 
 })(jQuery); 
 jQuery.extend(String.prototype, { tr:function(){
-	if(locale && locale[this]){
-		return locale[this];
+	if(window.locale!==undefined && window.locale[this]){
+		return window.locale[this];
 	}
 	return this;
 }
@@ -45,6 +45,7 @@ function timeFormat(seconds){
 	var min=Math.floor(seconds/60);
 	min=min>9?min:"0"+min;
 	var sec=Math.floor(seconds%60);
+	alert("D");
 	sec=sec>9?sec:"0"+sec;
 	return min+":"+sec;
 }
@@ -1202,14 +1203,6 @@ var YoukuWs = function(){
 	};
 
 	var isSupportLocalStorage = !!window.localStorage, isSupportBehavior = false;
-	if(!isSupportLocalStorage){
-		var dataObj = document.createElement('input');
-		dataObj.type = 'hidden';
-		document.body.appendChild(dataObj);
-		isSupportBehavior = !! dataObj.addBehavior;
-		isSupportBehavior && dataObj.addBehavior('#default#userData');
-	}
-
 	var configs = {
 		storeName: 'editorContent'
 	};
@@ -1557,9 +1550,6 @@ var YoukuWs = function(){
 			     }else{
 				     if(isSupportLocalStorage){
 					     r = window.localStorage.getItem(k);
-				     }else if(isSupportBehavior){
-					     dataObj.load(configs.storeName);
-					     r = dataObj.getAttribute(k);
 				     }else{
 					     if($.cookie(k))r = $.cookie(k);
 				     }
@@ -1571,9 +1561,6 @@ var YoukuWs = function(){
 			     }else{
 				     if(isSupportLocalStorage){
 					     window.localStorage.setItem(k, v);
-				     }else if(isSupportBehavior){
-					     dataObj.setAttribute(k, v);
-					     dataObj.save(configs.storeName);
 				     }else{
 					     $.cookie(k,v,{expires:40});
 				     }
