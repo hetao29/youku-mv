@@ -45,7 +45,6 @@ function timeFormat(seconds){
 	var min=Math.floor(seconds/60);
 	min=min>9?min:"0"+min;
 	var sec=Math.floor(seconds%60);
-	alert("D");
 	sec=sec>9?sec:"0"+sec;
 	return min+":"+sec;
 }
