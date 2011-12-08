@@ -26,7 +26,9 @@ class user_api{
 			self::setCookie("token",0,time()-3600*24);
 		}
 		static public function setCookie($k,$v,$t){
-			header( 'p3p:CP="IDC DSP COR ADM DEVi TAIi PSA PSD IVAi IVDi CONi HIS OUR IND CNT"');
+			//header( 'p3p:CP="IDC DSP COR ADM DEVi TAIi PSA PSD IVAi IVDi CONi HIS OUR IND CNT"');
+			header('P3P: CP="CURa ADMa DEVa PSAo PSDo OUR BUS UNI PUR INT DEM STA PRE COM NAV OTC NOI DSP COR"'); 
+			header('P3P:CP="CURa ADMa DEVa PSAo PSDo OUR BUS UNI PUR INT DEM STA PRE COM NAV OTC NOI DSP COR IDC ADM DEVi TAIi PSA PSD IVAi IVDi CONi HIS IND CNT"'); 
 			setcookie($k,$v,$t);
 		}
 }
