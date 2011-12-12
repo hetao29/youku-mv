@@ -82,6 +82,9 @@ exit;
 	function pageQQ($inPath){
 			return $this->pageEntry($inPath,"qq");
 	}
+	function pageNetease($inPath){
+			return $this->pageEntry($inPath,"netease");
+	}
 	function pageFaceBook($inPath){
 			return $this->pageEntry($inPath,"facebook");
 	}
