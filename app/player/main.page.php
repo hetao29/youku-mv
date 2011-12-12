@@ -63,7 +63,47 @@ class player_main extends STpl{
 		return $this->pageEntry($inPath,"qq");
 	}
 	function pageNetease($inPath){
-		return $this->pageEntry($inPath,"netease");
+		if(($user==user_api::login())===false){
+			//没有登录
+		}
+		/*
+		include_once(WWW_ROOT.'/lib/netease/t163_php_sdk/config.php');
+		include_once(WWW_ROOT.'/lib/netease/t163_php_sdk/api/tblog.class.php');
+		if(empty($_REQUEST["oauth_token"])){
+			unset($_SESSION['access_token']);
+			unset($_SESSION['request_token']);
+			$oauth = new OAuth(CONSUMER_KEY, CONSUMER_SECRET);
+			$request_token = $oauth->getRequestToken();
+			$aurl = $oauth->getAuthorizeURL( $request_token['oauth_token'],
+				"http://".$_SERVER['HTTP_HOST'].'/player.main.netease'
+			);
+			$_SESSION['request_token'] = $request_token;
+			return $this->render("app/netease.tpl",$params=array("aurl"=>$aurl));
+		}else{
+			if(empty($_SESSION['access_token'])){
+				$oauth = new OAuth( CONSUMER_KEY, CONSUMER_SECRET , $_SESSION['request_token']['oauth_token'] , $_SESSION['request_token']['oauth_token_secret']  );
+
+				if ($access_token = $oauth->getAccessToken(  $_REQUEST['oauth_token'] ) ){
+					$_SESSION['access_token'] = $access_token;
+				}else{
+					return "接口调用不正确，访问失败，请返回!!!";
+				}
+			}else{
+				$access_token = $_SESSION['access_token'];
+			}
+			if(empty($_SESSION['access_token']) || !empty($_SESSION['access_token']['oauth_problem'])){
+				unset($_SESSION['access_token']);
+				$this->redirect("/player.main.netease");
+			}
+
+			$tblog = new TBlog(CONSUMER_KEY, CONSUMER_SECRET,$access_token['oauth_token'] , $access_token['oauth_token_secret']);
+			$me = $tblog->show_user_id("");
+			print_r($access_token);
+			print_r($me);
+			return;
+		}
+		 */
+		return $this->pageEntry($inPath,"netease",@$params['vid']);
 	}
 	function pageFaceBook($inPath){
 		return $this->pageEntry($inPath,"facebook");
