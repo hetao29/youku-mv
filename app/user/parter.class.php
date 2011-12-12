@@ -1,19 +1,23 @@
 <?php
 class user_parter{
 	/**
-	 * Youku.FM站内用户(默认)
+	 * 站内用户(默认)
 	 */
-	const YOUKU_FM = 0;
+	const FM = 0;
 	/**
-	 * Youku.COM用户
+	 * 优酷
 	 */
-	const YOUKU_COM = 1;
+	const YOUKU= 1;
 	/**
-	 * Sina 微薄
+	 * 新浪
 	 */
-	const SINA_WEIBO = 2;
+	const SINA = 2;
 	/**
-	 * 网易 微薄
+	 * 网易
 	 */
-	const NETEASE_WEIBO = 3;
+	const NETEASE = 3;
+	/**
+	 * 腾讯
+	 */
+	const TENCENT= 4;
 }
