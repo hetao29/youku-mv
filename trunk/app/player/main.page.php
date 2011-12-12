@@ -62,6 +62,9 @@ class player_main extends STpl{
 	function pageQQ($inPath){
 		return $this->pageEntry($inPath,"qq");
 	}
+	function pageSohu($inPath){
+		return $this->pageEntry($inPath,"sohu");
+	}
 	function pageNetease($inPath){
 		if(($User=user_api::islogin())===false){
 			//没有登录
