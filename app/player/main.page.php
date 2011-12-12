@@ -63,7 +63,7 @@ class player_main extends STpl{
 		return $this->pageEntry($inPath,"qq");
 	}
 	function pageNetease($inPath){
-		if(($user==user_api::login())===false){
+		if(($User=user_api::islogin())===false){
 			//没有登录
 		}
 		/*
@@ -83,10 +83,11 @@ class player_main extends STpl{
 			if(empty($_SESSION['access_token'])){
 				$oauth = new OAuth( CONSUMER_KEY, CONSUMER_SECRET , $_SESSION['request_token']['oauth_token'] , $_SESSION['request_token']['oauth_token_secret']  );
 
-				if ($access_token = $oauth->getAccessToken(  $_REQUEST['oauth_token'] ) ){
+				if ($access_token = $oauth->getAccessToken($_REQUEST['oauth_token'])){
 					$_SESSION['access_token'] = $access_token;
 				}else{
-					return "接口调用不正确，访问失败，请返回!!!";
+					unset($_SESSION['access_token']);
+					$this->redirect("/player.main.netease");
 				}
 			}else{
 				$access_token = $_SESSION['access_token'];
