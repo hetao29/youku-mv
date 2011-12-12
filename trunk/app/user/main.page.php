@@ -46,14 +46,14 @@ class user_main{
 					$r = SHttp::post("http://www.youku.com/index_login/",array("username"=>$useremail,"password"=>$password,"forever=0"));
 					if($r==1){
 							//在优酷登录成功
-							$user = $db->getUserByEmail($useremail,$paterid=1);
+							$user = $db->getUserByEmail($useremail,$paterid=user_parter::YOUKU);
 							if(empty($user)){
 								//增加用户
 								$User = array();
 								$User['UserAlias']=$useremail;
 								$User['UserEmail']=$useremail;
 								$User['UserPassword']=$password;
-								$User['ParterID']="1";
+								$User['ParterID']=user_parter::YOUKU;
 								$UserID = $db->addUser($User);
 								$user=$db->getUserByID($UserID);
 							}else{
