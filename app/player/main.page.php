@@ -32,7 +32,7 @@ class player_main extends STpl{
 				$user_id = $_SESSION['oauth2']['user_id'];
 				$UserEmail = $user_id."@weibo.com";
 				$db = new user_db;
-				$user = $db->getUserByEmail($UserEmail,$paterid=2);
+				$user = $db->getUserByEmail($UserEmail,$paterid=user_parter::SINA);
 				if(empty($user)){
 					//增加用户
 					//新浪这个接口很慢
@@ -41,7 +41,7 @@ class player_main extends STpl{
 					$User['UserAlias']=$info['name'];
 					$User['UserEmail']=$UserEmail;
 					$User['UserPassword']=$_SESSION['oauth2']['oauth_token'];
-					$User['ParterID']="2";
+					$User['ParterID']=user_parter::SINA;
 					$UserID = $db->addUser($User);
 					$user=$db->getUserByID($UserID);
 				}else{
@@ -97,6 +97,8 @@ class player_main extends STpl{
 			}
 
 			$tblog = new TBlog(CONSUMER_KEY, CONSUMER_SECRET,$access_token['oauth_token'] , $access_token['oauth_token_secret']);
+			echo (SJson::encode($access_token));
+			echo strlen(SJson::encode($access_token));
 			$me = $tblog->show_user_id("");
 			print_r($access_token);
 			print_r($me);
