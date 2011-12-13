@@ -21,7 +21,3 @@ class api_sina{
 
 	}
 }
-/*
-$sina = new api_sina;
-$sina->postWeibo($msg);
- */
