@@ -80,7 +80,8 @@ class player_main extends STpl{
 				"http://".$_SERVER['HTTP_HOST'].'/player.main.netease'
 			);
 			$_SESSION['request_token'] = $request_token;
-			return $this->render("app/netease.tpl",$params=array("aurl"=>$aurl));
+			return $this->redirect($aurl);
+			//return $this->render("app/netease.tpl",$params=array("aurl"=>$aurl));
 		}else{
 			if(empty($_SESSION['access_token'])){
 				$oauth = new OAuth( CONSUMER_KEY, CONSUMER_SECRET , $_SESSION['request_token']['oauth_token'] , $_SESSION['request_token']['oauth_token_secret']  );
