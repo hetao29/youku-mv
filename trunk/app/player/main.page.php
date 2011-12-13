@@ -59,16 +59,54 @@ class player_main extends STpl{
 		}
 		return $this->pageEntry($inPath,"sina",@$params['vid']);
 	}
+	/**
+	 * QQ空间
+	 * 腾讯朋友
+	 */
 	function pageQQ($inPath){
+		if(empty($_GET['openkey']) || empty($_GET['openid'])){
+			return $this->pageEntry($inPath);
+		}
+		include_once(WWW_ROOT.'/lib/qq/qzone/qzone.class.1.0.0.php');
+		include_once(WWW_ROOT.'/lib/qq/qzone/qzone.config.php');
+		$qzone = new Qzone(QQ_QZONE_APPID, QQ_QZONE_APPKEY, QQ_QZONE_APPNAME);
+		$qzone->setServerName(QQ_QZONE_SERVER);
+		$openid = $_GET['openid'];
+		$openkey = $_GET['openkey'];
+		$result = $qzone->getUserInfo($openid, $openkey);
+		if(!isset($result['ret']) || $result['ret']!==0){
+			user_api::logout();
+		}else{
+			$UserEmail=$openid."@qq.com";
+			$db = new user_db;
+			$user = $db->getUserByEmail($UserEmail,$paterid=user_parter::TENCENT);
+			if(empty($user)){
+				//增加用户
+				//新浪这个接口很慢
+				$User = array();
+				$User['UserAlias']=$result['nickname'];
+				$User['UserEmail']=$UserEmail;
+				$User['UserPassword']=$openkey;
+				$User['ParterID']=user_parter::TENCENT;
+				$UserID = $db->addUser($User);
+				$user=$db->getUserByID($UserID);
+			}else{
+				//更新用户
+				if($user['UserAlias']!==$result['nickname']){
+					$user['UserAlias']=$result['nickname'];
+					$user['UserPassword']=$openkey;
+					$db->updateUser($user);
+				}
+			}
+			user_api::logout();
+			user_api::login($user,!empty($_REQUEST['forever']));
+		}
 		return $this->pageEntry($inPath,"qq");
 	}
 	function pageSohu($inPath){
 		return $this->pageEntry($inPath,"sohu");
 	}
 	function pageNetease($inPath){
-		if(($User=user_api::islogin())===false){
-			//没有登录
-		}
 		include_once(WWW_ROOT.'/lib/netease/t163_php_sdk/config.php');
 		include_once(WWW_ROOT.'/lib/netease/t163_php_sdk/api/tblog.class.php');
 		if(empty($_REQUEST["oauth_token"])){
