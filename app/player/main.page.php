@@ -119,7 +119,7 @@ class player_main extends STpl{
 			'400012205',		// 填入应用 ID
 			'SVvr3vDp1SxfUTpq'	// 填入应用的通信密钥。此参数仅有 WebQQ 和开发者自己知晓，请勿公开！！
 		);
-		if(empty($_GET['app_openid']) || empty($_GET['app_openkey']) || !$openId::checkSig()){
+		if(empty($_GET['app_openid']) || empty($_GET['app_openkey']) || !$openId->checkSig()){
 			return $this->pageEntry($inPath);
 		}
 		$UserEmail=$_GET['app_openkey']."@qq.com";
