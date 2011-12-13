@@ -71,6 +71,7 @@ class player_main extends STpl{
 		include_once(WWW_ROOT.'/lib/qq/qzone/qzone.config.php');
 		$qzone = new Qzone(QQ_QZONE_APPID, QQ_QZONE_APPKEY, QQ_QZONE_APPNAME);
 		$qzone->setServerName(QQ_QZONE_SERVER);
+		print_r($_GET);
 		$openid = $_GET['openid'];
 		$openkey = $_GET['openkey'];
 		$result = $qzone->getUserInfo($openid, $openkey);
@@ -113,7 +114,36 @@ class player_main extends STpl{
 	 * WebQQ
 	 */
 	function pageQQWeb($inPath){
-		return $this->pageQQ($inPath);
+		include_once(WWW_ROOT.'/lib/qq/webqq/webqq_openid.class.php');
+		$openId = new WebQQ_OpenID(
+			'400012205',		// 填入应用 ID
+			'SVvr3vDp1SxfUTpq'	// 填入应用的通信密钥。此参数仅有 WebQQ 和开发者自己知晓，请勿公开！！
+		);
+		if(empty($_GET['app_openid']) || empty($_GET['app_openkey']) || !$openId::checkSig()){
+			return $this->pageEntry($inPath);
+		}
+		$UserEmail=$_GET['app_openkey']."@qq.com";
+		$db = new user_db;
+		$user = $db->getUserByEmail($UserEmail,$paterid=user_parter::TENCENT);
+		if(empty($user)){
+			//增加用户
+			//新浪这个接口很慢
+			$User = array();
+			$User['UserAlias']="";
+			$User['UserEmail']=$UserEmail;
+			$User['UserPassword']=$_GET['app_openkey'];
+			$User['ParterID']=user_parter::TENCENT;
+			$UserID = $db->addUser($User);
+			$user=$db->getUserByID($UserID);
+		}else{
+			//更新用户
+			//$user['UserAlias']="";
+			//$user['UserPassword']=$_GET['app_openkey'];
+			//$db->updateUser($user);
+		}
+		user_api::logout();
+		user_api::login($user,!empty($_REQUEST['forever']));
+		return $this->pageEntry($inPath,"qq");
 	}
 	function pageSohu($inPath){
 		return $this->pageEntry($inPath,"sohu");
