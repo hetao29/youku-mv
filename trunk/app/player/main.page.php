@@ -103,6 +103,9 @@ class player_main extends STpl{
 		}
 		return $this->pageEntry($inPath,"qq");
 	}
+	function pageQQWeibo($inPath){
+		return $this->pageQQ($inPath);
+	}
 	function pageSohu($inPath){
 		return $this->pageEntry($inPath,"sohu");
 	}
