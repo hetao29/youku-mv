@@ -181,7 +181,11 @@
 										</div>
 {elseif $out=="sina"}
 										<div id="share_insite_handle"> 
-												<span><a _href="/player.api.sina.:vid:"><b style="font-size:14px">分享到新浪微博<img title="分享到新浪微博" src="http://static.youku.com/v/img/ico_sina.gif" /></b></a></span>
+												<span><a _source="/player.api.sina.:vid:" _post="/player.api.sinaPost"><b style="font-size:14px">分享到新浪微博<img title="分享到新浪微博" src="http://static.youku.com/v/img/ico_sina.gif" /></b></a></span>
+										</div>
+{elseif $out=="netease"}
+										<div id="share_insite_handle"> 
+												<span><a _source="/player.api.netease.:vid:" _post="/player.api.neteasePost"><b style="font-size:14px">分享到网易微博<img title="分享到网易微博" src="http://static.youku.com/v/img/ico_163_16.gif" /></b></a></span>
 										</div>
 {/if}
 

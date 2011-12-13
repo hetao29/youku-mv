@@ -125,6 +125,7 @@ class player_main extends STpl{
 					}
 					//}
 				}
+				$user['UserPassword']=SJson::encode($access_token);
 				user_api::logout();
 				user_api::login($user,!empty($_REQUEST['forever']));
 			}

@@ -274,7 +274,8 @@ var YoukuWs = function(){
 					};
 				});
 				$("#share_insite_handle a").click(function(){
-					var url= ($(this).attr("_href")).replace(/:vid:/g,CurrentVideoID);
+					var url= ($(this).attr("_source")).replace(/:vid:/g,CurrentVideoID);
+					var postUrl = $(this).attr("_post");
 					$.get(url,function(data){
 						var data="<div style='width:320px;height:220px;overflow:hidden'><textarea style='width:100%;height:100%'>"+data+"</textarea><div>";
 
@@ -285,7 +286,7 @@ var YoukuWs = function(){
 							buttons: [{
 								text:"分享到微博",click:function() {
 									var _data=$(this).parent('.ui-dialog').find("textarea").val();
-									$.post("/player.api.sinaPost",{content:_data},function(data){
+									$.post(postUrl,{content:_data},function(data){
 
 									if(data){
 										YoukuWs.tips("分享视频成功.");
@@ -301,9 +302,6 @@ var YoukuWs = function(){
 							click: function() {
 								$( this ).dialog( "destroy" );
 							}
-								//Cancel: function() {
-								//		$( this ).dialog( "destroy");
-								//	}
 							}
 						]});
 					},"text");
