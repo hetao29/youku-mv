@@ -69,7 +69,6 @@ class player_main extends STpl{
 		if(($User=user_api::islogin())===false){
 			//没有登录
 		}
-		/*
 		include_once(WWW_ROOT.'/lib/netease/t163_php_sdk/config.php');
 		include_once(WWW_ROOT.'/lib/netease/t163_php_sdk/api/tblog.class.php');
 		if(empty($_REQUEST["oauth_token"])){
@@ -101,14 +100,35 @@ class player_main extends STpl{
 			}
 
 			$tblog = new TBlog(CONSUMER_KEY, CONSUMER_SECRET,$access_token['oauth_token'] , $access_token['oauth_token_secret']);
-			echo (SJson::encode($access_token));
-			echo strlen(SJson::encode($access_token));
 			$me = $tblog->show_user_id("");
-			print_r($access_token);
-			print_r($me);
-			return;
+			if(!empty($me['email'])){
+				$UserEmail = $me['email'];
+				$db = new user_db;
+				$user = $db->getUserByEmail($UserEmail,$paterid=user_parter::NETEASE);
+				if(empty($user)){
+					//增加用户
+					//新浪这个接口很慢
+					$User = array();
+					$User['UserAlias']=$me['name'];
+					$User['UserEmail']=$me['email'];
+					$User['UserPassword']="";
+					$User['ParterID']=user_parter::NETEASE;
+					$UserID = $db->addUser($User);
+					$user=$db->getUserByID($UserID);
+				}else{
+					//更新用户
+					//if($user['UserPassword']!==$_SESSION['oauth2']['oauth_token']){
+					if($user['UserAlias']!==$me['name']){
+						$user['UserAlias']=$me['name'];
+						$user['UserPassword']="";
+						$db->updateUser($user);
+					}
+					//}
+				}
+				user_api::logout();
+				user_api::login($user,!empty($_REQUEST['forever']));
+			}
 		}
-		 */
 		return $this->pageEntry($inPath,"netease",@$params['vid']);
 	}
 	function pageFaceBook($inPath){
