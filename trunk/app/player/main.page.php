@@ -65,7 +65,7 @@ class player_main extends STpl{
 	 */
 	function pageQQ($inPath){
 		if(empty($_GET['openkey']) || empty($_GET['openid'])){
-			return $this->pageEntry($inPath);
+			return $this->pageEntry($inPath,"qq");
 		}
 		include_once(WWW_ROOT.'/lib/qq/qzone/qzone.class.1.0.0.php');
 		include_once(WWW_ROOT.'/lib/qq/qzone/qzone.config.php');
@@ -121,7 +121,7 @@ class player_main extends STpl{
 			'SVvr3vDp1SxfUTpq'	// 填入应用的通信密钥。此参数仅有 WebQQ 和开发者自己知晓，请勿公开！！
 		);
 		if(empty($_GET['app_openid']) || empty($_GET['app_openkey']) || !$openId->checkSig()){
-			return $this->pageEntry($inPath);
+			return $this->pageEntry($inPath,"qq");
 		}
 		$UserEmail=$_GET['app_openkey']."@qq.com";
 		$db = new user_db;
