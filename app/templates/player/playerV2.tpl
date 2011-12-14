@@ -281,6 +281,12 @@
 
 								</div>
 								<div class="clear"></div>
+{if $out=="qq"}
+<div class="clear" style="padding-top:10px">
+请使用者仔细阅读优酷<a target="_blank" href="http://www.youku.com/pub/youku/service/agreement.shtml">使用协议</a>和<a target="_blank" href="http://c.youku.com/copyright/">版权声明</a>
+<a href="http://www.youku.com/service/feed/" target="_blank">联系客服与在线反馈</a>
+</div>
+{/if}
 						</div>
 						{*						<div id="googlead" class="googlead" style="padding:5px;margin:auto;zoom:1;">
 								<script type="text/javascript">
