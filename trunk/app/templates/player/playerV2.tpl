@@ -352,7 +352,8 @@
 						<div id="_ContentAbout" title="{'关于'|tr}" style="display:none">
 								<div style="padding:15px;margin:auto;padding-left:45px;">
 										{"copyright"|tr}<br />
-										关注我：<a href="http://weibo.com/youkufm" target="_blank">优酷电台</a>
+										<!--关注我：<a href="http://weibo.com/youkufm" target="_blank">优酷电台</a>-->
+										联系我(QQ):231073376
 								</div>
 						</div>
 						<div id="_ContentUsage" title="{'使用说明'|tr}" style="display:none">
