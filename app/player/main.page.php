@@ -114,6 +114,8 @@ class player_main extends STpl{
 	 * WebQQ
 	 */
 	function pageQQWeb($inPath){
+		return $this->pageQQ($inPath);
+		//下面的app_openid有问题，tencent没有与QQ号绑定，shit!!!!!!!!!!!!!!!!!!!
 		include_once(WWW_ROOT.'/lib/qq/webqq/webqq_openid.class.php');
 		$openId = new WebQQ_OpenID(
 			'400012205',		// 填入应用 ID
