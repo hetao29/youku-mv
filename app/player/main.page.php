@@ -71,7 +71,6 @@ class player_main extends STpl{
 		include_once(WWW_ROOT.'/lib/qq/qzone/qzone.config.php');
 		$qzone = new Qzone(QQ_QZONE_APPID, QQ_QZONE_APPKEY, QQ_QZONE_APPNAME);
 		$qzone->setServerName(QQ_QZONE_SERVER);
-		print_r($_GET);
 		$openid = $_GET['openid'];
 		$openkey = $_GET['openkey'];
 		$result = $qzone->getUserInfo($openid, $openkey);
