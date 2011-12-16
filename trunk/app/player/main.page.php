@@ -6,6 +6,34 @@ class player_main extends STpl{
 	function __destruct(){
 		//echo $this->render("footer.tpl");
 	}
+	
+	function pageEntryV2($inPath,$out="",$vid=""){
+		$param=array();
+		$allLanguage=array(
+			"zh-cn"=>"中文 (简体)",
+			"zh-tw"=>"中文 (繁體)",
+			"en"=>"English",
+			"ko"=>"한국어",
+			"ja"=>"日本語",
+		);
+		$language="中文 (简体)";
+		if(!empty($_COOKIE['language'])){
+			$l = $_COOKIE['language'];
+			if(!empty($allLanguage[$l])){
+				$language = $allLanguage[$l];
+			}
+
+		}
+		$param['language']=$language;
+		$param['allLanguage']=$allLanguage;
+		$param['out']=$out;
+		$param['vid']=$vid;
+		$param['jsversion']=filemtime(WWW_ROOT."/"."assets/js/youku.ws.js");
+		$param['cssversion']=filemtime(WWW_ROOT."/"."assets/css/styleV2.css");
+		return $this->render("playerV3/main.tpl",$param);
+	}
+
+
 	function pageSina($inPath){
 		$url = parse_url(@$_SERVER['HTTP_REFERER']);
 		parse_str(@$url['query'],$params);
