@@ -596,7 +596,7 @@ var YoukuWs = function(){
 										ListID:lid
 									},type:"post",
 									success: function( List) {
-											 $('.header').load("/player.main.header."+out);
+											 $('.header').load("/player.main.headerV3."+out);
 											 if(List){
 												 YoukuWs.listList();
 											 }
@@ -732,7 +732,7 @@ var YoukuWs = function(){
 							vid:vid
 							},type:"post",
 							success: function( result) {
-									 $('#_IDHeader').load("/player.main.header."+out);
+									 $('#_IDHeader').load("/player.main.headerV3."+out);
 									 setTimeout(function() { $(_this).parents("li").remove(); }, 1);//fro ie patch
 								 }
 						});
@@ -743,7 +743,7 @@ var YoukuWs = function(){
 								vid:vid
 							},type:"post",
 							success: function( result) {
-									 $('#_IDHeader').load("/player.main.header."+out);
+									 $('#_IDHeader').load("/player.main.headerV3."+out);
 									 setTimeout(function() { $(_this).parents("li").remove(); }, 1);//fro ie patch
 								 }
 						});
@@ -944,7 +944,7 @@ var YoukuWs = function(){
 						},
 						success: function( List) {
 								 if(List){
-									 $('#_IDHeader').load("/player.main.header."+out);
+									 $('#_IDHeader').load("/player.main.headerV3."+out);
 									 YoukuWs.listList();
 								 }
 							 }
@@ -1589,7 +1589,7 @@ var YoukuWs = function(){
 		     },formlogin:function(){
 			     $.post("/user.main.login",$("#_FormLogin").serialize(),function(data){
 				     if(data && data.result==1){
-					     $('.header').load("/player.main.header."+out);
+					     $('.header').load("/player.main.headerV3."+out);
 					     $("#_ContentLogin").dialog( "close" );
 					     //登录成功
 				     }else{
@@ -1608,7 +1608,7 @@ var YoukuWs = function(){
 			     if(this.get("token","",true) && this.get("uid","",true)){
 				     $.post("/user.main.autologin","token="+this.get("token")+"&uid="+this.get("uid"),function(data){
 					     if(data){
-						     $('#_IDHeader').load("/player.main.header."+out);
+						     $('#_IDHeader').load("/player.main.headerV3."+out);
 						     //登录成功
 					     }
 				     },"json");
@@ -1617,7 +1617,7 @@ var YoukuWs = function(){
 			     $.post("/user.main.signup",$("#_FormSignup").serialize(),function(data){
 				     if(data.uid){
 					     //注册成功
-					     $('.header').load("/player.main.header."+out);
+					     $('.header').load("/player.main.headerV3."+out);
 					     $("#_ContentSignup").dialog( "close" );
 					     //登录成功
 				     }else{
