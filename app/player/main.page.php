@@ -7,7 +7,7 @@ class player_main extends STpl{
 		//echo $this->render("footer.tpl");
 	}
 	
-	function pageEntryV2($inPath,$out="",$vid=""){
+	function pageEntryV3($inPath,$out="",$vid=""){
 		$param=array();
 		$allLanguage=array(
 			"zh-cn"=>"中文 (简体)",
@@ -33,6 +33,28 @@ class player_main extends STpl{
 		return $this->render("playerV3/main.tpl",$param);
 	}
 
+	function pageHeaderV3($inPath){
+		$param = array();
+		$out = !empty($inPath[3])?$inPath[3]:"";
+		$param['out']=$out;
+		if(($User=user_api::islogin())!==false){
+			$db = new user_db;
+			$action = $db->getAction($User['UserID']);
+			$param['user'] = $User;
+			$param['_CtListen'] = $db->getListenCount($User['UserID']);
+			$param['_CtList'] = $db->getListCount($User['UserID']);
+			$act = array();
+			if(!empty($action->items)){
+				foreach($action->items as $item){
+					$k=$item['ActionType'];
+					$v=$item['ct'];
+					$act[$k]=$v;
+				}
+			}
+			$param['act'] = $act;
+		}
+		return $this->render("playerV3/header.tpl",$param);
+	}
 
 	function pageSina($inPath){
 		$url = parse_url(@$_SERVER['HTTP_REFERER']);
