@@ -1071,7 +1071,8 @@ var YoukuWs = function(){
 					PlayType=1;
 					YoukuWs.set("PlayType",PlayType);
 					YoukuWs.getVideoByVid(objURL.vid);
-				}else if(_initVid!=""){
+
+				}else if(window._initVid){
 					PlayType=1;
 					YoukuWs.set("PlayType",PlayType);
 					YoukuWs.getVideoByVid(_initVid);
