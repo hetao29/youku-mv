@@ -4,50 +4,54 @@
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 
 		<title>{'标题'|tr}</title>
-		<script type="text/javascript" src="/assets/js/jquery-1.4.4.js"></script>
-		<script type="text/javascript" src="/assets/js/jquery-ui.min.js"></script>
-		<script type="text/javascript" src="/assets/js/jquery.cookie.js"></script>
-		<script type="text/javascript" src="/assets/js/swfobject/swfobject.js"></script>
-		<script type="text/javascript" src="/assets/js/json2.js"></script>
 
+		<script type="text/javascript" src="/slightphp/js/jquery-1.7.min.js"></script>
+		<script type="text/javascript" src="/assets/js/development-bundle/ui/jquery.ui.core.js"></script>
+		<script type="text/javascript" src="/assets/js/development-bundle/ui/jquery.ui.widget.js"></script>
+		<script type="text/javascript" src="/assets/js/development-bundle/ui/jquery.ui.mouse.js"></script>
+		<script type="text/javascript" src="/assets/js/development-bundle/ui/jquery.ui.position.js"></script>
+		<script type="text/javascript" src="/assets/js/development-bundle/ui/jquery.ui.button.js"></script>
+		<script type="text/javascript" src="/assets/js/development-bundle/ui/jquery.ui.autocomplete.js"></script>
+		<script type="text/javascript" src="/assets/js/development-bundle/ui/jquery.ui.resizable.js"></script>
+		<script type="text/javascript" src="/assets/js/development-bundle/ui/jquery.ui.sortable.js"></script>
+		<script type="text/javascript" src="/assets/js/development-bundle/ui/jquery.ui.dialog.js"></script>
+		<script type="text/javascript" src="/assets/js/development-bundle/ui/jquery.ui.draggable.js"></script>
+		<script type="text/javascript" src="/assets/js/development-bundle/ui/jquery.ui.droppable.js"></script>
+		<script type="text/javascript" src="/assets/js/jquery.cookie.js"></script>
+		<script type="text/javascript" src="/assets/js/jquery.corner.js"></script>
+		<script type="text/javascript" src="/assets/js/json2.js"></script>
+		<script type="text/javascript" src="/assets/js/swfobject/swfobject.js"></script>
+
+<!--
 		<script type="text/javascript" src="/assets/js/v3/config.js"></script>
-		<script type="text/javascript" src="/assets/js/v3/api.js"></script>
 		<script type="text/javascript" src="/assets/js/v3/ui.js"></script>
+		-->
 		<script type="text/javascript" src="/assets/js/v3/player.js"></script>
 
 		<link rel="Shortcut Icon" href="/assets/images/ico/favicon_32x32.ico" />
 
 		<link type="text/css" rel="stylesheet" href="/assets/style/default/css/fm.css" />
 
+		<script type="text/javascript">
+			var locale={
+				"确认":"{"确认"|tr}",
+				"帮助":"{"帮助"|tr}",
+				"关于":"{"关于"|tr}",
+				"歌手":"{"歌手"|tr}",
+				"专辑":"{"专辑"|tr}",
+				"正在播放":"{"正在播放"|tr}",
+
+			};
+			var out="{$out}";
+			var _LabelOk="{'确认'|tr}";
+			var _LabelCancel="{'取消'|tr}";
+			var _initVid="{$vid}";
+		</script>
 	</head>
 
 	<body>
 		<div class="t-header">
-			<div class="th-cont">
-				<i class="yk-logo"></i>
-				<ul id="login_success">
-					<li><a href="" title="">帮助</a></li>
-					<li><a href="" title="">关于</a></li>
-					<li>|</li>
-					<li class="language" onmouseover="(function(t){ t.className='language hover' ; })(this)" onmouseout="(function(t){ t.className='language'})(this)">语言选择<i class="icon-down"></i><em class="panel"><a href="">简体中文</a><a href="">English</a><a href="">한국의</a><a href="">日本語</a></em></li>
-					<li>|</li>
-					<li><a href="" title="">喜欢(<span>230</span>)</a></li>
-					<li><a href="" title="">听歌(<span>222</span>)</a></li>
-					<li><a href="" title="">歌单(<span>21</span>)</a></li>
-					<li>|</li>
-					<li><a href="" title="">退出</a></li>
-					<li class="family"><span class="black">gggg111222@000.com</span></li>
-				</ul>
-				<ul id="login_no" style="display:none;">
-					<li><a href="" title="">关于</a></li>
-					<li><a href="" title="">使用说明</a></li>
-					<li>|</li>
-					<li><a href="" title="">注册</a></li>
-					<li><a href="" title="">登录</a></li>
-					<li>|</li>
-					<li><a href="" title="">登录</a>后，能记住你所喜好</li>
-				</ul>
-			</div>
+			{part "/player.main.headerV3.".$out}
 		</div>
 		<div class="logo"><i class="fm-logo"></i><div class="btnbox"><a class="rollbtn" href="" title=""><em></em><i class="mode"></i><span>简单模式</span></a><a class="rollbtn" href="" title=""><em></em><i class="change"></i><span>切换电台</span></a></div></div>
 		<div class="fm-body">
@@ -87,15 +91,21 @@
 
 						<div id="dtmsh-panel">
 							<div class="dt-box">
-								<h2>当前播放：<span>歌曲名称</span></h2>
-								<a href=""><img src="temp.jpg" alt="" /></a>
+								<h2>{"当前播放"|tr}:<span id="_IDVideoTitle"></span></h2>
+								<img id="_IDVideoPic" class="shadow" />
 							</div>
 							<div class="dt-box">
-								<h2>接着播放：<span>歌曲名称</span></h2>
-								<a href=""><img src="temp.jpg" alt="" /></a>
+								<h2>{"接着播放"|tr}:<span id="_IDNextVideoTitle"></span></h2>
+								<img id="_IDNextVideoPic" class="shadow" />
 							</div>
 						</div>
+<!--
 
+<div style="padding:10px;"><b>{"当前播放"|tr}:</b><span id="_IDVideoTitle"></span><div><img id="_IDVideoPic" class="shadow" /></div></div>
+<div style="padding:10px"><b>{"接着播放"|tr}:</b><span id="_IDNextVideoTitle"></span>
+		<div><img id="_IDNextVideoPic" class="shadow" /></div>
+</div>
+-->
 						<div id="bfmsh-panel" class="hide">
 							<div class="search-box">
 								<i class="search-bg"></i>
