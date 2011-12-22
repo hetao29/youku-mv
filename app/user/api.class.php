@@ -29,4 +29,7 @@ class user_api{
 			header( 'p3p:CP="IDC DSP COR ADM DEVi TAIi PSA PSD IVAi IVDi CONi HIS OUR IND CNT"');
 			setcookie($k,$v,$t);
 		}
+		static public function pwd($password){
+			return md5(sha1(md5($password).$password));
+		}
 }

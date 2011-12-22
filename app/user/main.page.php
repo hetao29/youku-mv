@@ -38,7 +38,7 @@ class user_main{
 			$db = new user_db;
 			$user = $db->getUserByEmail($useremail);
 			$o  = new stdclass;
-			if(!empty($user) && $user['UserPassword']==$password){
+			if(!empty($user) && $user['UserPassword']==user_api::pwd($password)){
 					user_api::login($user,!empty($_REQUEST['forever']));
 					$o->result=1;
 			}else{
@@ -52,13 +52,13 @@ class user_main{
 								$User = array();
 								$User['UserAlias']=$useremail;
 								$User['UserEmail']=$useremail;
-								$User['UserPassword']=$password;
+								$User['UserPassword']=user_api::pwd($password);
 								$User['ParterID']=user_parter::YOUKU;
 								$UserID = $db->addUser($User);
 								$user=$db->getUserByID($UserID);
 							}else{
 								//更新用户
-								$user['UserPassword']=$password;
+								$user['UserPassword']=user_api::pwd($password);
 								$db->updateUser($user);
 							}
 							//更新s_user
@@ -91,7 +91,7 @@ class user_main{
 			$User = array();
 			$User['UserAlias']=$_REQUEST['useralias'];
 			$User['UserEmail']=$_REQUEST['useremail'];
-			$User['UserPassword']=$_REQUEST['password'];
+			$User['UserPassword']=user_api::pwd($_REQUEST['password']);
 			$db = new user_db;
 			$UserID = $db->addUser($User);
 			if($UserID>0){
