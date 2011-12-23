@@ -113,7 +113,7 @@ class player_main extends STpl{
 	 * QQ空间
 	 * 腾讯朋友
 	 */
-	function pageQQ($inPath){
+	function pageQQ($inPath,$out="qq"){
 		if(empty($_GET['openkey']) || empty($_GET['openid'])){
 			return $this->pageEntry($inPath,"qq");
 		}
@@ -123,6 +123,8 @@ class player_main extends STpl{
 		$qzone->setServerName(QQ_QZONE_SERVER);
 		$openid = $_GET['openid'];
 		$openkey = $_GET['openkey'];
+		$_SESSION['qq_openid'] = $openid;
+		$_SESSION['qq_openkey'] = $openkey;
 		$result = $qzone->getUserInfo($openid, $openkey);
 		if(!isset($result['ret']) || $result['ret']!==0){
 			user_api::logout();
@@ -132,7 +134,6 @@ class player_main extends STpl{
 			$user = $db->getUserByEmail($UserEmail,$paterid=user_parter::TENCENT);
 			if(empty($user)){
 				//增加用户
-				//新浪这个接口很慢
 				$User = array();
 				$User['UserAlias']=$result['nickname'];
 				$User['UserEmail']=$UserEmail;
@@ -151,13 +152,13 @@ class player_main extends STpl{
 			user_api::logout();
 			user_api::login($user,!empty($_REQUEST['forever']));
 		}
-		return $this->pageEntry($inPath,"qq");
+		return $this->pageEntry($inPath,$out);
 	}
 	/**
 	 * QQ微薄
 	 */
 	function pageQQWeibo($inPath){
-		return $this->pageQQ($inPath);
+		return $this->pageQQ($inPath,"qqweibo");
 	}
 	/**
 	 * WebQQ
