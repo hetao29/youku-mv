@@ -187,11 +187,15 @@
 										<div id="share_insite_handle"> 
 												<span><a _source="/player.api.netease.:vid:" _post="/player.api.neteasePost"><b style="font-size:14px">分享到网易微博<img title="分享到网易微博" src="http://static.youku.com/v/img/ico_163_16.gif" /></b></a></span>
 										</div>
+{elseif $out=="qqweibo"}
+										<div id="share_insite_handle"> 
+												<span><a _source="/player.api.qq.:vid:" _post="/player.api.qqPost"><b style="font-size:14px">分享到腾讯微博<img title="分享到腾讯微博" src="http://static.youku.com/v/img/ico_163_16.gif" /></b></a></span>
+										</div>
 {/if}
 
 										<div id="copyright">  <span style="color:#666">{'语言'|tr}:</span><a id="_IDLanguage">{$language}</a> <a style="text-decoration:none" id="_IDBeian"><font color="#777">{"备案"|tr}</font></a> ©2010-2011 Youku.FM </div>
 										<div id="language" style="display:none">  
-{foreach $allLanguage as $k=>$v}
+{foreach($allLanguage as $k=>$v)}
 										<a data="{$k}">{$v}</a> 
 {/foreach}
 										</div>
