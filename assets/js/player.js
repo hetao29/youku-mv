@@ -286,7 +286,7 @@ var YoukuWs = function(){
 							buttons: [{
 								text:"分享到微博",click:function() {
 									var _data=$(this).parent('.ui-dialog').find("textarea").val();
-									$.post(postUrl,{content:_data},function(data){
+									$.post(postUrl,{content:_data,vid:CurrentVideoID},function(data){
 
 									if(data){
 										YoukuWs.tips("分享视频成功.");
