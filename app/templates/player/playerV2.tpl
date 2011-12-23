@@ -189,7 +189,7 @@
 										</div>
 {elseif $out=="qqweibo"}
 										<div id="share_insite_handle"> 
-												<span><a _source="/player.api.qq.:vid:" _post="/player.api.qqPost"><b style="font-size:14px">分享到腾讯微博<img title="分享到腾讯微博" src="http://static.youku.com/v/img/ico_163_16.gif" /></b></a></span>
+												<span><a _source="/player.api.qq.:vid:" _post="/player.api.qqPost"><b style="font-size:14px">分享到腾讯微博<img title="分享到腾讯微博" src="http://static.youku.com/v1.0.0729/v/img/ico_qq_t.png" /></b></a></span>
 										</div>
 {/if}
 
