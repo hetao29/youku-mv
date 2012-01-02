@@ -15,8 +15,10 @@ SlightPHP::setSplitFlag("-_.");
 //{{{
 SDb::setConfigFile(SlightPHP::$appDir . "/db.ini.php");
 SLanguage::setLanguageDir(SlightPHP::$appDir."/../locale");
-//SLanguage::$defaultLocale="zh-CN";
-//SLanguage::setLocale("zh-CN");
+SLanguage::$defaultLocale="zh-CN";
+if(!empty($_COOKIE['language'])){
+	SLanguage::setLocale($_COOKIE['language']);
+}
 //}}}
 function __autoload($class){
 	if($class{0}=="S"){

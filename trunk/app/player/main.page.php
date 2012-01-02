@@ -21,6 +21,7 @@ class player_main extends STpl{
 			$l = $_COOKIE['language'];
 			if(!empty($allLanguage[$l])){
 				$language = $allLanguage[$l];
+				SLanguage::setLocale($l);
 			}
 
 		}
@@ -34,7 +35,24 @@ class player_main extends STpl{
 	}
 
 	function pageHeaderV3($inPath){
+		
+		$allLanguage=array(
+			"zh-cn"=>"中文 (简体)",
+			"zh-tw"=>"中文 (繁體)",
+			"en"=>"English",
+			"ko"=>"한국어",
+			"ja"=>"日本語",
+		);
 		$param = array();
+		$language="中文 (简体)";
+		if(!empty($_COOKIE['language'])){
+			$l = $_COOKIE['language'];
+			if(!empty($allLanguage[$l])){
+				$language = $allLanguage[$l];
+			}
+
+		}
+		$param['language']=$language;
 		$out = !empty($inPath[3])?$inPath[3]:"";
 		$param['out']=$out;
 		if(($User=user_api::islogin())!==false){
@@ -53,6 +71,7 @@ class player_main extends STpl{
 			}
 			$param['act'] = $act;
 		}
+		$param['allLanguage'] = $allLanguage;
 		return $this->render("playerV3/header.tpl",$param);
 	}
 
