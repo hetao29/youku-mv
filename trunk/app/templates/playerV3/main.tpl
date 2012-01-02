@@ -47,7 +47,13 @@
 		<div class="t-header" id="_IDHeader">
 			{part "/player.main.headerV3.".$out}
 		</div>
-		<div class="logo"><i class="fm-logo"></i><div class="btnbox"><a class="rollbtn"  title=""><em></em><i class="mode"></i><span>简单模式</span></a><a class="rollbtn" id="_IDChange" title="{'换台'|tr}"><em></em><i class="change"></i><span>切换电台</span></a></div></div>
+		<div class="logo">
+			<i class="fm-logo"></i>
+			<div class="btnbox">
+				<a class="rollbtn"  title=""><em></em><i class="mode"></i><span>简单模式</span></a>
+				<a class="rollbtn" id="_IDChange" title="{'换台'|tr}"><em></em><i class="change"></i><span>切换电台</span></a>
+			</div>
+		</div>
 		<div class="fm-body">
 			<div class="cont-left" id="box">
 			<div class="inner-left">
@@ -55,19 +61,28 @@
 				<div class="cont-border">
 					<div class="left"><div class="box"></div></div>
 					<div class="content">
-						<h2>【<span>华语MHZ</span>】我的模样 - <span>张靓颖《改变》</span><i class="btn-width"><a  title="" id="_IDThx">宽屏</a></i></h2>
+						<h2><span id="title">Youku.FM</span><i class="btn-width"><a  title="" id="_IDThx">宽屏</a></i></h2>
 						<div class="player" id="playerBox">
 							<div id="player"></div>
 						</div>
 						<div class="player-controll">
 							<a id="share" class="btn-share" title="" ><i class="icon-share"></i>分享</a>
 							<div class="center">
-								<a class="btn-play"  title="播放">播放</a><a class="btn-prev"  title="上一首">上一首</a><a class="btn-next"  title="下一首">下一首</a><a class="btn-pause"  title="暂停">暂停</a><a class="btn-love"  title="喜欢">喜欢</a><a class="btn-remove"  title="移除">移除</a><a class="btn-skip"  title="跳过">跳过</a>
+
+							
+								<a class="btn-prev" id="_BtPre" title="{'上一首'|tr}">{'上一首'|tr}</a>
+								<a class="btn-play" id="_IDPlay" title="{'播放'|tr}">{'播放'|tr}</a>
+								<a class="btn-pause"  id="_IDPause" title="暂停">暂停</a>
+								<a class="btn-next" id="_BtNext" title="{'下一首'|tr}">{'下一首'|tr}</a>
+								&nbsp;&nbsp;&nbsp;
+								<a class="btn-love" id="_IDUp" title="{"喜欢"|tr}">{"喜欢"|tr}</a>
+								<a class="btn-remove" id="_IDDown" title="移除">{"不喜欢"|tr}</a>
+								{*<a class="btn-skip"  title="跳过">跳过</a>*}
 							</div>
-							<div class="right" id="testRight">
-								<a class="btn-for"  title="循环播放">循环播放</a>
-								<a class="btn-order"  title="无序播放">无序播放</a>
-								<a class="btn-list select"  title="XXXX">XXXX</a>
+							<div class="right" id="PlayModeSet">
+								<a class="btn-order" playmode="3" title="{'随机'|tr}<">{'随机'|tr}</a>
+								<a class="btn-list" playmode="2"  title="{'循环'|tr}">{'循环'|tr}</a>
+								<a class="btn-for" playmode="1" title="{'单曲'|tr}">{'单曲'|tr}</a>
 							</div>
 						</div>
 					</div>
@@ -107,7 +122,7 @@
 								<a  title="搜索" class="btn-search">搜索</a>
 							</div>
 							<ul class="music-list" id="_ContentMusic">
-								<!--
+								{*
 								<li><i class="checkbox"></i><span>歌曲标题</span><em>歌手名字</em></li>
 								<li><i class="checkbox"></i><span>歌曲标题</span><em>歌手名字</em></li>
 								<li><i class="checkbox"></i><span>歌曲标题</span><em>歌手名字</em></li>
@@ -119,7 +134,7 @@
 								<li><i class="checkbox"></i><span>歌曲标题</span><em>歌手名字</em></li>
 								<li><i class="checkbox"></i><span>歌曲标题</span><em>歌手名字</em></li>
 								<li><i class="checkbox"></i><span>歌曲标题</span><em>歌手名字</em></li>
-								-->
+								*}
 							</ul>
 							<div class="btnline">
 								<a  title="全选" class="btn-w">全选</a>
@@ -132,7 +147,7 @@
 						</div>
 
 						<div id="sw-panel" class="hide">
-							<div class="sw-box">
+							<div class="sw-box" id="_ContentLyrics">
 								<p>罗志祥  爱转角</p>
 								<p>爱转角遇见了谁是否有爱情的美</p>
 								<p>爱转角以后的街能不能有我来陪</p>
@@ -152,11 +167,11 @@
 								<p>我不让爱掉眼泪 不让你掉眼泪</p>
 							</div>
 							<div class="btnline">
-								<a   title="报错" class="btn-w">报错</a>
-								<a   title="查看" class="btn-w">查看</a>
+								<a id="_IDLyricsErr"  title="{"报错"|tr}" class="btn-w">{"报错"|tr}</a>
+								<a id="_IDLyricsView"  title="{"查看"|tr}" class="btn-w">{"查看"|tr}</a>
 
-								<a  title="" class="btn-c"><i class="r"></i></a>
-								<a  title="" class="btn-c"><i class="l"></i></a>
+								<a id="_IDLyricsBk" title="{"后退"|tr}" class="btn-c"><i class="r"></i></a>
+								<a id="_IDLyricsPr" title="{"前进"|tr}" class="btn-c"><i class="l"></i></a>
 							</div>
 						</div>
 

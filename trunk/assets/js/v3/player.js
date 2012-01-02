@@ -270,22 +270,6 @@ var YoukuWs = function(){
 			YoukuWs.set("language",$(this).attr("data"),true);
 			_location.replace(_location.pathname);
 		});
-/*
-
-document.getElementById('share').onmouseover = function() {
-	document.getElementById('share').className = "btn-share hover";
-	var _pos = getLT('share');
-	document.getElementById('share-layer').style.left = (_pos.left)+"px";
-	document.getElementById('share-layer').style.top = (_pos.top+27)+"px";
-	document.getElementById('share-layer').style.display = "block";
-}
-document.getElementById('share').onmouseout = function() {
-	document.getElementById('share').className = "btn-share";
-	document.getElementById('share-layer').style.display = "none";
-}
-document.getElementById('share-layer').onmouseover = document.getElementById('share').onmouseover;
-document.getElementById('share-layer').onmouseout = document.getElementById('share').onmouseout;
-*/
 		$("#share, #share-layer").mouseout(function(){
 			$("#share").removeClass("hover");
 			$("#share-layer").hide();
@@ -627,10 +611,10 @@ document.getElementById('share-layer').onmouseout = document.getElementById('sha
 				});
 				$("#_IDLyricsView").click(function(){
 					var html = "";
-					$("#_ContentLyrics >div").each(function(n,item){
+					$("#_ContentLyrics >p").each(function(n,item){
 						html+=$(item).html()+"<br/>";
 					});
-					$("#_ContentLyricsView >div").html(html);
+					$("#_ContentLyricsView >p").html(html);
 					$("#_ContentLyricsView").dialog({
 						width:400,height:300,title:"歌词信息", buttons: [
 					{
@@ -974,16 +958,39 @@ document.getElementById('share-layer').onmouseout = document.getElementById('sha
 					YoukuWsPlaylist.del(li.attr("vid"));
 					setTimeout(function() { li.remove(); }, 1);//fro ie patch
 				});
-				$("#PlayModeSet [name=set]").click(function(){
-					PlayMode = $("#PlayModeSet [name=set]:checked").val();
+				$("#PlayModeSet >a").click(function(){
+
+					
+					var PlayMode = $(this).attr("playmode");
+
+					$("#PlayModeSet >a").each(function(i,item){
+						$(item).removeClass("select");
+					});
+					$(this).addClass("select");
 					YoukuWs.set("PlayModeSet",PlayMode);
 				});
-				if(YoukuWs.get("PlayModeSet")){
-					PlayMode = YoukuWs.get("PlayModeSet");
-					$("#PlayModeSet [value="+PlayMode+"]").attr("checked",true);//(PlayMode);
+				var PlayMode = YoukuWs.get("PlayModeSet");
+				if(PlayMode<1 ||PlayMode>3){
+					PlayMode=2;
+				}
+
+				if(PlayMode){
+
+					$("#PlayModeSet >a").each(function(i,item){
+						$(item).removeClass("select");
+					});
+					
+					$("#PlayModeSet >a").each(function(i,item){
+						
+						var _playmode = $(item).attr("playmode");
+						if(PlayMode==_playmode){
+							$(item).addClass("select");
+							return;
+						}
+					});
 				}
 				//$("#PlayModeSet" ).buttonset().show();
-				$("#_BtPlayModeSet").button("option","disabled",true).show();
+				//$("#_BtPlayModeSet").button("option","disabled",true).show();
 				$("#_BtSearch").bt().click(function(){
 					search();
 				});
@@ -1023,35 +1030,28 @@ document.getElementById('share-layer').onmouseout = document.getElementById('sha
 					};
 					$("#IDNav >a").each(function(i,item){
 						//{{{ save scrollTop
-						/*
+						
 						window._ContentMusicTop=window._ContentMusicTop?window._ContentMusicTop:0;
 						if($("#_ContentMusic").scrollTop()>0){
 							window._ContentMusicTop = $("#_ContentMusic").scrollTop();
-						}*/
+						}
 						//}}}
 						
 						var _for = $(item).attr("for");
 							$("#"+_for).addClass("hide");
 
 						$(item).removeClass("current");
-						//$(item).css("background-color","#ddd");
-						//$("#_IDRight >.list").eq(i).hide();
 					});
 					$("#IDNav >a").each(function(i,item){
 						var _for = $(item).attr("for");
 						if($(_this).html()==$(item).html()){
 							$("#"+_for).addClass("current");
 							$("#"+_for).removeClass("hide");
-							//$("#"+_for).show();;
-							//$(item).css("background-color","");
 							$(item).addClass("current");
-							//$("#_IDRight >.list").eq(i).show();
-
 							//{{{ restore scrollTop
-							/*
 							if(i==1 && window._ContentMusicTop>0){
 								$("#_ContentMusic").scrollTop(window._ContentMusicTop);
-							}*/
+							}
 							//}}}
 						}
 					});
@@ -1302,7 +1302,7 @@ document.getElementById('share-layer').onmouseout = document.getElementById('sha
 			if(gc[k].w==""){
 				gc[k].w="&nbsp;";
 			}
-			var c = '<div time="'+gc[k].t+'" id="_ID'+k+'">'+gc[k].w+'</div>';
+			var c = '<p time="'+gc[k].t+'" id="_ID'+k+'">'+gc[k].w+'</p>';
 			o.append(c);
 		}
 	}
@@ -1366,13 +1366,13 @@ document.getElementById('share-layer').onmouseout = document.getElementById('sha
 			     if(!vid)return;
 			     showLyric("");
 			     pre=PlayType==0?0:1;
-			     if(PlayType==0){
-				     $("#_IDSkip").show();
+			    // if(PlayType==0){
+				     $("#_IDPause").show();
 				     $("#_IDPlay").hide();
-			     }else{
-				     $("#_IDSkip").hide();
-				     $("#_IDPlay").show();
-			     }
+			     //}else{
+				   //  $("#_IDPause").hide();
+				     //$("#_IDPlay").show();
+			    /// }
 			     next=1;
 			     CurrentVideoID=vid;
 			     YoukuWs.set("CurrentVideoID",CurrentVideoID);
@@ -1478,7 +1478,7 @@ document.getElementById('share-layer').onmouseout = document.getElementById('sha
 				     //}}}
 			     }else{
 					 //debug;
-					 return "";
+					// return "";
 				     try{
 					     PlayerReplay(vid);
 				     }catch(e){
@@ -1543,9 +1543,9 @@ document.getElementById('share-layer').onmouseout = document.getElementById('sha
 			     //向上移动
 			     var LyricCurrent = $("#"+id);
 			     //var t = l.top - 100;
-			     var t = LyricCurrent.position().top + $("#_ContentLyrics").scrollTop()- 120;
+			     var t = LyricCurrent.position().top + $("#_ContentLyrics").scrollTop()- 160;
 			     LyricTop.show();
-			     $("#_ContentLyrics .red").removeClass("red");
+			     $("#_ContentLyrics .current").removeClass("current");
 			     o_lyrics.animate({scrollTop:t+"px"},"fast","linear",function(){
 				     if(LyricCurrent.html().replace("&nbsp",'')!=""){
 					     var t2 = LyricCurrent.position().top;
@@ -1553,7 +1553,7 @@ document.getElementById('share-layer').onmouseout = document.getElementById('sha
 					     LyricTop.animate({
 						     "height":LyricCurrent.height()+"px"
 					     },"fast");
-					     LyricCurrent.addClass("red");
+					     LyricCurrent.addClass("current");
 				     }
 			     });
 
@@ -2155,7 +2155,11 @@ function PlayerReplay(vid){
 };
 function PlayerPause(flag){
 	try{
-		return _player().pauseVideo(flag);
+		
+		_player().pauseVideo(flag);
+
+		$("#_IDPause").hide();
+		$("#_IDPlay").show();
 	}catch(e){
 	}
 };
