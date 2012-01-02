@@ -1,3 +1,0 @@
-$.ajaxSetup({
-	dataType:"json"
-});
