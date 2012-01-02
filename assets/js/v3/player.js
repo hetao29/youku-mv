@@ -434,7 +434,18 @@ document.getElementById('share-layer').onmouseout = document.getElementById('sha
 					YoukuWs.playRadio();
 				}).bt({icon:"ui-icon-play"});
 
-				var normal_width=0;
+				$(".language").mouseover(function(){
+					 $(this).addClass('hover');
+				});
+				$(".language").mouseout(function(){
+					 $(this).removeClass('hover');
+				});
+				$(".language .panel a").live("click",(function(){
+					YoukuWs.set("language",$(this).attr("data"),true);
+					_location.replace(_location.pathname);
+					
+				}));
+
 				$("#_IDThx").click(function(){
 					//宽屏模式
 					var o = $(this).find("span");
