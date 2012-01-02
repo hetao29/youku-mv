@@ -961,15 +961,15 @@ var YoukuWs = function(){
 				$("#PlayModeSet >a").click(function(){
 
 					
-					var PlayMode = $(this).attr("playmode");
+					var _playmode = $(this).attr("playmode");
 
 					$("#PlayModeSet >a").each(function(i,item){
 						$(item).removeClass("select");
 					});
 					$(this).addClass("select");
-					YoukuWs.set("PlayModeSet",PlayMode);
+					YoukuWs.set("PlayModeSet",_playmode);
 				});
-				var PlayMode = YoukuWs.get("PlayModeSet");
+				PlayMode = YoukuWs.get("PlayModeSet");
 				if(PlayMode<1 ||PlayMode>3){
 					PlayMode=2;
 				}
@@ -1494,18 +1494,19 @@ var YoukuWs = function(){
 					 var p = o.position();
 					 if(!p)return;
 				     t = p.top+o.outerHeight()-o.parent().height();
-					 //4512:36:23:316
-					// var m = o.parent().scrollTop()+":"+o.position().top+":"+o.outerHeight()+":"+o.parent().height();
-				     if(t>0){
+				     var offset = 50; //偏移修正，比较无语
+					  t -= offset;
+					 if(t>0){
 					     t = o.parent().scrollTop() + p.top+o.height()-o.parent().height(); //432
+						 t -= offset;
 					     o.parent().animate({scrollTop:t+"px"},"slow","linear",function(){
 					     });
 				     }else if( t<0-(o.parent().height()-o.outerHeight())){
 					     t = (o.parent().scrollTop()+p.top);
+						  t -= offset;
 					     o.parent().animate({scrollTop:t+"px"},"slow","linear",function(){
 					     });
-				     }else{
-					 }
+				     }
 				     //}}}
 				     $("#_ContentMusic >li").removeClass("current");
 				     o.addClass('current');
