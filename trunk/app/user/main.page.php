@@ -12,6 +12,10 @@ class user_main{
 			user_api::logout();
 			header("location:/player.main.header");
 	}
+	function pageLogoutV3($inPath){
+			user_api::logout();
+			header("location:/player.main.headerV3");
+	}
 	function pageisLogin($inPath){
 			return user_api::islogin();
 	}
