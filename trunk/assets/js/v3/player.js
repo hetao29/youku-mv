@@ -1490,17 +1490,22 @@ var YoukuWs = function(){
 				     //{{{
 				     var t = 0;
 				     var o = $("#_ContentMusic [vid='"+vid+"']");
-				     if(!o || !o.position())return;
-				     t = o.position().top+o.outerHeight()-o.parent().height();
+				     if(!o)return;
+					 var p = o.position();
+					 if(!p)return;
+				     t = p.top+o.outerHeight()-o.parent().height();
+					 //4512:36:23:316
+					// var m = o.parent().scrollTop()+":"+o.position().top+":"+o.outerHeight()+":"+o.parent().height();
 				     if(t>0){
-					     t = o.parent().scrollTop() + o.position().top+o.height()-o.parent().height(); //432
+					     t = o.parent().scrollTop() + p.top+o.height()-o.parent().height(); //432
 					     o.parent().animate({scrollTop:t+"px"},"slow","linear",function(){
 					     });
 				     }else if( t<0-(o.parent().height()-o.outerHeight())){
-					     t = (o.parent().scrollTop()+o.position().top);
+					     t = (o.parent().scrollTop()+p.top);
 					     o.parent().animate({scrollTop:t+"px"},"slow","linear",function(){
 					     });
-				     }
+				     }else{
+					 }
 				     //}}}
 				     $("#_ContentMusic >li").removeClass("current");
 				     o.addClass('current');
