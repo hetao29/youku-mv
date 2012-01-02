@@ -1494,7 +1494,7 @@ var YoukuWs = function(){
 					 var p = o.position();
 					 if(!p)return;
 				     t = p.top+o.outerHeight()-o.parent().height();
-				     var offset = 50; //偏移修正，比较无语
+				     var offset = 52; //偏移修正，比较无语
 					  t -= offset;
 					 if(t>0){
 					     t = o.parent().scrollTop() + p.top+o.height()-o.parent().height(); //432
