@@ -5,7 +5,7 @@ body { font-size:12px; font-family:arial,"宋体",sans-serif; background:#EFEFEF
 body,ul,li,h1,h2,h3,h4,h5,p,form { margin:0; padding:0; list-style:none; }
 
 .t-header { width:100%; height:35px; background:url(/assets/style/default/img/rpx.png) repeat-x 0 -60px; position:relative; z-index:2; }
-.t-header .th-cont { width:930px; height:35px; margin:0 auto; }
+.t-header .th-cont {max-width:930px;width:100%;min-width:600px;  height:35px; margin:0 auto; }
 .t-header .th-cont .yk-logo { float:left; margin-left:10px; margin-top:9px; }
 .t-header .th-cont ul { float:right; }
 .t-header .th-cont ul li { height:20px; line-height:20px; padding:0 5px; margin-top:8px; float:right; color:#666; font-family:"宋体"; }
@@ -21,14 +21,24 @@ body,ul,li,h1,h2,h3,h4,h5,p,form { margin:0; padding:0; list-style:none; }
 .t-header .th-cont ul li.language:hover .panel,.t-header .th-cont ul li.language.hover .panel { display:block; }
 .t-header .th-cont ul li.family { font-family:arial; }
 
-.logo { width:930px; height:80px; margin:0 auto; text-align:left; padding-top:15px; position:relative; z-index:1; }
+.logo { max-width:930px;width:100%;min-width:400px; height:80px; margin:0 auto; text-align:left; padding-top:15px; position:relative; z-index:1; }
 .logo i { float:left; }
 .logo .btnbox { float:right; }
 .logo .btnbox a { float:right; margin-right:10px; }
 
-.fm-body { width:930px; overflow:hidden; margin:0 auto; }
-.fm-body .cont-left { width:660px; overflow:hidden; padding:10px 0; position:relative; float:left; background:#EFEFEF; }
-.top,.bottom { width:100%; height:10px; overflow:hidden; position:absolute; left:0; top:0; }
+.fm-body { max-width:930px;min-width:380px; overflow:hidden; margin:0 auto; }
+.fm-body .cont-left {
+	float:left;
+	width:100%;
+	margin:0 0 0 -258px;
+	
+	overflow:hidden;position:relative; background:#EFEFEF; 
+}
+.fm-body .cont-left .inner-left{
+	margin:0 0 0 258px;
+}
+
+.top,.bottom { width:100%; height:10px; overflow:hidden; left:0; top:0; }
 .top .box,.bottom .box { padding:0 10px; height:10px; overflow:hidden; position:relative; }
 .top .box i,.bottom .box i { width:10px; height:10px; display:block; overflow:hidden; background:url(/assets/style/default/img/ui.png) no-repeat -80px -200px; position:absolute; left:0; top:0; }
 .top .box i.right,.bottom .box i.right { background-position:-90px -200px; left:auto; right:0; }
@@ -39,7 +49,7 @@ body,ul,li,h1,h2,h3,h4,h5,p,form { margin:0; padding:0; list-style:none; }
 .bottom .box i.right { background-position:-90px -210px; }
 .bottom .box .boxcenter { background-position:0 -15px; }
 
-.fm-body .cont-left .cont-border,.ly-box .cont-border { position:relative; }
+.fm-body .cont-left .cont-border,.ly-box .cont-border { position:relative;  overflow:hidden;}
 .fm-body .cont-left .cont-border .left,.fm-body .cont-left .cont-border .right,.ly-box .left,.ly-box .right { width:10px; position:absolute; left:0; top:0; }
 .fm-body .cont-left .cont-border .left .box,.fm-body .cont-left .cont-border .right .box,.ly-box .left .box,.ly-box .right .box { width:10px; height:1500px;  background:url(/assets/style/default/img/rpy.png) repeat-y 0 0; }
 .fm-body .cont-left .cont-border .right,.ly-box .right { left:auto; right:0; }
@@ -107,7 +117,7 @@ body,ul,li,h1,h2,h3,h4,h5,p,form { margin:0; padding:0; list-style:none; }
 
 
 
-.share-layer { width:172px; overflow:hidden; padding:6px 10px 4px; position:absolute; border:1px solid #CCC; border-top:none; background:#FFF; display:none; }
+.share-layer { width:190px; overflow:hidden; padding:6px 10px 4px; position:absolute; border:1px solid #CCC; border-top:none; background:#FFF; display:none; }
 .share-layer .top { width:100%; height:1px; display:block; overflow:hidden; position:absolute; left:45px; top:0; background:#CCC; }
 .share-layer span { padding:0 2px; }
 .share-layer img { border:none; }
@@ -364,7 +374,7 @@ a { text-decoration:none; color:#333; cursor:pointer; }
 
 }
 .ly-box { padding:10px 0;margin:auto; overflow:hidden; position:relative; }
-.ly-box .cont-border { padding:0 10px; float:left; }
+.ly-box .cont-border { padding:0 10px; float:left;}
 .ly-box .cont-border h2 { width:100%; line-height:16px; padding:4px 0; position:absolute; left:20px; top:1px; font-size:12px; z-index:10; }
 .ly-box .cont-border h2 span { font-weight:normal; font-family:"宋体"; }
 .ly-box .cont-border a.close { position:absolute; right:20px; top:5px; z-index:10; }
