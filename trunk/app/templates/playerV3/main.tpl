@@ -50,6 +50,7 @@
 		<div class="logo"><i class="fm-logo"></i><div class="btnbox"><a class="rollbtn"  title=""><em></em><i class="mode"></i><span>简单模式</span></a><a class="rollbtn" id="_IDChange" title="{'换台'|tr}"><em></em><i class="change"></i><span>切换电台</span></a></div></div>
 		<div class="fm-body">
 			<div class="cont-left" id="box">
+			<div class="inner-left">
 				<div class="top"><div class="box"><i></i><i class="right"></i><div class="boxcenter"></div></div></div>
 				<div class="cont-border">
 					<div class="left"><div class="box"></div></div>
@@ -73,6 +74,7 @@
 					<div class="right"><div class="box"></div></div>
 				</div>
 				<div class="bottom"><div class="box"><i></i><i class="right"></i><div class="boxcenter"></div></div></div>
+			</div>
 			</div>
 			<div class="cont-right" id="_IDRight">
 				<div class="tab-bg">
@@ -171,14 +173,14 @@
 
 		<div class="share-layer" id="share-layer">
 			<i class="top"></i>
-			<span><a target="_blank" href="#" _href="http://v.t.sina.com.cn/share/share.php?url=http://v.youku.com/v_show/id_:vid:.html&amp;title=:title: http://youku.fm%23vid=:vid:&amp;content=utf8"><img title="分享到新浪微博" src="http://static.youku.com/v/img/ico_sina.gif"></a></span>
-			<span><a target="_blank" href="#" _href="http://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=http://v.youku.com/v_show/id_:vid:.html&amp;title=:title: http://youku.fm%23vid=:vid:"><img title="分享到QQ空间&quot;" src="http://static.youku.com/v/img/ico_Qzone.gif"></a></span>
-			<!--<span><a target="_blank" href="#" _href="http://share.v.t.qq.com/index.php?c=share&amp;a=index&amp;url=http://v.youku.com/v_show/id_:vid:.html&amp;appkey=801069800&amp;pic=&amp;assname=&amp;title=:title: (http://youku.fm%23vid=:vid:) "><img title="分享到腾讯微博" src="/assets/images/other/weiboicon16.png"></a></span>-->
-			<span><a target="_blank" href="#" _href="http://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?to=pengyou&amp;url=http://v.youku.com/v_show/id_:vid:.html&amp;title=:title: http://youku.fm%23vid=:vid:"><img title="分享到腾讯朋友&quot;" src="http://static.youku.com/v1.0.0659/v/img/ico_pengyou.png"></a></span>
-			<span><a target="_blank" href="#" _href="http://www.kaixin001.com/repaste/share.php?rurl=http://v.youku.com/v_show/id_:vid:.html&amp;rcontent=http://v.youku.com/v_show/id_:vid:.html&amp;rtitle=:title: http://youku.fm%23vid=:vid:"><img title="分享到开心网&quot;" src="http://static.youku.com/v1.0.0659/v/img/ico_kaixin.gif"></a></span>
-			<span><a target="_blank" href="#" _href="http://space.fetion.com.cn/api/share?source=优酷网&amp;url=http://v.youku.com/v_show/id_:vid:.html&amp;title=:title: http://youku.fm%23vid=:vid:"><img title="分享到飞信空间&quot;" src="http://static.youku.com/v1.0.0659/v/img/feixin_14px.png"></a></span>
-			<span><a target="_blank" href="#" _href="http://www.139.com/share/share.php?tl=953010001&amp;source=shareto139_youku&amp;url=http://v.youku.com/v_show/id_:vid:.html&amp;title=title=:title: http://youku.fm%23vid=:vid:"><img title="分享到139说客&quot;" src="http://static.youku.com/v1.0.0659/v/img/ico_139.gif"></a></span>
-			<span><a target="_blank" href="#" _href="http://share.renren.com/share/buttonshare.do?link=http://v.youku.com/v_show/id_:vid:.html&amp;title=:title:"><img src="http://static.youku.com/v/img/ico_renren.gif"></a></span>
+			<span><a target="_blank" href="#" _href="http://v.t.sina.com.cn/share/share.php?url=http://v.youku.com/v_show/id_:vid:.html&title=:title: http://youku.fm%23vid=:vid:&content=utf8"><img title="分享到新浪微博" src="http://static.youku.com/v/img/ico_sina.gif" /></a></span>
+			<span><a target="_blank" href="#" _href="http://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=http://v.youku.com/v_show/id_:vid:.html&title=:title: http://youku.fm%23vid=:vid:" ><img title=分享到QQ空间" src="http://static.youku.com/v/img/ico_Qzone.gif" /></a></span>
+			<span><a target="_blank" href="#" _href="http://share.v.t.qq.com/index.php?c=share&a=index&url=http://v.youku.com/v_show/id_:vid:.html&appkey=801069800&pic=&assname=&title=:title: (http://youku.fm%23vid=:vid:) " ><img title="分享到腾讯微博" src="/assets/images/other/weiboicon16.png" /></a></span>
+			<span><a target="_blank" href="#" _href="http://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?to=pengyou&url=http://v.youku.com/v_show/id_:vid:.html&title=:title: http://youku.fm%23vid=:vid:" ><img title=分享到腾讯朋友" src="http://static.youku.com/v1.0.0659/v/img/ico_pengyou.png" /></a></span>
+			<span><a target="_blank" href="#" _href="http://www.kaixin001.com/repaste/share.php?rurl=http://v.youku.com/v_show/id_:vid:.html&rcontent=http://v.youku.com/v_show/id_:vid:.html&rtitle=:title: http://youku.fm%23vid=:vid:" ><img title=分享到开心网" src="http://static.youku.com/v1.0.0659/v/img/ico_kaixin.gif" /></a></span>
+			<span><a target="_blank" href="#" _href="http://space.fetion.com.cn/api/share?source=优酷网&url=http://v.youku.com/v_show/id_:vid:.html&title=:title: http://youku.fm%23vid=:vid:" ><img title=分享到飞信空间" src="http://static.youku.com/v1.0.0659/v/img/feixin_14px.png" /></a></span>
+			<span><a target="_blank" href="#" _href="http://www.139.com/share/share.php?tl=953010001&source=shareto139_youku&url=http://v.youku.com/v_show/id_:vid:.html&title=title=:title: http://youku.fm%23vid=:vid:" ><img title=分享到139说客" src="http://static.youku.com/v1.0.0659/v/img/ico_139.gif" /></a></span>
+			<span><a target="_blank" href="#" _href="http://share.renren.com/share/buttonshare.do?link=http://v.youku.com/v_show/id_:vid:.html&title=:title:"><img src="http://static.youku.com/v/img/ico_renren.gif" /></a></span>
 		</div>
 
 
@@ -206,7 +208,7 @@
 
 
 		<!-- 拖动歌曲弹出层 默认下拉菜单们关闭层 在drag-layer加入hover样式即可切换为打开状态 -->
-		<div id="drag-layer" style="position: absolute;left:0px;top:0px"; class="mvlist-edit-layer">
+		<div id="drag-layer" style="position: absolute;left:0px;top:0px"; class="mvlist-edit-layer hide">
 			<div class="top"><p>添加到歌单<i class="icon-down"></i><i class="icon_add"></i></p></div>
 			<a id="_BtTrash2" class="icon_del" title="删除"></a>
 
