@@ -397,19 +397,21 @@ var YoukuWs = function(){
 					//}}}
 					YoukuWs.playRadio();
 				}).bt({icon:"ui-icon-play"});
+
+				var normal_width=0;
 				$("#_IDThx").click(function(){
 					//宽屏模式
 					var o = $(this).find("span");
 					if(YoukuWs.get("thx")!="open"){
 						//to open
 						$("#_IDRight").hide();
-						$("#box").css("width","756px");
+						$("#box").css("width",$(".fm-body").width()+"px");
 						YoukuWs.set("thx","open");
 						o.removeClass("thx_close");
 						o.addClass("thx_open");
 					}else{
 						//to close
-						$("#box").css("width","496px");//.hide();
+						$("#box").css("width","660px");//.hide();
 						$("#_IDRight").show();
 						o.addClass("thx_close");
 						o.removeClass("thx_open");
@@ -621,14 +623,8 @@ var YoukuWs = function(){
 					});
 				});
 				$("#_IDAbout").live("click",function(){
-					$("#_ContentAbout").dialog({
-						width:300,height:180,title:"关于".tr(), buttons: [
-					{
-						text:_LabelOk,click: function() {
-							     $( this ).dialog( "close" );
-						     }
-					}
-					]
+					$("#_ContentAbout").dg({
+						width:300,height:180,title:"关于".tr()
 					});
 				});
 				$("#_IDSignup").live("click",function(){
@@ -649,11 +645,27 @@ var YoukuWs = function(){
 						setTimeout(function() { ui.draggable.remove(); }, 1);//fro ie patch
 					}
 				});
+				var _sortMusicFlag=true;
 				$("#_ContentMusic").sortable({
 					stop:function(event,ui){
 						     setTimeout("YoukuWsPlaylist.save()",200);
-					     },start:function(event,ui){
-					     }
+							 
+							 $("#drag-layer").hide();
+							_sortMusicFlag = true;
+					     },
+					sort:function(event,ui){
+							 if(_sortMusicFlag){
+							 var p = ui.offset;
+							 var p2= $("#bfmsh-panel").offset();
+							 if(p){
+								 $("#drag-layer").css("left",(p2.left-$("#drag-layer").width())+"px");
+								 $("#drag-layer").css("top",(p.top)+"px");
+							 }
+
+							 $("#drag-layer").show();
+							 }
+							 _sortMusicFlag = false;
+					}
 
 				});
 				$( "#_ContentList >li .del" ).live("click",function(){
@@ -897,9 +909,9 @@ var YoukuWs = function(){
 					YoukuWs.set("PlayType",PlayType);
 					YoukuWs.playNext();
 				}).bt();//({icons:{primary:"ui-icon-seek-next"}});;
-				$("#_BtTrash").bt().droppable({
-					activeClass: "ui-state-highlight",
-					hoverClass: "ui-state-error",
+				$("#_BtTrash,#_BtTrash2").droppable({
+					activeClass: "",
+					hoverClass: "icon_del_active",
 					accept:"#_ContentMusic >li,#_ContentList >li",
 					tolerance:"pointer",
 					drop: function( event, ui ) {
