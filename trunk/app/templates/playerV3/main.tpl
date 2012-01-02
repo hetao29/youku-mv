@@ -105,9 +105,6 @@
 								<a  title="搜索" class="btn-search">搜索</a>
 							</div>
 							<ul class="music-list" id="_ContentMusic">
-								<li><i class="checkbox"></i><span>歌曲标题</span></li>
-								<li><i class="checkbox"></i><span>歌曲标题歌曲标题歌曲标题歌曲标题歌曲标题歌曲标题歌曲标题</span><em>歌手名字</em></li>
-								<li><a>歌曲标题歌曲标题歌曲标题歌曲标题歌曲标题歌曲标题歌曲标题</a></li>
 								<!--
 								<li><i class="checkbox"></i><span>歌曲标题</span><em>歌手名字</em></li>
 								<li><i class="checkbox"></i><span>歌曲标题</span><em>歌手名字</em></li>
@@ -126,9 +123,10 @@
 								<a  title="全选" class="btn-w">全选</a>
 								<a  title="反选" class="btn-w">反选</a>
 								<a  title="保存" class="btn-c"><i class="save"></i>保存</a>
-								<a  title="删除" class="btn-c"><i class="remove"></i>删除</a>
+								<a  title="删除" id="_BtTrash" class="btn-c"><i class="remove"></i>删除</a>
 								<a  title="添加" class="btn-c"><i class="add"></i>添加</a>
 							</div>
+							
 						</div>
 
 						<div id="sw-panel" class="hide">
@@ -205,6 +203,26 @@
 				</form>
 			</div>
 		</div>
+
+
+		<!-- 拖动歌曲弹出层 默认下拉菜单们关闭层 在drag-layer加入hover样式即可切换为打开状态 -->
+		<div id="drag-layer" style="position: absolute;left:0px;top:0px"; class="mvlist-edit-layer">
+			<div class="top"><p>添加到歌单<i class="icon-down"></i><i class="icon_add"></i></p></div>
+			<a id="_BtTrash2" class="icon_del" title="删除"></a>
+
+			<div class="mdrag-layer" id="_ContentList">
+				<ul>
+					<li><a  title="">华语流行金曲(23)</a></li>
+				</ul>
+
+				<a  title="">华语流行金曲(23)</a>
+				<a  title="">华语流行金曲(23)</a>
+				<a  title="">华语流行金曲(23)</a>
+				<a  title="" class="hover">华语流行金曲(23)</a>
+				<a  title="">华语流行金曲(23)</a>
+			</div>
+		</div>
+
 
 		<!-- 注册 -->
 		<div id="_ContentSignup" class="hide">
@@ -290,6 +308,21 @@
 					<a  title="" class="btn-layer-d big icon ret"><i class="l"></i>返回</a>
 				</div>
 				<!--<a  title="右下角不知道干什么的按钮" class="btn-rb">右下角不知道干什么的按钮</a>-->
+			</div>
+		</div>
+		
+		<div id="_ContentAbout" class="hide">
+			<!-- 关于优酷FM -->
+			<div class="about-box">
+				<img src="/assets/style/default/img/about-bg.gif" alt="" />
+				<div class="cont">
+					<p>优酷FM 2011-12-15</p>
+					<p>Copyright©2011 优酷 youku.com 版权所有</p>
+					<p>作者：Hetal　　QQ：231073376</p>
+				</div>
+				<div class="singleBtn">
+					<a  title="" class="btn-layer-d">确定</a>
+				</div>
 			</div>
 		</div>
 	<!-- 删除确认 -->
@@ -404,27 +437,11 @@
 		</div>
 	</div>
 	-->
-
-	<!-- 关于优酷FM -->
-	<!--
-	<div class="about-box">
-		<img src="img/about-bg.gif" alt="" />
-		<div class="cont">
-			<p>优酷FM 2011-12-15</p>
-			<p>Copyright©2011 优酷 youku.com 版权所有</p>
-			<p>作者：Hetal　　QQ：231073376</p>
-		</div>
-		<div class="singleBtn">
-			<a  title="" class="btn-layer-d">确定</a>
-		</div>
-	</div>
-	-->
-
 	<!-- 帮助中心 -->
-	<!--
+<div id="_ContentUsage" class="hide">
 	<div class="help-box">
 		<div class="help-cont">
-			<img src="img/help-bg.gif" alt="" />
+			<img src="/assets/style/default/img/help-bg.gif" alt="" />
 			<div class="cont">
 				<h2><i class="icon_ques"></i>什么是“电台模式”？</h2>
 				<p>电台模式，就是以“电台”的方式播放音乐，他们自动的不间断的播放你所选“频道”的音乐。换台，点击“换台”按钮，就可选择你所要播放的频道。播放/跳过，播放就是播放频道，跳过就是换下一首音乐来收听。喜欢/不喜欢，收藏音乐或者加入黑名单，只有登录了才能使用。</p>
@@ -443,24 +460,11 @@
 			</div>
 		</div>
 		<div class="singleBtn">
-			<a  title="" class="btn-layer-d">确定</a>
+			<a class="btn-layer-d">确定</a>
 		</div>
 	</div>
-	-->
+</div>
 
-	<!-- 拖动歌曲弹出层 默认下拉菜单们关闭层 在drag-layer加入hover样式即可切换为打开状态 -->
-	<div id="drag-layer" class="mvlist-edit-layer hover">
-		<div class="top"><p>添加到歌单<i class="icon-down"></i><i class="icon_add"></i></p></div>
-		<i class="icon_del"></i>
-
-		<div class="mdrag-layer">
-			<a  title="">华语流行金曲(23)</a>
-			<a  title="">华语流行金曲(23)</a>
-			<a  title="">华语流行金曲(23)</a>
-			<a  title="" class="hover">华语流行金曲(23)</a>
-			<a  title="">华语流行金曲(23)</a>
-		</div>
-	</div>
 
 	</body>
 
