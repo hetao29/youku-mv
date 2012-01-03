@@ -605,7 +605,7 @@ var YoukuWs = function(){
 					});
 
 					 if(YoukuWs.ListContent){
-							YoukuWs.showList();
+						//	YoukuWs.showList();
 					 }else{
 						 YoukuWs.listList();
 					 }
