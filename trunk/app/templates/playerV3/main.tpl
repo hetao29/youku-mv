@@ -172,8 +172,8 @@
 								<a id="_IDLyricsErr"  title="{"报错"|tr}" class="btn-w">{"报错"|tr}</a>
 								<a id="_IDLyricsView"  title="{"查看"|tr}" class="btn-w">{"查看"|tr}</a>
 
-								<a id="_IDLyricsBk" title="{"后退"|tr}" class="btn-c"><i class="r"></i></a>
-								<a id="_IDLyricsPr" title="{"前进"|tr}" class="btn-c"><i class="l"></i></a>
+								<a id="_IDLyricsPr" title="{"前进"|tr}" class="btn-c"><i class="r"></i></a>
+								<a id="_IDLyricsBk" title="{"后退"|tr}" class="btn-c"><i class="l"></i></a>
 							</div>
 						</div>
 
