@@ -396,14 +396,30 @@ class player_main extends STpl{
 			return $db->delAction($UserID,$VideoID,$ActionType);
 		}
 	}
+	function pageDelActionV3($inPath){
+		if(($User=user_api::islogin())!==false && !empty($_REQUEST['vid'])){
+			$VideoID= $_REQUEST['vid'];
+			$action =!empty($inPath[3])?$inPath[3]:"";
+			switch($action){
+				case "up":	$actiontype=0;	break;
+				case "down":$actiontype=1;	break;
+				case "skip":$actiontype=2;	break;
+				default:return false;
+			}
+			$UserID=$User['UserID'];
+			$db = new user_db;
+			return $db->delAction($UserID,$VideoID,$ActionType);
+		}
+	}
 	function pageListAction($inPath){
 		if(($User=user_api::islogin())!==false){
-			$action =!empty($inPath[3])?$inPath[3]:0;
+			$action =!empty($inPath[3])?$inPath[3]:"";
 			$page =!empty($inPath[4])?$inPath[4]:1;
 			switch($action){
-			case "up":	$actiontype=0;	break;
-			case "down":$actiontype=1;	break;
-			case "skip":$actiontype=2;	break;
+				case "up":	$actiontype=0;	break;
+				case "down":$actiontype=1;	break;
+				case "skip":$actiontype=2;	break;
+				default:return false;
 			}
 			$db = new user_db;
 			$video_api = new video_api;
