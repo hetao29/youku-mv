@@ -420,16 +420,16 @@
 						</div>
 					</div>
 				</td>
-				<td style="width:100%;display:none" id="_IDListAdd">
+				<td style="width:100%;display:none" id="_IDListAdd" lid="0">
 					<div class="mylist-box">
 						<div class="mylist-cont pb-30">
 							<p class="label-title">精选集名称2</p>
-							<input type="text" class="input-txt" />
+							<input type="text" id="_IDListName" name="name" class="input-txt" />
 							<p class="label-title">精选集说明</p>
-							<textarea class="input-area"></textarea>
+							<textarea name="comment" id="_IDListComment" class="input-area"></textarea>
 						</div>
 						<div class="singleBtn">
-							<a title="" class="btn-layer-d big">保存完成</a>　<a id="_IDReturn" title="" class="btn-layer-d big icon ret"><i class="l" ></i>返回</a>
+							<a title="" id="_IDSaveList" class="btn-layer-d big">保存完成</a>　<a id="_IDReturn" title="" class="btn-layer-d big icon ret"><i class="l" ></i>返回</a>
 						</div>
 					</div>
 				</td>

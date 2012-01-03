@@ -423,7 +423,7 @@ class player_main extends STpl{
 			}
 			$db = new user_db;
 			$video_api = new video_api;
-			$r = $db->listAction($User['UserID'],$actiontype,$page);
+			$r = $db->listAction($User['UserID'],$actiontype,$page,$size=10);
 			if(!empty($r->items)){
 				foreach($r->items as &$item){
 					$item = $video_api->getVideoInfo($item['VideoID']);
