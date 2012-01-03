@@ -472,9 +472,10 @@ class player_main extends STpl{
 	function pageListListen($inPath){
 		if(($User=user_api::islogin())!==false){
 			$page =!empty($inPath[3])?$inPath[3]:1;
+			$size =!empty($inPath[4])?$inPath[4]:10;
 			$db = new user_db;
 			$video_api = new video_api;
-			$r= $db->ListListen($User['UserID'],$page);
+			$r= $db->ListListen($User['UserID'],$page,$size);
 			if(!empty($r->items)){
 				foreach($r->items as &$item){
 					$item = $video_api->getVideoInfo($item['VideoID']);
@@ -641,6 +642,23 @@ class player_main extends STpl{
 			}
 		}else{
 			$r=$video_api->search($k);
+		}
+		return $r;
+	}
+	function pageSearchV3($inPath){
+		$k = $_REQUEST['k'];
+		if(empty($k))return;
+		$video_api = new video_api;
+		$page = empty($inPath[3])?1:$inPath[3];
+
+		$sphinx_api = new sphinx_api;
+		$r = $sphinx_api->searchV3($k,$page,10,$mustHaveSingers=true);
+		if(!empty($r->items)){
+			foreach($r->items as &$item){
+				$item = $video_api->getVideoInfoByLuceneVideo($item);
+			}
+		}else{
+			$r=$video_api->searchV3($k,$page,10);
 		}
 		return $r;
 	}

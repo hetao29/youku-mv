@@ -85,8 +85,40 @@ class video_api{
 		/**
 		 * 搜索
 		 **/
-		public function search($key){
-			$r = SHttp::get("http://api.youku.com/api_ptvideo/st_3_pid_XOA",array("sv"=>$key,"rt"=>3,"ob"=>6,"pz"=>100,"pg"=>1));
+		public function searchV3($key,$page=1,$size=10){
+			$r = SHttp::get("http://api.youku.com/api_ptvideo/st_3_pid_XOA",array("sv"=>$key,"rt"=>3,"ob"=>6,"pz"=>$size,"pg"=>$page));
+			$r = SJson::decode($r);
+			$o = array();
+			foreach($r->item as $item){
+				$vid = $item->videoid;
+				$db=new video_db;
+				$vid = singer_music::decode($vid);
+				$Video = $db->getVideo($vid);
+				if(empty($Video)){
+					//{{{
+					$Video = array();
+					$Video['VideoSourceID']=1;
+					$Video['VideoName'] = $item->title;
+					$Video['VideoDuration'] = $this->__strTotime($item->duration);
+					$Video['VideoID'] = singer_music::decode($item->videoid);
+					$Video['VideoThumb'] = $item->snapshot;
+					$Video['VideoPubDate'] = $item->pubDate;
+					$this->addVideo($Video);
+					//}}}
+				}
+				$o[]=$Video;
+			}
+			
+			$result=new stdclass;
+			$result->page=$page;
+			$result->pageSize=$size;
+			$result->totalPage=ceil($r->total/$size);
+			$result->total=$r->total;
+			$result->items=$o;
+			return $result;
+		}
+		public function search($key,$page=1,$size=10){
+			$r = SHttp::get("http://api.youku.com/api_ptvideo/st_3_pid_XOA",array("sv"=>$key,"rt"=>3,"ob"=>6,"pz"=>$size,"pg"=>$page));
 			$r = SJson::decode($r);
 			$o = array();
 			foreach($r->item as $item){

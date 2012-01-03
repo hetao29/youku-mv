@@ -411,6 +411,43 @@ a { text-decoration:none; color:#333; cursor:pointer; }
 	box-shadow: 5px 5px 5px rgba(13, 13, 13, 0.5);
 	filter:progid:DXImageTransform.Microsoft.Shadow(color=#3F3F3F,direction=135,strength=5);
 }
+
+.ui-autocomplete {
+	position: absolute; cursor: default; 
+	background-color: #EFEFEF;
+	border: 1px solid #CCC;
+}	
+.ui-menu {
+	list-style:none;
+	padding: 2px;
+	margin: 0;
+	display:block;
+	float: left;
+}
+.ui-menu .ui-menu {
+	margin-top: -3px;
+}
+.ui-menu .ui-menu-item {
+	margin:0;
+	padding: 0;
+	zoom: 1;
+	float: left;
+	clear: left;
+	width: 100%;
+	border-bottom: 1px solid #CCC;
+}
+.ui-menu .ui-menu-item a {
+	text-decoration:none;
+	display:block;
+	padding:.2em .4em;
+	line-height:1.5;
+	zoom:1;
+}
+.ui-menu .ui-menu-item a.ui-state-hover,
+.ui-menu .ui-menu-item a.ui-state-active {
+	font-weight: normal;background-color: #E1F0F7;
+}
+
 /*
 
 .ui-dialog { position: absolute; padding:10px 0;z-index:51; overflow: hidden; }
