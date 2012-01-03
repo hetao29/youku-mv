@@ -23,9 +23,13 @@
 /*dialog*/
 (function($){
 	$.fn.center = function () {
+		//this.css("position","absolute");
 		var top = ( $(window).height() - this.height() ) / 2+$(window).scrollTop();
 		top = top<0?0:top;
 		this.css("top", top + "px");
+		var left = ( $(window).width() - this.width() ) / 2+$(window).scrollLeft();
+		left = left<0?0:left;
+		this.css("left", left + "px");
 		return this;
 	}
 	$.fn.dg = function(options){
