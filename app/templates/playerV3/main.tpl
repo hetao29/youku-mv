@@ -7,23 +7,16 @@
 		<script type="text/javascript" src="/assets/js/ui-1.8.16/jquery.ui.core.js"></script>
 		<script type="text/javascript" src="/assets/js/ui-1.8.16/jquery.ui.widget.js"></script>
 		<script type="text/javascript" src="/assets/js/ui-1.8.16/jquery.ui.mouse.js"></script>
-		<!--<script type="text/javascript" src="/assets/js/ui-1.8.16/jquery.ui.position.js"></script>-->
-		<!--<script type="text/javascript" src="/assets/js/ui-1.8.16/jquery.ui.button.js"></script>-->
+		<script type="text/javascript" src="/assets/js/ui-1.8.16/jquery.ui.position.js"></script>
 		<script type="text/javascript" src="/assets/js/ui-1.8.16/jquery.ui.autocomplete.js"></script>
 		<script type="text/javascript" src="/assets/js/ui-1.8.16/jquery.ui.resizable.js"></script>
 		<script type="text/javascript" src="/assets/js/ui-1.8.16/jquery.ui.sortable.js"></script>
-		<!--<script type="text/javascript" src="/assets/js/ui-1.8.16/jquery.ui.dialog.js"></script>-->
 		<script type="text/javascript" src="/assets/js/ui-1.8.16/jquery.ui.draggable.js"></script>
 		<script type="text/javascript" src="/assets/js/ui-1.8.16/jquery.ui.droppable.js"></script>
 		<script type="text/javascript" src="/assets/js/jquery.cookie.js"></script>
-		<!--<script type="text/javascript" src="/assets/js/jquery.corner.js"></script>-->
 		<!--<script type="text/javascript" src="/assets/js/json2.js"></script>-->
 		<script type="text/javascript" src="/assets/js/swfobject/swfobject.js"></script>
 
-		<!--
-		<script type="text/javascript" src="/assets/js/v3/config.js"></script>
-		<script type="text/javascript" src="/assets/js/v3/ui.js"></script>
-		-->
 		<script type="text/javascript" src="/assets/js/v3/player.js"></script>
 
 		<link rel="Shortcut Icon" href="/assets/images/ico/favicon_32x32.ico" />
