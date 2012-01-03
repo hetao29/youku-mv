@@ -53,8 +53,9 @@
 			if(width) w2 = "style='width:"+(width+20)+"px;'";
 			mode = mode?true:false;
 			var dg="";
+			if(!window.zIndex)window.zIndex=50;window.zIndex++;
 			//if(mode)dg+='<div class="screen-over" style="display:none";>&nbsp;</div>';
-			dg='<div class="layer">';
+			dg='<div class="layer" style="z-index:'+zIndex+'">';
 				dg+='<div class="ly-box" '+w2+'>';
 					dg+='<div class="top"><div class="box"><i></i><i class="right"></i><div class="boxcenter"></div></div></div>';
 					dg+='<div class="cont-border">';
@@ -443,6 +444,37 @@ var YoukuWs = function(){
 					$("#_IDList td").eq(index).show();
 					$("#_IDList .layer").center();
 				});
+				$("#_IDSaveList").live("click",function(){
+					
+					var lid = parseInt($("#_IDList td").eq(1).attr("lid"));
+					if(lid<=0){
+						var url="/user.list.add";
+					}else{
+						var url="/user.list.edit";
+					}
+					
+					if($("#_IDListName").val()=="")return;
+					$.ajax({
+						url: url,
+						data: {
+							ListName:$("#_IDListName").val(),
+							ListComment:$("#_IDListComment").val(),
+							ListID:lid
+						},
+						success: function( List) {
+								 if(List){
+									 $('#_IDHeader').load("/player.main.headerV3."+out);
+									 YoukuWs.listList();
+								 }
+							 }
+
+					});
+					var index=0;
+					$("#_IDList td").hide();
+					$("#_IDList td").eq(index).show();
+					$("#_IDList .layer").center();
+						
+				});
 				$("#_IDConfirm").live("click",function(){
 					var index=0;
 					//{{{删除
@@ -455,7 +487,7 @@ var YoukuWs = function(){
 							ListID:lid
 						},type:"post",
 						success: function( List) {
-								 $('.header').load("/player.main.headerV3."+out);
+								 $('#_IDHeader').load("/player.main.headerV3."+out);
 								 if(List){
 									 YoukuWs.listList();
 								 }
@@ -607,6 +639,30 @@ var YoukuWs = function(){
 					$("#_IDList td").hide();
 					$("#_IDList td").eq(index).attr("lid",lid).show();
 					$("#_IDList .layer").center();
+
+				});
+
+				
+				$("#_IDListMain .editEdit").live("click",function(){
+					var index=1;
+					$("#_IDList td").hide();
+					var li =$(this).parentsUntil("li").parent();
+					$("#_IDList td").eq(index).attr("lid",li.attr("lid")).show();
+					$("#_IDList .layer").center();
+
+					$("#_IDListName").val(li.find("a").html());
+					$("#_IDListComment").val(li.find(".comment").html());
+
+				});
+				
+				$("#_IDListMain .editContent").live("click",function(){
+					var li =$(this).parentsUntil("li").parent();
+					var lid=li.attr("lid");
+					url="/user.list.listContents?lid="+lid;
+					page=1;
+					delUrl="";
+					saveSortUrl="";
+					YoukuWs.loadMusic(url,page,delUrl,saveSortUrl);
 
 				});
 				//删除
@@ -1198,6 +1254,7 @@ var YoukuWs = function(){
 				$("#_AListAdd").click(function(){
 					$("#_CtListAdd").toggle("fast");
 				});
+				/*
 				$("#_IDListAdd").click(function(){
 					if($("#_IDListName").val()=="")return;
 					$.ajax({
@@ -1214,6 +1271,7 @@ var YoukuWs = function(){
 
 					});
 				});
+				*/
 				$("#_BtSaveList").bt().click(function(){
 					if(YoukuWs.isLogin()){
 						$("#_IDList").dialog({
@@ -1894,8 +1952,8 @@ var YoukuWs = function(){
 					 li+='<li lid="'+list.ListID+'" ord="'+list.ListOrder+'">';
 					li+='<h2><a  title="">'+list.ListName+'</a><span>('+list.ListCount+')</span><a title="" class="btn-play-s"></a></h2>';
 					li+='<p>最后更新：<span>'+list.ListUpdateTime+'</span></p>';
-					li+='<p>'+list.ListComment+'</p>';
-					li+='<div class="edit"><a class="del" title="删除">删除</a><a  title="编辑">编辑</a><a  title="整理歌曲">整理歌曲</a></div>';
+					li+='<p class="comment">'+list.ListComment+'</p>';
+					li+='<div class="edit"><a class="del" title="删除">删除</a><a class="editEdit" title="编辑">编辑</a><a class="editContent" title="整理歌曲">整理歌曲</a></div>';
 					li+='</li>';
 
 				 }

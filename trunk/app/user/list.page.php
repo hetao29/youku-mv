@@ -8,8 +8,13 @@ class user_list{
 	function pageAdd($inPath){
 		if(($User=user_api::islogin())!==false && !empty($_REQUEST['ListName'])){
 				$ListName=strip_tags($_REQUEST['ListName']);
+				$ListComment=strip_tags($_REQUEST['ListComment']);
 				if(empty($ListName))return false;
-				$List=array("UserID"=>$User['UserID'],"ListName"=>$ListName,"ListCreateTime=now()");
+				$List=array(
+					"UserID"=>$User['UserID'],
+					"ListName"=>$ListName,
+					"ListComment"=>$ListComment,
+					"ListCreateTime=now()");
 				$db = new user_db;
 				if(($ListID = $db->addList($List))!==false){
 					return $db->getList($ListID);
@@ -78,11 +83,12 @@ class user_list{
 	function pageEdit($inPath){
 		if(($User=user_api::islogin())!==false && !empty($_REQUEST['ListID']) && !empty($_REQUEST['ListName'])){
 				$ListName = strip_tags($_REQUEST['ListName']);
+				$ListComment=strip_tags($_REQUEST['ListComment']);
 				if(empty($ListName))return false;
 				$db = new user_db;
 				if(($List=$db->getList($_REQUEST['ListID']))!==false){
 						if($List['UserID']==$User['UserID']){
-								$List=array("ListName"=>$ListName);
+								$List=array("ListName"=>$ListName,"ListComment"=>$ListComment);
 								return $db->editList($_REQUEST['ListID'],$List);
 						}
 				};
