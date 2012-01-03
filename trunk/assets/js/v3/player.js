@@ -1442,6 +1442,11 @@ var YoukuWs = function(){
 		$("#keywords").change(function(){
 			YoukuWs.set("keywords",$("#keywords").val());
 		});
+		$("#keywords").keydown(function(event){
+			if(event.keyCode==13){  
+				$("#_BtSearch").trigger("click");
+			}
+		});
 		var keywords = YoukuWs.get("keywords");
 		if(keywords){
 			$("#keywords").val(keywords);
