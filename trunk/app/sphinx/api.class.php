@@ -23,7 +23,7 @@ class sphinx_api{
 		"videostyle"	=>"VideoStyle",
 		"videostatus"	=>"VideoStatus",
 		"videolanguage"	=>"VideoLanguage");
-	var $sphinx;
+		var $sphinx;
 		function __construct(){
 			$this->sphinx = new SSphinx;
 			$this->sphinx->SetServer ( "127.0.0.1", 9312 );
@@ -97,6 +97,43 @@ class sphinx_api{
 			$res = $this->sphinx->Query ( $q="@(videoname,singernames) $key", $index="video" );
 			$videos = $this->resToVideos($res);
 			return $videos;
+		}
+		function searchV3($key,$page=1,$size=10,$mustHaveSingers=true){
+			 
+			$key = $this->sphinx->EscapeString ($key);
+			
+			$search = array(",", "/", "\\", ".", ";", ":", "\"", "!", "~", "`", "^", "(", ")", "?", "-", "'", "<", ">", "$", "&", "%", "#", "@", "+", "=", "{", "}", "[", "]", "：", "）", "（", "．", "。", "，", "！", "；", "“", "”", "‘", "’", "［", "］", "、", "—", "　", "《", "》", "－", "…", "【", "】");
+			$key = str_replace($search,' ',$key);
+
+
+			$keywords = explode(" ",$key);
+			$key="";
+			foreach($keywords as $_k){
+				$key.='+"'.$_k.'" ';
+			}
+			$start = ($page-1)*$size;
+			$length = $size;
+			//$key ="+".$key;
+			//$keywords = $this->sphinx->BuildKeywords ($key, "video", false );
+			$this->sphinx->ResetFilters();
+			$this->sphinx->ResetGroupBy();
+			$this->sphinx->SetMatchMode ( $mode=SPH_MATCH_EXTENDED );
+			//$this->sphinx->SetFilterRange ( $args[++$i], $args[++$i], $args[++$i] );
+			//$this->sphinx->SetLimits(0,$limit,10000);
+			$this->sphinx->SetLimits($start, $length, 10000);
+			$this->sphinx->SetSortMode (SPH_SORT_EXTENDED ,"videostatus desc, videopubdate desc");
+			//$this->sphinx->SetFilter ("@videostatus",array(-1 ));
+			//$this->sphinx->SetFilterRange("videoid",96,96);
+			$res = $this->sphinx->Query ( $q="@(videoname,singernames) $key", $index="video" );
+			
+			$result=new stdclass;
+			$videos = $this->resToVideos($res);
+			$result->totalSize = $res['total'];
+			$result->totalPage = ceil($res['total']/$size);
+			$result->page = $page;
+			$result->pageSize=$size;
+			$result->items = $videos;
+			return $result;
 		}
 		function SetFilterRange ( $attribute, $min, $max, $exclude=false ){
 			return $this->sphinx->SetFilterRange ( $attribute, $min, $max, $exclude );

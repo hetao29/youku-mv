@@ -73,11 +73,11 @@
 								<a class="btn-prev" id="_BtPre" title="{'上一首'|tr}">{'上一首'|tr}</a>
 								<a class="btn-play" id="_IDPlay" title="{'播放'|tr}">{'播放'|tr}</a>
 								<a class="btn-pause"  id="_IDPause" title="暂停">暂停</a>
+								{*<a class="btn-skip"  title="跳过">跳过</a>*}
 								<a class="btn-next" id="_BtNext" title="{'下一首'|tr}">{'下一首'|tr}</a>
 								&nbsp;&nbsp;&nbsp;
 								<a class="btn-love" id="_IDUp" title="{"喜欢"|tr}">{"喜欢"|tr}</a>
 								<a class="btn-remove" id="_IDDown" title="移除">{"不喜欢"|tr}</a>
-								{*<a class="btn-skip"  title="跳过">跳过</a>*}
 							</div>
 							<div class="right" id="PlayModeSet">
 								<a class="btn-order" playmode="3" title="{'随机'|tr}<">{'随机'|tr}</a>
@@ -118,8 +118,8 @@
 						<div id="bfmsh-panel" class="hide">
 							<div class="search-box">
 								<i class="search-bg"></i>
-								<input type="text" id="" name="" />
-								<a  title="搜索" class="btn-search">搜索</a>
+								<input type="text" id="keywords" name="" />
+								<a id="_BtSearch" title="搜索" class="btn-search">搜索</a>
 							</div>
 							<ul class="music-list" id="_ContentMusic">
 								{*
@@ -289,10 +289,15 @@
 			</div>
 			
 		</div>
-		<div id="_CtMusicList" class="hide">
+		<div id="_CtMusicList" class="hide" title="歌曲列表">
 			<!-- 我的歌单(整理歌曲) -->
+			<div id="loading" style="text-align:center;padding:10px;position: absolute;width: 100%;top: 30%;z-index: 999;">
+				<img style="vertical-align: middle;" src="/assets/images/loading/loading9.gif" /> 正在加载中...
+			</div>
+
 			<div class="mylist-box">
 				<div class="mylist-cont">
+					<!--
 					<ul class="mvlist">
 						<li>
 						<i class="checkbox"></i>
@@ -316,6 +321,7 @@
 							<a class="fl" title="下一页" >下一页</a>
 						</div>
 					</div>
+					-->
 				</div>
 				<div class="singleBtn">
 					<a  title="" class="btn-layer-d">全选</a>
@@ -455,32 +461,32 @@
 	</div>
 	-->
 	<!-- 帮助中心 -->
-<div id="_ContentUsage" class="hide">
-	<div class="help-box">
-		<div class="help-cont">
-			<img src="/assets/style/default/img/help-bg.gif" alt="" />
-			<div class="cont">
-				<h2><i class="icon_ques"></i>什么是“电台模式”？</h2>
-				<p>电台模式，就是以“电台”的方式播放音乐，他们自动的不间断的播放你所选“频道”的音乐。换台，点击“换台”按钮，就可选择你所要播放的频道。播放/跳过，播放就是播放频道，跳过就是换下一首音乐来收听。喜欢/不喜欢，收藏音乐或者加入黑名单，只有登录了才能使用。</p>
+	<div id="_ContentUsage" class="hide">
+		<div class="help-box">
+			<div class="help-cont">
+				<img src="/assets/style/default/img/help-bg.gif" alt="" />
+				<div class="cont">
+					<h2><i class="icon_ques"></i>什么是“电台模式”？</h2>
+					<p>电台模式，就是以“电台”的方式播放音乐，他们自动的不间断的播放你所选“频道”的音乐。换台，点击“换台”按钮，就可选择你所要播放的频道。播放/跳过，播放就是播放频道，跳过就是换下一首音乐来收听。喜欢/不喜欢，收藏音乐或者加入黑名单，只有登录了才能使用。</p>
+				</div>
+				<div class="cont">
+					<h2><i class="icon_ques"></i>什么是“电台模式”？</h2>
+					<p>电台模式，就是以“电台”的方式播放音乐，他们自动的不间断的播放你所选“频道”的音乐。换台，点击“换台”按钮，就可选择你所要播放的频道。播放/跳过，播放就是播放频道，跳过就是换下一首音乐来收听。喜欢/不喜欢，收藏音乐或者加入黑名单，只有登录了才能使用。</p>
+				</div>
+				<div class="cont">
+					<h2><i class="icon_ques"></i>什么是“电台模式”？</h2>
+					<p>电台模式，就是以“电台”的方式播放音乐，他们自动的不间断的播放你所选“频道”的音乐。换台，点击“换台”按钮，就可选择你所要播放的频道。播放/跳过，播放就是播放频道，跳过就是换下一首音乐来收听。喜欢/不喜欢，收藏音乐或者加入黑名单，只有登录了才能使用。</p>
+				</div>
+				<div class="cont">
+					<h2><i class="icon_ques"></i>什么是“电台模式”？</h2>
+					<p>电台模式，就是以“电台”的方式播放音乐，他们自动的不间断的播放你所选“频道”的音乐。换台，点击“换台”按钮，就可选择你所要播放的频道。播放/跳过，播放就是播放频道，跳过就是换下一首音乐来收听。喜欢/不喜欢，收藏音乐或者加入黑名单，只有登录了才能使用。</p>
+				</div>
 			</div>
-			<div class="cont">
-				<h2><i class="icon_ques"></i>什么是“电台模式”？</h2>
-				<p>电台模式，就是以“电台”的方式播放音乐，他们自动的不间断的播放你所选“频道”的音乐。换台，点击“换台”按钮，就可选择你所要播放的频道。播放/跳过，播放就是播放频道，跳过就是换下一首音乐来收听。喜欢/不喜欢，收藏音乐或者加入黑名单，只有登录了才能使用。</p>
+			<div class="singleBtn">
+				<a class="btn-layer-d">确定</a>
 			</div>
-			<div class="cont">
-				<h2><i class="icon_ques"></i>什么是“电台模式”？</h2>
-				<p>电台模式，就是以“电台”的方式播放音乐，他们自动的不间断的播放你所选“频道”的音乐。换台，点击“换台”按钮，就可选择你所要播放的频道。播放/跳过，播放就是播放频道，跳过就是换下一首音乐来收听。喜欢/不喜欢，收藏音乐或者加入黑名单，只有登录了才能使用。</p>
-			</div>
-			<div class="cont">
-				<h2><i class="icon_ques"></i>什么是“电台模式”？</h2>
-				<p>电台模式，就是以“电台”的方式播放音乐，他们自动的不间断的播放你所选“频道”的音乐。换台，点击“换台”按钮，就可选择你所要播放的频道。播放/跳过，播放就是播放频道，跳过就是换下一首音乐来收听。喜欢/不喜欢，收藏音乐或者加入黑名单，只有登录了才能使用。</p>
-			</div>
-		</div>
-		<div class="singleBtn">
-			<a class="btn-layer-d">确定</a>
 		</div>
 	</div>
-</div>
 
 
 	</body>
