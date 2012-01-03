@@ -338,7 +338,7 @@
 			</div>
 		</div>
 		
-		<div id="_ContentAbout" class="hide">
+		<div id="_ContentAbout" class="hide" _title="关于">
 			<!-- 关于优酷FM -->
 			<div class="about-box">
 				<img src="/assets/style/default/img/about-bg.gif" alt="" />
@@ -398,96 +398,129 @@
 		</div>
 	</div>
 	-->
+	<div id="_IDList" class="hide" _title="我的歌单"/>
+		<!-- 我的歌单 -->
+		<table style="width:100%">
+			<tr style="width:100%">
+				<td style="width:100%" id="_IDListMain">
+					<div class="mylist-box">
+							<div class="mylist-cont">
+								<ul class="list">
+									{*<li>
+									<h2><a  title="">华语流行金曲</a><span>(15)</span><a  title="" class="btn-play-s"></a></h2>
+									<p>最后更新：<span>2011-12-02</span></p>
+									<p>甜而温暖，重复一整天也不会腻味，七克力般甜蜜的声音。重复一整天也不会腻味。</p>
+									<div class="edit"><a  title="删除">删除</a><a  title="编辑">编辑</a><a  title="整理歌曲">整理歌曲</a></div>
+									</li>*}
+								</ul>
+							</div>
+						</div>
+						<div class="singleBtn">
+							<a  title="" id="_BtListAdd" class="btn-layer-d big icon"><i class="add"></i>新建歌单</a>
+						</div>
+					</div>
+				</td>
+				<td style="width:100%;display:none" id="_IDListAdd">
+					<div class="mylist-box">
+						<div class="mylist-cont pb-30">
+							<p class="label-title">精选集名称2</p>
+							<input type="text" class="input-txt" />
+							<p class="label-title">精选集说明</p>
+							<textarea class="input-area"></textarea>
+						</div>
+						<div class="singleBtn">
+							<a title="" class="btn-layer-d big">保存完成</a>　<a id="_IDReturn" title="" class="btn-layer-d big icon ret"><i class="l" ></i>返回</a>
+						</div>
+					</div>
+				</td>
+				<td style="width:100%;display:none" lid="0">
 
-	<!-- 我的歌单 -->
-	<!--
-	<div class="mylist-box">
-		<div class="mylist-cont">
-			<ul class="list">
-				<li>
-				<h2><a  title="">华语流行金曲</a><span>(15)</span><a  title="" class="btn-play-s"></a></h2>
-				<p>最后更新：<span>2011-12-02</span></p>
-				<p>甜而温暖，重复一整天也不会腻味，七克力般甜蜜的声音。重复一整天也不会腻味。</p>
-				<div class="edit"><a  title="删除">删除</a><a  title="编辑">编辑</a><a  title="整理歌曲">整理歌曲</a></div>
-				</li>
-				<li>
-				<h2><a  title="">华语流行金曲</a><span>(15)</span><a  title="" class="btn-play-s"></a></h2>
-				<p>最后更新：<span>2011-12-02</span></p>
-				<p>甜而温暖，重复一整天也不会腻味，七克力般甜蜜的声音。重复一整天也不会腻味。</p>
-				<div class="edit"><a  title="删除">删除</a><a  title="编辑">编辑</a><a  title="整理歌曲">整理歌曲</a></div>
-				</li>
-				<li>
-				<h2><a  title="">华语流行金曲</a><span>(15)</span><a  title="" class="btn-play-s"></a></h2>
-				<p>最后更新：<span>2011-12-02</span></p>
-				<p>甜而温暖，重复一整天也不会腻味，七克力般甜蜜的声音。重复一整天也不会腻味。</p>
-				<div class="edit"><a  title="删除">删除</a><a  title="编辑">编辑</a><a  title="整理歌曲">整理歌曲</a></div>
-				</li>
-				<li>
-				<h2><a  title="">华语流行金曲</a><span>(15)</span><a  title="" class="btn-play-s"></a></h2>
-				<p>最后更新：<span>2011-12-02</span></p>
-				<p>甜而温暖，重复一整天也不会腻味，七克力般甜蜜的声音。重复一整天也不会腻味。</p>
-				<div class="edit"><a  title="删除">删除</a><a  title="编辑">编辑</a><a  title="整理歌曲">整理歌曲</a></div>
-				</li>
-				<li>
-				<h2><a  title="">华语流行金曲</a><span>(15)</span><a  title="" class="btn-play-s"></a></h2>
-				<p>最后更新：<span>2011-12-02</span></p>
-				<p>甜而温暖，重复一整天也不会腻味，七克力般甜蜜的声音。重复一整天也不会腻味。</p>
-				<div class="edit"><a  title="删除">删除</a><a  title="编辑">编辑</a><a  title="整理歌曲">整理歌曲</a></div>
-				</li>
-				<li>
-				<h2><a  title="">华语流行金曲</a><span>(15)</span><a  title="" class="btn-play-s"></a></h2>
-				<p>最后更新：<span>2011-12-02</span></p>
-				<p>甜而温暖，重复一整天也不会腻味，七克力般甜蜜的声音。重复一整天也不会腻味。</p>
-				<div class="edit"><a  title="删除">删除</a><a  title="编辑">编辑</a><a  title="整理歌曲">整理歌曲</a></div>
-				</li>
-			</ul>
-		</div>
-		<div class="singleBtn">
-			<a  title="" class="btn-layer-d big icon"><i class="add"></i>新建歌单</a>
-		</div>
+					<div class="msg-box nobg">
+						<div class="cont">
+							<i class="warning"></i>
+							<span>确证要删除吗？</span>
+						</div>
+						<div class="singleBtn">
+							<a id="_IDConfirm" title="" class="btn-layer-d">确定</a>　<a id="_IDCancel" title="" class="btn-layer-d">取消</a>
+						</div>
+					</div>
+				</td>
+			</tr>
+		</table>
 	</div>
-	-->
 
-
-
-	<!-- 我的歌单(编辑/新建歌单) -->
-	<!--
-	<div class="mylist-box">
-		<div class="mylist-cont pb-30">
-			<p class="label-title">精选集名称</p>
-			<input type="text" class="input-txt" />
-			<p class="label-title">精选集说明</p>
-			<textarea class="input-area"></textarea>
-		</div>
-		<div class="singleBtn">
-			<a  title="" class="btn-layer-d big">保存完成</a>　<a  title="" class="btn-layer-d big icon ret"><i class="l"></i>返回</a>
-		</div>
-	</div>
-	-->
 	<!-- 帮助中心 -->
-	<div id="_ContentUsage" class="hide">
+	<div id="_ContentUsage" class="hide" _title="使用说明">
 		<div class="help-box">
 			<div class="help-cont">
 				<img src="/assets/style/default/img/help-bg.gif" alt="" />
 				<div class="cont">
-					<h2><i class="icon_ques"></i>什么是“电台模式”？</h2>
-					<p>电台模式，就是以“电台”的方式播放音乐，他们自动的不间断的播放你所选“频道”的音乐。换台，点击“换台”按钮，就可选择你所要播放的频道。播放/跳过，播放就是播放频道，跳过就是换下一首音乐来收听。喜欢/不喜欢，收藏音乐或者加入黑名单，只有登录了才能使用。</p>
+<pre>1.什么是“电台模式”
+	电台模式，就是以“电台”的方式播放音乐，他们自动的不间断的播放你所选“频道”的音乐。
+	换台，点击“换台”按钮，就可选择你所要播放的频道。
+	播放/跳过，播放就是播放频道，跳过就是换下一首音乐来收听。
+	喜欢/不喜欢，收藏音乐或者加入黑名单，只有登录了才能使用。
+
+2.什么是“播放模式”
+	播放模式，就是以自定义音乐列表来播放，播放时只会播放列表里的音乐。
+	搜索歌曲
+		能过歌手名和歌曲名进入搜索。
+		打开搜索结果后可以直接点击音乐名播放试听。
+		点击“加号”直接加到播放列表，或者直接“拖动”到播放列表。
+	添加歌曲
+		通过把优酷播放页地址，专辑地址，节目地址添加播放列表里
+	调整顺序
+		顺序调整很简单，“拖动”你要调整的音乐，放到合适的位置就可以排序了
+	删除
+		点“删除”按钮，删除当前选中的音乐
+		或者把要删除的音乐“拖动”到按钮上面，就删除了！
+	保存，在未登录的情况下，默认是自动保存在本地的，登录后就是保存在你的歌单里了
+
+3.什么是“显示歌词”
+	显示歌词就是把当前的音乐的歌词显示出来，如果没有歌词的话，就会显示为空白的。
+	后退/前进，当歌词不同步时，可以通过这2个按钮调整。
+	报错，当发现歌词不对时，可以通过这个功能通知我们修改。
+	查看，查看完整的歌词内容。
+
+4.页面快捷键
+	上一首，向上(Up)，在“电台模式”下，这按钮没有作用
+	下一首，向下(Down)
+	播放模式切换，向左(Left)/向右(Right)
+	播放/暂停，空格键(Space)
+	宽屏/标屏，回车键(Enter)
+	不喜欢/删除，删除键(Delete),
+		当是"电台模式"时,为"不喜欢"
+		当是"播放模式"时,为"删除"
+
+5.浏览器地址里的“前进”，“后退”
+	浏览器里的“前进”与“后退”功能，能实现播放你的播放历史功能。
+	不过在“电台模式”下不会记录你的上一首。
+
+6.歌单，属于你自己的歌曲播放列表，这功能必须登录后才能使用
+	建立歌单，建立属于你自己的歌单名。
+	歌单排序，很简单，只用拖到你的歌单就排序了。
+	清空，完全清除歌单里的音乐。
+	删除，删除歌单，同时会删除歌单里的音乐。
+	改名，给歌单改名。
+	加载，把歌单里的所有音乐，加载到当前的播放列表里。
+	歌曲整理，会打开这个歌单里的所有音乐，可以进行，排序(拖动排序)和删除歌曲功能。
+	保存，保存歌曲到歌单。
+		可以把你当前列表里的音乐永久保存起来，方便随时加载到当前列表里播放。
+
+7.喜欢/不喜欢(黑名单)
+	如果你喜欢当前这首音乐，你可以用“喜欢”来进行收藏。
+	如果你不喜欢，也可以“不喜欢”，以后电台里就不会放你不喜欢的音乐。
+
+8.听过的，记录播放历史
+	如果你登录后，会自动记录你播放过的音乐。方便你以后再来收听。
+
+9.多语言版本，目前只支持下如下种，其中英文，繁体中文还不是完全支持。
+	英文/繁体中文/简体中文
+
+10.全屏模式
+	双击播放器进入全屏模式</pre>
+
 				</div>
-				<div class="cont">
-					<h2><i class="icon_ques"></i>什么是“电台模式”？</h2>
-					<p>电台模式，就是以“电台”的方式播放音乐，他们自动的不间断的播放你所选“频道”的音乐。换台，点击“换台”按钮，就可选择你所要播放的频道。播放/跳过，播放就是播放频道，跳过就是换下一首音乐来收听。喜欢/不喜欢，收藏音乐或者加入黑名单，只有登录了才能使用。</p>
-				</div>
-				<div class="cont">
-					<h2><i class="icon_ques"></i>什么是“电台模式”？</h2>
-					<p>电台模式，就是以“电台”的方式播放音乐，他们自动的不间断的播放你所选“频道”的音乐。换台，点击“换台”按钮，就可选择你所要播放的频道。播放/跳过，播放就是播放频道，跳过就是换下一首音乐来收听。喜欢/不喜欢，收藏音乐或者加入黑名单，只有登录了才能使用。</p>
-				</div>
-				<div class="cont">
-					<h2><i class="icon_ques"></i>什么是“电台模式”？</h2>
-					<p>电台模式，就是以“电台”的方式播放音乐，他们自动的不间断的播放你所选“频道”的音乐。换台，点击“换台”按钮，就可选择你所要播放的频道。播放/跳过，播放就是播放频道，跳过就是换下一首音乐来收听。喜欢/不喜欢，收藏音乐或者加入黑名单，只有登录了才能使用。</p>
-				</div>
-			</div>
-			<div class="singleBtn">
-				<a class="btn-layer-d">确定</a>
 			</div>
 		</div>
 	</div>
