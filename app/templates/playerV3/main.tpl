@@ -148,6 +148,7 @@
 
 						<div id="sw-panel" class="hide">
 							<div class="sw-box" id="_ContentLyrics">
+							{*
 								<p>罗志祥  爱转角</p>
 								<p>爱转角遇见了谁是否有爱情的美</p>
 								<p>爱转角以后的街能不能有我来陪</p>
@@ -165,6 +166,7 @@
 								<p>心不再拚命躲不去害怕结果</p>
 								<p>有美丽笑容</p>
 								<p>我不让爱掉眼泪 不让你掉眼泪</p>
+							  *}
 							</div>
 							<div class="btnline">
 								<a id="_IDLyricsErr"  title="{"报错"|tr}" class="btn-w">{"报错"|tr}</a>
@@ -289,7 +291,7 @@
 			</div>
 			
 		</div>
-		<div id="_CtMusicList" class="hide" title="歌曲列表">
+		<div id="_CtMusicList" class="hide" _title="歌曲列表">
 			<!-- 我的歌单(整理歌曲) -->
 			<div id="loading" style="text-align:center;padding:10px;position: absolute;width: 100%;top: 30%;z-index: 999;">
 				<img style="vertical-align: middle;" src="/assets/images/loading/loading9.gif" /> 正在加载中...
@@ -297,7 +299,7 @@
 
 			<div class="mylist-box">
 				<div class="mylist-cont">
-					<!--
+					{*
 					<ul class="mvlist">
 						<li>
 						<i class="checkbox"></i>
@@ -321,16 +323,18 @@
 							<a class="fl" title="下一页" >下一页</a>
 						</div>
 					</div>
-					-->
+					*}
 				</div>
 				<div class="singleBtn">
+				{*
 					<a  title="" class="btn-layer-d">全选</a>
 					<a  title="" class="btn-layer-d">反选</a>
 					<a  title="" class="btn-layer-d">删除</a>
 					<a  title="" class="btn-layer-d big">添加歌曲</a>
 					<a  title="" class="btn-layer-d big icon ret"><i class="l"></i>返回</a>
+				*}
 				</div>
-				<!--<a  title="右下角不知道干什么的按钮" class="btn-rb">右下角不知道干什么的按钮</a>-->
+				{*<a  title="右下角不知道干什么的按钮" class="btn-rb">右下角不知道干什么的按钮</a>*}
 			</div>
 		</div>
 		
