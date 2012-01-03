@@ -162,8 +162,8 @@ var YoukuWs = function(){
 		$("#_IDLyricsAdmin >a").bt();
 		//{{{
 		if (!$.support.borderRadius){
-			$('#box').corner("tr tl 8px");
-			$("#_IDRight").corner("tr br 8px");
+			//$('#box').corner("tr tl 8px");
+			//$("#_IDRight").corner("tr br 8px");
 		}
 		//}}}
 
@@ -1232,7 +1232,7 @@ var YoukuWs = function(){
 						//}
 					//});
 				});
-				$("#_BtAddList").button();
+				//$("#_BtAddList").button();
 				$("#_BtAddMv").bt().click(function(){
 					$( "#_DialogAdd" ).dialog({
 						width:500,height:320, buttons: {
@@ -1332,6 +1332,7 @@ var YoukuWs = function(){
 						YoukuWs.login(function(){$("#_BtSaveList").trigger("click");});
 					}
 				}).show();
+				/*
 				$("#_BtOpenList").button().click(function(){
 					if(YoukuWs.isLogin()){
 						//显示列表
@@ -1342,7 +1343,7 @@ var YoukuWs = function(){
 						YoukuWs.login(function(){$("#_BtOpenList").trigger("click");});
 					}
 				}).show();
-
+				*/
 				$(window).bind("beforeunload",function(){
 					var r= PlayerInfo();
 					if(r){
