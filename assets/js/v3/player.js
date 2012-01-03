@@ -34,12 +34,11 @@
 		var options = $.extend(defaults, options); 
 		this.each(function(item){ 
 			var t = $(this);
+			t.show();
 			if(t.attr("bt_set")){
-				
 				t.find(".layer").center();
 				return;
 			};
-			t.show();
 			var content = t.html();
 			var mode = t.attr("mode");
 			var title = t.attr("_title");
@@ -99,12 +98,14 @@
 
 	$(".ly-box .close").live("click",function(){
 		var p = $(this).parents(".layer").parent();
-		p.attr("bt_set","");
 		var d =p.data("close");
 		if(d)eval(d);
 		p.hide();
+		/*
+		return;
 		var dg = $(p).find(".content");
 		p.html(dg.html());
+		*/
 	});
 })(jQuery); 
 
