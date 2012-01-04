@@ -116,25 +116,16 @@
 							</div>
 							<ul class="music-list" id="_ContentMusic">
 								{*
-								<li><i class="checkbox"></i><span>歌曲标题</span><em>歌手名字</em></li>
-								<li><i class="checkbox"></i><span>歌曲标题</span><em>歌手名字</em></li>
-								<li><i class="checkbox"></i><span>歌曲标题</span><em>歌手名字</em></li>
-								<li><i class="checkbox"></i><span>歌曲标题</span><em>歌手名字</em></li>
-								<li><i class="checkbox"></i><span>歌曲标题歌曲标题歌曲标题歌曲标题歌曲标题歌曲标题歌曲标题</span><em>歌手名字</em></li>
-								<li><i class="checkbox"></i><span>歌曲标题</span><em>歌手名歌手名字歌手名字字</em></li>
-								<li><i class="checkbox"></i><span>歌曲标题</span><em>歌手名字</em></li>
-								<li><i class="checkbox"></i><span>歌曲标题</span><em>歌手名字</em></li>
-								<li><i class="checkbox"></i><span>歌曲标题</span><em>歌手名字</em></li>
-								<li><i class="checkbox"></i><span>歌曲标题</span><em>歌手名字</em></li>
-								<li><i class="checkbox"></i><span>歌曲标题</span><em>歌手名字</em></li>
+								<li><span class="checkbox"></span><span>歌曲标题</span><em>歌手名字</em></li>
 								*}
 							</ul>
 							<div class="btnline">
-								<a  title="全选" class="btn-w">全选</a>
-								<a  title="反选" class="btn-w">反选</a>
-								<a  title="保存" class="btn-c"><i class="save"></i>保存</a>
-								<a  title="删除" id="_BtTrash" class="btn-c"><i class="remove"></i>删除</a>
-								<a  title="添加" class="btn-c"><i class="add"></i>添加</a>
+								<a id="_BtEditMode" title="编辑" class="btn-w">编辑</a>
+								<a id="_BtSelectAll" title="全选" class="btn-w hide">全选</a>
+								<a id="_BtDeSelect" title="反选" class="btn-w hide">反选</a>
+								<a id="_BtAdd" title="添加" class="btn-c"><i class="add"></i>添加</a>
+								<a id="_BtSaveAll" title="保存" class="btn-c hide"><i class="save"></i>保存</a>
+								<a id="_BtDelete" title="删除" id="_BtTrash" class="btn-c hide"><i class="remove"></i>删除</a>
 							</div>
 							
 						</div>
@@ -291,10 +282,11 @@
 		</div>
 		<div id="_CtMusicList" class="hide" _title="歌曲列表">
 			<!-- 我的歌单(整理歌曲) -->
-			<div id="loading" style="text-align:center;padding:10px;position: absolute;width: 100%;top: 30%;z-index: 999;">
-				<img style="vertical-align: middle;" src="/assets/images/loading/loading9.gif" /> 正在加载中...
+			<div id="loading" style="text-align: center;     position: absolute; width: 100%; top: 0%; z-index: 999;  height: 100%;">
+				<div style="width:100%;top:40%;position:relative">
+					<img style="vertical-align: middle;" src="/assets/images/loading/loading9.gif"> 正在加载中...
+				</div>
 			</div>
-
 			<div class="mylist-box">
 				<div class="mylist-cont">
 					{*

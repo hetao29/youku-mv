@@ -579,6 +579,57 @@ var YoukuWs = function(){
 
 
 				//{{{
+				//编辑模式
+				var editmode=false;
+				$("#_BtEditMode").click(function(){
+					if(editmode==false){
+						$("#_ContentMusic .checkbox").show();
+						$("#_BtSelectAll").show();
+						$("#_BtDeSelect").show();
+						$("#_BtSaveAll").show();
+						$("#_BtDelete").show();
+						editmode=true;
+					}else{
+						$("#_ContentMusic .checkbox").hide();
+						$("#_BtSelectAll").hide();
+						$("#_BtDeSelect").hide();
+						$("#_BtSaveAll").hide();
+						$("#_BtDelete").hide();
+						editmode=false;
+					}
+				});
+				//删除
+				$("#_BtDelete").click(function(){
+						var selected =$("#_ContentMusic >li.select");
+
+						$.each(selected,function(i,item){
+							YoukuWsPlaylist.del($(item).attr("vid"));
+							setTimeout(function() { $(item).remove(); }, 1);
+						});
+
+				});
+				//全选
+				$("#_BtSelectAll").click(function(){
+						$("#_ContentMusic >li").addClass("select");
+				});
+				//反选
+				$("#_BtDeSelect").click(function(){
+					var all =$("#_ContentMusic >li");
+					var selected =$("#_ContentMusic >li.select");
+					all.addClass("select");
+					selected.removeClass("select");
+				});
+				$("#_ContentMusic .checkbox").live("click",function(){
+						var li =$(this).parent();
+						if(li.hasClass("select"))li.removeClass("select");else li.addClass("select");
+						return false;
+				});
+
+
+
+
+
+
 				$("#_IDListMain .btn-play-s").live('click',function(){
 					var li =$(this).parentsUntil("li").parent();
 					YoukuWs.listContents(li.attr("lid"));
@@ -628,7 +679,7 @@ var YoukuWs = function(){
 
 				});
 				//删除
-				$("#_CtMusicList .remove").live('click',function(){
+				$("#_CtMusicList .MusicRemove").live('click',function(){
 					var li =$(this).parentsUntil("li").parent();
 					var div = $(this).parentsUntil(".mylist-cont").parent();
 					var delurl = $(div).attr("delurl").replace(/:vid:/,li.attr("vid"));
@@ -645,7 +696,8 @@ var YoukuWs = function(){
 					//可以优化
 					$(this).parentsUntil(".content").find(".select .remove").trigger("click");
 				});
-				$("#_CtMusicList .play").live('click',function(){
+				//播放
+				$("#_CtMusicList .MusicPlay").live('click',function(){
 					var li =$(this).parentsUntil("li").parent();
 					YoukuWsPlaylist.add(li.attr("vid"),li.attr("mvname"));
 					YoukuWs.play(li.attr("vid"));
@@ -1190,7 +1242,7 @@ var YoukuWs = function(){
 					//});
 				});
 				//$("#_BtAddList").button();
-				$("#_BtAddMv").bt().click(function(){
+				$("#_BtAddMv").click(function(){
 					$( "#_DialogAdd" ).dialog({
 						width:500,height:320, buttons: {
 							      "增加": function() {
@@ -1365,7 +1417,7 @@ var YoukuWs = function(){
 				PlayType = YoukuWs.get("PlayType",0);
 				if(PlayType>2)PlayType=0;
 				$.each(YoukuWsPlaylist.list(),function(i,n){
-					var o = '<li vid="'+n.v+'"><a>'+n.t+'</a></li>';
+					var o = '<li vid="'+n.v+'"><span class="checkbox hide"></span><a>'+n.t+'</a></li>';
 					$("#_ContentMusic").append(o);
 				});
 				$("#IDNav >a").each(function(i,item){
@@ -2009,15 +2061,16 @@ var YoukuWs = function(){
 						  $("#_CtMusicList #loading" ).hide();
 							var li="";
 							var ti='';
+							var od="";
 							if(saveSortUrl)ti='title="拖动可以排序哦"';
 							 for(var i=0;i<result.items.length;i++){
 								var mvname=YoukuWs.getVideoName(result.items[i]);
-								
-								li+='<li order="'+(result.items[i].MvOrder)+'" _type="listen" '+ti+' mvname="'+mvname+'" vid="'+result.items[i].VideoID+'">'
-								li+='<i class="checkbox"></i><p>'+mvname+'</p>';
+								if(result.items[i].MvOrder) od = 'order="'+(result.items[i].MvOrder)+'"';
+								li+='<li '+od+' _type="listen" '+ti+' mvname="'+mvname+'" vid="'+result.items[i].VideoID+'">'
+								li+='<span class="checkbox"></span><p>'+mvname+'</p>';
 								li+='<span>';
-								if(delUrl)li+='<a title="" class="btn-c"><i class="remove"></i></a>';
-								li+='<a title="" class="btn-c"><i class="play"></i></a></span></li>';
+								if(delUrl)li+='<a title="" class="btn-c MusicRemove"><i class="remove"></i></a>';
+								li+='<a class="btn-c MusicPlay"><i class="play"></i></a></span></li>';
 							 }
 							//{{{ pager
 							var pager='';
@@ -2295,7 +2348,7 @@ var YoukuWsPlaylist = function(){
 				all.push(m);
 			};
 			if(!noappend && !finded){
-				var html = '<li vid="'+m.v+'"><a>'+m.t+'</a></li>';
+				var html = '<li vid="'+m.v+'"><span class="checkbox hide"></span><a>'+m.t+'</a></li>';
 				content.append(html);
 				isappend=true;
 			}
