@@ -843,26 +843,29 @@ var YoukuWs = function(){
 					}
 				});
 				
-				var _sortMusicFlag=true;
+				//var _sortMusicFlag=true;
 				$("#_ContentMusic").sortable({
 					stop:function(event,ui){
 						     setTimeout("YoukuWsPlaylist.save()",200);
 							 
 							 $("#drag-layer").hide();
-							_sortMusicFlag = true;
+							//_sortMusicFlag = true;
 					     },
-					sort:function(event,ui){
-							 if(_sortMusicFlag){
-							 var p = ui.offset;
-							 var p2= $("#bfmsh-panel").offset();
-							 if(p){
-								 $("#drag-layer").css("left",(p2.left-$("#drag-layer").width())+"px");
-								 $("#drag-layer").css("top",(p.top)+"px");
-							 }
-
-							 $("#drag-layer").show();
-							 }
-							 _sortMusicFlag = false;
+					start:function(event,ui){
+							 //if(_sortMusicFlag)
+							//	 {
+								// setTimeout(function(){
+								
+								// var p = ui.position;
+								// var p2= $("#bfmsh-panel").offset();
+								// if(p){
+									// $("#drag-layer").css("left",(p2.left-$("#drag-layer").width())+"px");
+									// $("#drag-layer").css("top",(p.top)+"px");
+								// }
+								 $("#drag-layer").show();
+								// },200);
+							// }
+							// _sortMusicFlag = false;
 					}
 
 				});
@@ -1120,7 +1123,7 @@ var YoukuWs = function(){
 						YoukuWs.playRadioNext();
 					}
 				});
-				$("#_BtTrash,#_BtTrash2").droppable({
+				$("#_BtDelete,#_BtTrash2").droppable({
 					activeClass: "",
 					hoverClass: "icon_del_active",
 					accept:"#_ContentMusic >li,#_ContentList >li",
