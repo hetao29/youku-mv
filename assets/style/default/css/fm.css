@@ -250,13 +250,12 @@ body,ul,li,h1,h2,h3,h4,h5,p,form { margin:0; padding:0; list-style:none; }
 .mvlist-edit-layer .mdrag-layer .layer-bg { width:100%; height:1000px; position:absolute; left:0; top:0; z-index:1; opacity:0.2; filter:alpha(opacity=20); z-index:1; }
 .mvlist-edit-layer .mdrag-layer a { width:110px; height:16px; display:block; line-height:16px; color:#666; padding:4px 10px; text-align:left; position:relative; z-index:2 }
 .mvlist-edit-layer .mdrag-layer a span { color:#999; }
-.mvlist-edit-layer .mdrag-layer li { background:#FFF; background:#FFF; border-bottom:1px solid #CCC;}
-.mvlist-edit-layer .mdrag-layer li.hover { background:#E1F0F7; border:1px solid red; }
-/*
+.mvlist-edit-layer .mdrag-layer li { background:#FFF; background:#FFF; border:1px solid #CCC;}
+.mvlist-edit-layer .mdrag-layer li.hover { background:#FFF; }
 .fm-body .cont-right .cont-border ul.music-list li:hover,.fm-body .cont-right .cont-border ul.music-list li.hover { background:#E1F0F7; }
 .fm-body .cont-right .cont-border ul.music-list li.select i { background-position:-155px -200px; }
 .fm-body .cont-right .cont-border ul.music-list li.current	{ background-color: #DDDEE0; }
-*/
+
 
 
 
