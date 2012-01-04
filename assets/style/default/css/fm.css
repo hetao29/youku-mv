@@ -70,7 +70,12 @@ body,ul,li,h1,h2,h3,h4,h5,p,form { margin:0; padding:0; list-style:none; }
 .fm-body .cont-left .cont-border .right,.ly-box .right { left:auto; right:0; }
 .fm-body .cont-left .cont-border .right .box,.ly-box .right .box { background-position:-15px 0; }
 
-.fm-body .cont-left .cont-border .content { padding:5px 20px 0; overflow:hidden; }
+.fm-body .cont-left .cont-border .content { padding:5px 0 0; overflow:hidden;margin-right: 10px;margin-left: 10px; }
+.fm-body .cont-left .cont-border .content .box{ 
+margin-left: 10px;
+margin-right: 10px;
+}
+
 .fm-body .cont-left .cont-border .content h2 { font-size:14px; font-family:"宋体"; position:relative; }
 .fm-body .cont-left .cont-border .content h2 span { font-weight:normal; }
 .fm-body .cont-left .cont-border .content h2 i { position:absolute; right:0; top:0; }
