@@ -194,27 +194,6 @@
 		</div>
 
 
-		<div id="CtLogin" class="hide" title="{'登录'|tr}">
-			<div class="login-box">
-				<form id="_FormLogin" onsubmit="return YoukuWs.formlogin();" action="post">
-					<div class="msgbox" style="display:none"><i class="error"></i> <span></span></div>
-					<ul class="elm-list">
-						<li class="label"><label for="username">{'邮箱'|tr}/{'用户名'|tr}:</label></li>
-						<li class="input"><input class="txt" type="text" name="useremail" id="username" /></li>
-						<li class="label"><label for="password">{'密码'|tr}:</label></li>
-						<li class="input"><input class="txt" type="password"  name="password" id="password" /></li>
-						<li class="label ck"></li>
-						<li class="input ck"><input class="ckbox" name="forever" type="checkbox" id="forever" /><label for="forever" class="ck-label">{"记住登录"|tr}</label></li>
-						<li class="label ck"></li>
-						<li class="input ck">
-							<a title="{'登录'|tr}" onclick="return YoukuWs.formlogin();" class="btn-login hover"><input type="submit" name="submit" class="hide"/>{'登录'|tr}</a>　
-							<a id="_IDSignup2" title="{"注册"|tr}" class="btn-login">{"注册"|tr}</a>
-							
-						</li>
-					</ul>
-				</form>
-			</div>
-		</div>
 
 
 		<!-- 拖动歌曲弹出层 默认下拉菜单们关闭层 在drag-layer加入hover样式即可切换为打开状态 -->
@@ -237,24 +216,50 @@
 
 
 		<!-- 注册 -->
-		<div id="_ContentSignup" class="hide">
+		<div id="_ContentSignup" class="hide" _title="{'注册'|tr}">
 			<div class="reg-box">
-				<div class="msgbox" style="display:none"><i class="notice"></i> 请输入正确的邮箱地址</div>
-				<ul class="elm-list">
-					<li class="label"><label for="username">邮箱:</label></li>
-					<li class="input"><input class="txt" type="text" id="username" /></li>
-					<li class="label"><label for="nickname">昵称:</label></li>
-					<li class="input"><input class="txt" type="text" id="nickname" /></li>
-					<li class="label"><label for="password">密码:</label></li>
-					<li class="input"><input class="txt" type="password" id="password" /></li>
-					<li class="label"><label for="password2">确认密码:</label></li>
-					<li class="input"><input class="txt" type="password" id="password2" /></li>
-					<li class="line"><input type="checkbox" id="readed" /><label for="readed">我已阅读并接受优酷</label><a>注册协议</a><span>和</span><a>版权声明</a></li>
-					<li class="line des">电子邮箱和昵称注册后不能修改，请仔细核对</li>
-					<li class="singleBtn"><a class="btn-login hover">注册</a></li>
-				</ul>
+				<div class="msgbox" style="display:none"><i class="notice"></i> <span></span></div>
+				<form onsubmit="return YoukuWs.formsignup();"  id="_FormSignup">
+					<ul class="elm-list">
+						<li class="label"><label for="username">{'邮箱'|tr}:</label></li>
+						<li class="input"><input class="txt" type="text" name="useremail" id="username" /></li>
+						<li class="label"><label for="nickname">{'别名'|tr}:</label></li>
+						<li class="input"><input class="txt" type="text" name="useralias" id="nickname" /></li>
+						<li class="label"><label for="password">{'密码'|tr}:</label></li>
+						<li class="input"><input class="txt" type="password" name="password" id="password" /></li>
+						<li class="label"><label for="password2">{'密码确认'|tr}:</label></li>
+						<li class="input"><input class="txt" type="password" name="password2" id="password2" /></li>
+						<li class="line"><input type="checkbox" id="readed" /><label for="readed">我已阅读并接受优酷</label><a>注册协议</a><span>和</span><a>版权声明</a></li>
+						<li class="line des">电子邮箱和昵称注册后不能修改，请仔细核对</li>
+						<li class="singleBtn"><a id="_IDSingupSubmit" onclick="return YoukuWs.formsignup();" class="btn-login hover">{'注册'|tr}</a></li>
+					</ul>
+				</form>
 			</div>
 		</div>
+
+		<!--登录-->
+		<div id="CtLogin" class="hide" _title="{'登录'|tr}">
+			<div class="login-box">
+				<form id="_FormLogin" onsubmit="return YoukuWs.formlogin();" action="post">
+					<div class="msgbox" style="display:none"><i class="error"></i> <span></span></div>
+					<ul class="elm-list">
+						<li class="label"><label for="username">{'邮箱'|tr}/{'用户名'|tr}:</label></li>
+						<li class="input"><input class="txt" type="text" name="useremail" id="username" /></li>
+						<li class="label"><label for="password">{'密码'|tr}:</label></li>
+						<li class="input"><input class="txt" type="password"  name="password" id="password" /></li>
+						<li class="label ck"></li>
+						<li class="input ck"><input class="ckbox" name="forever" type="checkbox" id="forever" /><label for="forever" class="ck-label">{"记住登录"|tr}</label></li>
+						<li class="label ck"></li>
+						<li class="input ck">
+							<a title="{'登录'|tr}" onclick="return YoukuWs.formlogin();" class="btn-login hover"><input type="submit" name="submit" class="hide"/>{'登录'|tr}</a>　
+							<a id="_IDSignup2" title="{"注册"|tr}" class="btn-login">{"注册"|tr}</a>
+							
+						</li>
+					</ul>
+				</form>
+			</div>
+		</div>
+
 		<div id="_RadioChannel" title="电台选择" class="hide">
 			<!-- 切换电台 -->
 			
