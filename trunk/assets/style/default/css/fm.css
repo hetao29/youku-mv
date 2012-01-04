@@ -160,7 +160,7 @@ body,ul,li,h1,h2,h3,h4,h5,p,form { margin:0; padding:0; list-style:none; }
 .msgbox { width:90%; overflow:hidden; line-height:14px; border:1px solid #FFC700; background:#FFFFDD; margin:0 auto; text-align:center; padding:3px 0; vertical-align:top; color:#F00; }
 .msgbox i.notice,.msgbox i.error { display:inline-block; }
 
-.reg-box,.cgfm-box { width:340px; padding:10px 0; overflow:hidden; background:#FFF; border:1px solid #CCC; border-radius:8px; }
+.reg-box,.cgfm-box { width:100%; padding:10px 0; overflow:hidden; background:#FFF; border:1px solid #CCC; border-radius:8px; }
 
 .cgfm-box ul { width:90px; float:left; margin-left:10px; overflow:hidden; display:inline; }
 .cgfm-box ul li { float:left; padding:5px 0; overflow:hidden; }

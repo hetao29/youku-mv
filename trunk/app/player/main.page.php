@@ -517,8 +517,16 @@ class player_main extends STpl{
 		if(($User=user_api::islogin())!==false){
 			$db = new user_db;
 			$UserID= $User['UserID'];
-			$VideoID= singer_music::decode($_REQUEST['vid']);
-			return $db->delListen($UserID,$VideoID);
+			$vids = array();
+			if(!is_array($_REQUEST['vid'])){
+				$vids = array($_REQUEST['vid']);
+			}else{
+				$vids = $_REQUEST['vid'];
+			}
+			foreach($vids as $vid){
+				$VideoID= singer_music::decode($vid);
+				return $db->delListen($UserID,$VideoID);
+			}
 		}
 		return false;
 	}
