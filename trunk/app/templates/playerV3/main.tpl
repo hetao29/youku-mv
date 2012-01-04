@@ -21,7 +21,8 @@
 
 		<link rel="Shortcut Icon" href="/assets/images/ico/favicon_32x32.ico" />
 
-		<link type="text/css" rel="stylesheet" href="/assets/style/default/css/fm.css" />
+		<!--<link type="text/css" rel="stylesheet" href="/assets/style/default/css/fm.css" />-->
+		<link type="text/css" rel="stylesheet" href="/assets/style/gdg/css/fm.css" />
 
 		<script type="text/javascript">
 			var locale={
@@ -48,6 +49,7 @@
 				<a class="rollbtn"  title=""><em></em><i class="mode"></i><span>简单模式</span></a>
 				<a class="rollbtn" id="_IDChange" title="{'换台'|tr}"><em></em><i class="change"></i><span>切换电台</span></a>
 			</div>
+			<i class="photo_img"></i>
 		</div>
 		<div class="fm-body">
 			<div class="cont-left" id="box">
