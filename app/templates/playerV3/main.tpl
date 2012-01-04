@@ -98,17 +98,38 @@
 					<div class="content">
 
 						<div id="dtmsh-panel">
-							<div class="dt-box">
-								<h2>{"当前播放"|tr}:<span id="_IDVideoTitle"></span></h2>
-								<img id="_IDVideoPic" class="shadow" />
-							</div>
-							<div class="dt-box">
-								<h2>{"接着播放"|tr}:<span id="_IDNextVideoTitle"></span></h2>
-								<img id="_IDNextVideoPic" class="shadow" />
+							<div style="padding: 9px;">
+								<div class="dt-box">
+									<h2>{"当前播放"|tr}:<span id="_IDVideoTitle"></span></h2>
+									<img id="_IDVideoPic" class="shadow" />
+								</div>
+								<div class="dt-box">
+									<h2>{"接着播放"|tr}:<span id="_IDNextVideoTitle"></span></h2>
+									<img id="_IDNextVideoPic" class="shadow" />
+								</div>
 							</div>
 						</div>
 
 						<div id="bfmsh-panel" class="hide">
+
+		<!-- 拖动歌曲弹出层 默认下拉菜单们关闭层 在drag-layer加入hover样式即可切换为打开状态 -->
+		<div id="drag-layer" style="position: absolute;left:-160px;top:100px"; class="mvlist-edit-layer hide">
+			<div class="top"><p>添加到歌单<i class="icon-down"></i><i class="icon_add"></i></p></div>
+			<a id="_BtTrash2" class="icon_del" title="删除"></a>
+
+			<div class="mdrag-layer" id="_ContentList">
+				<ul>
+					<li><a  title="">华语流行金曲(23)</a></li>
+				</ul>
+
+				<a  title="">华语流行金曲(23)</a>
+				<a  title="">华语流行金曲(23)</a>
+				<a  title="">华语流行金曲(23)</a>
+				<a  title="" class="hover">华语流行金曲(23)</a>
+				<a  title="">华语流行金曲(23)</a>
+			</div>
+		</div>
+
 							<div class="search-box">
 								<i class="search-bg"></i>
 								<input type="text" id="keywords" name="" />
@@ -125,32 +146,33 @@
 								<a id="_BtDeSelect" title="反选" class="btn-w hide">反选</a>
 								<a id="_BtAdd" title="添加" class="btn-c"><i class="add"></i>添加</a>
 								<a id="_BtSaveAll" title="保存" class="btn-c hide"><i class="save"></i>保存</a>
-								<a id="_BtDelete" title="删除" id="_BtTrash" class="btn-c hide"><i class="remove"></i>删除</a>
+								<a id="_BtDelete" title="删除" class="btn-c hide"><i class="remove"></i>删除</a>
 							</div>
-							
 						</div>
 
 						<div id="sw-panel" class="hide">
-							<div class="sw-box" id="_ContentLyrics">
-							{*
-								<p>罗志祥  爱转角</p>
-								<p>爱转角遇见了谁是否有爱情的美</p>
-								<p>爱转角以后的街能不能有我来陪</p>
-								<p>爱转角遇见了谁是否不让你流泪</p>
-								<p>也许陌生到了解 让我来当你的谁</p>
-								<p>我不让爱掉眼泪 不让你掉眼泪</p>
-								<p class="current">心不再拚命躲不去害怕结果</p>
-								<p>有美丽笑容</p>
-								<p>我不让爱掉眼泪 不让你掉眼泪我不让爱掉眼泪 不让你掉眼泪</p>
-								<p >我不让爱掉眼泪 不让你掉眼泪</p>
-								<p>心不再拚命躲不去害怕结果</p>
-								<p>有美丽笑容</p>
-								<p>我不让爱掉眼泪 不让你掉眼泪</p>
-								<p>我不让爱掉眼泪 不让你掉眼泪</p>
-								<p>心不再拚命躲不去害怕结果</p>
-								<p>有美丽笑容</p>
-								<p>我不让爱掉眼泪 不让你掉眼泪</p>
-							  *}
+							<div style="padding: 9px;">
+								<div class="sw-box" id="_ContentLyrics">
+								{*
+									<p>罗志祥  爱转角</p>
+									<p>爱转角遇见了谁是否有爱情的美</p>
+									<p>爱转角以后的街能不能有我来陪</p>
+									<p>爱转角遇见了谁是否不让你流泪</p>
+									<p>也许陌生到了解 让我来当你的谁</p>
+									<p>我不让爱掉眼泪 不让你掉眼泪</p>
+									<p class="current">心不再拚命躲不去害怕结果</p>
+									<p>有美丽笑容</p>
+									<p>我不让爱掉眼泪 不让你掉眼泪我不让爱掉眼泪 不让你掉眼泪</p>
+									<p >我不让爱掉眼泪 不让你掉眼泪</p>
+									<p>心不再拚命躲不去害怕结果</p>
+									<p>有美丽笑容</p>
+									<p>我不让爱掉眼泪 不让你掉眼泪</p>
+									<p>我不让爱掉眼泪 不让你掉眼泪</p>
+									<p>心不再拚命躲不去害怕结果</p>
+									<p>有美丽笑容</p>
+									<p>我不让爱掉眼泪 不让你掉眼泪</p>
+								  *}
+								</div>
 							</div>
 							<div class="btnline">
 								<a id="_IDLyricsErr"  title="{"报错"|tr}" class="btn-w">{"报错"|tr}</a>
@@ -187,23 +209,7 @@
 
 
 
-		<!-- 拖动歌曲弹出层 默认下拉菜单们关闭层 在drag-layer加入hover样式即可切换为打开状态 -->
-		<div id="drag-layer" style="position: absolute;left:0px;top:0px"; class="mvlist-edit-layer hide">
-			<div class="top"><p>添加到歌单<i class="icon-down"></i><i class="icon_add"></i></p></div>
-			<a id="_BtTrash2" class="icon_del" title="删除"></a>
 
-			<div class="mdrag-layer" id="_ContentList">
-				<ul>
-					<li><a  title="">华语流行金曲(23)</a></li>
-				</ul>
-
-				<a  title="">华语流行金曲(23)</a>
-				<a  title="">华语流行金曲(23)</a>
-				<a  title="">华语流行金曲(23)</a>
-				<a  title="" class="hover">华语流行金曲(23)</a>
-				<a  title="">华语流行金曲(23)</a>
-			</div>
-		</div>
 
 
 		<!-- 注册 -->
