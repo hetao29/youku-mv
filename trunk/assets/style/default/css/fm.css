@@ -187,13 +187,13 @@ body,ul,li,h1,h2,h3,h4,h5,p,form { margin:0; padding:0; list-style:none; }
 .mylist-box .mylist-cont ul.list li .edit a {float:right; overflow:hidden; line-height:16px; margin-right:10px; color:#007db5; }
 .mylist-box .mylist-cont ul.list li .edit a:hover,.mylist-box .mylist-cont ul.list li h2 a:hover { text-decoration:underline; }
 
-.mylist-box .mylist-cont ul.mvlist li { width:100%; height:auto; overflow:hidden; position:relative; padding:6px 0; border-bottom:1px solid #CCC; cursor:pointer; }
+.mylist-box .mylist-cont ul.mvlist li { width:100%; height:auto; overflow:hidden; position:relative; padding:4px 0; border-bottom:1px solid #CCC; cursor:pointer; }
 .mylist-box .mylist-cont ul.mvlist li p,.mylist-box .mylist-cont ul.mvlist li i { float:left; margin-left:5px; }
 .mylist-box .mylist-cont ul.mvlist li p { line-height:16px; font-size:12px; text-align:left; }
-.mylist-box .mylist-cont ul.mvlist li span { position:absolute; top:4px; right:0; }
+.mylist-box .mylist-cont ul.mvlist li span {margin-left: 6px; /*position:absolute; top:4px; right:0;*/ }
 .mylist-box .mylist-cont ul.mvlist li span a { float:right; margin-right:5px; }
 .mylist-box .mylist-cont ul.mvlist li span a i { float:none; margin:0; }
-.mylist-box .mylist-cont ul.mvlist li.select i.checkbox { background-position:-155px -200px; }
+/*.mylist-box .mylist-cont ul.mvlist */li.select span.checkbox { background-position:-155px -200px; }
 
 .mylist-box .mylist-cont .label-title { width:358px; height:16px; padding:20px 0 5px; line-height:16px; margin:0 auto; font-size:14px; text-align:left; }
 .mylist-box .mylist-cont .input-txt,.mylist-box .mylist-cont .input-area { width:350px; height:16px; padding:7px 3px; color:#666; margin:0 auto; display:block; outline:none; border:1px solid #CCC; border-radius:4px; background:none; }
@@ -294,9 +294,9 @@ a.rollbtn:hover i.mode { background-position:-100px -89px; }
 a.rollbtn span { text-align:center; line-height:18px; }
 a.rollbtn:hover { color:#0097E0; }
 
-a.btn-w { width:37px; height:16px; line-height:16px; padding:2px 0; display:block; overflow:hidden; background:url(/assets/style/default/img/ui.png) no-repeat -5px -200px; text-align:center; }
+a.btn-w { width:37px; height:16px; line-height:16px; padding:2px 0; overflow:hidden; background:url(/assets/style/default/img/ui.png) no-repeat -5px -200px; text-align:center; }
 
-a.btn-c { width:20px; height:20px; display:block; overflow:hidden; background:url(/assets/style/default/img/ui.png) no-repeat -50px -200px; position:relative; text-indent:-999px; }
+a.btn-c { width:20px; height:20px;overflow:hidden; background:url(/assets/style/default/img/ui.png) no-repeat -50px -200px; position:relative; text-indent:-999px; }
 a.btn-c i.add { position:absolute; left:3px; top:4px; }
 a.btn-c i.remove { position:absolute; left:4px; top:4px; }
 a.btn-c i.save { position:absolute; left:4px; top:4px; }
@@ -348,8 +348,10 @@ a.btn-fm-d.big:hover { background-position:-100px -430px; }
 a.btn-play-s { width:14px; height:14px; display:block; overflow:hidden; background:url(/assets/style/default/img/ui.png) no-repeat -235px -210px; }
 a.btn-play-s:hover { background-position:-260px -210px; }
 
-
-i.checkbox { width:13px; height:14px; display:block; overflow:hidden; background:url(/assets/style/default/img/ui.png) no-repeat -135px -200px; }
+/*歌曲列表*/
+span.checkbox { float: left;width:13px; height:14px; margin-top: 2px;overflow:hidden; background:url(/assets/style/default/img/ui.png) no-repeat -135px -200px; }
+/*编辑列表*/
+/*i.checkbox { width:13px; height:14px; display:block; overflow:hidden; background:url(/assets/style/default/img/ui.png) no-repeat -135px -200px; }*/
 i.add { width:15px; height:12px; display:block; overflow:hidden; background:url(/assets/style/default/img/ui.png) no-repeat -80px -170px; }
 
 i.remove { width:12px; height:12px; display:block; overflow:Hidden; background:url(/assets/style/default/img/ui.png) no-repeat -335px -215px; }
