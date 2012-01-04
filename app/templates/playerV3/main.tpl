@@ -37,6 +37,8 @@
 	</head>
 
 	<body>
+		<div id="IDTips"><span></span></div>
+
 		<div class="t-header" id="_IDHeader">
 			{part "/player.main.headerV3.".$out}
 		</div>
@@ -112,23 +114,17 @@
 
 						<div id="bfmsh-panel" class="hide">
 
-		<!-- 拖动歌曲弹出层 默认下拉菜单们关闭层 在drag-layer加入hover样式即可切换为打开状态 -->
-		<div id="drag-layer" style="position: absolute;left:-160px;top:100px"; class="mvlist-edit-layer hide">
-			<div class="top"><p>添加到歌单<i class="icon-down"></i><i class="icon_add"></i></p></div>
-			<a id="_BtTrash2" class="icon_del" title="删除"></a>
+							<!-- 拖动歌曲弹出层 默认下拉菜单们关闭层 在drag-layer加入hover样式即可切换为打开状态 -->
+							<div id="drag-layer" style="position: absolute;left:-160px;top:100px"; class="mvlist-edit-layer hide">
+								<div class="top"><p>添加到歌单<i class="icon-down"></i><i class="icon_add"></i></p></div>
+								<a id="_BtTrash2" class="icon_del" title="删除"></a>
 
-			<div class="mdrag-layer" id="_ContentList">
-				<ul>
-					<li><a  title="">华语流行金曲(23)</a></li>
-				</ul>
-
-				<a  title="">华语流行金曲(23)</a>
-				<a  title="">华语流行金曲(23)</a>
-				<a  title="">华语流行金曲(23)</a>
-				<a  title="" class="hover">华语流行金曲(23)</a>
-				<a  title="">华语流行金曲(23)</a>
-			</div>
-		</div>
+								<div class="mdrag-layer" id="_ContentList">
+									<ul>
+										<span style="padding: 15px;">加载中...</span>
+									</ul>
+								</div>
+							</div>
 
 							<div class="search-box">
 								<i class="search-bg"></i>

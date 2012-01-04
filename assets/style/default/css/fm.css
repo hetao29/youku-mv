@@ -101,7 +101,9 @@ body,ul,li,h1,h2,h3,h4,h5,p,form { margin:0; padding:0; list-style:none; }
 .fm-body .cont-right .cont-border .search-box a { position:absolute; right:18px; top:10px; }
 .fm-body .cont-right .cont-border .search-box input { width:195px; height:18px; color:#666; position:absolute; left:20px; top:11px; border:none; background:none; outline:none; }
 
-.fm-body .cont-right .cont-border ul.music-list { width:230px; height:316px; overflow-y:scroll; border:1px solid #CCC; margin:10px auto 0; background:#FFF; }
+.fm-body .cont-right .cont-border ul.music-list { 
+	width:230px; height:316px; overflow-y:scroll;  margin:10px auto 0; background:#FFF; border:1px solid #CCC;
+}
 .fm-body .cont-right .cont-border ul.music-list li { 
 	line-height:18px; overflow:hidden; 
 	/*padding:2px 0 2px 20px; */
@@ -248,8 +250,13 @@ body,ul,li,h1,h2,h3,h4,h5,p,form { margin:0; padding:0; list-style:none; }
 .mvlist-edit-layer .mdrag-layer .layer-bg { width:100%; height:1000px; position:absolute; left:0; top:0; z-index:1; opacity:0.2; filter:alpha(opacity=20); z-index:1; }
 .mvlist-edit-layer .mdrag-layer a { width:110px; height:16px; display:block; line-height:16px; color:#666; padding:4px 10px; text-align:left; position:relative; z-index:2 }
 .mvlist-edit-layer .mdrag-layer a span { color:#999; }
-.mvlist-edit-layer .mdrag-layer a:hover,.mvlist-edit-layer .mdrag-layer a.hover { background:#FFF; }
-
+.mvlist-edit-layer .mdrag-layer li { background:#FFF; background:#FFF; border-bottom:1px solid #CCC;}
+.mvlist-edit-layer .mdrag-layer li.hover { background:#E1F0F7; border:1px solid red; }
+/*
+.fm-body .cont-right .cont-border ul.music-list li:hover,.fm-body .cont-right .cont-border ul.music-list li.hover { background:#E1F0F7; }
+.fm-body .cont-right .cont-border ul.music-list li.select i { background-position:-155px -200px; }
+.fm-body .cont-right .cont-border ul.music-list li.current	{ background-color: #DDDEE0; }
+*/
 
 
 
@@ -450,7 +457,32 @@ a { text-decoration:none; color:#333; cursor:pointer; }
 .ui-menu .ui-menu-item a.ui-state-active {
 	font-weight: normal;background-color: #E1F0F7;
 }
+#IDTips{
+	display:none;
+	position:absolute;top:0px;width:100%;text-align:center;margin:auto;
+	z-index: 3;
+	font-weight: bold;
+}
+#IDTips span{
+	background: yellow;
+	color: black;
+	margin: 0px;
+	padding: 8px;
+	height: 30px;
+	line-height: 30px;
+	padding-left: 20px;
+	padding-right: 25px;
 
+	font-size: 13px;
+	border-bottom-left-radius: 8px 8px; 
+	border-bottom-right-radius: 8px 8px;
+
+	-moz-border-radius-bottomleft:8px 8px;
+	-moz-border-radius-bottomright:8px 8px;
+
+	-webkit-border-bottom-left-radius:8px 8px;
+	-webkit-border-bottom-right-radius:8px 8px;
+}
 /*
 
 .ui-dialog { position: absolute; padding:10px 0;z-index:51; overflow: hidden; }
