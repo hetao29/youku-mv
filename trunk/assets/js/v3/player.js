@@ -2008,10 +2008,12 @@ var YoukuWs = function(){
 				     success: function( result) {
 						  $("#_CtMusicList #loading" ).hide();
 							var li="";
+							var ti='';
+							if(saveSortUrl)ti='title="拖动可以排序哦"';
 							 for(var i=0;i<result.items.length;i++){
 								var mvname=YoukuWs.getVideoName(result.items[i]);
-
-								li+='<li order="'+(result.items[i].MvOrder)+'" _type="listen"  title="点击拖动到右边播放列表" mvname="'+mvname+'" vid="'+result.items[i].VideoID+'">'
+								
+								li+='<li order="'+(result.items[i].MvOrder)+'" _type="listen" '+ti+' mvname="'+mvname+'" vid="'+result.items[i].VideoID+'">'
 								li+='<i class="checkbox"></i><p>'+mvname+'</p>';
 								li+='<span>';
 								if(delUrl)li+='<a title="" class="btn-c"><i class="remove"></i></a>';
@@ -2124,8 +2126,8 @@ var YoukuWs = function(){
 		     }, listAction:function(action,page){
 				 
 				 var delUrl="/player.main.delActionV3."+action+"?vid=:vid:";
-				 var sortUrl="/user.list.contentsorder";
-				  YoukuWs.loadMusic("/player.main.listAction."+action+".:page:",page,delUrl,sortUrl);
+				 //var sortUrl="/user.list.contentsorder";
+				  YoukuWs.loadMusic("/player.main.listAction."+action+".:page:",page,delUrl);
 				 /* return;
 			     $("#_ContentListen DIV").html("");
 			     $("#_ContentListen >ul" ).html('<li><img style="vertical-align: middle;" src="/assets/images/loading/loading9.gif" /> 正在加载中...</li>');
