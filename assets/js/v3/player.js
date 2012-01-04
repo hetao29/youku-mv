@@ -530,7 +530,8 @@ var YoukuWs = function(){
 				$("#_IDDown").click(function(){
 					if(YoukuWs.isLogin()){
 						YoukuWs.VideoAction("down",CurrentVideoID);
-						YoukuWs.playRadioNext();
+						//YoukuWs.playRadioNext();
+						$("#_BtNext").trigger("click");
 					}else{
 						YoukuWs.login(function(){$("#_IDDown").trigger("click");});
 					}
@@ -1135,12 +1136,32 @@ var YoukuWs = function(){
 				});
 				$("#_BtPre").click(function(){
 					if(PlayType==1){
-						YoukuWs.playPre();
+						switch(parseInt(PlayMode)){
+							case 1:
+								YoukuWs.play(CurrentVideoID);
+								break;
+							case 2:
+								YoukuWs.playPre();
+								break;
+							case 3:
+								YoukuWs.playRandom(true);
+								break;
+						}
 					}
 				});
 				$("#_BtNext").click(function(){
 					if(PlayType==1){
-						YoukuWs.playNext();
+						switch(parseInt(PlayMode)){
+							case 1:
+								YoukuWs.play(CurrentVideoID);
+								break;
+							case 2:
+								YoukuWs.playNext();
+								break;
+							case 3:
+								YoukuWs.playRandom();
+								break;
+						}
 					}else{
 						YoukuWs.playRadioNext();
 					}
@@ -1153,13 +1174,13 @@ var YoukuWs = function(){
 				$("#PlayModeSet >a").click(function(){
 
 					
-					var _playmode = $(this).attr("playmode");
+					PlayMode = $(this).attr("playmode");
 
 					$("#PlayModeSet >a").each(function(i,item){
 						$(item).removeClass("select");
 					});
 					$(this).addClass("select");
-					YoukuWs.set("PlayModeSet",_playmode);
+					YoukuWs.set("PlayModeSet",PlayMode);
 				});
 				PlayMode = YoukuWs.get("PlayModeSet");
 				if(PlayMode<1 ||PlayMode>3){
