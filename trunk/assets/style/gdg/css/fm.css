@@ -511,7 +511,9 @@ a { text-decoration:none; color:#333; cursor:pointer; }
 .fm-body .cont-right .cont-border ul.music-list li a{
 	color:#B98C65; 
 }
-
+a.btn-share { width:45px; height:14px; line-height:15px; padding:4px 2px 2px; display:block; overflow:hidden; text-align:center; position:relative; color:#666; text-indent:12px; background:url(/assets/style/gdg/img/ui.png) no-repeat -345px -240px; font-family:"宋体"; }
+a.btn-share i { position:absolute; left:5px; top:5px; }
+a.btn-share.hover { width:45px; height:14px; line-height:15px; padding:4px 2px 9px; display:block; background:url(/assets/style/gdg/img/rpx.png) repeat-x 0 -100px; border:1px solid #BBB; border-bottom:none; color:#666; }
 
 /*
 
