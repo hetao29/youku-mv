@@ -62,7 +62,7 @@ body,ul,li,h1,h2,h3,h4,h5,p,form { margin:0; padding:0; list-style:none; }
 	width:10px; height:100%;position:absolute; left:0; top:0; 
 }
 .fm-body .cont-left .cont-border .left .box,.fm-body .cont-left .cont-border .right .box,.ly-box .left .box,.ly-box .right .box {
-	width:10px;height:100%;background:url(/assets/style/default/img/rpy.png) repeat-y 0 0; 
+	width:10px;height:100%;background:url(/assets/style/gdg/img/rpy.png) repeat-y 0 0; 
 }
 .fm-body .cont-left .cont-border .right,.ly-box .right { left:auto; right:0; }
 .fm-body .cont-left .cont-border .right .box,.ly-box .right .box { background-position:-15px 0; }
