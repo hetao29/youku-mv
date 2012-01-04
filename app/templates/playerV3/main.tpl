@@ -22,7 +22,7 @@
 		<link rel="Shortcut Icon" href="/assets/images/ico/favicon_32x32.ico" />
 
 		<!--<link type="text/css" rel="stylesheet" href="/assets/style/default/css/fm.css" />-->
-		<link type="text/css" rel="stylesheet" href="/assets/style/gdg/css/fm.css" />
+		<link type="text/css" rel="stylesheet" href="/assets/style/{$style}/css/fm.css" />
 
 		<script type="text/javascript">
 			var locale={
