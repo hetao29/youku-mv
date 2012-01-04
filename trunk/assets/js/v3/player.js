@@ -106,11 +106,6 @@
 		var d =p.data("close");
 		if(d)eval(d);
 		p.hide();
-		/*
-		return;
-		var dg = $(p).find(".content");
-		p.html(dg.html());
-		*/
 	});
 })(jQuery); 
 
@@ -228,7 +223,7 @@ var YoukuWs = function(){
 
 
 		//换台按钮
-		$("#_RadioChannel a").live("click",function(){
+		$("#_RadioChannel li >a").live("click",function(){
 			$("#_RadioChannel").dgclose();
 			YoukuWs.set("cid",$(this).attr("id"));
 			window.radioPlayList=new Array();
@@ -523,10 +518,11 @@ var YoukuWs = function(){
 
 									//$("#_RadioChannel button").button({icons:{primary:"ui-icon-play"}});
 								}
+								$("#_RadioChannel").center();
 							}
 						}
 					});
-				}).bt();
+				});
 				$("#_IDDown").click(function(){
 					if(YoukuWs.isLogin()){
 						YoukuWs.VideoAction("down",CurrentVideoID);

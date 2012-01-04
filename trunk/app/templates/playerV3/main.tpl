@@ -259,6 +259,8 @@
 			<!-- 切换电台 -->
 			
 			<div class="cgfm-box">
+				<ul></ul>
+				{*
 				<ul>
 					<li><a class="btn-fm-d"  title="">默认电台</a></li>
 					<li><a class="btn-fm-d"  title="">70后MHZ</a></li>
@@ -281,6 +283,7 @@
 					<li><a class="btn-fm-d big"  title="">2011年日韩新曲</a></li>
 					<li><a class="btn-fm-d big"  title="">2011年欧美新曲</a></li>
 				</ul>
+				*}
 			</div>
 			
 		</div>
