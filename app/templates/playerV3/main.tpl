@@ -32,6 +32,7 @@
 .logo { _width:920px;}
 .fm-body { _width:920px; }
 .fm-body .cont-left {
+	_width:900px;
 }
 </style>
 <![endif]-->
