@@ -654,6 +654,7 @@ var YoukuWs = function(){
 				});
 				//保存选择的音乐到歌单
 				$("#_BtSaveAll").click(function(){
+					if(YoukuWs.isLogin()){
 						var selected =$("#_ContentMusic >li.select");
 						if(selected.size()<=0){
 							YoukuWs.tips("请先选择要保存的音乐");
@@ -668,6 +669,9 @@ var YoukuWs = function(){
 						});
 						window.listFlag=true;
 						YoukuWs.listList(true);
+					}else{
+						YoukuWs.login(function(){$("#_BtSaveAll").trigger("click");});
+					}
 				});
 				//删除
 				$("#_BtDelete").click(function(){
@@ -1739,7 +1743,7 @@ var YoukuWs = function(){
 				     //}}}
 			     }else{
 					 //debug;
-					// return "";
+					 return "";
 				     try{
 					     PlayerReplay(vid);
 				     }catch(e){
