@@ -81,8 +81,9 @@
 			t.html(dg);
 			t.find(".layer").center();
 			t.attr("bt_set",true);
-			if(options['close'])
-			t.data("close",options['close']);
+			if(options['close']){
+				t.data("close",options['close']);
+			}
 		}); 
 		return this;
 	}; 
@@ -104,7 +105,13 @@
 	$(".ly-box .close").live("click",function(){
 		var p = $(this).parents(".layer").parent();
 		var d =p.data("close");
-		if(d)eval(d);
+		if(d){
+			try{
+				d();
+			}catch(e){
+				eval(d);
+			}
+		}
 		p.hide();
 	});
 })(jQuery); 
@@ -596,15 +603,9 @@ var YoukuWs = function(){
 				$("#_LiList").live('click',function(){
 					
 					$("#_IDList").dg({
-						width:550,height:320,title:"歌单列表"
+						width:550,height:320,title:"歌单列表",close:function(){}
 					});
-
-					 if(YoukuWs.ListContent){
-						//	YoukuWs.showList();
-					 }else{
-						 YoukuWs.listList();
-					 }
-
+					YoukuWs.listList();
 				});
 
 
@@ -647,19 +648,18 @@ var YoukuWs = function(){
 							YoukuWs.tips("请先选择要保存的音乐");
 							return;
 						}
-						YoukuWs.tips("请选择要保存歌单.",true);
+						YoukuWs.tips("请选择要保存歌单.");
 						$.each(selected,function(i,item){
 						});
 						
 						$("#_IDList").dg({
 							width:550,height:320,title:"歌单列表"
 						});
-
-						 if(YoukuWs.ListContent){
-							//	YoukuWs.showList();
-						 }else{
-							 YoukuWs.listList();
-						 }
+						YoukuWs.listList(true);
+						 //if(YoukuWs.ListContent){
+						// }else{
+						//	 
+						// }
 
 				});
 				//删除
@@ -2061,13 +2061,13 @@ var YoukuWs = function(){
 				     }
 			     },"json");
 			     return false;
-		     },showList:function(){
+		     },showList:function(flag){
 				 var li="";
 				 var li_2="";//快速添加音乐入口
 				 var li_index=0;
 				 for(var i in YoukuWs.ListContent){
 					 list = YoukuWs.ListContent[i];
-					 li+='<li lid="'+list.ListID+'" ord="'+list.ListOrder+'"><span class="checkbox"></span>';
+					 li+='<li lid="'+list.ListID+'" ord="'+list.ListOrder+'"><span class="checkbox hide"></span>';
 					li+='<h2><a  title="">'+list.ListName+'</a><span>('+list.ListCount+')</span><a title="" class="btn-play-s"></a></h2>';
 					li+='<p>最后更新：<span>'+list.ListUpdateTime+'</span></p>';
 					li+='<p class="comment">'+list.ListComment+'</p>';
@@ -2082,7 +2082,13 @@ var YoukuWs = function(){
 				 }
 				$("#_ContentList ul").html(li_2);//快速添加音乐入口
 				$("#_IDListMain ul").html(li);
-				
+				if(flag){
+					$("#_IDListMain ul .checkbox").show();
+					$("#_BtListSave").show();
+				}else{
+					$("#_IDListMain ul .checkbox").hide();
+					$("#_BtListSave").hide();
+				}
 				$("#_IDListMain ul").sortable({
 					stop:function(event,ui){
 
@@ -2302,17 +2308,22 @@ var YoukuWs = function(){
 		     }, listList:function(flag){
 				 
 					//加载歌单
-					YoukuWs.ListContent=new Array();
-					 $.ajax({
-						 url: "/user.list.list",
-						 success: function( result) {
-							 if(result && result.items && result.items.length>0){
-								 YoukuWs.ListContent = result.items;
-								YoukuWs.showList();
-
+					if(YoukuWs.ListContent){
+						YoukuWs.showList(flag);
+					}else{
+						YoukuWs.ListContent=new Array();
+						 $.ajax({
+							 url: "/user.list.list",
+							 success: function( result) {
+								 if(result && result.items && result.items.length>0){
+									YoukuWs.ListContent = result.items;
+									YoukuWs.showList(flag);
+								 }
 							 }
-						 }
-					 });
+						 });
+					}
+
+
 					/*
 					return;
 			     $("#_ContentList").html("");
