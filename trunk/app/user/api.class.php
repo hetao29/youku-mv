@@ -22,7 +22,7 @@ class user_api{
 			$db = new  user_db;
 			$db->delUserToken(@$_SESSION['user']['UserID'],session_id());
 			unset($_SESSION['user']);
-			self::setCookie("uid",0,time()-3600*24);
+			//self::setCookie("uid",0,time()-3600*24);
 			self::setCookie("token",0,time()-3600*24);
 		}
 		static public function setCookie($k,$v,$t){
