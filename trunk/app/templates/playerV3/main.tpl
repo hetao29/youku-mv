@@ -46,7 +46,7 @@
 		<div class="logo">
 			<i class="fm-logo"></i>
 			<div class="btnbox">
-				<a class="rollbtn"  title=""><em></em><i class="mode"></i><span>简单模式</span></a>
+				{*<a class="rollbtn"  title=""><em></em><i class="mode"></i><span>简单模式</span></a>*}
 				<a class="rollbtn" id="_IDChange" title="{'换台'|tr}"><em></em><i class="change"></i><span>切换电台</span></a>
 			</div>
 			<i class="photo_img"></i>
