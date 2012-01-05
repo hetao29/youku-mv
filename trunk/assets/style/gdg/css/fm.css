@@ -212,7 +212,7 @@ margin-right: 10px;
 .mylist-box .mylist-cont .pages { overflow:hidden; padding:10px 0; margin:5px auto 0; }
 .mylist-box a.btn-rb { position:absolute; right:0; bottom:0; text-indent:-999px; }
 
-.about-box { width:362px; overflow:hidden; margin:0 auto; }
+.about-box {overflow:hidden; margin:0 auto; }
 .about-box .cont { width:96%; overflow:hidden; padding:10px 0 0; margin:0 auto; }
 .about-box p { height:16px; line-height:16px; text-align:left; padding:3px 0; }
 .about-box .singleBtn { text-align:right; padding:0; }
