@@ -906,7 +906,7 @@ var YoukuWs = function(){
 				});
 				$("#_IDAbout").live("click",function(){
 					$("#_ContentAbout").dg({
-						width:300,height:180,title:"关于".tr()
+						width:360,height:180,title:"关于".tr()
 					});
 				});
 				$("#_IDSignup").live("click",function(){

@@ -361,9 +361,9 @@
 					<p>Copyright©2011 优酷 youku.com 版权所有</p>
 					<p>作者：Hetal　　QQ：231073376</p>
 				</div>
-				<div class="singleBtn">
+				<!--<div class="singleBtn">
 					<a  title="" class="btn-layer-d">确定</a>
-				</div>
+				</div>-->
 			</div>
 		</div>
 	<!-- 删除确认 -->
