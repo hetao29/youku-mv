@@ -1739,7 +1739,7 @@ var YoukuWs = function(){
 				     //}}}
 			     }else{
 					 //debug;
-					 return "";
+					// return "";
 				     try{
 					     PlayerReplay(vid);
 				     }catch(e){
@@ -2530,10 +2530,10 @@ function onPlayerStart(obj){
 }
 function onPlayerError(vid){
 	if(PlayType!=0){
+		YoukuWs.playNext();
 		var h = $("#_ContentMusic [vid='"+vid+"'] A[error!=1]");
 		h.attr("error",1);
 		h.html("<font color='red'>播放失败:</font> "+h.html());
-		YoukuWs.playNext();
 	}else{
 		YoukuWs.playRadioNext();
 	}
