@@ -509,6 +509,12 @@ a { text-decoration:none; color:#333; cursor:pointer; }
 .ui-menu .ui-menu-item a.ui-state-active {
 	font-weight: normal;background-color: #E1F0F7;
 }
+.elm-add{ padding:10px ; }
+.elm-add li{ width:100%; }
+
+.elm-add li.label {
+	font-size: 14px;padding-bottom: 16px;
+}
 #IDTips{
 	display:none;
 	position:absolute;top:32px;width:100%;text-align:center;margin:auto;

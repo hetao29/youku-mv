@@ -209,15 +209,6 @@
 
 
 
-
-<style>
-.elm-add{ padding:10px ; }
-.elm-add li{ width:100%; }
-
-.elm-add li.label {
-font-size: 14px;padding-bottom: 16px;
-}
-</style>
 		<!-- 添加音乐 -->
 		<div id="_DialogAdd" class="hide" _title="{'添加'|tr}">
 			<div class="reg-box">
