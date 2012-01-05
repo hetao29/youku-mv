@@ -24,6 +24,20 @@
 		<!--<link type="text/css" rel="stylesheet" href="/assets/style/default/css/fm.css" />-->
 		<link type="text/css" rel="stylesheet" href="/assets/style/{$style}/css/fm.css" />
 
+
+<!--[if IE 6]>
+<style>
+.copyright { _width:920px;}
+.t-header .th-cont { _width:920px;}
+.logo { _width:920px;}
+.fm-body { _width:920px; }
+.fm-body .cont-left {
+}
+</style>
+<![endif]-->
+
+
+
 		<script type="text/javascript">
 			var locale={
 				"确认":"{"确认"|tr}",
