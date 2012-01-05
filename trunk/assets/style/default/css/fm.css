@@ -511,7 +511,7 @@ a { text-decoration:none; color:#333; cursor:pointer; }
 }
 #IDTips{
 	display:none;
-	position:absolute;top:0px;width:100%;text-align:center;margin:auto;
+	position:absolute;top:32px;width:100%;text-align:center;margin:auto;
 	z-index: 3;
 	font-weight: bold;
 }
