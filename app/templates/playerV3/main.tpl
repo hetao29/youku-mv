@@ -144,7 +144,7 @@
 								<a id="_BtEditMode" title="编辑" class="btn-w">编辑</a>
 								<a id="_BtSelectAll" title="全选" class="btn-w hide">全选</a>
 								<a id="_BtDeSelect" title="反选" class="btn-w hide">反选</a>
-								<a id="_BtAdd" title="添加" class="btn-c"><i class="add"></i>添加</a>
+								<a id="_BtAddMv" title="添加" class="btn-c"><i class="add"></i>添加</a>
 								<a id="_BtSaveAll" title="保存" class="btn-c hide"><i class="save"></i>保存</a>
 								<a id="_BtDelete" title="删除" class="btn-c hide"><i class="remove"></i>删除</a>
 							</div>
@@ -210,7 +210,44 @@
 
 
 
+<style>
+.elm-add{ padding:10px ; }
+.elm-add li{ width:100%; }
 
+.elm-add li.label {
+font-size: 14px;padding-bottom: 16px;
+}
+</style>
+		<!-- 添加音乐 -->
+		<div id="_DialogAdd" class="hide" _title="{'添加'|tr}">
+			<div class="reg-box">
+				<div class="msgbox" style="display:none"><i class="notice"></i> <span></span></div>
+				<form onsubmit="return YoukuWs.formsignup();"  id="_FormSignup">
+					<ul class="elm-add">
+						<li class="label"><label>请输入优酷播放页地址(一次只能添加一种地址)::</label></li>
+						<li class="input"><textarea style="width:480px;height:30px">http://v.youku.com/v_show/id_XMjI2MDIxNTYw.html</textarea></li>
+						<li class="label">
+							<label>
+								如普通播放页: <br />
+								http://v.youku.com/v_show/id_XMjI2MDIxNTYw.html <br />
+								如专辑播放页: <br />
+								http://v.youku.com/v_playlist/f5365488o1p0.html <br />
+								如节目显示页: <br />
+								http://www.youku.com/show_page/id_zd121155eef0a11df97c0.html <br />
+								如专辑显示页: <br />
+								http://www.youku.com/playlist_show/id_5365488.html <br />
+							</label>
+						</li>
+						<li class="singleBtn">
+							<a  title="" id="_AddMusic" class="btn-layer-d big icon"><i class="add"></i>增加</a>
+
+						</li>
+
+					
+					</ul>
+				</form>
+			</div>
+		</div>
 
 		<!-- 注册 -->
 		<div id="_ContentSignup" class="hide" _title="{'注册'|tr}">

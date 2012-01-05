@@ -511,6 +511,17 @@ var YoukuWs = function(){
 					$("#_IDList .layer").center();
 						
 				});
+				$("#_AddMusic").live("click",function(){
+					  var k =($("#_DialogAdd textarea").val());
+					  $.ajax({type:"POST",url:"/player.main.getVideo",data:{"k":k},success:function(msg){
+						  YoukuWsPlaylist.addArray(msg);
+						  YoukuWs.tips("增加歌曲成功.");
+					  },beforeSend:function(xhr){
+						  $("#_DialogAdd").dgclose();
+						  YoukuWs.tips("增加歌曲中...");
+					  }
+					  });
+				});
 				$("#_IDConfirm").live("click",function(){
 					var index=0;
 					//{{{删除
@@ -601,7 +612,7 @@ var YoukuWs = function(){
 					YoukuWs.listAction("down",1);
 				});
 				$("#_LiList").live('click',function(){
-					
+					window.listFlag=false;
 					$("#_IDList").dg({
 						width:550,height:320,title:"歌单列表",close:function(){}
 					});
@@ -655,6 +666,7 @@ var YoukuWs = function(){
 						$("#_IDList").dg({
 							width:550,height:320,title:"歌单列表"
 						});
+						window.listFlag=true;
 						YoukuWs.listList(true);
 						 //if(YoukuWs.ListContent){
 						// }else{
@@ -1321,28 +1333,10 @@ var YoukuWs = function(){
 				});
 				//$("#_BtAddList").button();
 				$("#_BtAddMv").click(function(){
-					$( "#_DialogAdd" ).dialog({
-						width:500,height:320, buttons: {
-							      "增加": function() {
-								      var k =($("#_DialogAdd textarea").val());
-								      $.ajax({type:"POST",url:"/player.main.getVideo",data:{"k":k},success:function(msg){
-									      YoukuWsPlaylist.addArray(msg);
-									      $("#_DialogAdding").hide();
-									      $("#_DialogAdd").dialog( "close" );
-								      },beforeSend:function(xhr){
-									      $("#_DialogAdding").show();
-								      }
-								      });
-							      },
-						"取消": function() {
-							$( this ).dialog( "close" );
-						}
-						      },
-						close:function(event,ui){
-							      //alert("CLOSE");
-						      }
+					$( "#_DialogAdd" ).dg({
+						width:500,height:320
 					});
-				}).show();
+				});
 				$("#_AListAdd").click(function(){
 					$("#_CtListAdd").toggle("fast");
 				});
@@ -2082,7 +2076,7 @@ var YoukuWs = function(){
 				 }
 				$("#_ContentList ul").html(li_2);//快速添加音乐入口
 				$("#_IDListMain ul").html(li);
-				if(flag){
+				if(window.listFlag){
 					$("#_IDListMain ul .checkbox").show();
 					$("#_BtListSave").show();
 				}else{
@@ -2308,9 +2302,9 @@ var YoukuWs = function(){
 		     }, listList:function(flag){
 				 
 					//加载歌单
-					if(YoukuWs.ListContent){
-						YoukuWs.showList(flag);
-					}else{
+					//if(YoukuWs.ListContent){
+					//	YoukuWs.showList(flag);
+					//}else{
 						YoukuWs.ListContent=new Array();
 						 $.ajax({
 							 url: "/user.list.list",
@@ -2321,7 +2315,7 @@ var YoukuWs = function(){
 								 }
 							 }
 						 });
-					}
+					//}
 
 
 					/*
