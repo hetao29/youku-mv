@@ -135,7 +135,7 @@
 								<input type="text" id="keywords" name="" />
 								<a id="_BtSearch" title="搜索" class="btn-search">搜索</a>
 							</div>
-							<ul class="music-list" id="_ContentMusic">
+							<ul class="music-list checkbox_hide" id="_ContentMusic">
 								{*
 								<li><span class="checkbox"></span><span>歌曲标题</span><em>歌手名字</em></li>
 								*}

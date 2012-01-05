@@ -473,6 +473,13 @@ a { text-decoration:none; color:#333; cursor:pointer; }
 .elm-add li.label {
 	font-size: 14px;padding-bottom: 16px;
 }
+.checkbox_show .checkbox{
+	display:block;
+}
+.checkbox_hide .checkbox{
+	display:none;
+}
+
 #IDTips{
 	display:none;
 	position:absolute;top:0px;width:100%;text-align:center;margin:auto;
