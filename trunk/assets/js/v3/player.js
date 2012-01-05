@@ -637,14 +637,14 @@ var YoukuWs = function(){
 				var editmode=false;
 				$("#_BtEditMode").click(function(){
 					if(editmode==false){
-						$("#_ContentMusic .checkbox").show();
+						$("#_ContentMusic").removeClass("checkbox_hide");
 						$("#_BtSelectAll").show();
 						$("#_BtDeSelect").show();
 						$("#_BtSaveAll").show();
 						$("#_BtDelete").show();
 						editmode=true;
 					}else{
-						$("#_ContentMusic .checkbox").hide();
+						$("#_ContentMusic").addClass("checkbox_hide");
 						$("#_BtSelectAll").hide();
 						$("#_BtDeSelect").hide();
 						$("#_BtSaveAll").hide();
@@ -668,11 +668,6 @@ var YoukuWs = function(){
 						});
 						window.listFlag=true;
 						YoukuWs.listList(true);
-						 //if(YoukuWs.ListContent){
-						// }else{
-						//	 
-						// }
-
 				});
 				//删除
 				$("#_BtDelete").click(function(){
@@ -937,7 +932,11 @@ var YoukuWs = function(){
 							 $("#drag-layer").hide();
 					     },
 					start:function(event,ui){
-							
+							if(YoukuWs.isLogin()){
+								$("#_ContentList").show();
+							}else{
+								$("#_ContentList").hide();
+							}
 							 if(YoukuWs.ListContent){
 							 }else{
 								 YoukuWs.listList();
@@ -1491,9 +1490,10 @@ var YoukuWs = function(){
 				PlayType = YoukuWs.get("PlayType",0);
 				if(PlayType>2)PlayType=0;
 				$.each(YoukuWsPlaylist.list(),function(i,n){
-					var o = '<li vid="'+n.v+'"><span class="checkbox hide"></span><a>'+n.t+'</a></li>';
+					var o = '<li vid="'+n.v+'"><span class="checkbox"></span><a>'+n.t+'</a></li>';
 					$("#_ContentMusic").append(o);
 				});
+
 				$("#IDNav >a").each(function(i,item){
 					var _for = $(item).attr("for");
 					if(i==PlayType){
@@ -2305,11 +2305,11 @@ var YoukuWs = function(){
 					//if(YoukuWs.ListContent){
 					//	YoukuWs.showList(flag);
 					//}else{
-						YoukuWs.ListContent=new Array();
 						 $.ajax({
 							 url: "/user.list.list",
 							 success: function( result) {
 								 if(result && result.items && result.items.length>0){
+									YoukuWs.ListContent=new Array();
 									YoukuWs.ListContent = result.items;
 									YoukuWs.showList(flag);
 								 }
@@ -2442,7 +2442,7 @@ var YoukuWsPlaylist = function(){
 				all.push(m);
 			};
 			if(!noappend && !finded){
-				var html = '<li vid="'+m.v+'"><span class="checkbox hide"></span><a>'+m.t+'</a></li>';
+				var html = '<li vid="'+m.v+'"><span class="checkbox"></span><a>'+m.t+'</a></li>';
 				content.append(html);
 				isappend=true;
 			}
