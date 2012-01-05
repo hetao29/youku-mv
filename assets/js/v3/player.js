@@ -1743,7 +1743,7 @@ var YoukuWs = function(){
 				     //}}}
 			     }else{
 					 //debug;
-					 return "";
+					// return "";
 				     try{
 					     PlayerReplay(vid);
 				     }catch(e){
