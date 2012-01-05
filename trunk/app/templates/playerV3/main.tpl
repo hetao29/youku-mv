@@ -175,8 +175,8 @@
 								</div>
 							</div>
 								<div class="btnline">
-									<a id="_IDLyricsErr"  title="{"报错"|tr}" class="btn-w">{"报错"|tr}</a>
 									<a id="_IDLyricsView"  title="{"查看"|tr}" class="btn-w">{"查看"|tr}</a>
+									<a id="_IDLyricsErr"  title="{"报错"|tr}" class="btn-w">{"报错"|tr}</a>
 
 									<a id="_IDLyricsPr" title="{"前进"|tr}" class="btn-c"><i class="r"></i></a>
 									<a id="_IDLyricsBk" title="{"后退"|tr}" class="btn-c"><i class="l"></i></a>
@@ -257,33 +257,20 @@
 			</div>
 		</div>
 
-		<div id="_RadioChannel" title="电台选择" class="hide">
+		<div id="_RadioChannel" _title="电台选择" class="hide">
 			<!-- 切换电台 -->
 			
 			<div class="cgfm-box">
+				<div id="loading" style="text-align: center; width: 100%; height: 100%;">
+					<div>
+						<img style="vertical-align: middle;" src="/assets/images/loading/loading9.gif"> 正在加载中...
+					</div>
+				</div>
 				<ul></ul>
 				{*
 				<ul>
-					<li><a class="btn-fm-d"  title="">默认电台</a></li>
-					<li><a class="btn-fm-d"  title="">70后MHZ</a></li>
-					<li><a class="btn-fm-d"  title="">80后MHZ</a></li>
-					<li><a class="btn-fm-d"  title="">90后MHZ</a></li>
-				</ul>
-				<ul>
-					<li><a class="btn-fm-d"  title="">华语MHZ</a></li>
-					<li><a class="btn-fm-d"  title="">粤语MHZ</a></li>
-					<li><a class="btn-fm-d"  title="">欧美MHZ</a></li>
-					<li><a class="btn-fm-d"  title="">日语MHZ</a></li>
-					<li><a class="btn-fm-d"  title="">韩语MHZ</a></li>
-					<li><a class="btn-fm-d"  title="">2011年国语新曲</a></li>
-					<li><a class="btn-fm-d"  title="">2011年日韩新曲</a></li>
-					<li><a class="btn-fm-d"  title="">2011年欧美新曲</a></li>
-				</ul>
-				<ul class="big">
-					<li><a class="btn-fm-d big"  title="">2010年流行金曲</a></li>
-					<li><a class="btn-fm-d big"  title="">2011年国语新曲</a></li>
-					<li><a class="btn-fm-d big"  title="">2011年日韩新曲</a></li>
-					<li><a class="btn-fm-d big"  title="">2011年欧美新曲</a></li>
+					<li><a title="">默认电台</a></li>
+					<li><a class="disabled"  title="">70后MHZ</a></li>
 				</ul>
 				*}
 			</div>
@@ -378,27 +365,26 @@
 	-->
 
 	<!-- 歌词 -->
-	<!--
-	<div class="layer-swbox">
-		<div class="swbox-cont">
-			<p>你眷恋的 都已离去</p>
-			<p>你问过自己无数次 想放弃的</p>
-			<p>眼前全在这里</p>
-			<p>超脱和追求时常是混在一起</p>
-			<p>你拥抱的 并不总是也拥抱你</p>
-			<p>而我想说的 谁也不可惜</p>
-			<p>去挥霍和珍惜是同一件事情</p>
-			<p>眼前全在这里</p>
-			<p>超脱和追求时常是混在一起</p>
-			<p>你拥抱的 并不总是也拥抱你</p>
-		</div>
-		<div class="singleBtn">
-			<a  class="btn-layer-d" title="">关闭</a>
+	<div id="_ContentLyricsView" class="hide" _title="我的歌单"/>
+		
+		<div class="layer-swbox">
+			<div class="swbox-cont">{*
+				<p>你眷恋的 都已离去</p>
+				<p>你问过自己无数次 想放弃的</p>
+				<p>眼前全在这里</p>
+				<p>超脱和追求时常是混在一起</p>
+				<p>你拥抱的 并不总是也拥抱你</p>
+				<p>而我想说的 谁也不可惜</p>
+				<p>去挥霍和珍惜是同一件事情</p>
+				<p>眼前全在这里</p>
+				<p>超脱和追求时常是混在一起</p>
+				<p>你拥抱的 并不总是也拥抱你</p>*}
+			</div>
 		</div>
 	</div>
-	-->
+
+	<!-- 我的歌单 -->
 	<div id="_IDList" class="hide" _title="我的歌单"/>
-		<!-- 我的歌单 -->
 		<table style="width:100%">
 			<tr style="width:100%">
 				<td style="width:100%" id="_IDListMain">
@@ -416,6 +402,7 @@
 						</div>
 						<div class="singleBtn">
 							<a  title="" id="_BtListAdd" class="btn-layer-d big icon"><i class="add"></i>新建歌单</a>
+							<a  title="" id="_BtListSave" class="btn-layer-d big icon"><i class="add"></i>保存到歌单</a>
 						</div>
 					</div>
 				</td>

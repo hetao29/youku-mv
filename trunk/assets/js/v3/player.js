@@ -415,6 +415,52 @@ var YoukuWs = function(){
 					
 					$("#_IDList .layer").center();
 				});
+				//保存到歌单
+				$("#_BtListSave").live("click",function(){
+					var selected_music =$("#_ContentMusic >li.select");
+					if(selected_music.size()<=0){
+						YoukuWs.tips("请先选择要保存的音乐");
+						return;
+					}
+					var selected_list =$("#_IDListMain li.select");
+					if(selected_list.size()<=0){
+						YoukuWs.tips("请选择要保存歌单.",true);
+						return;
+					}
+					
+					var lids=[];
+					var vids=[];
+					$.each(selected_list,function(i,item){
+						lids.push($(item).attr("lid"));
+					});
+
+					$.each(selected_music,function(i,item){
+						vids.push($(item).attr("vid"));
+					});
+					YoukuWs.tips("保存中...");
+					$("#_IDList").dgclose();
+					if(YoukuWs.isLogin()){
+						$.ajax({
+							url: "/user.list.addContents",
+							data: {
+								lids:lids,
+								vids:vids
+							},type:"post",
+							success: function( List) {
+									 if(List){
+										 YoukuWs.listList();
+									 }
+									 YoukuWs.tips("保存成功");
+								 }
+
+						});
+					}else{
+						YoukuWs.login(function(){$("#_BtListSave").trigger("click");});
+					}
+						
+
+				});
+
 				$("#_IDReturn").live("click",function(){
 					var index=0;
 					$("#_IDList td").hide();
@@ -495,8 +541,7 @@ var YoukuWs = function(){
 				$("#_IDChange").click(function(){
 					//换台模式
 					$("#_RadioChannel ul").html("");
-					$("#_RadioChannel >ul" ).html('<li><img style="vertical-align: middle;" src="/assets/images/loading/loading9.gif" /> 正在加载中...</li>');
-
+					$("#_RadioChannel #loading" ).show();
 					$("#_RadioChannel").dg({
 						width:400,height:300,title:"频道列表"
 					});
@@ -506,19 +551,19 @@ var YoukuWs = function(){
 						success: function( result) {
 							if(result && result.items){
 								$("#_RadioChannel ul").html("");
+								
+								$("#_RadioChannel #loading" ).hide();
 								for(var i=0;i<result.items.length;i++){
 									var cid = YoukuWs.get("cid");
 									var dsb ="";
 									if(cid==result.items[i].ListID){
-										dsb="disabled='disabled'";
+										dsb="class='disabled'";
 									}else{
 										dsb="";
 									}
-									$("#_RadioChannel ul").append("<li><a id='"+result.items[i].ListID+"' class='btn-fm-d'>"+result.items[i].ListName+"</a></li>");
-
-									//$("#_RadioChannel button").button({icons:{primary:"ui-icon-play"}});
+									$("#_RadioChannel ul").append("<li ><a "+dsb+" id='"+result.items[i].ListID+"'>"+result.items[i].ListName+"</a></li>");
 								}
-								$("#_RadioChannel").center();
+								$("#_RadioChannel .layer").center();
 							}
 						}
 					});
@@ -595,9 +640,35 @@ var YoukuWs = function(){
 						editmode=false;
 					}
 				});
+				//保存选择的音乐到歌单
+				$("#_BtSaveAll").click(function(){
+						var selected =$("#_ContentMusic >li.select");
+						if(selected.size()<=0){
+							YoukuWs.tips("请先选择要保存的音乐");
+							return;
+						}
+						YoukuWs.tips("请选择要保存歌单.",true);
+						$.each(selected,function(i,item){
+						});
+						
+						$("#_IDList").dg({
+							width:550,height:320,title:"歌单列表"
+						});
+
+						 if(YoukuWs.ListContent){
+							//	YoukuWs.showList();
+						 }else{
+							 YoukuWs.listList();
+						 }
+
+				});
 				//删除
 				$("#_BtDelete").click(function(){
 						var selected =$("#_ContentMusic >li.select");
+						if(selected.size()<=0){
+							YoukuWs.tips("请先选择要删除的音乐");
+							return;
+						}
 						$.each(selected,function(i,item){
 							YoukuWsPlaylist.del($(item).attr("vid"));
 							setTimeout(function() { $(item).remove(); YoukuWs.tips("成功删除!");}, 1);
@@ -632,12 +703,6 @@ var YoukuWs = function(){
 					all.addClass("select");
 					selected.removeClass("select");
 				});
-				$("#_ContentMusic .checkbox").live("click",function(){
-						var li =$(this).parent();
-						if(li.hasClass("select"))li.removeClass("select");else li.addClass("select");
-						return false;
-				});
-
 
 
 
@@ -680,14 +745,6 @@ var YoukuWs = function(){
 					delUrl="/user.list.delcontent?vid=:vid:&lid="+lid;
 					saveSortUrl="/user.list.contentsorder?lid="+lid;
 
-					/*
-							     url: "/user.list.contentsorder",
-							     type:"POST",
-							     data: {
-								     order:order,lid:lid
-							     },
-					*/
-
 					YoukuWs.loadMusic(url,page,delUrl,saveSortUrl);
 
 				});
@@ -708,6 +765,7 @@ var YoukuWs = function(){
 				$("#_CtMusicList #deleteAll").live('click',function(){
 					//可以优化
 					$(this).parentsUntil(".content").find(".select .remove").trigger("click");
+					 YoukuWs.listList();
 				});
 				//播放
 				$("#_CtMusicList .MusicPlay").live('click',function(){
@@ -718,13 +776,11 @@ var YoukuWs = function(){
 					YoukuWs.set("PlayType",PlayType);
 					$("#IDNav >a").eq(1).trigger("click");
 				});
-				$("#_CtMusicList .checkbox").live('click',function(){
-					var li =$(this).parent();
-					if(li.hasClass("select")){
-						li.removeClass("select");
-					}else{
-						li.addClass("select");
-					}
+				
+				$("li >.checkbox").live("click",function(){
+						var li =$(this).parent();
+						if(li.hasClass("select"))li.removeClass("select");else li.addClass("select");
+						return false;
 				});
 				$("#_CtMusicList #selectlAll").live('click',function(){
 					var li =$(this).parentsUntil(".content").find("li").addClass("select");
@@ -779,42 +835,47 @@ var YoukuWs = function(){
 				//}}}
 				$("#_IDLyricsPr").click(function(){
 					lyrics_offset=parseInt(lyrics_offset)+1000;
+					YoukuWs.tips("歌词已经提前1秒...");
+					/*
 					$("#_IDLyricsInfo").html("已前进").fadeIn("slow",function(){
 						$("#_IDLyricsInfo").fadeOut("slow");	
 					});
+					*/
 					YoukuWs.saveOffset();
 				});
 				$("#_IDLyricsErr").click(function(){
 					if(CurrentVideoID && CurrentVideoID>0){
+						//YoukuWs.tips("正在提交错误报告...",true);
 						$.ajax({
 							url: "/player.main.LyricsError",
 							data: {
 								VideoID:CurrentVideoID
 							},
 							success: function( result) {
-									 $("#_IDLyricsInfo").html("已报错").fadeIn("slow",function(){
-										 $("#_IDLyricsInfo").fadeOut("slow");	
-									 });
-								 }
+								YoukuWs.tips("已经提交错误报告，谢谢！");
+							}
 
 						});
 					}
 				});
 				$("#_IDLyricsView").click(function(){
-					var html = "";
+					/*var html = "";
 					$("#_ContentLyrics >p").each(function(n,item){
 						html+=$(item).html()+"<br/>";
-					});
-					$("#_ContentLyricsView >p").html(html);
+					});*/
+					//alert();
+					$("#_ContentLyricsView .swbox-cont").html($("#_ContentLyrics").html());
 					$("#_ContentLyricsView").dg({
 						width:400,height:300,title:"歌词信息"
 					});
 				});
 				$("#_IDLyricsBk").click(function(){
 					lyrics_offset=parseInt(lyrics_offset)-1000;
+					YoukuWs.tips("歌词已经后退1秒...");
+					/*
 					$("#_IDLyricsInfo").html("已后退").fadeIn("slow",function(){
 						$("#_IDLyricsInfo").fadeOut("slow");	
-					});
+					});*/
 					YoukuWs.saveOffset();
 				});
 				//加载播放列表
@@ -862,29 +923,14 @@ var YoukuWs = function(){
 						     setTimeout("YoukuWsPlaylist.save()",200);
 							 
 							 $("#drag-layer").hide();
-							//_sortMusicFlag = true;
 					     },
 					start:function(event,ui){
 							
 							 if(YoukuWs.ListContent){
-								//	YoukuWs.showList();
 							 }else{
 								 YoukuWs.listList();
 							 }
-							 //if(_sortMusicFlag)
-							//	 {
-								// setTimeout(function(){
-								
-								// var p = ui.position;
-								// var p2= $("#bfmsh-panel").offset();
-								// if(p){
-									// $("#drag-layer").css("left",(p2.left-$("#drag-layer").width())+"px");
-									// $("#drag-layer").css("top",(p.top)+"px");
-								// }
-								 $("#drag-layer").show();
-								// },200);
-							// }
-							// _sortMusicFlag = false;
+							 $("#drag-layer").show();
 					}
 
 				});
@@ -1105,6 +1151,7 @@ var YoukuWs = function(){
 				$( "#_ContentList >li" ).live("mouseover",function(){$(this).find(".right").show();
 				}).live("mouseout",function(){$(this).find(".right").hide();
 				});
+
 				$( "#_ContentList" ).sortable({
 					stop:function(event,ui){
 						     var order=[];
@@ -1698,7 +1745,7 @@ var YoukuWs = function(){
 				     //}}}
 			     }else{
 					 //debug;
-					 //return "";
+					 return "";
 				     try{
 					     PlayerReplay(vid);
 				     }catch(e){
@@ -2020,7 +2067,7 @@ var YoukuWs = function(){
 				 var li_index=0;
 				 for(var i in YoukuWs.ListContent){
 					 list = YoukuWs.ListContent[i];
-					 li+='<li lid="'+list.ListID+'" ord="'+list.ListOrder+'">';
+					 li+='<li lid="'+list.ListID+'" ord="'+list.ListOrder+'"><span class="checkbox"></span>';
 					li+='<h2><a  title="">'+list.ListName+'</a><span>('+list.ListCount+')</span><a title="" class="btn-play-s"></a></h2>';
 					li+='<p>最后更新：<span>'+list.ListUpdateTime+'</span></p>';
 					li+='<p class="comment">'+list.ListComment+'</p>';
@@ -2035,6 +2082,7 @@ var YoukuWs = function(){
 				 }
 				$("#_ContentList ul").html(li_2);//快速添加音乐入口
 				$("#_IDListMain ul").html(li);
+				
 				$("#_IDListMain ul").sortable({
 					stop:function(event,ui){
 
@@ -2065,7 +2113,7 @@ var YoukuWs = function(){
 				 $( "#_ContentList >ul >li" ).droppable({
 					 accept:"#_ContentMusic >li,#_ContentSearch >li",
 					 activeClass: "",
-					 hoverClass: "hover icon_del_active",
+					 hoverClass: "hover",
 					 tolerance:"pointer",
 					 drop: function( event, ui ) {
 						 //TODO移动到另一个列表
@@ -2082,14 +2130,9 @@ var YoukuWs = function(){
 									  if(List){
 										  YoukuWs.listList();
 										  YoukuWs.tips("保存成功.");
-										//  $("#_IDSaveTips").html("保存成功");
-										//  $("#_IDSaveTips").show("clip");
 									  }else{
 										  YoukuWs.tips("歌单里已经有了，不要贪心哦.");
-										//  $("#_IDSaveTips").html("歌单里已经有了，不要贪心哦");
-										//  $("#_IDSaveTips").show("clip");
 									  }
-									 // setTimeout(function() { $("#_IDSaveTips").hide("clip");}, 2000);
 								  }
 
 						 });
@@ -2180,63 +2223,31 @@ var YoukuWs = function(){
 							//action+='<a  title="" class="btn-layer-d big icon ret"><i class="l"></i>返回</a>';
 							$("#_CtMusicList .singleBtn" ).html(action);
 							//}}}
-
 							if(saveSortUrl)$(".mvlist").sortable({
-
-										stop:function(event,ui){
-										 var order=[];
-										 $(this).find("li").each(function (index, domEle) { 
-											// lid = $(domEle).attr("lid");
-											 if(index!=$(domEle).attr("order")){
-												 var o={order:index,vid:$(domEle).attr("vid")};
-												 order.push(o);
-											 }
-										 });
-										 if(order.length==0)return;
-										 $.ajax({
-											 url: saveSortUrl,//"/user.list.contentsorder",
-											 type:"POST",
-											 data: {
-												 order:order//,lid:lid
-											 },
-											 success: function( result) {
-													  //应该修改当前的ord值
-													  for(var i in  order){
-														  $("#_CtMusicList .mylist-cont >ul >li[vid="+order[i].vid+"]").attr("order",order[i].order);
-													  }
-												  }
-										 });
-									 }
-
-
-/*
-								stop:function(event,ui){
-									
+									stop:function(event,ui){
 									 var order=[];
-									 var lid=0;
 									 $(this).find("li").each(function (index, domEle) { 
-										 lid = $(domEle).attr("lid");
-										 if(index!=$(domEle).attr("ord")){
+										// lid = $(domEle).attr("lid");
+										 if(index!=$(domEle).attr("order")){
 											 var o={order:index,vid:$(domEle).attr("vid")};
 											 order.push(o);
 										 }
 									 });
-									 if(order.length==0 || lid==0)return;
+									 if(order.length==0)return;
 									 $.ajax({
-										 url: "/user.list.contentsorder",
+										 url: saveSortUrl,//"/user.list.contentsorder",
 										 type:"POST",
 										 data: {
-											 order:order,lid:lid
+											 order:order//,lid:lid
 										 },
 										 success: function( result) {
 												  //应该修改当前的ord值
 												  for(var i in  order){
-													  $("#_ContentListen >ul >li[vid="+order[i].vid+"]").attr("ord",order[i].order);
+													  $("#_CtMusicList .mylist-cont >ul >li[vid="+order[i].vid+"]").attr("order",order[i].order);
 												  }
 											  }
 									 });
-									
-								 } */
+								 }
 							});
 							$("#_CtMusicList .layer").center();
 						}
@@ -2398,7 +2409,7 @@ var YoukuWs = function(){
 				     setTimeout(function() { 
 					     $("#IDTips").slideUp("fast");
 
-				     }, 2000);//fro ie patch
+				     }, 2000);
 
 			     });
 
