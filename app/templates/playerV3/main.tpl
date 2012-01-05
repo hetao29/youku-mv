@@ -402,7 +402,7 @@
 						</div>
 						<div class="singleBtn">
 							<a  title="" id="_BtListAdd" class="btn-layer-d big icon"><i class="add"></i>新建歌单</a>
-							<a  title="" id="_BtListSave" class="btn-layer-d big icon"><i class="add"></i>保存到歌单</a>
+							<a  title="" id="_BtListSave" class="btn-layer-d big icon hide"><i class="add"></i>保存到歌单</a>
 						</div>
 					</div>
 				</td>
