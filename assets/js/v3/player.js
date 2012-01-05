@@ -214,11 +214,12 @@ var YoukuWs = function(){
 						$("#_IDThx").trigger("click");
 						break;
 					case 46://Del
-						if(PlayType==0){
+
+						//if(PlayType==0){
 							$("#_IDDown").trigger("click");
-						}else{
-							$("#_BtTrash").trigger("click");
-						}
+						//}else{
+						//	$("#_BtTrash").trigger("click");
+						//}
 						break;
 				}
 			}
@@ -559,7 +560,7 @@ var YoukuWs = function(){
 				$("#_IDChange").click(function(){
 					//换台模式
 					$("#_RadioChannel ul").html("");
-					$("#_RadioChannel #loading" ).show();
+					$("#_RadioChannel .loading" ).show();
 					$("#_RadioChannel").dg({
 						width:400,height:300,title:"频道列表"
 					});
@@ -570,7 +571,7 @@ var YoukuWs = function(){
 							if(result && result.items){
 								$("#_RadioChannel ul").html("");
 								
-								$("#_RadioChannel #loading" ).hide();
+								$("#_RadioChannel .loading" ).hide();
 								for(var i=0;i<result.items.length;i++){
 									var cid = YoukuWs.get("cid");
 									var dsb ="";
@@ -682,9 +683,9 @@ var YoukuWs = function(){
 						}
 						$.each(selected,function(i,item){
 							YoukuWsPlaylist.del($(item).attr("vid"));
-							setTimeout(function() { $(item).remove(); YoukuWs.tips("成功删除!");}, 1);
+							setTimeout(function() { $(item).remove(); }, 1);
 						});
-
+						YoukuWs.tips("成功删除!");
 				});
 				$("#_BtDelete,#_BtTrash2").droppable({
 					activeClass: "",
@@ -2171,10 +2172,8 @@ var YoukuWs = function(){
 				*/
 				var	real_url = url.replace(/:page:/,page);
 				
-				$("#_CtMusicList").dg({
-					width:630,height:300,title:"听过的MV", 
-				});
-				 $("#_CtMusicList #loading" ).show();
+				$("#_CtMusicList").dg({width:630,height:300,title:"听过的MV"});
+				$("#_CtMusicList .loading" ).show();
 				 //$("#_CtMusicList .mylist-cont" ).html('<div style="text-align:center;padding:10px"><img style="vertical-align: middle;" src="/assets/images/loading/loading9.gif" /> 正在加载中...</div>');
 				 $("#_CtMusicList .mylist-cont" ).attr("url",url);
 				 $("#_CtMusicList .mylist-cont" ).attr("delUrl",delUrl);
@@ -2182,7 +2181,7 @@ var YoukuWs = function(){
 				 $.ajax({
 				     url: real_url,
 				     success: function( result) {
-						  $("#_CtMusicList #loading" ).hide();
+						  $("#_CtMusicList .loading" ).hide();
 							var li="";
 							var ti='';
 							var od="";

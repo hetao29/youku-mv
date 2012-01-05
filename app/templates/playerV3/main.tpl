@@ -14,7 +14,7 @@
 		<script type="text/javascript" src="/assets/js/ui-1.8.16/jquery.ui.draggable.js"></script>
 		<script type="text/javascript" src="/assets/js/ui-1.8.16/jquery.ui.droppable.js"></script>
 		<script type="text/javascript" src="/assets/js/jquery.cookie.js"></script>
-		<!--<script type="text/javascript" src="/assets/js/json2.js"></script>-->
+		<script type="text/javascript" src="/assets/js/json2.js"></script>
 		<script type="text/javascript" src="/assets/js/swfobject/swfobject.js"></script>
 
 		<script type="text/javascript" src="/assets/js/v3/player.js"></script>
@@ -31,9 +31,9 @@
 				"关于":"{"关于"|tr}",
 				"歌手":"{"歌手"|tr}",
 				"专辑":"{"专辑"|tr}",
-				"正在播放":"{"正在播放"|tr}",
-
-			}; var out="{$out}"; var _LabelOk="{'确认'|tr}"; var _LabelCancel="{'取消'|tr}"; var _initVid="{$vid}";
+				"正在播放":"{"正在播放"|tr}"
+			}; 
+			var out="{$out}"; var _LabelOk="{'确认'|tr}"; var _LabelCancel="{'取消'|tr}"; var _initVid="{$vid}";
 		</script>
 	</head>
 
@@ -289,7 +289,7 @@
 			<!-- 切换电台 -->
 			
 			<div class="cgfm-box">
-				<div id="loading" style="text-align: center; width: 100%; height: 100%;">
+				<div class="loading" style="text-align: center; width: 100%; height: 100%;">
 					<div>
 						<img style="vertical-align: middle;" src="/assets/images/loading/loading9.gif"> 正在加载中...
 					</div>
@@ -306,7 +306,7 @@
 		</div>
 		<div id="_CtMusicList" class="hide" _title="歌曲列表">
 			<!-- 我的歌单(整理歌曲) -->
-			<div id="loading" style="text-align: center;     position: absolute; width: 100%; top: 0%; z-index: 999;  height: 100%;">
+			<div class="loading" style="text-align: center;     position: absolute; width: 100%; top: 0%; z-index: 999;  height: 100%;">
 				<div style="width:100%;top:40%;position:relative">
 					<img style="vertical-align: middle;" src="/assets/images/loading/loading9.gif"> 正在加载中...
 				</div>
