@@ -1,5 +1,5 @@
 /*
- * jQuery UI Selectable 1.9m5
+ * jQuery UI Selectable 1.9m6
  *
  * Copyright 2011, AUTHORS.txt (http://jqueryui.com/about)
  * Dual licensed under the MIT or GPL Version 2 licenses.
@@ -15,6 +15,7 @@
 (function( $, undefined ) {
 
 $.widget("ui.selectable", $.ui.mouse, {
+	version: "1.9m6",
 	options: {
 		appendTo: 'body',
 		autoRefresh: true,
@@ -257,10 +258,6 @@ $.widget("ui.selectable", $.ui.mouse, {
 		return false;
 	}
 
-});
-
-$.extend($.ui.selectable, {
-	version: "1.9m5"
 });
 
 })(jQuery);

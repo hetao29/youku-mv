@@ -1,5 +1,5 @@
 /*
- * jQuery UI Sortable 1.9m5
+ * jQuery UI Sortable 1.9m6
  *
  * Copyright 2011, AUTHORS.txt (http://jqueryui.com/about)
  * Dual licensed under the MIT or GPL Version 2 licenses.
@@ -15,6 +15,7 @@
 (function( $, undefined ) {
 
 $.widget("ui.sortable", $.ui.mouse, {
+	version: "1.9m6",
 	widgetEventPrefix: "sort",
 	options: {
 		appendTo: "parent",
@@ -983,7 +984,7 @@ $.widget("ui.sortable", $.ui.mouse, {
 
 		// We first have to update the dom position of the actual currentItem
 		// Note: don't do it if the current item is already removed (by a user), or it gets reappended (see #4088)
-		if(!this._noFinalSort && this.currentItem[0].parentNode) this.placeholder.before(this.currentItem);
+		if(!this._noFinalSort && this.currentItem.parent().length) this.placeholder.before(this.currentItem);
 		this._noFinalSort = null;
 
 		if(this.helper[0] == this.currentItem[0]) {
@@ -1067,10 +1068,6 @@ $.widget("ui.sortable", $.ui.mouse, {
 		};
 	}
 
-});
-
-$.extend($.ui.sortable, {
-	version: "1.9m5"
 });
 
 })(jQuery);
