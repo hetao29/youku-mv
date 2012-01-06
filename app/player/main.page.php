@@ -7,6 +7,34 @@ class player_main extends STpl{
 		//echo $this->render("footer.tpl");
 	}
 	
+	function pageEntryV31($inPath,$out="",$vid=""){
+		$param=array();
+		$allLanguage=array(
+			"zh-cn"=>"中文 (简体)",
+			"zh-tw"=>"中文 (繁體)",
+			"en"=>"English",
+			"ko"=>"한국어",
+			"ja"=>"日本語",
+		);
+		$language="中文 (简体)";
+		if(!empty($_COOKIE['language'])){
+			$l = $_COOKIE['language'];
+			if(!empty($allLanguage[$l])){
+				$language = $allLanguage[$l];
+				SLanguage::setLocale($l);
+			}
+
+		}
+		$param['language']=$language;
+		$param['allLanguage']=$allLanguage;
+		$param['out']=$out;
+		$param['vid']=$vid;
+		$param['jsversion']=filemtime(WWW_ROOT."/"."assets/js/youku.ws.js");
+		$param['cssversion']=filemtime(WWW_ROOT."/"."assets/css/styleV2.css");
+		$style=(!empty($inPath[3]) && $inPath[3]=="gdg")?"gdg":"default";
+		$param['style']=$style;
+		return $this->render("playerV3/main3.1.tpl",$param);
+	}
 	function pageEntryV3($inPath,$out="",$vid=""){
 		$param=array();
 		$allLanguage=array(
@@ -34,6 +62,46 @@ class player_main extends STpl{
 		$style=(!empty($inPath[3]) && $inPath[3]=="gdg")?"gdg":"default";
 		$param['style']=$style;
 		return $this->render("playerV3/main.tpl",$param);
+	}
+	function pageHeaderV31($inPath){
+		
+		$allLanguage=array(
+			"zh-cn"=>"中文 (简体)",
+			"zh-tw"=>"中文 (繁體)",
+			"en"=>"English",
+			"ko"=>"한국어",
+			"ja"=>"日本語",
+		);
+		$param = array();
+		$language="中文 (简体)";
+		if(!empty($_COOKIE['language'])){
+			$l = $_COOKIE['language'];
+			if(!empty($allLanguage[$l])){
+				$language = $allLanguage[$l];
+			}
+
+		}
+		$param['language']=$language;
+		$out = !empty($inPath[3])?$inPath[3]:"";
+		$param['out']=$out;
+		if(($User=user_api::islogin())!==false){
+			$db = new user_db;
+			$action = $db->getAction($User['UserID']);
+			$param['user'] = $User;
+			$param['_CtListen'] = $db->getListenCount($User['UserID']);
+			$param['_CtList'] = $db->getListCount($User['UserID']);
+			$act = array();
+			if(!empty($action->items)){
+				foreach($action->items as $item){
+					$k=$item['ActionType'];
+					$v=$item['ct'];
+					$act[$k]=$v;
+				}
+			}
+			$param['act'] = $act;
+		}
+		$param['allLanguage'] = $allLanguage;
+		return $this->render("playerV3/header3.1.tpl",$param);
 	}
 
 	function pageHeaderV3($inPath){

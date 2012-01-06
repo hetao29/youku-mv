@@ -18,12 +18,12 @@
 		<script type="text/javascript" src="/assets/js/json2.js"></script>
 		<script type="text/javascript" src="/assets/js/swfobject/swfobject.js"></script>
 
-		<script type="text/javascript" src="/assets/js/v3/player.js"></script>
+		<script type="text/javascript" src="/assets/js/v3/player3.1.js"></script>
 
 		<link rel="Shortcut Icon" href="/assets/images/ico/favicon_32x32.ico" />
 
 		<!--<link type="text/css" rel="stylesheet" href="/assets/style/default/css/fm.css" />-->
-		<link type="text/css" rel="stylesheet" href="/assets/style/{$style}/css/fm.css" />
+		<link type="text/css" rel="stylesheet" href="/assets/style/{$style}/css/fm3.1.css" />
 
 
 <!--[if IE 6]>
@@ -59,7 +59,7 @@
 		<div id="IDTips"><span></span></div>
 
 		<div class="s_header" id="_IDHeader">
-			{part "/player.main.headerV3.".$out}
+			{part "/player.main.headerV31.".$out}
 		</div>
 		<div class="s_title">
 			<i class="logo left"></i>
@@ -74,6 +74,7 @@
 			<i class="photo_img"></i>
 		</div>
 		<div class="s_body">
+				
 			<div class="left s_body_main">
 				<div class="s_player">
 					<div class="top">
@@ -88,29 +89,53 @@
 						<div class="middle">
 						
 							<div class="box">
-								<h2><span id="title">Youku.FM</span><i class="btn-width right"><a  title="" id="_IDThx"></a></i></h2>
+								<h2><span id="title" class="left">Youku.FM</span><i class="btn-width right"><a  title="" id="_IDThx"></a></i></h2>
 								<div class="player" id="playerBox">
 									<div id="player"></div>
 								</div>
-								<div class="player-controll">
+								<div class="controls">
+									<div class="right">
+										<div id="PlayModeSet">
+											<a class="btn-order" playmode="3" title="{'随机'|tr}<">{'随机'|tr}</a>
+											<a class="btn-list" playmode="2"  title="{'循环'|tr}">{'循环'|tr}</a>
+											<a class="btn-for" playmode="1" title="{'单曲'|tr}">{'单曲'|tr}</a>
+										</div>
+
+									</div>
+									<div class="left">
+										<a id="share" class="btn-share" title="" ><i class="icon-share"></i>分享</a>
+									</div>
+									<div class="middle">
+										
+										<ul>
+											<li><a class="btn-prev" id="_BtPre" title="{'上一首'|tr}">{'上一首'|tr}</a></li>
+											<li><a class="btn-play" id="_IDPlay" title="{'播放'|tr}">{'播放'|tr}</a><a class="btn-pause"  id="_IDPause" title="暂停">暂停</a></li>
+											{*<li><a class="btn-skip"  title="跳过">跳过</a></li>*}
+											<li><a class="btn-next" id="_BtNext" title="{'下一首'|tr}">{'下一首'|tr}</a></li>
+											<li><a class="btn-love" id="_IDUp" title="{"喜欢"|tr}">{"喜欢"|tr}</a></li>
+											<li><a class="btn-remove" id="_IDDown" title="移除">{"不喜欢"|tr}</a></li>
+										<ul>
+
+									</div>
+									<!--
 									<a id="share" class="btn-share" title="" ><i class="icon-share"></i>分享</a>
 									<div class="center">
-
-									
-										<a class="btn-prev" id="_BtPre" title="{'上一首'|tr}">{'上一首'|tr}</a>
-										<a class="btn-play" id="_IDPlay" title="{'播放'|tr}">{'播放'|tr}</a>
-										<a class="btn-pause"  id="_IDPause" title="暂停">暂停</a>
-										{*<a class="btn-skip"  title="跳过">跳过</a>*}
-										<a class="btn-next" id="_BtNext" title="{'下一首'|tr}">{'下一首'|tr}</a>
-										&nbsp;&nbsp;&nbsp;
-										<a class="btn-love" id="_IDUp" title="{"喜欢"|tr}">{"喜欢"|tr}</a>
-										<a class="btn-remove" id="_IDDown" title="移除">{"不喜欢"|tr}</a>
+									<ul>
+										<li><a class="btn-prev" id="_BtPre" title="{'上一首'|tr}">{'上一首'|tr}</a></li>
+										<li><a class="btn-play" id="_IDPlay" title="{'播放'|tr}">{'播放'|tr}</a></li>
+										<li><a class="btn-pause"  id="_IDPause" title="暂停">暂停</a></li>
+										{*<li><a class="btn-skip"  title="跳过">跳过</a></li>*}
+										<li><a class="btn-next" id="_BtNext" title="{'下一首'|tr}">{'下一首'|tr}</a></li>
+										<li>&nbsp;</li>
+										<li><a class="btn-love" id="_IDUp" title="{"喜欢"|tr}">{"喜欢"|tr}</a></li>
+										<li><a class="btn-remove" id="_IDDown" title="移除">{"不喜欢"|tr}</a></li>
+									<li>
 									</div>
 									<div class="right" id="PlayModeSet">
 										<a class="btn-order" playmode="3" title="{'随机'|tr}<">{'随机'|tr}</a>
 										<a class="btn-list" playmode="2"  title="{'循环'|tr}">{'循环'|tr}</a>
 										<a class="btn-for" playmode="1" title="{'单曲'|tr}">{'单曲'|tr}</a>
-									</div>
+									</div>-->
 								</div>
 							</div>
 
@@ -127,7 +152,15 @@
 
 				</div>
 			</div>
-			<div class="right s_controls">right
+			<div class="right s_controls">
+
+				<div class="tab-bg">
+					<div class="tab" id="IDNav">
+						<a id="dtmsh" for="dtmsh-panel" title="{'电台模式'|tr}" class="current">{'电台模式'|tr}</a>
+						<a for="bfmsh-panel" title="{'播放模式'|tr}">{'播放模式'|tr}</a>
+						<a for="sw-panel" title="{'显示歌词'|tr}">{'显示歌词'|tr}</a>
+					</div>
+				</div>
 			</div>
 			<div class="clear"></div>
 		</div>
@@ -273,6 +306,7 @@
 			</div>
 		</div>
 		-->
+		<div style="clear:both"></div>
 		<p class="copyright">请使用者仔细阅读优酷使用协议和版权声明 Copyright©2011 优酷 youku.com 版权所有</p>
 
 		<div class="share-layer" id="share-layer">
