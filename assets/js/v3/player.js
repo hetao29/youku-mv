@@ -727,6 +727,8 @@ var YoukuWs = function(){
 
 
 				$("#_IDListMain .btn-play-s").live('click',function(){
+					$("#_IDList").dgclose();
+					YoukuWs.tips("添加歌曲中...");
 					var li =$(this).parentsUntil("li").parent();
 					YoukuWs.listContents(li.attr("lid"),true);
 				});
