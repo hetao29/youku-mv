@@ -34,6 +34,9 @@
 	}
 	$.fn.dg = function(options){
 
+		if(YoukuWs.isIpad()){
+				$("#"+playerId).attr("controls",null);
+		}
 		var defaults = {position:"left"}; 
 		var options = $.extend(defaults, options); 
 		this.each(function(item){ 
@@ -104,6 +107,9 @@
 
 	$(".ly-box .close").live("click",function(){
 		var p = $(this).parents(".layer").parent();
+		if(YoukuWs.isIpad()){
+			$("#"+playerId).attr("controls","controls");
+		}
 		var d =p.data("close");
 		if(d){
 			try{
@@ -2620,7 +2626,7 @@ function PlayerPlayNext(obj){
 //FOR IPAD PATCH
 var adCheck=0;//后贴检测
 var playTime={time:0,alltime:0};
-(function($){  
+(function($){  /*
 	if(YoukuWs.isIpad()){
 		var originOpen = $.ui.dialog.prototype.open;
 		$.ui.dialog.prototype.open = function(){
@@ -2632,7 +2638,7 @@ var playTime={time:0,alltime:0};
 			var video = $("#"+playerId).attr("controls","controls");
 			originClose.apply(this,arguments); 
 		};  
-	}
+	}*/
 	//{{{
 	function getPlayTime(){												  
 		var r= PlayerInfo();
