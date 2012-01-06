@@ -2626,8 +2626,13 @@ function PlayerPlayNext(obj){
 //FOR IPAD PATCH
 var adCheck=0;//后贴检测
 var playTime={time:0,alltime:0};
-(function($){  /*
+(function($){ 
 	if(YoukuWs.isIpad()){
+		$(document).bind('touchmove', function(e) {
+			return false;
+		   //e.preventDefault();
+		});
+/*
 		var originOpen = $.ui.dialog.prototype.open;
 		$.ui.dialog.prototype.open = function(){
 			var video = $("#"+playerId).attr("controls",null);
@@ -2637,8 +2642,8 @@ var playTime={time:0,alltime:0};
 		$.ui.dialog.prototype.close= function(){
 			var video = $("#"+playerId).attr("controls","controls");
 			originClose.apply(this,arguments); 
-		};  
-	}*/
+		};  */
+	}
 	//{{{
 	function getPlayTime(){												  
 		var r= PlayerInfo();
