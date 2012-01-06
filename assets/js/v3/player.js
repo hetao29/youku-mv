@@ -2628,10 +2628,6 @@ var adCheck=0;//后贴检测
 var playTime={time:0,alltime:0};
 (function($){ 
 	if(YoukuWs.isIpad()){
-		$(document).bind('touchmove', function(e) {
-			return false;
-		   //e.preventDefault();
-		});
 /*
 		var originOpen = $.ui.dialog.prototype.open;
 		$.ui.dialog.prototype.open = function(){
