@@ -33,7 +33,8 @@
 .logo { _width:920px;}
 .fm-body { _width:920px; }
 .fm-body .cont-left {
-	_width:900px;
+	_width:expression((documentElement.clientWidth >910) ? "910px" : "auto" );
+
 }
 </style>
 <![endif]-->
@@ -54,7 +55,13 @@
 	</head>
 
 	<body>
-		<div id="IDTips"><span></span></div>
+		<div id="IDTips">
+			<ul>
+				<li>
+					{*<a><span>jfiwoeiow </span><span class="x">X</span></a>*}
+				</li>
+			</ul>
+		</div>
 
 		<div class="t-header" id="_IDHeader">
 			{part "/player.main.headerV3.".$out}
@@ -67,7 +74,7 @@
 			</div>
 			<i class="photo_img"></i>
 		</div>
-		<div class="fm-body">
+		<div class="fm-body" id="_IDBody">
 			<div class="cont-left" id="box">
 			<div class="inner-left">
 				<div class="top"><div class="box"><i></i><i class="right"></i><div class="boxcenter"></div></div></div>
