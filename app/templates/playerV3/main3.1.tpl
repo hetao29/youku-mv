@@ -28,14 +28,9 @@
 
 <!--[if IE 6]>
 <style>
-.navbox,.s_title,.s_body { _width:920px;}
-
-
-.copyright { _width:920px;}
-.logo { _width:920px;}
-.fm-body { _width:920px; }
-.fm-body .cont-left {
-	_width:900px;
+.navbox, .s_title, .s_body, .s_footer {
+/*_width:920px;*/
+_width:expression((documentElement.clientWidth >920) ? "920px" : "auto" );
 }
 </style>
 <![endif]-->
@@ -88,12 +83,12 @@
 						<div class="left lt"></div>
 						<div class="middle">
 						
-							<div class="box">
+							<div>
 								<h2><span id="title" class="left">Youku.FM</span><i class="btn-width right"><a  title="" id="_IDThx"></a></i></h2>
 								<div class="player" id="playerBox">
 									<div id="player"></div>
 								</div>
-								<div class="controls">
+								<div class="controlbar">
 									<div class="right">
 										<div id="PlayModeSet">
 											<a class="btn-order" playmode="3" title="{'随机'|tr}<">{'随机'|tr}</a>
@@ -146,7 +141,6 @@
 								</div>
 							</div>
 
-
 						</div>
 					</div>
 
@@ -161,13 +155,172 @@
 			</div>
 			<div class="right s_controls">
 
-				<div class="tab-bg">
-					<div class="tab" id="IDNav">
-						<a id="dtmsh" for="dtmsh-panel" title="{'电台模式'|tr}" class="current">{'电台模式'|tr}</a>
-						<a for="bfmsh-panel" title="{'播放模式'|tr}">{'播放模式'|tr}</a>
-						<a for="sw-panel" title="{'显示歌词'|tr}">{'显示歌词'|tr}</a>
+				<div class="top">
+					<div class="right rt"></div>
+					<div class="left lt"></div>
+					<div class="middle"></div>
+				</div>
+
+				<div class="content">
+					<div class="right rt"></div>
+					<div class="left lt"></div>
+					<div class="middle">
+					
+
+
+						<div class="tab-bg">
+							<div id="IDNav">
+								<a for="dtmsh-panel" title="{'电台模式'|tr}" class="current">{'电台模式'|tr}</a>
+								<a for="bfmsh-panel" title="{'播放模式'|tr}">{'播放模式'|tr}</a>
+								<a for="sw-panel" title="{'显示歌词'|tr}">{'显示歌词'|tr}</a>
+							</div>
+						</div>
+
+
+
+
+
+				<div class="cont-border">
+					<div >
+
+						<div id="dtmsh-panel">
+							<div style="padding: 9px;">
+								<div class="dt-box">
+									<h2>{"当前播放"|tr}:<span id="_IDVideoTitle"></span></h2>
+									<img id="_IDVideoPic" class="shadow" />
+								</div>
+								<div class="dt-box">
+									<h2>{"接着播放"|tr}:<span id="_IDNextVideoTitle"></span></h2>
+									<img id="_IDNextVideoPic" class="shadow" />
+								</div>
+							</div>
+						</div>
+
+						<div id="bfmsh-panel" class="hide">
+
+							<div id="drag-layer" style="position:absolute;left:-160px;top:100px"; class="mvlist-edit-layer hide">
+								<div class="top"><p>添加到歌单<i class="icon-down"></i><i class="icon_add"></i></p></div>
+								<a id="_BtTrash2" class="icon_del" title="删除"></a>
+
+								<div class="mdrag-layer" id="_ContentList">
+									<ul>
+										<span style="padding: 15px;">加载中...</span>
+									</ul>
+								</div>
+							</div>
+							
+							<div class="search-box">
+								<i class="search-bg"></i>
+								<input type="text" id="keywords" name="" />
+								<a id="_BtSearch" title="搜索" class="btn-search">搜索</a>
+							</div>
+
+							<ul class="music-list checkbox_hide" id="_ContentMusic">
+								{*
+								<li><span class="checkbox"></span><span>歌曲标题</span><em>歌手名字</em></li>
+								*}
+							</ul>
+							<div class="btnline">
+								<a id="_BtEditMode" title="编辑" class="btn-w">编辑</a>
+								<a id="_BtSelectAll" title="全选" class="btn-w hide">全选</a>
+								<a id="_BtDeSelect" title="反选" class="btn-w hide">反选</a>
+								<a id="_BtAddMv" title="添加" class="btn-c"><i class="add"></i>添加</a>
+								<a id="_BtSaveAll" title="保存" class="btn-c hide"><i class="save"></i>保存</a>
+								<a id="_BtDelete" title="删除" class="btn-c hide"><i class="remove"></i>删除</a>
+							</div>
+						</div>
+
+						<div id="sw-panel" class="hide">
+							<div style="padding: 9px;">
+								<div class="sw-box" id="_ContentLyrics">
+								{*
+									<p>罗志祥  爱转角</p>
+									<p>爱转角遇见了谁是否有爱情的美</p>
+									<p>爱转角以后的街能不能有我来陪</p>
+									<p>爱转角遇见了谁是否不让你流泪</p>
+									<p>也许陌生到了解 让我来当你的谁</p>
+									<p>我不让爱掉眼泪 不让你掉眼泪</p>
+									<p class="current">心不再拚命躲不去害怕结果</p>
+									<p>有美丽笑容</p>
+									<p>我不让爱掉眼泪 不让你掉眼泪我不让爱掉眼泪 不让你掉眼泪</p>
+									<p >我不让爱掉眼泪 不让你掉眼泪</p>
+									<p>心不再拚命躲不去害怕结果</p>
+									<p>有美丽笑容</p>
+									<p>我不让爱掉眼泪 不让你掉眼泪</p>
+									<p>我不让爱掉眼泪 不让你掉眼泪</p>
+									<p>心不再拚命躲不去害怕结果</p>
+									<p>有美丽笑容</p>
+									<p>我不让爱掉眼泪 不让你掉眼泪</p>
+								  *}
+								</div>
+							</div>
+								<div class="btnline">
+									<a id="_IDLyricsView"  title="{"查看"|tr}" class="btn-w">{"查看"|tr}</a>
+									<a id="_IDLyricsErr"  title="{"报错"|tr}" class="btn-w">{"报错"|tr}</a>
+
+									<a id="_IDLyricsPr" title="{"前进"|tr}" class="btn-c"><i class="r"></i></a>
+									<a id="_IDLyricsBk" title="{"后退"|tr}" class="btn-c"><i class="l"></i></a>
+								</div>
+						</div>
+
 					</div>
 				</div>
+
+
+
+
+
+
+
+
+
+
+
+					</div>
+
+
+				</div>
+
+
+				<div class="bottom">
+					<div class="right rt"></div>
+					<div class="left lt"></div>
+					<div class="middle"></div>
+				</div>
+
+			</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 			</div>
 			<div class="clear"></div>
 		</div>
@@ -213,7 +366,7 @@
 			</div>
 			<div class="cont-right" id="_IDRight">
 				<div class="tab-bg">
-					<div class="tab" id="IDNav">
+					<div id="IDNav">
 						<a id="dtmsh" for="dtmsh-panel" title="{'电台模式'|tr}" class="current">{'电台模式'|tr}</a>
 						<a for="bfmsh-panel" title="{'播放模式'|tr}">{'播放模式'|tr}</a>
 						<a for="sw-panel" title="{'显示歌词'|tr}">{'显示歌词'|tr}</a>
@@ -312,9 +465,17 @@
 				<div class="bottom"><div class="box"><i></i><i class="right"></i><div class="boxcenter"></div></div></div>
 			</div>
 		</div>
-		-->
+-->
+		
 		<div style="clear:both"></div>
-		<p class="copyright">请使用者仔细阅读优酷使用协议和版权声明 Copyright©2011 优酷 youku.com 版权所有</p>
+		<div class="s_footer">
+			<p class="copyright">请使用者仔细阅读优酷使用协议和版权声明 Copyright©2011 优酷 youku.com 版权所有</p>
+		</div>
+
+
+
+
+
 
 		<div class="share-layer" id="share-layer">
 			<i class="top"></i>

@@ -938,25 +938,25 @@ var YoukuWs = function(){
 				});
 				*/
 				//var _sortMusicFlag=true;
-				$("#_ContentMusic").sortable({
+				$("#_ContentMusic").sortable({ placeholder: 'highlight',/*,forcePlaceholderSize:true*/
 					stop:function(event,ui){
 						     setTimeout("YoukuWsPlaylist.save()",200);
 							 
 							 $("#drag-layer").hide();
 					     },
 					start:function(event,ui){
-							if(YoukuWs.isLogin()){
-								$("#_ContentList").show();
-							}else{
-								$("#_ContentList").hide();
-							}
-							 if(YoukuWs.ListContent){
-							 }else{
-								 YoukuWs.listList();
-							 }
-							 $("#drag-layer").show();
+							
+						if(YoukuWs.isLogin()){
+							$("#_ContentList").show();
+						}else{
+							$("#_ContentList").hide();
+						}
+						if(YoukuWs.ListContent){
+						}else{
+							YoukuWs.listList();
+						}
+						$("#drag-layer").show();
 					}
-
 				});
 				/*
 				$( "#_ContentList >li .del" ).live("click",function(){

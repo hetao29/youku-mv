@@ -10,27 +10,33 @@ i,em{font-style: normal;}
 a{cursor:pointer;}
 img{border:0px}
 
-.navbox,.s_title,.s_body{
+.navbox, .s_title, .s_body, .s_footer{
 	max-width:920px;
 	width:100%;
 	min-width:400px;
 	margin:0 auto;
 }
 .left{
-position: absolute;
-left: 0;
+	position: absolute;;
+	left: 0;
 }
 .right{
-position: absolute;z-index:2;
-right: 0;
+	position: absolute;
+	right: 0;
+}
+.clear{
+	clear:both;
 }
 .middle{
-margin-left: 10px;
-margin-right: 10px;
-overflow:hidden;z-index:1;
+	margin-left: 10px;
+	margin-right: 10px;
+	overflow:hidden;z-index:1;
 }
 .hide{
 	display:none;
+}
+.relative{
+	position:relative;
 }
 
 /*单独资源*/
@@ -208,6 +214,7 @@ position: relative;
 	background: url(/assets/style/default/img/ui.png) no-repeat -80px -210px;
 	/*for ie6 */overflow: hidden;
 }
+
 .s_body .bottom .rt{
 	width: 10px;
 	height: 10px;
@@ -251,70 +258,164 @@ padding: 6px 0px;
 .s_body .content i.btn-width.already:hover,i.btn-width.already.hover { background-position:-275px -90px; }
 
 
-.s_body .content .controls { height:28px; overflow:hidden; margin-top:5px; position:relative;margin-left: 10px; }
-.s_body .content .controls .center {  height:20px; text-align:center;
+.s_body .content .controlbar { height:28px; overflow:hidden; margin-top:5px; position:relative;margin-left: 10px; }
+.s_body .content .controlbar .center {  height:20px; text-align:center;
 width: 100%; }
-.s_body .content .controls .center em { width:12px; height:12px; padding-top:4px; display:inline-block; }
-/*.s_body .content .controls .btn-share { position:absolute; left:0; top:0; }
-.s_body .content .controls .btn-share.hover { left:0; top:0; }
-.s_body .content .controls .center a {}*/
-.s_body .content .controls .right {width: 80px;right:5px;top: 5px; }
-.s_body .content .controls .right a { float:right; margin-right: 3px;
+.s_body .content .controlbar .center em { width:12px; height:12px; padding-top:4px; display:inline-block; }
+/*.s_body .content .controlbar .btn-share { position:absolute; left:0; top:0; }
+.s_body .content .controlbar .btn-share.hover { left:0; top:0; }
+.s_body .content .controlbar .center a {}*/
+.s_body .content .controlbar .right {width: 80px;right:5px;top: 5px; }
+.s_body .content .controlbar .right a { float:right; margin-right: 3px;
 margin-left: 3px; }
 
 
-.s_body .content .controls .btn-share { position:absolute; left:1px; top:1px; }
-.s_body .content .controls .btn-share.hover { left:0; top:0; }
-a.btn-share { 
+.s_body .content .controlbar .btn-share { position:absolute; left:1px; top:1px; }
+.s_body .content .controlbar .btn-share.hover { left:0; top:0; }
+.s_body .content .controlbar .btn-share i.icon-share { width:8px; height:11px; display:block; overflow:hidden; background:url(/assets/style/default/img/ui.png) no-repeat -180px -150px; }
+.s_body .content .controlbar .btn-share { 
 	width:45px; height:14px; line-height:15px; display:block; overflow:hidden; position:relative; color:#666;
 }
 /*a.btn-share i { position:absolute; left:5px; top:8px; }*/
 
-a.btn-prev { width:12px; height:18px; display:block; overflow:hidden; background:url(/assets/style/default/img/ui.png) no-repeat -5px -114px; text-indent:-999px; }
-a.btn-prev:hover { background-position:-190px -114px; background:red;}
+.s_body .content .controlbar a.btn-prev { width:12px; height:18px; display:block; overflow:hidden; background:url(/assets/style/default/img/ui.png) no-repeat -5px -114px; text-indent:-999px; }
+.s_body .content .controlbar a.btn-prev:hover { background-position:-190px -114px; background:red;}
 
 
-a.btn-next { width:12px; height:18px; display:block; overflow:hidden; background:url(/assets/style/default/img/ui.png) no-repeat -73px -114px; text-indent:-999px; }
-a.btn-pause { width:18px; height:18px; display:block; overflow:hidden; background:url(/assets/style/default/img/ui.png) no-repeat -36px -115px; text-indent:-999px; }
-a.btn-love,a.btn-love.hover { width:22px; height:18px; display:block; overflow:hidden; background:url(/assets/style/default/img/ui.png) no-repeat -105px -115px; text-indent:-999px; }
-a.btn-remove { width:17px; height:18px; display:block; overflow:hidden; background:url(/assets/style/default/img/ui.png) no-repeat -147px -115px; text-indent:-999px; }
-a.btn-play { width:13px; height:18px; display:block; overflow:hidden; background:url(/assets/style/default/img/ui.png) no-repeat -5px -145px; text-indent:-999px; }
-a.btn-skip { width:24px; height:16px; display:block; overflow:hidden; background:url(/assets/style/default/img/ui.png) no-repeat -40px -146px; text-indent:-999px; }
+.s_body .content .controlbar a.btn-next { width:12px; height:18px; display:block; overflow:hidden; background:url(/assets/style/default/img/ui.png) no-repeat -73px -114px; text-indent:-999px; }
+.s_body .content .controlbar a.btn-pause { width:18px; height:18px; display:block; overflow:hidden; background:url(/assets/style/default/img/ui.png) no-repeat -36px -115px; text-indent:-999px; }
+.s_body .content .controlbar a.btn-love,a.btn-love.hover { width:22px; height:18px; display:block; overflow:hidden; background:url(/assets/style/default/img/ui.png) no-repeat -105px -115px; text-indent:-999px; }
+.s_body .content .controlbar a.btn-remove { width:17px; height:18px; display:block; overflow:hidden; background:url(/assets/style/default/img/ui.png) no-repeat -147px -115px; text-indent:-999px; }
+.s_body .content .controlbar a.btn-play { width:13px; height:18px; display:block; overflow:hidden; background:url(/assets/style/default/img/ui.png) no-repeat -5px -145px; text-indent:-999px; }
+.s_body .content .controlbar a.btn-skip { width:24px; height:16px; display:block; overflow:hidden; background:url(/assets/style/default/img/ui.png) no-repeat -40px -146px; text-indent:-999px; }
 
-a.btn-share.hover { width:45px; height:14px; line-height:15px; padding:7px 0 6px; display:block; background:url(/assets/style/default/img/rpx.png) repeat-x 0 -100px; border:1px solid #BBB; border-bottom:none; color:#666; }
-a.btn-next:hover { background-position:-258px -114px; }
-a.btn-pause:hover { background-position:-221px -115px; }
-a.btn-love:hover,a.btn-love.hover { background-position:-290px -115px; }
-a.btn-remove:hover { background-position:-332px -115px; }
-a.btn-play:hover { background-position:-5px -170px; }
-a.btn-skip:hover { background-position:-40px -171px; }
+.s_body .content .controlbar a.btn-share.hover { width:45px; height:14px; line-height:15px; padding:7px 0 6px; display:block; background:url(/assets/style/default/img/rpx.png) repeat-x 0 -100px; border:1px solid #BBB; border-bottom:none; color:#666; }
+.s_body .content .controlbar a.btn-next:hover { background-position:-258px -114px; }
+.s_body .content .controlbar a.btn-pause:hover { background-position:-221px -115px; }
+.s_body .content .controlbar a.btn-love:hover,a.btn-love.hover { background-position:-290px -115px; }
+.s_body .content .controlbar a.btn-remove:hover { background-position:-332px -115px; }
+.s_body .content .controlbar a.btn-play:hover { background-position:-5px -170px; }
+.s_body .content .controlbar a.btn-skip:hover { background-position:-40px -171px; }
 
-a.btn-list { width:14px; height:10px; display:block; overflow:hidden; background:url(/assets/style/default/img/ui.png) no-repeat -236px -151px; text-indent:-999px; }
+.s_body .content .controlbar a.btn-list { width:14px; height:10px; display:block; overflow:hidden; background:url(/assets/style/default/img/ui.png) no-repeat -236px -151px; text-indent:-999px; }
 /*a.btn-list:hover { background-position:-236px -171px; }*/
-a.btn-list.select { background:url(/assets/style/default/img/ui.png) no-repeat -236px -191px; }
+.s_body .content .controlbar a.btn-list.select { background:url(/assets/style/default/img/ui.png) no-repeat -236px -191px; }
 
-a.btn-order { width:17px; height:10px; display:block; overflow:hidden; background:url(/assets/style/default/img/ui.png) no-repeat -257px -150px; text-indent:-999px; }
-a.btn-order:hover { background-position:-257px -170px; }
-a.btn-order.select { background-position:-258px -190px; }
-a.btn-for { width:17px; height:11px; display:block; overflow:hidden; background:url(/assets/style/default/img/ui.png) no-repeat -284px -150px; text-indent:-999px; }
-a.btn-for:hover { background-position:-284px -170px; }
-a.btn-for.select { background-position:-285px -190px; }
+.s_body .content .controlbar a.btn-order { width:17px; height:10px; display:block; overflow:hidden; background:url(/assets/style/default/img/ui.png) no-repeat -257px -150px; text-indent:-999px; }
+.s_body .content .controlbar a.btn-order:hover { background-position:-257px -170px; }
+.s_body .content .controlbar a.btn-order.select { background-position:-258px -190px; }
+.s_body .content .controlbar a.btn-for { width:17px; height:11px; display:block; overflow:hidden; background:url(/assets/style/default/img/ui.png) no-repeat -284px -150px; text-indent:-999px; }
+.s_body .content .controlbar a.btn-for:hover { background-position:-284px -170px; }
+.s_body .content .controlbar a.btn-for.select { background-position:-285px -190px; }
 
-.controls ul{
+.s_body .content .controlbar ul{
 	height: 18px;
 	width: 200px;
 margin: 0 auto;
 }
-.controls ul li{
+.s_body .content .controlbar ul li{
 	float:left;margin:0 auto;
 	margin: 0 auto;
 	padding-left: 5px;
 	padding-right: 5px;	
 }
 
+.s_controls { width:258px;  position:relative; float:right; background:#EFEFEF; }
+
+.s_controls .tab-bg { height:32px; background:url(/assets/style/default/img/tab-bg.png) no-repeat;}
+.s_controls .tab-bg { width:100%;  }
+.s_controls .tab-bg a { width: 76px;height:14px; display:inline-block; line-height:14px; padding:11px 0; float:left; text-align:center; margin-left:2px; }
+.s_controls .tab-bg a.current { background:url(/assets/style/default/img/ui.png) no-repeat 0 -275px; }
+
+.s_controls .dt-box {padding:3px 0; overflow:hidden; background:#FFF; }
+.s_controls .dt-box h2 { text-align:center;padding:5px 0; overflow:hidden; font-size:12px; }
+.s_controls .dt-box h2 span { font-weight:normal; }
+.s_controls .dt-box img { display:block; width:210px; height:126px; margin:10px auto 0; border:none; }
+
+
+.s_controls .sw-box { height:338px; overflow:hidden;border:1px solid #CCC; background:#FFF; }
+.s_controls .sw-box p { text-align:center; overflow:hidden; line-height:16px; padding:6px 10px; color:#666; font-size:14px; }
+.s_controls .sw-box p.current { color:#F90; }
+
+
+.s_controls ul.music-list { 
+	width:230px; height:316px; overflow-y:scroll;  margin:10px auto 0; background:#FFF; border:1px solid #CCC;
+}
+.s_controls ul.music-list li { 
+	line-height:18px; overflow:hidden; 
+
+	padding:2px 2px 2px 10px;
+	position:relative; border-bottom:1px solid #CCC; cursor:pointer; 
+}
+.s_controls ul.music-list li.highlight{
+	border:1px dashed  red;
+	color: #363636; height:30px;
+}
+.s_controls ul.music-list li i { position:absolute; left:4px; top:4px; }
+
+.s_controls ul.music-list li em { width:50px; overflow:hidden; float:left; text-align:center; font-style:normal; }
+.s_controls ul.music-list li:hover,.s_controls ul.music-list li.hover { background:#E1F0F7; }
+.s_controls ul.music-list li.select i { background-position:-155px -200px; }
+.s_controls ul.music-list li.current	{ background-color: #DDDEE0; }
+.s_controls ul.music-list li:hover,.s_controls ul.music-list li.hover { background:#E1F0F7; }
+.s_controls ul.music-list li.select i { background-position:-155px -200px; }
+.s_controls ul.music-list li.current	{ background-color: #DDDEE0; }
+.s_controls ul.music-list li span {overflow:hidden; float:left; padding-left:5px; }
 
 
 
+
+
+
+.s_controls .mvlist-edit-layer { width:164px; overflow:hidden; position:absolute; z-index:20; left:350px; top:250px; font-family:"宋体"; }
+.s_controls .mvlist-edit-layer .top { width:157px; height:auto; overflow:hidden; position:relative; z-index:1; border:1px solid #CCC; background:#DDD; background:rgba(221,221,221,0.9); border-radius:6px; padding:6px 0 5px 5px; }
+.s_controls .mvlist-edit-layer i.bg { width:13px; height:30px; display:block; position:absolute; z-index:1; right:0; top:0; background:url(/assets/style/default/img/ui.png) no-repeat -383px -416px; }
+
+.s_controls .mvlist-edit-layer .icon_del { width:20px; height:20px; display:block; overflow:hidden; background:url(/assets/style/default/img/ui.png) no-repeat -360px -145px; position:absolute; right:6px; top:7px; z-index:2; }
+
+.s_controls .mvlist-edit-layer .top p { width:90px; overflow:hidden; line-height:14px; position:relative; z-index:2; color:#666; background:#FFF; border:1px solid #CCC; border-radius:4px; padding:3px 14px 2px 20px; }
+.s_controls .mvlist-edit-layer .top p .icon_add { width:15px; height:12px; display:block; overflow:hidden; background:url(/assets/style/default/img/ui.png) no-repeat -360px -175px; position:absolute; left:1px; top:3px; z-index:3; }
+.s_controls .mvlist-edit-layer .top p .icon-down { position:absolute; right:5px; top:8px; }
+.s_controls .mvlist-edit-layer.hover .top p .icon_add { background-position:-360px -190px; }
+.s_controls .mvlist-edit-layer.hover .icon_del { background-position:-360px -115px; }
+
+.s_controls .mvlist-edit-layer .mdrag-layer { 
+	width:130px; overflow:hidden; padding:10px 0; position:relative;
+	margin-top:1px; border:1px solid #CCC; border-radius:6px; background:#DDD; background-color:rgba(221,221,221,0.9); display:none;
+}
+.s_controls .mvlist-edit-layer ul { 
+	background: white;
+}
+
+.s_controls .mvlist-edit-layer .mdrag-layer { display:block; }
+.s_controls .mvlist-edit-layer .mdrag-layer .layer-bg { 
+	width:100%; height:1000px; position:absolute; left:0; top:0; z-index:1; opacity:0.2; filter:alpha(opacity=20); z-index:1; 
+}
+.s_controls .mvlist-edit-layer .mdrag-layer a { 
+	width:110px; height:16px; display:block; line-height:16px; 
+	color:#666; padding:4px 10px; text-align:left; position:relative; z-index:2;
+}
+.s_controls .mvlist-edit-layer .mdrag-layer a span { color:#999; }
+.s_controls .mvlist-edit-layer .mdrag-layer li {border-bottom:1px solid #CCC;}
+.s_controls .mvlist-edit-layer .mdrag-layer li.hover {
+	font-weight:bold;
+	border: 1px solid red;
+}
+
+
+
+
+
+
+
+
+
+
+
+.share-layer { width:190px; overflow:hidden; padding:6px 10px 4px; position:absolute; border:1px solid #CCC; border-top:none; background:#FFF; display:none; }
+.share-layer .top { width:100%; height:1px; display:block; overflow:hidden; position:absolute; left:45px; top:0; background:#CCC; }
+.share-layer span { padding:0 2px; }
+.share-layer img { border:none; }
 
 
 
@@ -816,6 +917,12 @@ a { text-decoration:none; color:#333; cursor:pointer; }
 
 
 */
+.checkbox_show .checkbox{
+	display:block;
+}
+.checkbox_hide .checkbox{
+	display:none;
+}
 #IDTips{
 	display:none;
 	position:absolute;top:32px;width:100%;text-align:center;margin:auto;
