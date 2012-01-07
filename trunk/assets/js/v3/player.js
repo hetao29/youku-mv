@@ -1728,7 +1728,7 @@ var YoukuWs = function(){
 					     //this.video.addEventListener('timeupdate', onTimeUpdate, false);
 					     //this.video.addEventListener('error', onError, false);
 					     //$("#"+playerId).addEventListener('play', onPlay, false);
-					     this.video.addEventListener('pause', onPause, false);
+					     video.addEventListener('pause', onPause, false);
 					     //this.video.addEventListener('volumechange', onVolumechange, false);
 					     //this.video.addEventListener('playing', onPlaying, false);
 					     //this.video.addEventListener('loadstart', onLoadstart, false);
