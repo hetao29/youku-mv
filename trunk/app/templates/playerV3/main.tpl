@@ -3,6 +3,7 @@
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 		<title>{'标题'|tr}</title>
+		{if defined("DEV")}
 		<script type="text/javascript" src="/slightphp/js/jquery-1.7.min.js"></script>
 		<script type="text/javascript" src="/assets/js/ui-1.8.16/jquery.ui.core.js"></script>
 		<script type="text/javascript" src="/assets/js/ui-1.8.16/jquery.ui.widget.js"></script>
@@ -17,15 +18,13 @@
 		<script type="text/javascript" src="/assets/js/jquery.cookie.js"></script>
 		<script type="text/javascript" src="/assets/js/json2.js"></script>
 		<script type="text/javascript" src="/assets/js/swfobject/swfobject.js"></script>
-
 		<script type="text/javascript" src="/assets/js/v3/player.js"></script>
+		{else}
+		<script type="text/javascript" src="/assets/js/v3/v3.js"></script>
+		{/if}
 
 		<link rel="Shortcut Icon" href="/assets/images/ico/favicon_32x32.ico" />
-
-		<!--<link type="text/css" rel="stylesheet" href="/assets/style/default/css/fm.css" />-->
 		<link type="text/css" rel="stylesheet" href="/assets/style/{$style}/css/fm.css" />
-
-
 <!--[if IE 6]>
 <style>
 .copyright { _width:920px;}
