@@ -362,6 +362,7 @@ class player_main extends STpl{
 	}
 	function pageEntry($inPath,$out="",$vid=""){
 		$param=array();
+		$param['v']=array("1"=>"32","2"=>"DD");
 		$allLanguage=array(
 			"zh-cn"=>"中文 (简体)",
 			"zh-tw"=>"中文 (繁體)",
