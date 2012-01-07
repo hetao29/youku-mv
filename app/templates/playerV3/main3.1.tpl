@@ -106,15 +106,22 @@
 										<a id="share" class="btn-share" title="" ><i class="icon-share"></i>分享</a>
 									</div>
 									<div class="middle">
+										<!--<div>
+											<a class="btn-prev" id="_BtPre" title="{'上一首'|tr}">{'上一首'|tr}</a>
+											<a class="btn-play" id="_IDPlay" title="{'播放'|tr}">{'播放'|tr}</a><a class="btn-pause"  id="_IDPause" title="暂停">暂停</a>
+
+										</div>-->
 										
 										<ul>
 											<li><a class="btn-prev" id="_BtPre" title="{'上一首'|tr}">{'上一首'|tr}</a></li>
 											<li><a class="btn-play" id="_IDPlay" title="{'播放'|tr}">{'播放'|tr}</a><a class="btn-pause"  id="_IDPause" title="暂停">暂停</a></li>
 											{*<li><a class="btn-skip"  title="跳过">跳过</a></li>*}
 											<li><a class="btn-next" id="_BtNext" title="{'下一首'|tr}">{'下一首'|tr}</a></li>
+											<li>&nbsp;</li>
 											<li><a class="btn-love" id="_IDUp" title="{"喜欢"|tr}">{"喜欢"|tr}</a></li>
 											<li><a class="btn-remove" id="_IDDown" title="移除">{"不喜欢"|tr}</a></li>
-										<ul>
+										</ul>
+										
 
 									</div>
 									<!--
