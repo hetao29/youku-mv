@@ -6,7 +6,7 @@ body,ul,li,h1,h2,h3,h4,h5,p,form { margin:0; padding:0; list-style:none; }
 
 .t-header { width:100%; height:35px; background:url(/assets/style/default/img/rpx.png) repeat-x 0 -60px; position:relative; z-index:2; }
 .t-header .th-cont {max-width:920px;width:100%;min-width:400px;  height:35px; margin:0 auto; }
-.t-header .th-cont .yk-logo { float:left; margin-left:10px; margin-top:9px; }
+.t-header .th-cont .yk-logo { float:left; margin-left:10px; _margin-left:5px;margin-top:9px; }
 .t-header .th-cont ul { float:right; }
 .t-header .th-cont ul li { height:20px; line-height:20px; padding:0 5px; margin-top:8px; float:right; color:#666; font-family:"宋体"; }
 .t-header .th-cont ul li a { color:#666; }
@@ -31,14 +31,13 @@ body,ul,li,h1,h2,h3,h4,h5,p,form { margin:0; padding:0; list-style:none; }
 .logo { max-width:920px;width:100%;min-width:400px; height:80px; margin:0 auto; text-align:left; padding-top:15px; position:relative; z-index:1; }
 .logo i { float:left; }
 .logo .btnbox { float:right; }
-.logo .btnbox a { float:right; margin-right:10px; }
+.logo .btnbox a { float:right; margin-right:10px; _margin-right:5px;}
 
 .fm-body { max-width:920px;min-width:380px; overflow:hidden; margin:0 auto; }
 .fm-body .cont-left {
 	float:left;
 	width:100%;
 	margin:0 0 0 -258px;
-	
 	overflow:hidden;position:relative; background:#EFEFEF; 
 }
 .fm-body .cont-left .inner-left{
@@ -65,15 +64,23 @@ body,ul,li,h1,h2,h3,h4,h5,p,form { margin:0; padding:0; list-style:none; }
 	width:10px; height:100%; position:absolute; left:0; top:0; 
 }
 .fm-body .cont-left .cont-border .left .box,.fm-body .cont-left .cont-border .right .box,.ly-box .left .box,.ly-box .right .box { 
-	width:10px;height:100%;background:url(/assets/style/default/img/rpy.png) repeat-y 0 0; 
+	width:10px;
+	height:100%;background:url(/assets/style/default/img/rpy.png) repeat-y 0 0; 
+	_height:428px; /* for ie6 */
 }
 .fm-body .cont-left .cont-border .right,.ly-box .right { left:auto; right:0; }
 .fm-body .cont-left .cont-border .right .box,.ly-box .right .box { background-position:-15px 0; }
 
-.fm-body .cont-left .cont-border .content { padding:5px 0 0; overflow:hidden;margin-right: 10px;margin-left: 10px; }
+.fm-body .cont-left .cont-border .content { 
+	padding:5px 0 0; overflow:hidden;margin-right: 10px;margin-left: 10px; 
+_margin-left: 5px;
+_margin-right: 5px;
+	}
 .fm-body .cont-left .cont-border .content .box{ 
 margin-left: 10px;
 margin-right: 10px;
+_margin-left: 5px;
+_margin-right: 5px;
 }
 
 .fm-body .cont-left .cont-border .content h2 { font-size:14px; font-family:"宋体"; position:relative; }
@@ -191,7 +198,7 @@ margin-right: 10px;
 
 
 
-.cgfm-box ul {  float:left; margin-left:10px; overflow:hidden; display:inline; }
+.cgfm-box ul {  float:left; margin-left:10px;_margin-left:5px; overflow:hidden; display:inline; }
 .cgfm-box ul li { float:left; padding:5px; overflow:hidden; }
 .cgfm-box ul.big { width:120px; }
 
@@ -211,21 +218,21 @@ margin-right: 10px;
 	height:16px; line-height:16px; padding:2px 0; 
 	position:relative; width:auto; font-family:"宋体"; 
 	font-weight:normal; top:auto;
-	margin-left: 20px;z-index:1;
+	margin-left: 20px;z-index:1;_margin-left: 10px;
 }
 .mylist-box .mylist-cont ul.list li h2 a { float:left; color:#007db5; overflow:hidden; font-size:14px; }
 .mylist-box .mylist-cont ul.list li h2 span { float:left; height:16px; line-height:16px; color:#999; }
 .mylist-box .mylist-cont ul.list li h2 a.btn-play-s { margin-left:5px; }
 .mylist-box .mylist-cont ul.list li p { font-size:12px; color:#999; text-align:left; line-height:18px; }
 .mylist-box .mylist-cont ul.list li .edit { position:absolute; top:12px; right:0; z-index:2; }
-.mylist-box .mylist-cont ul.list li .edit a {float:right; overflow:hidden; line-height:16px; margin-right:10px; color:#007db5; }
+.mylist-box .mylist-cont ul.list li .edit a {float:right; overflow:hidden; line-height:16px; margin-right:10px; _margin-right:5px;color:#007db5; }
 .mylist-box .mylist-cont ul.list li .edit a:hover,.mylist-box .mylist-cont ul.list li h2 a:hover { text-decoration:underline; }
 
 .mylist-box .mylist-cont ul.mvlist li { width:100%; height:auto; overflow:hidden; position:relative; padding:4px 0; border-bottom:1px solid #CCC; cursor:pointer; }
 .mylist-box .mylist-cont ul.mvlist li p,.mylist-box .mylist-cont ul.mvlist li i { float:left; margin-left:5px; }
 .mylist-box .mylist-cont ul.mvlist li p { line-height:16px; font-size:12px; text-align:left; }
 .mylist-box .mylist-cont ul.mvlist li span {margin-left: 6px; /*position:absolute; top:4px; right:0;*/ }
-.mylist-box .mylist-cont ul.mvlist li span a { float:right; margin-right:5px; }
+.mylist-box .mylist-cont ul.mvlist li span a { float:right; margin-right:5px; _margin-right:2px;}
 .mylist-box .mylist-cont ul.mvlist li span a i { float:none; margin:0; }
 /*.mylist-box .mylist-cont ul.mvlist */li.select span.checkbox { background-position:-155px -200px; }
 
@@ -305,7 +312,8 @@ margin-right: 10px;
 
 
 i.yk-logo { width:69px; height:15px; display:block; overflow:hidden; background:url(/assets/style/default/img/ui.png) no-repeat 0 -65px; }
-i.fm-logo { width:172px; height:53px; display:block; overflow:hidden; background:url(/assets/style/default/img/ui.png) no-repeat 0 0; margin-left:10px; }
+i.fm-logo { width:172px; height:53px; display:block; overflow:hidden; background:url(/assets/style/default/img/ui.png) no-repeat 0 0; 
+margin-left:10px; _margin-left:5px;}
 i.icon-down { width:6px; height:3px; display:block; overflow:hidden; background:url(/assets/style/default/img/ui.png) no-repeat -200px -155px; }
 
 i.btn-width { width:21px; height:16px; display:block; overflow:hidden; background:url(/assets/style/default/img/ui.png) no-repeat 0 -90px; }
