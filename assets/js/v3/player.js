@@ -1728,7 +1728,7 @@ var YoukuWs = function(){
 					     //this.video.addEventListener('timeupdate', onTimeUpdate, false);
 					     //this.video.addEventListener('error', onError, false);
 					     //$("#"+playerId).addEventListener('play', onPlay, false);
-					     //this.video.addEventListener('pause', onPause, false);
+					     this.video.addEventListener('pause', onPause, false);
 					     //this.video.addEventListener('volumechange', onVolumechange, false);
 					     //this.video.addEventListener('playing', onPlaying, false);
 					     //this.video.addEventListener('loadstart', onLoadstart, false);
@@ -2551,7 +2551,13 @@ function onPlayerStart(obj){
 		}
 		});
 	}
+	
+	$("#_IDPause").show();
+	$("#_IDPlay").hide();
 	//PlayerColor("000000","4F4F4F",25);
+}
+function onPause(){
+	PlayerPause(true);
 }
 function onPlayerError(vid){
 	if(PlayType!=0){
@@ -2605,17 +2611,29 @@ function PlayerReplay(vid){
 	_player().playVideoByID(vid);
 };
 function PlayerPause(flag){
-	try{
-		
-		_player().pauseVideo(flag);
-		if(flag){
-			$("#_IDPause").hide();
-			$("#_IDPlay").show();
-		}else{
-			$("#_IDPause").show();
-			$("#_IDPlay").hide();
+	if(YoukuWs.isIpad()){
+			var video = document.getElementById(playerId);
+			if(flag){
+				$("#_IDPause").hide();
+				$("#_IDPlay").show();
+				 video.pause();
+			}else{
+				$("#_IDPause").show();
+				$("#_IDPlay").hide();
+				 video.play();
+			}
+	}else{
+		try{
+			_player().pauseVideo(flag);
+			if(flag){
+				$("#_IDPause").hide();
+				$("#_IDPlay").show();
+			}else{
+				$("#_IDPause").show();
+				$("#_IDPlay").hide();
+			}
+		}catch(e){
 		}
-	}catch(e){
 	}
 };
 function PlayerInfo(){
