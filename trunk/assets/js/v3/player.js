@@ -105,7 +105,7 @@
 	}; 
 
 
-	$(".ly-box .close").live("click",function(){
+	$(".close").live("click",function(){
 		var p = $(this).parents(".layer").parent();
 		if(YoukuWs.isIpad()){
 			$("#"+playerId).attr("controls","controls");
@@ -384,13 +384,13 @@ var YoukuWs = function(){
 					PlayerPause(true);
 				});
 
-				$(".language").mouseover(function(){
+				$("#_IDLanguage").mouseover(function(){
 					 $(this).addClass('hover');
 				});
-				$(".language").mouseout(function(){
+				$("#_IDLanguage").mouseout(function(){
 					 $(this).removeClass('hover');
 				});
-				$(".language .panel a").live("click",(function(){
+				$("#_IDLanguage .panel a").live("click",(function(){
 					YoukuWs.set("language",$(this).attr("data"),true);
 					_location.replace(_location.pathname);
 					
@@ -402,15 +402,15 @@ var YoukuWs = function(){
 					if(YoukuWs.get("thx")!="open"){
 						//to open
 						$("#_IDRight").hide();
-						$(".cont-left").css("margin-left","0px");
-						$(".inner-left").css("margin-left","0px");
+						$("#_IDBody .cont-left").css("margin-left","0px");
+						$("#_IDBody .inner-left").css("margin-left","0px");
 						//$("#box").css("width",$(".fm-body").width()+"px");
 						YoukuWs.set("thx","open");
 						$(this).parent().addClass("already");
 					}else{
 						//to close
-						$(".cont-left").css("margin-left","-258px");
-						$(".inner-left").css("margin-left","258px");
+						$("#_IDBody .cont-left").css("margin-left","-258px");
+						$("#_IDBody .inner-left").css("margin-left","258px");
 						//$("#box").css("width","660px");//.hide();
 						$("#_IDRight").show();
 						$(this).parent().removeClass("already");
@@ -638,6 +638,9 @@ var YoukuWs = function(){
 				});
 
 
+				 $("#IDTips .x").live("click",function(){
+					$(this).parentsUntil("li").remove();
+				 });
 
 				//{{{
 				//编辑模式
@@ -796,8 +799,7 @@ var YoukuWs = function(){
 					YoukuWs.set("PlayType",PlayType);
 					$("#IDNav >a").eq(1).trigger("click");
 				});
-				
-				$("li >.checkbox").live("click",function(){
+				$("#_CtMusicList li >.checkbox, #_ContentMusic li >.checkbox, #_IDListMain li >.checkbox")/*$("li >.checkbox")*/.live("click",function(){
 						var li =$(this).parent();
 						if(li.hasClass("select"))li.removeClass("select");else li.addClass("select");
 						return false;
@@ -820,7 +822,7 @@ var YoukuWs = function(){
 					});
 					if(li)YoukuWs.play(li.attr("vid"));
 				});
-				$(".pg-box > a").live('click',function(){
+				$("#_CtMusicList .pg-box > a").live('click',function(){
 					var page = $(this).attr("page");
 					var mylist =$(this).parentsUntil(".mylist-cont").parent();
 					var delUrl = mylist.attr("delUrl");
@@ -2419,6 +2421,18 @@ var YoukuWs = function(){
 			     }
 			     return false;
 		     }, tips:function(v,hold){
+				 var h=''
+				 var id="_ID"+(new Date()).getTime()+"_"+parseInt(Math.random()*10000);
+				 if(hold)h='<span class="x">X</span>';
+				 var info='<li id="'+id+'"><a><span>'+v+' </span>'+h+'</a></li>';
+				 $("#IDTips ul").append(info);
+				 if(!hold){
+				     setTimeout(function() { 
+					     $("#IDTips #"+id).slideUp("fast");
+
+				     }, 2000);
+				 }
+				 /*
 			     $("#IDTips span").html(v);
 			     $("#IDTips").slideDown("fast",function(){
 					 if(hold)return;
@@ -2428,7 +2442,7 @@ var YoukuWs = function(){
 				     }, 2000);
 
 			     });
-
+				*/
 		     },flag:flag
 	}
 }();
@@ -2630,17 +2644,6 @@ var adCheck=0;//后贴检测
 var playTime={time:0,alltime:0};
 (function($){ 
 	if(YoukuWs.isIpad()){
-/*
-		var originOpen = $.ui.dialog.prototype.open;
-		$.ui.dialog.prototype.open = function(){
-			var video = $("#"+playerId).attr("controls",null);
-			originOpen.apply(this,arguments); 
-		};  
-		var originClose = $.ui.dialog.prototype.close;
-		$.ui.dialog.prototype.close= function(){
-			var video = $("#"+playerId).attr("controls","controls");
-			originClose.apply(this,arguments); 
-		};  */
 	}
 	//{{{
 	function getPlayTime(){												  
