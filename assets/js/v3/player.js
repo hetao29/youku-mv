@@ -39,8 +39,9 @@
 		return this;
 	}; 
 	$(document).ready(function(){
+		
 				if($.browser.msie && parseInt($.browser.version) <9){
-					YoukuWs.tips("我们建议您升级你的浏览器，以获得更好的体验",true);
+					YoukuWs.tips("我们建议您升级你的浏览器，以获得更好的体验，或者访问<a href='/player.main.entryOld'><font color='red'>旧版</font></a> ",true);
 				}
 		/*
 		$("#test").bt();

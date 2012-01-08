@@ -360,6 +360,9 @@ class player_main extends STpl{
 	function pageRenren($inPath){
 		return $this->pageEntry($inPath,"renren");
 	}
+	function pageEntryOld($inPath,$out="",$vid=""){
+		return $this->pageEntry($inPath,$out,$vid);
+	}
 	function pageEntry($inPath,$out="",$vid=""){
 		$param=array();
 		$param['v']=array("1"=>"32","2"=>"DD");

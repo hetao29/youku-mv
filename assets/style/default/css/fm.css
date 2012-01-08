@@ -556,7 +556,7 @@ a { text-decoration:none; color:#333; cursor:pointer; }
 }
 #IDTips li a{
 	background: yellow;
-	padding: 2px 20px;
+	padding: 2px;
 	border-bottom-left-radius: 4px 4px; 
 	border-bottom-right-radius:4px 4px; 
 
