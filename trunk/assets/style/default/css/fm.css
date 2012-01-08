@@ -116,7 +116,7 @@ _margin-right: 5px;
 .fm-body .cont-right .cont-border .right .box { background-position:-21px 0; }
 
 .fm-body .cont-right .cont-border .search-box { width:250px; height:40px; margin:0 auto; border-bottom:1px solid #CCC; overflow:hidden; position:relative; }
-.fm-body .cont-right .cont-border .search-box i.search-bg { width:230px; height:26px; display:block; margin:7px auto 0; overflow:hidden; background:url(/assets/style/default/img/ui.png) no-repeat -50px -230px; }
+.fm-body .cont-right .cont-border .search-box i.search-bg { width:230px; height:22px; display:block; margin:7px auto 0;background:url(/assets/style/default/img/ui.png) no-repeat -50px -230px; }
 .fm-body .cont-right .cont-border .search-box a { position:absolute; right:18px; top:10px; }
 .fm-body .cont-right .cont-border .search-box input { width:195px; height:18px; color:#666; position:absolute; left:20px; top:11px; border:none; background:none; outline:none; }
 
@@ -135,9 +135,9 @@ _margin-right: 5px;
 .fm-body .cont-right .cont-border ul.music-list li:hover,.fm-body .cont-right .cont-border ul.music-list li.hover { background:#E1F0F7; }
 .fm-body .cont-right .cont-border ul.music-list li.select i { background-position:-155px -200px; }
 .fm-body .cont-right .cont-border ul.music-list li.current	{ background-color: #DDDEE0; }
-.fm-body .cont-right .cont-border .btnline { width:230px; height:22px; overflow:hidden; margin:10px auto 0; position:relative;}
-.fm-body .cont-right .cont-border .btnline a { float:left; margin-left:2px; _margin-left:1px;}
-.fm-body .cont-right .cont-border .btnline a.btn-c { float:right; margin-right:2px; _margin-right:1px; margin-left:auto; }
+.fm-body .cont-right .cont-border .btnline { width:230px; height:30px; margin:8px auto 0; position:relative;}
+.fm-body .cont-right .cont-border .btnline a { float:left;margin-left:2px; _margin-left:1px;}
+.fm-body .cont-right .cont-border .btnline a.bt_icon { float:right; margin-right:2px; _margin-right:1px; margin-left:auto; }
 
 .fm-body .cont-right .cont-border .dt-box { width:230px; padding:3px 0; margin:18px auto 0; overflow:hidden; background:#FFF; }
 .fm-body .cont-right .cont-border .dt-box h2 { text-align:center;padding:5px 0; overflow:hidden; font-size:12px; }
@@ -430,7 +430,7 @@ i.remove { width:12px; height:12px; display:block; overflow:Hidden; background:u
 
 a.close { width:11px; height:10px; display:block; overflow:hidden; background:url(/assets/style/default/img/ui.png) no-repeat -107px -171px; text-indent:-999px; }
 a.close:hover {background-position:-187px -171px; }
-i.save { width:17px; height:17px; display:block; overflow:hidden; background:url(/assets/style/default/img/ui.png) no-repeat -132px -170px; }
+i.save { width:12px; height:12px; display:block; overflow:hidden; background:url(/assets/style/default/img/ui.png) no-repeat -132px -170px; }
 i.play { width:6px; height:9px; display:block; overflow:hidden; background:url(/assets/style/default/img/ui.png) no-repeat -80px -70px; }
 
 i.icon_ques { width:16px; height:16px; display:block; overflow:hidden; background:url(/assets/style/default/img/ui.png) no-repeat -310px -210px; }
@@ -572,6 +572,63 @@ a { text-decoration:none; color:#333; cursor:pointer; }
 #IDTips .x:hover{
 	color:red	;cursor:pointer;
 }
+
+
+.bt_new {
+	border: 1px solid #AAA;
+	vertical-align: middle;
+	font-size: 12px;
+	text-decoration: none;
+	border-radius: 5px;
+	padding: 2px 6px;
+}
+.bt_new:hover {
+	
+	background:white;
+}
+.bt_new.bt_icon{
+	padding: 3px;float:right;
+}
+/*
+
+.bt{
+	border-width:1px 0; 
+	border-color:#AAA;
+	border-style:solid; 
+	vertical-align:middle;
+	font-size:12px;
+	text-decoration:none;
+}
+.bt_b{
+	display:block; 
+	float:left; 
+	background:#EEE;
+	border-width:0 1px;
+	border-color:#AAA;
+	border-style:solid;
+	margin:0 -1px;
+	position:relative;
+}
+.bt_c{
+	display:block; 
+}
+.bt_d{
+	display:block; 
+	padding:2px 5px;margin-top: -15px;
+	cursor:pointer;
+}
+
+.bt:hover .bt_b{
+	background:white;
+}
+.bt:hover{
+	background:white;
+}
+.bt:hover {
+}
+
+.bt:hover .bt_c{
+}*/
 /*
 
 .ui-dialog { position: absolute; padding:10px 0;z-index:51; overflow: hidden; }

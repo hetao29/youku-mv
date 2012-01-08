@@ -1,10 +1,54 @@
 (function($){
 	$.fn.bt = function(options){
+		var defaults = {position:"left"}; 
+		var options = $.extend(defaults, options); 
+		this.each(function(item){ 
+			var t = $(this);
+			var html2="";
+			if(t.attr("bt_set"))return;
+			var html = t.html();
+			//var html2='<span class="bt_b" ';
+			//if(options.width)html2+="style='width:"+options.width+"px'";
+			//else html2+="style='width:38px'";
+			//html2+=' >';
+			//if(options.icon){
+			//	if(options.position=="left"){
+			//				html2+='<span class="bt_c">&nbsp;</span> <span class="bt_d"><span style="padding-top:3px" class="left ui-icon '+options.icon+'"></span><span class="right">'+html+'</span></span></span>';
+			//	}else{
+			//				html2+='<span class="bt_c">&nbsp;</span> <span class="bt_d"><span style="padding-top:3px" class="right ui-icon '+options.icon+'"></span><span class="left">'+html+'</span></span></span>';
+			//	}
+			//}else{
+				if($.browser.msie && parseInt($.browser.version) <9){
+					//var x=("NO");
+					html2='<span class="bt_b"><span class="bt_c">&nbsp;</span> <span class="bt_d">'+html+'</span> </span>';
+					
+					if(!t.hasClass("bt"))t.addClass("bt");
+				}else{
+					//var x=("YES");
+					html2=html;//'<span class="bt_new">'+html+'</span>';
+					//html2='<span class="bt_b"><span class="bt_c">&nbsp;</span> <span class="bt_d">'+html+'</span> </span>';
+					if(!t.hasClass("bt_new"))t.addClass("bt_new");
+				}
+				//html+=x;
+			//var	html2='<span class="bt_b"><span class="bt_c">&nbsp;</span> <span class="bt_d">'+html+'</span> </span>';
+			//}
+			t.html(html2);
+			t.attr("bt_set",true);
+			t.attr("href","javascript:void(0);");
+		}); 
 		return this;
 	}; 
+	$(document).ready(function(){
+		/*
+		$("#test").bt();
+		$("#_BtEditMode").bt();
+		$("#_BtSelectAll").bt();
+		$("#_BtDeSelect").bt();
+		$("#_IDLyricsView").bt();
+		$("#_IDLyricsErr").bt();
+		*/
+	});
 })(jQuery); 
-
-
 
 /*dialog*/
 (function($){
@@ -541,6 +585,7 @@ var YoukuWs = function(){
 				$("#_BtDelete").hide();
 				editmode=false;
 			}
+			return false;
 		});
 		//保存选择的音乐到歌单
 		$("#_BtSaveAll").click(function(){
@@ -1262,7 +1307,7 @@ var YoukuWs = function(){
 					 //}}}
 				 }else{
 					 //debug;
-					 // return "";
+					  return "";
 					 try{
 						 PlayerReplay(vid);
 					 }catch(e){

@@ -54,6 +54,8 @@
 	</head>
 
 	<body>
+
+
 		<div id="IDTips">
 			<ul>
 				<li>
@@ -163,12 +165,12 @@
 								*}
 							</ul>
 							<div class="btnline">
-								<a id="_BtEditMode" title="编辑" class="btn-w">编辑</a>
-								<a id="_BtSelectAll" title="全选" class="btn-w hide">全选</a>
-								<a id="_BtDeSelect" title="反选" class="btn-w hide">反选</a>
-								<a id="_BtAddMv" title="添加" class="btn-c"><i class="add"></i>添加</a>
-								<a id="_BtSaveAll" title="保存" class="btn-c hide"><i class="save"></i>保存</a>
-								<a id="_BtDelete" title="删除" class="btn-c hide"><i class="remove"></i>删除</a>
+								<a id="_BtEditMode" class="bt_new" title="编辑">编辑</a>
+								<a id="_BtSelectAll" title="全选" class="bt_new hide">全选</a>
+								<a id="_BtDeSelect" title="反选" class="bt_new hide">反选</a>
+								<a id="_BtAddMv" title="添加" class="bt_new bt_icon"><i class="add"></i></a>
+								<a id="_BtSaveAll" title="保存" class="bt_new bt_icon hide"><i class="save"></i></a>
+								<a id="_BtDelete" title="删除" class="bt_new bt_icon hide"><i class="remove"></i></a>
 							</div>
 						</div>
 
@@ -197,11 +199,11 @@
 								</div>
 							</div>
 								<div class="btnline">
-									<a id="_IDLyricsView"  title="{"查看"|tr}" class="btn-w">{"查看"|tr}</a>
-									<a id="_IDLyricsErr"  title="{"报错"|tr}" class="btn-w">{"报错"|tr}</a>
+									<a id="_IDLyricsView"  title="{"查看"|tr}" class="bt_new">{"查看"|tr}</a>
+									<a id="_IDLyricsErr"  title="{"报错"|tr}" class="bt_new">{"报错"|tr}</a>
 
-									<a id="_IDLyricsPr" title="{"前进"|tr}" class="btn-c"><i class="r"></i></a>
-									<a id="_IDLyricsBk" title="{"后退"|tr}" class="btn-c"><i class="l"></i></a>
+									<a id="_IDLyricsPr" title="{"前进"|tr}" class="bt_new bt_icon"><i class="r"></i></a>
+									<a id="_IDLyricsBk" title="{"后退"|tr}" class="bt_new bt_icon"><i class="l"></i></a>
 								</div>
 						</div>
 
