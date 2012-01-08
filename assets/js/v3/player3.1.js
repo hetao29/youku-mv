@@ -398,22 +398,21 @@ var YoukuWs = function(){
 
 				$("#_IDThx").click(function(){
 					//宽屏模式
-					var o = $(this).find("span");
 					if(YoukuWs.get("thx")!="open"){
 						//to open
 						$("#_IDRight").hide();
-						$(".cont-left").css("margin-left","0px");
-						$(".inner-left").css("margin-left","0px");
-						//$("#box").css("width",$(".fm-body").width()+"px");
+						$("#_IDMain").css("margin-left","0px");
+						$("#_IDMain >.s_player").css("margin-left","0px");
+
 						YoukuWs.set("thx","open");
-						$(this).parent().addClass("already");
+						$(this).addClass("already");
 					}else{
 						//to close
-						$(".cont-left").css("margin-left","-258px");
-						$(".inner-left").css("margin-left","258px");
-						//$("#box").css("width","660px");//.hide();
+						$("#_IDMain").css("margin-left","-258px");
+						$("#_IDMain >.s_player").css("margin-left","258px");
+
 						$("#_IDRight").show();
-						$(this).parent().removeClass("already");
+						$(this).removeClass("already");
 						YoukuWs.set("thx","close");
 					}
 				});
