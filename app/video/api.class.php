@@ -60,6 +60,10 @@ class video_api{
 					$album_db=new album_db;
 					$v['AlbumName']=$album_db->getAlbumName($v['AlbumID']);
 				}
+				if(!empty($v['VideoThumb'])){
+					//换成大图
+					$v['VideoThumb'] = str_replace("com/0","com/1",$v['VideoThumb']);
+				}
 			}
 			return $v;
 		}
