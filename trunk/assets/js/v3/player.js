@@ -39,18 +39,9 @@
 		return this;
 	}; 
 	$(document).ready(function(){
-		
-				if($.browser.msie && parseInt($.browser.version) <=6){
-					YoukuWs.tips("我们建议您升级你的浏览器，以获得更好的体验，或者访问<a href='/player.main.entryOld'><font color='red'>旧版</font></a> ",true);
-				}
-		/*
-		$("#test").bt();
-		$("#_BtEditMode").bt();
-		$("#_BtSelectAll").bt();
-		$("#_BtDeSelect").bt();
-		$("#_IDLyricsView").bt();
-		$("#_IDLyricsErr").bt();
-		*/
+		if($.browser.msie && parseInt($.browser.version) <=6){
+			YoukuWs.tips("我们建议您升级你的浏览器，以获得更好的体验，或者访问<a href='/player.main.entryOld'><font color='red'>旧版</font></a> ",true);
+		}
 	});
 })(jQuery); 
 
@@ -620,10 +611,6 @@ var YoukuWs = function(){
 			$("#IDNav >li").eq(1).trigger("click");
 		});
 
-
-		$("#IDTips .x").live("click",function(){
-			$(this).parentsUntil("li").remove();
-		});
 
 		//{{{
 		//编辑模式
@@ -2034,7 +2021,7 @@ drop: function( event, ui ) {
 	return false;
 }, tips:function(v,hold,replace){
 	if(replace){
-		$("#IDTips ul li").last().remove();
+		$("#IDTips ul li").last().slideUp("fast");
 	}
 	var h=''
 		var id="_ID"+(new Date()).getTime()+"_"+parseInt(Math.random()*10000);
@@ -2043,21 +2030,13 @@ drop: function( event, ui ) {
 	$("#IDTips ul").append(info);
 	if(!hold){
 		setTimeout(function() { 
-			$("#IDTips #"+id).slideUp("fast");
+			$("#IDTips #"+id).remove();
 
 		}, 2000);
 	}
-	/*
-	   $("#IDTips span").html(v);
-	   $("#IDTips").slideDown("fast",function(){
-	   if(hold)return;
-	   setTimeout(function() { 
-	   $("#IDTips").slideUp("fast");
-
-	   }, 2000);
-
-	   });
-	 */
+	$("#IDTips #"+id).click(function(){
+		$(this).remove();
+	});
 },flag:flag
 }
 }();
