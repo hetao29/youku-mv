@@ -39,6 +39,9 @@
 		return this;
 	}; 
 	$(document).ready(function(){
+				if($.browser.msie && parseInt($.browser.version) <9){
+					YoukuWs.tips("我们建议您升级你的浏览器，以获得更好的体验",true);
+				}
 		/*
 		$("#test").bt();
 		$("#_BtEditMode").bt();
@@ -1307,7 +1310,7 @@ var YoukuWs = function(){
 					 //}}}
 				 }else{
 					 //debug;
-					  return "";
+					 // return "";
 					 try{
 						 PlayerReplay(vid);
 					 }catch(e){
