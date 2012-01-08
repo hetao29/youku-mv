@@ -752,12 +752,12 @@ var YoukuWs = function(){
 		});
 		//播放
 		$("#_CtMusicList .MusicPlay").live('click',function(){
-			var li =$(this).parentsUntil("li").parent();
-			YoukuWsPlaylist.add(li.attr("vid"),li.attr("mvname"));
-			YoukuWs.play(li.attr("vid"));
 			PlayType=1;
 			YoukuWs.set("PlayType",PlayType);
 			$("#IDNav >a").eq(1).trigger("click");
+			var li =$(this).parentsUntil("li").parent();
+			YoukuWsPlaylist.add(li.attr("vid"),li.attr("mvname"));
+			YoukuWs.play(li.attr("vid"));
 		});
 		$("#_CtMusicList li >.checkbox, #_ContentMusic li >.checkbox, #_IDListMain li >.checkbox").live("click",function(){
 			var li =$(this).parent();
@@ -950,7 +950,17 @@ var YoukuWs = function(){
 						break;
 				}
 			}else{
-				YoukuWs.playRadioNext();
+				//{{{如果当前播放的不是 列表里的第一个音乐，
+				
+				 var o= window.radioPlayList[0];
+				 if(o){
+					 if(CurrentVideoID == o.VideoID){
+						YoukuWs.playRadioNext();	
+						return;
+					 }
+				}
+				YoukuWs.playRadio();
+				//}}}
 			}
 		});
 
