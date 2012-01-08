@@ -218,49 +218,70 @@
 		</div>
 		<p class="copyright">请使用者仔细阅读优酷使用协议和版权声明 Copyright©2011 优酷 youku.com 版权所有</p>
 
+
 		<div class="share-layer" id="share-layer">
-			<i class="top"></i>
-			<span><a target="_blank" href="#" _href="http://v.t.sina.com.cn/share/share.php?url=http://v.youku.com/v_show/id_:vid:.html&title=:title: http://youku.fm%23vid=:vid:&content=utf8"><img title="分享到新浪微博" src="http://static.youku.com/v/img/ico_sina.gif" /></a></span>
-			<span><a target="_blank" href="#" _href="http://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=http://v.youku.com/v_show/id_:vid:.html&title=:title: http://youku.fm%23vid=:vid:" ><img title=分享到QQ空间" src="http://static.youku.com/v/img/ico_Qzone.gif" /></a></span>
-			<span><a target="_blank" href="#" _href="http://share.v.t.qq.com/index.php?c=share&a=index&url=http://v.youku.com/v_show/id_:vid:.html&appkey=801069800&pic=&assname=&title=:title: (http://youku.fm%23vid=:vid:) " ><img title="分享到腾讯微博" src="/assets/images/other/weiboicon16.png" /></a></span>
-			<span><a target="_blank" href="#" _href="http://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?to=pengyou&url=http://v.youku.com/v_show/id_:vid:.html&title=:title: http://youku.fm%23vid=:vid:" ><img title=分享到腾讯朋友" src="http://static.youku.com/v1.0.0659/v/img/ico_pengyou.png" /></a></span>
-			<span><a target="_blank" href="#" _href="http://www.kaixin001.com/repaste/share.php?rurl=http://v.youku.com/v_show/id_:vid:.html&rcontent=http://v.youku.com/v_show/id_:vid:.html&rtitle=:title: http://youku.fm%23vid=:vid:" ><img title=分享到开心网" src="http://static.youku.com/v1.0.0659/v/img/ico_kaixin.gif" /></a></span>
-			<span><a target="_blank" href="#" _href="http://space.fetion.com.cn/api/share?source=优酷网&url=http://v.youku.com/v_show/id_:vid:.html&title=:title: http://youku.fm%23vid=:vid:" ><img title=分享到飞信空间" src="http://static.youku.com/v1.0.0659/v/img/feixin_14px.png" /></a></span>
-			<span><a target="_blank" href="#" _href="http://www.139.com/share/share.php?tl=953010001&source=shareto139_youku&url=http://v.youku.com/v_show/id_:vid:.html&title=title=:title: http://youku.fm%23vid=:vid:" ><img title=分享到139说客" src="http://static.youku.com/v1.0.0659/v/img/ico_139.gif" /></a></span>
-			<span><a target="_blank" href="#" _href="http://share.renren.com/share/buttonshare.do?link=http://v.youku.com/v_show/id_:vid:.html&title=:title:"><img src="http://static.youku.com/v/img/ico_renren.gif" /></a></span>
+				<i class="top"></i>
+			{if empty($out)}
+				<span><a target="_blank" href="#" _href="http://v.t.sina.com.cn/share/share.php?url=http://v.youku.com/v_show/id_:vid:.html&title=:title: http://youku.fm%23vid=:vid:&content=utf8"><img title="分享到新浪微博" src="http://static.youku.com/v/img/ico_sina.gif" /></a></span>
+				<span><a target="_blank" href="#" _href="http://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=http://v.youku.com/v_show/id_:vid:.html&title=:title: http://youku.fm%23vid=:vid:" ><img title=分享到QQ空间" src="http://static.youku.com/v/img/ico_Qzone.gif" /></a></span>
+				<span><a target="_blank" href="#" _href="http://share.v.t.qq.com/index.php?c=share&a=index&url=http://v.youku.com/v_show/id_:vid:.html&appkey=801069800&pic=&assname=&title=:title: (http://youku.fm%23vid=:vid:) " ><img title="分享到腾讯微博" src="/assets/images/other/weiboicon16.png" /></a></span>
+				<span><a target="_blank" href="#" _href="http://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?to=pengyou&url=http://v.youku.com/v_show/id_:vid:.html&title=:title: http://youku.fm%23vid=:vid:" ><img title=分享到腾讯朋友" src="http://static.youku.com/v1.0.0659/v/img/ico_pengyou.png" /></a></span>
+				<span><a target="_blank" href="#" _href="http://www.kaixin001.com/repaste/share.php?rurl=http://v.youku.com/v_show/id_:vid:.html&rcontent=http://v.youku.com/v_show/id_:vid:.html&rtitle=:title: http://youku.fm%23vid=:vid:" ><img title=分享到开心网" src="http://static.youku.com/v1.0.0659/v/img/ico_kaixin.gif" /></a></span>
+				<span><a target="_blank" href="#" _href="http://space.fetion.com.cn/api/share?source=优酷网&url=http://v.youku.com/v_show/id_:vid:.html&title=:title: http://youku.fm%23vid=:vid:" ><img title=分享到飞信空间" src="http://static.youku.com/v1.0.0659/v/img/feixin_14px.png" /></a></span>
+				<span><a target="_blank" href="#" _href="http://www.139.com/share/share.php?tl=953010001&source=shareto139_youku&url=http://v.youku.com/v_show/id_:vid:.html&title=title=:title: http://youku.fm%23vid=:vid:" ><img title=分享到139说客" src="http://static.youku.com/v1.0.0659/v/img/ico_139.gif" /></a></span>
+				<span><a target="_blank" href="#" _href="http://share.renren.com/share/buttonshare.do?link=http://v.youku.com/v_show/id_:vid:.html&title=:title:"><img src="http://static.youku.com/v/img/ico_renren.gif" /></a></span>
+			{elseif $out=="sina"}
+				<span><a _source="/player.api.sina.:vid:" _post="/player.api.sinaPost"><b style="font-size:14px">分享到新浪微博<img title="分享到新浪微博" src="http://static.youku.com/v/img/ico_sina.gif" /></b></a></span>
+			{elseif $out=="netease"}
+				<span><a _source="/player.api.netease.:vid:" _post="/player.api.neteasePost"><b style="font-size:14px">分享到网易微博<img title="分享到网易微博" src="http://static.youku.com/v/img/ico_163_16.gif" /></b></a></span>
+			{elseif $out=="qqweibo" || $out=="qq"}
+				<span><a _source="/player.api.qq.:vid:" _post="/player.api.qqPost"><b style="font-size:14px">分享到腾讯微博<img title="分享到腾讯微博" src="http://static.youku.com/v1.0.0729/v/img/ico_qq_t.png" /></b></a></span>
+			{/if}
+			
 		</div>
 
 
+		<!-- 分享音乐 -->
+		<div id="_DialogShare" class="hide" _title="{'添加'|tr}">
+			<div class="reg-box">
+				<div class="msgbox" style="display:none"><i class="notice"></i> <span></span></div>
+				<ul class="elm-add">
+					<li class="input"><textarea style="width:294px;height:120px">http://v.youku.com/v_show/id_XMjI2MDIxNTYw.html</textarea></li>
+					<li class="singleBtn">
+						<a  title="" id="_BtDialogShare" class="btn-layer-d big icon"><i class="add"></i>分享</a>
+
+					</li>
+				</ul>
+			</div>
+		</div>
 
 
 		<!-- 添加音乐 -->
 		<div id="_DialogAdd" class="hide" _title="{'添加'|tr}">
 			<div class="reg-box">
 				<div class="msgbox" style="display:none"><i class="notice"></i> <span></span></div>
-				<form onsubmit="return YoukuWs.formsignup();"  id="_FormSignup">
-					<ul class="elm-add">
-						<li class="label"><label>请输入优酷播放页地址(一次只能添加一种地址)::</label></li>
-						<li class="input"><textarea style="width:480px;height:30px">http://v.youku.com/v_show/id_XMjI2MDIxNTYw.html</textarea></li>
-						<li class="label">
-							<label>
-								如普通播放页: <br />
-								http://v.youku.com/v_show/id_XMjI2MDIxNTYw.html <br />
-								如专辑播放页: <br />
-								http://v.youku.com/v_playlist/f5365488o1p0.html <br />
-								如节目显示页: <br />
-								http://www.youku.com/show_page/id_zd121155eef0a11df97c0.html <br />
-								如专辑显示页: <br />
-								http://www.youku.com/playlist_show/id_5365488.html <br />
-							</label>
-						</li>
-						<li class="singleBtn">
-							<a  title="" id="_AddMusic" class="btn-layer-d big icon"><i class="add"></i>增加</a>
+				<ul class="elm-add">
+					<li class="label"><label>请输入优酷播放页地址(一次只能添加一种地址)::</label></li>
+					<li class="input"><textarea style="width:480px;height:30px">http://v.youku.com/v_show/id_XMjI2MDIxNTYw.html</textarea></li>
+					<li class="label">
+						<label>
+							如普通播放页: <br />
+							http://v.youku.com/v_show/id_XMjI2MDIxNTYw.html <br />
+							如专辑播放页: <br />
+							http://v.youku.com/v_playlist/f5365488o1p0.html <br />
+							如节目显示页: <br />
+							http://www.youku.com/show_page/id_zd121155eef0a11df97c0.html <br />
+							如专辑显示页: <br />
+							http://www.youku.com/playlist_show/id_5365488.html <br />
+						</label>
+					</li>
+					<li class="singleBtn">
+						<a  title="" id="_AddMusic" class="btn-layer-d big icon"><i class="add"></i>增加</a>
 
-						</li>
+					</li>
 
-					
-					</ul>
-				</form>
+				
+				</ul>
 			</div>
 		</div>
 

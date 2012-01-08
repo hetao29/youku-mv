@@ -105,7 +105,6 @@ class player_main extends STpl{
 	}
 
 	function pageHeaderV3($inPath){
-		
 		$allLanguage=array(
 			"zh-cn"=>"中文 (简体)",
 			"zh-tw"=>"中文 (繁體)",
@@ -124,7 +123,7 @@ class player_main extends STpl{
 		}
 		$param['language']=$language;
 		$out = !empty($inPath[3])?$inPath[3]:"";
-		$param['out']=$out;
+		$param['outx']=$out;
 		if(($User=user_api::islogin())!==false){
 			$db = new user_db;
 			$action = $db->getAction($User['UserID']);
@@ -361,9 +360,6 @@ class player_main extends STpl{
 		return $this->pageEntry($inPath,"renren");
 	}
 	function pageEntryOld($inPath,$out="",$vid=""){
-		return $this->pageEntry($inPath,$out,$vid);
-	}
-	function pageEntry($inPath,$out="",$vid=""){
 		$param=array();
 		$param['v']=array("1"=>"32","2"=>"DD");
 		$allLanguage=array(
@@ -388,6 +384,35 @@ class player_main extends STpl{
 		$param['jsversion']=filemtime(WWW_ROOT."/"."assets/js/youku.ws.js");
 		$param['cssversion']=filemtime(WWW_ROOT."/"."assets/css/styleV2.css");
 		return $this->render("player/playerV2.tpl",$param);
+	}
+	function pageEntry($inPath,$out="",$vid=""){
+		return $this->pageEntryV3($inPath,$out,$vid);
+		/*
+		$param=array();
+		$param['v']=array("1"=>"32","2"=>"DD");
+		$allLanguage=array(
+			"zh-cn"=>"中文 (简体)",
+			"zh-tw"=>"中文 (繁體)",
+			"en"=>"English",
+			"ko"=>"한국어",
+			"ja"=>"日本語",
+		);
+		$language="中文 (简体)";
+		if(!empty($_COOKIE['language'])){
+			$l = $_COOKIE['language'];
+			if(!empty($allLanguage[$l])){
+				$language = $allLanguage[$l];
+			}
+
+		}
+		$param['language']=$language;
+		$param['allLanguage']=$allLanguage;
+		$param['out']=$out;
+		$param['vid']=$vid;
+		$param['jsversion']=filemtime(WWW_ROOT."/"."assets/js/youku.ws.js");
+		$param['cssversion']=filemtime(WWW_ROOT."/"."assets/css/styleV2.css");
+		return $this->render("player/playerV2.tpl",$param);
+		*/
 	}
 	function pageHeader($inPath){
 		$param = array();
