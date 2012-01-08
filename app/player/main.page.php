@@ -29,8 +29,8 @@ class player_main extends STpl{
 		$param['allLanguage']=$allLanguage;
 		$param['out']=$out;
 		$param['vid']=$vid;
-		$param['jsversion']=filemtime(WWW_ROOT."/"."assets/js/youku.ws.js");
-		$param['cssversion']=filemtime(WWW_ROOT."/"."assets/css/styleV2.css");
+		$param['jsversion']=filemtime(WWW_ROOT."/"."assets/js/v3/v3.js");
+		$param['cssversion']=filemtime(WWW_ROOT."/"."assets/style/default/css/fm.css");
 		$style=(!empty($inPath[3]) && $inPath[3]=="gdg")?"gdg":"default";
 		$param['style']=$style;
 		return $this->render("playerV3/main3.1.tpl",$param);
@@ -57,8 +57,8 @@ class player_main extends STpl{
 		$param['allLanguage']=$allLanguage;
 		$param['out']=$out;
 		$param['vid']=$vid;
-		$param['jsversion']=filemtime(WWW_ROOT."/"."assets/js/youku.ws.js");
-		$param['cssversion']=filemtime(WWW_ROOT."/"."assets/css/styleV2.css");
+		$param['jsversion']=filemtime(WWW_ROOT."/"."assets/js/v3/v3.js");
+		$param['cssversion']=filemtime(WWW_ROOT."/"."assets/style/default/css/fm.css");
 		$style=(!empty($inPath[3]) && $inPath[3]=="gdg")?"gdg":"default";
 		$param['style']=$style;
 		return $this->render("playerV3/main.tpl",$param);

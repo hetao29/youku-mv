@@ -20,7 +20,7 @@
 		<script type="text/javascript" src="/assets/js/swfobject/swfobject.js"></script>
 		<script type="text/javascript" src="/assets/js/v3/player.js"></script>
 		{else}
-		<script type="text/javascript" src="/assets/js/v3/v3.js"></script>
+		<script type="text/javascript" src="{'/player.js.entryV3.js'|version:$jsversion}"></script>
 		{/if}
 
 		<link rel="Shortcut Icon" href="/assets/images/ico/favicon_32x32.ico" />

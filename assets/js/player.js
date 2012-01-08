@@ -1785,7 +1785,6 @@ var YoukuWs = function(){
 				     }, 2000);//fro ie patch
 
 			     });
-
 		     },flag:flag
 	}
 }();
