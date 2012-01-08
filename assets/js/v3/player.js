@@ -301,9 +301,64 @@ var YoukuWs = function(){
 			$("#share-layer").show();
 
 		});
+		$("#_BtDialogShare").live("click",function(){
+			$("#_DialogShare").dgclose();
+				YoukuWs.tips("正在发布微博...");
+				var _data=$("#_DialogShare textarea").html();
+				var postUrl=$("#_DialogShare textarea").attr("postUrl"); 
+				$.post(postUrl,{content:_data,vid:CurrentVideoID},function(data){
+
+				if(data){
+					YoukuWs.tips("分享视频成功.",false,true);
+				}else{
+					YoukuWs.tips("分享视频失败，请稍后重试!",false,true);
+				}
+				},"json");
+		});
 		$("#share-layer a").click(function(){
-			var href = ($(this).attr("_href")).replace(/:vid:/g,CurrentVideoID).replace(/:title:/g,"我正在%23优酷电台%23收听《 "+YoukuWs.title+" 》你们也来听听吧: ");
-			$(this).attr("href",href);
+			if($(this).attr("_href")){
+				var href = ($(this).attr("_href")).replace(/:vid:/g,CurrentVideoID).replace(/:title:/g,"我正在%23优酷电台%23收听《 "+YoukuWs.title+" 》你们也来听听吧: ");
+				$(this).attr("href",href);
+			}else{
+
+					var url= ($(this).attr("_source")).replace(/:vid:/g,CurrentVideoID);
+					var postUrl = $(this).attr("_post");
+					$.get(url,function(data){
+						//var data="<div style='width:320px;height:220px;overflow:hidden'><textarea style='width:100%;height:100%'>"+data+"</textarea><div>";
+						$("#_DialogShare textarea").html(data);
+						$("#_DialogShare textarea").attr("postUrl",postUrl);
+						$("#_DialogShare").dg({height:120,width:320});
+						/*
+						$(data).dialog({
+							resizable: false,
+							height:220,width:320,title:"分享到微博",
+							modal: true,title:"分享到微博",
+							buttons: [{
+								text:"分享到微博",click:function() {
+									var _data=$(this).parent('.ui-dialog').find("textarea").val();
+									$.post(postUrl,{content:_data,vid:CurrentVideoID},function(data){
+
+									if(data){
+										YoukuWs.tips("分享视频成功.");
+									}else{
+										YoukuWs.tips("分享视频失败，请稍后重试!");
+									}
+									},"json");
+									YoukuWs.tips("正在发布微博...");
+									$( this ).dialog( "destroy");
+								}},
+							{
+								text:_LabelCancel,
+							click: function() {
+								$( this ).dialog( "destroy" );
+							}
+							}
+						]});
+						*/
+					},"text");
+			}
+
+
 		});
 		$("#_IDPlay").click(function(){
 			PlayerPause(false);
@@ -1977,7 +2032,10 @@ drop: function( event, ui ) {
 		return true;
 	}
 	return false;
-}, tips:function(v,hold){
+}, tips:function(v,hold,replace){
+	if(replace){
+		$("#IDTips ul li").last().remove();
+	}
 	var h=''
 		var id="_ID"+(new Date()).getTime()+"_"+parseInt(Math.random()*10000);
 	if(hold)h='<span class="x">X</span>';

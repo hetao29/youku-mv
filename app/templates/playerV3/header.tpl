@@ -23,7 +23,7 @@
 					<li id="_LiListen"><a>{"听过"|tr}(<span id="_CtListen">{$_CtListen|default:0}</span>)</a></li>
 					<li id="_LiList"><a>{"歌单"|tr}({$_CtList|default:0})</a></li>
 					<li>|</li>
-					{if empty($out)}<li><a id="_IDLogout">{'退出'|tr}</a></li>{/if}
+					{if empty($outx)}<li><a id="_IDLogout">{'退出'|tr}</a></li>{/if}
 					<li class="family"><span class="black">{$user['UserAlias']}</span></li>
 					{/if}
 				</ul>

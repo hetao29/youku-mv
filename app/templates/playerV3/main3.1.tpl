@@ -19,6 +19,7 @@
 		<script type="text/javascript" src="/assets/js/swfobject/swfobject.js"></script>
 
 		<script type="text/javascript" src="/assets/js/v3/player3.1.js"></script>
+		<script type="text/javascript" src="/assets/js/v3/css3.js"></script>
 
 		<link rel="Shortcut Icon" href="/assets/images/ico/favicon_32x32.ico" />
 
@@ -68,23 +69,25 @@ _width:expression((documentElement.clientWidth >920) ? "920px" : "auto" );
 			</div>
 			<i class="photo_img"></i>
 		</div>
+		<div class="mBox">Jjfoiewjfo</div>
 		<div class="s_body">
 				
-			<div class="left s_body_main">
-				<div class="s_player">
+			<div class="left s_body_main" id="_IDMain">
+
+				<div class="s_player box">
+
 					<div class="top">
-						<div class="right rt"></div>
-						<div class="left lt"></div>
+						<div class="rt"></div>
+						<div class="lt"></div>
 						<div class="middle"></div>
 					</div>
 
 					<div class="content">
-						<div class="right rt"></div>
-						<div class="left lt"></div>
+						<div class="rt"></div>
+						<div class="lt"></div>
 						<div class="middle">
-						
 							<div>
-								<h2><span id="title" class="left">Youku.FM</span><i class="btn-width right"><a  title="" id="_IDThx"></a></i></h2>
+								<h2><span id="title" class="left">Youku.FM</span><i class="btn-width right" id="_IDThx"><a  title="" ></a></i></h2>
 								<div class="player" id="playerBox">
 									<div id="player"></div>
 								</div>
@@ -140,30 +143,148 @@ _width:expression((documentElement.clientWidth >920) ? "920px" : "auto" );
 									</div>-->
 								</div>
 							</div>
-
+							<div class="clear"></div>
 						</div>
 					</div>
 
 					<div class="bottom">
-						<div class="right rt"></div>
-						<div class="left lt"></div>
+						<div class="rt"></div>
+						<div class="lt"></div>
 						<div class="middle"></div>
 					</div>
 
 
 				</div>
 			</div>
-			<div class="right s_controls">
+
+
+
+
+
+
+
+
+
+<div class="cont-right" id="_IDRight">
+	<div class="tab-bg">
+		<div id="IDNav" class="tab">
+			<a id="dtmsh" for="dtmsh-panel" title="{'电台模式'|tr}" class="current">{'电台模式'|tr}</a>
+			<a for="bfmsh-panel" title="{'播放模式'|tr}">{'播放模式'|tr}</a>
+			<a for="sw-panel" title="{'显示歌词'|tr}">{'显示歌词'|tr}</a>
+		</div>
+	</div>
+
+	<div class="cont-border">
+		<div class="left"><div class="box"></div></div>
+		<div class="content">
+
+			<div id="dtmsh-panel">
+				<div style="padding: 9px;">
+					<div class="dt-box">
+						<h2>{"当前播放"|tr}:<span id="_IDVideoTitle"></span></h2>
+						<img id="_IDVideoPic" class="shadow" />
+					</div>
+					<div class="dt-box">
+						<h2>{"接着播放"|tr}:<span id="_IDNextVideoTitle"></span></h2>
+						<img id="_IDNextVideoPic" class="shadow" />
+					</div>
+				</div>
+			</div>
+
+			<div id="bfmsh-panel" class="hide">
+
+				<div id="drag-layer" style="position: absolute;left:-160px;top:100px"; class="mvlist-edit-layer hide">
+					<div class="top"><p>添加到歌单<i class="icon-down"></i><i class="icon_add"></i></p></div>
+					<a id="_BtTrash2" class="icon_del" title="删除"></a>
+
+					<div class="mdrag-layer" id="_ContentList">
+						<ul>
+							<span style="padding: 15px;">加载中...</span>
+						</ul>
+					</div>
+				</div>
+
+				<div class="search-box">
+					<i class="search-bg"></i>
+					<input type="text" id="keywords" name="" />
+					<a id="_BtSearch" title="搜索" class="btn-search">搜索</a>
+				</div>
+				<ul class="music-list checkbox_hide" id="_ContentMusic">
+					{*
+					<li><span class="checkbox"></span><span>歌曲标题</span><em>歌手名字</em></li>
+					*}
+				</ul>
+				<div class="btnline">
+					<a id="_BtEditMode" title="编辑" class="btn-w">编辑</a>
+					<a id="_BtSelectAll" title="全选" class="btn-w hide">全选</a>
+					<a id="_BtDeSelect" title="反选" class="btn-w hide">反选</a>
+					<a id="_BtAddMv" title="添加" class="btn-c"><i class="add"></i>添加</a>
+					<a id="_BtSaveAll" title="保存" class="btn-c hide"><i class="save"></i>保存</a>
+					<a id="_BtDelete" title="删除" class="btn-c hide"><i class="remove"></i>删除</a>
+				</div>
+			</div>
+
+			<div id="sw-panel" class="hide">
+				<div style="padding: 9px;">
+					<div class="sw-box" id="_ContentLyrics">
+					{*
+						<p>罗志祥  爱转角</p>
+						<p>爱转角遇见了谁是否有爱情的美</p>
+						<p>爱转角以后的街能不能有我来陪</p>
+						<p>爱转角遇见了谁是否不让你流泪</p>
+						<p>也许陌生到了解 让我来当你的谁</p>
+						<p>我不让爱掉眼泪 不让你掉眼泪</p>
+						<p class="current">心不再拚命躲不去害怕结果</p>
+						<p>有美丽笑容</p>
+						<p>我不让爱掉眼泪 不让你掉眼泪我不让爱掉眼泪 不让你掉眼泪</p>
+						<p >我不让爱掉眼泪 不让你掉眼泪</p>
+						<p>心不再拚命躲不去害怕结果</p>
+						<p>有美丽笑容</p>
+						<p>我不让爱掉眼泪 不让你掉眼泪</p>
+						<p>我不让爱掉眼泪 不让你掉眼泪</p>
+						<p>心不再拚命躲不去害怕结果</p>
+						<p>有美丽笑容</p>
+						<p>我不让爱掉眼泪 不让你掉眼泪</p>
+					  *}
+					</div>
+				</div>
+					<div class="btnline">
+						<a id="_IDLyricsView"  title="{"查看"|tr}" class="btn-w">{"查看"|tr}</a>
+						<a id="_IDLyricsErr"  title="{"报错"|tr}" class="btn-w">{"报错"|tr}</a>
+
+						<a id="_IDLyricsPr" title="{"前进"|tr}" class="btn-c"><i class="r"></i></a>
+						<a id="_IDLyricsBk" title="{"后退"|tr}" class="btn-c"><i class="l"></i></a>
+					</div>
+			</div>
+
+		</div>
+		<div class="right"><div class="box"></div></div>
+	</div>
+
+
+
+	<div class="bottom"><div class="box"><i></i><i class="right"></i><div class="boxcenter"></div></div></div>
+</div>
+
+
+
+
+
+
+<!--
+
+
+			<div class="right s_controls box" id="_IDRight">
 
 				<div class="top">
-					<div class="right rt"></div>
-					<div class="left lt"></div>
+					<div class="rt"></div>
+					<div class="lt"></div>
 					<div class="middle"></div>
 				</div>
 
 				<div class="content">
-					<div class="right rt"></div>
-					<div class="left lt"></div>
+					<div class="rt"></div>
+					<div class="lt"></div>
 					<div class="middle">
 					
 
@@ -283,8 +404,8 @@ _width:expression((documentElement.clientWidth >920) ? "920px" : "auto" );
 
 
 				<div class="bottom">
-					<div class="right rt"></div>
-					<div class="left lt"></div>
+					<div class="rt"></div>
+					<div class="lt"></div>
 					<div class="middle"></div>
 				</div>
 
@@ -292,7 +413,7 @@ _width:expression((documentElement.clientWidth >920) ? "920px" : "auto" );
 
 
 
-
+-->
 
 
 
@@ -489,6 +610,63 @@ _width:expression((documentElement.clientWidth >920) ? "920px" : "auto" );
 			<span><a target="_blank" href="#" _href="http://share.renren.com/share/buttonshare.do?link=http://v.youku.com/v_show/id_:vid:.html&title=:title:"><img src="http://static.youku.com/v/img/ico_renren.gif" /></a></span>
 		</div>
 
+
+
+
+		<!-- 添加音乐 - test -->
+		<div class="box">
+			<div class="top">
+				<div class="rt"></div>
+				<div class="lt"></div>
+				<div class="middle"></div>
+			</div>
+
+			<div class="content">
+				<div class="rt"></div>
+				<div class="lt"></div>
+				<div class="middle">
+				
+					<div id="_DialogAdd"  _title="{'添加'|tr}">
+						<div class="reg-box">
+							<div class="msgbox" style="display:none"><i class="notice"></i> <span></span></div>
+							<form onsubmit="return YoukuWs.formsignup();"  id="_FormSignup">
+								<ul class="elm-add">
+									<li class="label"><label>请输入优酷播放页地址(一次只能添加一种地址)::</label></li>
+									<li class="input"><textarea style="width:480px;height:30px">http://v.youku.com/v_show/id_XMjI2MDIxNTYw.html</textarea></li>
+									<li class="label">
+										<label>
+											如普通播放页: <br />
+											http://v.youku.com/v_show/id_XMjI2MDIxNTYw.html <br />
+											如专辑播放页: <br />
+											http://v.youku.com/v_playlist/f5365488o1p0.html <br />
+											如节目显示页: <br />
+											http://www.youku.com/show_page/id_zd121155eef0a11df97c0.html <br />
+											如专辑显示页: <br />
+											http://www.youku.com/playlist_show/id_5365488.html <br />
+										</label>
+									</li>
+									<li class="singleBtn">
+										<a  title="" id="_AddMusic" class="btn-layer-d big icon"><i class="add"></i>增加</a>
+
+									</li>
+
+								
+								</ul>
+							</form>
+						</div>
+					</div>
+
+				</div>
+			</div>
+
+			<div class="bottom">
+				<div class="rt"></div>
+				<div class="lt"></div>
+				<div class="middle"></div>
+			</div>
+
+
+		</div>
 
 
 

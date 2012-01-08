@@ -18,7 +18,7 @@
 					<li><a id="_IDSignup">{'注册'|tr}</a></li>
 					<li><a id="_IDLogin">{'登录'|tr}</a></li>
 					<li>|</li>
-					<li><a href="" title="">登录</a>后，能记住你所喜好</li>
+					<li>登录后，能记住你所喜好</li>
 					{else}
 					<li id="_LiUp"><a>{"喜欢"|tr}(<span id="_CtUp">{@$act[0]|default:0}</span>)</a></li>
 					<li id="_LiListen"><a>{"听过"|tr}(<span id="_CtListen">{$_CtListen|default:0}</span>)</a></li>
