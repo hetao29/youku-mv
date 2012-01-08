@@ -219,11 +219,11 @@ var YoukuWs = function(){
 						}
 						break;
 					case 40://下
-						if(PlayType==0){
-							$("#_IDSkip").trigger("click");
-						}else{
+						//if(PlayType==0){
+						//	$("#_IDSkip").trigger("click");
+						//}else{
 							$("#_BtNext").trigger("click");
-						}
+						//}
 						break;
 					case 37://左
 						var li=$("#IDNav >a");
@@ -266,7 +266,6 @@ var YoukuWs = function(){
 			$("#_RadioChannel").dgclose();
 			YoukuWs.set("cid",$(this).attr("id"));
 			window.radioPlayList=new Array();
-			//换台，这里要快速相应 
 			PlayType=0;
 			YoukuWs.set("PlayType",PlayType);
 			YoukuWs.playRadio();
