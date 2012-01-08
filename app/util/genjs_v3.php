@@ -23,13 +23,15 @@ foreach($files as $src){
 
 }
 $out = '../../assets/js/v3/v3.js';
-
+include("JShrink-0.2.class.php");
 $t1 = microtime(true);
-
-//$packer = new JavaScriptPacker($script);//, 'High ASCII', true, false);
-//$packer = new JavaScriptPacker($script,"Normal");//, 'High ASCII', true, false);
-$packer = new JavaScriptPacker($script,"Numeric");//, 'High ASCII', true, false);
-$packed = $packer->pack();
+//1
+//$packer = new JavaScriptPacker($script,"Numeric");//, 'High ASCII', true, false);
+//$packed = $packer->pack();
+//2
+$packed = JShrink::minify($script, array('flaggedComments' => false));
+//3
+//$packed = $script;
 
 $t2 = microtime(true);
 $time = sprintf('%.4f', ($t2 - $t1) );
