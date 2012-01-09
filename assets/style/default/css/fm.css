@@ -548,12 +548,12 @@ a { text-decoration:none; color:#333; cursor:pointer; }
 .ly-box .bottom .box .boxcenter { background-position:0 -195px; }
 
 .ly-box .cont-border { padding:0 10px; float:left; overflow:hidden; position:relative; }
-.ly-box .cont-border .left,.ly-box .cont-border .right{ width:10px; overflow:hidden; position:absolute; left:0; top:0; background:#000; }
+.ly-box .cont-border .left,.ly-box .cont-border .right{ width:10px; overflow:hidden; position:absolute; left:0; top:0;  }
 .ly-box .cont-border .left .box,.ly-box .cont-border .right .box { width:10px; height:1500px; overflow:hidden; background:url(/assets/style/default/img/rpy.png) repeat-y -60px 0; }
 .ly-box .cont-border .right { left:auto; right:0; }
 .ly-box .cont-border .right .box { background-position:-70px 0; }
 
-.ly-box .cont-border h2 { width:100%; line-height:16px; padding:4px 0; position:absolute; left:20px; top:1px; font-size:12px; z-index:10; }
+.ly-box .cont-border h2 {line-height:16px; padding:4px 0; position:absolute; left:20px; top:1px; font-size:12px; z-index:10; }
 .ly-box .cont-border h2 span { font-weight:normal; font-family:"宋体"; }
 .ly-box .cont-border a.close { position:absolute; right:20px; top:5px; z-index:10; }
 
