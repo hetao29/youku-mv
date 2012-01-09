@@ -287,7 +287,7 @@ var YoukuWs = function(){
 			$("#share").addClass("hover");
 			var _pos = $("#share").offset();
 			$("#share-layer").css("left",(_pos.left)+"px");
-			$("#share-layer").css("top",(_pos.top+27)+"px");
+			$("#share-layer").css("top",(_pos.top+24)+"px");
 			$("#share-layer").show();
 
 		});
