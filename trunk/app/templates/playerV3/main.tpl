@@ -91,6 +91,7 @@
 							
 							<div class="player-controll">
 								<a id="share" class="btn-share" title="" ><i class="icon-share"></i>分享</a>
+								
 								<div class="center">
 
 									<ul>
@@ -99,7 +100,7 @@
 									<a class="btn-pause"  id="_IDPause" title="暂停">暂停</a></li>
 									{*<a class="btn-skip"  title="跳过">跳过</a>*}
 									<li><a class="btn-next" id="_BtNext" title="{'下一首'|tr}">{'下一首'|tr}</a></li>
-									<li></li>
+									
 									<li><a class="btn-love" id="_IDUp" title="{"喜欢"|tr}">{"喜欢"|tr}</a></li>
 									<li><a class="btn-remove" id="_IDDown" title="移除">{"不喜欢"|tr}</a></li>
 									</ul>
@@ -107,7 +108,7 @@
 								<!--
 								<div class="center">
 
-								
+									<a style="float:left"></a>
 									<a class="btn-prev" id="_BtPre" title="{'上一首'|tr}">{'上一首'|tr}</a>
 									<a class="btn-play" id="_IDPlay" title="{'播放'|tr}">{'播放'|tr}</a>
 									<a class="btn-pause"  id="_IDPause" title="暂停">暂停</a>
@@ -116,12 +117,11 @@
 									&nbsp;&nbsp;&nbsp;
 									<a class="btn-love" id="_IDUp" title="{"喜欢"|tr}">{"喜欢"|tr}</a>
 									<a class="btn-remove" id="_IDDown" title="移除">{"不喜欢"|tr}</a>
-								</div>
-								-->
+								</div>-->
 								<div class="right" id="PlayModeSet">
-									<a class="btn-order" playmode="3" title="{'随机'|tr}<">{'随机'|tr}</a>
-									<a class="btn-list" playmode="2"  title="{'循环'|tr}">{'循环'|tr}</a>
-									<a class="btn-for" playmode="1" title="{'单曲'|tr}">{'单曲'|tr}</a>
+									<a class="btn-order" id="btn-order" playmode="3" title="{'随机'|tr}<">{'随机'|tr}</a>
+									<a class="btn-list" id="btn-list" playmode="2"  title="{'循环'|tr}">{'循环'|tr}</a>
+									<a class="btn-for" id="btn-for" playmode="1" title="{'单曲'|tr}">{'单曲'|tr}</a>
 								</div>
 							</div>
 							
