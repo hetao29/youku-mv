@@ -1366,8 +1366,10 @@ var YoukuWs = function(){
 					 try{
 						 PlayerReplay(vid);
 					 }catch(e){
+						 
+						//if(swfobject.ua.safari) par.wmode="opaque";
 						 //swfobject.createSWF({data:"http://static.youku.com/v/swf/player.swf",width:"100%",height:"100%"},{allowFullScreen:true,allowscriptaccess:"always",wmode:"transparent",flashvars:"isAutoPlay=true&VideoIDS="+vid+"&winType=popup&ad=0&skincolor1=3F3F3F&skincolor2=3F3F3F&firsttime="+time},playerId);
-						 swfobject.createSWF({data:"http://static.youku.com/v/swf/player.swf",width:"100%",height:"100%"},{allowFullScreen:true,allowscriptaccess:"always",wmode:"transparent",flashvars:"isAutoPlay=true&VideoIDS="+vid+"&winType=index&ad=0&skincolor1=3F3F3F&skincolor2=3F3F3F&firsttime="+time},playerId);
+						 swfobject.createSWF({data:"http://static.youku.com/v/swf/player.swf",width:"100%",height:"100%"},{allowFullScreen:true,allowscriptaccess:"always",wmode:"opaque",flashvars:"isAutoPlay=true&VideoIDS="+vid+"&winType=index&ad=0&skincolor1=3F3F3F&skincolor2=3F3F3F&firsttime="+time},playerId);
 					 }
 				 }
 				 if(PlayType!=0){//非收听模式
