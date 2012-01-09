@@ -95,7 +95,7 @@ _margin-right: 5px;
 .fm-body .cont-left .cont-border .content .player-controll .btn-share.hover { left:0; top:0; }
 /*.fm-body .cont-left .cont-border .content .player-controll .center a { display:inline; margin-left:10px;_margin-left:5px; }*/
 .fm-body .cont-left .cont-border .content .player-controll .center li { width:30px;float:left; }
-.fm-body .cont-left .cont-border .content .player-controll .center ul { width:200px;margin: 0 auto;height: 20px; }
+.fm-body .cont-left .cont-border .content .player-controll .center ul { width:150px;margin: 0 auto;height: 20px; }
 .fm-body .cont-left .cont-border .content .player-controll .right { width:70px; overflow:hidden; position:absolute; right:5px; top:8px; }
 .fm-body .cont-left .cont-border .content .player-controll .right a { float:right; margin-right:5px;  _margin-right:2px;}
 
