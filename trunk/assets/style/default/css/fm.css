@@ -188,9 +188,9 @@ _margin-right: 5px;
 .fm-body .cont-right .cont-border .search-box input { width:195px; height:18px; color:#666; position:absolute; left:20px; top:11px; border:none; background:none; outline:none; }
 
 .fm-body .cont-right .cont-border ul.music-list { width:230px; height:316px; overflow:hidden; overflow-y:scroll; border:1px solid #CCC; margin:10px auto 0; background:#FFF; position:relative; }
-.fm-body .cont-right .cont-border ul.music-list li { width:208px; line-height:18px; overflow:hidden; padding:2px 0 2px 20px; position:relative; border-bottom:1px solid #CCC; cursor:pointer; }
+.fm-body .cont-right .cont-border ul.music-list li {  line-height:18px; overflow:hidden; padding:2px 0 2px 10px; position:relative; border-bottom:1px solid #CCC; cursor:pointer; }
 .fm-body .cont-right .cont-border ul.music-list li i { position:absolute; left:4px; top:4px; }
-.fm-body .cont-right .cont-border ul.music-list li span { width:136px; overflow:hidden; float:left; padding-left:5px; }
+.fm-body .cont-right .cont-border ul.music-list li span { overflow:hidden; float:left; padding-left:5px; }
 .fm-body .cont-right .cont-border ul.music-list li em { width:50px; overflow:hidden; float:left; text-align:center; font-style:normal; }
 .fm-body .cont-right .cont-border ul.music-list li:hover,.fm-body .cont-right .cont-border ul.music-list li.hover { background:#E1F0F7; }
 .fm-body .cont-right .cont-border ul.music-list li.select i { background-position:-155px -200px; }
@@ -278,7 +278,8 @@ _margin-right: 5px;
 	height:16px; line-height:16px; padding:2px 0; 
 	position:relative; width:auto; font-family:"宋体"; 
 	font-weight:normal; top:auto;
-	margin-left: 20px;z-index:1;_margin-left: 10px;
+	margin-left: 20px;
+	z-index:1;_margin-left: 10px;
 }
 .mylist-box .mylist-cont ul.list li h2 a { float:left; color:#007db5; overflow:hidden; font-size:14px; }
 .mylist-box .mylist-cont ul.list li h2 span { float:left; height:16px; line-height:16px; color:#999; }
@@ -512,10 +513,11 @@ a { text-decoration:none; color:#333; cursor:pointer; }
 .layer { position:absolute;  z-index:51; overflow:hidden;
 
 }
-/*
+
 .ly-box .cont-border h2.ly-title{
-	padding-left: 5px;
+	padding-left: 10px;
 }
+/*
 .ly-box {margin:auto; overflow:hidden; position:relative; }
 .ly-box .cont-border { padding:0 10px; float:left;}
 .ly-box .cont-border h2 {
@@ -553,7 +555,7 @@ a { text-decoration:none; color:#333; cursor:pointer; }
 .ly-box .cont-border .right { left:auto; right:0; }
 .ly-box .cont-border .right .box { background-position:-70px 0; }
 
-.ly-box .cont-border h2 {line-height:16px; padding:4px 0; position:absolute; left:20px; top:1px; font-size:12px; z-index:10; }
+.ly-box .cont-border h2 {line-height:16px; padding:4px 0; position:absolute; left:5px; top:1px; font-size:12px; z-index:10; }
 .ly-box .cont-border h2 span { font-weight:normal; font-family:"宋体"; }
 .ly-box .cont-border a.close { position:absolute; right:20px; top:5px; z-index:10; }
 
