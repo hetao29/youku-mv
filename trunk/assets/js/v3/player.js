@@ -979,8 +979,8 @@ var YoukuWs = function(){
 			$(this).addClass("select");
 			YoukuWs.set("PlayModeSet",PlayMode);
 		});
-		PlayMode = YoukuWs.get("PlayModeSet");
-		if(PlayMode<1 ||PlayMode>3){
+		PlayMode = parseInt(YoukuWs.get("PlayModeSet"));
+		if(!PlayMode || isNaN(PlayMode) || PlayMode<1 ||PlayMode>3){
 			PlayMode=2;
 		}
 
