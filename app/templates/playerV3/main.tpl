@@ -136,9 +136,9 @@
 			<div class="cont-right" id="_IDRight">
 				<div class="tab-bg">
 					<div class="tab" id="IDNav">
-						<a id="dtmsh" for="dtmsh-panel" title="{'电台模式'|tr}" class="current">{'电台模式'|tr}</a>
+						<a id="dtmsh" for="dtmsh-panel" title="{'电台模式'|tr}" class="current radio">{'电台模式'|tr}</a>
 						<a for="bfmsh-panel" title="{'播放模式'|tr}">{'播放模式'|tr}</a>
-						<a for="sw-panel" title="{'显示歌词'|tr}">{'显示歌词'|tr}</a>
+						<a for="sw-panel" title="{'显示歌词'|tr}" class="lyrics">{'显示歌词'|tr}</a>
 					</div>
 				</div>
 
