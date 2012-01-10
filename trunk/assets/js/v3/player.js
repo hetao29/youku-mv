@@ -809,6 +809,14 @@ var YoukuWs = function(){
 			});
 			if(li)YoukuWs.play(li.attr("vid"));
 		});
+		$("#_CtMusicList #addAll").live('click',function(){
+			var selected =$(this).parentsUntil(".content").find(".select");
+			var li;
+			$.each(selected,function(i,item){
+				li=$(item);
+				YoukuWsPlaylist.add(li.attr("vid"),li.attr("mvname"));
+			});
+		});
 		$("#_CtMusicList .pg-box > a").live('click',function(){
 			var page = $(this).attr("page");
 			var mylist =$(this).parentsUntil(".mylist-cont").parent();
@@ -1864,6 +1872,7 @@ var YoukuWs = function(){
 						 var action="";
 						 action+='<a title="" id="selectlAll" class="btn-layer-d">全选</a>';
 						 action+='<a title="" id="deselectAll" class="btn-layer-d">反选</a>';
+						 action+='<a title="" id="addAll" class="btn-layer-d">添加</a>';
 						 action+='<a title="" id="playAll" class="btn-layer-d">播放</a>';
 						 if(delUrl)action+='<a  title="" id="deleteAll" class="btn-layer-d">删除</a>';
 						 //action+='<a  title="" class="btn-layer-d big">添加歌曲</a>';
