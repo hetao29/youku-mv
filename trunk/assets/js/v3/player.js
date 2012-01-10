@@ -69,8 +69,8 @@
 			var t = $(this);
 			t.show();
 			if(t.attr("bt_set")){
-				t.find(".layer").css("z-index",window.zIndex);
-				t.find(".layer").center();
+				t.find(".table-layer").css("z-index",window.zIndex);
+				t.find(".table-layer").center();
 				return;
 			};
 			var content = t.html();
@@ -82,11 +82,11 @@
 			var width = options['width'];
 			var w=w2=h="";
 			//	if(height) h='height:'+height+'px;';
-			if(width) w = "style='width:"+width+"px;"+h+"'";
-			if(width) w2 = "style='width:"+(width+20)+"px;'";
+			if(width) w = "width:"+width+"px;";
+			//if(width) w2 = "style='width:"+(width+20)+"px;'";
 			mode = mode?true:false;
 			var dg="";
-			//if(mode)dg+='<div class="screen-over" style="display:none";>&nbsp;</div>';
+			/*
 			dg='<div class="layer" style="z-index:'+zIndex+'">';
 			dg+='<div class="ly-box" '+w2+'>';
 			dg+='<div class="top"><div class="box"><i></i><i class="right"></i><div class="boxcenter"></div></div></div>';
@@ -95,19 +95,46 @@
 			dg+='<h2 id="ly-title" class="ly-title">'+title;
 			if(title2)dg+='<span>/'+title2+'</span>';
 			dg+='</h2>';
-			//dg+='<h3 class="list-des" style="display:none;"><i class="face"></i>您可以将播放列表内的歌曲直接拖动到歌单内</h3>';
 			dg+='<a class="close" title="'+close+'">'+close+'</a>';
 			dg+='<div class="content" '+w+'>';
+			*/
+			dg+='<table class="table-layer" cellpadding="0" cellspacing="0" style="z-index:'+zIndex+'">';
+			dg+='<tr class="top">';
+			dg+='<td class="angle left-top"></td>';
+			dg+='<td class="edge-top"></td>';
+			dg+='<td class="angle right-top"></td>';
+			dg+='</tr>';
+			dg+='<tr class="middle">';
+			dg+='<td class="edge-left"></td>';
+			dg+='<td class="layer-body" style="position:relative;">';
+			//dg+='<h2 id="ly-title" class="ly-title">我的歌单<span>/华语流行金曲 -> 整理歌曲</span></h2>';
+			dg+='<h2 id="ly-title" class="ly-title">'+title;
+			if(title2)dg+='<span>/'+title2+'</span>';
+			dg+='</h2>';
+			dg+='<a class="close" title="关闭">关闭</a>';
+			dg+='<div class="content" style="margin:0 auto; '+w+'">';
+
 			dg+=content;
+			dg+='</div>';
+			dg+='</td>';
+			dg+='<td class="edge-right"></td>';
+			dg+='</tr>';
+			dg+='<tr class="bottom">';
+			dg+='<td class="angle left-bottom"></td>';
+			dg+='<td class="edge-bottom"></td>';
+			dg+='<td class="angle right-bottom"></td>';
+			dg+='</tr>';
+			dg+='</table>';
+			/*
 			dg+='</div>';
 			dg+='<div class="right"><div class="box"></div></div>';
 			dg+='</div>';
 			dg+='<div class="bottom"><div class="box"><i></i><i class="right"></i><div class="boxcenter"></div></div></div>';
 			dg+='</div>';
 			dg+='</div>';
-
+			*/
 			t.html(dg);
-			t.find(".layer").center();
+			t.find(".table-layer").center();
 			t.attr("bt_set",true);
 			if(options['close']){
 				t.data("close",options['close']);
@@ -131,7 +158,7 @@
 
 
 	$(".close").live("click",function(){
-		var p = $(this).parents(".layer").parent();
+		var p = $(this).parents(".table-layer").parent();
 		if(YoukuWs.isIpad()){
 			$("#"+playerId).attr("controls","controls");
 		}
@@ -398,10 +425,10 @@ var YoukuWs = function(){
 		//{{{
 		$("#_BtListAdd").live("click",function(){
 			var index=1;
-			$("#_IDList td").hide();
-			$("#_IDList td").eq(index).show();
+			$("#_IDListTable td").hide();
+			$("#_IDListTable td").eq(index).show();
 
-			$("#_IDList .layer").center();
+			$("#_IDList .table-layer").center();
 		});
 		//保存到歌单
 		$("#_BtListSave").live("click",function(){
@@ -451,19 +478,19 @@ var YoukuWs = function(){
 
 		$("#_IDReturn").live("click",function(){
 			var index=0;
-			$("#_IDList td").hide();
-			$("#_IDList td").eq(index).show();
-			$("#_IDList .layer").center();
+			$("#_IDListTable td").hide();
+			$("#_IDListTable td").eq(index).show();
+			$("#_IDList .table-layer").center();
 		});
 		$("#_IDCancel").live("click",function(){
 			var index=0;
-			$("#_IDList td").hide();
-			$("#_IDList td").eq(index).show();
-			$("#_IDList .layer").center();
+			$("#_IDListTable td").hide();
+			$("#_IDListTable td").eq(index).show();
+			$("#_IDList .table-layer").center();
 		});
 		$("#_IDSaveList").live("click",function(){
 
-			var lid = parseInt($("#_IDList td").eq(1).attr("lid"));
+			var lid = parseInt($("#_IDListTable td").eq(1).attr("lid"));
 			if(lid<=0){
 				var url="/user.list.add";
 			}else{
@@ -487,9 +514,9 @@ var YoukuWs = function(){
 
 			});
 			var index=0;
-			$("#_IDList td").hide();
-			$("#_IDList td").eq(index).show();
-			$("#_IDList .layer").center();
+			$("#_IDListTable td").hide();
+			$("#_IDListTable td").eq(index).show();
+			$("#_IDList .table-layer").center();
 
 		});
 		$("#_AddMusic").live("click",function(){
@@ -506,8 +533,8 @@ var YoukuWs = function(){
 		$("#_IDConfirm").live("click",function(){
 			var index=0;
 			//{{{删除
-			var lid = $("#_IDList td").eq(2).attr("lid");
-			var li = $("#_IDList li[lid="+lid+"]");
+			var lid = $("#_IDListTable td").eq(2).attr("lid");
+			var li = $("#_IDListTable li[lid="+lid+"]");
 			setTimeout(function() {li.remove(); }, 1);
 			$.ajax({
 				url: "/user.list.del",
@@ -523,9 +550,9 @@ var YoukuWs = function(){
 
 			});
 			//}}}
-			$("#_IDList td").hide();
-			$("#_IDList td").eq(index).show();
-			$("#_IDList .layer").center();
+			$("#_IDListTable td").hide();
+			$("#_IDListTable td").eq(index).show();
+			$("#_IDList .table-layer").center();
 
 		});
 		//}}}
@@ -562,7 +589,7 @@ var YoukuWs = function(){
 							}
 							$("#_RadioChannel ul").append("<li ><a "+dsb+" id='"+result.items[i].ListID+"'>"+result.items[i].ListName+"</a></li>");
 						}
-						$("#_RadioChannel .layer").center();
+						$("#_RadioChannel .table-layer").center();
 					}
 				}
 			});
@@ -701,19 +728,19 @@ var YoukuWs = function(){
 		$("#_IDListMain .del").live('click',function(){
 			var lid =$(this).parentsUntil("li").parent().attr("lid");
 			var index=2;
-			$("#_IDList td").hide();
-			$("#_IDList td").eq(index).attr("lid",lid).show();
-			$("#_IDList .layer").center();
+			$("#_IDListTable td").hide();
+			$("#_IDListTable td").eq(index).attr("lid",lid).show();
+			$("#_IDList .table-layer").center();
 
 		});
 
 
 		$("#_IDListMain .editEdit").live("click",function(){
 			var index=1;
-			$("#_IDList td").hide();
+			$("#_IDListTable td").hide();
 			var li =$(this).parentsUntil("li").parent();
-			$("#_IDList td").eq(index).attr("lid",li.attr("lid")).show();
-			$("#_IDList .layer").center();
+			$("#_IDListTable td").eq(index).attr("lid",li.attr("lid")).show();
+			$("#_IDList .table-layer").center();
 
 			$("#_IDListName").val(li.find("a").html());
 			$("#_IDListComment").val(li.find(".comment").html());
@@ -1789,7 +1816,7 @@ var YoukuWs = function(){
 				  */
 				 var	real_url = url.replace(/:page:/,page);
 
-				 $("#_CtMusicList").dg({width:630,height:300,title:"听过的MV"});
+				 $("#_CtMusicList").dg({width:500,height:300,title:"听过的MV"});
 				 $("#_CtMusicList .loading" ).show();
 				 //$("#_CtMusicList .mylist-cont" ).html('<div style="text-align:center;padding:10px"><img style="vertical-align: middle;" src="/assets/images/loading/loading9.gif" /> 正在加载中...</div>');
 				 $("#_CtMusicList .mylist-cont" ).attr("url",url);
@@ -1869,7 +1896,7 @@ var YoukuWs = function(){
 									  });
 								  }
 						 });
-						 $("#_CtMusicList .layer").center();
+						 $("#_CtMusicList .table-layer").center();
 					 }
 				 });
 			 },showMusicBox:function(result){
