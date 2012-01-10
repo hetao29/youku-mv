@@ -50,6 +50,7 @@
 				"正在播放":"{"正在播放"|tr}"
 			}; 
 			var out="{$out}"; var _LabelOk="{'确认'|tr}"; var _LabelCancel="{'取消'|tr}"; var _initVid="{$vid}";
+			{if !empty($lid)}var _initLid="{$lid}";{/if}
 		</script>
 	</head>
 
