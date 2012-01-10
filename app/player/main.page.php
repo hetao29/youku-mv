@@ -66,7 +66,6 @@ class player_main extends STpl{
 		$param['style']=$style;
 		if($style=="gdg"){
 			$param['lid']=343;
-			$param['lid']=82;
 		}
 		return $this->render("playerV3/main.tpl",$param);
 	}
