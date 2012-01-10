@@ -1913,54 +1913,11 @@ var YoukuWs = function(){
 			 },listListen:function(page){
 				 var delUrl="/player.main.delListen?vid=:vid:";
 				 YoukuWs.loadMusic('/player.main.listListen.:page:',page,delUrl);
-				 /* $.ajax({
-					url: "/player.main.listListen."+page,
-					success: function( result) {
-					YoukuWs.showMusicBox(result);
-					}
-					});
-				  */
 			 }, listAction:function(action,page){
 
 				 var delUrl="/player.main.delActionV3."+action+"?vid=:vid:";
-				 //var sortUrl="/user.list.contentsorder";
 				 YoukuWs.loadMusic("/player.main.listAction."+action+".:page:",page,delUrl);
-				 /* return;
-					$("#_ContentListen DIV").html("");
-					$("#_ContentListen >ul" ).html('<li><img style="vertical-align: middle;" src="/assets/images/loading/loading9.gif" /> 正在加载中...</li>');
-					$.ajax({
-					url: "/player.main.listAction."+action+"."+page,
-					success: function( result) {
-					var o = $("#_ContentListen >ul");
-					o.html("");
-					for(var i=0;i<result.items.length;i++){
-					if(result.items[i]){
-					var mvname=YoukuWs.getVideoName(result.items[i]);
-					var html='<li _type="action"  actiontype="'+result.actiontype+'" title="点击拖动到右边播放列表" mvname="'+mvname+'" vid="'+result.items[i].VideoID+'">'+
-					'<span class="left name" title="点击播放:'+mvname+'">'+mvname+'</span>'+
-					'<span class="right">'+timeFormat(result.items[i].VideoDuration)+' <a class="delMv" title="删除"><img src="/assets/images/style2/DeleteDisabled.png" style="vertical-align:middle" /></a><img title="点击添加到播放列表" class="add" src="/assets/images/style2/plus.png" style="vertical-align:top"></span>'+
-					'<div class="clear"></div>'+
-					'</li>';
-					}
-					o.append(html);
-					}
-					var pager="<div>";
-					if(parseInt(result.page)-2>0)pager+="<a onclick='YoukuWs.listAction(\""+action+"\","+(parseInt(result.page)-2)+")'>"+(parseInt(result.page)-2)+"</a>";
-					if(parseInt(result.page)-1>0)pager+="<a onclick='YoukuWs.listAction(\""+action+"\","+(parseInt(result.page)-1)+")'>"+(parseInt(result.page)-1)+"</a>";
-					pager+="<b>"+result.page+"</b>";
-					if(parseInt(result.page)+1<=result.totalPage)pager+="<a onclick='YoukuWs.listAction(\""+action+"\","+(parseInt(result.page)+1)+")'>"+(parseInt(result.page)+1)+"</a>";
-					if(parseInt(result.page)+2<=result.totalPage)pager+="<a onclick='YoukuWs.listAction(\""+action+"\","+(parseInt(result.page)+2)+")'>"+(parseInt(result.page)+2)+"</a>";
-					pager+="</div>";
-					$("#_ContentListen").append(pager);
-					}
-
-					});*/
 			 }, listList:function(flag){
-
-				 //加载歌单
-				 //if(YoukuWs.ListContent){
-				 //	YoukuWs.showList(flag);
-				 //}else{
 				 $.ajax({
 					 url: "/user.list.list",
 				 success: function( result) {
@@ -1971,65 +1928,7 @@ var YoukuWs = function(){
 					 }
 				 }
 				 });
-				 //}
 
-
-				 /*
-					return;
-					$("#_ContentList").html("");
-					var t="";
-					$.ajax({
-					url: "/user.list.list",
-					success: function( result) {
-					if(result && result.items && result.items.length>0){
-					var o = $("#_ContentList");
-					for(var i=0;i<result.items.length;i++){
-//var r='<li ord="'+result.items[i].ListOrder+'" lid="'+result.items[i].ListID+'"><div class="left"><input value="'+result.items[i].ListID+'" style="vertical-align:top" type="checkbox"/><span class="name">'+result.items[i].ListName+'</span> ('+result.items[i].ListCount+'首)</div><div class="right hide">';
-var r='<li ord="'+result.items[i].ListOrder+'" lid="'+result.items[i].ListID+'"><div class="left"><input '+t+' value="'+result.items[i].ListID+'" style="vertical-align:top" type="checkbox"/><span class="name">'+result.items[i].ListName+'</span> ('+result.items[i].ListCount+'首)</div><div class="right hide">';
-if(result.items[i].ListCount>0)r+='<span class="edit">歌曲整理</span> ';
-r+='<span class="load">加载</span> <span class="empty">清空</span> <span class="del">删除</span> <span class="rename">改名</span></div><div class="clear"></div></li>';
-o.append(r);
-}
-$( "#_ContentList >li" ).droppable({
-accept:"#_ContentMusic >li,#_ContentSearch >li",
-activeClass: "ui-state-highlight",
-hoverClass: "ui-state-error",
-tolerance:"pointer",
-drop: function( event, ui ) {
-				 //TODO移动到另一个列表
-				 var lid=$(this).attr("lid");
-				 if(!lid)return;
-				 $.ajax({
-				 url: "/user.list.addContents",
-				 data: {
-				 lids:lid,
-				 vids:$(ui.draggable).attr("vid")
-				 },type:"post",
-				 success: function( List) {
-				 $("#_IDListDialogAdding").hide();
-				 if(List){
-				 YoukuWs.listList();
-				 $("#_IDSaveTips").html("保存成功");
-				 $("#_IDSaveTips").show("clip");
-				 }else{
-				 $("#_IDSaveTips").html("歌单里已经有了，不要贪心哦");
-				 $("#_IDSaveTips").show("clip");
-				 }
-				 setTimeout(function() { $("#_IDSaveTips").hide("clip");}, 2000);
-				 }
-
-				 });
-				 }
-				 });
-				 $("#_CtListAdd").hide("fast");
-				 }else{
-				 $("#_CtListAdd").show("fast");
-				 }
-
-				 }
-
-				 });
-				  */
 }, listContents:function(lid,autoPlay){
 	$.ajax({
 		url: "/user.list.listContents",
