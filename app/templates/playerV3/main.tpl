@@ -477,7 +477,7 @@
 
 	<!-- 我的歌单 -->
 	<div id="_IDList" class="hide" _title="我的歌单"/>
-		<table style="width:100%">
+		<table style="width:100%" id="_IDListTable">
 			<tr style="width:100%">
 				<td style="width:100%" id="_IDListMain">
 					<div class="mylist-box">
@@ -602,6 +602,46 @@
 			</div>
 		</div>
 	</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--
+<table id="layer" class="table-layer" cellpadding="0" cellspacing="0">
+	<tr class="top">
+    	<td class="angle left-top"></td>
+        <td class="edge-top"></td>
+        <td class="angle right-top"></td>
+    </tr>
+    <tr class="middle">
+    	<td class="edge-left"></td>
+        <td class="layer-body" style="position:relative;">
+            <h2 id="ly-title" class="ly-title">我的歌单<span>/华语流行金曲 -> 整理歌曲</span></h2>
+            <a class="close" href="" title="关闭">关闭</a>
+            <div class="content" style="margin:0 auto;">
+			</div>
+        </td>
+        <td class="edge-right"></td>
+    </tr>
+    <tr class="bottom">
+    	<td class="angle left-bottom"></td>
+        <td class="edge-bottom"></td>
+        <td class="angle right-bottom"></td>
+    </tr>
+</table>
+
+
+-->
+
 
 	<div style="display:none"><script src="http://s16.cnzz.com/stat.php?id=2780428&web_id=2780428&show=pic" language="JavaScript"></script></div>
 	<script type="text/javascript">
