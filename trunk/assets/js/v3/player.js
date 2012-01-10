@@ -1095,6 +1095,8 @@ var YoukuWs = function(){
 					objURL[ $1 ] = $3;
 				}
 				);
+		if(window._initLid)objURL.lid = window._initLid;
+		if(window._initVid)objURL.vid = window._initVid;
 		if(objURL.lid){
 			PlayType=1;
 			YoukuWs.set("PlayType",PlayType);
@@ -1103,11 +1105,6 @@ var YoukuWs = function(){
 			PlayType=1;
 			YoukuWs.set("PlayType",PlayType);
 			YoukuWs.getVideoByVid(objURL.vid);
-
-		}else if(window._initVid){
-			PlayType=1;
-			YoukuWs.set("PlayType",PlayType);
-			YoukuWs.getVideoByVid(_initVid);
 		};
 		//{{{显示播放模式的内容
 		PlayType = YoukuWs.get("PlayType",0);
