@@ -33,6 +33,9 @@ class player_main extends STpl{
 		$param['cssversion']=filemtime(WWW_ROOT."/"."assets/style/default/css/fm.css");
 		$style=(!empty($inPath[3]) && $inPath[3]=="gdg")?"gdg":"default";
 		$param['style']=$style;
+		if($style=="gdg"){
+			$param['lid']=343;
+		}
 		return $this->render("playerV3/main3.1.tpl",$param);
 	}
 	function pageEntryV3($inPath,$out="",$vid=""){
@@ -61,6 +64,10 @@ class player_main extends STpl{
 		$param['cssversion']=filemtime(WWW_ROOT."/"."assets/style/default/css/fm.css");
 		$style=(!empty($inPath[3]) && $inPath[3]=="gdg")?"gdg":"default";
 		$param['style']=$style;
+		if($style=="gdg"){
+			$param['lid']=343;
+			$param['lid']=82;
+		}
 		return $this->render("playerV3/main.tpl",$param);
 	}
 	function pageHeaderV31($inPath){
