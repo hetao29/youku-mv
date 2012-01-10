@@ -345,7 +345,7 @@ _margin-right: 5px;
 
 .mvlist-edit-layer .mdrag-layer { 
 	width:130px; overflow:hidden; padding:10px 0; position:relative;
-	margin-top:1px; border:1px solid #CCC; border-radius:6px; background:#DDD; background-color:rgba(221,221,221,0.9); display:none;
+	margin-top:1px; border:1px solid #CCC; border-radius:6px; background:#DDD; background-color:rgba(221,221,221,0.9);*background:#DDD; display:none;
 }
 .mvlist-edit-layer ul { 
 	background: white;
@@ -622,7 +622,6 @@ a { text-decoration:none; color:#333; cursor:pointer; }
 }
 
 #IDTips{
-	display:none;
 	position:absolute;top:32px;width:100%;text-align:center;margin:auto;
 	z-index: 3;
 	font-weight: bold;
