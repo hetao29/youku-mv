@@ -231,7 +231,7 @@ _margin-right: 5px;
 .elm-list li.input .ckbox { float:left; }
 .elm-list li.input .ck-label { display:block; padding:2px 5px; float:left; }
 .elm-list li.ck { padding-top:0; padding-bottom:0; }
-.elm-list li.line { width:260px; height:16px; line-height:16px; padding:3px 0 3px 50px; vertical-align:top; }
+.elm-list li.line {height:16px; line-height:16px; padding:3px 0 3px 50px; vertical-align:top; }
 .elm-list li.line * { float:left; }
 .elm-list li.line a,.elm-list li.line,label,.elm-list li.line span { padding-top:2px; }
 .elm-list li.line a { color:#09D; }
