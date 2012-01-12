@@ -1398,8 +1398,6 @@ var YoukuWs = function(){
 					 try{
 						 PlayerReplay(vid);
 					 }catch(e){
-						 
-						//if(swfobject.ua.safari) par.wmode="opaque";
 						 //swfobject.createSWF({data:"http://static.youku.com/v/swf/player.swf",width:"100%",height:"100%"},{allowFullScreen:true,allowscriptaccess:"always",wmode:"transparent",flashvars:"isAutoPlay=true&VideoIDS="+vid+"&winType=popup&ad=0&skincolor1=3F3F3F&skincolor2=3F3F3F&firsttime="+time},playerId);
 						 swfobject.createSWF({data:"http://static.youku.com/v/swf/player.swf",width:"100%",height:"100%"},{allowFullScreen:true,allowscriptaccess:"always",wmode:"opaque",flashvars:"isAutoPlay=true&VideoIDS="+vid+"&winType=index&ad=0&skincolor1=3F3F3F&skincolor2=3F3F3F&firsttime="+time},playerId);
 					 }
@@ -1411,20 +1409,21 @@ var YoukuWs = function(){
 					 if(!o)return;
 					 var p = o.position();
 					 if(!p)return;
-					 t = p.top+o.outerHeight()-o.parent().height();
-					 var offset = 52; //偏移修正，比较无语
-					 t -= offset;
-					 if(t>0){
-						 t = o.parent().scrollTop() + p.top+o.height()-o.parent().height(); //432
-						 t -= offset;
-						 o.parent().animate({scrollTop:t+"px"},"slow","linear",function(){
-						 });
-					 }else if( t<0-(o.parent().height()-o.outerHeight())){
-						 t = (o.parent().scrollTop()+p.top);
-						 t -= offset;
-						 o.parent().animate({scrollTop:t+"px"},"slow","linear",function(){
-						 });
+					 var to=0;
+					 if(p.top>0 && p.top<o.parent().height()){
+						//正中间，无视
+					 }else{
+						 if(p.top<=0){
+							to=p.top +o.parent().scrollTop() ;
+							 o.parent().animate({scrollTop:to+"px"},"slow","linear",function(){
+							 });
+						 }else if(p.top>o.parent().height()){
+							to=o.parent().scrollTop()+(p.top - o.parent().height())+o.height()+4;
+							 o.parent().animate({scrollTop:to+"px"},"slow","linear",function(){
+							 });
+						}	
 					 }
+					 //YoukuWs.tips(p.top+":"+o.parent().scrollTop()+":"+o.height()+":"+o.parent().height()+"to:"+to,true);
 					 //}}}
 					 $("#_ContentMusic >li").removeClass("current");
 					 o.addClass('current');
