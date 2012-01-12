@@ -6,38 +6,6 @@ class player_main extends STpl{
 	function __destruct(){
 		//echo $this->render("footer.tpl");
 	}
-	
-	function pageEntryV31($inPath,$out="",$vid=""){
-		$param=array();
-		$allLanguage=array(
-			"zh-cn"=>"中文 (简体)",
-			"zh-tw"=>"中文 (繁體)",
-			"en"=>"English",
-			"ko"=>"한국어",
-			"ja"=>"日本語",
-		);
-		$language="中文 (简体)";
-		if(!empty($_COOKIE['language'])){
-			$l = $_COOKIE['language'];
-			if(!empty($allLanguage[$l])){
-				$language = $allLanguage[$l];
-				SLanguage::setLocale($l);
-			}
-
-		}
-		$param['language']=$language;
-		$param['allLanguage']=$allLanguage;
-		$param['out']=$out;
-		$param['vid']=$vid;
-		$param['jsversion']=filemtime(WWW_ROOT."/"."assets/js/v3/v3.js");
-		$param['cssversion']=filemtime(WWW_ROOT."/"."assets/style/default/css/fm.css");
-		$style=(!empty($inPath[3]) && $inPath[3]=="gdg")?"gdg":"default";
-		$param['style']=$style;
-		if($style=="gdg"){
-			$param['lid']=343;
-		}
-		return $this->render("playerV3/main3.1.tpl",$param);
-	}
 	function pageEntryV3($inPath,$out="",$vid=""){
 		$param=array();
 		$allLanguage=array(
@@ -62,54 +30,66 @@ class player_main extends STpl{
 		$param['vid']=$vid;
 		$param['jsversion']=filemtime(WWW_ROOT."/"."assets/js/v3/v3.js");
 		$param['cssversion']=filemtime(WWW_ROOT."/"."assets/style/default/css/fm.css");
-		$style=(!empty($inPath[3]) && $inPath[3]=="gdg")?"gdg":"default";
-		$param['style']=$style;
-		if($style=="gdg"){
-			$param['lid']=343;
-		}
-		return $this->render("playerV3/main.tpl",$param);
-	}
-	function pageHeaderV31($inPath){
-		
-		$allLanguage=array(
-			"zh-cn"=>"中文 (简体)",
-			"zh-tw"=>"中文 (繁體)",
-			"en"=>"English",
-			"ko"=>"한국어",
-			"ja"=>"日本語",
-		);
-		$param = array();
-		$language="中文 (简体)";
-		if(!empty($_COOKIE['language'])){
-			$l = $_COOKIE['language'];
-			if(!empty($allLanguage[$l])){
-				$language = $allLanguage[$l];
-			}
+		$style="default";
 
-		}
-		$param['language']=$language;
-		$out = !empty($inPath[3])?$inPath[3]:"";
-		$param['out']=$out;
-		if(($User=user_api::islogin())!==false){
-			$db = new user_db;
-			$action = $db->getAction($User['UserID']);
-			$param['user'] = $User;
-			$param['_CtListen'] = $db->getListenCount($User['UserID']);
-			$param['_CtList'] = $db->getListCount($User['UserID']);
-			$act = array();
-			if(!empty($action->items)){
-				foreach($action->items as $item){
-					$k=$item['ActionType'];
-					$v=$item['ct'];
-					$act[$k]=$v;
+		if(!empty($inPath[3]) && $inPath[3]=="gdg"){
+			//郭德纲专题
+			$style="gdg";
+			$param['lid']=343;
+			$url = parse_url(@$_SERVER['HTTP_REFERER']);
+			parse_str(@$url['query'],$params);
+			$vid = @$params['vid'];
+			$sina = new api_sina;
+			//从POST过来的signed_request中提取oauth2信息
+			if(!empty($_REQUEST["signed_request"])){
+				require_once(WWW_ROOT."/lib/weibo/config.php");
+				require_once(WWW_ROOT."/lib/weibo/saetv2.ex.class.php");
+				$o = new SaeTOAuthV2( WB_AKEY , WB_SKEY  );
+				$data=$o->parseSignedRequest($_REQUEST["signed_request"]);
+				if($data=='-2'){
+					die('签名错误!');
+				}else{
+					$_SESSION['oauth2']=$data;
+				}
+				//判断用户是否授权
+				if (empty($_SESSION['oauth2']["user_id"])) {
+					$params['appkey']=WB_AKEY;
+					$params['vid'] = $vid;
+					return $this->render("app/sina.tpl",$params);
+				} else {//若已获取到access token，则加载应用信息
+					$c = new SaeTClientV2( WB_AKEY,WB_SKEY,$_SESSION['oauth2']['oauth_token'] ,'' );
+					$user_id = $_SESSION['oauth2']['user_id'];
+					$UserEmail = $user_id."@weibo.com";
+					$db = new user_db;
+					$user = $db->getUserByEmail($UserEmail,$paterid=user_parter::SINA);
+					if(empty($user)){
+						//增加用户
+						//新浪这个接口很慢
+						$info = $c->show_user_by_id($user_id);
+						$User = array();
+						$User['UserAlias']=$info['name'];
+						$User['UserEmail']=$UserEmail;
+						$User['UserPassword']=$_SESSION['oauth2']['oauth_token'];
+						$User['ParterID']=user_parter::SINA;
+						$UserID = $db->addUser($User);
+						$user=$db->getUserByID($UserID);
+					}else{
+						//更新用户
+						//if($user['UserPassword']!==$_SESSION['oauth2']['oauth_token']){
+						$info = $c->show_user_by_id($user_id);
+						$user['UserAlias']=$info['name'];
+						$user['UserPassword']=$_SESSION['oauth2']['oauth_token'];
+						$db->updateUser($user);
+						//}
+					}
+					user_api::logout();
+					user_api::login($user,!empty($_REQUEST['forever']));
 				}
 			}
-			$param['act'] = $act;
 		}
-		$param['allLanguage'] = $allLanguage;
-		return $this->render("playerV3/header3.1.tpl",$param);
+		$param['style']=$style;
+		return $this->render("playerV3/main.tpl",$param);
 	}
-
 	function pageHeaderV3($inPath){
 		$allLanguage=array(
 			"zh-cn"=>"中文 (简体)",
