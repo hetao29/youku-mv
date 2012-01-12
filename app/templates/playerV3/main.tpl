@@ -37,7 +37,7 @@ $("#_IDStyle").attr("disabled",null);
 .logo { _width:920px;}
 .fm-body { _width:920px; }
 .fm-body .cont-left {
-	_width:expression((documentElement.clientWidth >910) ? "910px" : "auto" );
+	_width:expression((documentElement.clientWidth >920) ? "920px" : "auto" );
 
 }
 </style>
