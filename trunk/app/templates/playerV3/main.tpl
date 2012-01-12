@@ -24,8 +24,13 @@
 		{/if}
 
 		<link rel="Shortcut Icon" href="/assets/images/ico/favicon_32x32.ico" />
-		<link type="text/css" rel="stylesheet" href="/assets/style/{$style}/css/fm.css" />
+		<link type="text/css" id="_IDStyle" style="{$style}" rel="stylesheet" href="/assets/style/{$style}/css/fm.css" />
 <!--[if IE 6]>
+<script>
+$("#_IDStyle").attr("disabled","disabled");
+$("#_IDStyle").attr("href","/assets/style/{$style}/css/fm-ie6.css");
+$("#_IDStyle").attr("disabled",null);
+</script>
 <style>
 .copyright { _width:920px;}
 .t-header .th-cont { _width:920px;}
