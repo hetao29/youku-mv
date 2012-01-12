@@ -1733,6 +1733,7 @@ var YoukuWs = function(){
 				 }
 				 $("#_ContentList ul").html(li_2);//快速添加音乐入口
 				 $("#_IDListMain ul").html(li);
+				 $("#_IDList .table-layer").center();
 				 if(window.listFlag){
 					 $("#_IDListMain ul .checkbox").show();
 					 $("#_BtListSave").show();
