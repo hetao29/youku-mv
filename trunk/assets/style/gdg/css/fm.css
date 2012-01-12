@@ -104,7 +104,7 @@ _margin-right: 5px;
 .fm-body .cont-left .cont-border .content .player-controll a.btn-share { position:absolute; left:1px; top:1px; }
 .fm-body .cont-left .cont-border .content .player-controll a.btn-share.hover { background:url(/assets/style/gdg/img/rpx.png) repeat-x 0 -100px; border:1px solid #BBB; border-bottom:none; color:#666; left:0; top:0; }
 /*.fm-body .cont-left .cont-border .content .player-controll .center a { display:inline-block; margin-left:10px; }*/
-.fm-body .cont-left .cont-border .content .player-controll .center li { width:30px;float:left; }
+.fm-body .cont-left .cont-border .content .player-controll .center li {float:left; padding-left: 4px;padding-right: 4px;}
 .fm-body .cont-left .cont-border .content .player-controll .center ul { width:150px;margin: 0 auto;height: 20px; }
 .fm-body .cont-left .cont-border .content .player-controll .right { width:120px; overflow:hidden; position:absolute; right:5px; top:8px; }
 .fm-body .cont-left .cont-border .content .player-controll .right a { float:right; margin-right:5px; }
@@ -382,7 +382,7 @@ i.btn-width.already { background-position:-240px -90px; }
 
 .btn-share { width:45px; height:14px; line-height:15px; padding:7px 0 6px; display:block; overflow:hidden; text-align:center; position:absolute; color:#666; text-indent:12px; }
 .btn-share i { position:absolute; left:5px; top:8px; }
-.btn-love { width:22px; height:18px; display:block; overflow:hidden; background:url(/assets/style/gdg/img/ui.png) no-repeat -105px -115px; text-indent:-999px; }
+.btn-love { margin-left: 10px;width:22px; height:18px; display:block; overflow:hidden; background:url(/assets/style/gdg/img/ui.png) no-repeat -105px -115px; text-indent:-999px; }
 .btn-prev { width:12px; height:18px; display:block; overflow:hidden; background:url(/assets/style/gdg/img/ui.png) no-repeat -5px -114px; text-indent:-999px; }
 .btn-next { width:12px; height:18px; display:block; overflow:hidden; background:url(/assets/style/gdg/img/ui.png) no-repeat -73px -114px; text-indent:-999px; }
 .btn-pause { width:18px; height:18px; display:block; overflow:hidden; background:url(/assets/style/gdg/img/ui.png) no-repeat -36px -115px; text-indent:-999px; }
@@ -706,4 +706,12 @@ background: #2B241C;
 }
 .fm-body .cont-right .tab-bg .tab a.current{
 color: white;font-weight: bold;
+}
+.fm-body .cont-right .cont-border {background:#2B241C;}
+.fm-body .cont-right .cont-border .search-box {border-bottom:none;}
+.fm-body .cont-right .cont-border ul.music-list {border:1px solid #271E19; background:#48372D;}
+
+.fm-body .cont-right .cont-border ul.music-list li {border-bottom:1px solid #271E19;color:#B98C65}
+.fm-body .cont-right .cont-border ul.music-list li A{color:#B98C65;}
+.bt_new{color:#B98C65;
 }
