@@ -203,7 +203,7 @@ function search(page){
 	page = page?page:1;
 	$("#keywords").autocomplete("close");
 	YoukuWs.set("keywords",$("#keywords").val());
-	var key = $("#keywords").val();
+	var key = encodeURIComponent($("#keywords").val());
 	if(key=="")return;
 	YoukuWs.loadMusic("/player.main.searchV3.:page:?k="+$("#keywords").val(),page);
 }
