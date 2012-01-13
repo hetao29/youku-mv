@@ -757,6 +757,7 @@ class player_main extends STpl{
 	function pageSearchV3($inPath){
 		$k = $_REQUEST['k'];
 		if(empty($k))return;
+		$k = mb_convert_encoding($k,"utf8","utf8,gbk");
 		$video_api = new video_api;
 		$page = empty($inPath[3])?1:$inPath[3];
 
