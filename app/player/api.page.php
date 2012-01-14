@@ -13,7 +13,7 @@ class player_api{
 			//$SingerNameS[]=$singer['SingerName'];
 			$SingerNameS[]="@".$singer['SingerName'];
 		}
-		return "我正在#优酷电台#收听《 ".(implode(" , ",$SingerNameS))." - {$item['VideoName']} 》\n您们也来这里听听吧: http://apps.weibo.com/youkufm?vid={$item['VideoID']}  \n\n( 分享来自 @优酷电台 ，视频源：http://v.youku.com/v_show/id_".(singer_music::encode($item['VideoID'])).".html )";
+		return "我正在#优酷电台#收听《 ".(implode(" , ",$SingerNameS))." - {$item['VideoName']} 》\n，除了电台模式，还能添加自己喜欢的音乐，最fashion的是还有滚动歌词，你也来试试吧 : http://apps.weibo.com/youkufm?vid={$item['VideoID']}  \n\n( 分享来自 @优酷电台 ，视频源：http://v.youku.com/v_show/id_".(singer_music::encode($item['VideoID'])).".html )";
 	}
 	function pageNetease($inPath){
 		$vid = !empty($inPath[3])?$inPath[3]:0;
@@ -24,7 +24,7 @@ class player_api{
 			//$SingerNameS[]=$singer['SingerName'];
 			$SingerNameS[]="@".$singer['SingerName'];
 		}
-		return "我正在#优酷电台#收听《 ".(implode(" , ",$SingerNameS))." - {$item['VideoName']} 》\n您们也来这里听听吧: http://youku.fm/#vid={$item['VideoID']}  \n\n( 分享来自 @优酷电台 ，视频源：http://v.youku.com/v_show/id_".(singer_music::encode($item['VideoID'])).".html )";
+		return "我正在#优酷电台#收听《 ".(implode(" , ",$SingerNameS))." - {$item['VideoName']} 》\n，除了电台模式，还能添加自己喜欢的音乐，最fashion的是还有滚动歌词，你也来试试吧 : http://youku.fm/#vid={$item['VideoID']}  \n\n( 分享来自 @优酷电台 ，视频源：http://v.youku.com/v_show/id_".(singer_music::encode($item['VideoID'])).".html )";
 	}
 	function pageQQ($inPath){
 		$vid = !empty($inPath[3])?$inPath[3]:0;
@@ -34,7 +34,7 @@ class player_api{
 		foreach($item['Singers'] as $singer){
 			$SingerNameS[]="@".$singer['SingerName'];
 		}
-		return "我正在#优酷电台#收听《 ".(implode(" , ",$SingerNameS))." - {$item['VideoName']} 》\n您们也来这里听听吧: http://youku.fm/#vid={$item['VideoID']}";
+		return "我正在#优酷电台#收听《 ".(implode(" , ",$SingerNameS))." - {$item['VideoName']} 》\n，除了电台模式，还能添加自己喜欢的音乐，最fashion的是还有滚动歌词，你也来试试吧 : http://youku.fm/#vid={$item['VideoID']}";
 	}
 	function pageQqPost($inPath){
 		$user=user_api::islogin();
