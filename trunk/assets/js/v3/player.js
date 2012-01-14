@@ -334,7 +334,7 @@ var YoukuWs = function(){
 		});
 		$("#share-layer a").click(function(){
 			if($(this).attr("_href")){
-				var href = ($(this).attr("_href")).replace(/:vid:/g,CurrentVideoID).replace(/:title:/g,"我正在%23优酷电台%23收听《 "+YoukuWs.title+" 》你们也来听听吧: ");
+				var href = ($(this).attr("_href")).replace(/:vid:/g,CurrentVideoID).replace(/:title:/g,"我正在%23优酷电台%23收听《 "+YoukuWs.title+" 》，除了电台模式，还能添加自己喜欢的音乐，最fashion的是还有滚动歌词，你也来试试吧 : ");
 				$(this).attr("href",href);
 			}else{
 
