@@ -612,6 +612,14 @@ var YoukuWs = function(){
 		$("#_LiUp").live('click',function(){
 			YoukuWs.listAction("up",1);
 		});
+				//歌手信息点击
+		$("#title .singer").live("click",function(){
+			 YoukuWs.loadMusic("/player.main.getSingerV3.:page:?sid="+$(this).attr("id"),1);
+		});
+		$("#title .special").live("click",function(){
+			 YoukuWs.loadMusic("/player.main.getAlbumV3.:page:?sid="+$(this).attr("id"),1);
+		});
+
 		$("#_LiSkip").live('click',function(){
 			YoukuWs.listAction("skip",1);
 		});
@@ -903,6 +911,7 @@ var YoukuWs = function(){
 		$("#_IDSignup").live("click",function(){
 			$("#_ContentSignup").dg({ title:"注册",width:360,height:240 });
 		});
+		
 		$("#_ContentMusic").sortable({
 			stop:function(event,ui){
 					 setTimeout("YoukuWsPlaylist.save()",200);
@@ -923,6 +932,19 @@ var YoukuWs = function(){
 				  }
 
 		});
+		/*先不要拖动添加了
+		$("#_ContentMusic").droppable({
+			activeClass: "ui-state-highlight",
+			hoverClass: "ui-state-error",
+			tolerance:"pointer",
+			accept:"#_CtMusicList li",
+			drop: function( event, ui ) {
+				//这里是从搜索结果拖到当前播放列表
+				YoukuWsPlaylist.add(ui.draggable.attr("vid"),ui.draggable.attr("mvname"));
+				YoukuWs.tips("添加 "+ui.draggable.attr("mvname")+" 成功");
+			}
+		});
+		*/
 		$( "#_ContentList >li .load" ).live("click",function(){
 			var lid = $(this).parents("li").attr("lid");
 			YoukuWs.listContents(lid);
@@ -1294,39 +1316,35 @@ var YoukuWs = function(){
 				 CurrentVideoID=vid;
 				 YoukuWs.set("CurrentVideoID",CurrentVideoID);
 				 //获取曲库信息
-				 $("#musicInfo").html("&nbsp;");
 				 $.ajax({
 					 url: "/player.main.getMusic",
 					 data: { vid:vid }, global:false,
 					 success: function( result) {
 						 if(result){
+							 var t="正在播放".tr()+":";
 							 var singer="";
 							 var tmp=[];
 							 var t_tmp=[];
 							 if(result.Singers){
-								 singer="歌手".tr()+":";
-
 								 for(var i in result.Singers){
 									 tmp.push("<a class='singer' id='"+result.Singers[i].SingerID+"'>"+result.Singers[i].SingerName+"</a>");
 									 t_tmp.push(result.Singers[i].SingerName);
 								 }
-								 singer+=tmp.join(" / ");
+								 singer=tmp.join(" / ");
 							 }
-							 if(result.AlbumID && result.AlbumName)
-					 $("#musicInfo").html(singer+" "+"专辑".tr()+":<a class='special' id='"+result.AlbumID+"'>"+result.AlbumName+"</a>");
-							 else
-					 $("#musicInfo").html(singer);
-
-							 $("#musicInfo").slideDown("fast");
 							 //设置title
 							 var title=""; if (t_tmp.length>0) title=t_tmp.join(" / ")+" - ";
+
+							 t= t + singer +" - " +result.VideoName ;
+							 if(result.AlbumID && result.AlbumName){
+								 t+=" 《专辑:"+"<a class='special' id='"+result.AlbumID+"'>"+result.AlbumName+"</a>"+"》";
+							 }
 							 YoukuWs.setTitle(title+result.VideoName);
-						 }else{
-							 $("#musicInfo").slideUp("fast");
+							 //更新音乐信息
+							 $("#title").html(t);
 						 }
 					 },
 					 error:function(){
-							   $("#musicInfo").slideUp("fast");
 						   }
 				 });
 				 //下载歌词
@@ -1842,10 +1860,10 @@ var YoukuWs = function(){
 							 var mvname=YoukuWs.getVideoName(result.items[i]);
 							 if(result.items[i].MvOrder) od = 'order="'+(result.items[i].MvOrder)+'"';
 							 li+='<li '+od+' _type="listen" '+ti+' mvname="'+mvname+'" vid="'+result.items[i].VideoID+'">'
-					 li+='<span class="checkbox"></span><p>'+mvname+'</p>';
-				 li+='<span>';
-				 if(delUrl)li+='<a title="" class="btn-c MusicRemove"><i class="remove"></i></a>';
-				 li+='<a class="btn-c MusicPlay"><i class="play"></i></a></span></li>';
+							 li+='<span class="checkbox"></span><p>'+mvname+'</p>';
+							 li+='<span>';
+							 if(delUrl)li+='<a title="" class="btn-c MusicRemove"><i class="remove"></i></a>';
+							 li+='<a class="btn-c MusicPlay"><i class="play"></i></a></span></li>';
 						 }
 						 //{{{ pager
 						 var pager='';

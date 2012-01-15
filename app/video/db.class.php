@@ -36,8 +36,10 @@ class video_db{
 	function getLyrics($VideoID){
 		return $this->_db->selectOne("s_lyrics",array("VideoID"=>$VideoID));
 	}
-	function listVideoByAlbumID($AlbumID){
+	function listVideoByAlbumID($AlbumID,$page=1,$size=-1){
 		//从搜索出数据
+		$this->_db->setPage($page);
+		$this->_db->setLimit($size);
 		return $this->_db->select(array("s_video"),array("AlbumID"=>$AlbumID));
 	}
 	

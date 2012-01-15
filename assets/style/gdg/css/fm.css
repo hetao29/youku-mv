@@ -666,3 +666,7 @@ color: white;font-weight: bold;
 .fm-body .cont-right .cont-border ul.music-list li A{color:#B98C65;}
 .bt_new{color:#B98C65;
 }
+#title a{text-decoration: underline;}
+.mylist-box .mylist-cont{
+min-height: 40px;
+}
