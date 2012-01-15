@@ -71,6 +71,31 @@ class sphinx_api{
 			$res = $this->sphinx->Query ( $q="", $index="video" );
 			return $this->resToVideos($res);
 		}
+		function listBySingerIDV3($SingerID,$page=1,$size=10){
+			$start = ($page-1)*$size;
+			$length = $size;
+			$this->sphinx->ResetFilters();
+			$this->sphinx->ResetGroupBy();
+			$this->sphinx->SetMatchMode ( $mode=SPH_MATCH_EXTENDED );
+			//$this->sphinx->SetFilterRange ( $args[++$i], $args[++$i], $args[++$i] );
+			//$this->sphinx->SetLimits(0,1000,1000);
+			$this->sphinx->SetLimits($start, $length, 10000);
+			$this->sphinx->SetSortMode (SPH_SORT_EXTENDED ,"videostatus desc, videopubdate desc");
+			$this->sphinx->SetFilter ("singerids",array($SingerID ));
+			//$this->sphinx->SetFilterRange("videoid",96,96);
+			$res = $this->sphinx->Query ( $q="", $index="video" );
+			//return $this->resToVideos($res);
+			//$res = $this->sphinx->Query ( $q="@(videoname,singernames) $key", $index="video" );
+			
+			$result=new stdclass;
+			$videos = $this->resToVideos($res);
+			$result->totalSize = $res['total'];
+			$result->totalPage = ceil($res['total']/$size);
+			$result->page = $page;
+			$result->pageSize=$size;
+			$result->items = $videos;
+			return $result;
+		}
 		function search($key,$limit=50,$mustHaveSingers=true){
 			 
 			$key = $this->sphinx->EscapeString ($key);

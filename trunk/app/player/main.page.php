@@ -635,6 +635,35 @@ class player_main extends STpl{
 		}
 		return $r;
 	}
+	/**获取歌手信息和歌手歌曲列表*/
+	function pageGetSingerV3($inPath){
+		$sid = $_REQUEST['sid'];
+		$page = empty($inPath[3])?1:$inPath[3];
+		$video_api = new video_api;
+		$sphinx_api = new sphinx_api;
+		$r = $sphinx_api->listBySingerIDV3($sid,$page,10);
+		if(!empty($r->items)){
+			foreach($r->items as &$item){
+				$item = $video_api->getVideoInfoByLuceneVideo($item);
+			}
+		}
+		return $r;
+	}
+	/**获取专辑信息*/
+	function pageGetAlbumV3($inPath){
+		//从搜索出数据
+		$sid = $_REQUEST['sid'];
+		$page = empty($inPath[3])?1:$inPath[3];
+		$video_db= new video_db;
+		$video_api = new video_api;
+		$r = $video_db->listVideoByAlbumID($sid,$page,10);
+		if(!empty($r->items)){
+			foreach($r->items as &$item){
+				$item = $video_api->getVideoInfo($item['VideoID']);
+			}
+		}
+		return $r;
+	}
 	/**获取专辑信息*/
 	function pageGetAlbum($inPath){
 		//从搜索出数据
