@@ -435,7 +435,7 @@ i.remove { width:12px; height:12px; display:block; overflow:Hidden; background:u
 a.close { width:11px; height:10px; display:block; overflow:hidden; background:url(/assets/style/gdg/img/ui-ie6.png) no-repeat -107px -171px; text-indent:-999px; }
 a.close:hover {background-position:-187px -171px; }
 i.save { width:12px; height:12px; display:block; overflow:hidden; background:url(/assets/style/gdg/img/ui-ie6.png) no-repeat -132px -170px; }
-i.play { width:6px; height:9px; display:block; overflow:hidden; background:url(/assets/style/gdg/img/ui-ie6.png) no-repeat -80px -70px; }
+i.play { width:6px; height:9px; display:block; overflow:hidden; background:url(/assets/style/i.play/img/ui-ie6.png) no-repeat -80px -70px; }
 
 i.icon_ques { width:16px; height:16px; display:block; overflow:hidden; background:url(/assets/style/gdg/img/ui-ie6.png) no-repeat -310px -210px; }
 
