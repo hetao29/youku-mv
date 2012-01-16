@@ -107,7 +107,6 @@
 			dg+='<tr class="middle">';
 			dg+='<td class="edge-left"></td>';
 			dg+='<td class="layer-body" style="position:relative;">';
-			//dg+='<h2 id="ly-title" class="ly-title">我的歌单<span>/华语流行金曲 -> 整理歌曲</span></h2>';
 			dg+='<h2 id="ly-title" class="ly-title">'+title;
 			if(title2)dg+='<span>/'+title2+'</span>';
 			dg+='</h2>';
@@ -284,13 +283,13 @@ var YoukuWs = function(){
 		});
 		//}}}
 
-		YoukuWs.loadRadio(false);
 
 
 
 		//换台按钮
 		$("#_RadioChannel li >a").live("click",function(){
 			$("#_RadioChannel").dgclose();
+			CurrentCid = 0;
 			YoukuWs.set("cid",$(this).attr("id"));
 			window.radioPlayList=new Array();
 			PlayType=0;
@@ -766,6 +765,12 @@ var YoukuWs = function(){
 			YoukuWs.loadMusic(url,page,delUrl,saveSortUrl);
 
 		});
+		$("#_IDListMain .shareList").live("click",function(){
+			var li =$(this).parentsUntil("li").parent();
+
+			li.find(".shareInput").toggle();
+			li.find("input").focus().select();
+		});
 		//删除
 		$("#_CtMusicList .MusicRemove").live('click',function(){
 			var li =$(this).parentsUntil("li").parent();
@@ -1139,6 +1144,11 @@ var YoukuWs = function(){
 				$("#IDNav >li").eq(1).trigger("click");
 			}
 		});
+		var list = YoukuWsPlaylist.list();
+		$.each(list,function(i,n){
+			var o = '<li vid="'+n.v+'"><span class="checkbox"></span><a>'+n.t+'</a></li>';
+			$("#_ContentMusic").append(o);
+		});
 		var objURL={};
 		_location.search.replace(
 				new RegExp( "([^?=&]+)(=([^&]*))?", "g" ),
@@ -1154,22 +1164,38 @@ var YoukuWs = function(){
 				);
 		if(window._initLid)objURL.lid = window._initLid;
 		if(window._initVid)objURL.vid = window._initVid;
+		
+		PlayType = YoukuWs.get("PlayType",0);
+		if(PlayType>2)PlayType=0;
+
 		if(objURL.lid){
-			PlayType=1;
+			//指定了频道，用 固定电台模式播放，并且不要保存在cookie里
+			PlayType=0;
 			YoukuWs.set("PlayType",PlayType);
-			YoukuWs.listContents(objURL.lid);
+			//YoukuWs.listContents(objURL.lid);
+			CurrentCid = objURL.lid;
+			YoukuWs.playRadio();
 		}else if(objURL.vid){
 			PlayType=1;
 			YoukuWs.set("PlayType",PlayType);
 			YoukuWs.getVideoByVid(objURL.vid);
-		};
+		}else{
+			
+			CurrentVideoID= YoukuWs.get("CurrentVideoID");
+			if(PlayType==0){
+				YoukuWs.playRadio();
+			}else{
+				if(YoukuWs.get("CurrentVideoID")){
+					var time = YoukuWs.get("time",0);
+					YoukuWs.play(YoukuWs.get("CurrentVideoID"),time);
+				};
+			}
+		}
+		if(PlayType==1){
+			YoukuWs.loadRadio(false);
+		}
 		//{{{显示播放模式的内容
-		PlayType = YoukuWs.get("PlayType",0);
-		if(PlayType>2)PlayType=0;
-		$.each(YoukuWsPlaylist.list(),function(i,n){
-			var o = '<li vid="'+n.v+'"><span class="checkbox"></span><a>'+n.t+'</a></li>';
-			$("#_ContentMusic").append(o);
-		});
+
 
 		$("#IDNav >a").each(function(i,item){
 			var _for = $(item).attr("for");
@@ -1186,15 +1212,6 @@ var YoukuWs = function(){
 
 
 		//}}}
-		CurrentVideoID= YoukuWs.get("CurrentVideoID");
-		if(PlayType==0){
-			YoukuWs.playRadio();
-		}else{
-			if(YoukuWs.get("CurrentVideoID")){
-				var time = YoukuWs.get("time",0);
-				YoukuWs.play(YoukuWs.get("CurrentVideoID"),time);
-			};
-		}
 		YoukuWs.autoLogin();
 
 	});
@@ -1537,33 +1554,31 @@ var YoukuWs = function(){
 				 }else{
 					 YoukuWs._realPlayRadio();
 				 }
-			 },loadRadio:function(play){
+			 },loadRadio:function(play,cid){
 				 $.ajax({
 					 url: "/player.main.radio",
-				 data: {
-					 cid:YoukuWs.get("cid"),
-				 vid:CurrentVideoID,
-				 length:window.radioPlayList.length
-				 },
-				 success: function( result) {
-							  if(result && result.items){
-								  YoukuWs.set("cid",result.cid);
-								  window.radioPlayList=window.radioPlayList.concat(result.items);
-								  if(play)YoukuWs._realPlayRadio();
+					 data: {
+						 cid:CurrentCid?CurrentCid:YoukuWs.get("cid"),
+						 vid:CurrentVideoID,
+						 length:window.radioPlayList.length
+					 },
+					 success: function( result) {
+						  if(result && result.items){
+							  if(CurrentCid==0) YoukuWs.set("cid",result.cid);
+							  window.radioPlayList=window.radioPlayList.concat(result.items);
+							  if(play)YoukuWs._realPlayRadio();
 
 
-								  if(window.radioPlayList[0]){
-									  $("#_IDVideoTitle").html(YoukuWs.getVideoName(window.radioPlayList[0]));
-									  $("#_IDVideoPic").attr("src",window.radioPlayList[0].VideoThumb);
-								  }
-								  if(window.radioPlayList[1]){
-									  $("#_IDNextVideoTitle").html(YoukuWs.getVideoName(window.radioPlayList[1]));
-									  $("#_IDNextVideoPic").attr("src",window.radioPlayList[1].VideoThumb);
-								  }
-
-
+							  if(window.radioPlayList[0]){
+								  $("#_IDVideoTitle").html(YoukuWs.getVideoName(window.radioPlayList[0]));
+								  $("#_IDVideoPic").attr("src",window.radioPlayList[0].VideoThumb);
+							  }
+							  if(window.radioPlayList[1]){
+								  $("#_IDNextVideoTitle").html(YoukuWs.getVideoName(window.radioPlayList[1]));
+								  $("#_IDNextVideoPic").attr("src",window.radioPlayList[1].VideoThumb);
 							  }
 						  }
+					  }
 				 });
 			 },playRandom:function(pre){
 				 if(randMusicList.length!=$('#_ContentMusic li').size()){
@@ -1733,13 +1748,16 @@ var YoukuWs = function(){
 				 var li="";
 				 var li_2="";//快速添加音乐入口
 				 var li_index=0;
+				 
 				 for(var i in YoukuWs.ListContent){
 					 list = YoukuWs.ListContent[i];
 					 li+='<li lid="'+list.ListID+'" ord="'+list.ListOrder+'"><span class="checkbox hide"></span>';
 					 li+='<h2><a  title="">'+list.ListName+'</a><span>('+list.ListCount+')</span><a title="" class="btn-play-s"></a></h2>';
 					 li+='<p>最后更新：<span>'+list.ListUpdateTime+'</span></p>';
+					 var url = "http://"+_location.host+_location.pathname+"#lid="+list.ListID;
+					 li+='<p class="comment hide shareInput" style="text-align:right">请复制播放地址 <input type="text" style="width:300px" value="'+url+'" /></p>';
 					 li+='<p class="comment">'+list.ListComment+'</p>';
-					 li+='<div class="edit"><a class="del" title="删除">删除</a><a class="editEdit" title="编辑">编辑</a><a class="editContent" title="整理歌曲">整理歌曲</a></div>';
+					 li+='<div class="edit"><a class="del" title="删除">删除</a><a class="editEdit" title="编辑">编辑</a><a class="editContent" title="整理歌曲">整理歌曲</a><a class="shareList" title="分享">分享</a></div>';
 					 li+='</li>';
 					 if(li_index++<=3){
 						 li_2 +='<li lid="'+list.ListID+'" ord="'+list.ListOrder+'">';
@@ -2096,6 +2114,8 @@ var randMusicListIndex=0;
 var PlayType=0;
 //当前播放视频ID，主要是播放模式用
 var CurrentVideoID="";
+//默认播放的频道ID，如果为0，就从本地里取
+var CurrentCid = 0;
 var radioPlayList=[];
 function onPlayerStart(obj){
 	if(YoukuWs.isLogin()){
