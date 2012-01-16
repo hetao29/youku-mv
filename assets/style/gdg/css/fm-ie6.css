@@ -118,7 +118,7 @@ _margin-right: 5px;
 .fm-body .cont-right { width:258px;  padding:0 0 10px; position:relative; float:right; }
 .fm-body .cont-right .tab-bg { width:250px; height:32px; overflow:hidden; background:url(/assets/style/gdg/img/tab-bgie6.png) no-repeat; padding:4px 4px 0 4px; }
 .fm-body .cont-right .tab-bg .tab { width:255px; height:32px; overflow:hidden; margin-left:-2px; }
-.fm-body .cont-right .tab-bg .tab a { width:83px; height:14px; display:inline-block; line-height:14px; padding:11px 0; float:left; text-align:center; margin-left:2px; }
+.fm-body .cont-right .tab-bg .tab a { width:83px; height:14px; display:inline-block; line-height:14px; padding:11px 0; float:left; text-align:center; margin-left:2px;color: #9D612F; }
 .fm-body .cont-right .tab-bg .tab a.current { background:url(/assets/style/gdg/img/ui-ie6.png) no-repeat 0 -275px; }
 
 .fm-body .cont-right .bottom { width:100%; height:10px; overflow:hidden; position:absolute; left:0; bottom:0; }
@@ -645,7 +645,7 @@ a { text-decoration:none; cursor:pointer; }
 .t-header{display:none;}
 .logo .btnbox { float:right; display:none;}
 #IDNav .lyrics{display:none; }
-#IDNav .playMode{display:none; }
+#IDNav .playMode{}
 .logo .photo_img { width:182px; height:146px; display:block; background:url(/assets/style/gdg/img/ui-ie6.png) no-repeat 0 -475px; position:absolute; left:20px; top:-10px; }
 body {background: #DECEAC; }
 i.fm-logo { margin-left:180px; _margin-left:90px;width: 406px;height: 77px;}
