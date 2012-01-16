@@ -85,6 +85,7 @@ class player_main extends STpl{
 					user_api::logout();
 					user_api::login($user,!empty($_REQUEST['forever']));
 				}
+				$param['out']="sina";
 			}
 		}
 		$param['style']=$style;
