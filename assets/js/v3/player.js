@@ -106,11 +106,13 @@
 			dg+='</tr>';
 			dg+='<tr class="middle">';
 			dg+='<td class="edge-left"></td>';
-			dg+='<td class="layer-body" style="position:relative;">';
+			dg+='<td class="layer-body">';
+			dg+='<div style="background: none repeat scroll 0 0 #DDDDDD; margin:0 auto;   position: relative;">';
 			dg+='<h2 id="ly-title" class="ly-title">'+title;
 			if(title2)dg+='<span>/'+title2+'</span>';
 			dg+='</h2>';
 			dg+='<a class="close" title="关闭">关闭</a>';
+			dg+="</div>";
 			dg+='<div class="content" style="margin:0 auto; '+w+'">';
 
 			dg+=content;

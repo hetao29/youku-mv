@@ -636,9 +636,9 @@ a { text-decoration:none; cursor:pointer; }
 .table-layer .edge-top { height:10px; background:url(/assets/style/gdg/img/rpx-ie6.png) repeat-x 0 -180px; }
 .table-layer .edge-bottom { height:10px; background:url(/assets/style/gdg/img/rpx-ie6.png) repeat-x 0 -195px; }
 .table-layer .layer-body { position:relative; }
-.table-layer .layer-body .ly-title { line-height:16px; padding:4px 0 4px 16px; font-size:12px; z-index:10; background:#DDD; }
+.table-layer .layer-body .ly-title { line-height:16px; padding:4px 0 4px 4px; font-size:12px; z-index:10; background:#DDD; }
 .table-layer .layer-body .ly-title span { font-weight:normal; font-family:"宋体"; }
-.table-layer .layer-body a.close { position:absolute; right:20px; top:5px; z-index:10; }
+.table-layer .layer-body a.close { position:absolute; right:5px; top:5px; z-index:10; }
 .table-layer .layer-body .content { padding:10px 0px 0px 0px; position:relative; background:#DDD; }
 
 
