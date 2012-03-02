@@ -67,6 +67,28 @@ class player_api{
 		}
 		return false;
 	}
+	
+	function pageQqWeiboPost($inPath){
+		$user=user_api::islogin();
+			if(!empty($_POST['content']) && ($user=user_api::islogin())!==false){
+				
+				include_once(WWW_ROOT.'/lib/qq/weibo/config.php');
+
+				$r = OpenSDK_Tencent_Weibo::call('t/add_video',
+					array(
+						"format"=>"json",
+						"content"=>$_POST['content'],
+						"url"=>"http://v.youku.com/v_show/id_".(singer_music::encode($_POST['vid'])).".html",
+					),"POST"
+				);
+
+
+				if(!empty($r->data->id)){
+					return true;
+				}
+			}
+		return false;
+	}
 	function pageSinaPost($inPath){
 		if(!empty($_POST['content']) && ($user=user_api::islogin())!==false){
 			$sina = new api_sina;
