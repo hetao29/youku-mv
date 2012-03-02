@@ -233,7 +233,54 @@ class player_main extends STpl{
 	 * QQ微薄
 	 */
 	function pageQQWeibo($inPath){
-		return $this->pageQQ($inPath,"qqweibo");
+
+		include_once(WWW_ROOT.'/lib/qq/weibo/config.php');
+		if( isset($_GET['oauth_token']) && isset($_GET['oauth_verifier'])) //第5，6步
+		{
+			
+			//从Callback返回时
+			if(OpenSDK_Tencent_Weibo::getAccessToken($_GET['oauth_verifier']))
+			{
+				//此时已经可以正常调用CGI
+				$uinfo = OpenSDK_Tencent_Weibo::call('user/info');
+				if(!empty($uinfo->data)){
+					$openid = $uinfo->data->openid;
+					$openkey = empty($_REQUEST['openkey'])?"":$_REQUEST['openkey'];
+					$nick = $uinfo->data->nick;
+				//	$email = $uinfo->data->email;
+
+					
+					$UserEmail=$openid."@qq.com";
+
+					$db = new user_db;
+					$user = $db->getUserByEmail($UserEmail,$paterid=user_parter::TENCENT);
+					if(empty($user)){
+						//增加用户
+						$User = array();
+						$User['UserAlias']=$nick;
+						$User['UserEmail']=$UserEmail;
+						$User['UserPassword']=$openkey;
+						$User['ParterID']=user_parter::TENCENT;
+						$UserID = $db->addUser($User);
+						$user=$db->getUserByID($UserID);
+					}else{
+						//更新用户
+						if($user['UserAlias']!==$nick){
+							$user['UserAlias']=$nick;
+							$user['UserPassword']=$openkey;
+							$db->updateUser($user);
+						}
+					}
+					user_api::logout();
+					user_api::login($user,!empty($_REQUEST['forever']));
+					return $this->pageEntry($inPath,"qqweibo");
+				}
+			}
+		}
+		$callback = 'http://' . $_SERVER['HTTP_HOST'] . $_SERVER['PHP_SELF'];
+		$request_token = OpenSDK_Tencent_Weibo::getRequestToken($callback);
+		$url = OpenSDK_Tencent_Weibo::getAuthorizeURL($request_token);
+		header('Location: ' . $url);
 	}
 	/**
 	 * WebQQ
