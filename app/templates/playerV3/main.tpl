@@ -258,8 +258,10 @@ $("#_IDStyle").attr("disabled",null);
 				<span><a _source="/player.api.sina.:vid:" _post="/player.api.sinaPost"><b style="font-size:14px">分享到新浪微博<img title="分享到新浪微博" src="http://static.youku.com/v/img/ico_sina.gif" /></b></a></span>
 			{elseif $out=="netease"}
 				<span><a _source="/player.api.netease.:vid:" _post="/player.api.neteasePost"><b style="font-size:14px">分享到网易微博<img title="分享到网易微博" src="http://static.youku.com/v/img/ico_163_16.gif" /></b></a></span>
-			{elseif $out=="qqweibo" || $out=="qq"}
+			{elseif $out=="qq"}
 				<span><a _source="/player.api.qq.:vid:" _post="/player.api.qqPost"><b style="font-size:14px">分享到腾讯微博<img title="分享到腾讯微博" src="http://static.youku.com/v1.0.0729/v/img/ico_qq_t.png" /></b></a></span>
+			{elseif $out=="qqweibo"}
+				<span><a _source="/player.api.qq.:vid:" _post="/player.api.qqWeiboPost"><b style="font-size:14px">分享到腾讯微博<img title="分享到腾讯微博" src="http://static.youku.com/v1.0.0729/v/img/ico_qq_t.png" /></b></a></span>
 			{/if}
 			
 		</div>
