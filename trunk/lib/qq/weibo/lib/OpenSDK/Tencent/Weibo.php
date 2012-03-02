@@ -257,7 +257,7 @@ class OpenSDK_OAuth_Client
 		$method = strtoupper($method);
 		$postdata = '';
 		$urls = @parse_url($url);
-		$httpurl = $urlpath = $urls['path'] . ($urls['query'] ? '?' . $urls['query'] : '');
+		$httpurl = $urlpath = @$urls['path'] . (@$urls['query'] ? '?' . @$urls['query'] : '');
 		if( !$multi )
 		{
 			$parts = array();
@@ -275,8 +275,8 @@ class OpenSDK_OAuth_Client
 			}
 		}
 		
-		$host = $urls['host'];
-		$port = $urls['port'] ? $urls['port'] : 80;
+		$host = @$urls['host'];
+		$port = @$urls['port'] ? @$urls['port'] : 80;
 		$version = '1.1';
 		if($urls['scheme'] === 'https')
         {
