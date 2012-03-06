@@ -845,7 +845,7 @@ class player_main extends STpl{
 				$item = $video_api->getVideoInfoByLuceneVideo($item);
 			}
 		}
-		if(empty($r->items) || count($r->items)<=5)){
+		if(empty($r->items) || count($r->items)<=5){
 			$r2=$video_api->searchV3($k,$page,10-count($r->items));
 			$r->items = array_merge($r->items,$r2->items);
 		}
