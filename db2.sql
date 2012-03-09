@@ -31,7 +31,7 @@ CREATE TABLE `s_video`(
 `VideoPubdate` date,
 `VideoSourceID` tinyint unsigned not null default 1 COMMENT'来源,1.优酷，2.土豆 3...',
 `VideoUpdateTime` timestamp,
-`VideoStatus` tinyint not null default -1 COMMENT '１正常，-1未审核',
+`VideoStatus` tinyint not null default -1 COMMENT '1正常,-1未审核,-2屏蔽视频',
 PRIMARY KEY `VideoID` (`VideoID`),
 KEY VideoUpdateTime(VideoUpdateTime)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
