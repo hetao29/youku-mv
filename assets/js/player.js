@@ -35,6 +35,7 @@ jQuery.extend(String.prototype, { tr:function(){
 }
 });
 var _location = window.location;
+if(!window.out)out="";
 
 //{{{主方法
 $.ajaxSetup({
@@ -1071,10 +1072,10 @@ var YoukuWs = function(){
 					PlayType=1;
 					YoukuWs.set("PlayType",PlayType);
 					YoukuWs.getVideoByVid(objURL.vid);
-				}else if(_initVid!=""){
+				}else if(window._initVid!=""){
 					PlayType=1;
 					YoukuWs.set("PlayType",PlayType);
-					YoukuWs.getVideoByVid(_initVid);
+					YoukuWs.getVideoByVid(window._initVid);
 				};
 				//{{{显示播放模式的内容
 				PlayType = YoukuWs.get("PlayType",0);
@@ -1762,8 +1763,10 @@ var YoukuWs = function(){
 				     url: "/player.main.getVideoByVid",
 			     data:{vid:vid},
 			     success: function( result) {
-				     YoukuWsPlaylist.add(result.VideoID,YoukuWs.getVideoName(result));
-				     YoukuWs.play(result.VideoID);
+				 if(result){
+				 YoukuWsPlaylist.add(result.VideoID,YoukuWs.getVideoName(result));
+				 YoukuWs.play(result.VideoID);
+				 }
 			     }
 			     });
 		     }, isIpad:function(){
