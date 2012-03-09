@@ -91,6 +91,10 @@ class player_main extends STpl{
 		$param['style']=$style;
 		return $this->render("playerV3/main.tpl",$param);
 	}
+	
+	function pageUc($inPath){
+		return $this->pageEntryV3($inPath);
+	}
 	function pageHeaderV3($inPath){
 		$allLanguage=array(
 			"zh-cn"=>"中文 (简体)",
