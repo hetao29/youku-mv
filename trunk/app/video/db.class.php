@@ -28,7 +28,7 @@ class video_db{
 	 */
 	function listVideo($startTime,$limit=-1){
 		$this->_db->setLimit($limit);
-		return $this->_db->select("s_video",array("VideoUpdateTime>='$startTime'"),"*","",array("VideoUpdateTime"=>"ASC","VideoID"=>"ASC"));
+		return $this->_db->select("s_video",array("VideoUpdateTime>='$startTime'","VideoStatus!=-2"),"*","",array("VideoUpdateTime"=>"ASC","VideoID"=>"ASC"));
 	}
 	function getVideoExtension($vid){
 		return $this->_db->selectOne("s_video_extension",array("VideoID"=>$vid));
