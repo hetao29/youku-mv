@@ -2136,12 +2136,15 @@ function onPlayerStart(obj){
 function onPause(){
 	PlayerPause(true);
 }
-function onPlayerError(vid){
+function onPlayerError(){
+	$.ajax(
+		{type:"POST",url:"/player.error",data:{"vid":CurrentVideoID},success:function(msg){}}
+	);
 	if(PlayType!=0){
-		YoukuWs.playNext();
-		var h = $("#_ContentMusic [vid='"+vid+"'] A[error!=1]");
+		var h = $("#_ContentMusic [vid='"+CurrentVideoID+"'] A[error!=1]");
 		h.attr("error",1);
 		h.html("<font color='red'>播放失败:</font> "+h.html());
+		YoukuWs.playNext();
 	}else{
 		YoukuWs.playRadioNext();
 	}
