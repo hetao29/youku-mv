@@ -86,7 +86,7 @@ _margin-right: 5px;
 }
 */
 .fm-body .cont-left .cont-border .content { padding:5px 20px 0; overflow:hidden; }
-.fm-body .cont-left .cont-border .content h2 { height:20px; line-height:20px; font-size:14px; font-family:"宋体"; position:relative; }
+.fm-body .cont-left .cont-border .content h2 {line-height:20px; font-size:14px; font-family:"宋体"; position:relative; }
 /*
 .fm-body .cont-left .cont-border .content h2 { font-size:14px; font-family:"宋体"; position:relative; }
 */
