@@ -4,8 +4,7 @@
 				<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 				<link rel="Shortcut Icon" href="/assets/images/ico/favicon_32x32.ico" />
 				<title>{'标题'|tr}</title>
-{if defined(DEV)}
-<script type="text/javascript" src="/assets/js/jquery-1.5.1.js"></script>
+<script type="text/javascript" src="/slightphp/js/jquery-1.7.min.js"></script>
 <script type="text/javascript" src="/assets/js/development-bundle/ui/jquery.ui.core.js"></script>
 <script type="text/javascript" src="/assets/js/development-bundle/ui/jquery.ui.widget.js"></script>
 <script type="text/javascript" src="/assets/js/development-bundle/ui/jquery.ui.mouse.js"></script>
@@ -23,11 +22,8 @@
 <script type="text/javascript" src="/assets/js/player.js"></script>
 <script type="text/javascript" src="/assets/js/swfobject/swfobject.js"></script>
 				<link href="/assets/css/jquery-ui-1.8.6.custom-smoothness.css" media="all" rel="stylesheet" type="text/css" />
-				<link href="/assets/css/admin.css" media="all" rel="stylesheet" type="text/css" />
-{else}
-				<script type="text/javascript" src="{'/player.js'|version:$jsversion}"></script>
 				<link href="{'/player.css'|version:$cssversion}" media="all" rel="stylesheet" type="text/css" />
-{/if}
+				<link href="/assets/css/admin.css" media="all" rel="stylesheet" type="text/css" />
 		</head>
 		<body>
 				<h1>电台维护</h1>
