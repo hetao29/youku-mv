@@ -25,9 +25,9 @@ function listVideoFromOfficial($startTime){
 		return $r;
 }
 $log="official.log";
-define("DEBUG",true);
 
-while(true){
+$iii = 0;
+while($iii++<10){
 	$logData = trim(file_get_contents($log));
 	$startTime=0;$startVideoID=0;
 	if(!empty($logData)){

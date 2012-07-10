@@ -120,11 +120,29 @@ $config =	array(
 					"LIMIT"=>10000
 				),
 				array(
+					"ListID"=>"370",
+					"ListName"=>"2012年国语新曲	",
+					"QUERY"=>'@videoarea "台湾" | "大陆" | "香港"',
+					"SetFilterRange"=>array(
+									"videopubdate"=>array(20120101,20130100)
+								),
+					"LIMIT"=>10000
+				),
+				array(
 					"ListID"=>"3",
 					"ListName"=>"2011年日韩新曲",
 					"QUERY"=>'@videoarea "日本" | "韩国"',
 					"SetFilterRange"=>array(
 									"videopubdate"=>array(20110101,20120100)
+								),
+					"LIMIT"=>10000
+				),
+				array(
+					"ListID"=>"467",
+					"ListName"=>"2012年日韩新曲",
+					"QUERY"=>'@videoarea "日本" | "韩国"',
+					"SetFilterRange"=>array(
+									"videopubdate"=>array(20120101,20130100)
 								),
 					"LIMIT"=>10000
 				),
@@ -135,6 +153,16 @@ $config =	array(
 					"QUERY"=>'@videolanguage "英语" | "其它"',
 					"SetFilterRange"=>array(
 									"videopubdate"=>array(20110101,20120100)
+								),
+					"LIMIT"=>10000
+				),
+				array(
+					"ListID"=>"466",
+					"ListName"=>"2012年欧美新曲",
+					
+					"QUERY"=>'@videolanguage "英语" | "其它"',
+					"SetFilterRange"=>array(
+									"videopubdate"=>array(20120101,20130100)
 								),
 					"LIMIT"=>10000
 				),

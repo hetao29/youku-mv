@@ -17,7 +17,8 @@ class admin_main extends STpl{
 	function pageEntry($inPath){
 		$page=empty($inPath[3])?1:$inPath[3];
 		$db = new user_db;
-		$param['lists']= $db->ListAllList($page,$limit=100);
+		//$param['lists']= $db->ListAllList($page,$limit=-1);
+		$param['lists']= $db->ListList(1);
 		echo $this->render("admin/main.tpl",$param);
 	}
 	function PagegetList($inPath){

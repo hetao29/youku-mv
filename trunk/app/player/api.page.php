@@ -22,7 +22,7 @@ class player_api{
 		$SingerNameS=array();
 		foreach($item['Singers'] as $singer){
 			//$SingerNameS[]=$singer['SingerName'];
-			$SingerNameS[]="@".$singer['SingerName'];
+			$SingerNameS[]=$singer['SingerName'];
 		}
 		return "我正在#优酷电台#收听《 ".(implode(" , ",$SingerNameS))." - {$item['VideoName']} 》\n，除了电台模式，还能添加自己喜欢的音乐，最fashion的是还有滚动歌词，你也来试试吧 : http://youku.fm/#vid={$item['VideoID']}  \n\n( 分享来自 @优酷电台 ，视频源：http://v.youku.com/v_show/id_".(singer_music::encode($item['VideoID'])).".html )";
 	}
