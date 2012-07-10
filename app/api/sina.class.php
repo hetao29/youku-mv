@@ -15,6 +15,9 @@ class api_sina{
 			if(!empty($r['id'])){
 				return true;
 			}
+			error_log(var_export($token,true),3,	"/opt/youku-fm-read-only/youkufm_api_error_log");
+			error_log(var_export($c,true),3,	"/opt/youku-fm-read-only/youkufm_api_error_log");
+			error_log(var_export($r,true),3,	"/opt/youku-fm-read-only/youkufm_api_error_log");
 			//exit;
 		}
 		return false;
