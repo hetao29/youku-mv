@@ -1435,7 +1435,7 @@ var YoukuWs = function(){
 					 try{
 						 PlayerReplay(vid);
 					 }catch(e){
-						 swfobject.createSWF({data:"http://static.youku.com/v/swf/player.swf",width:"100%",height:"100%"},{allowFullScreen:true,allowscriptaccess:"always",wmode:"opaque",flashvars:"isAutoPlay=true&VideoIDS="+vid+"&winType=index&ad=0&skincolor1=3F3F3F&skincolor2=3F3F3F&firsttime="+time},playerId);
+						 swfobject.createSWF({data:"http://static.youku.com/v/swf/player.swf",width:"100%",height:"100%"},{allowFullScreen:true,allowscriptaccess:"always",wmode:"opaque",flashvars:"isAutoPlay=true&VideoIDS="+vid+"&winType=index&skincolor1=3F3F3F&skincolor2=3F3F3F&firsttime="+time},playerId);
 						 //swfobject.createSWF({data:"http://static.youku.com/v/swf/player.swf",width:"100%",height:"100%"},{allowFullScreen:true,allowscriptaccess:"always",wmode:"opaque",flashvars:"isAutoPlay=true&VideoIDS="+vid+"&firsttime="+time},playerId);
 					 }
 				 }
