@@ -768,7 +768,7 @@ class player_main extends STpl{
 		$mv  = $api->getVideoInfo($vid);
 		if(!empty($mv)){
 			$lyric = $db->getLyrics($mv['VideoID']);
-			if(empty($lyric) || $lyric['LyricsStatus']==-2)
+			if(empty($lyric['LyricsContent']) || $lyric['LyricsStatus']==-2)
 			{
 				$api = new video_api;
 				$k = (!empty($mv['Singers'][0]['SingerName'])?$mv['Singers'][0]['SingerName']." ":"").$mv['VideoName'];
