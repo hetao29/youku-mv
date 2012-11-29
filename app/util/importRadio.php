@@ -173,24 +173,27 @@ require("../../global.php");
 
 $user_db  = new user_db;
 
+error_log("\nSTART:".date("Y-m-d H:i:s")."\n",3,"/tmp/importRadio.log");
 foreach( $config as $t){
 	print_r($t);
-	
-			$sphinx_api = new sphinx_api();
+	error_log(var_export($t,true),3,"/tmp/importRadio.log");
+
+	$sphinx_api = new sphinx_api();
 
 
 
-			foreach($t['SetFilterRange'] as $k=>$v){
-				$sphinx_api->SetFilterRange($k,$v[0],$v[1]);
-			}
-			$items=$sphinx_api->query($t['QUERY'],$t['LIMIT']);
-			var_dump(count($items));
-			//查出来后，清空原来的列表
-			$user_db->emptyList($t['ListID']);
-			$i=0;
-			foreach($items as $i=>$item){
-					$user_db->addListContent($t['ListID'],$item['VideoID'],$i++);
-			}
+	foreach($t['SetFilterRange'] as $k=>$v){
+		$sphinx_api->SetFilterRange($k,$v[0],$v[1]);
+	}
+	$items=$sphinx_api->query($t['QUERY'],$t['LIMIT']);
+	var_dump(count($items));
+	error_log(count($items),3,"/tmp/importRadio.log");
+	//查出来后，清空原来的列表
+	$user_db->emptyList($t['ListID']);
+	$i=0;
+	foreach($items as $i=>$item){
+		$user_db->addListContent($t['ListID'],$item['VideoID'],$i++);
+	}
 	echo "SUCCESS\n";
 }
-	
+error_log("\nEND:".date("Y-m-d H:i:s")."\n",3,"/tmp/importRadio.log");
