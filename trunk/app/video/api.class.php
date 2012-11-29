@@ -292,6 +292,8 @@ class video_api{
 						"/首发/",
 						"/新歌/",
 						"/天籁之声/",
+						"/超清/",
+						"/HD/",
 						"/韩国/",
 						"/插曲/",
 						"/主打/",
@@ -336,6 +338,7 @@ class video_api{
 				" ",
 			);
 			$MvName = preg_replace($pattern,$replacement,$MvName);
+			//error_log($MvName,3,"/tmp/x.log");
 			$MvName=urlencode($MvName);
 			/* v1
 			$r = SHttp::get("http://mp3.sogou.com/api/lrc2?query=$MvName&id=1");
