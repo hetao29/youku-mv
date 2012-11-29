@@ -2,5 +2,5 @@
 exit;
 ?>
 [default]
-main    =   host:127.0.0.1,user:root,database:youku,password:,charset:utf8,engine:pdo_mysql
+main    =   host:127.0.0.1,user:youkufm,database:youkufm,password:youkufm,charset:utf8,engine:mysql
 
