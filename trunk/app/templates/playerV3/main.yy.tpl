@@ -236,7 +236,7 @@ $("#_IDStyle").attr("disabled",null);
 				<div class="bottom"><div class="box"><i></i><i class="right"></i><div class="boxcenter"></div></div></div>
 			</div>
 		</div>
-		<p class="copyright">请使用者仔细阅读优酷使用协议和版权声明 Copyright©2011 优酷 youku.com 版权所有</p>
+		<p class="copyright" style="margin:10px auto 0px">请使用者仔细阅读优酷使用协议和版权声明 Copyright©2011 优酷 youku.com 版权所有</p>
 
 
 		<div class="share-layer" id="share-layer">
