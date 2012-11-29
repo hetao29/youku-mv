@@ -337,10 +337,20 @@ class video_api{
 			);
 			$MvName = preg_replace($pattern,$replacement,$MvName);
 			$MvName=urlencode($MvName);
+			/* v1
 			$r = SHttp::get("http://mp3.sogou.com/api/lrc2?query=$MvName&id=1");
 			preg_match('/lrc":"(.+?)","/ims',$r,$_m);
 			if(!empty($_m[1])){
 					return mb_convert_encoding($_m[1],"utf8","gbk,utf8");
+			}
+			*/
+			// v2 
+			$r = SHttp::get("http://music.baidu.com/search/lrc?key=$MvName");
+			preg_match("/down\-lrc\-btn \{ 'href'\:'(.+?)'/ims",$r,$_m);
+			if(!empty($_m[1])){
+				$url = 'http://music.baidu.com'.$_m[1];
+				$ct = SHttp::get($url);
+				return trim(mb_convert_encoding($ct,"utf8","gbk,utf8"));
 			}
 		}
 }
