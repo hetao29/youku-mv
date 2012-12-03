@@ -40,8 +40,14 @@ class user_main{
 	function pageLogin($inPath){
 			$useremail= $_REQUEST['useremail'];
 			$password = $_REQUEST['password'];
+			$ParterID=0;
+			if(!empty($_REQUEST['ParterID'])){
+				$ParterID=$_REQUEST['ParterID'];
+			}
 			$db = new user_db;
-			$user = $db->getUserByEmail($useremail);
+			$user = $db->getUserByEmail($useremail,$ParterID);
+			//error_log(var_export($user,true),3,"/tmp/xx.log");
+			//error_log("\n".user_api::pwd($password)."\n",3,"/tmp/xx.log");
 			$o  = new stdclass;
 			if(!empty($user) && $user['UserPassword']==user_api::pwd($password)){
 					user_api::login($user,!empty($_REQUEST['forever']));
@@ -73,6 +79,7 @@ class user_main{
 						$o->result=-1;
 					}
 			}
+			//error_log(var_export($o,true),3,"/tmp/xx.log");
 			return $o;
 	}
 	function pageSignup($inPath){
