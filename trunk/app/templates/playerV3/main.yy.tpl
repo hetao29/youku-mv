@@ -3,25 +3,8 @@
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 		<title>{'标题'|tr}</title>
-		{if defined("DEV")}
-		<script type="text/javascript" src="/slightphp/js/jquery-1.7.min.js"></script>
-		<script type="text/javascript" src="/assets/js/ui-1.8.16/jquery.ui.core.js"></script>
-		<script type="text/javascript" src="/assets/js/ui-1.8.16/jquery.ui.widget.js"></script>
-		<script type="text/javascript" src="/assets/js/ui-1.8.16/jquery.ui.mouse.js"></script>
-		<script type="text/javascript" src="/assets/js/ui-1.8.16/jquery.ui.position.js"></script>
-		<script type="text/javascript" src="/assets/js/ui-1.8.16/jquery.ui.autocomplete.js"></script>
-		<script type="text/javascript" src="/assets/js/ui-1.8.16/jquery.ui.resizable.js"></script>
-		<script type="text/javascript" src="/assets/js/ui-1.8.16/jquery.ui.sortable.js"></script>
-		<script type="text/javascript" src="/assets/js/ui-1.8.16/jquery.ui.draggable.js"></script>
-		<script type="text/javascript" src="/assets/js/ui-1.8.16/jquery.ui.droppable.js"></script>
-		<script type="text/javascript" src="/assets/js/ui-1.8.16/jquery.ui.touch-punch.js"></script>
-		<script type="text/javascript" src="/assets/js/jquery.cookie.js"></script>
-		<script type="text/javascript" src="/assets/js/json2.js"></script>
-		<script type="text/javascript" src="/assets/js/swfobject/swfobject.js"></script>
-		<script type="text/javascript" src="/assets/js/v3/player.js"></script>
-		{else}
 		<script type="text/javascript" src="{'/player.js.entryV3.js'|version:$jsversion}"></script>
-		{/if}
+		<script type="text/javascript" src="/assets/js/v3/yyapi.js"></script>
 
 		<link rel="Shortcut Icon" href="/assets/images/ico/favicon_32x32.ico" />
 		<link type="text/css" id="_IDStyle" style="{$style}" rel="stylesheet" href="/assets/style/{$style}/css/fm.css" />
@@ -56,6 +39,18 @@ $("#_IDStyle").attr("disabled",null);
 			}; 
 			var out="{$out}"; var _LabelOk="{'确认'|tr}"; var _LabelCancel="{'取消'|tr}"; var _initVid="{$vid}";
 			{if !empty($lid)}var _initLid="{$lid}";{/if}
+		</script>
+		<script type="text/javascript">
+		/* YY */
+		$(document).ready(function(){
+			var u = yy.user.getCurrentUserInfo();
+			//http://report.open.yy.com/yydocs/YY-JS-Doc-1.6beta/symbols/YYUserInfo.html
+			$("#_FormSignup [name='useremail']").val(u.uid+"@yy.com");
+			$("#_FormSignup [name='useralias']").val(u.name);
+			$("#_FormSignup [name='password']").val(u.sign);
+			$("#_FormSignup [name='password2']").val(u.sign);
+			YoukuWs.formsignup();
+		});
 		</script>
 	</head>
 
@@ -312,6 +307,7 @@ $("#_IDStyle").attr("disabled",null);
 			<div class="reg-box">
 				<div class="msgbox" style="display:none"><i class="notice"></i> <span></span></div>
 				<form onsubmit="return YoukuWs.formsignup();"  id="_FormSignup">
+				<input type="hidden" name="ParterID" id="ParterID" value=5 />
 					<ul class="elm-list">
 						<li class="label"><label for="username">{'邮箱'|tr}:</label></li>
 						<li class="input"><input class="txt" type="text" name="useremail" id="username" /></li>
@@ -321,7 +317,7 @@ $("#_IDStyle").attr("disabled",null);
 						<li class="input"><input class="txt" type="password" name="password" id="password" /></li>
 						<li class="label"><label for="password2">{'密码确认'|tr}:</label></li>
 						<li class="input"><input class="txt" type="password" name="password2" id="password2" /></li>
-						<li class="line"><input type="checkbox" id="readed" /><label for="readed">我已阅读并接受优酷</label><a>注册协议</a><span>和</span><a>版权声明</a></li>
+						<li class="line"><input type="checkbox" id="readed" checked /><label for="readed">我已阅读并接受优酷</label><a>注册协议</a><span>和</span><a>版权声明</a></li>
 						<li class="line des">电子邮箱和昵称注册后不能修改，请仔细核对</li>
 						<li class="singleBtn"><a id="_IDSingupSubmit" onclick="return YoukuWs.formsignup();" class="btn-login hover">{'注册'|tr}</a></li>
 					</ul>
