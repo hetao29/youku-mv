@@ -20,4 +20,10 @@ class user_parter{
 	 * 腾讯
 	 */
 	const TENCENT= 4;
+
+	/**
+	 * YY
+	 */
+	const YY= 5;
+
 }

@@ -96,6 +96,9 @@ class user_main{
 			$User['UserAlias']=$_REQUEST['useralias'];
 			$User['UserEmail']=$_REQUEST['useremail'];
 			$User['UserPassword']=user_api::pwd($_REQUEST['password']);
+			if(!empty($_REQUEST['ParterID'])){
+				$User['UserEmail'] = $_REQUEST['ParterID'];
+			}
 			$db = new user_db;
 			$UserID = $db->addUser($User);
 			if($UserID>0){
