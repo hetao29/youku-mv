@@ -1,4 +1,5 @@
 <?php
+//error_log(var_export($_REQUEST,true),3,"/tmp/xx.log");
 class user_main{
 	function __construct(){
 	}
@@ -97,7 +98,7 @@ class user_main{
 			$User['UserEmail']=$_REQUEST['useremail'];
 			$User['UserPassword']=user_api::pwd($_REQUEST['password']);
 			if(!empty($_REQUEST['ParterID'])){
-				$User['UserEmail'] = $_REQUEST['ParterID'];
+				$User['ParterID'] = $_REQUEST['ParterID'];
 			}
 			$db = new user_db;
 			$UserID = $db->addUser($User);
