@@ -2,8 +2,9 @@
 			<div class="th-cont">
 				<i class="yk-logo"></i>
 				<ul id="login_success">
+{if empty($outx)}
 					<li><a id="_IDUsage">{'使用说明'|tr}</a></li>
-					<li><a id="_IDAbout">{if empty($outx)}{'关于'|tr}{/if}</a></li>
+					<li><a id="_IDAbout">{'关于'|tr}</a></li>
 					<li>|</li>
 					<li id="_IDLanguage" class="language">{'语言'|tr}<i class="icon-down"></i>
 						<em class="panel">
@@ -13,11 +14,14 @@
 						</em>
 					</li>
 					<li>|</li>
+{/if}
 					{if empty($user)}
+{if empty($outx)}
 					<li><a id="_IDSignup">{'注册'|tr}</a></li>
 					<li><a id="_IDLogin">{'登录'|tr}</a></li>
 					<li>|</li>
 					<li>登录后，能记住你所喜好</li>
+{/if}
 					{else}
 					<li id="_LiUp"><a>{"喜欢"|tr}(<span id="_CtUp">{@$act[0]|default:0}</span>)</a></li>
 					<li id="_LiListen"><a>{"听过"|tr}(<span id="_CtListen">{$_CtListen|default:0}</span>)</a></li>
