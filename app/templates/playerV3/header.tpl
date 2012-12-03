@@ -2,7 +2,7 @@
 			<div class="th-cont">
 				<i class="yk-logo"></i>
 				<ul id="login_success">
-{if empty($outx)}
+{if empty($outx) || $outx!="yy"}
 					<li><a id="_IDUsage">{'使用说明'|tr}</a></li>
 					<li><a id="_IDAbout">{'关于'|tr}</a></li>
 					<li>|</li>
