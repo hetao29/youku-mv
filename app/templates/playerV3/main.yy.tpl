@@ -44,12 +44,20 @@ $("#_IDStyle").attr("disabled",null);
 		/* YY */
 		$(document).ready(function(){
 			var u = yy.user.getCurrentUserInfo();
-			//http://report.open.yy.com/yydocs/YY-JS-Doc-1.6beta/symbols/YYUserInfo.html
-			$("#_FormSignup [name='useremail']").val(u.uid+"@yy.com");
-			$("#_FormSignup [name='useralias']").val(u.name);
-			$("#_FormSignup [name='password']").val(u.sign);
-			$("#_FormSignup [name='password2']").val(u.sign);
-			YoukuWs.formsignup();
+			if(u){
+				//http://report.open.yy.com/yydocs/YY-JS-Doc-1.6beta/symbols/YYUserInfo.html
+				$("#_FormSignup [name='useremail']").val(u.uid+"@yy.com");
+				$("#_FormSignup [name='useralias']").val(u.name);
+				$("#_FormSignup [name='password']").val(u.sign);
+				$("#_FormSignup [name='password2']").val(u.sign);
+				YoukuWs.formsignup();
+
+
+				$("#_FormLogin [name='useremail']").val(u.uid+"@yy.com");
+				$("#_FormLogin [name='password']").val(u.sign);
+				YoukuWs.formlogin();
+			}
+			
 		});
 		</script>
 	</head>
