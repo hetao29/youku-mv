@@ -3,7 +3,7 @@
 				<i class="yk-logo"></i>
 				<ul id="login_success">
 					<li><a id="_IDUsage">{'使用说明'|tr}</a></li>
-{if empty($outx)}<li><a id="_IDAbout">{'关于'|tr}</a></li>{/if}
+					<li><a id="_IDAbout">{if empty($outx)}{'关于'|tr}{/if}</a></li>
 					<li>|</li>
 					<li id="_IDLanguage" class="language">{'语言'|tr}<i class="icon-down"></i>
 						<em class="panel">
