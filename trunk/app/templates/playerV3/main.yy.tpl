@@ -59,6 +59,7 @@ $("#_IDStyle").attr("disabled",null);
 					YoukuWs.formlogin();
 				}
 			}catch(e){
+				setTimeout("init()",2000);
 				//for debug
 				//$("#_FormLogin [name='useremail']").val(e.description);
 				//YoukuWs.formlogin();
@@ -433,8 +434,8 @@ $("#_IDStyle").attr("disabled",null);
 			</div>
 		</div>
 		
+		<!--
 		<div id="_ContentAbout" class="hide" _title="关于">
-			<!-- 关于优酷FM -->
 			<div class="about-box">
 				<img src="/assets/style/default/img/about-bg.gif" alt="" />
 				<div class="cont">
@@ -442,11 +443,9 @@ $("#_IDStyle").attr("disabled",null);
 					<p>Copyright©2011 优酷 youku.com 版权所有</p>
 					<p>作者：Hetal　　QQ：231073376</p>
 				</div>
-				<!--<div class="singleBtn">
-					<a  title="" class="btn-layer-d">确定</a>
-				</div>-->
 			</div>
 		</div>
+		-->
 	<!-- 删除确认 -->
 	<!--
 	<div class="msg-box">
