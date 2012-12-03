@@ -121,7 +121,37 @@ class player_main extends STpl{
 		$param['cssversion']=filemtime(WWW_ROOT."/"."assets/style/default/css/fm.css");
 		$style="default";
 		$param['style']=$style;
+		$param['out']="yy";
 		return $this->render("playerV3/main.yy.tpl",$param);
+	}
+	function pageYYTest($inPath){
+		$param=array();
+		$allLanguage=array(
+			"zh-cn"=>"中文 (简体)",
+			"zh-tw"=>"中文 (繁體)",
+			"en"=>"English",
+			"ko"=>"한국어",
+			"ja"=>"日本語",
+		);
+		$language="中文 (简体)";
+		if(!empty($_COOKIE['language'])){
+			$l = $_COOKIE['language'];
+			if(!empty($allLanguage[$l])){
+				$language = $allLanguage[$l];
+				SLanguage::setLocale($l);
+			}
+
+		}
+		$param['language']=$language;
+		$param['allLanguage']=$allLanguage;
+		$param['out']=$out;
+		$param['vid']=$vid;
+		$param['jsversion']=filemtime(WWW_ROOT."/"."assets/js/v3/v3.js");
+		$param['cssversion']=filemtime(WWW_ROOT."/"."assets/style/default/css/fm.css");
+		$style="default";
+		$param['style']=$style;
+		$param['out']="yy";
+		return $this->render("playerV3/main.yy.test.tpl",$param);
 	}
 	function pageHeaderV3($inPath){
 		$allLanguage=array(
