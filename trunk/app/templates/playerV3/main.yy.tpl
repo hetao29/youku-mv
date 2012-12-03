@@ -343,6 +343,7 @@ $("#_IDStyle").attr("disabled",null);
 		<div id="CtLogin" class="hide" _title="{'登录'|tr}">
 			<div class="login-box">
 				<form id="_FormLogin" onsubmit="return YoukuWs.formlogin();" action="post">
+					<input type="hidden" name="ParterID" id="ParterID" value=5 />
 					<div class="msgbox" style="display:none"><i class="error"></i> <span></span></div>
 					<ul class="elm-list">
 						<li class="label"><label for="username">{'邮箱'|tr}/{'用户名'|tr}:</label></li>
