@@ -90,7 +90,7 @@ class video_api{
 		 * 搜索
 		 **/
 		public function searchV3($key,$page=1,$size=10){
-			$r = SHttp::get("http://api.youku.com/api_ptvideo/st_3_pid_311",array("sv"=>$key,"rt"=>3,"ob"=>6,"pz"=>$size,"pg"=>$page));
+			$r = SHttp::get("http://api.youku.com/api_ptvideo/st_3_pid_XOA==",array("sv"=>$key,"rt"=>3,"ob"=>6,"pz"=>$size,"pg"=>$page));
 			$r = SJson::decode($r);
 			$o = array();
 			foreach($r->item as $item){
@@ -122,7 +122,7 @@ class video_api{
 			return $result;
 		}
 		public function search($key,$page=1,$size=10){
-			$r = SHttp::get("http://api.youku.com/api_ptvideo/st_3_pid_311",array("sv"=>$key,"rt"=>3,"ob"=>6,"pz"=>$size,"pg"=>$page));
+			$r = SHttp::get("http://api.youku.com/api_ptvideo/st_3_pid_XOA==",array("sv"=>$key,"rt"=>3,"ob"=>6,"pz"=>$size,"pg"=>$page));
 			$r = SJson::decode($r);
 			$o = array();
 			foreach($r->item as $item){
@@ -182,7 +182,12 @@ class video_api{
 			$o = array();
 			$k = $_REQUEST['k'];
 			if(empty($k))return;
-			if(preg_match("/v_show\/id_(.*?)\./",$k,$_m)){
+			if(preg_match("/\?f=(\\d*)/",$k,$_m)){
+					//专辑播放页
+					///v_show/id_XNDc5NjEyNTky.html?f=18551010
+					$pid = $_m[1];
+					$st = 8;
+			}elseif(preg_match("/v_show\/id_(.*?)\./",$k,$_m)){
 					//普通视频播放页
 					$api = new video_api;
 					$r = $api->getVideoInfo($_m[1]);
@@ -204,7 +209,7 @@ class video_api{
 					$st = 8;
 			}
 			if(!empty($pid)){
-					$r = SHttp::get("http://api.youku.com/api_ptvideo/st_$st",array("pid"=>"311","rt"=>3,"pz"=>100,"sv"=>$pid));
+					$r = SHttp::get("http://api.youku.com/api_ptvideo/st_$st",array("pid"=>"XOA==","rt"=>3,"pz"=>100,"sv"=>$pid));
 					$r = SJson::decode($r);
 					$totalPage=1;
 					if(!empty($r->totalSize) && !empty($r->pageSize)){
@@ -212,7 +217,7 @@ class video_api{
 					}
 					if($totalPage>1){
 						for($i=2;$i<=$totalPage;$i++){
-							$r2 = SHttp::get("http://api.youku.com/api_ptvideo/st_$st",array("pid"=>"311","rt"=>3,"pz"=>100,"pg"=>$i,"sv"=>$pid));
+							$r2 = SHttp::get("http://api.youku.com/api_ptvideo/st_$st",array("pid"=>"XOA==","rt"=>3,"pz"=>100,"pg"=>$i,"sv"=>$pid));
 							$r2 = SJson::decode($r2);
 							if(!empty($r2))$r->item=array_merge($r->item,$r2->item);
 						}
