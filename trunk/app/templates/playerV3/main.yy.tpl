@@ -42,27 +42,33 @@ $("#_IDStyle").attr("disabled",null);
 		</script>
 		<script type="text/javascript">
 		/* YY */
-		$(document).ready(function(){
-			var u = yy.user.getCurrentUserInfo();
-			if(u){
-				//http://report.open.yy.com/yydocs/YY-JS-Doc-1.6beta/symbols/YYUserInfo.html
-				$("#_FormSignup [name='useremail']").val(u.uid+"@yy.com");
-				$("#_FormSignup [name='useralias']").val(u.name);
-				$("#_FormSignup [name='password']").val(u.sign);
-				$("#_FormSignup [name='password2']").val(u.sign);
-				YoukuWs.formsignup();
+		function init(){
+			try{
+				var u = yy.user.getCurrentUserInfo();
+				if(u){
+					//http://report.open.yy.com/yydocs/YY-JS-Doc-1.6beta/symbols/YYUserInfo.html
+					$("#_FormSignup [name='useremail']").val(u.uid+"@yy.com");
+					$("#_FormSignup [name='useralias']").val(u.name);
+					$("#_FormSignup [name='password']").val(u.uid);
+					$("#_FormSignup [name='password2']").val(u.uid);
+					YoukuWs.formsignup();
 
 
-				$("#_FormLogin [name='useremail']").val(u.uid+"@yy.com");
-				$("#_FormLogin [name='password']").val(u.sign);
-				YoukuWs.formlogin();
+					$("#_FormLogin [name='useremail']").val(u.uid+"@yy.com");
+					$("#_FormLogin [name='password']").val(u.uid);
+					YoukuWs.formlogin();
+				}
+			}catch(e){
+				//for debug
+				//$("#_FormLogin [name='useremail']").val(e.description);
+				//YoukuWs.formlogin();
 			}
-			
-		});
+
+		}
 		</script>
 	</head>
 
-	<body>
+	<body onload="init()">
 
 
 		<div id="IDTips">
