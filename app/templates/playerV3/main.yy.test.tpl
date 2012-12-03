@@ -59,6 +59,7 @@ $("#_IDStyle").attr("disabled",null);
 					YoukuWs.formlogin();
 				}
 			}catch(e){
+				setTimeout("init()",2000);
 				//for debug
 				//$("#_FormLogin [name='useremail']").val(e.description);
 				//YoukuWs.formlogin();
