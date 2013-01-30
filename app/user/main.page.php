@@ -54,10 +54,12 @@ class user_main{
 					$o->result=1;
 			}else{
 					//尝试和优酷用户登录
-					$r = SHttp::post("http://www.youku.com/index_login/",array("username"=>$useremail,"password"=>$password,"forever=0"));
-					if($r==1){
+					$r = SHttp::post("http://open.youku.com/developer/login?submit=1",array("name"=>$useremail,"password"=>$password,"forever=0"));
+					if(stripos($r,"login_success")){
+					//if($r==1){
 							//在优酷登录成功
 							$user = $db->getUserByEmail($useremail,$paterid=user_parter::YOUKU);
+							//error_log(var_export($user,true),3,"/tmp/log.log");
 							if(empty($user)){
 								//增加用户
 								$User = array();
