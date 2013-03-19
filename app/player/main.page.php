@@ -115,8 +115,8 @@ class player_main extends STpl{
 		}
 		$param['language']=$language;
 		$param['allLanguage']=$allLanguage;
-		$param['out']=$out;
-		$param['vid']=$vid;
+		$param['out']=@$out;
+		$param['vid']=@$vid;
 		$param['jsversion']=filemtime(WWW_ROOT."/"."assets/js/v3/v3.js");
 		$param['cssversion']=filemtime(WWW_ROOT."/"."assets/style/default/css/fm.css");
 		$style="default";
@@ -793,7 +793,7 @@ class player_main extends STpl{
 	 **/
 	function pageGetLyric($inPath){
 		$db = new video_db;
-		$vid = singer_music::decode($_REQUEST['vid']);
+		$vid = singer_music::decode(@$_REQUEST['vid']);
 		$api = new video_api;
 		$mv  = $api->getVideoInfo($vid);
 		if(!empty($mv)){
