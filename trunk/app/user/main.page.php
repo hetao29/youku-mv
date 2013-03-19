@@ -24,8 +24,8 @@ class user_main{
 	 * 自动登录
 	 */
 	function pageAutoLogin($inPath){
-			$token = $_REQUEST['token'];
-			$uid = $_REQUEST['uid'];
+			$token = @$_REQUEST['token'];
+			$uid = @$_REQUEST['uid'];
 			$db = new user_db;
 			$logined = false;
 			$UserToken = $db->getUserToken($uid,$token);
@@ -38,8 +38,8 @@ class user_main{
 	}
 	///user.main.login
 	function pageLogin($inPath){
-			$useremail= $_REQUEST['useremail'];
-			$password = $_REQUEST['password'];
+			$useremail= @$_REQUEST['useremail'];
+			$password = @$_REQUEST['password'];
 			$ParterID=0;
 			if(!empty($_REQUEST['ParterID'])){
 				$ParterID=$_REQUEST['ParterID'];
