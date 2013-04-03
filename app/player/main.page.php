@@ -909,6 +909,9 @@ class player_main extends STpl{
 		}
 		if(empty($r->items) || count($r->items)<=5){
 			$r2=$video_api->searchV3($k,$page,10-count($r->items));
+			if(empty($r->items)){
+				return $r2;
+			}
 			$r->items = array_merge($r->items,$r2->items);
 		}
 		return $r;
