@@ -90,11 +90,18 @@ class video_api{
 		 * 搜索
 		 **/
 		public function searchV3($key,$page=1,$size=10){
-			$r = SHttp::get("http://api.youku.com/api_ptvideo/st_3_pid_XOA==",array("sv"=>$key,"rt"=>3,"ob"=>6,"pz"=>$size,"pg"=>$page));
+			$r = SHttp::get("https://openapi.youku.com/v2/searches/video/by_keyword.json",
+					array(
+						"client_id"=>"e8066412aa60d453",
+						"keyword"=>$key,
+						"count"=>$size,
+						"page"=>$page,
+					)
+				);
 			$r = SJson::decode($r);
 			$o = array();
-			foreach($r->item as $item){
-				$vid = $item->videoid;
+			foreach($r->videos as $item){
+				$vid = $item->id;
 				$db=new video_db;
 				$vid = singer_music::decode($vid);
 				$Video = $db->getVideo($vid);
@@ -104,9 +111,9 @@ class video_api{
 					$Video['VideoSourceID']=1;
 					$Video['VideoName'] = $item->title;
 					$Video['VideoDuration'] = $this->__strTotime($item->duration);
-					$Video['VideoID'] = singer_music::decode($item->videoid);
-					$Video['VideoThumb'] = $item->snapshot;
-					$Video['VideoPubDate'] = $item->pubDate;
+					$Video['VideoID'] = singer_music::decode($item->id);
+					$Video['VideoThumb'] = $item->thumbnail;
+					$Video['VideoPubDate'] = $item->published;
 					$this->addVideo($Video);
 					//}}}
 				}
