@@ -158,7 +158,9 @@ _margin-right: 5px;
 .fm-body .cont-right .cont-border .sw-box p { text-align:center; overflow:hidden; line-height:16px; padding:6px 10px; color:#666; font-size:14px; }
 .fm-body .cont-right .cont-border .sw-box p.current { color:#F90; }
 
-.copyright {max-width:920px;min-width:380px; height:16px; line-height:16px; padding:5px 0; margin:30px auto 0; text-align:center; color:#999; }
+.copyright {max-width:920px;min-width:380px; 
+height:16px; line-height:16px; padding:5px 0; margin:30px auto 0; text-align:center; color:#999; }
+/*.copyright a{ color: #999; }*/
 
 
 .share-layer { width:190px; overflow:hidden; padding:6px 10px 4px; position:absolute; border:1px solid #CCC; border-top:none; background:#FFF; display:none; }
