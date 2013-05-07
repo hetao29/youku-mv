@@ -288,7 +288,7 @@ $("#_IDStyle").attr("disabled",null);
 				<div class="msgbox" style="display:none"><i class="notice"></i> <span></span></div>
 				<ul class="elm-add">
 					<li class="label"><label>请输入优酷播放页地址(一次只能添加一种地址)::</label></li>
-					<li class="input"><textarea style="width:480px;height:30px">http://v.youku.com/v_show/id_XMjI2MDIxNTYw.html</textarea></li>
+					<li class="input"><textarea style="width:480px;height:30px"></textarea></li>
 					<li class="label">
 						<label>
 							如普通播放页: <br />
