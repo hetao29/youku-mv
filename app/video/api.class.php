@@ -166,20 +166,25 @@ class video_api{
 		 * 从API上获取视频信息,获取一个视频信息
 		 */
 		private function __getVideoInfo($vid,$add=true){
-			$r = SHttp::get("http://api.youku.com/api_ptvideoinfo",array("pid"=>"311","rt"=>3,"id"=>$vid));
+			$url = "https://openapi.youku.com/v2/videos/show.json";
+			$key = "video_id";
+			$r = SHttp::get($url,
+					array(
+						"client_id"=>"e8066412aa60d453",
+						$key=>$vid
+						)
+					);
 			$r = SJson::decode($r);
-			if(!empty($r->item->title)){
-				if(preg_match("/v_show\/id_(.*?)\./",$r->item->playlink,$_m)){
-					$video = array();
-					$video['VideoSourceID']=1;
-					$video['VideoName'] = $r->item->title;
-					$video['VideoDuration'] = $this->__strTotime($r->item->duration);
-					$video['VideoID'] = singer_music::decode($_m[1]);
-					$video['VideoThumb'] = $r->item->imagelink;
-					$video['VideoPubdate'] = $r->item->pubdate;;
-					if($add)$this->addVideo($video);
-					return $video;
-				}
+			if(!empty($r)){
+				$video = array();
+				$video['VideoSourceID']=1;
+				$video['VideoName'] = $r->title;
+				$video['VideoDuration'] = $this->__strTotime($r->duration);
+				$video['VideoID'] = singer_music::decode($r->id);
+				$video['VideoThumb'] = $r->thumbnail;
+				$video['VideoPubdate'] = $r->published;;
+				if($add)$this->addVideo($video);
+				return $video;
 			}
 		}
 		/**
@@ -193,57 +198,68 @@ class video_api{
 					//专辑播放页
 					///v_show/id_XNDc5NjEyNTky.html?f=18551010
 					$pid = $_m[1];
-					$st = 8;
+					$url = "https://openapi.youku.com/v2/playlists/videos.json";
+					$key = "playlist_id";
 			}elseif(preg_match("/v_show\/id_(.*?)\./",$k,$_m)){
 					//普通视频播放页
-					$api = new video_api;
-					$r = $api->getVideoInfo($_m[1]);
-					$o[]=$r;
+					$pid = $_m[1];
+					$url = "https://openapi.youku.com/v2/videos/show_batch.json";
+					$key = "video_ids";
 			}elseif(preg_match("/show_page\/id_(.*?)\./",$k,$_m)){
 					//节目显示页
 					$pid = $_m[1];
-					$st = 11;
+					$url = "https://openapi.youku.com/v2/shows/videos.json";
+					$key = "show_id";
 			}elseif(preg_match("/playlist_show\/id_(\\d*)/",$k,$_m)){
 					//专辑显示页
 					$pid = $_m[1];
-					$st = 8;
-					//playlist_show/id_5358637.html
-
-			}elseif(preg_match("/v_playlist\/f(\\d*)/",$k,$_m)){
+					$url = "https://openapi.youku.com/v2/playlists/videos.json";
+					$key = "playlist_id";
+			}elseif(preg_match("/f\=(\\d*)/",$k,$_m)){
 					//专辑播放页
 					//v_playlist/f5358637o1p1.html
 					$pid = $_m[1];
-					$st = 8;
+					$url = "https://openapi.youku.com/v2/playlists/videos.json";
+					$key = "playlist_id";
 			}
-			if(!empty($pid)){
-					$r = SHttp::get("http://api.youku.com/api_ptvideo/st_$st",array("pid"=>"XOA==","rt"=>3,"pz"=>100,"sv"=>$pid));
+			$pageSize=10;
+			$r = SHttp::get($url,
+					array(
+						"client_id"=>"e8066412aa60d453",
+						$key=>$pid,
+						"count"=>$pageSize,
+						"page"=>1,
+						)
+					);
+			if(!empty($r)){
 					$r = SJson::decode($r);
 					$totalPage=1;
-					if(!empty($r->totalSize) && !empty($r->pageSize)){
-							$totalPage = ceil($r->totalSize / $r->pageSize);
+					if(!empty($r->total) && !empty($r->total)){
+							$totalPage = ceil($r->total / $pageSize);
 					}
 					if($totalPage>1){
 						for($i=2;$i<=$totalPage;$i++){
-							$r2 = SHttp::get("http://api.youku.com/api_ptvideo/st_$st",array("pid"=>"XOA==","rt"=>3,"pz"=>100,"pg"=>$i,"sv"=>$pid));
+							$r2 = SHttp::get($url,
+									array(
+										"client_id"=>"e8066412aa60d453",
+										$key=>$pid,
+										"count"=>100,
+										"page"=>1,
+										)
+									);
 							$r2 = SJson::decode($r2);
-							if(!empty($r2))$r->item=array_merge($r->item,$r2->item);
+							if(!empty($r2))$r->videos=array_merge($r->videos,$r2->videos);
 						}
 					}
-					foreach($r->item as $item){
-						$vid = $item->videoid;
-						$video = $this->getVideoInfo($vid);
-						if(empty($video)){
-							//{{{
-							$video = array();
-							$video['VideoSourceID']=1;
-							$video['VideoName'] = $item->title;
-							$video['VideoDuration'] = $this->__strTotime($item->duration);
-							$video['VideoID'] = singer_music::decode($item->videoid);
-							$video['VideoThumb'] = $item->snapshot;
-							$video['VideoPubDate'] = $item->pubDate;
-							$this->addVideo($video);
-							//}}}
-						}
+					foreach($r->videos as $item){
+						$video = array();
+						$video['VideoSourceID']=1;
+						$video['VideoName'] = $item->title;
+						$video['VideoDuration'] = $this->__strTotime($item->duration);
+						$video['VideoID'] = singer_music::decode($item->id);
+						$video['VideoThumb'] = $item->thumbnail;
+						$video['VideoPubDate'] = $item->published;
+						$this->addVideo($video);
 						$o[]=$video;
 					}
 			}
