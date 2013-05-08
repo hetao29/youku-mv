@@ -294,11 +294,11 @@ $("#_IDStyle").attr("disabled",null);
 							如普通播放页: <br />
 							http://v.youku.com/v_show/id_XMjI2MDIxNTYw.html <br />
 							如专辑播放页: <br />
-							http://v.youku.com/v_playlist/f5365488o1p0.html <br />
+							http://v.youku.com/v_show/id_XNTUzNDQyNDg4.html?f=19251480 <br />
 							如节目显示页: <br />
-							http://www.youku.com/show_page/id_zd121155eef0a11df97c0.html <br />
+							http://www.youku.com/show_page/id_z319ed820c26511e0a046.html <br />
 							如专辑显示页: <br />
-							http://www.youku.com/playlist_show/id_5365488.html <br />
+							http://www.youku.com/playlist_show/id_19251480.html <br />
 						</label>
 					</li>
 					<li class="singleBtn">
