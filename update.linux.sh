@@ -8,6 +8,7 @@
 php -c /opt/youku-fm-read-only/php.ini /opt/youku-fm-read-only/app/util/official.php
 
 #完全重建
+rm /opt/youku-fm-read-only/app/util/sphinx.xmlpipe.log
 /usr/local/sphinx/bin/indexer --rotate -c /opt/youku-fm-read-only/app/sphinx/config/s_video.conf video
 #增量重建
 #/usr/local/sphinx/bin/indexer --rotate -c /opt/youku-fm-read-only/app/sphinx/config/s_video.conf video_delta
