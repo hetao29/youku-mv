@@ -79,8 +79,8 @@ class video_db{
 	/**
 	 * add
 	 */
-	function addVideo($Video){
-		return $this->_db->insert("s_video",$Video);
+	function addVideo($Video,$replace=false){
+		return $this->_db->insert("s_video",$Video,$replace);
 	}
 	function addVideoExtension($Video){
 		return $this->_db->insert("s_video_extension",$Video);

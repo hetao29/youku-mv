@@ -5,7 +5,7 @@
 #4.生成js(app/util/genjs.php)
 
 
-php -c /etc/php.cli.ini /opt/youku-fm-read-only/app/util/official.php
+php -c /opt/youku-fm-read-only/php.ini /opt/youku-fm-read-only/app/util/official.php
 
 #完全重建
 /usr/local/sphinx/bin/indexer --rotate -c /opt/youku-fm-read-only/app/sphinx/config/s_video.conf video
@@ -14,4 +14,4 @@ php -c /etc/php.cli.ini /opt/youku-fm-read-only/app/util/official.php
 #/usr/local/sphinx/bin/indexer --rotate -c /opt/youku-fm-read-only/app/sphinx/config/s_video.conf --merge video video_delta
 #启动服务:
 #/usr/local/sphinx/bin/searchd -c /opt/youku-fm-read-only/app/sphinx/config/s_video.conf -i video
-php -c /etc/php.cli.ini /opt/youku-fm-read-only/app/util/importRadio.php
+php -c /opt/youku-fm-read-only/php.ini /opt/youku-fm-read-only/app/util/importRadio.php

@@ -6,51 +6,75 @@ chdir(dirname(__FILE__));
 require("../../global.php");
 include("ChineseSpellUtils.php");
 $spell = new ChineseSpell;
-function listVideoFromOfficial($startTime){
-		$startTime = str_replace("-","",$startTime);
-		$startTime = str_replace(" ","",$startTime);
-		$startTime = str_replace(":","",$startTime);
-		$now = date("YmdHis");
-		$params['q']="showcategory:音乐 completed:1 showlastupdate:$startTime-$now";
-		$params['fd']="showname show_thumburl mv_type mv_genre singer showlastupdate firstepisode_videoid releasedate area singertype language album";
-		$params['pn']="1";
-		$params['pl']="1000";
-		$params['ob']="showlastupdate:asc";
+function listVideoFromOfficial($start,$end){
+		$params['q']="singertype:男,女,乐队,组合,群星 showid:0 category:音乐 state:normal videoid:$start-$end";
+		$params['fd']="releasedate mv_type mv_genre singertype publishtime thumburl singertype videoid singer language title category state seconds tags area";
+		$params['pl']="100";
+		$params['ob']="videoid:desc";
 		$params['ft']="json";
 		$params['cl']="test_page";
 		$params['h']="3";
-		$url = "http://10.103.12.71/show.show";
-		$r = SHttp::get($url,$params);
-		$r = SJson::decode($r);
-		return $r;
-}
-$log="official.log";
+		$url = "http://10.103.12.71/video.dvd";
+		$result=array();
+		$page=1;
+		do{
+			$params['pn']=$page++;
+			sleep(1);
+			$r = SHttp::get($url,$params);
+			$r = SJson::decode($r);
+			if(!empty($r->results)){
+				$result=array_merge($result,$r->results);
+			}
+			//print_r($r);
+			echo "CT:";
+			echo count($result);
+			echo "\n";
+		//print_r($r);
+		//if($xx++==2)exit;
+			//if($xx++==2){print_r($result);exit;}
+		}while(count($result)<$r->total);
 
-$iii = 0;
-while($iii++<10){
+		//print_r($result);
+		return $result;
+		//print_r($r);
+		//return $r;
+}
+$start=0;
+$maxvid=0;
+$end=1687000;
+
+$iii=0;
+while($iii++<1000)
+{
+	$log = "official.log";
 	$logData = trim(file_get_contents($log));
-	$startTime=0;$startVideoID=0;
 	if(!empty($logData)){
-			$tmp = explode("/",$logData);
-			$startTime=trim($tmp[0]);
-			$startVideoID=trim($tmp[1]);
+		$tmp = explode("/",$logData);
+		$start=trim($tmp[0]);
+		$end=trim($tmp[1]);
 	}
-	echo "START FROM $startTime / $startVideoID\n";
-	$r = listVideoFromOfficial($startTime);
-	$singer_db = new singer_db;
-	$album_db = new album_db;
-	$video_api = new video_api;
-	if(empty($r->results) || count($r->results)<10){
-			die("OVER\n");
-	}
-	foreach($r->results as $v){
-			if(empty($v->firstepisode_videoid))continue;
+	echo "\n\nSTART FROM $start/ $end\n\n";
+
+	$r = listVideoFromOfficial($start,$end);
+	if(count($r)==0){die("\n\n EMPTY DATA\n");}
+
+
+	foreach($r as $v){
+		$start=max($start,$v->pk_video);
+		$singer_db = new singer_db;
+		$album_db = new album_db;
+		$video_db = new video_db;
+			//if(empty($v->firstepisode_videoid))continue;
 			$Video=array();
-			$Video['VideoName']		=$v->showname;
-			$Video['VideoThumb']	=$v->show_thumburl;
-			$Video['VideoID']		=$v->firstepisode_videoid;
-			$Video['VideoPubdate']	=$v->releasedate;
-			$Video['VideoDuration']	=0;
+			$Video['VideoName']		=$v->title;
+			$Video['VideoThumb']	=$v->thumburl;
+			$Video['VideoID']		=$v->pk_video;
+			if(!empty($v->releasedate)){
+				$Video['VideoPubdate']	=$v->releasedate;
+			}else{
+				$Video['VideoPubdate']	=$v->publishtime;
+			}
+			$Video['VideoDuration']	=$v->seconds;
 	
 			if(!empty($v->area)) $Video['VideoArea']		=$v->area[0];
 			if(!empty($v->language)) $Video['VideoLanguage']	=$v->language[0];
@@ -89,25 +113,39 @@ while($iii++<10){
 				$Video['SingerIDS']	=0;
 			}
 			$Video['AlbumID']	=0;
-			if(!empty($v->album)){
-				$Album = $album_db->getAlbumByName($v->album,$Video['SingerIDS']);
-				if(empty($Album)){
-						$Album['SingerIDS'] = $Video['SingerIDS'];
-						$Album['AlbumName'] = $v->album;
-						echo "add album\n";
-						print_r($Album);
-						$Album['AlbumID'] = $album_db->addAlbum($Album);
-				}
-				$Video['AlbumID'] = $Album['AlbumID'];
-			}
+			//if(!empty($v->album)){
+			//	$Album = $album_db->getAlbumByName($v->album,$Video['SingerIDS']);
+			//	if(empty($Album)){
+			//			$Album['SingerIDS'] = $Video['SingerIDS'];
+			//			$Album['AlbumName'] = $v->album;
+			//			echo "add album\n";
+			//			print_r($Album);
+			//			$Album['AlbumID'] = $album_db->addAlbum($Album);
+			//	}
+			//	$Video['AlbumID'] = $Album['AlbumID'];
+			//}
 			$Video['VideoStatus']	=1;
-			print_r($v);
-			print_r($Video);
-			if($video_api->addVideo($Video)){
-					$video_api->getVideoDuration($Video['VideoID']);//更新时间 
-					echo $Video['VideoID']." ".$v->showlastupdate." Success\n";
+			//print_r($v);
+			//print_r($Video);
+			if($video_db->addVideo($Video)!==false){
+					echo $Video['VideoID']." ".$v->title." Success\n";
+			}else{
+				$up=array();
+				$up['VideoPubdate']=$Video['VideoPubdate'];
+				$up['VideoStyle']=$Video['VideoStyle'];
+				$up['VideoDuration']=$Video['VideoDuration'];
+				$up['VideoLanguage']=$Video['VideoLanguage'];
+				$up['VideoArea']=$Video['VideoArea'];
+				$video_db->updateVideo($Video['VideoID'],$up);
+					echo $Video['VideoID']." ".$v->title." Update Success\n";
+				
 			};
 			unset($Video);
-			file_put_contents($log,$v->showlastupdate."/".$v->firstepisode_videoid);
+			unset($singer_db);
+			unset($album_db) ;
+			unset($video_db) ;
 	}
+	$end=$start+1000000;
+	file_put_contents($log,$start."/".$end);
+	sleep(10);
 }
