@@ -66,11 +66,11 @@ function microtime_float() {
 }
 $t = microtime_float();
 $pageSize=1000;
-$videos = $db->listVideo($startTime,$pageSize,$page=1);
+$videos = $db->listVideo($startVideoID,$pageSize,$page=1);
 $totalPage = $videos->totalPage;
 //error_log(var_export($videos,true),3,"/tmp/x.log");
 for($page=1;$page<=$totalPage;$page++){
-	$videos = $db->listVideo($startTime,$pageSize,$page);
+	$videos = $db->listVideo($startVideoID,$pageSize,$page);
 
 	foreach($videos->items as $item){
 		$total++;
@@ -96,7 +96,8 @@ for($page=1;$page<=$totalPage;$page++){
 		$item['AlbumName']=@$albums[$id]['AlbumName'];
 		$item['VideoPubdate'] = str_replace("-","",$item['VideoPubdate']);
 		add($item);
-		file_put_contents($log,$item['VideoUpdateTime']."/".$item['VideoID']);
+		$vid = (int)$item['VideoID']+1;
+		file_put_contents($log,$item['VideoUpdateTime']."/".$vid);
 		unset($item);
 	}
 }
