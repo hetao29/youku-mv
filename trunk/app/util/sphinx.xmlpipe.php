@@ -41,7 +41,6 @@ if(!empty($logData)){
 }
 //echo "START FROM $startTime / $startVideoID\n";
 $startTime=0;
-$videos = $db->listVideo($startTime,-1);
 $singer_db = new singer_db;
 $tmp = $singer_db->listSinger(1,-1);
 $singers=array();
@@ -62,19 +61,22 @@ unset($tmp);
 
 $i=0;
 $total=0;
-$len=count($videos->items);
 function microtime_float() {
 		list($usec, $sec) = explode(" ", microtime());
 		return ((float)$usec + (float)$sec);
 }
 $t = microtime_float();
-foreach($videos->items as $item){
+$pageSize=5000;
+$videos = $db->listVideo($startTime,$pageSize,$page=1);
+for($page=1;$page<=$videos->totalPage;$page++){
+	$videos = $db->listVideo($startTime,$pageSize,$page);
+
+	foreach($videos->items as $item){
 		$total++;
 		if($i++>=100){
-				$t2 = microtime_float();
-				//echo ($total)."/$len\t".($t2-$t)." seconds\n";
-				$t  = $t2;
-				$i=0;
+			$t2 = microtime_float();
+			$t  = $t2;
+			$i=0;
 		};
 		if(empty($item['SingerIDS']))continue;
 		$vid = $item['VideoID'];
@@ -83,8 +85,8 @@ foreach($videos->items as $item){
 		$singernames=array();
 		//$singerids2=array();
 		foreach($singerids as $singerid){
-				$singernames[]=@$singers[$singerid]['SingerName'];
-				//$singerids[]=array('SingerID'=>$singerid);
+			$singernames[]=@$singers[$singerid]['SingerName'];
+			//$singerids[]=array('SingerID'=>$singerid);
 		}
 		if(empty($singernames))continue;
 		$item['SingerNameS']=implode("/",$singernames);
@@ -94,6 +96,8 @@ foreach($videos->items as $item){
 		$item['VideoPubdate'] = str_replace("-","",$item['VideoPubdate']);
 		add($item);
 		file_put_contents($log,$item['VideoUpdateTime']."/".$item['VideoID']);
+		unset($item);
+	}
 }
 function add($item){
 	$item['id'] = $item['VideoID'];
@@ -110,4 +114,3 @@ function add($item){
 }
 //echo' <sphinx:killlist> <id>96</id> <id>603</id> </sphinx:killlist>';
 echo '</sphinx:docset>';
-?>
