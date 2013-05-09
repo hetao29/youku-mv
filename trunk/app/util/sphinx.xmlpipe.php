@@ -66,9 +66,11 @@ function microtime_float() {
 		return ((float)$usec + (float)$sec);
 }
 $t = microtime_float();
-$pageSize=5000;
+$pageSize=1000;
 $videos = $db->listVideo($startTime,$pageSize,$page=1);
-for($page=1;$page<=$videos->totalPage;$page++){
+$totalPage = $videos->totalPage;
+//error_log(var_export($videos,true),3,"/tmp/x.log");
+for($page=1;$page<=$totalPage;$page++){
 	$videos = $db->listVideo($startTime,$pageSize,$page);
 
 	foreach($videos->items as $item){

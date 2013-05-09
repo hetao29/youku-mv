@@ -26,7 +26,8 @@ class video_db{
 	/**
 	 * 主要是给rebuild.php来用来做索引的
 	 */
-	function listVideo($startTime,$limit=-1){
+	function listVideo($startTime,$limit=-1,$page=1){
+		$this->_db->setPage($page);
 		$this->_db->setLimit($limit);
 		return $this->_db->select("s_video",array("VideoUpdateTime>='$startTime'","VideoStatus!=-2"),"*","",array("VideoUpdateTime"=>"ASC","VideoID"=>"ASC"));
 	}
