@@ -56,7 +56,7 @@ while($iii++<1000)
 	echo "\n\nSTART FROM $start/ $end\n\n";
 
 	$r = listVideoFromOfficial($start,$end);
-	if(count($r)==0){die("\n\n EMPTY DATA\n");}
+	if(count($r)<=1){die("\n\n EMPTY DATA\n");}
 
 
 	foreach($r as $v){
