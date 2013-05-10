@@ -243,8 +243,8 @@ class video_api{
 									array(
 										"client_id"=>"e8066412aa60d453",
 										$key=>$pid,
-										"count"=>100,
-										"page"=>1,
+										"count"=>$pageSize,
+										"page"=>$i,
 										)
 									);
 							$r2 = SJson::decode($r2);
