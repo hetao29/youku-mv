@@ -854,24 +854,20 @@ class player_main extends STpl{
 		$k = $_REQUEST['k'];
 		if(empty($k))return "[]";
 		$k = urlencode($k);
-		$r = file_get_contents("http://tip.so.youku.com/search_keys?type=video&k=$k&limit=15");
+		$r = file_get_contents("http://tip.soku.com/search_keys?query=$k&h=11");
 		if($r){
-			preg_match("/\[.*?\]/",$r,$_m);
+			preg_match("/\((.*?)\)/",$r,$_m);
 			if(!empty($_m)){
 				$keywords=array();
-				$r = SJson::decode($_m[0]);
+				$r = SJson::decode($_m[1]);
+				$r = $r->r;
 				if(!empty($r)){
 					for($i=0;$i<count($r);$i++){
-						$tmp = str_replace(array("mv","mtv"),"",$r[$i]->keyword);
-						if(!empty($keywords[$tmp])){
-							unset($r[$i]);
-						}else{
-							$keywords[$tmp]=1;
-							$r[$i]->keyword=$tmp;
-						}
+						$r[$i]->keyword=$r[$i]->c;
+						unset($r[$i]->c);
 					}
 				}
-				sort($r);
+				//sort($r);
 				return $r;
 			}
 		}
