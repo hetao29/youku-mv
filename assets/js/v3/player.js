@@ -1359,8 +1359,6 @@ var YoukuWs = function(){
 								 t+=" 《专辑:"+"<a class='special' id='"+result.AlbumID+"'>"+result.AlbumName+"</a>"+"》";
 							 }
 							 YoukuWs.setTitle(title+result.VideoName);
-							 //更新音乐信息
-							 $("#title").html(t);
 						 }
 					 },
 					 error:function(){
@@ -1641,7 +1639,7 @@ var YoukuWs = function(){
 				 if(!t)return;
 				 var t = t.replace(/<[^>]+>/g,"");
 				 this.title = t;
-				 if(t)$("#title").html("正在播放".tr()+":"+t);
+				 if(t)$("#title").html("正在播放".tr()+" : "+t);
 				 if(t)document.title="YouKu.FM - "+t;
 			 }, VideoAction:function(type,vid){
 				 $.ajax({
