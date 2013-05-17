@@ -252,14 +252,20 @@ class video_api{
 						}
 					}
 					foreach($r->videos as $item){
-						$video = array();
+						$vid = singer_music::decode($item->id);
+						$video_db = new video_db;
+						$video = $video_db->getVideo($vid);
+						if(empty($video)){
+							$video = array();
+						}
+
 						$video['VideoSourceID']=1;
 						$video['VideoName'] = $item->title;
 						$video['VideoDuration'] = $this->__strTotime($item->duration);
 						$video['VideoID'] = singer_music::decode($item->id);
 						$video['VideoThumb'] = $item->thumbnail;
-						$video['VideoPubDate'] = $item->published;
-						$this->addVideo($video);
+						$video['VideoPubdate'] = $item->published;
+						$video_db->addVideo($video,true);
 						$o[]=$video;
 					}
 			}
