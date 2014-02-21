@@ -74,7 +74,22 @@ $("#_IDStyle").attr("disabled",null);
 			{part "/player.main.headerV3.".$out}
 		</div>
 		<div class="logo">
-			<i class="fm-logo"></i>
+			<i class="fm-logo">
+			<div style="float: left;padding-right: 0px;margin-right: 0px;margin-left: 185px;width:468px;height:60px;background-color: red;">
+			<script type="text/javascript">
+			document.write('<a style="display:none!important" id="tanx-a-mm_49466900_4368423_14670051"></a>');
+			tanx_s = document.createElement("script");
+			tanx_s.type = "text/javascript";
+			tanx_s.charset = "gbk";
+			tanx_s.id = "tanx-s-mm_49466900_4368423_14670051";
+			tanx_s.async = true;
+			tanx_s.src = "http://p.tanx.com/ex?i=mm_49466900_4368423_14670051";
+			tanx_h = document.getElementsByTagName("head")[0];
+			if(tanx_h)tanx_h.insertBefore(tanx_s,tanx_h.firstChild);
+			</script>
+			</div>
+			</i>
+
 			<div class="btnbox">
 				{*<a class="rollbtn"  title=""><em></em><i class="mode"></i><span>简单模式</span></a>*}
 				<a class="rollbtn" id="_IDChange" title="{'换台'|tr}"><em></em><i class="change"></i><span>切换电台</span></a>
@@ -650,7 +665,7 @@ $("#_IDStyle").attr("disabled",null);
 -->
 
 
-	<!--<div style="display:none"><script src="http://s16.cnzz.com/stat.php?id=2780428&web_id=2780428&show=pic" language="JavaScript"></script></div>-->
+	<div style="display:none"><script src="http://s16.cnzz.com/stat.php?id=2780428&web_id=2780428&show=pic" language="JavaScript"></script></div>
 	</body>
 
 </html>

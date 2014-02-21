@@ -65,12 +65,20 @@ function microtime_float() {
 		return ((float)$usec + (float)$sec);
 }
 $t = microtime_float();
-$pageSize=1000;
-$videos = $db->listVideo($startVideoID,$pageSize,$page=1);
+$pageSize=2000;
+if(empty($startVideoID)){
+	$videos = $db->listVideo($startVideoID,$pageSize,$page=1);
+}else{
+	$videos = $db->listVideoByTime($startTime,$pageSize,$page=1);
+}
 $totalPage = $videos->totalPage;
 //error_log(var_export($videos,true),3,"/tmp/x.log");
 for($page=1;$page<=$totalPage;$page++){
-	$videos = $db->listVideo($startVideoID,$pageSize,$page);
+	if(empty($startVideoID)){
+		$videos = $db->listVideo($startVideoID,$pageSize,$page);
+	}else{
+		$videos = $db->listVideoByTime($startTime,$pageSize,$page);
+	}
 
 	foreach($videos->items as $item){
 		$total++;
