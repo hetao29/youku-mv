@@ -26,10 +26,22 @@ class video_db{
 	/**
 	 * 主要是给rebuild.php来用来做索引的
 	 */
+	//全量的时候用
 	function listVideo($startVideoID,$limit=-1,$page=1){
 		$this->_db->setPage($page);
 		$this->_db->setLimit($limit);
-		return $this->_db->select("s_video",array("videoid>='$startVideoID'","VideoStatus!=-2"),"*","",array("VideoUpdateTime"=>"ASC","VideoID"=>"ASC"));
+		return $this->_db->select("s_video",array("VideoStatus!=-2"),"*","");
+	}
+	//增量的时候用
+	function listVideoByTime($updateTime,$limit=-1,$page=1){
+		$this->_db->setPage($page);
+		$this->_db->setLimit($limit);
+		return $this->_db->select("s_video",
+				array("VideoUpdateTime>='$updateTime'","VideoStatus!=-2"),
+				"*",
+				"",
+				array("VideoUpdateTime"=>"ASC","VideoID"=>"ASC")
+		);
 	}
 	function getVideoExtension($vid){
 		return $this->_db->selectOne("s_video_extension",array("VideoID"=>$vid));

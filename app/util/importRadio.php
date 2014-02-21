@@ -111,15 +111,6 @@ $config =	array(
 				//	"LIMIT"=>10000
 				//),
 				array(
-					"ListID"=>"1037",
-					"ListName"=>"2013年国语新曲	",
-					"QUERY"=>'@videoarea "台湾" | "大陆" | "香港"',
-					"SetFilterRange"=>array(
-									"videopubdate"=>array(20130101,20140100)
-								),
-					"LIMIT"=>10000
-				),
-				array(
 					"ListID"=>"370",
 					"ListName"=>"2012年国语新曲	",
 					"QUERY"=>'@videoarea "台湾" | "大陆" | "香港"',
@@ -129,20 +120,39 @@ $config =	array(
 					"LIMIT"=>10000
 				),
 				array(
-					"ListID"=>"1039",
-					"ListName"=>"2013年日韩新曲",
+					"ListID"=>"467",
+					"ListName"=>"2012年日韩新曲",
 					"QUERY"=>'@videoarea "日本" | "韩国"',
+					"SetFilterRange"=>array(
+									"videopubdate"=>array(20120101,20130100)
+								),
+					"LIMIT"=>10000
+				),
+				array(
+					"ListID"=>"466",
+					"ListName"=>"2012年欧美新曲",
+					
+					"QUERY"=>'@videolanguage "英语" | "其它"',
+					"SetFilterRange"=>array(
+									"videopubdate"=>array(20120101,20130100)
+								),
+					"LIMIT"=>10000
+				),
+				array(
+					"ListID"=>"1037",
+					"ListName"=>"2013年国语新曲	",
+					"QUERY"=>'@videoarea "台湾" | "大陆" | "香港"',
 					"SetFilterRange"=>array(
 									"videopubdate"=>array(20130101,20140100)
 								),
 					"LIMIT"=>10000
 				),
 				array(
-					"ListID"=>"467",
-					"ListName"=>"2012年日韩新曲",
+					"ListID"=>"1039",
+					"ListName"=>"2013年日韩新曲",
 					"QUERY"=>'@videoarea "日本" | "韩国"',
 					"SetFilterRange"=>array(
-									"videopubdate"=>array(20120101,20130100)
+									"videopubdate"=>array(20130101,20140100)
 								),
 					"LIMIT"=>10000
 				),
@@ -157,12 +167,30 @@ $config =	array(
 					"LIMIT"=>10000
 				),
 				array(
-					"ListID"=>"466",
-					"ListName"=>"2012年欧美新曲",
+					"ListID"=>"1200",
+					"ListName"=>"2014年国语新曲	",
+					"QUERY"=>'@videoarea "台湾" | "大陆" | "香港"',
+					"SetFilterRange"=>array(
+									"videopubdate"=>array(20140101,20150100)
+								),
+					"LIMIT"=>10000
+				),
+				array(
+					"ListID"=>"1202",
+					"ListName"=>"2014年日韩新曲",
+					"QUERY"=>'@videoarea "日本" | "韩国"',
+					"SetFilterRange"=>array(
+									"videopubdate"=>array(20140101,20150100)
+								),
+					"LIMIT"=>10000
+				),
+				array(
+					"ListID"=>"1201",
+					"ListName"=>"2014年欧美新曲",
 					
 					"QUERY"=>'@videolanguage "英语" | "其它"',
 					"SetFilterRange"=>array(
-									"videopubdate"=>array(20120101,20130100)
+									"videopubdate"=>array(20140101,20150100)
 								),
 					"LIMIT"=>10000
 				),
